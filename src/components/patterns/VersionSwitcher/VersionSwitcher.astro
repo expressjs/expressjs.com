@@ -1,0 +1,113 @@
+---
+/**
+ * VersionSwitcher Component
+ *
+ * A dropdown to switch between different versions of documentation.
+ * Detects the current version from the URL or fallback to the default version.
+ *
+ * @example
+ * <VersionSwitcher
+ *   versions={[
+ *     { id: '5x', label: 'v5.x', isDefault: true },
+ *     { id: '4x', label: 'v4.x' },
+ *   ]}
+ *   defaultVersion="5x"
+ *   currentPath="/en/docs/5x/getting-started"
+ * />
+ */
+
+import './VersionSwitcher.css';
+import { Icon } from 'astro-icon/components';
+import { Flex, Select } from '@/components/primitives';
+import type { SelectOption } from '@/components/primitives';
+import type { VersionConfig, VersionSwitcherProps } from './types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const {
+  versions,
+  defaultVersion,
+  currentPath = '',
+  class: className,
+  ...rest
+} = Astro.props as VersionSwitcherProps;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+function getVersionFromPath(path: string, availableVersions: VersionConfig[]): string | null {
+  for (const version of availableVersions) {
+    if (path.includes(`/${version.id}/`)) {
+      return version.id;
+    }
+  }
+  return null;
+}
+
+const urlVersion = getVersionFromPath(currentPath, versions);
+const selectedVersion = urlVersion || defaultVersion;
+
+const selectOptions: SelectOption[] = versions.map((version) => ({
+  value: version.id,
+  label: version.label,
+  selected: version.id === selectedVersion,
+}));
+---
+
+<Flex
+  align="center"
+  justify="center"
+  gap="2"
+  class:list={['version-switcher', className]}
+  data-version-switcher
+  {...rest}
+>
+  <Icon
+    name="fluent:tag-28-regular"
+    size="16"
+    color="var(--color-icon-secondary)"
+    aria-hidden="true"
+  />
+  <Select
+    options={selectOptions}
+    value={selectedVersion}
+    size="md"
+    variant="default"
+    fullWidth
+    data-version-select
+    aria-label={t('version.selectLabel')}
+  />
+</Flex>
+
+<script>
+  function handleVersionChange(event: Event) {
+    const customEvent = event as CustomEvent<{ value: string }>;
+    const newVersion = customEvent.detail.value;
+    const currentPath = window.location.pathname;
+
+    const pathParts = currentPath.split('/').filter(Boolean);
+
+    const versionIndex = pathParts.findIndex((part) => /^\d+x$/.test(part));
+
+    if (versionIndex !== -1) {
+      pathParts[versionIndex] = newVersion;
+    } else if (pathParts.length >= 2) {
+      pathParts.splice(1, 0, newVersion);
+    }
+
+    window.location.href = '/' + pathParts.join('/');
+  }
+
+  function initVersionSwitcher() {
+    const versionSwitchers = document.querySelectorAll('[data-version-switcher]');
+
+    versionSwitchers.forEach((versionSwitcher) => {
+      const selectContainer = versionSwitcher.querySelector('[data-select-container]');
+      if (!selectContainer) return;
+
+      selectContainer.removeEventListener('select-change', handleVersionChange);
+      selectContainer.addEventListener('select-change', handleVersionChange);
+    });
+  }
+
+  initVersionSwitcher();
+  document.addEventListener('astro:page-load', initVersionSwitcher);
+</script>

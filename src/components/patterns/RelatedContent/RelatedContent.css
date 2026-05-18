@@ -1,0 +1,48 @@
+@layer patterns {
+  .related-content {
+    margin-top: var(--space-24);
+    position: relative;
+
+    h2 {
+      margin-bottom: var(--space-6);
+    }
+
+    @media (--xs-only) {
+      margin-top: var(--space-16);
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        left: auto;
+        width: var(--space-16);
+        background: linear-gradient(to right, transparent, var(--color-bg-primary));
+        pointer-events: none;
+      }
+    }
+  }
+
+  .related-content__grid {
+    display: flex;
+    gap: var(--space-6);
+
+    & > .post-card {
+      flex: 1 1 33.33%;
+    }
+
+    @media (--xs-only) {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & > .post-card {
+        flex: 1 0 var(--size-60);
+        scroll-snap-align: start;
+      }
+    }
+  }
+}

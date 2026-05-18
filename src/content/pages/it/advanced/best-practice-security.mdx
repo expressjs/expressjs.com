@@ -1,0 +1,276 @@
+---
+title: Migliori Pratiche Di Produzione
+description: Scopri le migliori pratiche di sicurezza fondamentali per le app Express in produzione, tra cui l'utilizzo di TLS, la convalida degli input, i cookie sicuri e la prevenzione delle vulnerabilità.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Il termine _"produzione"_ si riferisce allo stadio del ciclo di vita del software quando un'applicazione o API è generalmente disponibile per i suoi utenti finali o consumatori. Al contrario, nella fase di _"sviluppo"_ stai ancora scrivendo attivamente e testando il codice, e l'applicazione non è aperta ad accesso esterno. Gli ambienti di sistema corrispondenti sono conosciuti rispettivamente come ambienti _production_ e _development_.
+
+Gli ambienti di sviluppo e di produzione sono di solito impostati in modo diverso e hanno esigenze molto diverse. Che cosa bene in sviluppo potrebbe non essere accettabile nella produzione. Ad esempio, in un ambiente di sviluppo potresti voler registrare dettagliatamente gli errori per il debug, mentre lo stesso comportamento può diventare una preoccupazione di sicurezza in un ambiente di produzione. E nello sviluppo, non c'è bisogno di preoccuparsi di scalabilità, affidabilità e prestazioni, mentre queste preoccupazioni diventano fondamentali nella produzione.
+
+<Alert type="info">
+
+If you believe you have discovered a security vulnerability in Express, please see Security
+Policies and Procedures.
+
+</Alert>
+
+Le migliori pratiche di sicurezza per le applicazioni Express in produzione includono:
+
+- [Migliori Pratiche Di Produzione: Sicurezza](#production-best-practices-security)
+  - [Overview](#overview)
+  - [Non utilizzare versioni deprecate o vulnerabili di Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+  - [Usa TLS](#use-tls)
+  - [Non fidarti dell'input dell'utente](#do-not-trust-user-input)
+    - [Previene reindirizzamenti aperti](#prevent-open-redirects)
+  - [Usa Elmet](#use-helmet)
+  - [Riduci l'impronta digitale](#reduce-fingerprinting)
+  - [Usa i cookie in modo sicuro](#use-cookies-securely)
+    - [Non utilizzare il nome predefinito del cookie di sessione](#dont-use-the-default-session-cookie-name)
+    - [Imposta opzioni di sicurezza dei cookie](#set-cookie-security-options)
+  - [Prevenire attacchi di forza brutale contro l'autorizzazione](#prevent-brute-force-attacks-against-authorization)
+  - [Assicurati che le tue dipendenze siano sicure](#ensure-your-dependencies-are-secure)
+    - [Evitare altre vulnerabilità conosciute](#avoid-other-known-vulnerabilities)
+  - [Ulteriori considerazioni](#additional-considerations)
+
+## Non utilizzare versioni deprecate o vulnerabili di Express
+
+Express 2.x e 3.x non sono più mantenuti. Problemi di sicurezza e prestazioni in queste versioni non saranno risolti. Non usarli! Se non hai spostato nella versione 4, segui la [guida alla migrazione](/en/guide/migrating-4) o prendi in considerazione [Opzioni di supporto commerciale](/en/support#commercial-support-options).
+
+Assicurati inoltre di non utilizzare nessuna delle versioni Express vulnerabili elencate nella [pagina Aggiornamenti di sicurezza](/en/advanced/security-updates). Se lo si è, aggiornare a una delle versioni stabili, preferibilmente l'ultimo.
+
+## Usa TLS
+
+Se la tua app si occupa o trasmette dati sensibili, usa [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) per proteggere la connessione e i dati. Questa tecnologia crittografa i dati prima che vengano inviati dal client al server, impedendo così alcuni hack comuni (e facili). Anche se le richieste Ajax e POST potrebbero non essere visibilmente evidenti e sembrano "nascoste" nei browser, il loro traffico di rete è vulnerabile a [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) e [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+
+Potresti avere familiarità con la crittografia Secure Socket Layer (SSL). [TLS è semplicemente la prossima progressione di SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. In generale, si consiglia Nginx per gestire TLS. Per un buon riferimento per configurare TLS su Nginx (e altri server), vedere [Configurazioni server consigliate (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+
+Inoltre, uno strumento utile per ottenere un certificato TLS gratuito è [Let's Encrypt](https://letsencrypt.org/about/), un gratuito, automatizzato, e autorità di certificazione aperta (CA) fornite dal [Gruppo di ricerca sulla sicurezza Internet (ISRG)](https://www.abetterinternet.org/).
+
+## Non fidarti dell'input utente
+
+Per le applicazioni web, uno dei requisiti di sicurezza più critici è la convalida e la gestione dell'input dell'utente. Questo avviene in molte forme e non li copriremo tutti qui.
+In definitiva, la responsabilità di convalidare e gestire correttamente i tipi di input utente che la tua applicazione accetta è tua.
+
+### Impedisci reindirizzamenti aperti
+
+Un esempio di input utente potenzialmente pericoloso è un _open redirect_, dove un'applicazione accetta un URL come input utente (spesso nella domanda URL, ad esempio `? rl=https://esempio. om`) e utilizza `res.redirect` per impostare l'intestazione `location` e
+restituisce uno stato 3xx.
+
+Un'applicazione deve convalidare che supporta il reindirizzamento all'URL in arrivo per evitare di inviare gli utenti a link dannosi come siti web di phishing, tra gli altri rischi.
+
+Ecco un esempio di controllo degli URL prima di usare `res.redirect` o `res.location`:
+
+```js
+app.use((req, res) => {
+  try {
+    if (new Url(req.uery.url).host !== 'example.com') {
+      return res.status(400).nd(`Redirect non supportato all'host: ${req.query.url}`);
+    }
+  } catch (e) {
+    return res.tatus(400).end(`URL non valido: ${req.query.url}`);
+  }
+  res.redirect(req.query.url);
+});
+```
+
+## Usa Elmo
+
+[Helmet][helmet] può aiutare a proteggere la tua app da alcune note vulnerabilità web impostando le intestazioni HTTP in modo appropriato.
+
+Helmet è una funzione middleware che imposta le intestazioni di risposta HTTP legate alla sicurezza. Casco imposta le seguenti intestazioni per impostazione predefinita:
+
+- `Content-Security-Policy`: Una potente lista di permessi di ciò che può accadere sulla tua pagina che attenua molti attacchi
+- `Cross-Origin-Opener-Policy`: aiuta a isolare la tua pagina
+- `Cross-Origin-Resource-Policy`: blocca gli altri dal caricamento delle risorse cross-origin
+- `Origin-Agent-Cluster`: Modifica l'isolamento del processo per essere basato sull'origine
+- `Referrer-Policy`: controlla l'intestazione [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer)
+- `Strict-Transport-Security`: Racconta i browser per preferire HTTPS
+- `X-Content-Type-Options`: Evita [MIME sniffing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
+- `X-DNS-Prefetch-Control`: controlla il prefetching DNS
+- `X-D<unk> ad-Options`: Forza il salvataggio dei download (solo Internet Explorer)
+- `X-Frame-Options`: intestazione legacy che attenua gli attacchi [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking)
+- `X-Permitted-Cross-Domain-Policies`: Controlla il comportamento cross-domain per i prodotti Adobe, come Acrobat
+- `X-Powered-By`: Informazioni sul server web. Rimosso perché potrebbe essere usato in semplici attacchi
+- `X-XSS-Protection`: intestazione legacy che cerca di mitigare [attacchi XSS](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), ma peggiora le cose, quindi l'Elmo lo disabilita
+
+Ogni intestazione può essere configurata o disabilitata. Per saperne di più su di esso si prega di andare su [il suo sito di documentazione][helmet].
+
+Installare Elmo come qualsiasi altro modulo:
+
+```bash
+$ npm install helmet
+```
+
+Quindi per usarlo nel tuo codice:
+
+```js
+// ...
+
+const casco = require('casco');
+app.use(casco());
+
+// ...
+```
+
+## Riduci l'impronta digitale
+
+Può aiutare a fornire un ulteriore livello di sicurezza per ridurre la capacità degli aggressori di determinare
+il software che un server utilizza, conosciuto come "impronta digitale". Anche se non un problema di sicurezza in sé,
+ridurre la capacità di impronte digitali un'applicazione migliora la sua posizione generale di sicurezza.
+Il software del server può essere improntato alle impronte digitali per quanto riguarda il modo in cui risponde a richieste specifiche, ad esempio in
+le intestazioni di risposta HTTP.
+
+Per impostazione predefinita, Express invia l'intestazione della risposta `X-Powered-By` che puoi disabilitare
+usando il metodo `app.disable()`:
+
+```js
+app.disable('x-powered-by');
+```
+
+<Alert type="info">
+
+Disabilitare l'intestazione `X-Powered-By ` non impedisce a un sofisticato aggressore di determinare
+che un'app sta eseguendo Express. Può scoraggiare un exploit casuale, ma ci sono altri modi per
+determinare che un'app è in esecuzione Express.
+
+</Alert>
+
+Express invia anche i propri messaggi di risposta "404 Not Found" formattati e i messaggi di risposta di errore di formattazione
+. Questi possono essere modificati da
+[aggiungendo il tuo gestore non trovato](/en/starter/faq#how-do-i-handle-404-responses)
+e
+[scrivendo il tuo gestore di errore](/en/guide/error-handling#writing-error-handlers):
+
+```js
+// last app.use calls right before app.listen():
+
+// custom 404
+app.use((req, res, next) => {
+  res.status(404). end("Siamo spiacenti non riesci a trovarlo!");
+});
+
+// app gestore di errori personalizzato
+. se((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+## Utilizzare i cookie in modo sicuro
+
+Per garantire che i cookie non aprano la tua app agli exploit, non utilizzare il nome predefinito del cookie di sessione e impostare le opzioni di sicurezza dei cookie in modo appropriato.
+
+Ci sono due principali moduli di sessione di cookie middleware:
+
+- [express-session](https://www.npmjs.com/package/express-session) che sostituisce il middleware `express.session` integrato in Express 3.x.
+- [cookie-session](https://www.npmjs.com/package/cookie-session) che sostituisce il middleware `express.cookieSession` integrato in Express 3.x.
+
+La differenza principale tra questi due moduli è come salvano i dati di sessione dei cookie. La [express-session](https://www.npmjs.com/package/express-session) middleware memorizza i dati di sessione sul server; salva solo l'ID di sessione nel cookie stesso, non i dati di sessione. Per impostazione predefinita, utilizza l'archivio in-memory e non è progettato per un ambiente di produzione. Nella produzione, dovrai impostare un archivio di sessione scalabile; vedi l'elenco di [negozi di sessione compatibili](https://github.com/expressjs/session#compatible-session-stores).
+
+Al contrario, [cookie-session](https://www.npmjs.com/package/cookie-session) middleware implementa la memorizzazione supportata dai cookie: serializza l'intera sessione al cookie, piuttosto che una semplice chiave di sessione. Usalo solo quando i dati di sessione sono relativamente piccoli e facilmente codificati come valori primitivi (piuttosto che oggetti). Anche se i browser dovrebbero supportare almeno 4096 byte per cookie, per assicurarsi di non superare il limite, non superare una dimensione di 4093 byte per dominio. Inoltre, essere consapevoli che i dati dei cookie saranno visibili al cliente, quindi se c'è qualche motivo per mantenerlo sicuro o oscuro, allora `express-session` potrebbe essere una scelta migliore.
+
+### Non utilizzare il nome predefinito del cookie di sessione
+
+Utilizzando il nome predefinito del cookie di sessione puoi aprire la tua app agli attacchi. Il problema di sicurezza posto è simile a `X-Powered-By`: un potenziale attaccante può usarlo per impronte digitali il server e attacchi di destinazione di conseguenza.
+
+Per evitare questo problema, usa i nomi generici dei cookie, ad esempio usando il middleware [express-session](https://www.npmjs.com/package/express-session):
+
+```js
+const session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
+app.se(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
+```
+
+### Imposta opzioni di sicurezza cookie
+
+Impostare le seguenti opzioni di cookie per migliorare la sicurezza:
+
+- `secure` - Assicura il browser solo invia il cookie su HTTPS.
+- `httpOnly` - Assicura che il cookie venga inviato solo su HTTP(S), non su JavaScript, contribuendo a proteggere dagli attacchi di scripting cross-site.
+- `domain` - indica il dominio del cookie; usalo per confrontare con il dominio del server in cui viene richiesto l'URL. Se corrispondono, controlla l'attributo percorso successivo.
+- `path` - indica il percorso del cookie; usalo per confrontare con il percorso della richiesta. Se questo e dominio corrispondono, quindi inviare il cookie nella richiesta.
+- `expires` - usa per impostare la data di scadenza per i cookie persistenti.
+
+Ecco un esempio che usa [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
+
+```js
+const session = require('cookie-session');
+const express = require('express');
+const app = express();
+
+const expiryDate = new Date(Date.ow() + 60 * 60 * 1000); // 1 ora
+app.se(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      dominio: 'esempio. om',
+      percorso: 'foo/bar',
+      scadenza: ScadenzaData,
+    },
+  })
+);
+```
+
+## Prevenire attacchi di forza brutale contro l'autorizzazione
+
+Assicurati che gli endpoint di accesso siano protetti per rendere i dati privati più sicuri.
+
+Una tecnica semplice e potente è quella di bloccare i tentativi di autorizzazione utilizzando due metriche:
+
+1. Il numero di tentativi consecutivi falliti dallo stesso nome utente e indirizzo IP.
+2. Il numero di tentativi falliti da un indirizzo IP per un lungo periodo di tempo. Ad esempio, blocca un indirizzo IP se fa 100 tentativi falliti in un giorno.
+
+Il pacchetto [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) fornisce strumenti per rendere questa tecnica facile e veloce. Puoi trovare [un esempio di protezione della forza brutale nella documentazione](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
+
+## Assicurati che le tue dipendenze siano sicure
+
+Usare npm per gestire le dipendenze della tua applicazione è potente e conveniente. Ma i pacchetti che si utilizzano possono contenere vulnerabilità di sicurezza critiche che potrebbero influenzare anche la vostra applicazione. La sicurezza della tua app è forte solo come il "link più debole" nelle tue dipendenze.
+
+Dal momento che npm@6, npm esamina automaticamente ogni richiesta di installazione. Inoltre, puoi usare `npm audit` per analizzare il tuo albero delle dipendenze.
+
+```bash
+$ npm audit
+```
+
+Se vuoi rimanere più sicuro, considera [Snyk](https://snyk.io/).
+
+Snyk offre sia un [strumento da riga di comando](https://www.npmjs.com/package/snyk) che una [integrazione Github](https://snyk.io/docs/github) che controlla la tua applicazione contro [database di vulnerabilità open source di Snyk](https://snyk.io/vuln/) per qualsiasi vulnerabilità nota nelle tue dipendenze. Installare il CLI come segue:
+
+```bash
+$ npm install -g snyk
+$ cd your-app
+```
+
+Usa questo comando per testare la tua applicazione per le vulnerabilità:
+
+```bash
+$ snyk test
+```
+
+### Evitare altre vulnerabilità note
+
+Tieni d'occhio [Progetto di Sicurezza Nodi](https://npmjs.com/advisories) o [Snyk](https://snyk.io/vuln/) gli avvisi che possono influenzare Express o altri moduli che la tua app utilizza. In generale, queste banche dati sono risorse eccellenti per la conoscenza e gli strumenti sulla sicurezza del nodo.
+
+Infine, Express apps&mdash;come qualsiasi altra web app&mdash;può essere vulnerabile a una varietà di attacchi basati sul web. Conoscere se stessi con conosciute [vulnerabilità web](https://www.owasp.org/www-project-top-ten/) e prendere precauzioni per evitarli.
+
+## Considerazioni aggiuntive
+
+Ecco alcuni ulteriori consigli dall'eccellente [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/). Fare riferimento a quel post del blog per tutti i dettagli su queste raccomandazioni:
+
+- Filtrare e sanificare sempre l'input dell'utente per proteggere contro gli script cross-site (XSS) e gli attacchi di iniezione dei comandi.
+- Difendi gli attacchi di SQL injection utilizzando query parametrizzate o dichiarazioni preparate.
+- Usa lo strumento open-source [sqlmap](http://sqlmap.org/) per rilevare le vulnerabilità di SQL injection nella tua app.
+- Usa gli strumenti [nmap](https://nmap.org/) e [sslyze](https://github.com/nabla-c0d3/sslyze) per testare la configurazione dei tuoi cifrari SSL, chiavi, rinegoziazione e validità del certificato.
+- Usa [safe-regex](https://www.npmjs.com/package/safe-regex) per garantire che le tue espressioni regolari non siano suscettibili di [espressione regolare negazione del servizio](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacchi.
+
+[helmet]: https://helmetjs.github.io/

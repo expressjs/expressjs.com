@@ -1,0 +1,175 @@
+{
+  "home": {
+    "welcome": "Boas-vindas",
+    "workInProgress": "Esta é uma página inicial em progresso.",
+    "reviewDesignSystem": {
+      "prefix": "Revisar o",
+      "link": "Criar Fundamentos de Sistema",
+      "suffix": "página demo para explorar todos os tokens, primitivos e padrões."
+    }
+  },
+  "search": {
+    "placeholder": "Comece a digitar...",
+    "ariaLabel": "Comece a digitar para pesquisar"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "switchToLight": "Alternar para o modo claro",
+    "switchToDark": "Mudar para o modo escuro"
+  },
+  "version": {
+    "selectLabel": "Selecionar versão da API"
+  },
+  "nav": {
+    "mainMenu": "Menu principal",
+    "toggleMenu": "Abrir/fechar menu",
+    "home": "casa",
+    "breadcrumb": "Trilha",
+    "mainNavigation": "Navegação principal",
+    "selectVersion": "Selecionar versão da documentação"
+  },
+  "menu": {
+    "main": {
+      "docs": "Documentação",
+      "api": "API",
+      "resources": "Recursos",
+      "blog": "Blogue",
+      "support": "SUPORTE"
+    },
+    "sections": {
+      "gettingStarted": "Primeiros Passos",
+      "guide": "Guia",
+      "migration": "Guias de migração",
+      "advanced": "Tópicos avançados",
+      "express": "express()",
+      "application": "Solicitação",
+      "request": "Pedir",
+      "response": "Resposta",
+      "router": "Roteador",
+      "middleware": "Mediador"
+    },
+    "items": {
+      "installing": "Instalando",
+      "helloWorld": "Olá, mundo",
+      "expressGenerator": "Gerador expresso",
+      "basicRouting": "Roteamento básico",
+      "staticFiles": "Servindo arquivos estáticos",
+      "examples": "Exemplos",
+      "faq": "Perguntas Frequentes",
+      "routing": "Roteamento",
+      "writingMiddleware": "Escrevendo middleware",
+      "usingMiddleware": "Usando o middleware",
+      "usingTemplateEngines": "Usando motores de modelos",
+      "errorHandling": "Manipulação de erros",
+      "debugging": "Depuração",
+      "behindProxies": "Atrás dos proxies",
+      "databaseIntegration": "Integração com base de dados",
+      "overridingExpressApi": "Sobrescrevendo a API Expresso",
+      "migratingTo4": "Mover para Expresso 4",
+      "migratingTo5": "Movendo para Expresso 5",
+      "buildingTemplateEngines": "Mecanismos de construção",
+      "bestPracticePerformance": "Melhores práticas de desempenho",
+      "bestPracticeSecurity": "Melhores práticas de segurança",
+      "healthcheckGracefulShutdown": "Verificações de saúde e desligamento gracioso",
+      "securityUpdates": "Atualizações de segurança",
+      "overview": "Geral",
+      "properties": "propriedades",
+      "methods": "Métodos",
+      "events": "Eventos",
+      "types": "Internos",
+      "community": "Comunidade",
+      "glossary": "Glossary",
+      "contributing": "Contribuições",
+      "utils": "Serviços",
+      "middleware": "Mediador"
+    },
+    "aria": {
+      "docs": "Documentação",
+      "api": "Referência de API",
+      "resources": "Recursos",
+      "blog": "Blogue",
+      "support": "SUPORTE",
+      "installing": "Instalando o Express",
+      "helloWorld": "Olá, exemplo do mundo",
+      "expressGenerator": "Gerador expresso",
+      "routing": "Guia de roteamento",
+      "writingMiddleware": "Escrevendo o guia middleware",
+      "usingMiddleware": "Usando guia de middleware",
+      "usingTemplateEngines": "Usando guia de motores de modelos",
+      "errorHandling": "Guia para manipulação de erros",
+      "debugging": "Expresso de depuração",
+      "behindProxies": "Expresso atrás dos proxies",
+      "databaseIntegration": "Guia de integração do banco",
+      "overridingExpressApi": "Sobrescrevendo o guia API Expresso",
+      "application": "Resumo do aplicativo",
+      "request": "Solicitar resumo",
+      "response": "Resumo da resposta",
+      "router": "Visão geral do roteador",
+      "middleware": "Recursos do Mediador",
+      "community": "Recursos da Comunidade",
+      "glossary": "Glossário de termos",
+      "contributing": "Guia contribuidor",
+      "utils": "Serviços"
+    }
+  },
+  "doc": {
+    "previousPage": "Anterior",
+    "nextPage": "Próximo",
+    "pageNavigation": "Page navigation"
+  },
+  "page": {
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "Traduzir esta página"
+  },
+  "post": {
+    "share": "Compartilhar",
+    "shareOnX": "Compartilhar no X",
+    "shareOnBluesky": "Compartilhar no Bluesky",
+    "shareOnLinkedIn": "Compartilhar no LinkedIn",
+    "shareOnSlack": "Compartilhar no Slack",
+    "shareOnTelegram": "Compartilhar no Telegram",
+    "shareOnWhatsApp": "Compartilhe no WhatsApp",
+    "rssFeed": "Feed RSS",
+    "copyLink": "Link de cópia",
+    "linkCopied": "Link copiado!",
+    "toc": "Nesta página",
+    "more": "Mais do Express",
+    "writeBanner": "Interessou-se em escrever uma publicação? U \n Confira nossas diretrizes para começar.",
+    "writeGuidelines": "Leia as diretrizes"
+  },
+  "toc": {
+    "overview": "Geral"
+  },
+  "features": {
+    "title": "Clareza sobre complexidade. Para cada desenvolvedor.",
+    "performance": {
+      "title": "Desempenho",
+      "body": "Expresso fornece uma fina camada de recursos fundamentais de aplicativos web, sem obscurecer recursos de Node.js que você conhece e ama."
+    },
+    "api": {
+      "title": "APIs",
+      "body": "Com uma miríade de métodos de utilitário HTTP e middleware à sua disposição, criar uma API robusta é rápido e fácil."
+    },
+    "middleware": {
+      "title": "Mediador",
+      "body": "Expresso é um framework de roteamento leve e flexível com recursos básicos mínimos destinados a serem aumentados através do uso de módulos de middleware Express."
+    },
+    "webapplication": {
+      "title": "Aplicativos Web",
+      "body": "Expresso é um framework de aplicativos web Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móveis."
+    }
+  },
+  "error404": {
+    "title": "404 - Página não encontrada",
+    "description": "A página que você está procurando não pôde ser encontrada.",
+    "heading": "Página não encontrada",
+    "message": "A página que você procura não existe ou foi movida.",
+    "goHome": "Ir para o início"
+  },
+  "hero": {
+    "tagline": "Framework web para Node.js rápido, não opinionizado e minimalista",
+    "getStarted": "Comece Agora",
+    "videoPause": "Pausar vídeo em segundo plano",
+    "videoPlay": "Reproduzir vídeo de fundo"
+  }
+}

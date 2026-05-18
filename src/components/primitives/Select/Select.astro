@@ -1,0 +1,316 @@
+---
+/**
+ * Select Primitive Component
+ *
+ * An accessible custom dropdown component using the button + listbox pattern.
+ * Supports full keyboard navigation (Tab, Enter, Space, Escape, Arrow keys, Home, End)
+ * and follows ARIA best practices for accessibility.
+ *
+ * @example
+ * <Select
+ *   options={[
+ *     { value: '5x', label: 'v5.x', selected: true },
+ *     { value: '4x', label: 'v4.x' },
+ *   ]}
+ *   size="md"
+ *   variant="default"
+ *   ariaLabel="Select version"
+ * />
+ */
+
+import './Select.css';
+import type { HTMLAttributes } from 'astro/types';
+import type { SelectBaseProps } from './types';
+import { Icon } from 'astro-icon/components';
+import { BodyMd } from '../Typography';
+
+type Props = SelectBaseProps & Omit<HTMLAttributes<'div'>, 'onChange'>;
+
+const {
+  size = 'md',
+  variant = 'default',
+  options,
+  value,
+  placeholder,
+  fullWidth = false,
+  ariaLabel = 'Select an option',
+  id,
+  name,
+  disabled = false,
+  icon,
+  hideLabel = false,
+  dropdownAlign = 'left',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const selectedOption = options.find((opt) =>
+  value !== undefined ? opt.value === value : opt.selected
+);
+
+const displayLabel = selectedOption?.label || placeholder || 'Select...';
+const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
+---
+
+<div
+  class:list={['select-container', fullWidth && 'select-container--full-width', className]}
+  data-select-container
+  data-open="false"
+  id={containerId}
+  {...rest}
+>
+  <button
+    type="button"
+    class:list={[
+      'select-button',
+      `select-button--size-${size}`,
+      `select-button--variant-${variant}`,
+      icon && 'select-button--with-icon',
+    ]}
+    data-select-button
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-label={ariaLabel}
+    disabled={disabled}
+  >
+    {
+      icon && (
+        <div class="select-icon">
+          <Icon name={icon} size="20" color="var(--color-icon-primary)" aria-hidden="true" />
+        </div>
+      )
+    }
+    <BodyMd vMargin={false} class:list={['select-label', hideLabel && 'sr-only']} data-select-label>
+      {displayLabel}
+    </BodyMd>
+    {
+      !hideLabel && (
+        <Icon name="fluent:chevron-down-20-regular" class="select-caret" aria-hidden="true" />
+      )
+    }
+  </button>
+
+  <div
+    class:list={['select-dropdown', `select-dropdown--align-${dropdownAlign}`]}
+    data-select-dropdown
+    role="listbox"
+    aria-label={ariaLabel}
+  >
+    {
+      options.map((option) => (
+        <button
+          type="button"
+          class="select-option"
+          role="option"
+          aria-selected={option.value === selectedOption?.value ? 'true' : 'false'}
+          data-select-option
+          data-value={String(option.value)}
+          disabled={option.disabled}
+        >
+          <BodyMd vMargin={false}>{option.label}</BodyMd>
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    name && (
+      <input
+        type="hidden"
+        name={name}
+        value={selectedOption?.value ? String(selectedOption.value) : ''}
+      />
+    )
+  }
+</div>
+
+<script>
+  function initSelect() {
+    const containers = document.querySelectorAll('[data-select-container]');
+
+    containers.forEach((container) => {
+      const button = container.querySelector('[data-select-button]') as HTMLButtonElement;
+      const dropdown = container.querySelector('[data-select-dropdown]') as HTMLElement;
+      const options = Array.from(
+        container.querySelectorAll('[data-select-option]')
+      ) as HTMLButtonElement[];
+      const label = container.querySelector('[data-select-label]') as HTMLElement;
+      const hiddenInput = container.querySelector('input[type="hidden"]') as HTMLInputElement;
+
+      if (!button || !dropdown || !options.length) return;
+
+      let isOpen = false;
+      let focusedIndex = -1;
+
+      const findNextEnabled = (startIndex: number): number => {
+        let index = (startIndex + 1) % options.length;
+        const startPos = index;
+        while (options[index]?.disabled) {
+          index = (index + 1) % options.length;
+          if (index === startPos) break;
+        }
+        return index;
+      };
+
+      const findPrevEnabled = (startIndex: number): number => {
+        let index = startIndex <= 0 ? options.length - 1 : startIndex - 1;
+        const startPos = index;
+        while (options[index]?.disabled) {
+          index = index <= 0 ? options.length - 1 : index - 1;
+          if (index === startPos) break;
+        }
+        return index;
+      };
+
+      const findFirstEnabled = (): number => {
+        let index = 0;
+        while (index < options.length && options[index]?.disabled) {
+          index++;
+        }
+        return index < options.length ? index : -1;
+      };
+
+      const findLastEnabled = (): number => {
+        let index = options.length - 1;
+        while (index >= 0 && options[index]?.disabled) {
+          index--;
+        }
+        return index;
+      };
+
+      const toggle = (open?: boolean) => {
+        if (button.disabled) return;
+
+        isOpen = open ?? !isOpen;
+        container.setAttribute('data-open', String(isOpen));
+        button.setAttribute('aria-expanded', String(isOpen));
+
+        if (isOpen) {
+          const selectedIndex = options.findIndex(
+            (opt) => opt.getAttribute('aria-selected') === 'true'
+          );
+
+          if (selectedIndex >= 0 && !options[selectedIndex].disabled) {
+            focusedIndex = selectedIndex;
+          } else {
+            focusedIndex = findFirstEnabled();
+          }
+
+          if (focusedIndex >= 0) {
+            options[focusedIndex].focus();
+          }
+        } else {
+          focusedIndex = -1;
+        }
+      };
+
+      const selectOption = (optionElement: HTMLButtonElement) => {
+        const value = optionElement.dataset.value;
+        const optionLabel = optionElement.textContent?.trim();
+
+        if (!value || !optionLabel) return;
+
+        options.forEach((opt) => {
+          opt.setAttribute('aria-selected', opt === optionElement ? 'true' : 'false');
+        });
+
+        label.textContent = optionLabel;
+
+        if (hiddenInput) {
+          hiddenInput.value = value;
+        }
+
+        const changeEvent = new CustomEvent('select-change', {
+          detail: { value, label: optionLabel },
+          bubbles: true,
+        });
+        container.dispatchEvent(changeEvent);
+
+        toggle(false);
+        button.focus();
+      };
+
+      const handleClickOutside = (e: MouseEvent) => {
+        if (!container.contains(e.target as Node)) {
+          toggle(false);
+        }
+      };
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (!isOpen) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            toggle(true);
+          }
+          return;
+        }
+
+        switch (e.key) {
+          case 'Escape':
+            e.preventDefault();
+            toggle(false);
+            button.focus();
+            break;
+
+          case 'ArrowDown':
+            e.preventDefault();
+            focusedIndex = findNextEnabled(focusedIndex);
+            options[focusedIndex].focus();
+            break;
+
+          case 'ArrowUp':
+            e.preventDefault();
+            focusedIndex = findPrevEnabled(focusedIndex);
+            options[focusedIndex].focus();
+            break;
+
+          case 'Home':
+            e.preventDefault();
+            focusedIndex = findFirstEnabled();
+            if (focusedIndex >= 0) options[focusedIndex].focus();
+            break;
+
+          case 'End':
+            e.preventDefault();
+            focusedIndex = findLastEnabled();
+            if (focusedIndex >= 0) options[focusedIndex].focus();
+            break;
+        }
+      };
+
+      button.addEventListener('click', () => toggle());
+      button.addEventListener('keydown', handleKeyDown);
+
+      options.forEach((option, index) => {
+        option.addEventListener('click', () => {
+          if (!option.disabled) {
+            selectOption(option);
+          }
+        });
+
+        option.addEventListener('keydown', (e) => {
+          if ((e.key === 'Enter' || e.key === ' ') && !option.disabled) {
+            e.preventDefault();
+            selectOption(option);
+            return;
+          }
+          handleKeyDown(e);
+        });
+
+        option.addEventListener('focus', () => {
+          focusedIndex = index;
+        });
+      });
+
+      document.addEventListener('click', handleClickOutside);
+
+      document.addEventListener('astro:before-preparation', () => {
+        document.removeEventListener('click', handleClickOutside);
+      });
+    });
+  }
+
+  initSelect();
+
+  document.addEventListener('astro:page-load', initSelect);
+</script>

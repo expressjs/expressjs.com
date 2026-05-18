@@ -1,0 +1,30 @@
+---
+/**
+ * Card Primitive Component
+ *
+ * A content card with a title and body text
+ *
+ * @example
+ * <Card title="Getting Started" body="Express is a fast, unopinionated web framework." />
+ *
+ * @example — Cards group
+ * <Card title="Installation" body="Run npm install express." />
+ * <Card title="Usage" body="Import express and create an app instance." />
+ */
+import './Card.css';
+import type { HTMLAttributes } from 'astro/types';
+import { H3, Body } from '@components/primitives';
+
+interface Props extends HTMLAttributes<'div'> {
+  title: string;
+  body: string;
+}
+
+const { title, body, class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['card', className]} data-testid="card" {...rest}>
+  <H3 vMargin={false}>{title}</H3>
+  <Body>{body}</Body>
+  <slot />
+</div>

@@ -1,0 +1,60 @@
+---
+/**
+ * Pagination Pattern Component
+ *
+ * Renders previous/next navigation with a current page indicator.
+ *
+ * @example
+ * <Pagination
+ *   prevUrl="/blog"
+ *   nextUrl="/blog/3"
+ *   currentPage={2}
+ *   lastPage={5}
+ * />
+ */
+import './Pagination.css';
+import { Icon } from 'astro-icon/components';
+import { Flex, Button, Body } from '@components/primitives';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage: number;
+  lastPage: number;
+}
+
+const { prevUrl, nextUrl, currentPage, lastPage, ...rest } = Astro.props;
+---
+
+<Flex justify="between" align="center" gap="4" class="pagination" {...rest}>
+  {
+    prevUrl ? (
+      <Button as="a" href={prevUrl} variant="secondary" size="md" data-pagination-prev>
+        <Icon name="fluent:arrow-left-20-filled" />
+        Previous
+      </Button>
+    ) : (
+      <Button variant="secondary" size="md" data-pagination-prev>
+        <Icon name="fluent:arrow-left-20-filled" />
+        Previous
+      </Button>
+    )
+  }
+  <Body vMargin={false} data-pagination-label>
+    Page {currentPage} of {lastPage}
+  </Body>
+  {
+    nextUrl ? (
+      <Button as="a" href={nextUrl} variant="secondary" size="md" data-pagination-next>
+        Next
+        <Icon name="fluent:arrow-right-20-filled" />
+      </Button>
+    ) : (
+      <Button variant="secondary" size="md" data-pagination-next>
+        Next
+        <Icon name="fluent:arrow-right-20-filled" />
+      </Button>
+    )
+  }
+</Flex>

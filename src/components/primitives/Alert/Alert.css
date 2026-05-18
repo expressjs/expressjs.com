@@ -1,0 +1,57 @@
+/**
+ * Alert Component Styles
+ */
+
+@layer primitives {
+  .alert {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border-left-width: var(--border-width-4);
+    border-left-style: solid;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    margin: var(--space-4) 0;
+  }
+
+  .alert__icon {
+    flex-shrink: 0;
+  }
+
+  .alert__description {
+    p {
+      margin: 0;
+    }
+  }
+
+  /* ============================================
+     VARIANTS
+     ============================================ */
+
+  .alert--info {
+    background-color: var(--color-bg-info);
+    border-color: var(--color-border-info);
+
+    .alert__icon {
+      color: var(--color-text-info);
+    }
+  }
+
+  .alert--alert {
+    background-color: var(--color-bg-warning);
+    border-color: var(--color-border-warning);
+
+    .alert__icon {
+      color: var(--color-text-warning);
+    }
+  }
+
+  .alert--warning {
+    background-color: var(--color-bg-error);
+    border-color: var(--color-border-error);
+
+    .alert__icon {
+      color: var(--color-text-error);
+    }
+  }
+}

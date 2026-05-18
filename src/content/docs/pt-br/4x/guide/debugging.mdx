@@ -1,0 +1,124 @@
+---
+title: Expresso de depuração
+description: Aprenda a habilitar e usar logs de depuração nos aplicativos Express.js definindo a variável de ambiente DEBUG para melhorar a solução de problemas.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Para ver todos os logs internos usados no Express, defina a variável de ambiente `DEBUG` para
+`express:*` ao iniciar seu aplicativo.
+
+```bash
+$ DEBUG=express:* node index.js
+```
+
+No Windows, use o comando correspondente.
+
+```bash
+> $env:DEBUG = "express:*"; node index.js
+```
+
+Executar este comando no aplicativo padrão gerado pelo [gerador expresso](/en/starter/generator) imprime a seguinte saída:
+
+```bash
+$ DEBUG=express:* node ./bin/www
+  express:router:route new / +0ms
+  express:router:layer new / +1ms
+  express:router:route get / +1ms
+  express:router:layer new / +0ms
+  express:router:route new / +1ms
+  express:router:layer new / +0ms
+  express:router:route get / +0ms
+  express:router:layer new / +0ms
+  express:application compile etag weak +1ms
+  express:application compile query parser extended +0ms
+  express:application compile trust proxy false +0ms
+  express:application booting in development mode +1ms
+  express:router use / query +0ms
+  express:router:layer new / +0ms
+  express:router use / expressInit +0ms
+  express:router:layer new / +0ms
+  express:router use / favicon +1ms
+  express:router:layer new / +0ms
+  express:router use / logger +0ms
+  express:router:layer new / +0ms
+  express:router use / jsonParser +0ms
+  express:router:layer new / +1ms
+  express:router use / urlencodedParser +0ms
+  express:router:layer new / +0ms
+  express:router use / cookieParser +0ms
+  express:router:layer new / +0ms
+  express:router use / stylus +90ms
+  express:router:layer new / +0ms
+  express:router use / serveStatic +0ms
+  express:router:layer new / +0ms
+  express:router use / router +0ms
+  express:router:layer new / +1ms
+  express:router use /users router +0ms
+  express:router:layer new /users +0ms
+  express:router use / &lt;anonymous&gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &lt;anonymous&gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &lt;anonymous&gt; +0ms
+  express:router:layer new / +0ms
+```
+
+Quando um pedido for feito ao aplicativo, você verá os logs especificados no código Expresso:
+
+```bash
+  express:router dispatching GET / +4h
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
+  express:router dispatching GET / +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
+
+Para ver os logs apenas da implementação do roteador, defina o valor de `DEBUG` para `express:router`. Da mesma forma, para ver apenas os logs da implementação do aplicativo, defina o valor de `DEBUG` para `express:application`, e assim por diante.
+
+## Aplicações geradas por `express`
+
+Uma aplicação gerada pelo comando `express` usa o módulo `debug` e seu namespace de depuração é escopo para o nome da aplicação.
+
+Por exemplo, se você gerou o app com `$ express sample-app`, você pode ativar as instruções de depuração com o seguinte comando:
+
+```bash
+$ DEBUG=sample-app:* node ./bin/www
+```
+
+Você pode especificar mais de um namespace de depuração atribuindo uma lista de nomes separada por vírgulas:
+
+```bash
+$ DEBUG=http,mail,express:* node index.js
+```
+
+## Opções avançadas
+
+Ao executar através do Node.js, você pode definir algumas variáveis de ambiente que irão mudar o comportamento do log de depuração:
+
+| Nome:               | Objetivo                                                 |
+| ------------------- | -------------------------------------------------------- |
+| `DEBUG`             | Habilita/desabilita namespace específicos de depuração.  |
+| `DEBUG_COLORS`      | Usar ou não cores na saída de depuração.                 |
+| DEBUG_DEPTH\`       | Profundidade da inspeção de objeto.                      |
+| `DEBUG_FD`          | Descritor de arquivo para escrever a saída de depuração. |
+| `DEBUG_SHOW_HIDDEN` | Mostra propriedades ocultas em objetos inspecionados.    |
+
+<Alert type="informações">
+
+As variáveis de ambiente começando com `DEBUG_` acabam sendo convertidas em um objeto de Opções
+que é usado com formatos `%o`/`%O`. Veja a documentação do Node.js sobre
+[`util.inspect()`](https://nodejs.org/api/util#util_util_inspect_object_options) para a lista
+completa.
+
+</Alert>

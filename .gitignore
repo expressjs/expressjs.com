@@ -1,12 +1,27 @@
-node_modules
-.DS_Store
-*.sublime*
-_site
-.sass-cache
-*.iml
-**/.idea
-**/Thumbs.db
+# build output
+dist/
 
-.jekyll-metadata
-vendor
-.bundle
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+playwright-report/
+test-results/

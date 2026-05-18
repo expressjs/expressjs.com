@@ -1,0 +1,41 @@
+---
+title: インストール中
+description: プロジェクトディレクトリの設定やnpmとの依存関係の管理など、Node.js 環境で Express.js をインストールする方法を学びます。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+始める前に、 [Node.js](https://nodejs.org/) 18 以上のインストールがあることを確認してください。 次に、アプリケーションのディレクトリを作成し、その中に移動します。
+
+```bash
+mkdir myapp
+cd myapp
+```
+
+`npm init` コマンドを使用して、アプリケーション用の `package.json` ファイルを作成します。
+`package.json` がどのように動作するかについては、[npm の package.json handling](https://docs.npmjs.com/files/package.json) を参照してください。
+
+```bash
+npm init
+```
+
+このコマンドを実行すると、アプリケーションの名前やバージョンなど、さまざまなものが表示されます。
+今のところ、RETURNを押すと、ほとんどのデフォルトを受け入れることができます。以下の例外があります。
+
+```
+エントリ ポイント: (index.js)
+```
+
+`app.js`、またはメインファイルの名前を何でも入力します。 `index.js`にしたい場合は、RETURNを押して、推奨されるデフォルトのファイル名を受け入れます。
+
+次に、Expressを`myapp`ディレクトリにインストールし、依存関係リストに保存します。 例:
+
+```bash
+npm install Express
+```
+
+Express を一時的にインストールし、依存関係リストに追加しないでください。
+
+```bash
+npm install express --no-save
+```

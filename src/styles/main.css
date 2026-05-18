@@ -1,0 +1,26 @@
+/**
+ * Main Stylesheet
+ *
+ * Entry point for all styles
+ * Import this file in your layout
+ *
+ * CSS Cascade Layers order (lowest to highest priority):
+ * 1. base       - Global styles (reset, fonts, global, utilities)
+ * 2. primitives - Primitive component styles
+ * 3. patterns   - Pattern component styles
+ *
+ * Layer order is defined in Layout.astro <head>
+ * Layers ensure correct specificity order regardless of bundle order
+ */
+
+/* Design Tokens - CSS custom properties (OUTSIDE layers for global access) */
+@import './tokens/index.css';
+
+/* Import base styles into the base layer */
+@import './base/_reset.css' layer(base);
+@import './base/_fonts.css' layer(base);
+@import './base/_global.css' layer(base);
+@import './utilities/_utilities.css' layer(base);
+
+/* Import expressive-code customizations OUTSIDE layers for highest priority */
+@import './base/_expressive-code.css';

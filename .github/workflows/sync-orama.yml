@@ -1,0 +1,47 @@
+name: Sync Orama Cloud
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - redesign
+      - gh-pages
+  pull_request:
+    branches:
+      - redesign
+      - gh-pages
+
+permissions:
+  contents: read
+
+concurrency:
+  group: '${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: ${{ github.event_name != 'push' }}
+
+jobs:
+  sync-orama-cloud:
+    name: Sync Orama Cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Sync Orama Cloud
+        run: node ./scripts/sync-orama.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLIC_ORAMA_PROJECT_ID: ${{ github.event_name == 'push' && secrets.PUBLIC_ORAMA_PRODUCTION_PROJECT_ID || secrets.PUBLIC_ORAMA_PROJECT_ID }}
+          PRIVATE_ORAMA_API_KEY: ${{ github.event_name == 'push' && secrets.PRIVATE_ORAMA_PRODUCTION_API_KEY || secrets.PRIVATE_ORAMA_API_KEY }}
+          PUBLIC_ORAMA_DATASOURCE_ID: ${{ github.event_name == 'push' && secrets.PUBLIC_ORAMA_PRODUCTION_DATASOURCE_ID || secrets.PUBLIC_ORAMA_DATASOURCE_ID }}

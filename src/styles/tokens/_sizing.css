@@ -1,0 +1,50 @@
+/**
+ * Sizing tokens
+ *
+ * Based on a 4px grid system (0.25rem)
+ * Used for width, height, max-width, max-height, etc.
+ */
+
+:root {
+  --size-0: 0;
+  --size-px: 1px;
+  --size-0-5: 0.2rem; /* 2px */
+  --size-1: 0.4rem; /* 4px */
+  --size-1-5: 0.6rem; /* 6px */
+  --size-2: 0.8rem; /* 8px */
+  --size-2-5: 1rem; /* 10px */
+  --size-3: 1.2rem; /* 12px */
+  --size-3-5: 1.4rem; /* 14px */
+  --size-4: 1.6rem; /* 16px */
+  --size-5: 2rem; /* 20px */
+  --size-6: 2.4rem; /* 24px */
+  --size-7: 2.8rem; /* 28px */
+  --size-8: 3.2rem; /* 32px */
+  --size-9: 3.6rem; /* 36px */
+  --size-10: 4rem; /* 40px */
+  --size-11: 4.4rem; /* 44px */
+  --size-12: 4.8rem; /* 48px */
+  --size-14: 5.6rem; /* 56px */
+  --size-16: 6.4rem; /* 64px */
+  --size-20: 8rem; /* 80px */
+  --size-24: 9.6rem; /* 96px */
+  --size-28: 11.2rem; /* 112px */
+  --size-32: 12.8rem; /* 128px */
+  --size-36: 14.4rem; /* 144px */
+  --size-40: 16rem; /* 160px */
+  --size-44: 17.6rem; /* 176px */
+  --size-48: 19.2rem; /* 192px */
+  --size-52: 20.8rem; /* 208px */
+  --size-56: 22.4rem; /* 224px */
+  --size-60: 24rem; /* 240px */
+  --size-64: 25.6rem; /* 256px */
+  --size-68: 27.2rem; /* 272px */
+  --size-72: 28.8rem; /* 288px */
+  --size-76: 30.4rem; /* 304px */
+  --size-80: 32rem; /* 320px */
+  --size-84: 33.6rem; /* 336px */
+  --size-88: 35.2rem; /* 352px */
+  --size-92: 36.8rem; /* 368px */
+  --size-96: 38.4rem; /* 384px */
+  --size-100: 40rem; /* 400px */
+}

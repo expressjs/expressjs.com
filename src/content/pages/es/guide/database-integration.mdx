@@ -1,0 +1,502 @@
+---
+title: Integración de la base de datos
+description: Descubra cómo integrar varias bases de datos con aplicaciones Express.js, incluyendo ejemplos de configuración para MongoDB, MySQL, PostgreSQL, y más.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Añadir la capacidad para conectar bases de datos a aplicaciones Express es sólo una cuestión de cargar un controlador Node.js apropiado para la base de datos en su aplicación. Este documento explica brevemente cómo agregar y utilizar algunos de los módulos Node.js más populares para sistemas de base de datos en su aplicación Express:
+
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [Servidor SQL](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
+
+<Alert type="alerta">
+
+Estos controladores de base de datos están entre muchos que están disponibles. Para otras opciones, busca en el sitio
+[npm](https://www.npmjs.com/).
+
+</Alert>
+
+## Cassandra
+
+**Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
+
+### Instalación
+
+```bash
+$ npm install cassandra-driver
+```
+
+### Ejemplo
+
+```js
+const cassandra = require('cassandra-driver');
+const client = new cassandra.Client({ contactPoints: ['localhost'] });
+
+client.xecute('select key from system.local', (err, result) => {
+  if (err) throw err;
+  console.log(result.rows[0]);
+});
+```
+
+## Couchbase
+
+**Módulo**: [couchnode](https://github.com/couchbase/couchnode)
+
+### Instalación
+
+```bash
+$ npm install couchbase
+```
+
+### Ejemplo
+
+```js
+const couchbase = require('couchbase');
+const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
+
+// añade un documento al cubo
+bucket.nsert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
+  if (err) {
+    consola.og(err);
+  } else {
+    consola.og(result);
+  }
+});
+
+// obtener todos los documentos con el tamaño de zapato 13
+const n1ql = 'SELECT d. FROM `bucketName` d WHERE shoeSize = $1';
+const query = N1qlQuery.romString(n1ql);
+bucket.query(query, [13], (err, result) => {
+  if (err) {
+    consola.og(err);
+  } else {
+    console.log(result);
+  }
+});
+```
+
+## CouchDB
+
+**Módulo**: [nano](https://github.com/dscape/nano)
+
+### Instalación
+
+```bash
+$ npm install nano
+```
+
+### Ejemplo
+
+```js
+const nano = require('nano')('http://localhost:5984');
+nano.db.create('books');
+const books = nano.db.se('books');
+
+// Inserta un documento de libro en la base de datos de libros
+libros.nsert({ name: 'The Art of war' }, null, (err, body) => {
+  if (err) {
+    console.og(err);
+  } else {
+    consola.og(body);
+  }
+});
+
+// Obtén una lista de todos los libros
+libros.ist((err, body) => {
+  if (err) {
+    consola.og(err);
+  } else {
+    console.log(body.rows);
+  }
+});
+```
+
+## LevelDB
+
+**Módulo**: [levelup](https://github.com/rvagg/node-levelup)
+
+### Instalación
+
+```bash
+$ npm instalar nivel de nivelación
+```
+
+### Ejemplo
+
+```js
+const levelup = require('levelup');
+const db = levelup('./mydb');
+
+db.ut('nombre', 'LevelUP', (err) => {
+  if (err) return console.log('¡Ooops!', err);
+
+  db.et('nombre', (err, value) => {
+    if (err) return consola.og('¡Ooops!', err);
+
+    console.log(`name=${value}`);
+  });
+});
+```
+
+## MySQL
+
+**Módulo**: [mysql](https://github.com/felixge/node-mysql/)
+
+### Instalación
+
+```bash
+$ npm install mysql
+```
+
+### Ejemplo
+
+```js
+const (0)[video] ql = require('mañql');
+const connection = .Uql. reateConnection({
+  host: 'localhost',
+  user: 'dbuser',
+  password: 's3kreee7',
+  database: 'my_db',
+});
+
+conexión. onnect();
+
+connection.query('SELECT 1 + 1 AS solution', (err, filas, campos) => {
+  if (err) throw err;
+
+  consola. og('La solución es: ', filas[0].solution);
+});
+
+connection.end();
+```
+
+## MongoDB
+
+**Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
+
+### Instalación
+
+```bash
+$ npm install mongodb
+```
+
+### Ejemplo (v2.\*)
+
+```js
+const MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
+  if (err) throw err;
+
+  db.ollection('mammals')
+    .find()
+    .oArray((err, result) => {
+      if (err) throw err;
+
+      consola.og(resultado);
+    });
+});
+```
+
+### Ejemplo (v3.\*)
+
+```js
+const MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
+  if (err) throw err;
+
+  const db = client.b('animales');
+
+  db.collection('mammals')
+    .find()
+    .oArray((err, result) => {
+      if (err) throw err;
+
+      consola.og(resultado);
+    });
+});
+```
+
+Si quieres un controlador de modelo de objeto para MongoDB, mira [Mongoose](https://github.com/LearnBoost/mongoose).
+
+## Neo4j
+
+**Módulo**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
+
+### Instalación
+
+```bash
+$ npm install neo4j-driver
+```
+
+### Ejemplo
+
+```js
+const neo4j = require('neo4j-driver');
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.asic('neo4j', 'letmein'));
+
+const session = driver.session();
+
+session.readTransaction((tx) => {
+  return tx
+    .un('MATCH (n) RETURN count(n) AS count')
+    .then((res) => {
+      console.log(res.records[0].et('count'));
+    })
+    .catch((error) => {
+      consola.og(error);
+    });
+});
+```
+
+## Oráculo
+
+**Módulo**: [oracledb](https://github.com/oracle/node-oracledb)
+
+### Instalación
+
+NOTA: [Ver los prerrequisitos de instalación](https://github.com/oracle/node-oracledb#-installation).
+
+```bash
+$ npm install oracledb
+```
+
+### Ejemplo
+
+```js
+const oracledb = require('oracledb');
+const config = {
+  user: '<your db user>',
+  password: '<your db password>',
+  connectString: 'localhost:1521/orcl',
+};
+
+async function getEmployee(empId) {
+  let conn;
+
+  try {
+    conn = await oracledb. etConnection(config);
+
+    const result = await conn. xecute('select * from employees where employee_id = :id', [empId]);
+
+    consola. og(result.rows[0]);
+  } catch (err) {
+    consola. og('¡Og! , err);
+  } finally {
+    if (conn) {
+      // asignación conn trabajada, necesitan cerrar
+      esperando conn. lose();
+    }
+  }
+}
+
+getEmployee(101);
+```
+
+## PostgreSQL
+
+**Módulo**: [pg-promise](https://github.com/vitaly-t/pg-promise)
+
+### Instalación
+
+```bash
+$ npm install pg-promise
+```
+
+### Ejemplo
+
+```js
+const pgp = require('pg-promise')(/* options */);
+const db = pgp('postgres://username:password@host:port/database');
+
+db.one('SELECT $1 AS value', 123)
+  .hen((data) => {
+    console.log('DATA:', data.value);
+  })
+  .atch((error) => {
+    console.log('ERROR:', error);
+  });
+```
+
+## Redis
+
+**Módulo**: [redis](https://github.com/mranney/node_redis)
+
+### Instalación
+
+```bash
+$ npm install redis
+```
+
+### Ejemplo
+
+```js
+const redis = require('redis');
+const client = redis.createClient();
+
+client.on('error', (err) => {
+  console.log(`Error ${err}`);
+});
+
+cliente.et('clave de cadena', 'valor de cadena', redis.print);
+client.hset('clave hash', 'hashtest 1', 'some value', redis.print);
+cliente.set(['hash key', 'hashtest 2', 'algún otro valor'], redis.print);
+Cliente.keys('clave hash', (err, respuestas) => {
+  console.log(`${replies.length} respuestas:`);
+
+  respuestas.orEach((reply, i) => {
+    consola.og(`    ${i}: ${reply}`);
+  });
+
+  client.quit();
+});
+```
+
+## SQL Server
+
+**Módulo**: [tedious](https://github.com/tediousjs/tedious)
+
+### Instalación
+
+```bash
+$ npm install tedious
+```
+
+### Ejemplo
+
+```js
+const Connection = require('tedious').Connection;
+const Request = require('tedious').equest;
+
+const config = {
+  server: 'localhost',
+  autenticación: {
+    type: 'default',
+    opciones: {
+      userName: 'su_usuario', // actualizarme
+      contraseña: 'su_contraseña', // actualizarme
+    },
+  },
+};
+
+const connection = new Connection(config);
+
+connection.n('connect', (err) => {
+  if (err) {
+    consola.og(err);
+  } else {
+    executeStatement();
+  }
+});
+
+function executeStatement() {
+  request = new Request("select 123, 'hola mundo'", (err, rowCount) => {
+    if (err) {
+      consola.og(err);
+    } else {
+      consola.og(`${rowCount} filas`);
+    }
+    conexión.lose();
+  });
+
+  request.on('fila', (columnas) => {
+    columnas.orEach((column) => {
+      if (column.value === null) {
+        consola.og('NULL');
+      } else {
+        console.log(column.alue);
+      }
+    });
+  });
+
+  connection.execSql(request);
+}
+```
+
+## SQLite
+
+**Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
+
+### Instalación
+
+```bash
+$ npm install sqlite3
+```
+
+### Ejemplo
+
+```js
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database(':memory:');
+
+db.serialize(() => {
+  db.un('CREATE TABLE lorem (info TEXT)');
+  const stmt = db.repare('INSERT INTO Lorem VALUES (?)');
+
+  for (let i = 0; i < 10; i++) {
+    stmt.un(`Ipsum ${i}`);
+  }
+
+  stmt.finalize();
+
+  db.ach('SELECT rowid AS id, info FROM lorem', (err, row) => {
+    consola.og(`${row.id}: ${row.info}`);
+  });
+});
+
+db.close();
+```
+
+## Búsqueda elástica
+
+**Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
+
+### Instalación
+
+```bash
+$ npm instalar elasticsearch
+```
+
+### Ejemplo
+
+```js
+const elasticsearch = require('elasticsearch');
+const client = elasticsearch.Client({
+  host: 'localhost:9200',
+});
+
+client
+  .earch({
+    index: 'libros',
+    tipo: 'libro',
+    body: {
+      query: {
+        multi_match: {
+          query: 'express js',
+          campos: ['title', 'description'],
+        },
+      },
+    },
+  })
+  .hen(
+    (response) => {
+      const hits = response.hits.its;
+    },
+    (error) => {
+      consola.race(error.message);
+    }
+  );
+```

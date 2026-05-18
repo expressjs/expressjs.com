@@ -1,126 +1,141 @@
-# Contributing to Expressjs.com
-
-### The Official Documentation of the Express.js Framework
+# Contributing to the expressjs.com website
 
 This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
->[!NOTE]
-> This is not the repo for Express.js framework. To contribute to the _[Express.js framework](https://github.com/expressjs/express)_, check out the [GitHub repo contributing page](https://github.com/expressjs/express?tab=contributing-ov-file) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing.html) page.
+You can see the current [captains and committers](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md) of this project, and learn how to join through the [governance document](https://github.com/expressjs/discussions/blob/HEAD/docs/GOVERNANCE.md). Also review the [Express Collaborator Guide](https://github.com/expressjs/.github/blob/HEAD/CONTRIBUTING.md) for general contribution guidelines across Express.js projects.
 
+## Common Contributions
 
-#### Need some ideas? These are some typical issues.
-
-1. **Website issues**: If you see anything on the site that could use a tune-up, think about how to fix it.
-    - Display or screen sizing problems
-    - Mobile responsiveness issues
-    - Missing or broken accessibility features 
-    - Website outages
-    - Broken links
-    - Page structure or user interface enhancements
-
+1. **Website Issues**: Improvements to the site's functionality, design, or accessibility.
 2. **Content Issues**: Fix anything related to site content or typos.
-    - Spelling errors
-    - Incorrect/outdated Express.js documentation
-    - Missing content
+3. **Translation Issues**: Fix translation errors or contribute new content. See the [i18n documentation](docs/i18n.md).
 
-3. **Translation Issues**: Fix any translation errors or contribute new content.
-    - Fix spelling errors 
-    - Fix incorrect/poorly translated words
-    - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
+## Working on Issues
 
-#### Want to work on a backlog issue?
+We welcome contributions to existing bugs or enhancements. You can find these under our repo's [Issues tab](https://github.com/expressjs/expressjs.com/issues). Look for issues labeled `good first issue` or `help wanted` to get started.
 
-We often have bugs or enhancements that need work. You can find these under our repo's [Issues tab](https://github.com/expressjs/expressjs.com/issues). Check out the tags to find something that's a good match for you.
+If you have found a bug, a typo, or have an idea for an enhancement:
 
-#### Have an idea? Found a bug?
+- Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) for larger proposals or to get feedback first.
+- Open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) directly if the work is ready to go.
 
-If you've found a bug or a typo, or if you have an idea for an enhancement, you can:
-- Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first. 
-
-- Make a [GitHub pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). If you have already done work, and it's ready to go, feel free to send it our way.
+> For significant changes, we encourage opening an issue first to discuss and align before starting work.
 
 ## Getting Started
 
-The steps below will guide you through the Expressjs.com contribution process.
+### Prerequisites
 
-#### Step 1: (OPTIONAL) Open a New Issue
-So you've found a problem that you want to fix, or have a site enhancement you want to make. 
-1. If you want to get feedback or discuss, open a discussion [issue](https://github.com/expressjs/expressjs.com/issues/new/choose) prior to starting work. This is not required, but encouraged for larger proposals. 
-    - While we highly encourage this step, it is only for submissions proposing significant change. It  helps us to clarify and focus the work, and ensure it aligns with overall project priorities.
-    - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
-    - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
+This project uses:
 
-2. After receiving your issue the Express.js documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback. 
-    - For submissions proposing significant change, we encourage you to follow the review process before starting work. 
+- **Astro** for site generation
+- **TypeScript** for type safety
+- **ESLint** for linting
+- **Prettier** for formatting
 
-#### Step 2: Get the Application Code Base
+Tooling required:
 
-Clone the repo and get the code:
+- **Node.js**: v24.x or higher
+- **npm**: v11.0.0 or higher (comes with Node 24)
 
-```sh
-git clone https://github.com/expressjs/expressjs.com.git
+> We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions. This project includes an `.nvmrc` file for automatic version switching.
+
+### Setup
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/expressjs/expressjs.com.git
+   cd expressjs.com
+   ```
+
+2. **Install the correct Node.js version** (if using nvm):
+
+   ```bash
+   nvm install
+   nvm use
+   ```
+
+3. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+4. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+   The site will be available at `http://localhost:4321`
+
+### Available Scripts
+
+| Command            | Description                               |
+| ------------------ | ----------------------------------------- |
+| `npm run dev`      | Start development server with hot reload  |
+| `npm run build`    | Build production site to `./dist`         |
+| `npm run preview`  | Preview production build locally          |
+| `npm run lint`     | Run ESLint to check for issues            |
+| `npm run check`    | Run type checking and format verification |
+| `npm run test:e2e` | Run Playwright E2E tests                  |
+
+## Submitting a Pull Request
+
+1. Create a new branch from `main`.
+2. Make your changes.
+3. Run `npm run check` to verify code style and types.
+4. Run `npm run test:e2e` to ensure your changes don't break existing functionality.
+5. Commit with a clear message.
+6. Push to your fork.
+7. Open a PR against `main`.
+
+> Ensure all checks pass and your branch is up to date with `main` before opening a PR.
+
+## Testing
+
+We use **Playwright** for End-to-End (E2E) testing. All PRs are automatically tested against a Netlify Preview deployment before they can be merged.
+
+### Prerequisites
+
+Before running E2E tests for the first time, you need to install the browser binaries:
+
+```bash
+npx playwright install --with-deps
 ```
 
-After you've got the code you're ready to start making your changes! 
+### Running Tests Locally
 
-But just in case you need a little extra explanation, this section below outlines the main sections of the code base, where most changes are likely to be made.  
+You can run the full test suite against your local development server:
 
-**Markdown Page Files**: 
-- These files render to html and make up the individual pages of the site. Most of the site's documentation text content is written in `md` files.
-- Change these to make changes to individual pages' content/text or markup. 
-- Each language has its own complete set of pages, located under their respective language directories - all the Spanish markdown content is found in the `es` directory, for example. 
+1. In one terminal, start the site: `npm run dev`
+2. In another terminal, run the tests: `npm run test:e2e`
 
-**Includes Partials and Layout Templates**
-- `_includes` are partials that are imported and reused across multiple pages.
-  - These are used to import text content for reuse across pages, such as the API documentation, e.g., `_includes > api > en > 5x`, which is included in every language.
-  - These are used to include the page components that make up site-wide user interface and periphery structure, e.g., Header, Footer, etc.
-- `_layouts` are the templates used to wrap the site's individual pages. 
-  - These are used to display the structure of the site's periphery, such as the header and footer, and for injecting and displaying individual markdown pages inside the `content` tag.
+### Writing Stable Tests
 
-**Blog Markdown Files**
-- These files make up the individual blog posts. If you want to contribute a blog post please
-follow the specific instructions for [How to write a blog post.](https://expressjs.com/en/blog/write-post.html)
-- Located under the `_posts` directory. 
+When adding new tests or modifying components, please follow these stability guidelines:
 
-**CSS or Javascript**
-- All css and js files are kept in `css` and `js` folders on the project root.
+1. **Avoid CSS Classes**: Do not use CSS classes (e.g., `.hero__content`) for locators, as they are fragile and change during refactoring.
+2. **Use data-testid**: Add `data-testid` attributes to components for stable targeting (e.g., `<div data-testid="my-component">`).
+3. **User-Visible Locators**: Prefer semantic locators like `getByRole`, `getByText`, or `getByAltText` over IDs when possible.
 
-The Express.js website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [GitHub Pages](https://pages.github.com/).
+Example:
 
-#### Step 3: Running the Application
+```typescript
+// Good: Stable and accessible
+const logo = page.getByAltText('Express.js logo');
+const section = page.getByTestId('features-section');
 
-Now you'll need a way to see your changes, which means you'll need a running version of the application. You have two options. 
+// Bad: Fragile
+const logo = page.locator('.hero__logo');
+```
 
->[!NOTE]
->If you're only making changes to the content, you most likely won't need to run the site locally.
+## Further Documentation
 
-1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.  
-    - This is the recommended option for moderate to complex work. 
+For more detailed documentation about the project, see the [`docs/`](docs/) folder:
 
-2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/deploy/deploy-types/deploy-previews/). 
-    1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a *draft* pull request. 
-    2. After the build steps are complete, you'll have access to a __Deploy Preview__ tab that will run your changes on the web, rebuilding after each commit is pushed. 
-    3. After you are completely done your work, and it's ready for review, remove the draft status on your pull request and submit your work.
-  
-## Contributing translations
-
-We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
-
-The documentation is translated into these languages:
-
-- Chinese Simplified (`zh-cn`)
-- Chinese Traditional (`zh-tw`)
-- English (`en`)
-- French (`fr`)
-- German (`de`)
-- Italian (`it`)
-- Japanese (`ja`)
-- Korean (`ko`)
-- Brazilian Portuguese (`pt-br`)
-- Spanish (`es`)
-
-### How to translate
-
-1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
-2. [Select the language you want to translate](https://support.crowdin.com/for-translators/#starting-translation)
-3. [Start translating](https://support.crowdin.com/online-editor/)
+- [Project Structure](docs/project-structure.md) — Architecture, folder layout, and framework policy
+- [Content](docs/content.md) — Collections, frontmatter, versioning, and global pages
+- [Configuration](docs/configuration.md) — Navigation menus, announcement bar, and version-specific items
+- [Internationalization](docs/i18n.md) — Translations, Crowdin integration, and adding languages
+- [Design System](docs/design-system.md) — Components, tokens, colors, typography, and breakpoints

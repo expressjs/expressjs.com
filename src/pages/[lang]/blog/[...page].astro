@@ -1,0 +1,199 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { languages } from '@i18n/locales';
+import { Container, Grid, Col } from '@components/primitives';
+import { Tabs } from '@components/primitives/Tabs';
+import type { TabItem } from '@components/primitives';
+import { PostCard, PageHead, Pagination } from '@components/patterns';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { PaginateFunction } from 'astro';
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const PAGE_SIZE = 6;
+  const allPosts = await getCollection('blog');
+
+  return Object.keys(languages).flatMap((lang) => {
+    const langPosts = allPosts
+      .filter((post) => post.id !== 'write-post')
+      .sort((a, b) => {
+        const aFile = a.id.split('/').pop() ?? '';
+        const bFile = b.id.split('/').pop() ?? '';
+        return bFile.localeCompare(aFile);
+      });
+
+    const allTags = [...new Set(langPosts.flatMap((p) => p.data.tags ?? []))];
+
+    return paginate(langPosts, {
+      params: { lang },
+      pageSize: PAGE_SIZE,
+      props: { allTags, langPosts, pageSize: PAGE_SIZE },
+    });
+  });
+}
+
+const { page, allTags, langPosts, pageSize } = Astro.props;
+const { lang } = Astro.params;
+const pagePosts = page.data as CollectionEntry<'blog'>[];
+
+function getDate(id: string) {
+  const filename = id.split('/').pop() ?? id;
+  return new Date(filename.substring(0, 10)).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
+function formatTagLabel(tag: string) {
+  const spaced = tag.replace(/-/g, ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+}
+
+function getLabels(tags?: string[]) {
+  return (tags ?? []).map(formatTagLabel);
+}
+
+function getPostProps(post: CollectionEntry<'blog'>) {
+  return {
+    href: `/${lang}/blog/${post.id.split('/').pop()}`,
+    labels: getLabels(post.data.tags),
+    title: post.data.title,
+    coverSrc: post.data.cover || `/og/blog-${post.id.split('/').pop()}.png`,
+    authors: (post.data.authors ?? []).map((a) => ({
+      src: a.github ? `https://github.com/${a.github}.png` : '',
+      name: a.name ?? '',
+    })),
+    avatarCaption: getDate(post.id),
+  };
+}
+
+const filterTabs: TabItem[] = [
+  { label: 'All', value: 'all' },
+  ...(allTags as string[]).map((tag) => ({
+    label: formatTagLabel(tag),
+    value: tag,
+  })),
+];
+---
+
+<Layout title="Express Blog">
+  <Container>
+    <PageHead
+      title="Blog"
+      description="Stay tuned for details on new releases, enhancements, and everything you need to know to make the most of your Express applications. Let's dive into what's new!"
+    />
+    <Tabs tabs={filterTabs} defaultValue="all" data-posts-filter />
+    <Grid gap="4" align="stretch" data-posts-grid>
+      {
+        pagePosts.map((post) => (
+          <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
+            <PostCard {...getPostProps(post)} />
+          </Col>
+        ))
+      }
+    </Grid>
+    <Pagination
+      data-pagination
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      style={page.lastPage <= 1 ? 'display:none' : ''}
+    />
+    <template data-posts-pool>
+      {
+        langPosts.map((post) => (
+          <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
+            <PostCard {...getPostProps(post)} />
+          </Col>
+        ))
+      }
+    </template>
+  </Container>
+</Layout>
+
+<script
+  define:vars={{
+    pageSize,
+    currentStaticPage: page.currentPage,
+    lastStaticPage: page.lastPage,
+  }}
+  is:inline
+>
+  function initBlogFilter() {
+    const filter = document.querySelector('[data-posts-filter]');
+    const grid = document.querySelector('[data-posts-grid]');
+    const pool = document.querySelector('[data-posts-pool]');
+    const paginationEl = document.querySelector('[data-pagination]');
+    const prevBtn = document.querySelector('[data-pagination-prev]');
+    const nextBtn = document.querySelector('[data-pagination-next]');
+    const pageLabel = document.querySelector('[data-pagination-label]');
+
+    if (!filter || !grid || !pool) return;
+
+    const staticCards = Array.from(grid.children);
+    const allCards = Array.from(pool.content.children);
+    let currentTag = 'all';
+    let filterPage = 1;
+
+    function getFiltered() {
+      if (currentTag === 'all') return allCards;
+      return allCards.filter((el) =>
+        el.dataset.postTags.split(' ').filter(Boolean).includes(currentTag)
+      );
+    }
+
+    function setPaginationState(currentPage, totalPages) {
+      if (paginationEl) {
+        paginationEl.style.display = totalPages > 1 ? '' : 'none';
+      }
+      if (pageLabel) pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+      if (prevBtn) prevBtn.setAttribute('aria-disabled', String(currentPage === 1));
+      if (nextBtn) nextBtn.setAttribute('aria-disabled', String(currentPage >= totalPages));
+    }
+
+    function renderFiltered() {
+      const filtered = getFiltered();
+      const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+      const start = (filterPage - 1) * pageSize;
+      grid.innerHTML = '';
+      filtered.slice(start, start + pageSize).forEach((el) => grid.appendChild(el.cloneNode(true)));
+      setPaginationState(filterPage, totalPages);
+    }
+
+    function restoreStatic() {
+      grid.innerHTML = '';
+      staticCards.forEach((card) => grid.appendChild(card));
+      setPaginationState(currentStaticPage, lastStaticPage);
+    }
+
+    filter.addEventListener('tabs-change', (e) => {
+      currentTag = e.detail.value;
+      filterPage = 1;
+      if (currentTag === 'all') {
+        restoreStatic();
+      } else {
+        renderFiltered();
+      }
+    });
+
+    prevBtn?.addEventListener('click', (e) => {
+      if (currentTag === 'all') return;
+      e.preventDefault();
+      if (prevBtn.getAttribute('aria-disabled') === 'true') return;
+      filterPage--;
+      renderFiltered();
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      if (currentTag === 'all') return;
+      e.preventDefault();
+      if (nextBtn.getAttribute('aria-disabled') === 'true') return;
+      filterPage++;
+      renderFiltered();
+    });
+  }
+
+  initBlogFilter();
+  document.addEventListener('astro:page-load', initBlogFilter);
+</script>

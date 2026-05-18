@@ -1,8 +1,0 @@
-title_announcement: "Express@5.1.0: npm에서 기본 버전으로 채택, LTS 일정 함께 도입됨"
-body_announcement: "이제 Express 5.1.0이 npm에서 기본 버전이 되었으며, v4와 v5 릴리스 라인에 대해 공식적인 LTS 일정도 도입했습니다.\n<a href='https://expressjs.com/2025/03/31/v5-1-latest-release.html'>자세한 내용은 최신 블로그를 확인해보세요.</a>"
-community-caveat-alert: "이 정보는 Expressjs 팀에서 관리하지 않는 서드파티 사이트, 제품 또는 모듈에 관한 것입니다. 여기에 나열된다고 해서 Expressjs 프로젝트 팀이 이를 보증하거나 추천한다는 의미는 아닙니다."
-warning: '경고'
-note: '참고'
-caution: '주의'
-i18n_notice: "이 문서는 영어 문서에 비해 최신 정보가 아닐 수 있습니다. 최신 내용을 확인하려면 아래의 영어 문서를 참고해 주시기 바랍니다"
-i18n_notice_link_text: "영어로 된 문서"

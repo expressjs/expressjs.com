@@ -1,0 +1,33 @@
+---
+/**
+ * WriteBanner Pattern Component
+ *
+ * A horizontal CTA banner with a text message on the left and a button link on the right.
+ *
+ * @example
+ * <WriteBanner
+ *   message="Interested in writing a post? Check out our guidelines to get started."
+ *   linkLabel="Read the guidelines"
+ *   href="/en/blog/write-post"
+ * />
+ */
+import { Icon } from 'astro-icon/components';
+import './WriteBanner.css';
+import { Button, H3 } from '@/components/primitives';
+
+interface Props {
+  message: string;
+  linkLabel: string;
+  href: string;
+}
+
+const { message, linkLabel, href } = Astro.props;
+---
+
+<div class="write-banner">
+  <H3 vMargin={false}>{message}</H3>
+  <Button as="a" variant="primary" href={href}>
+    {linkLabel}
+    <Icon name="fluent:arrow-right-16-regular" aria-hidden="true" />
+  </Button>
+</div>
