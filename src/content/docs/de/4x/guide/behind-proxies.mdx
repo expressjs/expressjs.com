@@ -44,10 +44,10 @@ Eine IP-Adresse, ein Subnetz oder ein Array von IP-Adressen und Subnetzen, die d
 Sie können IP-Adressen auf jede der folgenden Arten festlegen:
 
 ```js
-app.set('trust proxy', 'loopback'); // ein einzelnes Subnetz
-app.set('trust proxy', 'loopback, 123.123.123.123''); // ein Subnetz und eine Adresse
-angeben. et('trust proxy', 'loopback, linklocal, uniquelocal'); // mehrere Subnetze als CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // mehrere Subnetze als Array angeben
+app.set('trust proxy', 'loopback'); // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123'); // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array
 ```
 
 Wenn angegeben, werden die IP-Adressen oder Subnetze vom Prozess der Adressermittlung ausgeschlossen und die dem Anwendungsserver nächstgelegene nicht vertrauenswürdige IP-Adresse wird als IP-Adresse des Clients ermittelt. Dies funktioniert indem überprüft wird, ob `req.socket.remoteAddress` vertrauenswürdig ist. Wenn ja, dann wird jede Adresse in `X-Forwarded-For` von rechts nach links bis zur ersten Adresse überprüft, die nicht vertrauenswürdig ist.
@@ -71,8 +71,8 @@ Benutzerdefinierte Vertrauens-Implementierung.
 
 ```js
 app.set('trust proxy', (ip) => {
-  if (ip === '127.0.0.1' || ip === '123.123.123. 23')
-    return true; // vertrauenswürdige IPs
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
   else return false;
 });
 ```

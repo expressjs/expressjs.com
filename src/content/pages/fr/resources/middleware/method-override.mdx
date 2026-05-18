@@ -1,0 +1,184 @@
+---
+title: substituer le middleware à la méthode
+description: Remplacer les verbes HTTP
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="3.0.0"
+  github="https://github.com/expressjs/method-override"
+  npm="https://www.npmjs.com/package/method-override"
+/>
+
+Vous permet d'utiliser des verbes HTTP tels que PUT ou DELETE à des endroits où le client ne le supporte pas.
+
+## Installer
+
+Ceci est un module [Node.js](https://nodejs.org/en/) disponible via
+[npm registry](https://www.npmjs.com/). L'installation se fait à l'aide de la commande
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install method-override
+```
+
+## API
+
+**NOTE** Il est très important que ce module soit utilisé **avant** tout module que
+a besoin de connaître la méthode de la requête (par exemple, il _doit_ être utilisé avant
+le module `csurf`).
+
+### remplacement de la méthode (getter, options)
+
+Créez une nouvelle fonction middleware pour remplacer la propriété `req.method` par une nouvelle valeur
+. Cette valeur sera tirée du `getter` fourni.
+
+- `getter` - L'getter à utiliser pour rechercher la méthode de requête surchargée pour la requête. (par défaut: `X-HTTP-Method-Override`)
+- `options.methods` - Les méthodes autorisées dans la requête originale doivent être utilisées pour vérifier si une méthode est remplacée par une valeur. (par défaut: `['POST']`)
+
+Si la méthode trouvée est supportée par node.js core, alors `req. ethod` sera défini à
+cette valeur, comme si c'était à l'origine cette valeur. La valeur précédente `req.method`
+sera stockée dans `req.originalMethod`.
+
+#### obtenteur
+
+C'est la méthode pour obtenir la valeur de remplacement de la requête. Si une fonction est fournie,
+le `req` est passé comme premier argument, le `res` en tant que deuxième argument et la méthode est
+devrait être retourné. Si une chaîne de caractères est fournie, la chaîne est utilisée pour rechercher la méthode
+avec les règles suivantes :
+
+- Si la chaîne commence par `X-`, alors il est traité comme le nom d'un en-tête et que l'en-tête
+  est utilisé pour le remplacement de la méthode. Si la requête contient le même en-tête plusieurs fois, la première occurrence
+  est utilisée.
+- Toutes les autres chaînes sont traitées comme une clé dans la chaîne de requête d'URL.
+
+#### Méthodes
+
+This allows the specification of what methods(s) the request _MUST_ be in in order to check for
+the method override value. Par défaut, seules les méthodes `POST`, qui est la seule méthode dans laquelle la substitution
+devrait arriver. D'autres méthodes peuvent être spécifiées ici, mais cela peut introduire des problèmes de sécurité
+et causer des comportements bizarres lorsque les requêtes voyagent à travers des caches. Cette valeur est un tableau
+de méthodes en majuscule. `null` peut être spécifié pour autoriser toutes les méthodes.
+
+## Exemples
+
+### remplacer par un en-tête
+
+Pour utiliser un en-tête pour remplacer la méthode, spécifiez le nom d'en-tête
+comme argument de chaîne de la fonction `methodOverride`. Pour faire
+l'appel, envoyez une requête `POST` à une URL avec la méthode remplacée
+comme valeur de cet en-tête. Cette méthode d'utilisation d'un en-tête serait
+généralement utilisée en conjonction avec `XMLHttpRequest` sur les implémentations
+qui ne prennent pas en charge la méthode que vous essayez d'utiliser.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride('X-HTTP-Method-Override'));
+```
+
+Exemple d'appel avec surcharge d'en-tête à l'aide de `XMLHttpRequest`:
+
+{/* navigateur eslint-env */}
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.onload = onload;
+xhr.open('post', '/resource', true);
+xhr.setRequestHeader('X-HTTP-Method-Override', 'DELETE');
+xhr.send();
+
+function onload() {
+  alert('got response: ' + this.responseText);
+}
+```
+
+### outrepasser la valeur d'une requête
+
+Pour utiliser une chaîne de requête pour remplacer la méthode, spécifiez la chaîne de requête
+comme argument de chaîne de caractères à la fonction `methodOverride`. À
+puis faites l'appel, envoyer une requête `POST` à une URL avec la méthode
+remplacée comme valeur de cette clé de chaîne de requête. Cette méthode d'utilisation d'une valeur de requête
+serait généralement utilisée en conjonction avec des éléments HTML
+`\<form>` lorsque vous essayez de prendre en charge les navigateurs existants mais utilisez toujours
+des méthodes plus récentes.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+```
+
+Exemple d'appel avec surcharge de requête en utilisant HTML `\<form>`:
+
+```html
+<form method="POST" action="/resource?_method=DELETE">
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+### prise en charge de plusieurs formats
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with different headers; last one takes precedence
+app.use(methodOverride('X-HTTP-Method')); //          Microsoft
+app.use(methodOverride('X-HTTP-Method-Override')); // Google/GData
+app.use(methodOverride('X-Method-Override')); //      IBM
+```
+
+### logique personnalisée
+
+Vous pouvez implémenter n'importe quel type de logique personnalisée avec une fonction pour le `getter`. Le
+suivant implémente la logique de recherche dans `req.body` qui était dans `method-override@1`:
+
+```js
+const bodyParser = require('body-parser');
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// NOTE: when using req.body, you must fully parse the request body
+//       before you call methodOverride() in your middleware stack,
+//       otherwise req.body will not be populated.
+app.use(bodyParser.urlencoded());
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      const method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
+```
+
+Exemple d'appel avec surcharge de requête en utilisant HTML `\<form>`:
+
+```html
+{/* enctype must be set to the type you will parse before methodOverride() */}
+<form method="POST" action="/resource" enctype="application/x-www-form-urlencoded">
+  <input type="hidden" name="_method" value="DELETE" />
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+## Licence
+
+[MIT](https://github.com/expressjs/method-override/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/method-override
+[Url de voyage]: https://travis-ci.org/expressjs/method-override
+[downloads-url]: https://npmjs.org/package/method-override

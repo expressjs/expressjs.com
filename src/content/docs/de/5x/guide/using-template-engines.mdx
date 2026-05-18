@@ -20,7 +20,7 @@ Um Template-Dateien zu rendern, setzen Sie folgende [Anwendungs-Einstellungen-Ei
 Installieren Sie dann das entsprechende Template Engine npm Paket; zum Beispiel um Pug:
 
 ```bash
-$ npm Installations-Pug --save
+$ npm install pug --save
 ```
 
 <Alert type="warnung">
@@ -43,10 +43,10 @@ Erstelle dann eine Pug Template Datei namens `index.pug` im `views` Verzeichnis 
 
 ```pug
 html
-  Kopf
+  head
     title= title
-  Körper
-    h1= Nachricht
+  body
+    h1= message
 ```
 
 Erstelle eine Route um die `index.pug` Datei zu rendern. Wenn die `view engine` Eigenschaft nicht gesetzt ist,
@@ -54,7 +54,7 @@ musst du die Erweiterung der `view` Datei angeben. Andernfalls können Sie es au
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Hallo there!' });
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 ```
 

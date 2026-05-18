@@ -70,11 +70,11 @@ Illustra un sub-stack middleware che stampa la richiesta di informazioni per qua
 app.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req.riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
   (req, res, next) => {
-    console.og('Request Type:', req.method);
+    console.log('Request Type:', req.method);
     next();
   }
 );
@@ -88,16 +88,16 @@ Questo esempio mostra un sub-stack middleware che gestisce le richieste GET al p
 app.get(
   '/user/:id',
   (req, res, next) => {
-    console.log('ID:', req. arams.id);
+    console.log('ID:', req.params.id);
     next();
   },
   (req, res, next) => {
-    res. end('Info utente');
+    res.send('User Info');
   }
 );
 
-// handler per il percorso /user/:id, che stampa l'app ID utente
-. et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req, res, next) => {
   res.send(req.params.id);
 });
 ```
@@ -117,19 +117,19 @@ Questo esempio mostra un sub-stack middleware che gestisce le richieste GET al p
 app.get(
   '/user/:id',
   (req, res, next) => {
-    // se l'ID utente è 0, salta al prossimo percorso
-    se (req. arams. d === '0') next('route');
-    // altrimenti passa il controllo alla funzione middleware successiva in questo stack
-    altrimenti successivo();
+    // if the user ID is 0, skip to the next route
+    if (req.params.id === '0') next('route');
+    // otherwise pass the control to the next middleware function in this stack
+    else next();
   },
   (req, res, next) => {
-    // invia una risposta regolare
-    res. end('regular');
+    // send a regular response
+    res.send('regular');
   }
 );
 
-// handler per il percorso /user/:id, che invia una risposta speciale
-app. et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req, res, next) => {
   res.send('special');
 });
 ```
@@ -140,17 +140,17 @@ Questo esempio mostra un array con un sub-stack middleware che gestisce le richi
 
 ```js
 function logOriginalUrl(req, res, next) {
-  console.log('Request URL:', req.riginalUrl);
+  console.log('Request URL:', req.originalUrl);
   next();
 }
 
 function logMethod(req, res, next) {
-  console.log('Request Type:', req.ethod);
+  console.log('Request Type:', req.method);
   next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app.et('/user/:id', logStuff, (req, res, next) => {
+app.get('/user/:id', logStuff, (req, res, next) => {
   res.send('User Info');
 });
 ```
@@ -160,7 +160,7 @@ app.et('/user/:id', logStuff, (req, res, next) => {
 Router-level middleware funziona allo stesso modo di application-level middleware, tranne che è legato ad un'istanza di `express.Router()`.
 
 ```js
-router const = express.Router();
+const router = express.Router();
 ```
 
 Carica il middleware a livello router usando le funzioni `router.use()` e `router.METHOD()`.
@@ -170,49 +170,49 @@ Il seguente esempio di codice replica il sistema middleware che viene mostrato s
 ```js
 const express = require('express');
 const app = express();
-const router = express. outer();
+const router = express.Router();
 
-// una funzione middleware senza percorso di montaggio. Questo codice viene eseguito per ogni richiesta al router
-. se((req, res, next) => {
-  console.log('Time:', Date. ow());
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
   next();
 });
 
-// un sub-stack middleware mostra le informazioni di richiesta per qualsiasi tipo di richiesta HTTP al router /user/:id path
-. se(
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req. riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
   (req, res, next) => {
-    console. og('Request Type:', req. ethod);
+    console.log('Request Type:', req.method);
     next();
   }
 );
 
-// un sub-stack middleware che gestisce le richieste GET al router /user/:id path
-. et(
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
   '/user/:id',
   (req, res, next) => {
-    // se l'ID utente è 0, salta al router successivo
-    se (req. arams. d === '0') next('route');
-    // altrimenti passa il controllo alla successiva funzione middleware in questo stack
-    altrimenti successivo();
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
   },
-  (req, successivo) => {
-    // renderizza una pagina normale
-    res. ender('regular');
+  (req, res, next) => {
+    // render a regular page
+    res.render('regular');
   }
 );
 
-// handler per il percorso /user/:id, che rende una pagina speciale
-router. et('/user/:id', (req, res, next) => {
-  console. og(req.params.id);
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
   res.render('special');
 });
 
-// monta il router sull'app
+// mount the router on the app
 app.use('/', router);
 ```
 
@@ -224,20 +224,20 @@ Questo esempio mostra un sub-stack middleware che gestisce le richieste GET al p
 ```js
 const express = require('express');
 const app = express();
-const router = express. outer();
+const router = express.Router();
 
-// predicare il router con un controllo e salvataggio quando necessario router
-. se((req, res, next) => {
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
   if (!req.headers['x-auth']) return next('router');
   next();
 });
 
-router. et('/user/:id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   res.send('hello, user!');
 });
 
-// usa il router e 401 qualsiasi cosa che cade attraverso l'app
-. se('/admin', router, (req, res) => {
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
   res.sendStatus(401);
 });
 ```

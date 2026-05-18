@@ -36,16 +36,16 @@ Une fois que le moteur de vue est défini, vous n'avez pas à spécifier le mote
 Express charge le module en interne, par exemple :
 
 ```js
-app.set('moteur d'affichage', 'pug');
+app.set('view engine', 'pug');
 ```
 
 Ensuite, créez un fichier de modèle Pug nommé `index.pug` dans le dossier `views`, avec le contenu suivant:
 
 ```pug
 html
-  devant
-    title= titre
-  corps
+  head
+    title= title
+  body
     h1= message
 ```
 
@@ -54,7 +54,7 @@ vous devez spécifier l'extension du fichier `view`. Sinon, vous pouvez l'oublie
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Bonjour !' });
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 ```
 

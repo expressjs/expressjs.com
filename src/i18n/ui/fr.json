@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "Sélectionnez la version de l'API"
   },
+  "language": {
+    "selectLabel": "Sélectionner la langue"
+  },
   "nav": {
     "mainMenu": "Menu principal",
     "toggleMenu": "Afficher/Masquer le menu",
@@ -81,6 +84,7 @@
       "glossary": "Glossary",
       "contributing": "Contribuer",
       "utils": "Utilitaires",
+      "changelog": "Historique des modifications",
       "middleware": "Middleware"
     },
     "aria": {
@@ -109,7 +113,8 @@
       "community": "Ressources de la communauté",
       "glossary": "Glossaire des termes",
       "contributing": "Guide de contribution",
-      "utils": "Utilitaires"
+      "utils": "Utilitaires",
+      "changelog": "Journal des modifications express"
     }
   },
   "doc": {
@@ -120,6 +125,10 @@
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Traduire cette page"
+  },
+  "announcement": {
+    "readMore": "En savoir plus",
+    "checkLatestBlog": "Consultez notre dernier blog"
   },
   "post": {
     "share": "Partager",
@@ -166,9 +175,13 @@
     "message": "La page que vous cherchez n'existe pas ou a été déplacée.",
     "goHome": "Aller à la page d'accueil"
   },
+  "common": {
+    "download": "Télécharger"
+  },
   "hero": {
     "tagline": "Cadre web rapide, sans opinion et minimaliste pour Node.js",
     "getStarted": "Commencer",
+    "kawaiiLogoAlt": "Logo Express.js kawaii",
     "videoPause": "Mettre en pause la vidéo de fond",
     "videoPlay": "Lire la vidéo de fond"
   }

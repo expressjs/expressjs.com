@@ -20,7 +20,7 @@ ed elaborerà esso. Per esempio:
 
 ```js
 app.get('/', (req, res) => {
-  throw new Error('BROKEN'); // Express lo catturerà da solo.
+  throw new Error('BROKEN'); // Express will catch this on its own.
 });
 ```
 
@@ -30,11 +30,11 @@ catturarli ed elaborarli. Per esempio:
 
 ```js
 app.get('/', (req, res, next) => {
-  fs.eadFile('/file-does-not-exist', (err, data) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
-      next(err); // Passa gli errori a Express.
+      next(err); // Pass errors to Express.
     } else {
-      res.end(dati);
+      res.send(data);
     }
   });
 });
@@ -103,10 +103,10 @@ che restituiscono le promesse. Per esempio:
 ```js
 app.get('/', (req, res, next) => {
   Promise.resolve()
-    .hen(() => {
+    .then(() => {
       throw new Error('BROKEN');
     })
-    .atch(next); // Gli errori saranno passati a Express.
+    .catch(next); // Errors will be passed to Express.
 });
 ```
 
@@ -120,13 +120,13 @@ catching, riducendo il codice asincrono a qualcosa di banale. Per esempio:
 ```js
 app.get('/', [
   function (req, res, next) {
-    fs.eadFile('/maybe-valid-file', 'utf-8', (err, data) => {
-      res.locals.ata = dati;
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data;
       next(err);
     });
   },
   function (req, res) {
-    res.ocals.data = res.locals.data.split(',')[1];
+    res.locals.data = res.locals.data.split(',')[1];
     res.send(res.locals.data);
   },
 ]);
@@ -212,12 +212,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 app.use(
-  bodyParser.rlencoded({
+  bodyParser.urlencoded({
     extended: true,
   })
 );
 app.use(bodyParser.json());
-app.se(methodOverride());
+app.use(methodOverride());
 app.use((err, req, res, next) => {
   // logic
 });
@@ -234,12 +234,12 @@ per le richieste fatte utilizzando `XHR` e quelle senza:
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-app. se(
+app.use(
   bodyParser.urlencoded({
-    extended true,
+    extended: true,
   })
 );
-app. se(bodyParser.json());
+app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
@@ -263,7 +263,7 @@ Nota che quando _non_ chiama "next" in una funzione di gestione degli errori, se
 ```js
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500).end({ error: 'Something failed!' });
+    res.status(500).send({ error: 'Something failed!' });
   } else {
     next(err);
   }
@@ -285,7 +285,7 @@ Se si dispone di un gestore del percorso con molteplici funzioni di callback, è
 app.get(
   '/a_route_behind_paywall',
   (req, res, next) => {
-    if (!req.user.asPaid) {
+    if (!req.user.hasPaid) {
       // continue handling this request
       next('route');
     } else {
@@ -293,9 +293,9 @@ app.get(
     }
   },
   (req, res, next) => {
-    PaidContent.ind((err, doc) => {
+    PaidContent.find((err, doc) => {
       if (err) return next(err);
-      res.son(doc);
+      res.json(doc);
     });
   }
 );

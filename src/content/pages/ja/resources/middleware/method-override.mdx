@@ -1,0 +1,184 @@
+---
+title: method-overridemiddleware
+description: HTTP 動詞を上書き
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="3.0.0"
+  github="https://github.com/express/method-override"
+  npm="https://www.npmjs.com/package/method-override"
+/>
+
+PUTやDELETEなどのHTTP動詞をクライアントがサポートしていない場所で使用できます。
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install method-override
+```
+
+## API
+
+**NOTE** It is very important that this module is used **before** any module that
+needs to know the method of the request (for example, it _must_ be used prior to
+the `csurf` module).
+
+### methodOverride(getter, options)
+
+新しい
+値で`req.method`プロパティをオーバーライドするために、新しいミドルウェア関数を作成します。 この値は `getter` から取り出されます。
+
+- `getter` - リクエストのオーバーライドされたリクエストメソッドを検索するために使用するゲッター。 (デフォルト: `X-HTTP-Method-Override` )
+- `options.methods` - メソッドのオーバーライド値をチェックするには、元のリクエストに許可されているメソッドを指定します。 (デフォルト: `['POST']`)
+
+foundメソッドがnode.jsコアでサポートされている場合は、 `req. ethod`は、もともとその値であったかのように、この値を
+に設定します。 以前の `req.method`
+の値は `req.originalMethod` に保存されます。
+
+#### 取得
+
+これはリクエストからオーバーライド値を取得する方法です。 If a function is provided,
+the `req` is passed as the first argument, the `res` as the second argument and the method is
+expected to be returned. 文字列が指定された場合、以下のルールで
+メソッドを検索するために使用されます。
+
+- 文字列が `X-`で始まる場合。 次に、ヘッダーの名前として扱われ、そのヘッダー
+  がメソッドのオーバーライドに使用されます。 リクエストに同じヘッダーが複数回含まれている場合、最初の
+  が使用されます。
+- その他の文字列はすべて、URL クエリ文字列内のキーとして扱われます。
+
+#### options.methods
+
+これにより、リクエストされた _MUST_ メソッドのオーバーライド値を
+でチェックするために、どのメソッドを指定できるようになります。 デフォルトは `POST` メソッドのみで、
+オーバーライドする唯一のメソッドです。 ここではより多くのメソッドを指定することができますが、セキュリティ
+の問題が発生し、リクエストがキャッシュを通過すると変な動作が発生する可能性があります。 この値は大文字小文字のメソッドの配列
+です。 `null`はすべてのメソッドを許可するように指定できます。
+
+## 例
+
+### ヘッダーを使用してオーバーライドする
+
+メソッドをオーバーライドするためにヘッダーを使用するには、`methodOverride` 関数の引数として、ヘッダー名
+を文字列として指定します。
+を呼び出しにするには、オーバーライドされたメソッド
+をそのヘッダの値としてURLに`POST` リクエストを送信します。 This method of using a header would
+typically be used in conjunction with `XMLHttpRequest` on implementations
+that do not support the method you are trying to use.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride('X-HTTP-Method-Override'));
+```
+
+`XMLHttpRequest` を使用したヘッダー付きの呼び出しの例:
+
+{/* eslint-env ブラウザー */}
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.onload = onload;
+xhr.open('post', '/resource', true);
+xhr.setRequestHeader('X-HTTP-Method-Override', 'DELETE');
+xhr.send();
+
+function onload() {
+  alert('got response: ' + this.responseText);
+}
+```
+
+### クエリ値を使用してオーバーライドする
+
+クエリ文字列の値を使用してメソッドをオーバーライドするには、`methodOverride` 関数の文字列引数としてクエリ
+文字列キーを指定します。 To
+then make the call, send a `POST` request to a URL with the overridden
+method as the value of that query string key.
+クエリ値を使用するこのメソッドは、通常、プレーンHTML
+`\<form>`要素と組み合わせて使用されますが、
+新しいメソッドを使用します。
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+```
+
+Example call with query override using HTML `\<form>`:
+
+```html
+<form method="POST" action="/resource?_method=DELETE">
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+### 複数フォーマットのサポート
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with different headers; last one takes precedence
+app.use(methodOverride('X-HTTP-Method')); //          Microsoft
+app.use(methodOverride('X-HTTP-Method-Override')); // Google/GData
+app.use(methodOverride('X-Method-Override')); //      IBM
+```
+
+### カスタムロジック設定
+
+`getter` の関数を使って、任意の種類のカスタムロジックを実装できます。 以下の
+は、 `method-override@1`にあった`req.body` を参照するためのロジックを実装しています。
+
+```js
+const bodyParser = require('body-parser');
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// NOTE: when using req.body, you must fully parse the request body
+//       before you call methodOverride() in your middleware stack,
+//       otherwise req.body will not be populated.
+app.use(bodyParser.urlencoded());
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      const method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
+```
+
+Example call with query override using HTML `\<form>`:
+
+```html
+{/* enctype must be set to the type you will parse before methodOverride() */}
+<form method="POST" action="/resource" enctype="application/x-www-form-urlencoded">
+  <input type="hidden" name="_method" value="DELETE" />
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/method-override/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/method-override
+[travis-url]: https://travis-ci.org/expressjs/method-override
+[downloads-url]: https://npmjs.org/package/method-override

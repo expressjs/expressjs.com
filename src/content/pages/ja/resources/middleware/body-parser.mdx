@@ -1,0 +1,504 @@
+---
+title: body-parser middleware
+description: Node.js body parsing middleware
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.2.2"
+  github="https://github.com/expressjs/body-parser"
+  npm="https://www.npmjs.com/package/body-parser"
+/>
+
+Node.js body parsing middleware
+
+ハンドラの前に入ってくるリクエストボディをミドルウェアで解析し、`req.body`プロパティで
+を利用できます。
+
+**注意** `req. ody`の形状はユーザーが制御する入力に基づいており、このオブジェクト内のすべての
+プロパティと値は信頼できず、信頼する前に
+検証する必要があります。 For example, `req.body.foo.toString()` may fail in multiple
+ways, for example the `foo` property may not be there or may not be a string,
+and `toString` may not be a function and instead a string or other user input.
+
+[Learn about the anatomy of an HTTP transaction in Node.js](https://nodejs.org/en/learn/http/anatomy-of-an-http-transaction).
+
+*これは複合体であり、通常は
+大きな性質のため、マルチパートbody*を扱いません。 マルチパートボディの場合、以下の
+モジュールに興味があるかもしれません。
+
+- [busboy](https://www.npmjs.com/package/busboy#readme) と
+  [connect-busboy](https://www.npmjs.com/package/connect-busboy#readme)
+- [multiparty](https://www.npmjs.com/package/multiparty#readme) と
+  [connect-multiparty](https://www.npmjs.com/package/connect-multiparty#readme)
+- [formidable](https://www.npmjs.com/package/formidable#readme)
+- [multer](https://www.npmjs.com/package/multer#readme)
+
+このモジュールは以下のパーサを提供します。
+
+- [JSON body parser](#bodyparserjsonoptions)
+- [Raw body parser](#bodyparserrawoptions)
+- [Text body parser](#bodyparsertextoptions)
+- [URL-encoded form body parser](#bodyparserurlencodedoptions)
+
+あなたが興味を持っているかもしれない他のボディパーサ:
+
+- [body](https://www.npmjs.com/package/body#readme)
+- [co-body](https://www.npmjs.com/package/co-body#readme)
+
+## インストール
+
+```sh
+$ npm install body-parser
+```
+
+## API
+
+```js
+// Import all parsers
+const bodyParser = require('body-parser');
+
+// Or import individual parsers directly
+const json = require('body-parser/json');
+const urlencoded = require('body-parser/urlencoded');
+const raw = require('body-parser/raw');
+const text = require('body-parser/text');
+```
+
+`bodyParser` オブジェクトは、ミドルウェアを作成するために様々な工場を公開します。 All
+middlewares will populate the `req.body` property with the parsed body when
+the `Content-Type` request header matches the `type` option.
+
+このモジュールによって返される様々なエラーは、
+[errors section](#errors)で説明されています。
+
+### bodyParser.json([options])
+
+Returns middleware that only parses `json` and only looks at requests where
+the `Content-Type` header matches the `type` option. このパーサーは
+Unicode エンコーディングを受け付け、`gzip`,
+`br`, `deflate` エンコーディングの自動インフレーションをサポートしています。
+
+ミドルウェアの後に `request`
+オブジェクトに解析されたデータを含む新しい`body` オブジェクトが追加されました。
+
+#### オプション
+
+The `json` function takes an optional `options` object that may contain any of
+the following keys:
+
+##### defaultCharset
+
+リクエストの `Content-Type` ヘッダーに文字セットが
+指定されていない場合、json コンテンツのデフォルト文字セットを指定します。 デフォルトは `utf-8` です。
+
+##### 膨らませ
+
+`true` に設定されている場合、デフレートされた(圧縮された)ボディは膨らまれます。
+`false` の場合、デフレートされたボディは拒否されます。 デフォルトは `true` です。
+
+##### 制限
+
+リクエストボディの最大サイズを制御します。 これが数値の場合、値
+はバイト数を指定します。 文字列であれば、値は[bytes](https://www.npmjs.com/package/bytes) ライブラリに渡され、解析します。 デフォルト
+は `'100kb'` です。
+
+> 可能な限り高い制限を設定し、可能な限りデフォルト値を使用しないことをお勧めします。 より大きなペイロードを許可すると、デコードと変換に必要なリソースのため、メモリ使用量が増加します。 より多くのデータが処理されるにつれて応答時間が長くなることもあります 「非常に高い」とは、例えば5MB以上のペイロードなど、デフォルトよりも高い値を意味しますが、既にこれらのリスクを導入し始めています。 デフォルトの制限では、これらの問題は発生しません。
+
+##### reviver
+
+2番目の
+引数として`リバイバー`オプションは直接`JSON.parse`に渡されます。 この引数
+[JSON.parseに関するMDN ドキュメント](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Example.3A_Using_the_reviver_parameter) に詳しい情報があります。
+
+##### 厳格な
+
+When set to `true`, will only accept arrays and objects; when `false` will
+accept anything `JSON.parse` accepts. デフォルトは `true` です。
+
+##### タイプ
+
+`type` オプションは、ミドルウェアが
+解析するメディアタイプを決定するために使用されます。 このオプションは文字列、文字列の配列、または関数です。 If not a
+function, `type` option is passed directly to the
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
+be an extension name (like `json`), a mime type (like `application/json`), or
+a mime type with a wildcard (like `*/*` or `*/json`). 関数の場合、`type`
+オプションは`fn(req)`と呼ばれ、リクエストは真の
+値を返した場合に解析されます。 デフォルトは `application/json` です。
+
+##### 確認する
+
+`verify` オプションを指定すると、`verify(req, res, buf, encoding)`と呼ばれます。
+で、 `buf` は生のリクエストボディの `Buffer` で、 `encoding` はリクエストの
+エンコーディングです。 エラーを投げることで解析を中止することができます。
+
+### bodyParser.raw([options])
+
+全ての本文を`Buffer`として解析し、`Content-Type`ヘッダーが`type`オプションにマッチする
+リクエストのみを参照するミドルウェアを返します。 この
+パーサは、 `gzip` 、 `br` (brotli) 、 `deflate`
+エンコーディングの自動インフレーションをサポートします。
+
+ミドルウェアの後に `request`
+オブジェクトに解析されたデータを含む新しい`body` オブジェクトが追加されました。 これは本文の `Buffer` オブジェクト
+になります。
+
+#### オプション
+
+The `raw` function takes an optional `options` object that may contain any of
+the following keys:
+
+##### 膨らませ
+
+`true` に設定されている場合、デフレートされた(圧縮された)ボディは膨らまれます。
+`false` の場合、デフレートされたボディは拒否されます。 デフォルトは `true` です。
+
+##### 制限
+
+リクエストボディの最大サイズを制御します。 これが数値の場合、値
+はバイト数を指定します。 文字列であれば、値は[bytes](https://www.npmjs.com/package/bytes) ライブラリに渡され、解析します。 デフォルト
+は `'100kb'` です。
+
+> 可能な限り高い制限を設定し、可能な限りデフォルト値を使用しないことをお勧めします。 より大きなペイロードを許可すると、デコードと変換に必要なリソースのため、メモリ使用量が増加します。 より多くのデータが処理されるにつれて応答時間が長くなることもあります 「非常に高い」とは、例えば5MB以上のペイロードなど、デフォルトよりも高い値を意味しますが、既にこれらのリスクを導入し始めています。 デフォルトの制限では、これらの問題は発生しません。
+
+##### タイプ
+
+`type` オプションは、ミドルウェアが
+解析するメディアタイプを決定するために使用されます。 このオプションは文字列、文字列の配列、または関数です。
+If not a function, `type` option is passed directly to the
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this
+can be an extension name (like `bin`), a mime type (like
+`application/octet-stream`), or a mime type with a wildcard (like `*/*` or
+`application/*`). 関数の場合、`type` オプションは `fn(req)`
+と呼ばれ、リクエストは真の値を返す場合に解析されます。 デフォルトは
+`application/octet-stream` です。
+
+##### 確認する
+
+`verify` オプションを指定すると、`verify(req, res, buf, encoding)`と呼ばれます。
+で、 `buf` は生のリクエストボディの `Buffer` で、 `encoding` はリクエストの
+エンコーディングです。 エラーを投げることで解析を中止することができます。
+
+### bodyParser.text([options])
+
+全ての本文を文字列として解析し、`Content-Type`ヘッダーが`type`オプションにマッチする
+リクエストのみを参照するミドルウェアを返します。 この
+パーサは、 `gzip` 、 `br` (brotli) 、 `deflate`
+エンコーディングの自動インフレーションをサポートします。
+
+ミドルウェアの後に `request`
+オブジェクトに解析されたデータを含む新しい`body` 文字列が追加されます。 これは、
+本体の文字列になります。
+
+#### オプション
+
+The `text` function takes an optional `options` object that may contain any of
+the following keys:
+
+##### defaultCharset
+
+リクエストの `Content-Type` ヘッダーに文字セットが
+指定されていない場合、テキストコンテンツのデフォルト文字セットを指定します。 デフォルトは `utf-8` です。
+
+##### 膨らませ
+
+`true` に設定されている場合、デフレートされた(圧縮された)ボディは膨らまれます。
+`false` の場合、デフレートされたボディは拒否されます。 デフォルトは `true` です。
+
+##### 制限
+
+リクエストボディの最大サイズを制御します。 これが数値の場合、値
+はバイト数を指定します。 文字列であれば、値は[bytes](https://www.npmjs.com/package/bytes) ライブラリに渡され、解析します。 デフォルト
+は `'100kb'` です。
+
+> 可能な限り高い制限を設定し、可能な限りデフォルト値を使用しないことをお勧めします。 より大きなペイロードを許可すると、デコードと変換に必要なリソースのため、メモリ使用量が増加します。 より多くのデータが処理されるにつれて応答時間が長くなることもあります 「非常に高い」とは、例えば5MB以上のペイロードなど、デフォルトよりも高い値を意味しますが、既にこれらのリスクを導入し始めています。 デフォルトの制限では、これらの問題は発生しません。
+
+##### タイプ
+
+`type` オプションは、ミドルウェアが
+解析するメディアタイプを決定するために使用されます。 このオプションは文字列、文字列の配列、または関数です。 If not
+a function, `type` option is passed directly to the
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
+be an extension name (like `txt`), a mime type (like `text/plain`), or a mime
+type with a wildcard (like `*/*` or `text/*`). 関数の場合、`type`
+オプションは`fn(req)`と呼ばれ、
+truthy値を返す場合はリクエストが解析されます。 デフォルトは `text/plain` です。
+
+##### 確認する
+
+`verify` オプションを指定すると、`verify(req, res, buf, encoding)`と呼ばれます。
+で、 `buf` は生のリクエストボディの `Buffer` で、 `encoding` はリクエストの
+エンコーディングです。 エラーを投げることで解析を中止することができます。
+
+### bodyParser.urlencoded([options])
+
+`urlencoded` ボディのみを解析し、`Content-Type` ヘッダーが `type` オプションに一致する場合の
+リクエストのみを参照するミドルウェアを返します。 この
+パーサは、ボディのUTF-8とISO-8859-1エンコーディングのみを受け付け、`gzip`、`br`(brotli)および`deflate`エンコーディングの
+自動インフレーションをサポートします。
+
+ミドルウェアの後に `request`
+オブジェクトに解析されたデータを含む新しい`body` オブジェクトが追加されました。 This object will contain
+key-value pairs, where the value can be a string or array (when `extended` is
+`false`), or any type (when `extended` is `true`).
+
+#### オプション
+
+The `urlencoded` function takes an optional `options` object that may contain
+any of the following keys:
+
+##### 拡張
+
+「拡張された」構文により、リッチオブジェクトや配列を
+URLエンコードされた形式にエンコードすることができ、JSONに似たURLエンコードを行うことができます。
+の詳細については、qs
+libraryを参照してください。
+
+デフォルトは `false` です。
+
+##### 膨らませ
+
+`true` に設定されている場合、デフレートされた(圧縮された)ボディは膨らまれます。
+`false` の場合、デフレートされたボディは拒否されます。 デフォルトは `true` です。
+
+##### 制限
+
+リクエストボディの最大サイズを制御します。 これが数値の場合、値
+はバイト数を指定します。 文字列であれば、値は[bytes](https://www.npmjs.com/package/bytes) ライブラリに渡され、解析します。 デフォルト
+は `'100kb'` です。
+
+> 可能な限り高い制限を設定し、可能な限りデフォルト値を使用しないことをお勧めします。 より大きなペイロードを許可すると、デコードと変換に必要なリソースのため、メモリ使用量が増加します。 より多くのデータが処理されるにつれて応答時間が長くなることもあります 「非常に高い」とは、例えば5MB以上のペイロードなど、デフォルトよりも高い値を意味しますが、既にこれらのリスクを導入し始めています。 デフォルトの制限では、これらの問題は発生しません。
+
+##### パラメータ制限
+
+`parameterLimit` オプションは、URLでエンコードされたデータ内で
+が許可されるパラメータの最大数を制御します。 リクエストにこの値よりも多くのパラメータ
+が含まれている場合、413がクライアントに返されます。 デフォルトは `1000` です。
+
+##### タイプ
+
+`type` オプションは、ミドルウェアが
+解析するメディアタイプを決定するために使用されます。 このオプションは文字列、文字列の配列、または関数です。 If not
+a function, `type` option is passed directly to the
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
+be an extension name (like `urlencoded`), a mime type (like
+`application/x-www-form-urlencoded`), or a mime type with a wildcard (like
+`*/x-www-form-urlencoded`). 関数の場合、`type`オプションは
+`fn(req)`と呼ばれ、リクエストは真の値を返した場合に解析されます。 デフォルト
+は `application/x-www-form-urlencoded` です。
+
+##### 確認する
+
+`verify` オプションを指定すると、`verify(req, res, buf, encoding)`と呼ばれます。
+で、 `buf` は生のリクエストボディの `Buffer` で、 `encoding` はリクエストの
+エンコーディングです。 エラーを投げることで解析を中止することができます。
+
+##### defaultCharset
+
+コンテンツ型で指定されていない場合、パースするデフォルトの文字セット。 Must be
+either `utf-8` or `iso-8859-1`. デフォルトは `utf-8` です。
+
+##### charsetSentinel
+
+`utf8`パラメータの値を文字セット
+セレクタとして優先するかどうか。 It requires the form to contain a parameter named `utf8` with a value
+of `✓`. デフォルトは `false` です。
+
+##### NumericEntities
+
+Whether to decode numeric entities such as `&#9786;` when parsing an iso-8859-1
+form. デフォルトは `false` です。
+
+##### 深さ
+
+`depth` オプションは、`extended` が `true` の場合、`qs` ライブラリの最大深度を設定するために使用されます。 これにより、パースされたキーの量を制限でき、特定のタイプの乱用を防ぐのに役立ちます。 デフォルトは `32` です。 この値をできるだけ低く保つことをお勧めします。
+
+## エラー
+
+このモジュールで提供されるミドルウェアは、
+[`http-errors` モジュール](https://www.npmjs.com/package/http-errors) を使用してエラーを生成します。 The errors
+will typically have a `status`/`statusCode` property that contains the suggested
+HTTP response code, an `expose` property to determine if the `message` property
+should be displayed to the client, a `type` property to determine the type of
+error without matching against the `message`, and a `body` property containing
+the read body, if available.
+
+以下は一般的なエラーですが、さまざまな理由で
+を介してエラーが発生する可能性があります。
+
+### コンテンツエンコーディングはサポートされていません
+
+このエラーは、
+にエンコーディングが含まれていて、"inflation" オプションが `false` に設定されている `Content-Encoding` ヘッダーがリクエストに含まれていた場合に発生します。 The
+`status` property is set to `415`, the `type` property is set to
+`'encoding.unsupported'`, and the `charset` property will be set to the
+encoding that is unsupported.
+
+### エンティティの解析に失敗しました
+
+This error will occur when the request contained an entity that could not be
+parsed by the middleware. The `status` property is set to `400`, the `type`
+property is set to `'entity.parse.failed'`, and the `body` property is set to
+the entity value that failed parsing.
+
+### エンティティの検証に失敗しました
+
+このエラーは、定義された `verify` オプションで
+失敗した検証に失敗したエンティティがリクエストに含まれている場合に発生します。 The `status` property is
+set to `403`, the `type` property is set to `'entity.verify.failed'`, and the
+`body` property is set to the entity value that failed verification.
+
+### リクエストは中止されました
+
+このエラーは、
+本文を読み込む前に、リクエストがクライアントによって中止された場合に発生します。 The `received` property will be set to the number of
+bytes before the request was aborted and the `expected` property is
+set to the number of expected bytes. `status` プロパティは `400`
+に設定され、`type` プロパティは `'request.aborted'` に設定されます。
+
+### 要求エンティティが大きすぎます
+
+このエラーは、リクエストボディのサイズが "limit"
+オプションより大きい場合に発生します。 `limit` プロパティはバイト制限に設定され、`length`
+プロパティはリクエスト本体の長さに設定されます。 `status` プロパティは
+に設定されており、`type` プロパティは `entity.too.large'` に設定されています。
+
+### 要求サイズがコンテンツの長さと一致しません
+
+このエラーは、リクエストの長さが `Content-Length` ヘッダの
+の長さと一致しなかった場合に発生します。 これは通常、リクエストが不正な形式になったときに発生します。
+通常、バイトではなく
+文字に基づいて `Content-Length` ヘッダーが計算されたときです。 `status`プロパティは`400`に、`type`プロパティ
+は`'request.size.invalid'`に設定されています。
+
+### ストリームのエンコーディングを設定できません
+
+このエラーは、このミドルウェアの
+より前に `req.setEncoding` メソッドと呼ばれるものが発生します。 This module operates directly on bytes only and you cannot
+call `req.setEncoding` when using this module. `status` プロパティは
+`500` に設定され、`type` プロパティは `'stream.encoding.set'` に設定されます。
+
+### ストリームが読み込めません
+
+このエラーは、このミドルウェア
+が読み込みを試みたときにリクエストが読み取れなくなったときに発生します。 これは通常、このモジュールがリクエスト本文を読み込んだ
+ミドルウェア以外のものを意味し、ミドルウェアも
+同じリクエストを読み込むように設定されています。 `status` プロパティは `500` に設定され、`type`
+プロパティは `'stream.not.readable'` に設定されます。
+
+### パラメータが多すぎます
+
+このエラーは、リクエストのコンテンツが `urlencoded` parserの設定された
+`parameterLimit` を超えた場合に発生します。 `status` プロパティは
+`413` に設定され、`type` プロパティは `'parameters.too.many'` に設定されます。
+
+### 未サポートの文字セット "BOGUS"
+
+This error will occur when the request had a charset parameter in the
+`Content-Type` header, but the `iconv-lite` module does not support it OR the
+parser does not support it. charset は `charset` プロパティと同様に
+メッセージにも含まれています。 The `status` property is set to `415`, the
+`type` property is set to `'charset.unsupported'`, and the `charset` property
+is set to the charset that is unsupported.
+
+### サポートされていないコンテンツエンコーディング"bogus"
+
+このエラーは、リクエストに
+サポートされていないエンコーディングが含まれている `Content-Encoding` ヘッダーがある場合に発生します。 エンコーディングは
+メッセージと `encoding` プロパティに含まれます。 The `status` property is set to `415`,
+the `type` property is set to `'encoding.unsupported'`, and the `encoding`
+property is set to the encoding that is unsupported.
+
+### 入力が深さを超えました
+
+このエラーは、`extended` プロパティが `true` に設定されている `bodyParser.urlencoded` を使用し、入力が設定された `depth` オプションを超えた場合に発生します。 `status` プロパティは `400` に設定されています。 `depth`オプションを確認し、より高い値が必要かどうかを評価することをお勧めします。 `depth`オプションが`32`（デフォルト値）に設定されている場合、エラーはスローされません。
+
+## 例
+
+### Express/Connect トップレベルジェネリック
+
+この例では、ジェネリックな JSON と URL エンコードされたパーサを
+トップレベルのミドルウェアとして追加し、すべてのリクエストの本文をパースします。
+これは最も単純な設定です。
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded());
+
+// parse application/json
+app.use(bodyParser.json());
+
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.write('you posted:\n');
+  res.end(String(JSON.stringify(req.body, null, 2)));
+});
+```
+
+### エクスプレスルート固有のルート
+
+この例では、
+が必要とするルートにボディパーサを追加することを示します。 一般に、これは
+Expressでbody-parserを使用するために最も推奨される方法です。
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// create application/json parser
+const jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+const urlencodedParser = bodyParser.urlencoded();
+
+// POST /login gets urlencoded bodies
+app.post('/login', urlencodedParser, function (req, res) {
+  if (!req.body || !req.body.username) res.sendStatus(400);
+  res.send('welcome, ' + req.body.username);
+});
+
+// POST /api/users gets JSON bodies
+app.post('/api/users', jsonParser, function (req, res) {
+  if (!req.body) res.sendStatus(400);
+  // create user in req.body
+});
+```
+
+### Parserの許容タイプの変更
+
+全てのパーサーは、ミドルウェアが解析する
+`Content-Type` を変更することができる`type` オプションを受け付けます。
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }));
+
+// parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }));
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }));
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/body-parser/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.com/package/body-parser
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser

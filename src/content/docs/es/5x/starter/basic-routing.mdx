@@ -36,7 +36,7 @@ Responder con `¡Hola Mundo!` en la página principal:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hola Mundo!');
+  res.send('Hello World!');
 });
 ```
 
@@ -44,7 +44,7 @@ Responder a una solicitud POST en la ruta raíz (`/`), la página de inicio de l
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Obtener una solicitud POST');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Responder a una solicitud PUT a la ruta `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Obtener una solicitud PUT en /user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Responder a una solicitud DELETE a la ruta `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Obtuvo una solicitud DELETE en /user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

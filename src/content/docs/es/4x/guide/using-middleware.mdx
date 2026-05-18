@@ -59,7 +59,7 @@ Este ejemplo muestra una ruta y su función manejadora (middleware system). La f
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  res.send('USUARIO');
+  res.send('USER');
 });
 ```
 
@@ -70,12 +70,12 @@ Ilustra un substack de middleware que imprime la información de la petición pa
 app.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req.riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
   (req, res, next) => {
-    consola.og('Tipo de solicitud:', req.method);
-    siguiente();
+    console.log('Request Type:', req.method);
+    next();
   }
 );
 ```
@@ -88,16 +88,16 @@ Este ejemplo muestra un substack de middleware que maneja peticiones GET a la ru
 app.get(
   '/user/:id',
   (req, res, next) => {
-    console.log('ID:', req.arams.id);
-    siguiente();
+    console.log('ID:', req.params.id);
+    next();
   },
   (req, res, next) => {
-    res.end('Información de usuario');
+    res.send('User Info');
   }
 );
 
-// manejador para la ruta /user/:id, que imprime el ID de usuario
-app.et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req, res, next) => {
   res.send(req.params.id);
 });
 ```
@@ -117,19 +117,19 @@ Este ejemplo muestra un substack de middleware que maneja peticiones GET a la ru
 app.get(
   '/user/:id',
   (req, res, next) => {
-    // si el ID de usuario es 0, saltar a la siguiente ruta
-    si (req. aramas. d === '0') siguiente('ruta');
-    // de lo contrario pasa el control a la siguiente función de middleware en esta pila
-    si no siguiente();
+    // if the user ID is 0, skip to the next route
+    if (req.params.id === '0') next('route');
+    // otherwise pass the control to the next middleware function in this stack
+    else next();
   },
   (req, res, next) => {
-    // envía una respuesta regular
-    res. end('regular');
+    // send a regular response
+    res.send('regular');
   }
 );
 
-// manejador para la ruta /user/:id, que envía una respuesta especial
-app. et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req, res, next) => {
   res.send('special');
 });
 ```
@@ -140,18 +140,18 @@ Este ejemplo muestra una matriz con un substack de middleware que maneja peticio
 
 ```js
 function logOriginalUrl(req, res, next) {
-  console.log('Request URL:', req.riginalUrl);
+  console.log('Request URL:', req.originalUrl);
   next();
 }
 
 function logMethod(req, res, next) {
-  console.log('Request Type:', req.ethod);
-  siguiente();
+  console.log('Request Type:', req.method);
+  next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app.et('/user/:id', logStuff, (req, res, next) => {
-  res.send('Información de usuario');
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info');
 });
 ```
 
@@ -170,49 +170,49 @@ El siguiente código de ejemplo replica el sistema middleware que se muestra arr
 ```js
 const express = require('express');
 const app = express();
-const router = express. outer();
+const router = express.Router();
 
-// una función de middleware sin ruta de montaje. Este código se ejecuta para cada petición al router
-. se((req, res, next) => {
-  console.log('Hora:', Date. ow());
-  siguiente();
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
 });
 
-// un substack de middleware muestra información de petición para cualquier tipo de petición HTTP al router /user/:id path
-. se(
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('URL de solicitud:', req. riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
   (req, res, next) => {
-    consola. og('Tipo de solicitud:', req. ethod);
+    console.log('Request Type:', req.method);
     next();
   }
 );
 
-// un substack de middleware que maneja las solicitudes GET al router /user/:id path
-. et(
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
   '/user/:id',
   (req, res, next) => {
-    // si el ID de usuario es 0, saltar al siguiente router
-    if (req. aramas. d === '0') siguiente('ruta');
-    // de lo contrario pasar el control a la siguiente función de middleware en esta pila
-    más siguiente();
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
   },
   (req, res, next) => {
-    // renderiza una página regular
-    res. ender('regular');
+    // render a regular page
+    res.render('regular');
   }
 );
 
-// manejador para la ruta /user/:id, que renderiza una página especial
-router. et('/user/:id', (req, res, next) => {
-  consola. og(req.params.id);
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
   res.render('special');
 });
 
-// monta el router en la aplicación
+// mount the router on the app
 app.use('/', router);
 ```
 
@@ -224,20 +224,20 @@ Este ejemplo muestra un substack de middleware que maneja peticiones GET a la ru
 ```js
 const express = require('express');
 const app = express();
-const router = express. outer();
+const router = express.Router();
 
-// predice el enrutador con un cheque y rescinda cuando sea necesario enrutador
-. se((req, res, next) => {
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
   if (!req.headers['x-auth']) return next('router');
   next();
 });
 
-router. et('/user/:id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   res.send('hello, user!');
 });
 
-// usa el enrutador y 401 cualquier cosa que caiga a través de
-aplicación. se('/admin', router, (req, res) => {
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
   res.sendStatus(401);
 });
 ```
@@ -284,7 +284,7 @@ Instale el módulo Node.js para la funcionalidad requerida, luego guárdelo en s
 El siguiente ejemplo ilustra la instalación y carga de la función middleware `cookie-parser`.
 
 ```bash
-$ npm instalar cookie-parser
+$ npm install cookie-parser
 ```
 
 ```js
@@ -292,7 +292,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 
-// cargar el middleware de análisis de cookies
+// load the cookie-parsing middleware
 app.use(cookieParser());
 ```
 

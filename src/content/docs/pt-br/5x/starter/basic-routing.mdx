@@ -12,7 +12,7 @@ Cada rota pode ter uma ou mais funções de manipulador, que são executadas qua
 A definição de rota aceita a seguinte estrutura:
 
 ```js
-app.METHOD(PATH, MUITO);
+app.METHOD(PATH, HANDLER);
 ```
 
 Onde:
@@ -36,7 +36,7 @@ Responda com `Olá Mundo!` na página inicial:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Olá Mundo!');
+  res.send('Hello World!');
 });
 ```
 
@@ -44,7 +44,7 @@ Responder a uma solicitação POST na rota raiz (`/`), a página inicial do apli
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Tem uma solicitação POST');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Responda a uma solicitação PUT para a rota `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Tem uma solicitação de PUT em/user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Responder a uma solicitação de DELETE para a rota `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Tem uma solicitação de DELETE em/user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

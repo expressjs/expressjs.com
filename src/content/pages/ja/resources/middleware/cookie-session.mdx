@@ -1,0 +1,303 @@
+---
+title: cookie-session middleware
+description: Cookieセッションミドルウェア
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.1.1"
+  github="https://github.com/expressjs/cookie-session"
+  npm="https://www.npmjs.com/package/cookie-session"
+/>
+
+シンプルなクッキーベースのセッションミドルウェア。
+
+ユーザーセッションは、サーバー上または
+クライアント上での2つの主要な方法で保存できます。 クライアントのセッションデータをクッキーに保存します。
+[express-session](https://www.npmjs.com/package/express-session)
+は、クッキー内にクライアントにセッション識別子のみを格納し、サーバーに
+セッションデータを格納します。 通常はデータベースに保存されます
+
+以下の点は、使用するポイントを選択するのに役立ちます:
+
+- `cookie-session` does not require any database / resources on the server side,
+  though the total session data cannot exceed the browser's max cookie size.
+- `cookie-session` は、特定の負荷分散シナリオを簡素化できます。
+- `cookie-session` は、「軽い」セッションを保存し、データベースの検索を減らすために、識別子
+  を含めることができます。
+
+**注意** このモジュールは Cookie 内のセッションの内容を暗号化しません。改ざんを防ぐために
+署名のみを提供します。 The client will be able to read the session data by
+examining the cookie's value. シークレットデータは
+暗号化なしで `req.session` に設定するか、代わりにサーバーサイドセッションを使用してください。
+
+**NOTE** This module does not prevent session replay, as the expiration set is that
+of the cookie only; if that is a concern of your application, you can store an expiration
+date in `req.session` object and validate it on the server, and implement any other logic
+to extend the session as your application needs.
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install cookie-session
+```
+
+## API
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: [
+      /* secret keys */
+    ],
+
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
+```
+
+### cookieSession(options)
+
+指定されたオプションで新しいcookieセッションミドルウェアを作成します。 This middleware
+will attach the property `session` to `req`, which provides an object representing
+the loaded session. このセッションは、リクエストで有効なセッションが
+提供されなかった場合、またはリクエストからロードされたセッションのいずれかである。
+
+`req.session`の
+内容が変更された場合、ミドルウェアは自動的に`Set-Cookie`ヘッダーをレスポンスに追加します。 _Note_ that no `Set-Cookie` header will be
+in the response (and thus no session created for a specific user) unless there are
+contents in the session, so be sure to add something to `req.session` as soon as
+you have identifying information to store for the session.
+
+#### オプション
+
+Cookieセッションはoptionsオブジェクトでこれらのプロパティを受け付けます。
+
+##### 名前
+
+設定されるクッキーの名前は、デフォルトは `session` です。
+
+##### キー
+
+Cookie の値の署名と検証に使用するキーのリスト、または設定された
+[`Keygrip`](https://www.npmjs.com/package/keygrip) インスタンス。 Cookieは常に
+`keys[0]`で署名されますが、他のキーは検証に有効です。
+キーの回転を許可します。 `Keygrip` インスタンスが指定されている場合、
+署名のアルゴリズムのように署名パラメータを変更することができます。
+
+##### シークレット
+
+`keys`が指定されていない場合、単一のキーとして使用される文字列。
+
+##### Cookieオプション
+
+他のオプションは `cookies.get()` と `cookies.set()` に渡されます。これにより、
+はセキュリティ、ドメイン、パス、および他の設定の間で署名を制御できます。
+
+オプションには、以下のいずれかを含めることもできます(完全なリストについては、
+[Cookie module documentation](https://www.npmjs.org/package/cookies#readme):
+
+- `maxAge`: 満期の `Date.now()`からのミリ秒を表す数値
+- `expires`: Cookieの有効期限を示す`Date`オブジェクト（デフォルトではセッション終了時に有効期限が切れます）。
+- `path`: クッキーのパスを示す文字列（デフォルトでは `/`）。
+- `domain`: Cookie のドメインを示す文字列 (デフォルトではありません)。
+- `partitioned`: [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (デフォルトでは `false` )のためにChromeのクッキーを分割するかどうかを示すブール値。 これがtrueの場合、埋め込まれたサイトからのCookieは分割され、作成された同じトップレベルのサイトからのみ読み込み可能になります。
+- `priority`: Cookie の優先度を示す文字列。 これは`'low'`、`'medium'`、または`'high'`に設定できます。
+- `sameSite`: クッキーが「同じサイト」クッキーであるかどうかを示す真偽値または文字列（デフォルトでは`false`）。 これは`'strict'`、`'lax'`、`'none'`、`true`（'strict'にマップされます）に設定できます。
+- `secure`: CookieがHTTPSでのみ送信されるかどうかを示すブール値 (HTTPでは`false`、HTTPSではデフォルトでは`true`)。 `true` と Node に設定されている場合。 sはTLS接続上で直接ではありません。 [set Express behind proxies](https://expressjs.com/en/guide/behind-proxies.html)またはクッキーが正しく設定されていない可能性があります。
+- `httpOnly`: CookieがHTTP(S)経由でのみ送信されるかどうかを示すブール値で、クライアントJavaScript（デフォルトでは`true`）では使用できません。
+- `signed`: Cookie を署名するかどうかを示す boolean (デフォルトでは `true` )。
+- `overwrite`: 以前に同じ名前のクッキーを上書きするかどうかを示す boolean (デフォルトは `true` )。
+
+### req.session
+
+指定されたリクエストのセッションを表します。
+
+#### .isChanged
+
+リクエスト中にセッションが変更された場合は `true` です。
+
+#### .isNew
+
+セッションが新しい場合は `true` になります。
+
+#### .isPopulated
+
+セッションにデータが入力されているか、空であるかを決定します。
+
+### req.sessionOptions
+
+現在のリクエストのセッションオプションを表します。 これらのオプションはミドルウェア構築時に提供されたものの
+浅いクローンです。
+リクエストごとにクッキー設定の動作を変更するために変更することができます。
+
+### セッションを破壊中
+
+セッションを破壊するには、`null`を設定するだけです。
+
+```js
+req.session = null;
+```
+
+### セッションを保存中
+
+セッションの内容全体がクライアント側の Cookie に保持されるため、
+セッションは、`Set-Cookie` レスポンスヘッダーにクッキーを書き出すことによって「保存」されます。
+This is done automatically if there has been a change made to the session when
+the Node.js response headers are being written to the client and the session
+was not destroyed.
+
+## 例
+
+### シンプルなビューカウンターの例
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.set('trust proxy', 1); // trust first proxy
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+  })
+);
+
+app.get('/', function (req, res, next) {
+  // Update views
+  req.session.views = (req.session.views || 0) + 1;
+
+  // Write response
+  res.end(req.session.views + ' views');
+});
+
+app.listen(3000);
+```
+
+### ユーザー毎のステキな最大年齢
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.set('trust proxy', 1); // trust first proxy
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+  })
+);
+
+// This allows you to set req.session.maxAge to let certain sessions
+// have a different value than the default.
+app.use(function (req, res, next) {
+  req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge;
+  next();
+});
+
+// ... your logic here ...
+```
+
+### セッションの有効期限を延長する
+
+This module does not send a `Set-Cookie` header if the contents of the session
+have not changed. This means that to extend the expiration of a session in the
+user's browser (in response to user activity, for example) some kind of
+modification to the session needs be made.
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+  })
+);
+
+// Update a value in the cookie so that the set-cookie will be sent.
+// Only changes every minute so that it's not sent with every request.
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
+  next();
+});
+
+// ... your logic here ...
+```
+
+### カスタム署名アルゴリズムの使用
+
+この例では、キーと追加の署名設定を提供するために、`keys` オプション
+としてカスタム `Keygrip` インスタンスを作成します。
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+var Keygrip = require('keygrip');
+
+var app = express();
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: new Keygrip(['key1', 'key2'], 'SHA384', 'base64'),
+  })
+);
+
+// ... your logic here ...
+```
+
+## 使用上の制限
+
+### クッキーの最大サイズ
+
+Because the entire session object is encoded and stored in a cookie, it is
+possible to exceed the maximum cookie size limits on different browsers.
+[RFC6265 仕様](https://tools.ietf.org/html/rfc6265#section-6.1)
+ブラウザーが **SHOULD** を許可することをお勧めします
+
+> クッキーあたり少なくとも4096バイト（クッキーの名前、値、属性の
+> の長さの合計で測定されます）
+
+実際、この制限はブラウザによってわずかに異なります。
+[browser limits here](http://browsercookielimits.iain.guru) のリストを参照してください。 原則として、親指の
+はドメインあたり4093バイトを超えてはいけません。
+
+セッションオブジェクトがエンコード時にブラウザの制限を超えるほど大きい場合。
+はほとんどの場合、ブラウザはクッキーの保存を拒否します。 これにより、
+ブラウザからのリクエストは、a) セッション
+情報がない、またはb)
+クッキーの制限を超えないように小さい古いセッション情報を使用します。
+
+セッションオブジェクトがこれらの制限に達している場合、
+セッション内のデータを、リクエストごとにブラウザから送信するのではなく、
+サーバー上のデータベースからロードするかどうかを検討することをお勧めします。 または、
+[alternative session strategy](https://github.com/expressjs/session#compatible-session-stores) に移動します。
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/cookie-session/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/cookie-session

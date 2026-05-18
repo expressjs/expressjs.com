@@ -44,10 +44,10 @@ Um endereço IP, subnet ou uma matriz de endereços IP e subnets para confiar co
 Você pode definir endereços IP das seguintes maneiras:
 
 ```js
-app.set('trust proxy', 'loopback'); // especifica um subnet
-app.set('trust proxy', 'loopback, 123.123.123.123'); // especifica um subnet e um aplicativo de endereço
-. et('proxy de confiança', 'loopback, linklocal, uniquelocal'); // especificar múltiplas subnets como CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // especificar várias subnets como um array
+app.set('trust proxy', 'loopback'); // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123'); // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array
 ```
 
 Quando especificado, os endereços IP ou as subredes são excluídos do processo de determinação de endereço, e o endereço IP não confiável mais próximo do servidor de aplicativos é definido como o endereço IP do cliente. Isto funciona verificando se 'req.socket.remoteAddress' é confiável. Em caso afirmativo, então cada endereço em `X-Forwarded-For` é verificado da direita para a esquerda até o primeiro endereço não confiável.
@@ -70,9 +70,9 @@ Ao usar esta configuração, é importante garantir que não haja vários, camin
 Execução de confiança personalizada.
 
 ```js
-app.set('proxy de confiança', (ip) => {
-  if (ip === '127.0.0.1' ├ip === '123.123.123. 23')
-    return true; // IPs
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
   else return false;
 });
 ```

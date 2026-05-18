@@ -55,7 +55,7 @@ Express-Versionierung und Releases sind nicht von Middleware-Updates betroffen.
 Ohne integrierte Middleware müssen Sie explizit alle
 Middleware hinzufügen, die für den Betrieb Ihrer App erforderlich ist. Folgen Sie einfach diesen Schritten:
 
-1. Modul installieren: `npm install --save <module-name>`
+1. Modul installieren: `npm install --save \<module-name>`
 2. Benötige in deiner App das Modul: `require('module-name')`
 3. Verwenden Sie das Modul entsprechend seiner Dokumentation: `app.use( ... )`
 
@@ -231,14 +231,14 @@ Hier ist ein Beispiel für verkettete Routenhandler, die durch die Funktion `app
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Holt ein zufälliges Buch');
+    res.send('Get a random book');
   })
-  . ost(req, res) => {
+  .post((req, res) => {
     res.send('Add a book');
   })
-  . ut((req, res) => {
-    res.send('Buch aktualisieren');
-});
+  .put((req, res) => {
+    res.send('Update the book');
+  });
 ```
 
 #### `express.Router` Klasse
@@ -246,7 +246,7 @@ app
 Die andere Funktion, die hilft, Routen zu organisieren, ist eine neue Klasse,
 `express.Router`, die Sie verwenden können, um modulare montierbare
 Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und
-\-Routing-System. Aus diesem Grund wird sie oft als "Mini-App" bezeichnet.
+-Routing-System. Aus diesem Grund wird sie oft als "Mini-App" bezeichnet.
 
 Das folgende Beispiel erzeugt einen Router als Modul, lädt Middleware in
 , definiert einige Routen und mountet sie auf einem Pfad in der Hauptanwendung.
@@ -258,18 +258,18 @@ mit folgendem Inhalt:
 var express = require('express');
 var router = express.Router();
 
-// Middleware spezifisch für diesen
-Router. se(req, res, next) => {
-  console.log('Time: ', Datum. ow());
+// middleware specific to this router
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now());
   next();
 });
-// die Startseite Route
-definieren. et('/', (req, res) => {
+// define the home page route
+router.get('/', (req, res) => {
   res.send('Birds home page');
 });
-// über Route
-definieren. et('/about', (req, res) => {
-  res.send('Über Vögel');
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
 });
 
 module.exports = router;
@@ -282,7 +282,7 @@ var birds = require('./birds');
 
 // ...
 
-app.use('/birds', Vögel);
+app.use('/birds', birds);
 ```
 
 Die App wird nun in der Lage sein, Anfragen an die `/birds` und
@@ -380,36 +380,36 @@ Die Dateien von Interesse sind `app.js` und `package.json`.
 Betrachten Sie eine Express v.3 Anwendung mit der folgenden `app.js` Datei:
 
 ```js
-var express = require('express ');
+var express = require('express');
 var routes = require('./routes');
-var user = require('. routes/user');
+var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
 
-// alle Umgebungen
-app.et('port', process.env.PORT || 3000);
+// all environments
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express.ession({ secret: 'your secret here' }));
+app.use(express.session({ secret: 'your secret here' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express.tatic(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Entwicklung nur
+// development only
 if (app.get('env') === 'development') {
-  app.se(express.errorHandler());
+  app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.reateServer(app).listen(app.get('port'), () => {
-  console.log('Express Server, der auf Port ' + app.get('port'));
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -421,14 +421,14 @@ something like this:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
-  "private": true
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "node app. s"
+    "start": "node app.js"
   },
   "dependencies": {
-    "express": "3. 2.0",
-    "Pug": "*"
+    "express": "3.12.0",
+    "pug": "*"
   }
 }
 ```
@@ -440,7 +440,7 @@ Express 4 App installieren und Express und Pug mit folgendem Befehl auf ihre jew
 Version aktualisieren:
 
 ```bash
-$ npm installieren serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 ```
 
 Folgende Änderungen an `app.js` vornehmen:
@@ -467,20 +467,20 @@ Das Ausführen des obigen `npm` Befehls wird `package.json` wie folgt aktualisie
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
-  "private": true
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "node app. s"
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.5.2",
-    "errorhandler": "^1.1. ",
-    "express ": "^4.8.0",
-    "express-session": "^1. .2",
+    "errorhandler": "^1.1.1",
+    "express": "^4.8.0",
+    "express-session": "^1.7.2",
     "pug": "^2.0.0",
-    "method-override": "^2. .2",
+    "method-override": "^2.1.2",
     "morgan": "^1.2.2",
-    "multer": "^0.1. ",
+    "multer": "^0.1.3",
     "serve-favicon": "^2.0.1"
   }
 }
@@ -495,7 +495,7 @@ Entferne dann ungültigen Code, lade die benötigte Middleware und führe bei Be
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
-var user = require('. routes/user');
+var user = require('./routes/user');
 var path = require('path');
 
 var favicon = require('serve-favicon');
@@ -508,36 +508,36 @@ var errorHandler = require('errorhandler');
 
 var app = express();
 
-// alle Umgebungen
-app. et('port', process.env.PORT || 3000);
+// all environments
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(logger('dev'));
-app. se(methodOverride());
-app. se(
+app.use(methodOverride());
+app.use(
   session({
     resave: true,
-    saveUninitialized: true
-    Geheimnis: 'uwotm8',
+    saveUninitialized: true,
+    secret: 'uwotm8',
   })
 );
-App. se(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', routes. ndex);
+app.get('/', routes.index);
 app.get('/users', user.list);
 
-// Fehler beim Umgang mit Middleware sollten nach dem Laden der Routen
-geladen werden, wenn (app. et('env') === 'development') {
-  app. se(errorHandler());
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
 }
 
 var server = http.createServer(app);
-server.listen(app. et('port'), () => {
-  console.log('Express Server, der auf Port ' + app.get('port'));
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -546,7 +546,7 @@ Wenn du nicht direkt mit dem `http` Modul (socket.io/SPDY/HTTPS) arbeiten musst,
 
 ```js
 app.listen(app.get('port'), () => {
-  console.log('Express Server, der auf Port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -558,7 +558,7 @@ Der Migrationsprozess ist abgeschlossen und die App ist nun eine
 Express 4 App. Um die App zu bestätigen, starten Sie die App mit dem folgenden Befehl:
 
 ```bash
-$ Knoten .
+$ node .
 ```
 
 Laden Sie [http://localhost:3000](http://localhost:3000)
@@ -577,7 +577,7 @@ Wenn Sie bereits den Express 3 App-Generator auf Ihrem System installiert haben,
 müssen Sie ihn deinstallieren:
 
 ```bash
-$ npm Deinstallation -g Express
+$ npm uninstall -g express
 ```
 
 Depending on how your file and directory privileges are configured,
@@ -586,7 +586,7 @@ you might need to run this command with `sudo`.
 Jetzt den neuen Generator installieren:
 
 ```bash
-$ npm Installation -g express-generator
+$ npm install -g express-generator
 ```
 
 Depending on how your file and directory privileges are configured,
@@ -608,7 +608,7 @@ Befehlsoptionen und -verwendung bleiben weitgehend gleich, mit den folgenden Aus
 Führen Sie den folgenden Befehl aus, um eine Express 4 App zu erstellen:
 
 ```bash
-$ Express App 4
+$ express app4
 ```
 
 Wenn du dir den Inhalt der `app4/app.js` Datei anschaust, wirst du
@@ -621,7 +621,7 @@ Du wirst auch bemerken, dass die `app.js` Datei jetzt ein Knoten ist. s Modul im
 Nach der Installation der Abhängigkeiten starten Sie die App mit dem folgenden Befehl:
 
 ```bash
-$ npm Start
+$ npm start
 ```
 
 Wenn du das `npm start`-Skript im `package betrachtest. son-Datei,
@@ -648,7 +648,7 @@ die Zeile, die `module. xports = app;` am Ende der
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), () => {
-  debug('Express Server, der auf Port ' + server.address().port);
+  debug('Express server listening on port ' + server.address().port);
 });
 ```
 

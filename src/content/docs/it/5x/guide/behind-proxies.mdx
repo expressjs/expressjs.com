@@ -71,7 +71,7 @@ Implementazione fiducia personalizzata.
 
 ```js
 app.set('trust proxy', (ip) => {
-  if (ip === '127.0.0.1' <unk> <unk> ip === '123.123.123. 23')
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
     return true; // trusted IPs
   else return false;
 });

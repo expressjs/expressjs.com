@@ -1,0 +1,120 @@
+---
+title: cookie-Parser Middleware
+description: HTTP-Anfrage-Cookies analysieren
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.4.7"
+  github="https://github.com/express js/cookie-parser"
+  npm="https://www.npmjs.com/package/cookie-parser"
+/>
+
+Parse `Cookie` header und fülle `req.cookies` mit einem Objekt, das von den
+Cookie-Namen geschlüsselt wird. Optional können Sie die signierte Cookie Unterstützung aktivieren, indem Sie einen
+`secret` String übergeben, der `req.secret` zuweist, so dass er von anderen
+Middleware verwendet werden kann.
+
+## Installation
+
+```sh
+$ npm install cookie-parser
+```
+
+## API
+
+```js
+var cookieParser = require('cookie-parser');
+```
+
+### cookieParser(geheim, Optionen)
+
+Erstelle eine neue Cookie-Parser-Middleware-Funktion mit den angegebenen `secret` und
+`options`.
+
+- `secret` eine Zeichenkette oder ein Array zum Signieren von Cookies. Dies ist optional und wenn
+  nicht angegeben, werden signierte Cookies nicht analysiert. Wenn eine Zeichenkette angegeben wird, wird diese
+  als Geheimnis verwendet. Wenn ein Array zur Verfügung gestellt wird, wird versucht
+  das Cookie mit jedem Geheimnis in der Reihenfolge zu entfernen.
+- `options` ein Objekt, das als zweite Option an `cookie.parse` übergeben wird. Siehe
+  [cookie](https://www.npmjs.org/package/cookie) für weitere Informationen.
+  - `decodieren` eine Funktion, um den Wert des Cookies zu dekodieren
+
+Die Middleware analysiert den `Cookie`-Header auf Anfrage und legt die Cookie-Daten
+als Eigenschaft `req. ookies` und, wenn ein `secret` angegeben wurde, als
+die Eigenschaft `req.signedCookies`. Diese Eigenschaften sind Namen-Wert-Paare des
+Cookie-Namens zum Cookie-Wert.
+
+Wenn `secret` angegeben wird, wird dieses Modul alle signierten Cookies
+Werte entfernen und validieren und diese Namenswert-Paare von `req.cookies` in `req.signedCookies` verschieben.
+Ein signiertes Cookie ist ein Cookie, der einen Wert hat, der mit `s:` vorangestellt ist. Signierte Cookies
+, die die Signatur nicht validieren, haben den Wert `false` statt des manipulierten
+Werts.
+
+Zusätzlich unterstützt dieses Modul spezielle "JSON-Cookies". Dies sind Cookies, bei denen
+der Wert mit `j:` vorgesetzt ist. Wenn diese Werte gefunden werden, wird der Wert
+als Ergebnis von `JSON.parse` angezeigt. Wenn das Parsen fehlschlägt, bleibt der Originalwert
+übrig.
+
+### cookieParser.JSONCookie(str)
+
+Analysieren Sie einen Cookie-Wert als JSON-Cookie. Dies gibt den geparsten JSON-Wert
+zurück, wenn es ein JSON-Cookie war, andernfalls wird der übergebene Wert zurückgegeben.
+
+### cookieParser.JSONCookies(Cookies)
+
+Wird ein Objekt angegeben, wird es über die Schlüssel iterieren und `JSONCookie` auf jeden
+Wert aufrufen, wodurch der ursprüngliche Wert durch den analysierten Wert ersetzt wird. Dies gibt das gleiche
+Objekt zurück, das weitergegeben wurde.
+
+### cookieParser.signedCookie(str, geheim)
+
+Parsen Sie einen Cookie-Wert als signiertes Cookie. Dies gibt den parsed unsignierten Wert
+zurück, wenn es ein signiertes Cookie war und die Signatur gültig war. Wenn der Wert
+nicht signiert wurde, wird der ursprüngliche Wert zurückgegeben. Wenn der Wert signiert wurde, aber die
+Signatur nicht validiert werden konnte, wird `false` zurückgegeben.
+
+Das `secret` Argument kann ein Array oder ein String sein. Wenn eine Zeichenkette angegeben wird, wird diese
+als Geheimnis verwendet. Wenn ein Array zur Verfügung gestellt wird, wird versucht
+das Cookie mit jedem Geheimnis in der Reihenfolge zu entfernen.
+
+### cookieParser.signedCookies(Cookies, geheim)
+
+Wenn ein Objekt angegeben wird, wird dies über die Schlüssel iteriert und überprüft, ob ein
+signierter Cookie ist. Wenn es ein signiertes Cookie ist und die Signatur gültig ist, der Schlüssel
+wird aus dem Objekt gelöscht und dem neuen Objekt hinzugefügt, das zurückgegeben wird.
+
+Das `secret` Argument kann ein Array oder ein String sein. Wenn eine Zeichenkette angegeben wird, wird diese
+als Geheimnis verwendet. Wenn ein Array zur Verfügung gestellt wird, wird versucht
+das Cookie mit jedem Geheimnis in der Reihenfolge zu entfernen.
+
+## Beispiel
+
+```js
+var express = require('express');
+var cookieParser = require('cookie-parser');
+
+var app = express();
+app.use(cookieParser());
+
+app.get('/', function (req, res) {
+  // Cookies that have not been signed
+  console.log('Cookies: ', req.cookies);
+
+  // Cookies that have been signed
+  console.log('Signed Cookies: ', req.signedCookies);
+});
+
+app.listen(8080);
+
+// curl command that sends an HTTP request with two cookies
+// curl http://127.0.0.1:8080 --cookie "Cho=Kim;Greet=Hello"
+```
+
+## Lizenz
+
+[MIT](https://github.com/expressjs/cookie-parser/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/cookie-Parser

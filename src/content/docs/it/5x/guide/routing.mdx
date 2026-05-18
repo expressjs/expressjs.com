@@ -10,7 +10,7 @@ Per un'introduzione al routing, vedere [Instradamento di base](/en/starter/basic
 
 Definisci il routing usando metodi dell'oggetto `app` Express che corrispondono ai metodi HTTP;
 per esempio, `app. et()` per gestire le richieste GET e `app.post` per gestire le richieste POST. Per una lista completa,
-vedi [app.METHOD](/en/5x/api#app.METHOD). Puoi anche usare [app.all()](/en/5x/api#app.all) per gestire tutti i metodi HTTP e [app. se()](/en/5x/api#app.use) to
+vedi [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-). Puoi anche usare [app.all()](/en/5x/api/application#appallpath-callback--callback-) per gestire tutti i metodi HTTP e [app. se()](/en/5x/api/application#appusepath-callback--callback) to
 specify middleware as the callback function (Vedi [Using middleware](/en/guide/using-middleware) for details).
 
 Questi metodi di routing specificano una funzione di callback (a volte chiamata "funzioni di handler") chiamata quando l'applicazione riceve una richiesta al percorso specificato (endpoint) e il metodo HTTP. In altre parole, l'applicazione "ascolta" per le richieste che corrispondono ai percorsi e ai metodi specificati, e quando rileva una corrispondenza, chiama la funzione di callback specificata.
@@ -25,8 +25,8 @@ Il seguente codice è un esempio di un percorso molto basilare.
 const express = require('express');
 const app = express();
 
-// rispondi con "ciao mondo" quando una richiesta GET viene fatta all'app homepage
-. et('/', (req, res) => {
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
   res.send('hello world');
 });
 ```
@@ -40,135 +40,111 @@ Il seguente codice è un esempio di percorsi definiti per il `GET` e i metodi `P
 ```js
 // GET method route
 app.get('/', (req, res) => {
-  res.end('Richiesta GET alla homepage');
+  res.send('GET request to the homepage');
 });
 
-// POST metodo percorso
-app.ost('/', (req, res) => {
+// POST method route
+app.post('/', (req, res) => {
   res.send('POST request to the homepage');
 });
 ```
 
 Express supporta metodi che corrispondono a tutti i metodi di richiesta HTTP: `get`, `post`, e così via.
-Per un elenco completo, vedere [app.METHOD](/en/5x/api#app.METHOD).
+Per un elenco completo, vedere [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-).
 
 C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. Ad esempio, il seguente gestore viene eseguito per le richieste al percorso `"/secret"` se si utilizza `GET`, `POST`, `PUT`, `DELETE`, o qualsiasi altro metodo di richiesta HTTP supportato nel [modulo http](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
-  console.log('Accedere alla sezione segreta ...');
-  next(); // passare il controllo al prossimo gestore
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
 });
 ```
 
 ## Percorsi di rotta
 
-Percorsi di percorso, in combinazione con un metodo di richiesta, definire gli endpoint in cui le richieste possono essere fatte. I tracciati del percorso possono essere stringhe, motivi di stringa o espressioni regolari.
-
-<Alert type="allerta">
-
-In express 5, i personaggi `? , `+`, `\*`, `[]`, e `()\` sono gestiti in modo diverso rispetto alla versione
-4, si prega di rivedere la [guida alla migrazione](/en/guide/migrating-5#path-syntax) per maggiori informazioni.
-
-</Alert>
-
-<Alert type="allerta">
-
-Nell'espressione 4, i caratteri di espressione regolare come `$` devono essere fuggiti con un `\`.
-
-</Alert>
+Percorsi di percorso, in combinazione con un metodo di richiesta, definire gli endpoint in cui le richieste possono essere fatte. I percorsi del percorso possono essere stringhe o espressioni regolari.
 
 <Alert type="info">
 
-Express utilizza [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) per abbinare i percorsi del percorso
-; vedere la documentazione path-to-regexp per tutte le possibilità di definire i percorsi del percorso.
-[Express Playground Router](https://bjohansebas.github.io/playground-router/) è uno strumento utile per
-testare i percorsi Express di base, anche se non supporta la corrispondenza dei modelli.
+Express utilizza [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 per abbinare i percorsi del percorso; vedere la documentazione path-to-regexp per tutte le possibilità di definire i percorsi del percorso.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) è uno strumento utile per testare le rotte Express di base, anche se non supporta la corrispondenza dei modelli.
 
 </Alert>
 
+### Tracciati stringhe
+
+I percorsi stringhe corrispondono esattamente alle richieste. Il punto (`.`) e il trattino (`-`) sono interpretati letteralmente.
+
 <Alert type="warning">Le stringhe di query non fanno parte del percorso percorso.</Alert>
-
-### Percorsi di percorso basati su stringhe
-
-Questo percorso corrisponderà alle richieste del percorso root, `/`.
 
 ```js
 app.get('/', (req, res) => {
   res.send('root');
 });
-```
 
-Questo percorso corrisponderà alle richieste di `/about`.
-
-```js
 app.get('/about', (req, res) => {
   res.send('about');
 });
-```
 
-Questo percorso corrisponderà alle richieste a `/random.text`.
-
-```js
 app.get('/random.text', (req, res) => {
   res.send('random.text');
 });
 ```
 
-### Percorsi del percorso in base ai motivi delle stringhe
+### Caratteri Selvatici
+
+I caratteri jolly corrispondono a qualsiasi percorso dopo un prefisso. Devono avere un nome, proprio come i parametri del percorso, e sono catturati come array di segmenti di percorso.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+Per abbinare anche il percorso di root, avvolgere il wildcard in graffe:
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Segmenti facoltativi
+
+Usa le parentesi graffe per definire segmenti opzionali in un percorso percorso. Quando il segmento non è presente, il parametro viene omesso da `req.params`.
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
 
 <Alert type="allerta">
 
-I modelli di stringhe in Express 5 non funzionano più. Si prega di fare riferimento alla [guida di migrazione
-(/en/guide/migrating-5#path-syntax) per ulteriori informazioni.
+I caratteri `?`, `+`, `*`, `[]`, e `()` sono riservati e non possono essere usati come caratteri letterali nei percorsi del percorso. Usa `\` per sfuggire se necessario.
 
 </Alert>
 
-Questo percorso corrisponde a `acd` e `abcd`.
+### Espressioni regolari
+
+È inoltre possibile utilizzare espressioni regolari come percorsi di percorso. Questo è utile quando hai bisogno di una logica di corrispondenza più complessa.
 
 ```js
-app.get('/ab?cd', (req, res) => {
-  res.send('ab?cd');
-});
-```
-
-Questo percorso corrisponderà a `abcd`, `abbcd`, `abbbcd`, e così via.
-
-```js
-app.get('/ab+cd', (req, res) => {
-  res.send('ab+cd');
-});
-```
-
-Questo percorso corrisponde a `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, e così via.
-
-```js
-app.get('/ab*cd', (req, res) => {
-  res.send('ab*cd');
-});
-```
-
-Questo percorso corrisponde a `/abe` e `/abcde`.
-
-```js
-app.get('/ab(cd)?e', (req, res) => {
-  res.send('ab(cd)?e');
-});
-```
-
-### Percorsi di percorso basati su espressioni regolari
-
-Questo percorso corrisponderà a qualsiasi cosa con una "a" in esso.
-
-```js
+// Matches any path containing "a"
 app.get(/a/, (req, res) => {
   res.send('/a/');
 });
-```
 
-Questo percorso corrisponde a `butterfly` e `dragonfly`, ma non a `butterflyman`, `dragonflyman`, e così via.
-
-```js
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
 app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/');
 });
@@ -179,8 +155,8 @@ app.get(/.*fly$/, (req, res) => {
 I parametri del percorso sono denominati segmenti di URL che vengono utilizzati per catturare i valori specificati nella loro posizione nell'URL. I valori catturati sono popolati nell'oggetto `req.params`, con il nome del parametro route specificato nel percorso come loro rispettive chiavi.
 
 ```
-Percorso del percorso: /users/:userId/books/:bookId
-Richiedi URL: http://localhost:3000/users/34/books/8989
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
 req.params: { "userId": "34", "bookId": "8989" }
 ```
 
@@ -201,41 +177,22 @@ Il nome dei parametri del percorso deve essere composto da "caratteri di parola"
 Poiché il trattino (`-`) e il punto (`.`) sono interpretati letteralmente, possono essere utilizzati insieme ai parametri del percorso per scopi utili.
 
 ```
-Percorso del percorso: /flights/:from-:to
-Richiedi URL: http://localhost:3000/flights/LAX-SFO
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
 req.params: { "from": "LAX", "to": "SFO" }
 ```
 
 ```
-Percorso percorso: /plantae/:genus.:species
-Richiedi URL: http://localhost:3000/plantae/Prunus.persica
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
 req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
 <Alert type="allerta">
 
-In express 5, Regexp characters are not supported in route paths, for more information please
-refer to the [migration guide](/en/guide/migrating-5#path-syntax).
+I caratteri Regexp non sono supportati nei percorsi del percorso. Usa invece un array di tracciati o espressioni regolari.
+Per maggiori informazioni consultare il [percorso percorso corrispondente alla sintassi](/en/guide/migrating-5#path-syntax).
 
-</Alert>
-
-Per avere più controllo sulla stringa esatta che può essere abbinata a un parametro del percorso, puoi aggiungere un'espressione regolare tra parentesi (`()`):
-
-```
-Percorso del percorso: /user/:userId(\d+)
-Richiedi URL: http://localhost:3000/user/42
-req.params: {"userId": "42"}
-```
-
-<Alert type="avviso">
-
-Perché l'espressione regolare è di solito parte di una stringa letterale, assicurati di sfuggire a qualsiasi carattere `\`
-con un backslash aggiuntivo, ad esempio `\d+`.
-
-</Alert>
-
-<Alert type="avviso">
-In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">il carattere `*` nelle espressioni regolari non viene interpretato nel modo usuale</a>. Come soluzione puoi usare `{0,}` invece di `*`. Questo sarà probabilmente fissato in Express 5.
 </Alert>
 
 ## Gestori del percorso
@@ -244,10 +201,10 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">il ca
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  if (req.params.d === '0') {
+  if (req.params.id === '0') {
     return next('route');
   }
-  res.end(`User ${req.params.id}`);
+  res.send(`User ${req.params.id}`);
 });
 
 app.get('/user/:id', (req, res) => {
@@ -276,11 +233,11 @@ Più di una funzione di callback può gestire un percorso (assicurati di specifi
 app.get(
   '/example/b',
   (req, res, next) => {
-    console.og('la risposta verrà inviata dalla funzione successiva . .');
+    console.log('the response will be sent by the next function ...');
     next();
   },
   (req, res) => {
-    res.end('Ciao da B!');
+    res.send('Hello from B!');
   }
 );
 ```
@@ -289,17 +246,17 @@ Un array di funzioni di callback può gestire un percorso. Per esempio:
 
 ```js
 const cb0 = function (req, res, next) {
-  console.og('CB0');
+  console.log('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console.og('CB1');
+  console.log('CB1');
   next();
 };
 
 const cb2 = function (req, res) {
-  res.end('Ciao da C!');
+  res.send('Hello from C!');
 };
 
 app.get('/example/c', [cb0, cb1, cb2]);
@@ -309,24 +266,24 @@ Una combinazione di funzioni indipendenti e matrici di funzioni può gestire un 
 
 ```js
 const cb0 = function (req, res, next) {
-  console.og('CB0');
+  console.log('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console.og('CB1');
+  console.log('CB1');
   next();
 };
 
-app.et(
+app.get(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    console.og('la risposta verrà inviata dalla funzione successiva . .');
+    console.log('the response will be sent by the next function ...');
     next();
   },
   (req, res) => {
-    res.end('Ciao da D!');
+    res.send('Hello from D!');
   }
 );
 ```
@@ -335,22 +292,22 @@ app.et(
 
 I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.
 
-| Metodo                                        | Descrizione                                                                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [res.download()](/en/5x/api#res.download)     | Avverte un file da scaricare.                                                                                      |
-| [res.end()](/en/5x/api#res.end)               | Termina il processo di risposta.                                                                                   |
-| [res.json()](/en/5x/api#res.json)             | Invia una risposta JSON.                                                                                           |
-| [res.jsonp()](/en/5x/api#res.jsonp)           | Invia una risposta JSON con il supporto JSONP.                                                                     |
-| [res.redirect()](/en/5x/api#res.redirect)     | Reindirizza una richiesta.                                                                                         |
-| [res.render()](/en/5x/api#res.render)         | Render un modello di visualizzazione.                                                                              |
-| [res.send()](/en/5x/api#res.send)             | Invia una risposta di vari tipi.                                                                                   |
-| [res.sendFile()](/en/5x/api#res.sendFile)     | Invia un file come un flusso di otte.                                                                              |
-| [res.sendStatus()](/en/5x/api#res.sendStatus) | Imposta il codice di stato della risposta e invia la sua rappresentazione della stringa come corpo della risposta. |
+| Metodo                                                                       | Descrizione                                                                                                        |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [res.download()](/en/5x/api/response#resdownloadpath--filename--options--fn) | Avverte un file da scaricare.                                                                                      |
+| [res.end()](/en/5x/api/response#resenddata-encoding-callback)                | Termina il processo di risposta.                                                                                   |
+| [res.json()](/en/5x/api/response#resjsonbody)                                | Invia una risposta JSON.                                                                                           |
+| [res.jsonp()](/en/5x/api/response#resjsonpbody)                              | Invia una risposta JSON con il supporto JSONP.                                                                     |
+| [res.redirect()](/en/5x/api/response#resredirectstatus-path)                 | Reindirizza una richiesta.                                                                                         |
+| [res.render()](/en/5x/api/response#resrenderview--locals--callback)          | Render un modello di visualizzazione.                                                                              |
+| [res.send()](/en/5x/api/response#ressendbody)                                | Invia una risposta di vari tipi.                                                                                   |
+| [res.sendFile()](/en/5x/api/response#ressendfilepath--options--fn)           | Invia un file come un flusso di otte.                                                                              |
+| [res.sendStatus()](/en/5x/api/response#ressendstatusstatuscode)              | Imposta il codice di stato della risposta e invia la sua rappresentazione della stringa come corpo della risposta. |
 
 ## app.route()
 
 È possibile creare i gestori di rotte per un percorso utilizzando `app.route()`.
-Poiché il percorso è specificato in una singola posizione, è utile creare percorsi modulari, così come ridurre la ridondanza e pneumatici. Per ulteriori informazioni sulle rotte, si veda: [Router() documentation](/en/5x/api#router).
+Poiché il percorso è specificato in una singola posizione, è utile creare percorsi modulari, così come ridurre la ridondanza e pneumatici. Per ulteriori informazioni sulle rotte, si veda: [Router() documentation](/en/5x/api/router).
 
 Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`.
 
@@ -358,13 +315,13 @@ Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`
 app
   .route('/book')
   .get((req, res) => {
-    res.end('Ottieni un libro casuale');
+    res.send('Get a random book');
   })
-  .ost((req, res) => {
+  .post((req, res) => {
     res.send('Add a book');
   })
-  .ut((req, res) => {
-    res.send('Aggiorna il libro');
+  .put((req, res) => {
+    res.send('Update the book');
   });
 ```
 
@@ -378,21 +335,21 @@ Crea un file router chiamato `birds.js` nella directory delle app, con il seguen
 
 ```js
 const express = require('express');
-const router = express. outer();
+const router = express.Router();
 
-// middleware che è specifico per questo router
+// middleware that is specific to this router
 const timeLog = (req, res, next) => {
-  console. og('Orario: ', Date.now());
+  console.log('Time: ', Date.now());
   next();
 };
-router. se(timeLog);
+router.use(timeLog);
 
-// definisci il percorso della home page
+// define the home page route
 router.get('/', (req, res) => {
-  res. end('Birds home page');
+  res.send('Birds home page');
 });
-// definire il router sulla rotta
-. et('/about', (req, res) => {
+// define the about route
+router.get('/about', (req, res) => {
   res.send('About birds');
 });
 
@@ -411,7 +368,7 @@ app.use('/birds', birds);
 
 L'app sarà ora in grado di gestire le richieste di `/birds` e `/birds/about`, oltre a chiamare la funzione middleware `timeLog` che è specifica per il percorso.
 
-Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. Per renderlo accessibile, dovrai passare l'opzione `mergeParams` al costruttore Router [reference](/en/5x/api#app.use).
+Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. Per renderlo accessibile, dovrai passare l'opzione `mergeParams` al costruttore Router [reference](/en/5x/api/application#appusepath-callback--callback).
 
 ```js
 const router = express.Router({ mergeParams: true });

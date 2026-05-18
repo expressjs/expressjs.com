@@ -10,7 +10,7 @@ For an introduction to routing, see [Basic routing](/en/starter/basic-routing).
 
 HTTPメソッドに対応するExpress `app` オブジェクトのメソッドを使用してルーティングを定義します。
 のように、`app。 POST リクエストを処理する GET リクエストと `app.post\` を処理します。 完全なリストについては、
-[app.METHOD](/en/5x/api#app.METHOD) を参照してください。 [app.all()](/en/5x/api#app.all)を使用して、すべてのHTTPメソッドと[app]を処理することもできます。 se()](/en/5x/api#app.use) to
+[app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-) を参照してください。 [app.all()](/en/5x/api/application#appallpath-callback--callback-)を使用して、すべてのHTTPメソッドと[app]を処理することもできます。 se()](/en/5x/api/application#appusepath-callback--callback) to
 コールバック関数としてミドルウェアを指定する (詳細は [Using middleware](/en/guide/using-middleware) を参照)。
 
 これらのルーティングメソッドは、アプリケーションが指定されたルート (エンドポイント) と HTTP メソッドへのリクエストを受け取ったときに呼び出されるコールバック関数 ("handler functions" と呼ばれることもあります) を指定します。 言い換えれば、アプリケーションは指定されたルートとメソッドに一致するリクエストを「リッスン」します。 マッチを検出すると、指定されたコールバック関数を呼び出します。
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Expressは、すべてのHTTPリクエストメソッドに対応するメソッドをサポートしています: `get`、`post`など。
-完全なリストについては、 [app.METHOD](/en/5x/api#app.METHOD) を参照してください。
+完全なリストについては、 [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-) を参照してください。
 
 特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。
 
@@ -63,112 +63,88 @@ app.all('/secret', (req, res, next) => {
 
 ## ルートパス
 
-ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列、文字列パターン、または正規表現であることができます。
-
-<Alert type="アラート">
-
-In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version
-4, please review the [migration guide](/en/guide/migrating-5#path-syntax) for more information.
-
-</Alert>
-
-<Alert type="アラート">
-
-式4では、`$`のような正規表現は`\`でエスケープする必要があります。
-
-</Alert>
+ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列または正規表現にすることができます。
 
 <Alert type="情報">
 
-Express は [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) をルート
-パスに一致させるために使用します。ルート パスの定義におけるすべての可能性については、path-to-regexp ドキュメントを参照してください。
-[Express Playground Router](https://bjohansebas.github.io/playground-router/)は基本的なExpressルートを
-テストするための便利なツールですが、パターンマッチングはサポートされていません。
+Express はルートパスに一致する [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 を使用します。ルートパスの定義におけるすべての可能性については、path-to-regexp ドキュメントを参照してください。
+[Express Playground Router](https://bjohansebas.github.io/playground-router/)は、パターンマッチングをサポートしていませんが、基本的なExpressルートをテストするための便利なツールです。
 
 </Alert>
 
+### 文字列パス
+
+文字列パスはリクエストと完全に一致します。 ドット(`.`)とハイフン(`-`)は文字通り解釈されます。
+
 <Alert type="warning">クエリ文字列はルートパスの一部ではありません。</Alert>
-
-### 文字列に基づく経路パス
-
-このルートパスはルートルートのリクエストと一致します。
 
 ```js
 app.get('/', (req, res) => {
   res.send('root');
 });
-```
 
-このルートパスは `/about` へのリクエストと一致します。
-
-```js
 app.get('/about', (req, res) => {
   res.send('about');
 });
-```
 
-このルートパスは `/random.text` へのリクエストと一致します。
-
-```js
 app.get('/random.text', (req, res) => {
   res.send('random.text');
 });
 ```
 
-### 文字列パターンに基づく経路パス
+### ワイルドカード
+
+ワイルドカードはプレフィックスの後の任意のパスに一致します。 ルートパラメータと同様に名前が必要で、パスセグメントの配列として取得されます。
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+ルートパスに一致させるには、ワイルドカードを括弧で囲みます。
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### 任意のセグメント
+
+ルートパスで任意のセグメントを定義するには、括弧を使用します。 セグメントが存在しない場合、パラメータは `req.params` から省略されます。
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
 
 <Alert type="アラート">
 
-Express 5の文字列パターンは動作しなくなりました。 詳細については、Migration
-guideを参照してください。
+`?`、`+`、`*`、`[]`、`()`の文字は予約されており、ルートパスの文字列として使用することはできません。 必要に応じてエスケープするには`\`を使用します。
 
 </Alert>
 
-このルートパスは `acd` と `abcd` に一致します。
+### 正規表現
+
+正規表現をルートパスとして使用することもできます。 これは、より複雑なマッチングロジックが必要な場合に便利です。
 
 ```js
-app.get('/ab?cd', (req, res) => {
-  res.send('ab?cd');
-});
-```
-
-このルートパスは `abcd`、`abbcd`、`abbcd`などにマッチします。
-
-```js
-app.get('/ab+cd', (req, res) => {
-  res.send('ab+cd');
-});
-```
-
-このルートパスは `abcd`、`abxcd`、`abrandoMcd`、`ab123cd`などにマッチします。
-
-```js
-app.get('/ab*cd', (req, res) => {
-  res.send('ab*cd');
-});
-```
-
-このルートパスは `/abe` と `/abcde` に一致します。
-
-```js
-app.get('/ab(cd)?e', (req, res) => {
-  res.send('ab(cd)?e');
-});
-```
-
-### 正規表現に基づく経路パス
-
-このルートパスは "a" と一致します。
-
-```js
+// Matches any path containing "a"
 app.get(/a/, (req, res) => {
   res.send('/a/');
 });
-```
 
-このルートは`蝶々`と`トンボ`にマッチしますが、`蝶々`、`トンボフライマン`などにはマッチしません。
-
-```js
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
 app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/');
 });
@@ -201,41 +177,22 @@ app.get('/users/:userId/books/:bookId', (req, res) => {
 ハイフン(`-`)とドット(`.`)は文字通り解釈されるので、ルートパラメータとともに便利な目的で使うことができます。
 
 ```
-ルートパス: /flights/:from-:to
+Route path: /flights/:from-:to
 Request URL: http://localhost:3000/flights/LAX-SFO
 req.params: { "from": "LAX", "to": "SFO" }
 ```
 
 ```
-ルートパス: /platae/:genus.:species
-リクエスト URL: http://localhost:3000/platae/Prunus.persica
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
 req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
 <Alert type="アラート">
 
-In express 5, Regexp characters are not supported in route paths, for more information please
-refer to the [migration guide](/en/guide/migrating-5#path-syntax).
+正規表現文字はルートパスではサポートされていません。 代わりにパスまたは正規表現の配列を使用してください。
+詳細については、[パスルートマッチング構文](/en/guide/migrating-5#path-syntax)を参照してください。
 
-</Alert>
-
-route (ルート)パラメータにマッチする正確な文字列をより詳細に制御するには、括弧(`()`)で正規表現を追加します。
-
-```
-ルートパス: /user/:userId(\d+)
-リクエスト URL: http://localhost:3000/user/42
-req.params: {"userId": "42"}
-```
-
-<Alert type="警告">
-
-正規表現は通常文字列の一部であるため、 `\`
-文字を追加して、`\d+`などのバックスラッシュをエスケープしてください。
-
-</Alert>
-
-<Alert type="警告">
-In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. 回避策として、`*` の代わりに `{0,}` を使用します。 これはExpress 5で修正される可能性があります。
 </Alert>
 
 ## Route handlers
@@ -335,22 +292,22 @@ app.get(
 
 次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。
 
-| 方法                                          | 説明                                                                               |
-| --------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [res.download()](/en/5x/api#res.download)     | ダウンロードするファイルを指示します。                                             |
-| [res.end()](/en/5x/api#res.end)               | 応答プロセスを終了します。                                                         |
-| [res.json()](/en/5x/api#res.json)             | JSON 応答を送信します。                                                            |
-| [res.jsonp()](/en/5x/api#res.jsonp)           | JSONP サポートを使用して JSON 応答を送信します。                                   |
-| [res.redirect()](/en/5x/api#res.redirect)     | リダイレクトします。                                                               |
-| [res.render()](/en/5x/api#res.render)         | ビューテンプレートをレンダリングします。                                           |
-| [res.send()](/en/5x/api#res.send)             | さまざまなタイプの応答を送信します。                                               |
-| [res.sendFile()](/en/5x/api#res.sendFile)     | ファイルをオクテットストリームとして送信する。                                     |
-| [res.sendStatus()](/en/5x/api#res.sendStatus) | レスポンスステータスコードを設定し、文字列表現をレスポンスボディとして送信します。 |
+| 方法                                                                         | 説明                                                                               |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [res.download()](/en/5x/api/response#resdownloadpath--filename--options--fn) | ダウンロードするファイルを指示します。                                             |
+| [res.end()](/en/5x/api/response#resenddata-encoding-callback)                | 応答プロセスを終了します。                                                         |
+| [res.json()](/en/5x/api/response#resjsonbody)                                | JSON 応答を送信します。                                                            |
+| [res.jsonp()](/en/5x/api/response#resjsonpbody)                              | JSONP サポートを使用して JSON 応答を送信します。                                   |
+| [res.redirect()](/en/5x/api/response#resredirectstatus-path)                 | リダイレクトします。                                                               |
+| [res.render()](/en/5x/api/response#resrenderview--locals--callback)          | ビューテンプレートをレンダリングします。                                           |
+| [res.send()](/en/5x/api/response#ressendbody)                                | さまざまなタイプの応答を送信します。                                               |
+| [res.sendFile()](/en/5x/api/response#ressendfilepath--options--fn)           | ファイルをオクテットストリームとして送信する。                                     |
+| [res.sendStatus()](/en/5x/api/response#ressendstatusstatuscode)              | レスポンスステータスコードを設定し、文字列表現をレスポンスボディとして送信します。 |
 
 ## app.route()
 
 `app.route()` を使用すると、ルートパスに対してチェーン可能なルートハンドラを作成できます。
-パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/en/5x/api#router)。
+パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/en/5x/api/router)。
 
 以下は、`app.route()`を使用して定義されたルートハンドラの例です。
 
@@ -411,7 +368,7 @@ app.use('/birds', birds);
 
 アプリは `/birds` と `/birds/about` へのリクエストを処理できるようになりました。 同様に、ルート固有の「timeLog」ミドルウェア関数を呼び出します。
 
-ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/en/5x/api#app.use) に渡す必要があります。
+ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/en/5x/api/application#appusepath-callback--callback) に渡す必要があります。
 
 ```js
 const router = express.Router({ mergeParams: true });

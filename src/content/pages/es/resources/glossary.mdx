@@ -5,23 +5,23 @@ description: Un glosario completo de términos relacionados con Express.js, Node
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-### aplicación
+## aplicación
 
 En general, uno o más programas diseñados para llevar a cabo operaciones con un propósito específico. En el contexto de Express, un programa que utiliza la API Express corriendo en la plataforma Node.js. También podría referirse a un [objeto de aplicación](/en/api#express).
 
-### API
+## API
 
 Interfaz de programación de aplicaciones. Escribe la abreviatura cuando se utiliza por primera vez.
 
-### Exprés
+## Exprés
 
 Un marco web rápido, sin opinión y minimalista para aplicaciones Node.js. En general, se prefiere "Express" a "Express.js", aunque esta última es aceptable.
 
-### libuv
+## libuv
 
 Una biblioteca de soporte multiplataforma que se centra en E/S asíncrona, desarrollada principalmente para su uso por Node.js.
 
-### middleware
+## middleware
 
 Una función que es invocada por la capa de enrutamiento Express antes del gestor de solicitud final, y por lo tanto se encuentra en el medio entre una solicitud cruda y la ruta final deseada. Unos pocos puntos finos de terminología en torno a middleware:
 
@@ -29,11 +29,11 @@ Una función que es invocada por la capa de enrutamiento Express antes del gesto
 - `app.use(mw)` se llama _agregando el middleware a la pila global de procesamiento de datos_.
 - `app.get('/foo', mw, function (req, res) { ... })` se llama _adding the middleware to the "GET /foo" processing stack_.
 
-### Node.js
+## Node.js
 
 Una plataforma de software que se utiliza para construir aplicaciones de red escalables. Node.js utiliza JavaScript como su lenguaje de scripting y logra un alto rendimiento a través de E/S sin bloqueo y un bucle de eventos con un solo hilo. Ver [nodejs.org](https://nodejs.org/en/). **Nota de uso**: Inicialmente, "Node.js", a partir de entonces "Node".
 
-### código abierto, código abierto
+## código abierto, código abierto
 
 Cuando se utiliza como adjetivo, guión; por ejemplo: "Esto es software de código abierto". Ver [Software de código abierto en Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
 
@@ -44,18 +44,18 @@ gueando un adjetivo compuesto.
 
 </Alert>
 
-### solicitud
+## solicitud
 
 Una petición HTTP. Un cliente envía un mensaje de petición HTTP a un servidor, el cual devuelve una respuesta. La solicitud debe utilizar uno de varios [métodos de petición](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) como GET, POST, y así sucesivamente.
 
-### respuesta
+## respuesta
 
 Una respuesta HTTP. Un servidor devuelve un mensaje de respuesta HTTP al cliente. La respuesta contiene información sobre el estado de finalización de la solicitud y también podría contener el contenido solicitado en su cuerpo del mensaje.
 
-### ruta
+## ruta
 
 Parte de una URL que identifica un recurso. Por ejemplo, en `http://foo.com/products/id`, "/products/id" es la ruta.
 
-### enrutador
+## enrutador
 
 Ver [router](/en/api#router) en la referencia API.

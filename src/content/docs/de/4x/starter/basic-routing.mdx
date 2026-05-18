@@ -36,7 +36,7 @@ Antworte mit `Hallo World!` auf der Homepage:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hallo Welt!');
+  res.send('Hello World!');
 });
 ```
 
@@ -44,7 +44,7 @@ Antwort auf eine POST-Anfrage auf der Root-Route (`/`), der Startseite der Anwen
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Hat eine POST-Anfrage');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Antworte auf eine PUT-Anfrage auf die `/user`-Route:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Eine PUT-Anfrage bei /user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Antworte auf eine LÖSCHE Anfrage auf die `/user`-Route:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Erhalte eine DELETE Anfrage unter /user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

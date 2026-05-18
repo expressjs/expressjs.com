@@ -44,7 +44,7 @@ Assicurati inoltre di non utilizzare nessuna delle versioni Express vulnerabili 
 
 Se la tua app si occupa o trasmette dati sensibili, usa [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) per proteggere la connessione e i dati. Questa tecnologia crittografa i dati prima che vengano inviati dal client al server, impedendo così alcuni hack comuni (e facili). Anche se le richieste Ajax e POST potrebbero non essere visibilmente evidenti e sembrano "nascoste" nei browser, il loro traffico di rete è vulnerabile a [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) e [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Potresti avere familiarità con la crittografia Secure Socket Layer (SSL). [TLS è semplicemente la prossima progressione di SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. In generale, si consiglia Nginx per gestire TLS. Per un buon riferimento per configurare TLS su Nginx (e altri server), vedere [Configurazioni server consigliate (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Potresti avere familiarità con la crittografia Secure Socket Layer (SSL). [TLS è semplicemente la prossima progressione di SSL](<%3Chttps://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx%3E>). In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. In generale, si consiglia Nginx per gestire TLS. Per un buon riferimento per configurare TLS su Nginx (e altri server), vedere [Configurazioni server consigliate (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Inoltre, uno strumento utile per ottenere un certificato TLS gratuito è [Let's Encrypt](https://letsencrypt.org/about/), un gratuito, automatizzato, e autorità di certificazione aperta (CA) fornite dal [Gruppo di ricerca sulla sicurezza Internet (ISRG)](https://www.abetterinternet.org/).
 
@@ -65,11 +65,11 @@ Ecco un esempio di controllo degli URL prima di usare `res.redirect` o `res.loca
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.uery.url).host !== 'example.com') {
-      return res.status(400).nd(`Redirect non supportato all'host: ${req.query.url}`);
+    if (new Url(req.query.url).host !== 'example.com') {
+      return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
-    return res.tatus(400).end(`URL non valido: ${req.query.url}`);
+    return res.status(400).end(`Invalid url: ${req.query.url}`);
   }
   res.redirect(req.query.url);
 });
@@ -89,7 +89,7 @@ Helmet è una funzione middleware che imposta le intestazioni di risposta HTTP l
 - `Strict-Transport-Security`: Racconta i browser per preferire HTTPS
 - `X-Content-Type-Options`: Evita [MIME sniffing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
 - `X-DNS-Prefetch-Control`: controlla il prefetching DNS
-- `X-D<unk> ad-Options`: Forza il salvataggio dei download (solo Internet Explorer)
+- `X-D\<unk> ad-Options`: Forza il salvataggio dei download (solo Internet Explorer)
 - `X-Frame-Options`: intestazione legacy che attenua gli attacchi [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking)
 - `X-Permitted-Cross-Domain-Policies`: Controlla il comportamento cross-domain per i prodotti Adobe, come Acrobat
 - `X-Powered-By`: Informazioni sul server web. Rimosso perché potrebbe essere usato in semplici attacchi
@@ -108,8 +108,8 @@ Quindi per usarlo nel tuo codice:
 ```js
 // ...
 
-const casco = require('casco');
-app.use(casco());
+const helmet = require('helmet');
+app.use(helmet());
 
 // ...
 ```
@@ -148,11 +148,11 @@ e
 
 // custom 404
 app.use((req, res, next) => {
-  res.status(404). end("Siamo spiacenti non riesci a trovarlo!");
+  res.status(404).send("Sorry can't find that!");
 });
 
-// app gestore di errori personalizzato
-. se((err, req, res, next) => {
+// custom error handler
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -180,7 +180,7 @@ Per evitare questo problema, usa i nomi generici dei cookie, ad esempio usando i
 ```js
 const session = require('express-session');
 app.set('trust proxy', 1); // trust first proxy
-app.se(
+app.use(
   session({
     secret: 's3Cur3',
     name: 'sessionId',
@@ -205,17 +205,17 @@ const session = require('cookie-session');
 const express = require('express');
 const app = express();
 
-const expiryDate = new Date(Date.ow() + 60 * 60 * 1000); // 1 ora
-app.se(
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
   session({
     name: 'session',
     keys: ['key1', 'key2'],
     cookie: {
       secure: true,
       httpOnly: true,
-      dominio: 'esempio. om',
-      percorso: 'foo/bar',
-      scadenza: ScadenzaData,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
     },
   })
 );

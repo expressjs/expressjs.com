@@ -44,7 +44,7 @@ $ npm install cassandra-driver
 const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['localhost'] });
 
-client.xecute('select key from system.local', (err, result) => {
+client.execute('select key from system.local', (err, result) => {
   if (err) throw err;
   console.log(result.rows[0]);
 });
@@ -66,21 +66,21 @@ $ npm install couchbase
 const couchbase = require('couchbase');
 const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
 
-// añade un documento al cubo
-bucket.nsert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
+// add a document to a bucket
+bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
   if (err) {
-    consola.og(err);
+    console.log(err);
   } else {
-    consola.og(result);
+    console.log(result);
   }
 });
 
-// obtener todos los documentos con el tamaño de zapato 13
-const n1ql = 'SELECT d. FROM `bucketName` d WHERE shoeSize = $1';
-const query = N1qlQuery.romString(n1ql);
+// get all documents with shoe size 13
+const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1';
+const query = N1qlQuery.fromString(n1ql);
 bucket.query(query, [13], (err, result) => {
   if (err) {
-    consola.og(err);
+    console.log(err);
   } else {
     console.log(result);
   }
@@ -102,21 +102,21 @@ $ npm install nano
 ```js
 const nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
-const books = nano.db.se('books');
+const books = nano.db.use('books');
 
-// Inserta un documento de libro en la base de datos de libros
-libros.nsert({ name: 'The Art of war' }, null, (err, body) => {
+// Insert a book document in the books database
+books.insert({ name: 'The Art of war' }, null, (err, body) => {
   if (err) {
-    console.og(err);
+    console.log(err);
   } else {
-    consola.og(body);
+    console.log(body);
   }
 });
 
-// Obtén una lista de todos los libros
-libros.ist((err, body) => {
+// Get a list of all books
+books.list((err, body) => {
   if (err) {
-    consola.og(err);
+    console.log(err);
   } else {
     console.log(body.rows);
   }
@@ -130,7 +130,7 @@ libros.ist((err, body) => {
 ### Instalación
 
 ```bash
-$ npm instalar nivel de nivelación
+$ npm install level levelup leveldown
 ```
 
 ### Ejemplo
@@ -139,11 +139,11 @@ $ npm instalar nivel de nivelación
 const levelup = require('levelup');
 const db = levelup('./mydb');
 
-db.ut('nombre', 'LevelUP', (err) => {
-  if (err) return console.log('¡Ooops!', err);
+db.put('name', 'LevelUP', (err) => {
+  if (err) return console.log('Ooops!', err);
 
-  db.et('nombre', (err, value) => {
-    if (err) return consola.og('¡Ooops!', err);
+  db.get('name', (err, value) => {
+    if (err) return console.log('Ooops!', err);
 
     console.log(`name=${value}`);
   });
@@ -163,20 +163,20 @@ $ npm install mysql
 ### Ejemplo
 
 ```js
-const (0)[video] ql = require('mañql');
-const connection = .Uql. reateConnection({
+const mysql = require('mysql');
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'dbuser',
   password: 's3kreee7',
   database: 'my_db',
 });
 
-conexión. onnect();
+connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', (err, filas, campos) => {
+connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
   if (err) throw err;
 
-  consola. og('La solución es: ', filas[0].solution);
+  console.log('The solution is: ', rows[0].solution);
 });
 
 connection.end();
@@ -200,12 +200,12 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
   if (err) throw err;
 
-  db.ollection('mammals')
+  db.collection('mammals')
     .find()
-    .oArray((err, result) => {
+    .toArray((err, result) => {
       if (err) throw err;
 
-      consola.og(resultado);
+      console.log(result);
     });
 });
 ```
@@ -218,14 +218,14 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
   if (err) throw err;
 
-  const db = client.b('animales');
+  const db = client.db('animals');
 
   db.collection('mammals')
     .find()
-    .oArray((err, result) => {
+    .toArray((err, result) => {
       if (err) throw err;
 
-      consola.og(resultado);
+      console.log(result);
     });
 });
 ```
@@ -246,18 +246,18 @@ $ npm install neo4j-driver
 
 ```js
 const neo4j = require('neo4j-driver');
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.asic('neo4j', 'letmein'));
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'));
 
 const session = driver.session();
 
 session.readTransaction((tx) => {
   return tx
-    .un('MATCH (n) RETURN count(n) AS count')
+    .run('MATCH (n) RETURN count(n) AS count')
     .then((res) => {
-      console.log(res.records[0].et('count'));
+      console.log(res.records[0].get('count'));
     })
     .catch((error) => {
-      consola.og(error);
+      console.log(error);
     });
 });
 ```
@@ -288,17 +288,17 @@ async function getEmployee(empId) {
   let conn;
 
   try {
-    conn = await oracledb. etConnection(config);
+    conn = await oracledb.getConnection(config);
 
-    const result = await conn. xecute('select * from employees where employee_id = :id', [empId]);
+    const result = await conn.execute('select * from employees where employee_id = :id', [empId]);
 
-    consola. og(result.rows[0]);
+    console.log(result.rows[0]);
   } catch (err) {
-    consola. og('¡Og! , err);
+    console.log('Ouch!', err);
   } finally {
     if (conn) {
-      // asignación conn trabajada, necesitan cerrar
-      esperando conn. lose();
+      // conn assignment worked, need to close
+      await conn.close();
     }
   }
 }
@@ -323,10 +323,10 @@ const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://username:password@host:port/database');
 
 db.one('SELECT $1 AS value', 123)
-  .hen((data) => {
+  .then((data) => {
     console.log('DATA:', data.value);
   })
-  .atch((error) => {
+  .catch((error) => {
     console.log('ERROR:', error);
   });
 ```
@@ -351,14 +351,15 @@ client.on('error', (err) => {
   console.log(`Error ${err}`);
 });
 
-cliente.et('clave de cadena', 'valor de cadena', redis.print);
-client.hset('clave hash', 'hashtest 1', 'some value', redis.print);
-cliente.set(['hash key', 'hashtest 2', 'algún otro valor'], redis.print);
-Cliente.keys('clave hash', (err, respuestas) => {
-  console.log(`${replies.length} respuestas:`);
+client.set('string key', 'string val', redis.print);
+client.hset('hash key', 'hashtest 1', 'some value', redis.print);
+client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
 
-  respuestas.orEach((reply, i) => {
-    consola.og(`    ${i}: ${reply}`);
+client.hkeys('hash key', (err, replies) => {
+  console.log(`${replies.length} replies:`);
+
+  replies.forEach((reply, i) => {
+    console.log(`    ${i}: ${reply}`);
   });
 
   client.quit();
@@ -379,45 +380,45 @@ $ npm install tedious
 
 ```js
 const Connection = require('tedious').Connection;
-const Request = require('tedious').equest;
+const Request = require('tedious').Request;
 
 const config = {
   server: 'localhost',
-  autenticación: {
+  authentication: {
     type: 'default',
-    opciones: {
-      userName: 'su_usuario', // actualizarme
-      contraseña: 'su_contraseña', // actualizarme
+    options: {
+      userName: 'your_username', // update me
+      password: 'your_password', // update me
     },
   },
 };
 
 const connection = new Connection(config);
 
-connection.n('connect', (err) => {
+connection.on('connect', (err) => {
   if (err) {
-    consola.og(err);
+    console.log(err);
   } else {
     executeStatement();
   }
 });
 
 function executeStatement() {
-  request = new Request("select 123, 'hola mundo'", (err, rowCount) => {
+  request = new Request("select 123, 'hello world'", (err, rowCount) => {
     if (err) {
-      consola.og(err);
+      console.log(err);
     } else {
-      consola.og(`${rowCount} filas`);
+      console.log(`${rowCount} rows`);
     }
-    conexión.lose();
+    connection.close();
   });
 
-  request.on('fila', (columnas) => {
-    columnas.orEach((column) => {
+  request.on('row', (columns) => {
+    columns.forEach((column) => {
       if (column.value === null) {
-        consola.og('NULL');
+        console.log('NULL');
       } else {
-        console.log(column.alue);
+        console.log(column.value);
       }
     });
   });
@@ -443,17 +444,17 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
-  db.un('CREATE TABLE lorem (info TEXT)');
-  const stmt = db.repare('INSERT INTO Lorem VALUES (?)');
+  db.run('CREATE TABLE lorem (info TEXT)');
+  const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
 
   for (let i = 0; i < 10; i++) {
-    stmt.un(`Ipsum ${i}`);
+    stmt.run(`Ipsum ${i}`);
   }
 
   stmt.finalize();
 
-  db.ach('SELECT rowid AS id, info FROM lorem', (err, row) => {
-    consola.og(`${row.id}: ${row.info}`);
+  db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
+    console.log(`${row.id}: ${row.info}`);
   });
 });
 
@@ -467,7 +468,7 @@ db.close();
 ### Instalación
 
 ```bash
-$ npm instalar elasticsearch
+$ npm install elasticsearch
 ```
 
 ### Ejemplo
@@ -479,24 +480,24 @@ const client = elasticsearch.Client({
 });
 
 client
-  .earch({
-    index: 'libros',
-    tipo: 'libro',
+  .search({
+    index: 'books',
+    type: 'book',
     body: {
       query: {
         multi_match: {
           query: 'express js',
-          campos: ['title', 'description'],
+          fields: ['title', 'description'],
         },
       },
     },
   })
-  .hen(
+  .then(
     (response) => {
-      const hits = response.hits.its;
+      const hits = response.hits.hits;
     },
     (error) => {
-      consola.race(error.message);
+      console.trace(error.message);
     }
   );
 ```
