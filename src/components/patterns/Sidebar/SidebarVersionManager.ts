@@ -10,15 +10,12 @@ export class SidebarVersionManager {
   }
 
   setup(): void {
-    const versionSwitchers = this.sidebar.querySelectorAll(
-      '[data-version-switcher] select, [data-version-select]'
-    );
+    const versionSwitchers = this.sidebar.querySelectorAll('[data-version-switcher]');
 
     versionSwitchers.forEach((switcher) => {
-      switcher.addEventListener('change', (e) => {
-        const select = e.target as HTMLSelectElement;
-        this.handleVersionChange(select.value);
-      });
+      switcher.addEventListener('select-change', ((e: CustomEvent<{ value: string }>) => {
+        this.handleVersionChange(e.detail.value);
+      }) as EventListener);
     });
   }
 
@@ -128,18 +125,5 @@ export class SidebarVersionManager {
 
   updatePath(path: string[]): void {
     this.activeSubmenuPath = path;
-  }
-
-  getVersion(): string {
-    return this.currentVersion;
-  }
-
-  setVersion(version: string): void {
-    const versionSelects =
-      this.sidebar.querySelectorAll<HTMLSelectElement>('[data-version-select]');
-    versionSelects.forEach((select) => {
-      select.value = version;
-    });
-    this.handleVersionChange(version);
   }
 }
