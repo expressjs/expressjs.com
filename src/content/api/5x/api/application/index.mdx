@@ -21,17 +21,18 @@ app.listen(3000);
 
 The `app` object has methods for
 
-- Routing HTTP requests; see for example, [app.METHOD](#appmethod) and [app.param](#appparam).
-- Configuring middleware; see [app.route](#approute).
-- Rendering HTML views; see [app.render](#apprender).
-- Registering a template engine; see [app.engine](#appengine).
+- Routing HTTP requests; see for example, [app.METHOD](#appmethodpath-callback--callback-) and [app.param](#appparamname-callback).
+- Configuring middleware; see [app.route](#approutepath).
+- Rendering HTML views; see [app.render](#apprenderview-locals-callback).
+- Registering a template engine; see [app.engine](#appengineext-callback).
 
 It also has settings (properties) that affect how the application behaves;
 for more information, see [Application settings](#application-settings).
 
 <Alert type="info">
-  The Express application object can be referred from the [request object](#req) and the [response
-  object](#res) as `req.app`, and `res.app`, respectively.
+
+The Express application object can be referred from the [request object](../request/) and the [response object](../response/) as `req.app`, and `res.app`, respectively.
+
 </Alert>
 
 ## Properties
@@ -39,7 +40,7 @@ for more information, see [Application settings](#application-settings).
 ### app.locals
 
 The `app.locals` object has properties that are local variables within the application,
-and will be available in templates rendered with [res.render](#res.render).
+and will be available in templates rendered with [res.render](../response/#resrenderview--locals--callback).
 
 <Alert type="warning">
 
@@ -59,12 +60,12 @@ console.dir(app.locals.email);
 ```
 
 Once set, the value of `app.locals` properties persist throughout the life of the application,
-in contrast with [res.locals](#res.locals) properties that
+in contrast with [res.locals](../response/#reslocals) properties that
 are valid only for the lifetime of the request.
 
 You can access local variables in templates rendered within the application.
 This is useful for providing helper functions to templates, as well as application-level data.
-Local variables are available in middleware via `req.app.locals` (see [req.app](#req.app))
+Local variables are available in middleware via `req.app.locals` (see [req.app](../request/#reqapp))
 
 ```js
 app.locals.title = 'My App';
@@ -96,7 +97,7 @@ admin.get('/', (req, res) => {
 app.use('/admin', admin); // mount the sub app
 ```
 
-It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, except `req.baseUrl`
+It is similar to the [baseUrl](../request/#reqbaseurl) property of the `req` object, except `req.baseUrl`
 returns the matched URL path, instead of the matched patterns.
 
 If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the list of
@@ -138,7 +139,7 @@ app.listen(3000);
 
 You can add middleware and HTTP method routes to the `router` just like an application.
 
-For more information, see [Router](#router).
+For more information, see [Router](../router/).
 
 ## Events
 
@@ -154,7 +155,7 @@ Sub-apps will:
 - Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 - Inherit the value of settings with no default value.
 
-For details, see [Application settings](/en/api/application/app-set#app.settings.table).
+For details, see [Application settings](#application-settings).
 
 </Alert>
 
@@ -177,7 +178,7 @@ app.use('/admin', admin);
 
 ### app.all(path, callback [, callback ...])
 
-This method is like the standard [app.METHOD()](#appmethod) methods,
+This method is like the standard [app.METHOD()](#appmethodpath-callback--callback-) methods,
 except it matches all HTTP verbs.
 
 #### Arguments
@@ -185,7 +186,7 @@ except it matches all HTTP verbs.
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
 #### Examples
 
@@ -228,14 +229,14 @@ app.all('/api/{*splat}', requireAuthentication);
 ### app.delete(path, callback [, callback ...])
 
 Routes HTTP DELETE requests to the specified path with the specified callback functions.
-For more information, see the [routing guide](/en/guide/routing).
+For more information, see the [routing guide](../../guide/routing/).
 
 #### Arguments
 
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
 #### Example
 
@@ -247,7 +248,7 @@ app.delete('/', (req, res) => {
 
 ### app.disable(name)
 
-Sets the Boolean setting `name` to `false`, where `name` is one of the properties from the [app settings table](/en/api/application/app-set#app.settings.table).
+Sets the Boolean setting `name` to `false`, where `name` is one of the properties from the [app settings table](#application-settings).
 Calling `app.set('foo', false)` for a Boolean property is the same as calling `app.disable('foo')`.
 
 For example:
@@ -261,7 +262,7 @@ app.get('trust proxy');
 ### app.disabled(name)
 
 Returns `true` if the Boolean setting `name` is disabled (`false`), where `name` is one of the properties from
-the [app settings table](/en/api/application/app-set#app.settings.table).
+the [app settings table](#application-settings).
 
 ```js
 app.disabled('trust proxy');
@@ -274,7 +275,7 @@ app.disabled('trust proxy');
 
 ### app.enable(name)
 
-Sets the Boolean setting `name` to `true`, where `name` is one of the properties from the [app settings table](/en/api/application/app-set#app.settings.table).
+Sets the Boolean setting `name` to `true`, where `name` is one of the properties from the [app settings table](#application-settings).
 Calling `app.set('foo', true)` for a Boolean property is the same as calling `app.enable('foo')`.
 
 ```js
@@ -286,7 +287,7 @@ app.get('trust proxy');
 ### app.enabled(name)
 
 Returns `true` if the setting `name` is enabled (`true`), where `name` is one of the
-properties from the [app settings table](/en/api/application/app-set#app.settings.table).
+properties from the [app settings table](#application-settings).
 
 ```js
 app.enabled('trust proxy');
@@ -337,7 +338,7 @@ app.engine('html', engines.hogan);
 ### app.get(name)
 
 Returns the value of `name` app setting, where `name` is one of the strings in the
-[app settings table](/en/api/application/app-set#app.settings.table). For example:
+[app settings table](#application-settings). For example:
 
 ```js
 app.get('title');
@@ -357,9 +358,9 @@ Routes HTTP GET requests to the specified path with the specified callback funct
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
-For more information, see the [routing guide](/en/guide/routing).
+For more information, see the [routing guide](../../guide/routing/).
 
 #### Example
 
@@ -438,7 +439,7 @@ PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
 #### Routing methods
 
@@ -537,13 +538,13 @@ The `app.get()` function is automatically called for the HTTP `HEAD` method in a
 
 The method, `app.all()`, is not derived from any HTTP method and loads middleware at
 the specified path for _all_ HTTP request methods.
-For more information, see [app.all](#appall).
+For more information, see [app.all](#appallpath-callback--callback-).
 
-For more information on routing, see the [routing guide](/en/guide/routing).
+For more information on routing, see the [routing guide](../../guide/routing/).
 
 ### app.param(name, callback)
 
-Add callback triggers to [route parameters](/en/guide/routing#route-parameters), where `name` is the name of the parameter or an array of them, and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order.
+Add callback triggers to [route parameters](../../guide/routing/#route-parameters), where `name` is the name of the parameter or an array of them, and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order.
 
 If `name` is an array, the `callback` trigger is registered for each parameter declared in it, in the order in which they are declared. Furthermore, for each declared parameter except the last one, a call to `next` inside the callback will call the callback for the next declared parameter. For the last parameter, a call to `next` will call the next middleware in place for the route currently being processed, just like it would if `name` were just a string.
 
@@ -638,19 +639,19 @@ console.log(blogAdmin.path()); // '/blog/admin'
 ```
 
 The behavior of this method can become very complicated in complex cases of mounted apps:
-it is usually better to use [req.baseUrl](#req.baseUrl) to get the canonical path of the app.
+it is usually better to use [req.baseUrl](../request/#reqbaseurl) to get the canonical path of the app.
 
 ### app.post(path, callback [, callback ...])
 
 Routes HTTP POST requests to the specified path with the specified callback functions.
-For more information, see the [routing guide](/en/guide/routing).
+For more information, see the [routing guide](../../guide/routing/).
 
 #### Arguments
 
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
 #### Example
 
@@ -669,7 +670,7 @@ Routes HTTP PUT requests to the specified path with the specified callback funct
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
 #### Example
 
@@ -682,7 +683,7 @@ app.put('/', (req, res) => {
 ### app.render(view, [locals], callback)
 
 Returns the rendered HTML of a view via the `callback` function. It accepts an optional parameter
-that is an object containing local variables for the view. It is like [res.render()](#res.render),
+that is an object containing local variables for the view. It is like [res.render()](../response/#resrenderview--locals--callback),
 except it cannot send the rendered view to the client on its own.
 
 <Alert type="info">
@@ -751,7 +752,7 @@ app
 
 Assigns setting `name` to `value`. You may store any value that you want,
 but certain names can be used to configure the behavior of the server. These
-special names are listed in the [app settings table](/en/api/application/app-set#app.settings.table).
+special names are listed in the [app settings table](#application-settings).
 
 Calling `app.set('foo', true)` for a Boolean property is the same as calling
 `app.enable('foo')`. Similarly, calling `app.set('foo', false)` for a Boolean
@@ -796,7 +797,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
 
 #### Options for `trust proxy` setting
 
-Read [Express behind proxies](/en/guide/behind-proxies) for more information.
+Read [Express behind proxies](../../guide/behind-proxies) for more information.
 
 **Boolean**: If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header. If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
 
@@ -866,7 +867,7 @@ app.set('etag', (body, encoding) => {
 
 ### app.use([path,] callback [, callback...])
 
-Mounts the specified [middleware](/en/guide/using-middleware) function or functions
+Mounts the specified [middleware](../../guide/using-middleware) function or functions
 at the specified path:
 the middleware function is executed when the base of the requested path matches `path`.
 
@@ -875,7 +876,7 @@ the middleware function is executed when the base of the requested path matches 
 | Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `path`     | The path for which the middleware function is invoked. It can be any of the following: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array containing any combination of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `'/'` (root path) |
-| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](#router) and [app](#application) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
+| `callback` | One or more callback functions. Accepted formats: a single middleware function, multiple middleware functions separated by commas, an array of middleware functions, or a combination of the above. You may provide multiple callbacks that behave like middleware. These can call `next('route')` to skip remaining callbacks for the current route. This is useful for conditional routing logic. If a callback throws an error or returns a rejected promise, `next(err)` is invoked automatically. Since both [router](../router/) and [app](#overview) implement the middleware interface, they can also be used as callback middleware. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | _None_            |
 
 #### Description
 
@@ -901,7 +902,7 @@ Sub-apps will:
 - Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 - Inherit the value of settings with no default value.
 
-For details, see [Application settings](/en/5x/api/application/app-settings/).
+For details, see [Application settings](#application-settings).
 
 </Alert>
 
@@ -921,7 +922,7 @@ app.get('/', (req, res) => {
 
 **Error-handling middleware**
 
-Error-handling middleware always takes _four_ arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](/en/guide/error-handling).
+Error-handling middleware always takes _four_ arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](../../guide/error-handling).
 
 Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
 
@@ -1062,7 +1063,7 @@ subApp.get('/', (req, res, next) => {
 app.use(mw1, [mw2, r1, r2], subApp);
 ```
 
-Following are some examples of using the [express.static](/en/guide/using-middleware#middleware.built-in)
+Following are some examples of using the [express.static](../../guide/using-middleware/#built-in-middleware)
 middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:

@@ -36,7 +36,7 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 
 This property holds a reference to the instance of the Express application that is using the middleware.
 
-`res.app` is identical to the [req.app](#req.app) property in the request object.
+`res.app` is identical to the [req.app](../request/#reqapp) property in the request object.
 
 ### res.headersSent
 
@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
 
 ### res.locals
 
-Use this property to set variables accessible in templates rendered with [res.render](#resrenderview-locals-callback).
+Use this property to set variables accessible in templates rendered with [res.render](#resrenderview--locals--callback).
 The variables set on `res.locals` are available within a single request-response cycle, and will not
 be shared between requests.
 
@@ -66,7 +66,7 @@ for the used view engine for additional considerations.
 </Alert>
 
 In order to keep local variables for use in template rendering between requests, use
-[app.locals](#app.locals) instead.
+[app.locals](../application/#applocals) instead.
 
 This property is useful for exposing request-level information such as the request path name,
 authenticated user, user settings, and so on to templates rendered within the application.
@@ -82,7 +82,7 @@ app.use(function (req, res, next) {
 
 ### res.req
 
-This property holds a reference to the <a href="#req">request object</a>
+This property holds a reference to the [request object](../request/)
 that relates to this response object.
 
 ## Methods
@@ -238,7 +238,7 @@ Then `res.cookie()` will use the secret passed to `cookieParser(secret)` to sign
 res.cookie('name', 'tobi', { signed: true });
 ```
 
-Later you may access this value through the [req.signedCookie](#req.signedCookies) object.
+Later you may access this value through the [req.signedCookie](../request/#reqsignedcookies) object.
 
 ### res.download(path [, filename] [, options] [, fn])
 
@@ -310,7 +310,7 @@ res.status(404).end();
 ### res.format(object)
 
 Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
-It uses [req.accepts()](#req.accepts) to select a handler for the request, based on the acceptable
+It uses [req.accepts()](../request/#reqacceptstypes) to select a handler for the request, based on the acceptable
 types ordered by their quality values. If the header is not specified, the first callback is invoked.
 When no match is found, the server responds with 406 "Not Acceptable", or invokes the `default` callback.
 
@@ -402,7 +402,7 @@ res.status(500).jsonp({ error: 'message' });
 
 By default, the JSONP callback name is simply `callback`. Override this with the
 
-<a href="/api/application/app-settings/">jsonp callback name</a> setting.
+[jsonp callback name](../application/#application-settings) setting.
 
 The following are some examples of JSONP responses using the same code:
 
@@ -458,7 +458,7 @@ res.location('back');
 A `path` value of "back" has a special meaning, it refers to the URL specified in the `Referer` header of the request. If the `Referer` header was not specified, it refers to "/".
 
 See also [Security best practices: Prevent open redirect
-vulnerabilities](http://expressjs.com/en/advanced/best-practice-security#prevent-open-redirects).
+vulnerabilities](../../../advanced/best-practice-security/#prevent-open-redirects).
 
 <Alert type="warning">
 After encoding the URL, if not encoded already, Express passes the specified URL to the browser in the `Location` header,
@@ -532,7 +532,7 @@ res.redirect('back');
 </Alert>
 
 See also [Security best practices: Prevent open redirect
-vulnerabilities](http://expressjs.com/en/advanced/best-practice-security#prevent-open-redirects).
+vulnerabilities](../../../advanced/best-practice-security/#prevent-open-redirects).
 
 ### res.render(view [, locals] [, callback])
 
@@ -544,7 +544,7 @@ Optional parameters:
 
 The `view` argument is a string that is the file path of the view file to render. This can be an absolute path, or a path relative to the `views` setting. If the path does not contain a file extension, then the `view engine` setting determines the file extension. If the path does contain a file extension, then Express will load the module for the specified template engine (via `require()`) and render it using the loaded module's `__express` function.
 
-For more information, see [Using template engines with Express](/en/guide/using-template-engines).
+For more information, see [Using template engines with Express](../../guide/using-template-engines).
 
 <Alert type="warning">
 

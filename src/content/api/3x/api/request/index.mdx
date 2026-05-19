@@ -164,7 +164,7 @@ where "proxy2" is the furthest down-stream.
 This property is much like `req.url`, however it retains
 the original request url, allowing you to rewrite `req.url`
 freely for internal routing purposes. For example the "mounting" feature
-of <a href="#app.use">app.use()</a> will rewrite `req.url` to
+of [app.use()](../application/#appusepath-function) will rewrite `req.url` to
 strip the mount point.
 
 ```js
@@ -243,7 +243,7 @@ console.dir(req.query.shoe.type);
 
 ### req.res
 
-This property holds a reference to the <a href="#response">response object</a>
+This property holds a reference to the [response object](../response/)
 that relates to this request object.
 
 ### req.route
