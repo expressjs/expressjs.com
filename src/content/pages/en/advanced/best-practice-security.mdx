@@ -18,27 +18,25 @@ Policies and Procedures](/en/resources/contributing#security-policies-and-proced
 
 Security best practices for Express applications in production include:
 
-- [Production Best Practices: Security](#production-best-practices-security)
-  - [Overview](#overview)
-  - [Don't use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-  - [Use TLS](#use-tls)
-  - [Do not trust user input](#do-not-trust-user-input)
-    - [Prevent open redirects](#prevent-open-redirects)
-  - [Use Helmet](#use-helmet)
-  - [Reduce fingerprinting](#reduce-fingerprinting)
-  - [Use cookies securely](#use-cookies-securely)
-    - [Don't use the default session cookie name](#dont-use-the-default-session-cookie-name)
-    - [Set cookie security options](#set-cookie-security-options)
-  - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
-  - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
-    - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
-  - [Additional considerations](#additional-considerations)
+- [Don't use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+- [Use TLS](#use-tls)
+- [Do not trust user input](#do-not-trust-user-input)
+  - [Prevent open redirects](#prevent-open-redirects)
+- [Use Helmet](#use-helmet)
+- [Reduce fingerprinting](#reduce-fingerprinting)
+- [Use cookies securely](#use-cookies-securely)
+  - [Don't use the default session cookie name](#dont-use-the-default-session-cookie-name)
+  - [Set cookie security options](#set-cookie-security-options)
+- [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
+- [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
+  - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
+- [Additional considerations](#additional-considerations)
 
 ## Don't use deprecated or vulnerable versions of Express
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](/en/guide/migrating-4) or consider [Commercial Support Options](/en/support#commercial-support-options).
+Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](../../guide/migrating-4) or consider [Commercial Support Options](../../support#commercial-support-options).
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/en/advanced/security-updates). If you are, update to one of the stable releases, preferably the latest.
+Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](../security-updates). If you are, update to one of the stable releases, preferably the latest.
 
 ## Use TLS
 

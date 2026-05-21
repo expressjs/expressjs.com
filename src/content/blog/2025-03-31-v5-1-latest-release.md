@@ -28,7 +28,7 @@ We know that migrating between versions can be challenging, especially when it i
 
 Thanks to the incredible efforts of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi), we have developed a new [codemod package](https://www.npmjs.com/package/@expressjs/codemod) specifically designed to facilitate the transition from Express v4 to v5, as well as future major versions. This package automates many of the necessary code changes, minimizing manual effort and making the upgrade as smooth and efficient as possible.
 
-However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](/en/guide/migrating-5#path-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](/en/blog/2024-10-15-v5-release).
+However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](/en/guide/migrating-5#path-route-matching-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](/en/blog/2024-10-15-v5-release).
 
 For more details on the migration process and how to use the codemod package, check the [repository’s README](https://github.com/expressjs/codemod#readme) and the [migration guide](/en/guide/migrating-5).
 
@@ -115,9 +115,9 @@ starts the clock on EOL for v4 by moving it to `MAINTENANCE`. We recognize that 
 only major version for most of the history of Node.js itself. Because of this, we want to remain flexible and also
 provide a bit longer support. We want to do what is best for the ecosystem, so consider these goals not commitments.
 
-\*: v4 is a special case, and we may extend MAINTENENCE support  
+\*: v4 is a special case, and we may extend MAINTENENCE support
 \*\*: v5 MAINTENENCE and EOL dates are determined by when v6 is released, these dates reflect the earliest dates if we
-were to ship v6 on 2025-10-01  
+were to ship v6 on 2025-10-01
 \*\*\* : v6 work has not officially started yet, this is simply the earliest date we can ship based on our proposed policy
 
 ---

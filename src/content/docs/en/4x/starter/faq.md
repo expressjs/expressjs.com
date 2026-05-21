@@ -13,8 +13,8 @@ Routes and other application-specific logic can live in as many files
 as you wish, in any directory structure you prefer. View the following
 examples for inspiration:
 
-- [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
-- [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [Route listings](https://github.com/expressjs/express/blob/v4.22.2/examples/route-separation/index.js#L34-L49)
+- [Route map](https://github.com/expressjs/express/blob/v4.22.2/examples/route-map/index.js#L55-L69)
 - [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Also, there are third-party extensions for Express, which simplify some of these patterns:
@@ -42,7 +42,7 @@ To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
 
-For more information, see [Using template engines with Express](/en/guide/using-template-engines).
+For more information, see [Using template engines with Express](../../guide/using-template-engines).
 
 ## How do I handle 404 responses?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-For more information, see [Error handling](/en/guide/error-handling).
+For more information, see [Error handling](../../guide/error-handling).
 
 ## How do I render plain HTML?
 
@@ -86,5 +86,5 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.
+- [Express 4.x](../../../4x/api) requires Node.js 0.10 or higher.
+- [Express 5.x](../../../5x/api) requires Node.js 18 or higher.
