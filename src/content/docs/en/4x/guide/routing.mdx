@@ -6,12 +6,12 @@ description: Learn how to define and use routes in Express.js applications, incl
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 _Routing_ refers to how an application's endpoints (URIs) respond to client requests.
-For an introduction to routing, see [Basic routing](/en/4x/starter/basic-routing).
+For an introduction to routing, see [Basic routing](../../starter/basic-routing).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
-see [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-). You can also use [app.all()](/en/4x/api/application#appallpath-callback--callback-) to handle all HTTP methods and [app.use()](/en/4x/api/application#appusepath-callback--callback) to
-specify middleware as the callback function (See [Using middleware](/en/4x/guide/using-middleware) for details).
+see [app.METHOD](../../api/application#appmethodpath-callback--callback-). You can also use [app.all()](../../api/application#appallpath-callback--callback-) to handle all HTTP methods and [app.use()](../../api/application#appusepath-callback--callback) to
+specify middleware as the callback function (See [Using middleware](../using-middleware) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-For a full list, see [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-).
+For a full list, see [app.METHOD](../../api/application#appmethodpath-callback--callback-).
 
 There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -212,12 +212,12 @@ characters with an additional backslash, for example `\\d+`.
 </Alert>
 
 <Alert type="warning">
-The <a href="https://github.com/expressjs/express/issues/2495">`*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`.
+The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. As a workaround, use `{0,}` instead of `*`.
 </Alert>
 
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/en/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](../using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -312,22 +312,22 @@ app.get(
 
 The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
-| Method                                                                       | Description                                                                           |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [res.download()](/en/4x/api/response#resdownloadpath--filename--options--fn) | Prompt a file to be downloaded.                                                       |
-| [res.end()](/en/4x/api/response#resenddata-encoding-callback)                | End the response process.                                                             |
-| [res.json()](/en/4x/api/response#resjsonbody)                                | Send a JSON response.                                                                 |
-| [res.jsonp()](/en/4x/api/response#resjsonpbody)                              | Send a JSON response with JSONP support.                                              |
-| [res.redirect()](/en/4x/api/response#resredirectstatus-path)                 | Redirect a request.                                                                   |
-| [res.render()](/en/4x/api/response#resrenderview--locals--callback)          | Render a view template.                                                               |
-| [res.send()](/en/4x/api/response#ressendbody)                                | Send a response of various types.                                                     |
-| [res.sendFile()](/en/4x/api/response#ressendfilepath--options--fn)           | Send a file as an octet stream.                                                       |
-| [res.sendStatus()](/en/4x/api/response#ressendstatusstatuscode)              | Set the response status code and send its string representation as the response body. |
+| Method                                                                      | Description                                                                           |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [res.download()](../../api/response#resdownloadpath--filename--options--fn) | Prompt a file to be downloaded.                                                       |
+| [res.end()](../../api/response#resenddata-encoding-callback)                | End the response process.                                                             |
+| [res.json()](../../api/response#resjsonbody)                                | Send a JSON response.                                                                 |
+| [res.jsonp()](../../api/response#resjsonpbody)                              | Send a JSON response with JSONP support.                                              |
+| [res.redirect()](../../api/response#resredirectstatus-path)                 | Redirect a request.                                                                   |
+| [res.render()](../../api/response#resrenderview--locals--callback)          | Render a view template.                                                               |
+| [res.send()](../../api/response#ressendbody)                                | Send a response of various types.                                                     |
+| [res.sendFile()](../../api/response#ressendfilepath--options--fn)           | Send a file as an octet stream.                                                       |
+| [res.sendStatus()](../../api/response#ressendstatusstatuscode)              | Set the response status code and send its string representation as the response body. |
 
 ## app.route()
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/en/4x/api/router).
+Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](../../api/router).
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
@@ -388,7 +388,7 @@ app.use('/birds', birds);
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/en/4x/api/application#appusepath-callback--callback).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](../../api/application#appusepath-callback--callback).
 
 ```js
 const router = express.Router({ mergeParams: true });
