@@ -242,6 +242,9 @@ app.get(
 );
 ```
 
+In this example:
+The callback does not end the request-response cycle, That's why it should call `next()` in order to pass control to the next callback. Otherwise the request will be just left hanging and the client will wait indefinitely for a response.
+
 An array of callback functions can handle a route. For example:
 
 ```js
