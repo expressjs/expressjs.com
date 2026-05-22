@@ -27,7 +27,7 @@ Express has no notion of a database. This concept is
 left up to third-party Node modules, allowing you to
 interface with nearly any database.
 
-See [LoopBack](http://loopback.io) for an Express-based framework that is centered around models.
+See [LoopBack](https://loopback.io/) for an Express-based framework that is centered around models.
 
 ## How can I authenticate users?
 
