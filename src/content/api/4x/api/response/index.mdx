@@ -174,7 +174,7 @@ The `options` parameter is an object that can have the following properties.
 <Alert type="alert">
 
 All `res.cookie()` does is set the HTTP `Set-Cookie` header with the options provided. Any option
-not specified defaults to the value stated in [RFC 6265](http://tools.ietf.org/html/rfc6265).
+not specified defaults to the value stated in [RFC 6265](https://datatracker.ietf.org/doc/html/rfc6265).
 
 </Alert>
 
@@ -485,7 +485,7 @@ res.redirect('../login');
 Redirects can be a fully-qualified URL for redirecting to a different site:
 
 ```js
-res.redirect('http://google.com');
+res.redirect('https://google.com');
 ```
 
 Redirects can be relative to the root of the host name. For example, if the
@@ -518,7 +518,7 @@ Path-relative redirects are also possible. If you were on
 res.redirect('..');
 ```
 
-A `back` redirection redirects the request back to the [referer](http://en.wikipedia.org/wiki/HTTP_referer),
+A `back` redirection redirects the request back to the [referer](https://en.wikipedia.org/wiki/HTTP_referer),
 defaulting to `/` when the referer is missing.
 
 ```js

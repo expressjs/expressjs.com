@@ -22,7 +22,7 @@ The Express middleware modules listed here are maintained by the
 | [serve-index](/en/resources/middleware/serve-index)         | Serve directory listing for a given path.                                                           |
 | [serve-static](/en/resources/middleware/serve-static)       | Serve static files.                                                                                 |
 | [session](/en/resources/middleware/session)                 | Establish server-based sessions (development only).                                                 |
-| [timeout](/en/resources/middleware/timeout)                 | Set a timeout perioHTTP request processing.                                                         |
+| [timeout](/en/resources/middleware/timeout)                 | Set a timeout period for HTTP request processing.                                                   |
 | [vhost](/en/resources/middleware/vhost)                     | Create virtual domains.                                                                             |
 
 ## Additional middleware modules
