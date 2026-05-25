@@ -5,7 +5,7 @@
     "reviewDesignSystem": {
       "prefix": "Review the",
       "link": "Design System Foundations",
-      "suffix": "demo page to explore all tokens, primitives, and patterns."
+      "suffix": "用于探索所有令牌、原始和模式的演示页面。"
     }
   },
   "search": {
