@@ -284,6 +284,8 @@ Or you can update your code manually:
 
 The `hidden` and `from` options for `res.sendFile()` are no longer supported. Use `dotfiles` and `root` instead.
 
+The `dotfiles` option applies to hidden directories in the path as well as hidden files. For example, a file served from a path like `/tmp/.mount/app/index.html` now requires `dotfiles: 'allow'`, even though `index.html` is not a dotfile.
+
 #### How to update
 
 ```diff
