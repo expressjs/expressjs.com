@@ -23,6 +23,9 @@ const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 export default defineConfig({
   redirects,
   site,
+  build: {
+    format: 'file',
+  },
   markdown: {
     // Link localization (Markdown links + raw HTML/JSX `<a href>`). Configuration —
     // localized sections, versioned sections, default version, and the "global" pages
