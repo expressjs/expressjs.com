@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](../../api/express/#expressstaticroot-options).
+For more information on the `options` argument, see [express.static](/en/5x/api/express/#expressstaticroot-options).
 
 For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
@@ -51,12 +51,12 @@ Express looks up the files in the order in which you set the static directories 
 <Alert type="info">
 
 For best results, [use a reverse
-proxy](../../../advanced/best-practice-performance/#use-a-reverse-proxy) cache to improve performance of
+proxy](/en/advanced/best-practice-performance/#use-a-reverse-proxy) cache to improve performance of
 serving static assets.
 
 </Alert>
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](../../api/application/#appusepath-callback--callback) for the static directory, as shown below:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/en/5x/api/application/#appusepath-callback--callback) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -79,4 +79,4 @@ const path = require('path');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
-For more details about the `serve-static` function and its options, see [serve-static](../../../resources/middleware/serve-static).
+For more details about the `serve-static` function and its options, see [serve-static](/en/resources/middleware/serve-static).

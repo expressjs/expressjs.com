@@ -42,7 +42,7 @@ To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
 
-For more information, see [Using template engines with Express](../../guide/using-template-engines).
+For more information, see [Using template engines with Express](/en/5x/guide/using-template-engines).
 
 ## How do I handle 404 responses?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-For more information, see [Error handling](../../guide/error-handling).
+For more information, see [Error handling](/en/5x/guide/error-handling).
 
 ## How do I render plain HTML?
 
@@ -86,5 +86,5 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-- [Express 4.x](../../../4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](../../../5x/api) requires Node.js 18 or higher.
+- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.
