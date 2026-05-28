@@ -1,5 +1,30 @@
 // Redirect .html and non-.html blog post URLs to the new format. This will ensure that any existing links to blog posts will continue to work and redirect users to the correct location on the new site.
+import { getLanguageCodes } from '../i18n/utils';
+
+/** @param {{[key: string]: string}} pageMap */
+function localizedPages(pageMap) {
+  /** @type {{[key: string]: string}} */
+  const localizedVersions = {};
+  const languageCodes = getLanguageCodes();
+  for (const [from, to] of Object.entries(pageMap)) {
+    // All localized pages seem to have had both /<path> and /en/<path> versions
+    localizedVersions[`/${from}`] = `/en/${to}`;
+    for (const langCode of languageCodes) {
+      localizedVersions[`/${langCode}/${from}`] = `/${langCode}/${to}`;
+    }
+  }
+  return localizedVersions;
+}
+
+/** @param {string[]} pageList */
+function stripHTML(pageList) {
+  return Object.fromEntries(pageList.map((old) => [old, old.substring(0, old.length - 5)]));
+}
+
 const blog = {
+  '/blog/posts.html': '/en/blog',
+  '/en/blog/posts.html': '/en/blog',
+  '/en/blog/write-post.html': '/en/blog/write-post/',
   '/2024/07/16/welcome-post.html': '/en/blog/2024-07-16-welcome-post',
   '/2024/07/16/welcome-post': '/en/blog/2024-07-16-welcome-post',
   '/2024/09/29/security-releases.html': '/en/blog/2024-09-29-security-releases',
@@ -60,10 +85,80 @@ const api_v2 = {
 };
 
 const pages = {
+  '/changelog/4x.html': 'https://github.com/expressjs/express/releases',
   '/en/changelog/4x.html': 'https://github.com/expressjs/express/releases',
   '/en/changelog/4x': 'https://github.com/expressjs/express/releases',
 };
 
-const redirects = { ...blog, ...api_v2, ...pages };
+const api = localizedPages({
+  'api.html': '5x/api/',
+  '3x/api.html': '3x/api/',
+  '4x/api.html': '4x/api/',
+  '5x/api.html': '5x/api/',
+});
+
+const localizedGuides = localizedPages(
+  stripHTML([
+    'advanced/best-practice-performance.html',
+    'advanced/best-practice-security.html',
+    'advanced/developing-template-engines.html',
+    'advanced/healthcheck-graceful-shutdown.html',
+    'advanced/security-updates.html',
+    'guide/behind-proxies.html',
+    'guide/database-integration.html',
+    'guide/debugging.html',
+    'guide/error-handling.html',
+    'guide/migrating-4.html',
+    'guide/migrating-5.html',
+    'guide/overriding-express-api.html',
+    'guide/routing.html',
+    'guide/using-middleware.html',
+    'guide/using-template-engines.html',
+    'guide/writing-middleware.html',
+    'starter/basic-routing.html',
+    'starter/examples.html',
+    'starter/faq.html',
+    'starter/generator.html',
+    'starter/hello-world.html',
+    'starter/installing.html',
+    'starter/static-files.html',
+  ])
+);
+
+const localizedResources = localizedPages(
+  stripHTML([
+    'resources/community.html',
+    'resources/contributing.html',
+    'resources/glossary.html',
+    'resources/middleware/body-parser.html',
+    'resources/middleware/compression.html',
+    'resources/middleware/connect-rid.html',
+    'resources/middleware/cookie-parser.html',
+    'resources/middleware/cookie-session.html',
+    'resources/middleware/cors.html',
+    'resources/middleware/errorhandler.html',
+    'resources/middleware/method-override.html',
+    'resources/middleware/morgan.html',
+    'resources/middleware/multer.html',
+    'resources/middleware/response-time.html',
+    'resources/middleware/serve-favicon.html',
+    'resources/middleware/serve-index.html',
+    'resources/middleware/serve-static.html',
+    'resources/middleware/session.html',
+    'resources/middleware/timeout.html',
+    'resources/middleware/vhost.html',
+    'resources/middleware.html',
+    'resources/utils.html',
+  ])
+);
+
+const redirects = {
+  ...blog,
+  ...api_v2,
+  ...pages,
+  ...api,
+  ...localizedGuides,
+  ...localizedResources,
+};
 
 export default redirects;
