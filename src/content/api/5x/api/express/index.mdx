@@ -20,7 +20,7 @@ The Express object has the following methods that can be used to create middlewa
 
 This is a built-in middleware function in Express. It parses incoming requests
 with JSON payloads and is based on
-[body-parser](../../../resources/middleware/body-parser).
+[body-parser](/en/resources/middleware/body-parser).
 
 Returns middleware that only parses JSON and only looks at requests where
 the `Content-Type` header matches the `type` option. This parser accepts any
@@ -60,7 +60,7 @@ The following table describes the properties of the optional `options` object.
 
 This is a built-in middleware function in Express. It parses incoming request
 payloads into a `Buffer` and is based on
-[body-parser](../../../resources/middleware/body-parser).
+[body-parser](/en/resources/middleware/body-parser).
 
 Returns middleware that parses all bodies as a `Buffer` and only looks at requests
 where the `Content-Type` header matches the `type` option. This parser accepts
@@ -96,7 +96,7 @@ The following table describes the properties of the optional `options` object.
 
 ### express.Router([options])
 
-Creates a new [router](../router/) object.
+Creates a new [router](/en/5x/api/router/) object.
 
 ```js
 const router = express.Router([options]);
@@ -117,17 +117,17 @@ The optional `options` parameter specifies the behavior of the router.
 You can add middleware and HTTP method routes (such as `get`, `put`, `post`, and
 so on) to `router` just like an application.
 
-For more information, see [Router](../router/).
+For more information, see [Router](/en/5x/api/router/).
 
 ### express.static(root, [options])
 
 This is a built-in middleware function in Express.
-It serves static files and is based on [serve-static](../../../resources/middleware/serve-static).
+It serves static files and is based on [serve-static](/en/resources/middleware/serve-static).
 
 <Alert type="info">
 
 NOTE: For best results, [use a reverse
-proxy](../../../advanced/best-practice-performance#use-a-reverse-proxy) cache to improve performance of
+proxy](/en/advanced/best-practice-performance#use-a-reverse-proxy) cache to improve performance of
 serving static assets.
 
 </Alert>
@@ -159,8 +159,8 @@ See also the [example below](#example-of-expressstatic).
 
 </div>
 
-For more information, see [Serving static files in Express](../../starter/static-files).
-and [Using middleware - Built-in middleware](../../guide/using-middleware/#built-in-middleware).
+For more information, see [Serving static files in Express](/en/5x/starter/static-files).
+and [Using middleware - Built-in middleware](/en/5x/guide/using-middleware/#built-in-middleware).
 
 #### dotfiles
 
@@ -195,7 +195,7 @@ fn(res, path, stat);
 
 Arguments:
 
-- `res`, the [response object](../response/).
+- `res`, the [response object](/en/5x/api/response/).
 - `path`, the file path that is being sent.
 - `stat`, the `stat` object of the file that is being sent.
 
@@ -223,7 +223,7 @@ app.use(express.static('public', options));
 
 This is a built-in middleware function in Express. It parses incoming request
 payloads into a string and is based on
-[body-parser](../../../resources/middleware/body-parser).
+[body-parser](/en/resources/middleware/body-parser).
 
 Returns middleware that parses all bodies as a string and only looks at requests
 where the `Content-Type` header matches the `type` option. This parser accepts
@@ -261,7 +261,7 @@ The following table describes the properties of the optional `options` object.
 ### express.urlencoded([options])
 
 This is a built-in middleware function in Express. It parses incoming requests
-with urlencoded payloads and is based on [body-parser](../../../resources/middleware/body-parser).
+with urlencoded payloads and is based on [body-parser](/en/resources/middleware/body-parser).
 
 Returns middleware that only parses urlencoded bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
