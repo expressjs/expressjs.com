@@ -23,7 +23,7 @@ export const GET: APIRoute = async (context) => {
     description: 'Posts tagged as security from the Express.js blog.',
     site: site.href,
     items: securityPosts.map((post) => ({
-      link: `/blog/${post.id}/`,
+      link: `/en/blog/${post.id}/`,
       title: post.data.title,
       pubDate: getPubDateFromId(post.id),
       description: post.data.description,
