@@ -21,6 +21,9 @@ const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 export default defineConfig({
   redirects,
   site,
+  build: {
+    format: 'file',
+  },
   markdown: {
     rehypePlugins: [
       rehypeSlug,

@@ -74,7 +74,7 @@ function resolveLabel(t: (key: string) => string, labelKey?: string, segment?: s
  * Build breadcrumbs
  */
 export function buildBreadcrumbs(pathname: string, t: (key: string) => string): BreadcrumbItem[] {
-  const segments = pathname.replace(/^\/|\/$/g, '').split('/');
+  const segments = pathname.replace(/^\/|\/$|\.html$/g, '').split('/');
 
   // Need at least lang + one content segment
   if (segments.length < 2) return [];

@@ -24,9 +24,9 @@ const pageTitle = title
   ? `${title} · Express.js`
   : 'Express.js · Node.js web application framework';
 
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
+const pathname = Astro.url.pathname.replace(/\.html$/, '');
+const canonicalUrl = new URL(pathname, Astro.site || Astro.url.origin);
 
-const pathname = Astro.url.pathname.replace(/\/$/, '');
 const segments = pathname.split('/').filter(Boolean);
 const langSegment = segments[0] || 'en';
 const restSegments = segments.slice(1);

@@ -93,10 +93,10 @@ jobs:
         with:
           args: |
             --root-dir $PWD/dist
+            --fallback-extensions html
             --exclude-path dist/llms.txt
             --exclude-path dist/llms/
             --exclude-private
-            --remap "https://expressjs\.com\/((?:[^\/]+\/)*[^\/\.]+)\/?$ file://$PWD/dist/\$1/index.html"
-            --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
+            --remap "^https://expressjs\.com\/ file://$PWD/dist/"
             dist/
           fail: true
