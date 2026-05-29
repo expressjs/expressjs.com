@@ -1,7 +1,8 @@
 import { ui, defaultLang, languages } from './locales';
 
 export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
+  const strippedPathname = url.pathname.replace(/\.html$/, '');
+  const [, lang] = strippedPathname.split('/');
   if (lang in ui) return lang as keyof typeof ui;
   return defaultLang;
 }
@@ -34,7 +35,7 @@ export function getLanguageCodes(): string[] {
  */
 export function createLanguagePathRegex(): RegExp {
   const codes = getLanguageCodes().join('|');
-  return new RegExp(`^/(${codes})/`);
+  return new RegExp(`^/(${codes})(?:/|$)`);
 }
 
 /**
@@ -43,9 +44,10 @@ export function createLanguagePathRegex(): RegExp {
 export function replaceLanguageInPath(path: string, newLang: string): string {
   const langRegex = createLanguagePathRegex();
 
-  if (langRegex.test(path)) {
-    return path.replace(langRegex, `/${newLang}/`);
+  const strippedPath = path.replace(/\.html$/, '');
+  if (langRegex.test(strippedPath)) {
+    return strippedPath.replace(langRegex, `/${newLang}/`);
   } else {
-    return `/${newLang}${path}`;
+    return `/${newLang}${strippedPath}`;
   }
 }
