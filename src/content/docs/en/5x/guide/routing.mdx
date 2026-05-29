@@ -6,12 +6,12 @@ description: Learn how to define and use routes in Express.js applications, incl
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 _Routing_ refers to how an application's endpoints (URIs) respond to client requests.
-For an introduction to routing, see [Basic routing](/en/starter/basic-routing).
+For an introduction to routing, see [Basic routing](/en/5x/starter/basic-routing).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
 see [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-). You can also use [app.all()](/en/5x/api/application#appallpath-callback--callback-) to handle all HTTP methods and [app.use()](/en/5x/api/application#appusepath-callback--callback) to
-specify middleware as the callback function (See [Using middleware](/en/guide/using-middleware) for details).
+specify middleware as the callback function (See [Using middleware](/en/5x/guide/using-middleware) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
@@ -191,13 +191,13 @@ req.params: { "genus": "Prunus", "species": "persica" }
 <Alert type="alert">
 
 Regexp characters are not supported in route paths. Use an array of paths or regular expressions instead.
-See the [path route matching syntax](/en/guide/migrating-5#path-syntax) for more information.
+See the [path route matching syntax](/en/guide/migrating-5#path-route-matching-syntax) for more information.
 
 </Alert>
 
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/en/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](/en/5x/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
