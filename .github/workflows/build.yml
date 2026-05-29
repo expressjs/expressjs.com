@@ -13,7 +13,7 @@ on:
 # Cancel in progress workflows
 # in the scenario where we already had a run going for that PR/branch/tag but then triggered a new run
 concurrency:
-  group: '${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  group: "${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
   cancel-in-progress: true
 
 permissions:
@@ -36,8 +36,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
 
       - name: Install Node.js dependencies
         run: npm ci
@@ -97,11 +97,11 @@ jobs:
         with:
           args: |
             --root-dir $PWD/dist
+            --fallback-extensions html
             --exclude-path dist/llms.txt
             --exclude-path dist/llms/
             --exclude-private
             --exclude-loopback
-            --remap "https://expressjs\.com\/((?:[^\/]+\/)*[^\/\.]+)\/?$ file://$PWD/dist/\$1/index.html"
-            --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
+            --remap "^https://expressjs\.com\/ file://$PWD/dist/"
             dist/
           fail: true
