@@ -23,3 +23,7 @@ dist/(.*/)?404((/index)?\.html|/)$
 
 # Ignore slack invite 403 (this will cause us to miss link invite expiration too)
 ^https://slack-invite\.openjsf\.org/
+
+# Oracle pages return 403 when connected
+^https://www\.mysql\.com/
+^https://www\.oracle\.com/
