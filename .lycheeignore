@@ -23,6 +23,8 @@ https://coveralls.io/-*
 
 # Prevent LinkedIn rate limit
 https://www.linkedin.com/sharing/share-offsite/.*
+# LinkedIn profiles that exist return 404 if not logged in, but it's also easy to hit a rate limit
+https://www.linkedin.com/in/
 
 # Ignore slack invite 403 (this will cause us to miss link invite expiration too)
 https://slack-invite.openjsf.org/
