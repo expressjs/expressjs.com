@@ -10,8 +10,7 @@ https://www.npmjs.org/.*
 https://github.com/.*
 
 # Exclude 404 pages
-dist/.*/404/index.html$
-dist/404/index.html$
+dist/(.*/)?404(\.html|/)?$
 
 # Exclude Open Collective links
 https://opencollective.com/.*
