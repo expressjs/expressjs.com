@@ -1,0 +1,90 @@
+---
+import './Sidebar.css';
+import type { HTMLAttributes } from 'astro/types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { mainMenu } from '@/config/menu/main';
+import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
+import type { Menu } from '@/config/types';
+import SidebarMenu from './SidebarMenu.astro';
+import {
+  detectVersionFromUrl,
+  collectAllSubmenus,
+  calculateInitialActiveLevel,
+  type SubmenuData,
+} from './utils';
+import { Icon } from 'astro-icon/components';
+
+type Props = HTMLAttributes<'div'> & {
+  menu?: Menu;
+  versions?: VersionConfig[];
+  defaultVersion?: string;
+};
+
+const {
+  menu = mainMenu,
+  versions = [
+    { id: '5x', label: 'v5.x', isDefault: true },
+    { id: '4x', label: 'v4.x' },
+    { id: '3x', label: 'v3.x (deprecated)' },
+  ],
+  defaultVersion = '5x',
+  ...rest
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersion);
+
+const submenus: SubmenuData[] = [];
+collectAllSubmenus(menu, 0, 'root', '', [], currentVersion, submenus);
+const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, lang, currentVersion);
+---
+
+<div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
+
+<aside
+  id="sidebar"
+  class="sidebar"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sidebar-title"
+  aria-hidden="true"
+  data-sidebar
+  data-current-path={currentPath}
+  data-current-version={currentVersion}
+  {...rest}
+>
+  <h2 id="sidebar-title" class="sr-only" aria-label={t('nav.mainMenu')}>{t('nav.mainMenu')}</h2>
+
+  {
+    submenus.length > 0 && (
+      <button
+        type="button"
+        class="sidebar-toggle-nested"
+        data-toggle-nested-button
+        data-visible={initialActiveLevel > 0}
+        aria-label="Toggle nested navigation"
+        aria-expanded="true"
+      >
+        <Icon name="fluent:panel-right-expand-20-regular" size="20" aria-hidden="true" />
+      </button>
+    )
+  }
+
+  <div class="sidebar-container" data-nav-container data-current-nav-level={initialActiveLevel}>
+    <SidebarMenu
+      menu={menu}
+      level={0}
+      lang={lang}
+      currentPath={currentPath}
+      version={currentVersion}
+      versions={versions}
+      defaultVersion={defaultVersion}
+    />
+  </div>
+
+  <script>
+    import './SidebarController';
+  </script>
+</aside>

@@ -1,0 +1,32 @@
+---
+/**
+ * PageTopbar Pattern Component
+ *
+ * Renders a page-level topbar with breadcrumb navigation and an optional action (via slot).
+ *
+ * @example
+ * <PageTopbar
+ *   breadcrumbs={[
+ *     { href: '/en/', ariaLabel: 'Home', icon: 'fluent:home-empty-20-regular' },
+ *     { label: 'Blog', href: '/en/blog' },
+ *     { label: 'Post title' },
+ *   ]}
+ * >
+ *   <Button as="a" variant="secondary" size="sm" href="...">Edit on GitHub</Button>
+ * </PageTopbar>
+ */
+import Breadcrumbs from '@components/patterns/Breadcrumbs/Breadcrumbs.astro';
+import type { BreadcrumbItem } from '@utils/content';
+import './PageTopbar.css';
+
+interface Props {
+  breadcrumbs: BreadcrumbItem[];
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<div class="page-topbar">
+  <Breadcrumbs items={breadcrumbs} />
+  <slot />
+</div>

@@ -1,0 +1,63 @@
+---
+title: Utilizando motores de plantillas con Express
+description: Descubra cómo integrar y utilizar motores de plantillas como Pug, Handlebars y EJS con Express.js para renderizar páginas HTML dinámicas eficientemente.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Un _template engine_ le permite usar plantillas estáticas en su aplicación. En tiempo de ejecución, el motor de plantillas reemplaza variables
+en un archivo de plantilla con valores reales. y transforma la plantilla en un archivo HTML enviado al cliente.
+Este enfoque facilita el diseño de una página HTML.
+
+El [generador de aplicaciones Express](/en/starter/generator) utiliza [Pug](https://pugjs.org/api/getting-started.html) como predeterminado, pero también soporta [Handlebars](https://www.npmjs.com/package/handlebars), y [EJS](https://www.npmjs.com/package/ejs), entre otros.
+
+Para renderizar archivos de plantilla, establezca las siguientes [propiedades de configuración de aplicación](/en/4x/api#app.set), en el `app.js` por defecto creado por el generador:
+
+- `vistas`, el directorio donde están ubicados los archivos de plantilla. Ej: `app.set('vistas', './views')`.
+  Esto por defecto es el directorio `views` en el directorio raíz de la aplicación.
+- `ver engine`, el motor de plantillas a usar. Por ejemplo, para usar el motor de plantillas Pug: `app.set('view engine', 'pug')`.
+
+A continuación, instale el correspondiente paquete npm del motor de plantillas; por ejemplo para instalar Pug:
+
+```bash
+$ npm install pug --save
+```
+
+<Alert type="alerta">
+Motores de plantillas compatibles con Expresiones, tales como Pug exportar una función llamada `__express(filePath, options, callback)`,
+que `res.render()` llama para renderizar el código de plantilla.
+
+Algunos motores de plantillas no siguen esta convención. La biblioteca [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
+sigue esta convención mapeando todos los motores de plantillas populares de Node.js, y por lo tanto funciona perfectamente dentro de Express.
+
+</Alert>
+
+Después de que el motor de vista esté definido, no tiene que especificar el motor o cargar el módulo de motor de plantillas en su aplicación;
+Express carga el módulo internamente, por ejemplo:
+
+```js
+app.set('view engine', 'pug');
+```
+
+Luego, crea un archivo de plantilla Pug llamado `index.pug` en el directorio `views`, con el siguiente contenido:
+
+```pug
+html
+  head
+    title= title
+  body
+    h1= message
+```
+
+Crea una ruta para representar el archivo `index.pug`. Si la propiedad `view engine` no está definida,
+debe especificar la extensión del archivo `view`. De lo contrario, puede omitirlo.
+
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
+Cuando hagas una solicitud a la página de inicio, el archivo `index.pug` será renderizado como HTML.
+
+La caché del motor de vistas no almacena en caché el contenido de la salida de la plantilla, sólo la misma plantilla subyacente. La vista todavía se vuelve a procesar con cada petición incluso cuando la caché está encendida.

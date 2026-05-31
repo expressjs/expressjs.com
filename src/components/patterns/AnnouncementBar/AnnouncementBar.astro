@@ -1,0 +1,82 @@
+---
+/**
+ * AnnouncementBar Component
+ *
+ * Displays a banner based on the announcement configuration.
+ * If `src/config/announcement.json` has a title, it shows the custom announcement.
+ * Otherwise, it falls back to the latest blog post (visible for 1 month after publication).
+ *
+ * Configuration is managed via `src/config/announcement.json`.
+ */
+import { Banner } from '@components/patterns';
+import { BodyMd } from '@components/primitives';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import announcement from '@/config/announcement.json';
+
+type BannerVariant = 'info' | 'warning';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const useCustom = !!announcement.title;
+
+function getLatestBlog() {
+  return getCollection('blog').then((posts) => {
+    const sorted = posts
+      .filter((post) => post.id !== 'write-post')
+      .sort((a, b) => {
+        const aFile = a.id.split('/').pop() ?? '';
+        const bFile = b.id.split('/').pop() ?? '';
+        return bFile.localeCompare(aFile);
+      });
+    return sorted[0] ?? null;
+  });
+}
+
+const latestPost = !useCustom ? await getLatestBlog() : null;
+
+function getPostDate(id: string) {
+  const filename = id.split('/').pop() ?? id;
+  return filename.substring(0, 10);
+}
+
+const blogSlug = latestPost ? latestPost.id.split('/').pop() : '';
+const blogDate = latestPost ? getPostDate(latestPost.id) : '';
+const blogTitle = latestPost?.data.title ?? '';
+const blogDescription = latestPost?.data.description ?? '';
+const blogVariant: BannerVariant = latestPost?.data.tags?.includes('security') ? 'warning' : 'info';
+
+// Blog banner expires 1 month after publication date
+const blogStartDate = blogDate || undefined;
+const blogEndDate = blogDate
+  ? (() => {
+      const d = new Date(blogDate);
+      d.setMonth(d.getMonth() + 1);
+      return d.toISOString().substring(0, 10);
+    })()
+  : undefined;
+---
+
+{
+  useCustom ? (
+    <Banner
+      variant={(announcement.variant as BannerVariant) || 'info'}
+      startDate={announcement.startDate || undefined}
+      endDate={announcement.endDate || undefined}
+      title={announcement.title}
+    >
+      <BodyMd vMargin={false}>
+        {announcement.description}{' '}
+        {announcement.link && <a href={announcement.link}>{t('announcement.readMore')}</a>}
+      </BodyMd>
+    </Banner>
+  ) : latestPost ? (
+    <Banner variant={blogVariant} startDate={blogStartDate} endDate={blogEndDate} title={blogTitle}>
+      <BodyMd vMargin={false}>
+        {/* Trailing space inside template literal to prevent Prettier from stripping it */}
+        {`${blogDescription} `}
+        <a href={`/${lang}/blog/${blogSlug}`}>{t('announcement.checkLatestBlog')}</a>
+      </BodyMd>
+    </Banner>
+  ) : null
+}

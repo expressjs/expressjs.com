@@ -1,0 +1,24 @@
+/**
+ * Font Face Declarations
+ *
+ * Self-hosted JetBrains Mono for code blocks.
+ * Currently only Light (300) weight is used across the site.
+ * Using font-display: swap for better performance.
+ */
+
+/* JetBrains Mono - Light */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}

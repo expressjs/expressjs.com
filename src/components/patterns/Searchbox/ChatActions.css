@@ -1,0 +1,24 @@
+@layer patterns {
+  .chat-actions {
+    display: flex;
+    gap: var(--space-2);
+    margin: 0;
+    padding-left: 0;
+    justify-content: flex-end;
+    list-style: none;
+  }
+
+  .chat-action {
+    cursor: pointer;
+    padding: var(--space-2);
+    border-radius: var(--radius-base);
+
+    &:hover {
+      background-color: var(--color-bg-tertiary);
+    }
+  }
+
+  .chat-action--disliked {
+    color: var(--color-text-mute);
+  }
+}

@@ -1,0 +1,150 @@
+---
+title: serve-index ミドルウェア
+description: ディレクトリ一覧を提供する
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.9.2"
+  github="https://github.com/express/serve-index"
+  npm="https://www.npmjs.com/package/serve-index"
+/>
+
+特定のパスのディレクトリ一覧を含むページを提供します。
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install serve-index
+```
+
+## API
+
+```js
+var serveIndex = require('serve-index');
+```
+
+### serveIndex(パス, オプション)
+
+指定された `path` 内のディレクトリのインデックスを提供するミドルウェアを返します。
+
+`path`は`req.url`値に基づいています。`/some/dir`
+`path`の`req.url`は`public/some/dir'`になります。 If you are using
+something like `express`, you can change the URL "base" with `app.use` (see
+the express example).
+
+#### オプション
+
+Serve indexはoptionsオブジェクトでこれらのプロパティを受け付けます。
+
+##### フィルター
+
+このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 The `filter` function
+is called for each file, with the signature `filter(filename, index, files, dir)`
+where `filename` is the name of the file, `index` is the array index, `files` is
+the array of files and `dir` is the absolute path the file is located (and thus,
+the directory the listing is for).
+
+##### hidden
+
+非表示(ドット)ファイルを表示します。 デフォルトは `false` です。
+
+##### アイコン
+
+アイコンを表示 デフォルトは `false` です。
+
+##### stylesheet
+
+CSS スタイルシートへのオプションのパス。 デフォルトはビルトインスタイルシートです。
+
+##### テンプレート
+
+HTMLテンプレートまたはHTML
+文字列をレンダリングする関数への任意のパス。 デフォルトはビルトインテンプレートです。
+
+When given a string, the string is used as a file path to load and then the
+following tokens are replaced in templates:
+
+- `{directory}` ディレクトリの名前を持つ。
+- `{files}` は、ファイルリンクの順序なしリストの HTML を持っています。
+- `{linked-path}` ディレクトリへのリンクのHTML付き。
+- `{style}`と指定されたスタイルシートと埋め込み画像付き。
+
+関数として与えられた場合、関数は `template(locals, callback)`
+と呼ばれ、`callback(error, htmlString)` を呼び出す必要があります。 以下はローカルで提供される
+です。
+
+- `directory`は表示されているディレクトリです（`/`がルートです）。
+- `displayIcons` は、アイコンをレンダリングするかどうかを指定するためのブール値です。
+- `fileList` はディレクトリ内のファイルのソートされた配列です。 配列には、以下のプロパティを持つ
+  オブジェクトが含まれています。
+  - `name` はファイルの相対的な名前です。
+  - `stat` はファイルの `fs.Stats` オブジェクトです。
+- `path`は`directory`への完全なファイルシステムのパスです。
+- `style` はデフォルトのスタイルシートまたは`stylesheet`オプションの内容です。
+- `viewName` は、`view` オプションによって提供されるビュー名です。
+
+##### 表示
+
+表示モード `tiles`と`details`があります。 デフォルトは `tiles` です。
+
+## 例
+
+### vanilla node.js http サーバを使用してディレクトリインデックスをサーブします
+
+```js
+var finalhandler = require('finalhandler');
+var http = require('http');
+var serveIndex = require('serve-index');
+var serveStatic = require('serve-static');
+
+// Serve directory indexes for public/ftp folder (with icons)
+var index = serveIndex('public/ftp', { icons: true });
+
+// Serve up public/ftp folder files
+var serve = serveStatic('public/ftp');
+
+// Create server
+var server = http.createServer(function onRequest(req, res) {
+  var done = finalhandler(req, res);
+  serve(req, res, function onNext(err) {
+    if (err) return done(err);
+    index(req, res, done);
+  });
+});
+
+// Listen
+server.listen(3000);
+```
+
+### エクスプレス付きのディレクトリインデックスを提供
+
+```js
+var express = require('express');
+var serveIndex = require('serve-index');
+
+var app = express();
+
+// Serve URLs like /ftp/thing as public/ftp/thing
+// The express.static serves the file contents
+// The serveIndex is this module serving the directory
+app.use('/ftp', express.static('public/ftp'), serveIndex('public/ftp', { icons: true }));
+
+// Listen
+app.listen(3000);
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/serve-index/blob/HEAD/LICENSE). [Silk](http://www.famfamfam.com/lab/icons/silk/) アイコン
+は [FAMFAMFAM](http://www.famfamfam.com/) によって作成されます。
+
+[appveyor-url]: https://ci.appveyor.com/project/dougwilson/serve-index
+[downloads-url]: https://npmjs.org/package/serve-index
+[npm-url]: https://npmjs.org/package/serve-index

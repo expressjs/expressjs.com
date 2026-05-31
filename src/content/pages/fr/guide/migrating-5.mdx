@@ -1,0 +1,585 @@
+---
+title: Mise à niveau vers Express v5
+description: Un guide complet pour migrer vos applications Express.js de la version 4 à 5, détaillant les changements cassés, les méthodes obsolètes et les nouvelles améliorations.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+L'Express 5 n'est pas très différent de l'Express 4 ; bien qu'il maintienne la même API de base, il y a toujours des changements qui cèdent la compatibilité avec la version précédente. Par conséquent, une application construite avec Express 4 pourrait ne pas fonctionner si vous la mettez à jour pour utiliser Express 5.
+
+## Installation
+
+Pour installer cette version, vous devez avoir une **version 18 ou supérieure de Node.js**. Ensuite, exécutez la commande suivante dans le répertoire de votre application :
+
+```sh
+npm install "express@5"
+```
+
+Vous pouvez ensuite exécuter vos tests automatisés pour voir ce qui échoue, et corriger les problèmes en fonction des mises à jour listées ci-dessous. Après avoir résolu des échecs de test, exécutez votre application pour voir quelles erreurs se produisent. Vous découvrirez immédiatement si l'application utilise des méthodes ou des propriétés qui ne sont pas prises en charge.
+
+## 5 Codemos Express
+
+Pour vous aider à migrer votre serveur express nous avons créé un ensemble de codemods qui vous aideront à mettre à jour automatiquement votre code vers la dernière version d'Express.
+
+Exécutez la commande suivante pour exécuter tous les codemods disponibles :
+
+```sh
+npx codemod@latest @expressjs/v5-migration-recipe
+```
+
+Si vous voulez exécuter un code spécifique, vous pouvez exécuter la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/name-of-the-codemod
+```
+
+Vous pouvez trouver la liste des codes disponibles [here](https://codemod.link/express).
+
+## Méthodes et propriétés supprimées
+
+Si vous utilisez l'une de ces méthodes ou propriétés dans votre application, cela plantera. Donc, vous devrez changer votre application après la mise à jour vers la version 5.
+
+### app.del()
+
+Express 5 ne prend plus en charge la fonction `app.del()`. Si vous utilisez cette fonction, une erreur est levée. Pour enregistrer les routes HTTP DELETE, utilisez la fonction `app.delete()` à la place.
+
+Initialement, `del` a été utilisé à la place de `delete`, parce que `delete` est un mot-clé réservé en JavaScript. Cependant, depuis ECMAScript 6, `delete` et d'autres mots-clés réservés peuvent légalement être utilisés comme noms de propriétés.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/route-del-to-delete
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+-app.del('/user/:id', (req, res) => {
++app.delete('/user/:id', (req, res) => {
+   res.send(`DELETE /user/${req.params.id}`);
+ });
+```
+
+### app.param(fn)
+
+La signature `app.param(fn)` a été utilisée pour modifier le comportement de la fonction `app.param(name, fn)`. Il est obsolète depuis la version 4.11.0, et Express 5 ne le supporte plus du tout.
+
+### Noms de méthodes pluralisées
+
+Les noms de méthodes suivantes ont été pluralisés. Dans Express 4, l'utilisation des anciennes méthodes a donné lieu à un avertissement de dépréciation. Express 5 ne les supporte plus du tout:
+
+`req.acceptsCharset()` est remplacé par `req.acceptsCharsets()`.
+
+`req.acceptsEncoding()` est remplacé par `req.acceptsEncodings()`.
+
+`req.acceptsLanguage()` est remplacé par `req.acceptsLanguages()`.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/pluralize-method-names
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.all('/', (req, res) => {
+-  req.acceptsCharset('utf-8');
+-  req.acceptsEncoding('br');
+-  req.acceptsLanguage('en');
++  req.acceptsCharsets('utf-8');
++  req.acceptsEncodings('br');
++  req.acceptsLanguages('en');
+
+   // ...
+ });
+```
+
+### Point-virgule (:) dans le nom de app.param(name, fn)
+
+Un caractère de deux points (:) dans le nom de l'application`. aram(name, fn)` est un reste d'Express 3, et pour des raisons de compatibilité ascendante, Express 4 l'a supporté avec une notification de dépréciation. Express 5 l'ignorera silencieusement et utilisera le paramètre de nom sans le préfixer avec un deux-points.
+
+Cela ne devrait pas affecter votre code si vous suivez la documentation Express 4 de [app.param](/en/4x/api#app.param), car il ne fait aucune mention du côlon principal.
+
+### param(nom)
+
+Cette méthode potentiellement confuse et dangereuse de récupération des données de formulaire a été supprimée. Vous devrez maintenant spécifiquement chercher le nom du paramètre soumis dans l'objet `req.params`, `req.body`, ou `req.query`.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/explicit-request-params
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.post('/user', (req, res) => {
+-  const id = req.param('id');
+-  const body = req.param('body');
+-  const query = req.param('query');
++  const id = req.params.id;
++  const body = req.body;
++  const query = req.query;
+
+   // ...
+ });
+```
+
+### res.json(obj, statut)
+
+Express 5 ne prend plus en charge la signature `res.json(obj, status)`. Au lieu de cela, définissez le statut, puis enchaînez-le à la méthode `res.json()` comme ceci: `res.status(status).json(obj)`.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.post('/user', (req, res) => {
+-  res.json({ name: 'Ruben' }, 201);
++  res.status(201).json({ name: 'Ruben' });
+ });
+```
+
+### res.jsonp(obj, status)
+
+Express 5 ne prend plus en charge la signature `res.jsonp(obj, status)`. Au lieu de cela, définissez le statut, puis enchaînez-le à la méthode `res.jsonp()` comme ceci: `res.status(status).jsonp(obj)`.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.post('/user', (req, res) => {
+-  res.jsonp({ name: 'Ruben' }, 201);
++  res.status(201).jsonp({ name: 'Ruben' });
+ });
+```
+
+### res.redirect(url, statut)
+
+Express 5 ne prend plus en charge la signature `res.redirect(url, status)`. À la place, utilisez la signature suivante : `res.redirect(status, url)`.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/redirect-arg-order
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.redirect('/users', 301);
++  res.redirect(301, '/users');
+ });
+```
+
+### res.redirect('back') et res.location('back')
+
+Express 5 ne supporte plus la chaîne magique `back` dans les méthodes `res.redirect()` et `res.location()`. À la place, utilisez la valeur `req.get('Referrer') || '/'` pour rediriger vers la page précédente. Dans Express 4, les méthodes `res.redirect('back')` et `res.location('back')` sont dépréciées.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/back-redirect-deprecated
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.redirect('back');
++  res.redirect(req.get('Referrer') || '/');
+ });
+```
+
+### res.send(body, statut)
+
+Express 5 ne prend plus en charge la signature `res.send(obj, status)`. Au lieu de cela, définissez le statut, puis enchaînez-le à la méthode `res.send()` comme ceci: `res.status(status).send(obj)`.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.send({ name: 'Ruben' }, 200);
++  res.status(200).send({ name: 'Ruben' });
+ });
+```
+
+### res.send(statut)
+
+Express 5 ne prend plus en charge la signature `res.send(status)`, où `status` est un nombre. À la place, utilisez les `res. la fonction endStatus(statusCode)`, qui définit le code d'état de l'en-tête de réponse HTTP et envoie la version texte du code: "Non trouvée", "Erreur interne du serveur", et ainsi de suite.
+Si vous avez besoin d'envoyer un numéro en utilisant les `res. la fonction end()`, guillemets le nombre pour le convertir en une chaîne, afin qu'Express ne l'interprète pas comme une tentative d'utiliser l'ancienne signature non supportée.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.send(200);
++  res.sendStatus(200);
+ });
+```
+
+### res.sendfile()
+
+La fonction `res.sendfile()` a été remplacée par une version à chameau `res.sendFile()` dans Express 5.
+
+#### Comment mettre à jour
+
+Vous pouvez automatiquement mettre à jour votre code en exécutant la commande suivante :
+
+```sh
+npx codemod@latest @expressjs/camelcase-sendfile
+```
+
+Ou vous pouvez mettre à jour votre code manuellement :
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.sendfile('/path/to/file');
++  res.sendFile('/path/to/file');
+ });
+```
+
+### Options res.sendFile()
+
+Les options `hidden` et `from` pour `res.sendFile()` ne sont plus supportées. Utilisez `dotfiles` et `root` à la place.
+
+#### Comment mettre à jour
+
+```diff
+ app.get('/files/:name', (req, res) => {
+-  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
++  res.sendFile(req.params.name, { dotfiles: 'allow', root: '/uploads' });
+ });
+```
+
+### options express.static()
+
+Les options `hidden` et `from` pour `express.static()` ne sont plus supportées. Utilisez `dotfiles` et `root` à la place. Notez que `from` n'a jamais été documenté dans l'API mais a été accepté comme un alias pour `root`. La valeur par défaut de `dotfiles` est maintenant `"ignore"`.
+
+#### Comment mettre à jour
+
+```diff
+ const express = require('express');
+ const app = express();
+
+-app.use(express.static('public', { hidden: true }));
++app.use(express.static('public', { dotfiles: 'allow' }));
+```
+
+### router.param(fn)
+
+La signature `router.param(fn)` a été utilisée pour modifier le comportement de la fonction `router.param(name, fn)`. Il est obsolète depuis la version 4.11.0, et Express 5 ne le supporte plus du tout.
+
+### express.static.mime
+
+Dans Express 5, `mime` n'est plus une propriété exportée du champ `static`.
+Utilisez le paquet [`mime-types`](https://github.com/jshttp/mime-types) pour travailler avec les valeurs de type MIME.
+
+#### Comment mettre à jour
+
+```diff
+-express.static.mime.lookup('json');
++const mime = require('mime-types');
++mime.lookup('json');
+```
+
+### Changements de type MIME
+
+Plusieurs types MIME ont été modifiés à cause des mises à jour dans [`mime-db`](https://github.com/jshttp/mime-db). Ces changements n'affectent que `express.static()` et `res.sendFile()`. Pour une liste complète des changements, voir le [changelog-mime-db](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md).
+
+Express 4 utilise la version `mime-db` **1.52.0**, tandis qu'Express 5 utilise des versions plus récentes qui reflètent les mises à jour de l'IANA et d'autres spécifications de type MIME. Le changement le plus notable est que les fichiers JavaScript (`.js`) sont maintenant servis en tant que `text/javascript` au lieu de `application/javascript`.
+
+Dans Express 5, les modifications des types MIME à partir des mises à jour `mime-db` ne sont pas considérées comme des modifications cassées donc faites attention lors de la mise à jour de vos dépendances car les types MIME peuvent changer entre des versions mineures ou des correctifs.
+
+### express:journaux de débogage du routeur
+
+La logique de gestion du routeur est maintenant effectuée par une dépendance séparée ([`router`](https://github.com/pillarjs/router)) maintenue par l'équipe Express, donc les logs de débogage ont été déplacés vers un espace de noms différent. Avant Express 5.1, ces journaux de débogage n'existaient pas. Pour les obtenir, mettez à jour vers une version récente Express 5 ou mettez à jour le package `router` dans votre `package-lock.json`:
+
+| V4                        | contre 5                            |
+| ------------------------- | ----------------------------------- |
+| `express:router`          | `routeur`                           |
+| `express:router:layer`    | `routeur:layer`                     |
+| `express:router:route`    | `routeur:route`                     |
+| `express:*` (inclut tous) | `express:*` + `router` + `router:*` |
+
+#### Comment mettre à jour
+
+```diff
+-DEBUG=express:* node index.js
++DEBUG=express:*,router,router:* node index.js
+```
+
+## Modifié
+
+Ces API existent toujours, mais leur comportement a changé. Examinez ces modifications pour vous assurer que votre application fonctionne comme prévu.
+
+### Syntaxe correspondante au chemin
+
+La syntaxe correspondante au chemin d'accès est lorsqu'une chaîne de caractères est fournie comme premier paramètre pour les API `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, et `router.use()`. Les modifications suivantes ont été apportées à la façon dont la chaîne de chemin est associée à une requête entrante :
+
+- Le caractère générique `*` doit avoir un nom correspondant au comportement des paramètres `:`, utilisez `/*splat` au lieu de `/*`
+
+  ```diff
+  -app.get('/*', async (req, res) => {
+  +app.get('/*splat', async (req, res) => {
+     res.send('ok');
+   });
+  ```
+
+  <Alert type="Infos">
+
+  `*splat` correspond à n'importe quel chemin sans le chemin racine. Si vous avez besoin de faire correspondre le chemin racine aussi bien que `/`, vous pouvez utiliser `/{*splat}`, envelopper le joker entre parenthèses.
+
+  ```js
+  app.get('/{*splat}', async (req, res) => {
+    res.send('ok');
+  });
+  ```
+
+  </Alert>
+
+- Le caractère optionnel `?` n'est plus pris en charge, utilisez plutôt des accolades.
+
+  ```diff
+  -app.get('/:file.:ext?', async (req, res) => {
+  +app.get('/:file{.:ext}', async (req, res) => {
+     res.send('ok');
+   });
+  ```
+
+- Les caractères Regexp ne sont pas pris en charge. Par exemple :
+
+  ```diff
+  -app.get('/[discussion|page]/:slug', async (req, res) => {
+  +app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
+     res.status(200).send('ok');
+   });
+  ```
+
+- Certains caractères ont été réservés pour éviter toute confusion lors de la mise à jour (`()[]?+!`), utilisez `\` pour les échapper.
+
+- Les noms de paramètres supportent maintenant des identifiants JavaScript valides, ou des guillemets comme `:"this"`.
+
+### Les promesses rejetées des middleware et des gestionnaires
+
+Les requêtes de middleware et les gestionnaires qui retournent les promesses rejetées sont maintenant gérées en renvoyant la valeur rejetée comme une `Erreur` vers le middleware. Cela signifie que l'utilisation des fonctions `async` comme middleware et des gestionnaires est plus facile que jamais. Lorsqu'une erreur est levée dans une fonction `async` ou qu'une promesse rejetée est `attendu` dans une fonction asynchrone, ces erreurs seront passées au gestionnaire d'erreurs comme si elle appelait `next(err)`.
+
+Détail de la façon dont Express gère les erreurs est couvert dans la [documentation de gestion des erreurs](/en/guide/error-handling).
+
+#### Comment mettre à jour
+
+Vous pouvez maintenant utiliser `async/await` directement sans attraper manuellement des erreurs. Si `getUserById` lance une erreur ou un refus, `next` sera appelé automatiquement avec la valeur rejetée.
+
+```diff
+-app.get('/user/:id', (req, res, next) => {
+-  getUserById(req.params.id)
+-    .then((user) => res.send(user))
+-    .catch(next);
+-});
++app.get('/user/:id', async (req, res) => {
++  const user = await getUserById(req.params.id);
++  res.send(user);
++});
+```
+
+### express.urlencodé
+
+La méthode `express.urlencoded` rend l'option `extended` `false` par défaut.
+
+#### Comment mettre à jour
+
+Si votre application repose sur le comportement `extended`, définissez-le explicitement à `true`:
+
+```diff
+-app.use(express.urlencoded());
++app.use(express.urlencoded({ extended: true }));
+```
+
+### express.static dotfiles
+
+L'option `express.static` du middleware `dotfiles` par défaut est maintenant `"ignore"`. Dans Express 4, les fichiers dotfiles ont été servis par défaut. En conséquence, les fichiers à l'intérieur d'un répertoire qui commence par un point (`.`), comme `. ell-known`, ne sera plus accessible et retournera une erreur **404 Not Found**. Cela peut casser la fonctionnalité qui dépend du service de répertoires de points, tels que les liens d'applications Android et Apple Universal Links.
+
+#### Comment mettre à jour
+
+Servez explicitement des répertoires de points spécifiques en utilisant l'option `dotfiles: "allow"`. Cela vous permet de ne servir que les répertoires de points prévus tout en conservant le comportement sécurisé par défaut pour les autres fichiers de dotfile.
+
+```diff
++app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
+ app.use(express.static('public'));
+```
+
+### Écouter
+
+Dans Express 5, la méthode `app.listen` invoquera la fonction de rappel fournie par l'utilisateur (si fournie) lorsque le serveur reçoit un événement d'erreur. Dans Express 4, de telles erreurs seraient lancées. Ce changement déplace la responsabilité de gestion des erreurs vers la fonction callback dans Express 5. S'il y a une erreur, elle sera passée au callback en tant qu'argument.
+Par exemple :
+
+```js ins={2-4}
+const server = app.listen(8080, '0.0.0.0', (error) => {
+  if (error) {
+    throw error; // e.g. EADDRINUSE
+  }
+  console.log(`Listening on ${JSON.stringify(server.address())}`);
+});
+```
+
+### routeur
+
+L'objet `app.router`, qui a été supprimé dans Express 4, a fait un retour dans Express 5. Dans la nouvelle version, cet objet est juste une référence au routeur de base Express, contrairement à Express 3, où une application devait explicitement la charger.
+
+### Req.body
+
+La propriété `req.body` retourne `undefined` quand le corps n'a pas été analysé. Dans Express 4, il retourne `{}` par défaut.
+
+```js del={4} ins={6}
+app.post('/user', (req, res) => {
+  console.dir(req.body);
+  // Express 4
+  // => {}
+  // Express 5
+  // => undefined
+});
+```
+
+### Hôte
+
+Dans Express 4, la fonction `req.host` a incorrectement retiré le numéro de port si elle était présente. Dans Express 5, le numéro de port est maintenu.
+
+### Réglages
+
+L'objet `req.params` a maintenant un **prototype null** lors de l'utilisation des chemins de chaîne de caractères. Cependant, si le chemin est défini avec une expression régulière, `req.params` reste un objet standard avec un prototype normal. En outre, il y a deux changements importants de comportement:
+
+**Les paramètres de la carte joker sont maintenant des tableaux :**
+
+Les jokers (par exemple, `/*splat`) capturent les segments de chemin en tant que tableau au lieu d'une seule chaîne.
+
+```js
+app.get('/*splat', (req, res) => {
+  // GET /foo/bar
+  console.dir(req.params);
+  // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
+});
+```
+
+**Les paramètres sans correspondance sont omis :**
+
+Dans Express 4, les caractères génériques sans correspondance étaient des chaînes vides (`''`) et les paramètres optionnels `:` (à l'aide de `?`) avaient une clé avec la valeur `undefined`. Dans Express 5, les paramètres incomparables sont complètement omis de `req.params`.
+
+```diff
+-// v4: unmatched wildcard is empty string
+-app.get('/*', (req, res) => {
+-  // GET /
+-  console.dir(req.params);
+-  // => { '0': '' }
+-});
+-
+-// v4: unmatched optional param is undefined
+-app.get('/:file.:ext?', (req, res) => {
+-  // GET /image
+-  console.dir(req.params);
+-  // => { file: 'image', ext: undefined }
+-});
+-
++// v5: unmatched optional param is omitted
++app.get('/:file{.:ext}', (req, res) => {
++  // GET /image
++  console.dir(req.params);
++  // => [Object: null prototype] { file: 'image' }
++});
+```
+
+### Requête
+
+La propriété `req.query` n'est plus une propriété accessible en écriture et est plutôt un getter. L'analyseur de requête par défaut a été changé de "étendu" à "simple".
+
+```js del={3}
+app.get('/search', (req, res) => {
+  // This is no longer possible in Express 5
+  req.query.page = 1;
+});
+```
+
+### Effacer les cookies
+
+La méthode `res.clearCookie` ignore les options `maxAge` et `expires` fournies par l'utilisateur.
+
+```diff
+ app.get('/logout', (req, res) => {
+-  res.clearCookie('session', { maxAge: 0, expires: new Date(0) });
++  res.clearCookie('session');
+ });
+```
+
+### Statut
+
+La méthode `res.status` n'accepte que les entiers de la plage de `100` à `999`, suivant le comportement défini par Node. , et retourne une erreur lorsque le code de statut n'est pas un entier.
+
+```js del={2}
+app.get('/user', (req, res) => {
+  res.status(99); // Throws an error
+  res.status(200); // OK
+});
+```
+
+### res.vary
+
+Le fichier `res.vary` lance une erreur quand l'argument `field` est manquant. Dans Express 4, si l'argument a été omis, il a donné un avertissement dans la console.
+
+```js del={2}
+app.get('/user', (req, res) => {
+  res.vary(); // Throws an error
+  res.vary('Accept'); // OK
+});
+```
+
+## Améliorations
+
+Ces changements ne nécessitent aucune étape de migration, mais méritent d'être connus lors de la mise à niveau.
+
+### res.render()
+
+Cette méthode impose maintenant un comportement asynchrone pour tous les moteurs de vue, en évitant les bogues causés par les moteurs de vue qui avaient une implémentation synchronisée et qui violaient l'interface recommandée.
+
+### Prise en charge de l'encodage Brotli
+
+Middleware comme `express.json()`, `express.urlencoded()`, `express.text()`, et `express.raw()` supporte maintenant la décompression Brotli (`Content-Encoding: br`) pour les corps de requêtes entrantes, en plus de `gzip` et `deflate`.

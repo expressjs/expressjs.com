@@ -1,0 +1,50 @@
+---
+title: Instalando
+description: Aprenda cómo instalar Express.js en su entorno Node.js, incluyendo la configuración del directorio de su proyecto y la gestión de dependencias con npm.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Antes de comenzar, asegúrese de que tiene instalado [Node.js](https://nodejs.org/) 0.10 o superior. Luego, crea un directorio para tu aplicación y navega por ella.
+
+```bash
+mkdir myapp
+cd myapp
+```
+
+Usa el comando `npm init` para crear un archivo `package.json` para tu aplicación.
+Para más información sobre el funcionamiento de `package.json`, consulta [Especificaciones del manejo de package.json de npm](https://docs.npmjs.com/files/package.json).
+
+```bash
+npm init
+```
+
+Este comando te pide varias cosas, como el nombre y la versión de tu aplicación.
+Por ahora, puede simplemente pulsar RETURN para aceptar los valores predeterminados para la mayoría de ellos, con la siguiente excepción:
+
+```
+entry point: (index.js)
+```
+
+Introduzca `app.js`, o lo que quiera que sea el nombre del archivo principal. Si desea que sea `index.js`, pulse RETURN para aceptar el nombre de archivo predeterminado sugerido.
+
+Ahora, instale Express en el directorio `myapp` y guárdelo en la lista de dependencias. Por ejemplo:
+
+```bash
+npm install express
+```
+
+Para instalar Express temporalmente y no añadirlo a la lista de dependencias:
+
+```bash
+npm install express --no-save
+```
+
+<Alert type="info">
+
+By default with version npm 5.0+, `npm install` adds the module to the `dependencies` list in the
+`package.json` file; with earlier versions of npm, you must specify the `--save` option
+explicitly. Luego, después, ejecutar `npm install` en el directorio de aplicaciones automáticamente
+instalará módulos en la lista de dependencias.
+
+</Alert>

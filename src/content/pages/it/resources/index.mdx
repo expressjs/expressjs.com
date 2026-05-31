@@ -1,0 +1,42 @@
+---
+title: Risorse
+description: Esplora le risorse di Express.js tra cui comunità, linee guida, glossario, utilità e middleware.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+Trova le risorse per aiutarti a imparare, contribuire e connetterti con l'ecosistema di Express.js. Che tu stia cercando di essere coinvolto nella comunità, esplorare il middleware o capire i concetti chiave, troverai quello di cui hai bisogno qui.
+
+<CardList gap="6">
+  <a href="/it/resources/community">
+    <Card
+      title="Community"
+      body="Connettiti con la comunità di Express.js, scopri il comitato tecnico e partecipa alle discussioni."
+    />
+  </a>
+  <a href="/it/resources/contributor">
+    <Card
+      title="Contribuire a Express"
+      body="Scopri come contribuire a Express.js, comprese le linee guida per segnalare i problemi e inviare richieste di pull."
+    />
+  </a>
+  <a href="/it/resources/glossario">
+    <Card
+      title="Glossary"
+      body="Un glossario completo di termini relativi a Express.js, Node.js, middleware, routing e altri concetti chiave."
+    />
+  </a>
+  <a href="/it/resources/utils">
+    <Card
+      title="Utilità"
+      body="Scopri i moduli di utilità relativi a Express.js e Node.js, inclusi strumenti per cookie, protezione CSRF, analisi URL e altro ancora."
+    />
+  </a>
+  <a href="/it/resources/middleware">
+    <Card
+      title="Middleware"
+      body="Esplora i moduli middleware per Express.js per estendere l'applicazione con funzionalità aggiuntive."
+    />
+  </a>
+</CardList>

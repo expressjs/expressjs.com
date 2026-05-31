@@ -1,0 +1,188 @@
+{
+  "home": {
+    "welcome": "Begrüßung",
+    "workInProgress": "Dies ist eine Work-in-progress Homepage.",
+    "reviewDesignSystem": {
+      "prefix": "Überprüfen Sie die",
+      "link": "Design System Foundations",
+      "suffix": "Demo-Seite, um alle Token, Primitive und Muster zu erkunden."
+    }
+  },
+  "search": {
+    "placeholder": "Tippe ein...",
+    "ariaLabel": "Tippen zum Suchen starten"
+  },
+  "theme": {
+    "toggle": "Theme umschalten",
+    "switchToLight": "Zum Lichtmodus wechseln",
+    "switchToDark": "Zum dunklen Modus wechseln"
+  },
+  "version": {
+    "selectLabel": "API-Version auswählen"
+  },
+  "language": {
+    "selectLabel": "Sprache auswählen"
+  },
+  "nav": {
+    "mainMenu": "Hauptmenü",
+    "toggleMenu": "Menü umschalten",
+    "home": "home",
+    "breadcrumb": "Breadcrumb",
+    "mainNavigation": "Hauptnavigation",
+    "selectVersion": "Dokumentationsversion auswählen"
+  },
+  "menu": {
+    "main": {
+      "docs": "Texte",
+      "api": "API",
+      "resources": "Ressourcen",
+      "blog": "Blog",
+      "support": "Unterstützung"
+    },
+    "sections": {
+      "gettingStarted": "Erste Schritte",
+      "guide": "Anleitung",
+      "migration": "Migrationsanleitungen",
+      "advanced": "Erweiterte Themen",
+      "express": "express()",
+      "application": "Anwendung",
+      "request": "Anfrage",
+      "response": "Antwort",
+      "router": "Router",
+      "middleware": "Middleware"
+    },
+    "items": {
+      "installing": "Installiere",
+      "helloWorld": "Hallo Welt",
+      "expressGenerator": "Express-Generator",
+      "basicRouting": "Basisrouting",
+      "staticFiles": "Serviere statische Dateien",
+      "examples": "Beispiele",
+      "faq": "FAQ",
+      "routing": "Routing",
+      "writingMiddleware": "Middleware schreiben",
+      "usingMiddleware": "Middleware verwenden",
+      "usingTemplateEngines": "Template-Engines verwenden",
+      "errorHandling": "Fehlerbehandlung",
+      "debugging": "Debuggen",
+      "behindProxies": "Hinter Proxys",
+      "databaseIntegration": "Datenbankintegration",
+      "overridingExpressApi": "Überschreiben der Express-API",
+      "migratingTo4": "Umzug nach Express 4",
+      "migratingTo5": "Umzug nach Express 5",
+      "buildingTemplateEngines": "Bauvorlagen-Engines",
+      "bestPracticePerformance": "Best Practices",
+      "bestPracticeSecurity": "Sicherheits-Best Practices",
+      "healthcheckGracefulShutdown": "Gesundheitschecks & anmutiges Herunterfahren",
+      "securityUpdates": "Sicherheitsupdates",
+      "overview": "Übersicht",
+      "properties": "Eigenschaften",
+      "methods": "Methoden",
+      "events": "Ereignisse",
+      "types": "Integriert",
+      "community": "Community",
+      "glossary": "Glossary",
+      "contributing": "Mitwirken",
+      "utils": "Hilfsmittel",
+      "changelog": "Changelog",
+      "middleware": "Middleware"
+    },
+    "aria": {
+      "docs": "Dokumentation",
+      "api": "API-Referenz",
+      "resources": "Ressourcen",
+      "blog": "Blog",
+      "support": "Unterstützung",
+      "installing": "Express installieren",
+      "helloWorld": "Hallo Weltbeispiel",
+      "expressGenerator": "Express-Generator",
+      "routing": "Routenanleitung",
+      "writingMiddleware": "Middleware-Anleitung schreiben",
+      "usingMiddleware": "Middleware-Anleitung verwenden",
+      "usingTemplateEngines": "Hilfe für Template-Engines",
+      "errorHandling": "Fehler beim Handling",
+      "debugging": "Debuggen Express",
+      "behindProxies": "Express hinter Proxies",
+      "databaseIntegration": "Datenbank-Integrationshandbuch",
+      "overridingExpressApi": "Überschreiben der Express-API-Anleitung",
+      "application": "Anwendungsübersicht",
+      "request": "Übersicht anfordern",
+      "response": "Antwortübersicht",
+      "router": "Routerübersicht",
+      "middleware": "Middleware-Ressourcen",
+      "community": "Community-Ressourcen",
+      "glossary": "Glossar der Begriffe",
+      "contributing": "Beitragende Anleitung",
+      "utils": "Hilfsmittel",
+      "changelog": "Express-Änderungsprotokoll"
+    }
+  },
+  "doc": {
+    "previousPage": "Vorherige",
+    "nextPage": "Nächste",
+    "pageNavigation": "Page navigation"
+  },
+  "page": {
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "Diese Seite übersetzen"
+  },
+  "announcement": {
+    "readMore": "Lesen Sie mehr",
+    "checkLatestBlog": "Schau dir unseren neuesten Blog an"
+  },
+  "post": {
+    "share": "Teilen",
+    "shareOnX": "Auf X teilen",
+    "shareOnBluesky": "Auf Bluesky teilen",
+    "shareOnLinkedIn": "Auf LinkedIn teilen",
+    "shareOnSlack": "Auf Slack teilen",
+    "shareOnTelegram": "Auf Telegram teilen",
+    "shareOnWhatsApp": "Auf WhatsApp teilen",
+    "rssFeed": "RSS-Feed",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Link kopiert!",
+    "toc": "Auf dieser Seite",
+    "more": "Mehr von Express",
+    "writeBanner": "Möchten Sie einen Beitrag schreiben? \n Schauen Sie sich unsere Richtlinien an, um loszulegen.",
+    "writeGuidelines": "Lies die Richtlinien"
+  },
+  "toc": {
+    "overview": "Übersicht"
+  },
+  "features": {
+    "title": "Klarheit über die Komplexität. Für jeden Entwickler.",
+    "performance": {
+      "title": "Leistung",
+      "body": "Express bietet eine dünne Schicht von grundlegenden Web-Applikations-Funktionen, ohne verschleiernde Node.js Funktionen, die Sie kennen und lieben."
+    },
+    "api": {
+      "title": "APIs",
+      "body": "Mit einer Vielzahl von HTTP-Utility-Methoden und Middleware steht Ihnen eine robuste API zu erstellen ist schnell und einfach."
+    },
+    "middleware": {
+      "title": "Middleware",
+      "body": "Express ist ein leichtes, flexibles Routing-Framework mit minimalen Kernfunktionen, die durch den Einsatz von Express-Middleware-Modulen ergänzt werden sollen."
+    },
+    "webapplication": {
+      "title": "Web-Anwendungen",
+      "body": "Express ist ein minimales und flexibles Node.js Web Application Framework, das eine robuste Reihe von Funktionen für Web- und mobile Anwendungen bietet."
+    }
+  },
+  "error404": {
+    "title": "404 - Seite nicht gefunden",
+    "description": "Die gesuchte Seite konnte nicht gefunden werden.",
+    "heading": "Seite nicht gefunden",
+    "message": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "goHome": "Gehe zu Zuhause"
+  },
+  "common": {
+    "download": "Download"
+  },
+  "hero": {
+    "tagline": "Schnell, unüberlegtes, minimalistisches Web-Framework für Node.js",
+    "getStarted": "Los geht's",
+    "kawaiiLogoAlt": "Express.js kawaii Logo",
+    "videoPause": "Hintergrundvideo pausieren",
+    "videoPlay": "Hintergrundvideo abspielen"
+  }
+}

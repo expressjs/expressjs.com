@@ -1,0 +1,131 @@
+---
+title: errorhandler middleware
+description: middleware gestore errori solo sviluppo
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.5.2"
+  github="https://github.com/expressjs/errorhandler"
+  npm="https://www.npmjs.com/package/errorhandler"
+/>
+
+middleware gestore errori solo di sviluppo.
+
+Questo middleware è destinato esclusivamente ad essere utilizzato in un ambiente di sviluppo, come
+le tracce \_full dello stack di errore e i dettagli interni di qualsiasi oggetto passato a questo modulo
+verranno inviati al client quando si verifica un errore.
+
+Quando viene fornito un oggetto per Express come errore, questo modulo visualizzerà
+il più possibile su questo oggetto, e lo farà utilizzando la negoziazione del contenuto
+per la risposta tra HTML, JSON e testo semplice.
+
+- Quando l'oggetto è un oggetto `Error` standard, la stringa fornita dalla proprietà `stack`
+  verrà restituita nelle risposte HTML/testo.
+- Quando l'oggetto è un oggetto non `Error`, il risultato di
+  [util.inspect](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+  sarà restituito in risposte HTML/testo.
+- Per le risposte JSON, il risultato sarà un oggetto con tutte le proprietà enumerabili
+  dall'oggetto nella risposta.
+
+## Installa
+
+Questo è un modulo [Node.js](https://nodejs.org/en/) disponibile attraverso la
+[npm registry](https://www.npmjs.com/). L'installazione viene eseguita usando il comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install errorhandler
+```
+
+## API
+
+{/* eslint-disable no-unused-vars */}
+
+```js
+var errorhandler = require('errorhandler');
+```
+
+### errorhandler(options)
+
+Crea un nuovo middleware per gestire gli errori e rispondere con la negoziazione dei contenuti.
+
+#### Opzioni
+
+Il gestore degli errori accetta queste proprietà nell'oggetto opzioni.
+
+##### log
+
+Fornire una funzione da chiamare con l'errore e una rappresentazione di stringa di
+l'errore. Può essere usato per scrivere l'errore in qualsiasi posizione desiderata, o impostato su
+`false` per inviare solo l'errore nella risposta. Chiamato come
+`log(err, str, req, res)` dove `err` è l'oggetto `Error`, `str` è una rappresentazione di stringa
+dell'errore, `req` è l'oggetto della richiesta e `res` è l'oggetto della risposta
+(nota, questa funzione viene invocata _dopo_ la risposta è stata scritta
+).
+
+Il valore predefinito per questa opzione è `true` a meno che `process.env.NODE_ENV === 'test'`.
+
+Valori possibili:
+
+- `true`: Registra gli errori usando `console.error(str)`.
+- `false`: invia solo l'errore nella risposta.
+- Una funzione: passare l'errore a una funzione per la gestione.
+
+## Esempi
+
+### Esempio semplice
+
+Esempio di base di aggiungere questo middleware come gestore di errori solo nello sviluppo
+con `connect` (`express` può anche essere usato in questo esempio).
+
+```js
+var connect = require('connect');
+var errorhandler = require('errorhandler');
+
+var app = connect();
+
+// assumes NODE_ENV is set by the user
+if (process.env.NODE_ENV === 'development') {
+  // only use in development
+  app.use(errorhandler());
+}
+```
+
+### Posizione di uscita personalizzata
+
+A volte potresti voler emettere gli errori in una posizione diversa da STDERR
+durante lo sviluppo, come ad esempio una notifica di sistema.
+
+{/* eslint-disable handle-callback-err */}
+
+```js
+var connect = require('connect');
+var errorhandler = require('errorhandler');
+var notifier = require('node-notifier');
+
+var app = connect();
+
+// assumes NODE_ENV is set by the user
+if (process.env.NODE_ENV === 'development') {
+  // only use in development
+  app.use(errorhandler({ log: errorNotification }));
+}
+
+function errorNotification(err, str, req) {
+  var title = 'Error in ' + req.method + ' ' + req.url;
+
+  notifier.notify({
+    title: title,
+    message: str,
+  });
+}
+```
+
+## Licenza
+
+[MIT](https://github.com/expressjs/errorhandler/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/errorhandler

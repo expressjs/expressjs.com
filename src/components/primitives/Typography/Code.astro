@@ -1,0 +1,29 @@
+---
+/**
+ * Code - Inline monospace text
+ *
+ * @example
+ * <Code>npm install express</Code>
+ * <Code as="pre">Multi-line code block</Code>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './types.ts';
+
+type BaseProps = {
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+};
+
+type Props =
+  | ({ as?: 'code' } & BaseProps & HTMLAttributes<'code'>)
+  | ({ as: 'pre' } & BaseProps & HTMLAttributes<'pre'>)
+  | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>);
+
+const { as = 'code', ...rest } = Astro.props as Props;
+---
+
+<Typography as={as} variant="code" {...rest}>
+  <slot />
+</Typography>

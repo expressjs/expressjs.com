@@ -43,7 +43,7 @@ For more details, see [GHSA-qxch-whhj-8956](https://github.com/pillarjs/multipar
 
 ## CVE-2026-8162 in multiparty utility module (High)
 
-**[multiparty](https://www.npmjs.com/package/multiparty) versions `<= 4.2.3` are vulnerable to denial of service via an uncaught exception in filename* parameter parsing**
+**[multiparty](https://www.npmjs.com/package/multiparty) versions `<= 4.2.3` are vulnerable to denial of service via an uncaught exception in filename\* parameter parsing**
 
 A multipart upload with a Content-Disposition header whose `filename*` parameter contains a malformed percent-encoding causes the parser to invoke `decodeURI` on the value without try/catch. The resulting URIError propagates as an uncaught exception and crashes the process. Any service accepting multipart uploads via multiparty is affected.
 

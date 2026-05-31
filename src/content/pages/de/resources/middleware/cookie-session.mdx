@@ -1,0 +1,303 @@
+---
+title: cookie-Session Middleware
+description: Cookie Session Middleware
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.1.1"
+  github="https://github.com/express js/cookie-Sitzung"
+  npm="https://www.npmjs.com/package/cookie-Sitzung"
+/>
+
+Einfache Cookie-basierte Session Middleware.
+
+Eine Benutzersitzung kann auf zwei Hauptwege mit Cookies gespeichert werden: auf dem Server oder auf
+dem Client. Dieses Modul speichert die Sitzungsdaten auf dem Client in einem Cookie
+während ein Modul wie [express-session](https://www.npmjs.com/package/express-session)
+nur eine Sitzungskennung auf dem Client in einem Cookie speichert und die
+Sitzungsdaten auf dem Server speichert typischerweise in einer Datenbank.
+
+Die folgenden Punkte können Ihnen helfen, zu entscheiden, welche Sie verwenden sollen:
+
+- `cookie-session` benötigt keine Datenbank / Ressourcen auf der Serverseite,
+  , obwohl die gesamten Sitzungsdaten die maximale Größe des Cookies des Browsers nicht überschreiten können.
+- `cookie-session` kann bestimmte Last-Balance-Szenarien vereinfachen.
+- `cookie-session` kann verwendet werden, um eine "light" Session zu speichern und einen Bezeichner
+  einzubinden, um einen datenbankgestützten sekundären Store zu suchen, um die Datenbanksuche zu reduzieren.
+
+**HINWEIS** Dieses Modul verschlüsselt die Session-Inhalte im Cookie nicht, bietet nur eine
+-Unterschrift, um Manipulationen zu verhindern. Der Kunde kann die Sitzungsdaten von
+lesen, indem er den Wert des Cookie überprüft. Geheime Daten sollten nicht in `req.session` gesetzt werden ohne
+zu verschlüsseln, oder stattdessen eine serverseitige Sitzung verwenden.
+
+**HINWEIS** Dieses Modul verhindert nicht das Wiederholen von Sitzungen, da das Ablaufdatum festgelegt ist, dass nur
+des Cookies; wenn dies ein Anliegen Ihrer Anwendung ist, können Sie ein Ablaufdatum
+in `req speichern. ession` Objekt und validieren Sie es auf dem Server und implementieren Sie jede andere Logik
+um die Session so zu erweitern, wie Ihre Anwendung es braucht.
+
+## Installieren
+
+Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
+[npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
+[`npm install` Befehl](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install cookie-session
+```
+
+## API
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: [
+      /* secret keys */
+    ],
+
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
+```
+
+### cookieSession(Optionen)
+
+Erstellen Sie eine neue Cookie Session Middleware mit den bereitgestellten Optionen. Diese Middleware
+wird die Eigenschaft `session` an `req` anhängen, die ein Objekt zur Verfügung stellt, das
+der geladenen Sitzung darstellt. Diese Sitzung ist entweder eine neue Sitzung, wenn keine gültige Sitzung
+in der Anfrage angegeben wurde, oder eine geladene Sitzung aus der Anfrage.
+
+Die Middleware wird automatisch einen `Set-Cookie` Header zur Antwort hinzufügen, wenn der
+Inhalt von `req.session` geändert wurde. _Hinweis_ dass kein `Set-Cookie` Header in der Antwort
+sein wird (und daher keine Sitzung für einen bestimmten Benutzer erstellt), es sei denn, es gibt
+Inhalt in der Sitzung, also sollten Sie etwas zu `req. ession` sobald
+du identifizierende Daten für die Sitzung gespeichert hast.
+
+#### Optionen
+
+Cookie Session akzeptiert diese Eigenschaften im Objekt Optionen.
+
+##### name
+
+Der Name des zu setzenden Cookies, Standardwert ist `session`.
+
+##### tasten
+
+Die Liste der Schlüssel, die verwendet werden sollen, um Cookies zu signieren und zu verifizieren, oder eine konfigurierte
+[`Keygrip`](https://www.npmjs.com/package/keygrip) Instanz. Setze Cookies sind immer
+signiert mit `keys[0]`, während die anderen Schlüssel für die Überprüfung gültig sind, wodurch
+für die Schlüsselrotation erlaubt wird. If a `Keygrip` instance is provided, it can be used to
+change signature parameters like the algorithm of the signature.
+
+##### geheim
+
+Ein String, der als Einzelschlüssel verwendet wird, wenn `keys` nicht angegeben wird.
+
+##### Cookie-Optionen
+
+Andere Optionen werden an `cookies.get()` und `cookies.set()` übergeben, so dass du
+neben anderen Einstellungen die Sicherheit, Domäne, Pfad und Signieren steuern kannst.
+
+Die Optionen können auch folgende enthalten (für die vollständige Liste, siehe
+[Cookie-Modul-Dokumentation](https://www.npmjs.org/package/cookies#readme):
+
+- `maxAge`: eine Zahl, die die Millisekunden von `Date.now()` für das Ablaufen repräsentiert
+- `expires`: ein `Date` Objekt zeigt das Ablaufdatum des Cookie an (läuft standardmäßig am Ende der Sitzung ab).
+- `path`: ein String, der den Pfad des Cookie (`/` standardmäßig anzeigt).
+- `domain`: ein String, der die Domain des Cookie angibt (kein Standard).
+- `partitioned`: ein boolescher Hinweis, ob das Cookie in Chrome für das [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (`false` standardmäßig partitioniert werden soll). Wenn dies der Fall ist, werden Cookies von eingebetteten Websites partitioniert und nur von der gleichen obersten Ebene aus lesbar, von der aus sie erstellt wurden.
+- `priority`: eine Zeichenkette, die die Cookie-Priorität angibt. Dies kann auf `'low'`, `'medium' oder `'high' gesetzt werden.
+- `sameSite`: ein boolescher oder String, der angibt, ob das Cookie ein "gleiches" Cookie ist (standardmäßig `false`). Dies kann auf `'strict'`, `'lax'`, `'none'` oder `true` gesetzt werden (die Karte auf `'strict'`)
+- `secure`: ein boolescher Hinweis darauf, ob das Cookie nur über HTTPS gesendet werden soll (`false` standardmäßig für HTTP, `true` standardmäßig für HTTPS). Wenn dies auf `true` und Knoten gesetzt ist. s ist nicht direkt über eine TLS-Verbindung Lesen Sie bitte, wie [Einrichten Express hinter Proxies](https://expressjs.com/en/guide/behind-proxies.html) oder das Cookie nicht korrekt gesetzt werden kann.
+- `httpOnly`: ein boolescher Hinweis darauf, ob das Cookie nur über HTTP(S) gesendet und nicht dem Client JavaScript zur Verfügung gestellt wird (standardmäßig `true`).
+- `signed`: ein boolescher Hinweis, ob das Cookie signiert werden soll (standardmäßig `true`).
+- `overwrite`: eine boolesche Angabe, ob vorher eingestellte Cookies mit gleichem Namen überschrieben werden sollen (`true` standardmäßig).
+
+### req.session
+
+Stellt die Sitzung für die angegebene Anfrage dar.
+
+#### .isGeändert
+
+Ist `true` wenn die Sitzung während der Anfrage geändert wurde.
+
+#### .isNeu
+
+Ist `true` wenn die Sitzung neu ist.
+
+#### .isbesiedelt
+
+Legen Sie fest, ob die Sitzung mit Daten besetzt wurde oder leer ist.
+
+### req.sessionOptions
+
+Stellt die Sitzungsoptionen für die aktuelle Anfrage dar. These options are a
+shallow clone of what was provided at middleware construction and can be
+altered to change cookie setting behavior on a per-request basis.
+
+### Sitzung wird zerstört
+
+Um eine Sitzung zu zerstören, setzen Sie sie einfach auf 'null':
+
+```js
+req.session = null;
+```
+
+### Speichere Sitzung
+
+Da der gesamte Inhalt der Sitzung in einem Client-seitigen Cookie gehalten wird, die
+-Sitzung wird "gespeichert", indem sie ein Cookie in einem "Set-Cookie"-Antwort-Header schreibt.
+This is done automatically if there has been a change made to the session when
+the Node.js response headers are being written to the client and the session
+was not destroyed.
+
+## Beispiele
+
+### Einfache Ansicht Zähler Beispiel
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.set('trust proxy', 1); // trust first proxy
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+  })
+);
+
+app.get('/', function (req, res, next) {
+  // Update views
+  req.session.views = (req.session.views || 0) + 1;
+
+  // Write response
+  res.end(req.session.views + ' views');
+});
+
+app.listen(3000);
+```
+
+### Angepinntes Maximalalter pro Benutzer
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.set('trust proxy', 1); // trust first proxy
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+  })
+);
+
+// This allows you to set req.session.maxAge to let certain sessions
+// have a different value than the default.
+app.use(function (req, res, next) {
+  req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge;
+  next();
+});
+
+// ... your logic here ...
+```
+
+### Ablauf der Sitzung wird verlängert
+
+Dieses Modul sendet keinen `Set-Cookie` Header, wenn sich der Inhalt der Sitzung
+nicht geändert hat. Dies bedeutet, dass das Ablaufdatum einer Sitzung im
+Browser verlängern wird (in Reaktion auf Benutzeraktivität) ) eine Art
+Änderung der Sitzung ist notwendig.
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+
+var app = express();
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+  })
+);
+
+// Update a value in the cookie so that the set-cookie will be sent.
+// Only changes every minute so that it's not sent with every request.
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
+  next();
+});
+
+// ... your logic here ...
+```
+
+### Verwende einen benutzerdefinierten Signatur-Algorithmus
+
+Dieses Beispiel zeigt das Erstellen einer benutzerdefinierten `Keygrip` Instanz als `keys` Option
+an, um Schlüssel und zusätzliche Signaturkonfiguration bereitzustellen.
+
+```js
+var cookieSession = require('cookie-session');
+var express = require('express');
+var Keygrip = require('keygrip');
+
+var app = express();
+
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: new Keygrip(['key1', 'key2'], 'SHA384', 'base64'),
+  })
+);
+
+// ... your logic here ...
+```
+
+## Nutzungsbeschränkungen
+
+### Maximale Cookie-Größe
+
+Weil das gesamte Session-Objekt verschlüsselt und in einem Cookie gespeichert ist es ist
+möglich, die maximale Anzahl von Cookies auf verschiedenen Browsern zu überschreiten. Die
+[RFC6265 Spezifikation](https://tools.ietf.org/html/rfc6265#section-6.1)
+empfiehlt einem Browser **SHOULD** zu erlauben
+
+> Mindestens 4096 Bytes pro Cookie (gemessen an der Summe der Länge von
+> des Cookies, des Wertes und der Attribute)
+
+In der Praxis unterscheidet sich diese Grenze leicht von Browsern. Eine Liste mit
+[Browserlimits hier](http://browsercookielimits.iain.guru). In der Regel überschreiten
+des Daumens **4093 Bytes pro Domäne**.
+
+Wenn Ihr Session-Objekt groß genug ist, um ein Browserlimit zu überschreiten wenn verschlüsselt,
+in den meisten Fällen wird der Browser das Speichern des Cookies ablehnen. This will cause the
+following requests from the browser to either a) not have any session
+information or b) use old session information that was small enough to not
+exceed the cookie limit.
+
+Wenn du findest, dass dein Session-Objekt diese Limits erreicht, am besten ist es
+zu überlegen, ob Daten in Ihrer Sitzung aus einer Datenbank auf dem
+Server geladen werden sollen, anstatt mit jeder Anfrage an oder vom Browser übertragen zu werden. Oder
+zu einer [alternativen Sitzungsstrategie](https://github.com/expressjs/session#compatible-session-stores)
+
+## Lizenz
+
+[MIT](https://github.com/expressjs/cookie-session/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/cookie-Sitzung

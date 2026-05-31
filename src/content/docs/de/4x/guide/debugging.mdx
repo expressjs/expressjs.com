@@ -1,0 +1,124 @@
+---
+title: Debuggen Express
+description: Erfahren Sie, wie Sie Debugging-Logs in Express.js-Anwendungen aktivieren und nutzen können, indem Sie die DEBUG-Umgebungsvariable für verbesserte Fehlerbehebung setzen.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Um alle internen Logs zu sehen, die in Express verwendet werden, setzen Sie die Umgebungsvariable `DEBUG` auf
+`express:*` beim Starten Ihrer App.
+
+```bash
+$ DEBUG=express:* node index.js
+```
+
+Verwenden Sie unter Windows den entsprechenden Befehl.
+
+```bash
+> $env:DEBUG = "express:*"; node index.js
+```
+
+Das Ausführen dieses Befehls auf der vom [Express-Generator] generierten Standard-App (/en/starter/generator) gibt folgende Ausgabe aus:
+
+```bash
+$ DEBUG=express:* node ./bin/www
+  express:router:route new / +0ms
+  express:router:layer new / +1ms
+  express:router:route get / +1ms
+  express:router:layer new / +0ms
+  express:router:route new / +1ms
+  express:router:layer new / +0ms
+  express:router:route get / +0ms
+  express:router:layer new / +0ms
+  express:application compile etag weak +1ms
+  express:application compile query parser extended +0ms
+  express:application compile trust proxy false +0ms
+  express:application booting in development mode +1ms
+  express:router use / query +0ms
+  express:router:layer new / +0ms
+  express:router use / expressInit +0ms
+  express:router:layer new / +0ms
+  express:router use / favicon +1ms
+  express:router:layer new / +0ms
+  express:router use / logger +0ms
+  express:router:layer new / +0ms
+  express:router use / jsonParser +0ms
+  express:router:layer new / +1ms
+  express:router use / urlencodedParser +0ms
+  express:router:layer new / +0ms
+  express:router use / cookieParser +0ms
+  express:router:layer new / +0ms
+  express:router use / stylus +90ms
+  express:router:layer new / +0ms
+  express:router use / serveStatic +0ms
+  express:router:layer new / +0ms
+  express:router use / router +0ms
+  express:router:layer new / +1ms
+  express:router use /users router +0ms
+  express:router:layer new /users +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+```
+
+Wenn eine Anfrage an die App gestellt wird, sehen Sie die im Express-Code angegebenen Protokolle:
+
+```bash
+  express:router dispatching GET / +4h
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
+  express:router dispatching GET / +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
+
+Um die Protokolle nur von der Router-Implementierung zu sehen, setzen Sie den Wert `DEBUG` auf `express:router`. Um Protokolle nur von der Anwendungsimplementierung zu sehen, setzten Sie den Wert von `DEBUG` auf `express:application`, und so weiter.
+
+## Anwendungen generiert von `Express`
+
+Eine Anwendung, die durch den Befehl `express generiert` erzeugt wird, benutzt das Modul `debug` und sein Debug-Namensraum wird auf den Namen der Anwendung übertragen.
+
+Wenn Sie zum Beispiel die App mit `$ express Beispiel-App` erstellt haben, können Sie die Debug-Anweisungen mit folgendem Befehl aktivieren:
+
+```bash
+$ DEBUG=sample-app:* node ./bin/www
+```
+
+Sie können mehr als einen Debug-Namensraum angeben, indem Sie eine kommaseparierte Namensliste zuweisen:
+
+```bash
+$ DEBUG=http,mail,express:* node index.js
+```
+
+## Erweiterte Optionen
+
+Wenn Sie über Node.js laufen, können Sie ein paar Umgebungsvariablen festlegen, die das Verhalten der Debug-Protokollierung ändern:
+
+| Name                | Zweck                                                                       |
+| ------------------- | --------------------------------------------------------------------------- |
+| `DEBUG`             | Aktiviere/deaktiviert bestimmte Debugging-Namensräume.                      |
+| DEBUG_COLORS        | Gibt an, ob Farben in der Debug-Ausgabe verwendet werden sollen oder nicht. |
+| DEBUG_DEPTH\`       | Objektüberprüfungstiefe.                                                    |
+| `DEBUG_FD`          | Datei-Deskriptor, in den die Debug-Ausgabe geschrieben wird.                |
+| `DEBUG_SHOW_HIDDEN` | Zeigt versteckte Eigenschaften auf untersuchten Objekten.                   |
+
+<Alert type="info">
+
+Die Umgebungsvariablen, die mit `DEBUG_` beginnen, werden am Ende in ein Optionsobjekt
+konvertiert, das mit `%o`/`%O` Formate verwendet wird. Siehe die Dokumentation von Node.js für
+[`util.inspect()`](https://nodejs.org/api/util#util_util_inspect_object_options) für die vollständige
+Liste.
+
+</Alert>

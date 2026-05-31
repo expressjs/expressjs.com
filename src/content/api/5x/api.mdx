@@ -1,0 +1,59 @@
+---
+title: 5.x API Reference
+description: API Reference for version 5.x
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+This section provides an overview of the modules and APIs available in Express 5.x for building web applications and HTTP services.
+
+```js title="index.js"
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+<Alert type="info">
+
+Express 5.x requires **Node.js 18 or higher**.
+
+</Alert>
+
+With express v5.x, you can define routes, configure middleware, and start handling HTTP requests using the application instance created by the `express()` function. The API is organized into the following sections:
+
+<CardList gap="6">
+  <a href="/en/5x/api/express">
+    <Card
+      title="express()"
+      body="Learn about the express() function, which creates an Express application."
+    />
+  </a>
+  <a href="/en/5x/api/application">
+    <Card
+      title="Application Object"
+      body="Learn about the properties and methods of the Express 5.x application object."
+    />
+  </a>
+  <a href="/en/5x/api/request">
+    <Card
+      title="Request Object"
+      body="Learn about the properties and methods of the Express 5.x request object."
+    />
+  </a>
+  <a href="/en/5x/api/response">
+    <Card
+      title="Response Object"
+      body="Learn about the properties and methods of the Express 5.x response object."
+    />
+  </a>
+  <a href="/en/5x/api/router">
+    <Card title="Router" body="Learn about the properties and methods of the Express 5.x router." />
+  </a>
+</CardList>

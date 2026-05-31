@@ -1,0 +1,100 @@
+---
+/**
+ * Tabs Primitive Component
+ *
+ * A tab strip for filtering or navigating between sections.
+ * Supports keyboard navigation (ArrowLeft/Right, Home, End) and
+ * dispatches a `tabs-change` CustomEvent (bubbles) on tab selection.
+ *
+ * @example
+ * <Tabs
+ *   tabs={[{ label: 'All', value: 'all' }, { label: 'Release', value: 'release' }]}
+ *   defaultValue="all"
+ * />
+ */
+import './Tabs.css';
+import type { HTMLAttributes } from 'astro/types';
+
+export interface TabItem {
+  label: string;
+  value: string;
+}
+
+interface Props extends HTMLAttributes<'div'> {
+  tabs: TabItem[];
+  defaultValue?: string;
+}
+
+const { tabs, defaultValue = tabs[0]?.value, class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['tabs', className]} role="tablist" {...rest}>
+  {
+    tabs.map((tab) => (
+      <button
+        role="tab"
+        type="button"
+        class:list={['tabs__tab', tab.value === defaultValue && 'tabs__tab--active']}
+        aria-selected={tab.value === defaultValue ? 'true' : 'false'}
+        tabindex={tab.value === defaultValue ? 0 : -1}
+        data-tabs-value={tab.value}
+      >
+        {tab.label}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  function initTabs() {
+    const tabbars = document.querySelectorAll<HTMLElement>('.tabs[role="tablist"]');
+
+    tabbars.forEach((tabbar) => {
+      const buttons = Array.from(tabbar.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+
+      const activate = (btn: HTMLButtonElement) => {
+        buttons.forEach((b) => {
+          const isActive = b === btn;
+          b.setAttribute('aria-selected', String(isActive));
+          b.setAttribute('tabindex', isActive ? '0' : '-1');
+          b.classList.toggle('tabs__tab--active', isActive);
+        });
+
+        tabbar.dispatchEvent(
+          new CustomEvent('tabs-change', {
+            detail: { value: btn.dataset.tabsValue },
+            bubbles: true,
+          })
+        );
+      };
+
+      buttons.forEach((btn, index) => {
+        btn.addEventListener('click', () => activate(btn));
+
+        btn.addEventListener('keydown', (e) => {
+          let targetIndex: number | null = null;
+
+          if (e.key === 'ArrowRight') {
+            targetIndex = (index + 1) % buttons.length;
+          } else if (e.key === 'ArrowLeft') {
+            targetIndex = (index - 1 + buttons.length) % buttons.length;
+          } else if (e.key === 'Home') {
+            targetIndex = 0;
+          } else if (e.key === 'End') {
+            targetIndex = buttons.length - 1;
+          }
+
+          if (targetIndex !== null) {
+            e.preventDefault();
+            const target = buttons[targetIndex];
+            target?.focus();
+            activate(target);
+          }
+        });
+      });
+    });
+  }
+
+  initTabs();
+  document.addEventListener('astro:page-load', initTabs);
+</script>

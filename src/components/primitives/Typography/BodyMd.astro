@@ -1,0 +1,27 @@
+---
+/**
+ * BodyMd - Medium body text
+ *
+ * @example
+ * <BodyMd>Medium sized content.</BodyMd>
+ * <BodyMd color="secondary">Subdued helper text</BodyMd>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyBaseProps } from './types.ts';
+
+type BaseProps = Omit<TypographyBaseProps, 'variant' | 'as'>;
+
+type Props =
+  | ({ as?: 'span' } & BaseProps & HTMLAttributes<'span'>)
+  | ({ as: 'p' } & BaseProps & HTMLAttributes<'p'>)
+  | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
+  | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
+
+const { as = 'span', ...rest } = Astro.props as Props;
+---
+
+<Typography as={as} variant="body-md" {...rest}>
+  <slot />
+</Typography>

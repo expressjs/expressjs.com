@@ -1,0 +1,40 @@
+@layer patterns {
+  .search-footer-shortcuts {
+    display: none;
+    align-items: center;
+    gap: var(--space-3);
+
+    span {
+      margin: 0;
+    }
+
+    @media (--md-up) {
+      display: flex;
+    }
+  }
+
+  .search-footer-shortcut {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+  }
+
+  .search-footer-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-1);
+  }
+
+  .search-footer-branding {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+}

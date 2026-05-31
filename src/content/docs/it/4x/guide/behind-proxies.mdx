@@ -1,0 +1,104 @@
+---
+title: Espresso dietro i proxy
+description: Scopri come configurare le applicazioni Express.js per funzionare correttamente dietro i proxy inversi, anche utilizzando l'impostazione del proxy di trust per gestire gli indirizzi IP del client.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Quando si esegue un'app Express dietro un proxy inverso, alcune delle API Express possono restituire valori diversi da quelli previsti. Al fine di adeguarsi a questo, l'impostazione dell'applicazione `trust proxy` può essere utilizzata per esporre le informazioni fornite dal proxy inverso nelle API Express. Il problema più comune è l'espressione API che espone l'indirizzo IP del cliente può invece mostrare un indirizzo IP interno del proxy inverso.
+
+<Alert type="info">
+
+Durante la configurazione dell'impostazione `trust proxy`, è importante capire l'esatta configurazione del proxy inverso
+. Dal momento che questa impostazione sarà i valori di fiducia forniti nella richiesta, è importante che
+la combinazione dell'impostazione in Express corrisponda al funzionamento del proxy inverso.
+
+</Alert>
+
+L'impostazione dell'applicazione `trust proxy` può essere impostata su uno dei valori elencati nella seguente tabella.
+
+<table class="doctable" border="1" markdown="1">
+  <thead><tr><th>Type</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Boolean</td>
+<td markdown="1">
+Se `true`, l'indirizzo IP del cliente è inteso come la voce più sinistra nell'intestazione `X-Forwarded-For`.
+
+Se `false`, l'app è intesa come rivolta direttamente al client e l'indirizzo IP del cliente è derivato da `req.socket.remoteAddress`. Questa è l'impostazione predefinita.
+
+<Alert type="avviso">
+Quando si imposta a `true`, è importante assicurarsi che l'ultimo proxy inverso attendibile stia rimuovendo/sovrascrivendo tutte le seguenti intestazioni HTTP: `X-Forwarded-For`, `X-Forwarded-Host`, e `X-Forwarded-Proto`, altrimenti potrebbe essere possibile per il cliente fornire qualsiasi valore.
+</Alert>
+</td>
+    </tr>
+    <tr>
+      <td>indirizzi IP</td>
+<td markdown="1">
+Un indirizzo IP, una sottorete, o un array di indirizzi IP e sottoreti a cui fidarsi come proxy inverso. Il seguente elenco mostra i nomi pre-configurati delle sottorete
+
+- loopback - `127.0.1/8`, `::1/128`
+- linklocal - `169.254.0.0/16`, `fe80::/10`
+- uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+
+È possibile impostare gli indirizzi IP in uno dei seguenti modi:
+
+```js
+app.set('trust proxy', 'loopback'); // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123'); // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array
+```
+
+Se specificato, gli indirizzi IP o le sottoreti sono esclusi dal processo di determinazione dell'indirizzo, e l'indirizzo IP non attendibile più vicino al server dell'applicazione è determinato come indirizzo IP del client. Questo funziona controllando se `req.socket.remoteAddress` è attendibile. In tal caso, ogni indirizzo in `X-Forwarded-For` viene controllato da destra a sinistra fino al primo indirizzo non fidato.
+
+</td>
+    </tr>
+    <tr>
+      <td>Numero</td>
+<td markdown="1">
+Usa l'indirizzo che è al massimo `n` numero di luppolo lontano dall'applicazione Express. `req.socket.remoteAddress` è il primo hop, e il resto sono cercati nell'intestazione `X-Forwarded-For` da destra a sinistra. Un valore di `0` significa che il primo indirizzo non attendibile sarebbe `req.socket.remoteAddress`, cioè non c'è un proxy inverso.
+
+<Alert type="avviso">
+Quando si utilizza questa impostazione, è importante assicurarsi che non ci siano multipli, percorsi diversi per l'applicazione Express in modo che il client possa essere inferiore al numero configurato di luppolo di distanza, altrimenti potrebbe essere possibile per il cliente fornire qualsiasi valore.
+</Alert>
+</td>
+    </tr>
+    <tr>
+      Funzione <td />
+<td markdown="1">
+Implementazione fiducia personalizzata.
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
+  else return false;
+});
+```
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+Abilitare il `trust proxy` avrà il seguente impatto:
+
+<ul>
+  <li markdown="1">
+    Il valore di [req.hostname](/en/api#req.hostname) è derivato dal valore impostato
+    nell'intestazione `X-Forwarded-Host`, che può essere impostato dal cliente o dal proxy.
+  </li>
+  <li markdown="1">
+    `X-Forwarded-Proto` può essere impostato dal proxy inverso per dire all'app se si tratta di `↓ `
+    o `http` o anche di un nome non valido. Questo valore è riflesso da
+    [req.protocol](/en/api#req.protocol).
+  </li>
+  <li markdown="1">
+    I valori [req.ip](/en/api#req.ip) e [req.ips](/en/api#req.ips) sono popolati in base
+    all'indirizzo del socket e all'intestazione `X-Forwarded-For`, a partire dal primo indirizzo non
+    fidato.
+  </li>
+</ul>
+
+L'impostazione `trust proxy` è implementata usando il pacchetto [proxy-addr](https://www.npmjs.com/package/proxy-addr). Per ulteriori informazioni, consultare la documentazione.

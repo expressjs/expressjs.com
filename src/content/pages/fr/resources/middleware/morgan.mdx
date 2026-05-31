@@ -1,0 +1,452 @@
+---
+title: morgan middleware
+description: Le middleware de l'enregistreur de requêtes HTTP pour Node.js
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.10.1"
+  github="https://github.com/expressjs/morgan"
+  npm="https://www.npmjs.com/package/morgan"
+/>
+
+middleware de l'enregistreur de requêtes HTTP pour node.js
+
+> Nommer après [Dexter](http://en.wikipedia.org/wiki/Dexter_Morgan), une série que vous ne devriez pas regarder jusqu'à la fin.
+
+## Installation
+
+Ceci est un module [Node.js](https://nodejs.org/en/) disponible via
+[npm registry](https://www.npmjs.com/). L'installation se fait à l'aide de la commande
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install morgan
+```
+
+## API
+
+{/* eslint-disable no-unused-vars */}
+
+```js
+var morgan = require('morgan');
+```
+
+### morgan(format, options)
+
+Crée une nouvelle fonction middleware morgan logger en utilisant le `format` et `options` donnés.
+L'argument `format` peut être une chaîne de nom prédéfini (voir ci-dessous pour les noms),
+une chaîne de caractères de format, ou une fonction qui va produire une entrée de journal.
+
+La fonction `format` sera appelée avec trois arguments `tokens`, `req` et `res`,
+où `tokens` est un objet avec tous les jetons définis, `req` est la requête HTTP et `res`
+est la réponse HTTP. La fonction est censée retourner une chaîne de caractères qui sera la ligne de log
+, ou `undefined` / `null` pour sauter la journalisation.
+
+#### Utiliser une chaîne de format prédéfinie
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan('tiny');
+```
+
+#### Utilisation de la chaîne de format des jetons prédéfinis
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(':method :url :status :res[content-length] - :response-time ms');
+```
+
+#### Utiliser une fonction de format personnalisé
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](https://github.com/expressjs/morgan/blob/HEAD/req, res), 'ms'
+  ].join(' ')
+})
+```
+
+#### Options
+
+Morgan accepte ces propriétés dans l'objet options.
+
+##### immédiat
+
+Écrivez la ligne du journal sur la requête au lieu de la réponse. Cela signifie qu'une requête
+sera enregistrée même si le serveur plante, _mais les données de la réponse (comme le code de réponse
+, la longueur du contenu, etc.) ne peut pas être logged_.
+
+##### sauter
+
+Fonction pour déterminer si la journalisation est ignorée, la valeur par défaut est `false`. Cette fonction
+sera appelée comme `skip(req, res)`.
+
+{/* eslint-disable no-undef */}
+
+```js
+// EXAMPLE: only log error responses
+morgan('combined', {
+  skip: function (req, res) {
+    return res.statusCode < 400;
+  },
+});
+```
+
+##### flux
+
+Flux de sortie pour l'écriture des lignes de log, la valeur par défaut est `process.stdout`.
+
+#### Formats prédéfinis
+
+Il existe différents formats prédéfinis fournis :
+
+##### combiné
+
+Sortie standard du journal combiné d'Apache.
+
+```
+:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
+# will output
+::1 - - [27/Nov/2024:06:21:42 +0000] "GET /combined HTTP/1.1" 200 2 "-" "curl/8.7.1"
+```
+
+##### en commun
+
+Sortie standard du journal commun d'Apache.
+
+```
+:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]
+# will output
+::1 - - [27/Nov/2024:06:21:46 +0000] "GET /common HTTP/1.1" 200 2
+```
+
+##### Développer
+
+Concise la sortie colorée par le statut de réponse pour l'utilisation du développement. Le jeton `:status`
+sera coloré vert pour les codes de réussite, rouge pour les codes d'erreur du serveur,
+jaune pour les codes d'erreur du client, cyan pour les codes de redirection et
+sans couleur pour les codes d'information.
+
+```
+:method :url :status :response-time ms - :res[content-length]
+# will output
+GET /dev 200 0.224 ms - 2
+```
+
+##### court
+
+Plus court que la valeur par défaut, y compris le temps de réponse.
+
+```
+:remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms
+# will output
+::1 - GET /short HTTP/1.1 200 2 - 0.283 ms
+```
+
+##### minuscule
+
+La sortie minimale.
+
+```
+:method :url :status :res[content-length] - :response-time ms
+# will output
+GET /tiny 200 2 - 0.188 ms
+```
+
+#### Jetons
+
+##### Création de nouveaux jetons
+
+Pour définir un jeton, appelez simplement `morgan.token()` avec le nom et une fonction de rappel.
+Cette fonction de rappel est censée retourner une chaîne de caractères. La valeur retournée est alors
+disponible en tant que ":type" dans ce cas:
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan.token('type', function (req, res) {
+  return req.headers['content-type'];
+});
+```
+
+Appeler `morgan.token()` en utilisant le même nom qu'un jeton existant écrasera cette définition de jeton
+.
+
+La fonction token est appelée avec les arguments `req` et `res`, représentant
+la requête HTTP et la réponse HTTP. De plus, le jeton peut accepter d'autres arguments de
+il choisit de personnaliser le comportement.
+
+##### :date[format]
+
+La date et l'heure courante en UTC. Les formats disponibles sont :
+
+- `clf` pour le format de log commun (`"10/Oct/2000:13:55:36 +0000"`)
+- `iso` pour le format de date habituel ISO 8601 (`2000-10-10T13:55:36.000Z`)
+- `web` pour le format de date commun RFC 1123 (`Mar, 10 Oct 2000 13:55:36 GMT`)
+
+Si aucun format n'est donné, alors la valeur par défaut est `web`.
+
+##### :http-version
+
+La version HTTP de la requête.
+
+##### :method
+
+La méthode HTTP de la requête.
+
+##### :pid
+
+L'ID de processus du processus Node.js gérant la requête.
+
+##### :referrer
+
+L'en-tête Référent de la requête. Cela utilisera l'en-tête standard de Referer mal orthographié s'il existe, sinon Referrer.
+
+##### :remote-addr
+
+L'adresse distante de la requête. Cela utilisera `req.ip`, sinon la valeur standard `req.connection.remoteAddress` (adresse socket).
+
+##### :remote-user
+
+L'utilisateur s'est authentifié dans le cadre de l'authentification basique pour la requête.
+
+##### :req[header]
+
+Le `header` donné de la requête. Si l'en-tête n'est pas présent, la valeur
+sera affichée comme `"-"` dans le journal.
+
+##### :res[header]
+
+Le `header` donné de la réponse. Si l'en-tête n'est pas présent, la valeur
+sera affichée comme `"-"` dans le journal.
+
+##### :response-time[digits]
+
+Le temps entre la requête entrant dans `morgan` et quand les en-têtes de réponse
+sont écrits, en millisecondes.
+
+L'argument `digits` est un nombre qui spécifie le nombre de chiffres à
+inclus sur le nombre, par défaut à `3`, qui fournit une précision de microseconde.
+
+##### :status
+
+Le code de statut de la réponse.
+
+Si le cycle de requête/réponse se termine avant l'envoi d'une réponse au client
+(par exemple, la socket TCP fermée prématurément par un client abandonnant
+la requête), alors le statut sera vide (affiché comme `"-"` dans le journal).
+
+##### :total-time[digits]
+
+Le temps entre la requête entrant dans `morgan` et quand la réponse
+a fini d'être écrite à la connexion, en millisecondes.
+
+L'argument `digits` est un nombre qui spécifie le nombre de chiffres à
+inclus sur le nombre, par défaut à `3`, qui fournit une précision de microseconde.
+
+##### :url
+
+L'URL de la requête. Cela utilisera `req.originalUrl` si existe, sinon `req.url`.
+
+##### :user-agent
+
+Le contenu de l'en-tête User-Agent de la requête.
+
+### morgan.compile(format)
+
+Compiler une chaîne de format dans une fonction `format` pour l'utiliser par `morgan`. Une chaîne de format
+est une chaîne de caractères qui représente une seule ligne de log et peut utiliser la syntaxe des jetons.
+Les jetons sont des références par `:token-name`. If tokens accept arguments, they can
+be passed using `[]`, for example: `:token-name[pretty]` would pass the string
+`'pretty'` as an argument to the token `token-name`.
+
+La fonction retournée par `morgan. ompile` prend trois arguments `tokens`, `req`, et
+`res`, où `tokens` est un objet avec tous les tokens définis, `req` est la requête HTTP et
+`res` est la réponse HTTP. La fonction retournera une chaîne qui sera la ligne de log,
+ou `undefined` / `null` pour sauter la journalisation.
+
+Normally formats are defined using `morgan.format(name, format)`, but for certain
+advanced uses, this compile function is directly available.
+
+## Exemples
+
+### express/connexion
+
+Exemple d'application qui va enregistrer toutes les requêtes dans le format combiné Apache au STDOUT
+
+```js
+var express = require('express');
+var morgan = require('morgan');
+
+var app = express();
+
+app.use(morgan('combined'));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### serveur http vanilla
+
+Exemple d'application qui va enregistrer toutes les requêtes dans le format combiné Apache au STDOUT
+
+```js
+var finalhandler = require('finalhandler');
+var http = require('http');
+var morgan = require('morgan');
+
+// create "middleware"
+var logger = morgan('combined');
+
+http.createServer(function (req, res) {
+  var done = finalhandler(req, res);
+  logger(req, res, function (err) {
+    if (err) return done(err);
+
+    // respond to request
+    res.setHeader('content-type', 'text/plain');
+    res.end('hello, world!');
+  });
+});
+```
+
+### écrire les logs dans un fichier
+
+#### fichier unique
+
+Exemple d'application qui va enregistrer toutes les requêtes dans le format combiné d'Apache dans le fichier
+`access.log`.
+
+```js
+var express = require('express');
+var fs = require('fs');
+var morgan = require('morgan');
+var path = require('path');
+
+var app = express();
+
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
+// setup the logger
+app.use(morgan('combined', { stream: accessLogStream }));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+#### rotation du fichier journal
+
+Exemple d'application qui va enregistrer toutes les requêtes dans le format combiné d'Apache à un fichier journal
+par jour dans le répertoire `log/` en utilisant le module
+[rotating-file-stream](https://www.npmjs.com/package/rotating-file-stream).
+
+```js
+var express = require('express');
+var morgan = require('morgan');
+var path = require('path');
+var rfs = require('rotating-file-stream'); // version 2.x
+
+var app = express();
+
+// create a rotating write stream
+var accessLogStream = rfs.createStream('access.log', {
+  interval: '1d', // rotate daily
+  path: path.join(__dirname, 'log'),
+});
+
+// setup the logger
+app.use(morgan('combined', { stream: accessLogStream }));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### journal séparé / double
+
+Le middleware `morgan` peut être utilisé autant de fois que nécessaire, en activant les combinaisons
+comme :
+
+- Enregistrer l'entrée sur la demande et une sur la réponse
+- Enregistrer toutes les requêtes dans un fichier, mais des erreurs dans la console
+- ... et plus encore !
+
+Sample app that will log all requests to a file using Apache format, but
+error responses are logged to the console:
+
+```js
+var express = require('express');
+var fs = require('fs');
+var morgan = require('morgan');
+var path = require('path');
+
+var app = express();
+
+// log only 4xx and 5xx responses to console
+app.use(
+  morgan('dev', {
+    skip: function (req, res) {
+      return res.statusCode < 400;
+    },
+  })
+);
+
+// log all requests to access.log
+app.use(
+  morgan('common', {
+    stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' }),
+  })
+);
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### Utiliser des formats de jetons personnalisés
+
+Exemple d'application qui utilisera des formats de jetons personnalisés. Cela ajoute un ID à toutes les requêtes et l'affiche en utilisant le jeton `:id`.
+
+```js
+var express = require('express');
+var morgan = require('morgan');
+var uuid = require('node-uuid');
+
+morgan.token('id', function getId(req) {
+  return req.id;
+});
+
+var app = express();
+
+app.use(assignId);
+app.use(morgan(':id :method :url :response-time'));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+
+function assignId(req, res, next) {
+  req.id = uuid.v4();
+  next();
+}
+```
+
+## Licence
+
+[MIT](https://github.com/expressjs/morgan/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/morgan

@@ -1,0 +1,54 @@
+---
+/**
+ * Button Primitive Component
+ *
+ * Interactive button with support for icon slots and variants.
+ * Can render as button, anchor, or any interactive element.
+ *
+ * @example
+ * <Button variant="primary" size="md">Click me</Button>
+ * <Button as="a" href="/docs">
+ *   <Icon slot="left" name="arrow" />
+ *   Go to docs
+ * </Button>
+ * <Button type="submit">Submit</Button>
+ *
+ * Notes:
+ * - The `disabled` prop is only supported when rendering as `<button>`.
+ * - Anchors do not support native disabled behavior.
+ */
+import './Button.css';
+import type { NativeButtonProps, AnchorProps } from './types';
+
+type Props = AnchorProps | NativeButtonProps;
+
+const props = Astro.props as Props;
+
+const {
+  as: Tag = 'button',
+  size = 'md',
+  variant = 'primary',
+  ghost = false,
+  class: className,
+  ...rest
+} = props;
+
+const isButton = Tag === 'button';
+const buttonType = isButton ? ((props as NativeButtonProps).type ?? 'button') : undefined;
+---
+
+<Tag
+  class:list={[
+    'btn',
+    `btn--size-${size}`,
+    `btn--variant-${variant}`,
+    ghost && 'btn--ghost',
+    className,
+  ]}
+  type={buttonType}
+  {...rest}
+>
+  <slot name="left" />
+  <slot />
+  <slot name="right" />
+</Tag>

@@ -1,0 +1,220 @@
+---
+import { getCollection } from 'astro:content';
+import DocLayout from '@layouts/DocLayout.astro';
+import { languages } from '@i18n/locales';
+import { render } from 'astro:content';
+import { getAdjacentPages } from '@utils/content';
+import { docsMenu } from '@/config/menu/docs';
+import { apiMenu } from '@/config/menu/api';
+import { resourcesMenu } from '@/config/menu/resources';
+import type { LanguageCode } from '@i18n/locales';
+
+export async function getStaticPaths() {
+  const DEFAULT_VERSION = '5x';
+  const VERSION_PREFIXES = ['5x', '4x', '3x'];
+  const DEFAULT_LANG = 'en';
+
+  const pages = await getCollection('docs');
+  const api = await getCollection('api');
+  const contentPages = await getCollection('pages');
+
+  type AnyPage = (typeof pages)[0] | (typeof api)[0] | (typeof contentPages)[0];
+
+  const paths: Array<{
+    params: { lang: string; slug: string };
+    props: { page: AnyPage; version?: string };
+  }> = [];
+
+  // Helper to create a map of existing content for fallback logic
+  const existingContent = new Map<string, AnyPage>();
+  pages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+    existingContent.set(`${lang}/${fullSlug}`, page);
+  });
+
+  api.forEach((page) => {
+    existingContent.set(`en/${page.id}`, page);
+  });
+
+  pages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+
+    const isVersioned = VERSION_PREFIXES.some((v) => fullSlug.startsWith(`${v}/`));
+
+    paths.push({
+      params: { lang, slug: fullSlug },
+      props: { page, version: isVersioned ? slugParts[0] : DEFAULT_VERSION },
+    });
+  });
+
+  contentPages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+
+    paths.push({
+      params: { lang, slug: fullSlug },
+      props: { page },
+    });
+  });
+
+  for (const lang of Object.keys(languages)) {
+    api.forEach((page) => {
+      const slugParts = page.id.split('/');
+      const version = slugParts[0];
+      const slug = page.id;
+
+      paths.push({
+        params: { lang, slug },
+        props: { page, version },
+      });
+    });
+  }
+
+  const defaultVersionApiPages = api.filter((page) => page.id.startsWith(`${DEFAULT_VERSION}/`));
+
+  for (const lang of Object.keys(languages)) {
+    defaultVersionApiPages.forEach((page) => {
+      const [, ...restSlugParts] = page.id.split('/');
+      const nonVersionedSlug = restSlugParts.join('/');
+
+      const exists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === nonVersionedSlug
+      );
+
+      if (!exists && nonVersionedSlug) {
+        paths.push({
+          params: { lang, slug: nonVersionedSlug },
+          props: { page, version: DEFAULT_VERSION },
+        });
+      }
+    });
+  }
+
+  const defaultVersionPages = pages.filter((page) => {
+    const [, ...slugParts] = page.id.split('/');
+    return slugParts[0] === DEFAULT_VERSION;
+  });
+
+  defaultVersionPages.forEach((page) => {
+    const [lang, , ...restSlugParts] = page.id.split('/');
+    const nonVersionedSlug = restSlugParts.join('/');
+
+    const exists = paths.some((p) => p.params.lang === lang && p.params.slug === nonVersionedSlug);
+
+    if (!exists && nonVersionedSlug) {
+      paths.push({
+        params: { lang, slug: nonVersionedSlug },
+        props: { page, version: DEFAULT_VERSION },
+      });
+    }
+  });
+
+  // Fallback for non-versioned default-version slugs: use English content for missing languages
+  const englishDefaultVersionPages = defaultVersionPages.filter((p) =>
+    p.id.startsWith(`${DEFAULT_LANG}/`)
+  );
+
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue;
+
+    englishDefaultVersionPages.forEach((page) => {
+      const [, , ...restSlugParts] = page.id.split('/');
+      const nonVersionedSlug = restSlugParts.join('/');
+
+      const exists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === nonVersionedSlug
+      );
+
+      if (!exists && nonVersionedSlug) {
+        paths.push({
+          params: { lang, slug: nonVersionedSlug },
+          props: { page, version: DEFAULT_VERSION },
+        });
+      }
+    });
+  }
+
+  // Fallback: Create paths for non-English languages using English pages content
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue;
+
+    const englishContentPages = contentPages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
+
+    englishContentPages.forEach((page) => {
+      const [, ...slugParts] = page.id.split('/');
+      const fullSlug = slugParts.join('/');
+
+      const langSpecificExists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === fullSlug
+      );
+
+      if (!langSpecificExists) {
+        paths.push({
+          params: { lang, slug: fullSlug },
+          props: { page },
+        });
+      }
+    });
+  }
+
+  // Fallback: Create paths for non-English languages using English docs content
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue; // Skip English, already added
+
+    const englishPages = pages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
+
+    englishPages.forEach((page) => {
+      const [, ...slugParts] = page.id.split('/');
+      const fullSlug = slugParts.join('/');
+
+      const langSpecificExists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === fullSlug
+      );
+
+      // If no language-specific version exists, add fallback to English
+      if (!langSpecificExists) {
+        paths.push({
+          params: { lang, slug: fullSlug },
+          props: {
+            page,
+            version: slugParts[0] === DEFAULT_VERSION ? DEFAULT_VERSION : slugParts[0],
+          },
+        });
+      }
+    });
+  }
+
+  return paths;
+}
+
+const { page, version } = Astro.props;
+const { lang: langParam, slug } = Astro.params;
+const lang = langParam as LanguageCode;
+const { Content, headings } = await render(page);
+const { title, description } = page.data;
+const isTranslation = lang !== 'en';
+const { prev, next } = getAdjacentPages(
+  slug,
+  lang,
+  [{ menu: docsMenu }, { menu: apiMenu }, { menu: resourcesMenu, global: true }],
+  version
+);
+
+const editUrl = isTranslation
+  ? `https://github.com/expressjs/expressjs.com/blob/main/docs/i18n.md`
+  : `https://github.com/expressjs/expressjs.com/edit/main/${page.filePath}`;
+---
+
+<DocLayout
+  title={title}
+  description={description}
+  headings={headings}
+  editUrl={editUrl}
+  isTranslation={isTranslation}
+  prev={prev}
+  next={next}
+>
+  <Content />
+</DocLayout>

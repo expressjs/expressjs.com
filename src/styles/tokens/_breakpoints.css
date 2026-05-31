@@ -1,0 +1,46 @@
+/**
+ * Breakpoint Tokens
+ *
+ * Design breakpoints:
+ * - Mobile:  < 768px
+ * - Tablet:  768px - 1439px
+ * - Desktop: >= 1440px
+ *
+ * Usage:
+ * @media (--xs-only)  { ... }  - Mobile only
+ * @media (--md-only)  { ... }  - Tablet only
+ * @media (--md-up) { ... } - Above Tablet
+ * @media (--lg-up) { ... } - Above Desktop
+ * @media (--lg-down) { ... } - Below Desktop
+ */
+
+/* ============================================
+   CUSTOM MEDIA QUERIES
+   ============================================ */
+
+/* Device-specific (exclusive) */
+@custom-media --xs-only (width < 768px);
+@custom-media --md-up (width >= 768px);
+@custom-media --md-only (768px <= width < 1440px);
+@custom-media --lg-up (width >= 1440px);
+@custom-media --lg-down (width < 1440px);
+
+/* Range queries (inclusive) */
+
+/* ============================================
+   BREAKPOINT VALUES (for JavaScript)
+
+   Note: CSS custom properties cannot be used in
+   @media or @custom-media queries. These are exposed
+   for documentation (to have a human-readable reference) and
+   for JavaScript access via getComputedStyle().
+
+   Example:
+   const bp = getComputedStyle(document.documentElement)
+     .getPropertyValue('--breakpoint-md');
+   ============================================ */
+
+:root {
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1440px;
+}
