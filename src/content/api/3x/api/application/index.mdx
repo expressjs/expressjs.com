@@ -488,7 +488,7 @@ app.post('/forum/:fid/thread/:tid', middleware, function () {
 });
 ```
 
-### app.all(path, [callback...], callback)
+### app.all(path, callback [, callback ...])
 
 This method functions just like the `app.VERB()` methods,
 however it matches all HTTP verbs.
@@ -521,7 +521,7 @@ the example is much like before, however only restricting paths prefixed with
 app.all('/api/*', requireAuthentication);
 ```
 
-### app.render(view, [options], callback)
+### app.render(view, [locals], callback)
 
 Render a `view` with a callback responding with
 the rendered string. This is the app-level variant of `res.render()`,

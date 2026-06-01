@@ -117,8 +117,14 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x'],
               },
               {
+                href: '/api/application#applisten',
+                label: 'app.listen()',
+                omitFrom: ['4x', '5x'],
+              },
+              {
                 href: '/api/application#applistenport-host-backlog-callback',
                 label: 'app.listen()',
+                omitFrom: ['3x'],
               },
               {
                 href: '/api/application#appmethodpath-callback--callback-',
@@ -148,7 +154,16 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x'],
               },
               { href: '/api/application#appsetname-value', label: 'app.set()' },
-              { href: '/api/application#appusepath-callback--callback', label: 'app.use()' },
+              {
+                href: '/api/application#appusepath-function',
+                label: 'app.use()',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: '/api/application#appusepath-callback--callback',
+                label: 'app.use()',
+                omitFrom: ['3x'],
+              },
               {
                 href: '/api/application#appverbpath-callback-callback',
                 label: 'app.VERB()',
@@ -292,17 +307,17 @@ export const apiMenu: Menu = {
                 label: 'req.acceptsLanguages()',
                 omitFrom: ['3x'],
               },
-              { href: '/api/request#reqgetfield', label: 'req.get()', omitFrom: ['3x'] },
-              {
-                href: '/api/request#reqheaderfield',
-                label: 'req.header()',
-                omitFrom: ['4x', '5x'],
-              },
+              { href: '/api/request#reqgetfield', label: 'req.get()' },
               { href: '/api/request#reqistype', label: 'req.is()' },
               {
                 href: '/api/request#reqparamname',
                 label: 'req.param()',
-                omitFrom: ['5x'],
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: '/api/request#reqparamname--defaultvalue',
+                label: 'req.param()',
+                omitFrom: ['3x', '5x'],
               },
               {
                 href: '/api/request#reqrangesize-options',
@@ -362,8 +377,14 @@ export const apiMenu: Menu = {
               { href: '/api/response#resclearcookiename--options', label: 'res.clearCookie()' },
               { href: '/api/response#rescookiename-value--options', label: 'res.cookie()' },
               {
+                href: '/api/response#resdownloadpath-filename-fn',
+                label: 'res.download()',
+                omitFrom: ['4x', '5x'],
+              },
+              {
                 href: '/api/response#resdownloadpath--filename--options--fn',
                 label: 'res.download()',
+                omitFrom: ['3x'],
               },
               {
                 href: '/api/response#resenddata-encoding-callback',
@@ -372,13 +393,28 @@ export const apiMenu: Menu = {
               },
               { href: `/api/response#resformatobject`, label: 'res.format()' },
               { href: '/api/response#resgetfield', label: 'res.get()' },
-              { href: `/api/response#resjsonbody`, label: 'res.json()' },
-              { href: '/api/response#resjsonpbody', label: 'res.jsonp()' },
+              {
+                href: `/api/response#resjsonstatusbody-body`,
+                label: 'res.json()',
+                omitFrom: ['4x', '5x'],
+              },
+              { href: `/api/response#resjsonbody`, label: 'res.json()', omitFrom: ['3x'] },
+              {
+                href: '/api/response#resjsonpstatusbody-body',
+                label: 'res.jsonp()',
+                omitFrom: ['4x', '5x'],
+              },
+              { href: '/api/response#resjsonpbody', label: 'res.jsonp()', omitFrom: ['3x'] },
               { href: '/api/response#reslinkslinks', label: 'res.links()' },
               { href: '/api/response#reslocationpath', label: 'res.location()' },
               { href: '/api/response#resredirectstatus-path', label: 'res.redirect()' },
               { href: `/api/response#resrenderview--locals--callback`, label: 'res.render()' },
-              { href: `/api/response#ressendbody`, label: 'res.send()' },
+              {
+                href: `/api/response#ressendbodystatus-body`,
+                label: 'res.send()',
+                omitFrom: ['4x', '5x'],
+              },
+              { href: `/api/response#ressendbody`, label: 'res.send()', omitFrom: ['3x'] },
               {
                 href: '/api/response#ressendfilepath-options-fn',
                 label: 'res.sendfile()',
