@@ -376,8 +376,17 @@ res.status(500).json({ error: 'message' });
 
 ### res.jsonp([body])
 
-Sends a JSON response with JSONP support. This method is identical to `res.json()`,
-except that it opts-in to JSONP callback support.
+Sends a JSON response with JSONP support. When the request has no JSONP callback
+query parameter, this method behaves like `res.json()`. When the callback parameter
+is present, the response differs from `res.json()` in the following ways:
+
+- The JSON response body is wrapped in a call to the named callback function
+  (for example, `callback({ "user": "tobi" })`).
+- The `Content-Type` is set to `text/javascript` instead of `application/json`.
+  This cannot be overridden, since browsers will not execute JSONP responses
+  served with any other content type.
+- An `X-Content-Type-Options: nosniff` header is added, and the body is prefixed
+  with `/**/` as a security mitigation against the Rosetta Flash JSONP attack.
 
 ```js
 res.jsonp(null);
