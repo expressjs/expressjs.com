@@ -26,3 +26,7 @@ https://expressjs.com/sitemap-index.xml
 
 https://coveralls.io/-*
 
+# Exclude OpenJS Foundation Slack invite — redirects to a rotating Slack
+# invite token that returns 403 to bots; the vanity URL itself is valid
+https://slack-invite.openjsf.org.*
+
