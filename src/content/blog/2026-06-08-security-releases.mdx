@@ -1,0 +1,41 @@
+---
+title: June 2026 Security Releases
+description: Security releases for morgan have been published. We recommend that all users upgrade as soon as possible.
+tags: ['security']
+authors:
+  - name: Ulises Gascon
+    github: UlisesGascon
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+The Express team has released [morgan](https://www.npmjs.com/package/morgan) 1.11.0, addressing a log forging vulnerability in the `:remote-user` token.
+
+<Alert type="warning">
+
+We recommend upgrading to the latest version of morgan to secure your applications. If you have a `package-lock.json`, you can update the dependency by running:
+
+```sh
+npm update morgan
+```
+
+</Alert>
+
+The following vulnerabilities have been addressed:
+
+- [CVE-2026-5078 in morgan middleware (Medium)](#cve-2026-5078-in-morgan-middleware-medium)
+
+## CVE-2026-5078 in morgan middleware (Medium)
+
+**[morgan](https://www.npmjs.com/package/morgan) versions `>= 1.2.0, <= 1.10.1` are vulnerable to log forging via unneutralized control characters in the `:remote-user` token**
+
+Morgan's `:remote-user` token writes the Basic auth username from the `Authorization` header to the log stream without neutralizing control characters. A crafted `Authorization: Basic` header containing CR/LF characters can inject forged log lines, corrupting the one-request-per-line structure of access logs. The built-in `combined`, `common`, `default`, and `short` formats are affected, as well as any custom format that includes `:remote-user`.
+
+**Affected versions**: `>= 1.2.0, <= 1.10.1`
+**Patched version**: `>= 1.11.0`
+
+For more details, see [GHSA-4vj7-5mj6-jm8m](https://github.com/expressjs/morgan/security/advisories/GHSA-4vj7-5mj6-jm8m).
+
+---
+
+We recommend upgrading to the latest version of morgan to secure your applications.
