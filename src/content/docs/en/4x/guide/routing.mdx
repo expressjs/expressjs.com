@@ -212,12 +212,12 @@ characters with an additional backslash, for example `\\d+`.
 </Alert>
 
 <Alert type="warning">
-The <a href="https://github.com/expressjs/express/issues/2495">`*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`.
+The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. As a workaround, use `{0,}` instead of `*`.
 </Alert>
 
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/en/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](/en/4x/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 ```js
 app.get('/user/:id', (req, res, next) => {

@@ -96,6 +96,7 @@ jobs:
             --exclude-path dist/llms.txt
             --exclude-path dist/llms/
             --exclude-private
+            --exclude-loopback
             --remap "https://expressjs\.com\/((?:[^\/]+\/)*[^\/\.]+)\/?$ file://$PWD/dist/\$1/index.html"
             --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
             dist/

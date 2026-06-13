@@ -7,7 +7,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
 
-_Middleware_ functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/en/4x/api/request) (`req`), the [response object](/en/4x/api/response) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 Middleware functions can perform the following tasks:
 
@@ -20,18 +20,18 @@ If the current middleware function does not end the request-response cycle, it m
 
 An Express application can use the following types of middleware:
 
-- [Application-level middleware](#middleware.application)
-- [Router-level middleware](#middleware.router)
-- [Error-handling middleware](#middleware.error-handling)
-- [Built-in middleware](#middleware.built-in)
-- [Third-party middleware](#middleware.third-party)
+- [Application-level middleware](#application-level-middleware)
+- [Router-level middleware](#router-level-middleware)
+- [Error-handling middleware](#error-handling-middleware)
+- [Built-in middleware](#built-in-middleware)
+- [Third-party middleware](#third-party-middleware)
 
 You can load application-level and router-level middleware with an optional mount path.
 You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.
 
 ## Application-level middleware
 
-Bind application-level middleware to an instance of the [app object](/en/5x/api#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
+Bind application-level middleware to an instance of the [app object](/en/4x/api/application) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
@@ -262,7 +262,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-For details about error-handling middleware, see: [Error handling](/en/guide/error-handling).
+For details about error-handling middleware, see: [Error handling](/en/4x/guide/error-handling).
 
 ## Built-in middleware
 
@@ -271,9 +271,9 @@ functions that were previously included with Express are now in separate modules
 
 Express has the following built-in middleware functions:
 
-- [express.static](/en/5x/api#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/en/5x/api#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/5x/api#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/4x/api/express/#expressstaticroot-options) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/4x/api/express/#expressjsonoptions) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api/express/#expressurlencodedoptions) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
 
 ## Third-party middleware
 
@@ -296,4 +296,4 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 ```
 
-For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware).
+For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](/en/resources/middleware).
