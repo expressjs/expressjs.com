@@ -7,7 +7,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express es un framework web de enrutamiento y middleware que tiene una funcionalidad mínima propia: Una aplicación Express es esencialmente una serie de llamadas a funciones de middleware.
 
-Las funciones _Middleware_ son funciones que tienen acceso al [objeto de solicitud](/en/5x/api#req) (`req`), el [objeto de respuesta](/en/5x/api#res) (`res`), y la siguiente función de middleware en el ciclo de solicitud y respuesta de la aplicación. La siguiente función middleware se denota comúnmente por una variable llamada `next`.
+Las funciones _Middleware_ son funciones que tienen acceso al [objeto de solicitud](/api#req) (`req`), el [objeto de respuesta](/api#res) (`res`), y la siguiente función de middleware en el ciclo de solicitud y respuesta de la aplicación. La siguiente función middleware se denota comúnmente por una variable llamada `next`.
 
 Las funciones de Middleware pueden realizar las siguientes tareas:
 
@@ -31,7 +31,7 @@ También puede cargar una serie de funciones de middleware juntas, lo que crea u
 
 ## Middleware de nivel de aplicación
 
-Vincular middleware a una instancia del [objeto de aplicación](/en/5x/api#app) usando `app.use()` y `app. ETHOD()` funciona, donde `METHOD` es el método HTTP de la petición que la función middleware maneja (como GET, PUT o POST) en minúsculas.
+Vincular middleware a una instancia del [objeto de aplicación](/api#app) usando `app.use()` y `app. ETHOD()` funciona, donde `METHOD` es el método HTTP de la petición que la función middleware maneja (como GET, PUT o POST) en minúsculas.
 
 Este ejemplo muestra una función de middleware sin ruta de montaje. La función se ejecuta cada vez que la aplicación recibe una solicitud.
 
@@ -262,7 +262,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Para más detalles sobre el middleware de manejo de errores, vea: [Gestión de errores](/en/guide/error-handling).
+Para más detalles sobre el middleware de manejo de errores, vea: [Gestión de errores](/guide/error-handling).
 
 ## Middleware incorporado
 
@@ -271,9 +271,9 @@ del middleware que anteriormente estaban incluidas con Express están ahora en m
 
 Express tiene las siguientes funciones de middleware incorporadas:
 
-- [express.static](/en/5x/api#express.static) sirve activos estáticos como archivos HTML, imágenes, etc.
-- [express.json](/en/5x/api#express.json) analiza las solicitudes entrantes con cargas útiles JSON. **NOTA: Disponible con Express 4.16.0+**
-- [express.urlencoded](/en/5x/api#express.urlencoded) analiza las solicitudes entrantes con payloads codificados por URL. **NOTA: Disponible con Express 4.16.0+**
+- [express.static](/api#express.static) sirve activos estáticos como archivos HTML, imágenes, etc.
+- [express.json](/api#express.json) analiza las solicitudes entrantes con cargas útiles JSON. **NOTA: Disponible con Express 4.16.0+**
+- [express.urlencoded](/api#express.urlencoded) analiza las solicitudes entrantes con payloads codificados por URL. **NOTA: Disponible con Express 4.16.0+**
 
 ## Middleware de terceros
 

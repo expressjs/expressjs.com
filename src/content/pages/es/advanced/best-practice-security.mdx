@@ -36,9 +36,9 @@ Las mejores prácticas de seguridad para aplicaciones Express en producción inc
 
 ## No utilizar versiones obsoletas o vulnerables de Express
 
-Las exprés 2.x y 3.x ya no están mantenidas. No se solucionarán problemas de seguridad y rendimiento en estas versiones. ¡No los utilices! Si no has movido a la versión 4, sigue la [guía de migración](/en/guide/migrating-4) o considera [Opciones de Soporte Comercial](/en/support#commercial-support-options).
+Las exprés 2.x y 3.x ya no están mantenidas. No se solucionarán problemas de seguridad y rendimiento en estas versiones. ¡No los utilices! Si no has movido a la versión 4, sigue la [guía de migración](/guide/migrating-4) o considera [Opciones de Soporte Comercial](/support#commercial-support-options).
 
-También asegúrese de que no está usando ninguna de las versiones Express vulnerables listadas en la [página de actualizaciones de seguridad](/en/advanced/security-updates). Si lo está, actualice a una de las versiones estables, preferiblemente la más reciente.
+También asegúrese de que no está usando ninguna de las versiones Express vulnerables listadas en la [página de actualizaciones de seguridad](/advanced/security-updates). Si lo está, actualice a una de las versiones estables, preferiblemente la más reciente.
 
 ## Usar TLS
 
@@ -139,9 +139,9 @@ determine an app is running Express.
 
 Express también envía sus propios mensajes de respuesta con formato "404 No encontrados" y de error de formato
 . Estos pueden ser cambiados por
-[agregando tu propio gestor de error](/en/starter/faq#how-do-i-handle-404-responses)
+[agregando tu propio gestor de error](/starter/faq#how-do-i-handle-404-responses)
 y
-[escribiendo tu propio gestor de error](/en/guide/error-handling#writing-error-handlers):
+[escribiendo tu propio gestor de error](/guide/error-handling#writing-error-handlers):
 
 ```js
 // last app.use calls right before app.listen():

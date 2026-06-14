@@ -103,7 +103,7 @@ Ou você pode atualizar seu código manualmente:
 
 Um personagem com dois pontos principais (:) no nome do `app. aram(name, fn)` é um remanescente do Express 3, e por uma questão de compatibilidade retrógrada, Express 4 apoiou-o com um aviso de depreciação. Expresso 5 irá ignorá-lo silenciosamente e usar o parâmetro de nome sem prefixá-lo com dois-pontos.
 
-Isso não deve afetar o seu código se você seguir a documentação Express 4 do [app.param](/en/4x/api#app.param), uma vez que não faz qualquer menção ao casal principal.
+Isso não deve afetar o seu código se você seguir a documentação Express 4 do [app.param](/4x/api#app.param), uma vez que não faz qualquer menção ao casal principal.
 
 ### req.param(nome)
 
@@ -405,7 +405,7 @@ A sintaxe de rota de correspondência de um caminho é quando uma string é forn
 
 Solicite aos manipuladores e manipuladores que retornam promessas rejeitadas agora são tratados encaminhando o valor rejeitado como um `Erro` para o erro de manipulação do middleware. Isto significa que usar funções `async` como middleware e manipuladores são mais fáceis do que nunca. Quando um erro é lançado em uma função `async` ou uma promessa rejeitada é `aguardada` dentro de uma função async esses erros serão passados para o manipulador de erro como se chamando `next(err)`.
 
-Detalhes de como Expresso lida com os erros está coberto na [documentação de manipulação de erro](/en/guide/error-handling).
+Detalhes de como Expresso lida com os erros está coberto na [documentação de manipulação de erro](/guide/error-handling).
 
 #### Como atualizar
 

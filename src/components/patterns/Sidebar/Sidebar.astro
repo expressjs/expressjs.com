@@ -3,6 +3,7 @@ import './Sidebar.css';
 import type { HTMLAttributes } from 'astro/types';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { mainMenu } from '@/config/menu/main';
+import { VERSIONS, DEFAULT_VERSION } from '@/config/versions';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { Menu } from '@/config/types';
 import SidebarMenu from './SidebarMenu.astro';
@@ -22,12 +23,8 @@ type Props = HTMLAttributes<'div'> & {
 
 const {
   menu = mainMenu,
-  versions = [
-    { id: '5x', label: 'v5.x', isDefault: true },
-    { id: '4x', label: 'v4.x' },
-    { id: '3x', label: 'v3.x (deprecated)' },
-  ],
-  defaultVersion = '5x',
+  versions = VERSIONS,
+  defaultVersion = DEFAULT_VERSION,
   ...rest
 } = Astro.props;
 

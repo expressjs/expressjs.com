@@ -6,12 +6,12 @@ description: Aprenda cómo definir y usar rutas en aplicaciones Express.js, incl
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 _Routing_ se refiere a cómo responden los extremos (URIs) de una aplicación a las peticiones del cliente.
-Para una introducción al enrutamiento, consulte [Enrutamiento básico](/en/4x/starter/basic-routing).
+Para una introducción al enrutamiento, consulte [Enrutamiento básico](/starter/basic-routing).
 
 Define enrutamiento usando métodos del objeto Express `app` que corresponden a métodos HTTP;
 por ejemplo, `app. et()` para manejar solicitudes GET y `app.post` para manejar solicitudes POST. Para una lista completa,
-vea [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-). También puedes usar [app.all()](/en/4x/api/application#appallpath-callback--callback-) para manejar todos los métodos HTTP y [app. se()](/en/4x/api/application#appusepath-callback--callback) a
-especificar middleware como función de callback (Ver [Usando middleware](/en/4x/guide/using-middleware) para más detalles).
+vea [app.METHOD](/api/application#appmethodpath-callback--callback-). También puedes usar [app.all()](/api/application#appallpath-callback--callback-) para manejar todos los métodos HTTP y [app. se()](/api/application#appusepath-callback--callback) a
+especificar middleware como función de callback (Ver [Usando middleware](/guide/using-middleware) para más detalles).
 
 Estos métodos de enrutamiento especifican una función de callback (a veces llamada "funciones manejadoras") llamada cuando la aplicación recibe una petición a la ruta especificada (endpoint) y el método HTTP. En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada.
 
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express soporta métodos que corresponden a todos los métodos de petición HTTP: `get`, `post`, y así sucesivamente.
-Para una lista completa, vea [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-).
+Para una lista completa, vea [app.METHOD](/api/application#appmethodpath-callback--callback-).
 
 Hay un método especial de enrutamiento, `app.all()`, usado para cargar funciones de middleware en una ruta para _all_ métodos de petición HTTP. Por ejemplo, el siguiente manejador se ejecuta para peticiones a la ruta `"/secret"` ya sea usando `GET`, `POST`, `PUT`, `DELETE`, o cualquier otro método de solicitud HTTP soportado en el [módulo http](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -217,7 +217,7 @@ El carácter <a href="https://github.com/expressjs/express/issues/2495">`*` en e
 
 ## Manejadores de rutas
 
-Puedes proporcionar múltiples funciones de callback que se comportan como [middleware](/en/guide/using-middleware) para gestionar una solicitud. La única excepción es que estos callbacks podrían invocar a `next('route')` para evitar las llamadas restantes de ruta. Se puede utilizar este mecanismo para imponer condiciones previas a una ruta, luego pasar el control a las rutas posteriores si no hay razón para proceder con la ruta actual.
+Puedes proporcionar múltiples funciones de callback que se comportan como [middleware](/guide/using-middleware) para gestionar una solicitud. La única excepción es que estos callbacks podrían invocar a `next('route')` para evitar las llamadas restantes de ruta. Se puede utilizar este mecanismo para imponer condiciones previas a una ruta, luego pasar el control a las rutas posteriores si no hay razón para proceder con la ruta actual.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -312,22 +312,22 @@ app.get(
 
 Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden enviar una respuesta al cliente y terminar el ciclo de solicitud y respuesta. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.
 
-| Método                                                                       | Descripción                                                                                                 |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| [res.download()](/en/4x/api/response#resdownloadpath--filename--options--fn) | Solicitar un archivo para ser descargado.                                                                   |
-| [res.end()](/en/4x/api/response#resenddata-encoding-callback)                | Terminar el proceso de respuesta.                                                                           |
-| [res.json()](/en/4x/api/response#resjsonbody)                                | Enviar una respuesta JSON.                                                                                  |
-| [res.jsonp()](/en/4x/api/response#resjsonpbody)                              | Envía una respuesta JSON con soporte JSONP.                                                                 |
-| [res.redirect()](/en/4x/api/response#resredirectstatus-path)                 | Redirigir una solicitud.                                                                                    |
-| [res.render()](/en/4x/api/response#resrenderview--locals--callback)          | Procesar una plantilla de vista.                                                                            |
-| [res.send()](/en/4x/api/response#ressendbody)                                | Enviar una respuesta de varios tipos.                                                                       |
-| [res.sendFile()](/en/4x/api/response#ressendfilepath--options--fn)           | Enviar un archivo como un flujo de octet.                                                                   |
-| [res.sendStatus()](/en/4x/api/response#ressendstatusstatuscode)              | Establece el código de estado de respuesta y envía su representación de cadena como el cuerpo de respuesta. |
+| Método                                                                 | Descripción                                                                                                 |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Solicitar un archivo para ser descargado.                                                                   |
+| [res.end()](/api/response#resenddata-encoding-callback)                | Terminar el proceso de respuesta.                                                                           |
+| [res.json()](/api/response#resjsonbody)                                | Enviar una respuesta JSON.                                                                                  |
+| [res.jsonp()](/api/response#resjsonpbody)                              | Envía una respuesta JSON con soporte JSONP.                                                                 |
+| [res.redirect()](/api/response#resredirectstatus-path)                 | Redirigir una solicitud.                                                                                    |
+| [res.render()](/api/response#resrenderview--locals--callback)          | Procesar una plantilla de vista.                                                                            |
+| [res.send()](/api/response#ressendbody)                                | Enviar una respuesta de varios tipos.                                                                       |
+| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Enviar un archivo como un flujo de octet.                                                                   |
+| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Establece el código de estado de respuesta y envía su representación de cadena como el cuerpo de respuesta. |
 
 ## app.route()
 
 Puede crear manejadores de rutas encadenables para una ruta usando `app.route()`.
-Debido a que la ruta se especifica en una única ubicación, la creación de rutas modulares es útil, al igual que la reducción de redundancia y tipografías. Para más información sobre rutas, vea: [documentación Router() ](/en/4x/api/router).
+Debido a que la ruta se especifica en una única ubicación, la creación de rutas modulares es útil, al igual que la reducción de redundancia y tipografías. Para más información sobre rutas, vea: [documentación Router() ](/api/router).
 
 Aquí hay un ejemplo de manejadores encadenados de rutas que se definen usando `app.route()`.
 
@@ -388,7 +388,7 @@ app.use('/birds', birds);
 
 La aplicación ahora será capaz de manejar solicitudes a `/birds` y `/birds/about`, así como llamar a la función de middleware `timeLog` que es específica de la ruta.
 
-Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. Para hacerlo accesible, necesitarás pasar la opción `mergeParams` al constructor de Router [reference](/en/4x/api/application#appusepath-callback--callback).
+Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. Para hacerlo accesible, necesitarás pasar la opción `mergeParams` al constructor de Router [reference](/api/application#appusepath-callback--callback).
 
 ```js
 const router = express.Router({ mergeParams: true });

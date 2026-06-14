@@ -7,11 +7,10 @@ import { getAdjacentPages } from '@utils/content';
 import { docsMenu } from '@/config/menu/docs';
 import { apiMenu } from '@/config/menu/api';
 import { resourcesMenu } from '@/config/menu/resources';
+import { DEFAULT_VERSION, VERSION_PREFIXES } from '@/config/versions';
 import type { LanguageCode } from '@i18n/locales';
 
 export async function getStaticPaths() {
-  const DEFAULT_VERSION = '5x';
-  const VERSION_PREFIXES = ['5x', '4x', '3x'];
   const DEFAULT_LANG = 'en';
 
   const pages = await getCollection('docs');

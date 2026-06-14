@@ -6,12 +6,12 @@ description: Apprenez à définir et utiliser des routes dans les applications E
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 _Routing_ indique comment les terminaux (URIs) d'une application répondent aux requêtes du client.
-Pour une introduction au routage, voir [Routage de base](/en/starter/basic-routing).
+Pour une introduction au routage, voir [Routage de base](/starter/basic-routing).
 
 Vous définissez le routage à l'aide des méthodes de l'objet Express `app` qui correspondent aux méthodes HTTP;
 par exemple, `app. et()` pour gérer les requêtes GET et `app.post` pour gérer les requêtes POST. Pour une liste complète,
-voir [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-). Vous pouvez également utiliser [app.all()](/en/5x/api/application#appallpath-callback--callback-) pour gérer toutes les méthodes HTTP et [app. se()](/en/5x/api/application#appusepath-callback--callback) à
-spécifient le middleware comme fonction de callback (Voir [Utilisation du middleware](/en/guide/using-middleware) pour plus de détails).
+voir [app.METHOD](/api/application#appmethodpath-callback--callback-). Vous pouvez également utiliser [app.all()](/api/application#appallpath-callback--callback-) pour gérer toutes les méthodes HTTP et [app. se()](/api/application#appusepath-callback--callback) à
+spécifient le middleware comme fonction de callback (Voir [Utilisation du middleware](/guide/using-middleware) pour plus de détails).
 
 Ces méthodes de routage spécifient une fonction de rappel (parfois appelée "fonctions de gestionnaire") appelée lorsque l'application reçoit une requête vers la route spécifiée (endpoint) et la méthode HTTP. En d'autres termes, l'application "écoute" les requêtes qui correspondent à la(les) route(s) spécifiée(s) et à la(les) méthode(s), et quand il détecte une correspondance, il appelle la fonction de rappel spécifiée.
 
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express supporte les méthodes qui correspondent à toutes les méthodes de requête HTTP : `get`, `post`, et ainsi de suite.
-Pour une liste complète, voir [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-).
+Pour une liste complète, voir [app.METHOD](/api/application#appmethodpath-callback--callback-).
 
 Il y a une méthode de routage spéciale, `app.all()`, utilisée pour charger les fonctions du middleware à un chemin pour _toutes_ les méthodes de requête HTTP. Par exemple, le gestionnaire suivant est exécuté pour les requêtes vers la route `"/secret"` si vous utilisez `GET`, `POST`, `PUT`, `DELETE`, ou toute autre méthode de requête HTTP supportée dans le module [http](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -197,7 +197,7 @@ Voir la [syntaxe correspondante à la route des chemins] (/en/guide/migrating-5#
 
 ## Gestionnaires de routes
 
-Vous pouvez fournir plusieurs fonctions de rappel qui se comportent comme [middleware](/en/guide/using-middleware) pour traiter une requête. La seule exception est que ces callbacks peuvent appeler `next('route')` pour contourner les rappels de route restants. Vous pouvez utiliser ce mécanisme pour imposer des conditions préalables sur une route, passent ensuite le contrôle aux routes suivantes s'il n'y a pas de raison de poursuivre l'itinéraire courant.
+Vous pouvez fournir plusieurs fonctions de rappel qui se comportent comme [middleware](/guide/using-middleware) pour traiter une requête. La seule exception est que ces callbacks peuvent appeler `next('route')` pour contourner les rappels de route restants. Vous pouvez utiliser ce mécanisme pour imposer des conditions préalables sur une route, passent ensuite le contrôle aux routes suivantes s'il n'y a pas de raison de poursuivre l'itinéraire courant.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -292,22 +292,22 @@ app.get(
 
 Les méthodes de l'objet de réponse (`res`) dans la table suivante peuvent envoyer une réponse au client et terminer le cycle de réponse de la requête. Si aucune de ces méthodes n'est appelée à partir d'un gestionnaire d'itinéraire, la requête du client sera suspendue.
 
-| Méthode                                                                      | Libellé                                                                                           |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| [res.download()](/en/5x/api/response#resdownloadpath--filename--options--fn) | Demander au téléchargement un fichier.                                                            |
-| [res.end()](/en/5x/api/response#resenddata-encoding-callback)                | Terminer le processus de réponse.                                                                 |
-| [res.json()](/en/5x/api/response#resjsonbody)                                | Envoyer une réponse JSON.                                                                         |
-| [res.jsonp()](/en/5x/api/response#resjsonpbody)                              | Envoyer une réponse JSON avec le support JSONP.                                                   |
-| [res.redirect()](/en/5x/api/response#resredirectstatus-path)                 | Rediriger une requête.                                                                            |
-| [res.render()](/en/5x/api/response#resrenderview--locals--callback)          | Afficher un modèle de vue.                                                                        |
-| [res.send()](/en/5x/api/response#ressendbody)                                | Envoyer une réponse de différents types.                                                          |
-| [res.sendFile()](/en/5x/api/response#ressendfilepath--options--fn)           | Envoyer un fichier en tant que flux octet.                                                        |
-| [res.sendStatus()](/en/5x/api/response#ressendstatusstatuscode)              | Définit le code de statut de la réponse et envoie sa représentation en tant que corps de réponse. |
+| Méthode                                                                | Libellé                                                                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Demander au téléchargement un fichier.                                                            |
+| [res.end()](/api/response#resenddata-encoding-callback)                | Terminer le processus de réponse.                                                                 |
+| [res.json()](/api/response#resjsonbody)                                | Envoyer une réponse JSON.                                                                         |
+| [res.jsonp()](/api/response#resjsonpbody)                              | Envoyer une réponse JSON avec le support JSONP.                                                   |
+| [res.redirect()](/api/response#resredirectstatus-path)                 | Rediriger une requête.                                                                            |
+| [res.render()](/api/response#resrenderview--locals--callback)          | Afficher un modèle de vue.                                                                        |
+| [res.send()](/api/response#ressendbody)                                | Envoyer une réponse de différents types.                                                          |
+| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Envoyer un fichier en tant que flux octet.                                                        |
+| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Définit le code de statut de la réponse et envoie sa représentation en tant que corps de réponse. |
 
 ## app.route()
 
 Vous pouvez créer des gestionnaires de routes chaînables pour un chemin en utilisant `app.route()`.
-Parce que le chemin est spécifié à un seul endroit, la création de routes modulaires est utile, tout comme la réduction de la redondance et des fautes de frappe. Pour plus d'informations sur les routes, voir : [Documentation de Router()](/en/5x/api/router).
+Parce que le chemin est spécifié à un seul endroit, la création de routes modulaires est utile, tout comme la réduction de la redondance et des fautes de frappe. Pour plus d'informations sur les routes, voir : [Documentation de Router()](/api/router).
 
 Voici un exemple de gestionnaires de routes enchaînés qui sont définis en utilisant `app.route()`.
 
@@ -368,7 +368,7 @@ app.use('/birds', birds);
 
 L'application sera maintenant en mesure de traiter les demandes vers `/birds` et `/birds/about`, ainsi que d'appeler la fonction middleware `timeLog` qui est spécifique à la route.
 
-Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. Pour le rendre accessible, vous devrez passer l'option `mergeParams` au constructeur de routeur [reference](/en/5x/api/application#appusepath-callback--callback).
+Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. Pour le rendre accessible, vous devrez passer l'option `mergeParams` au constructeur de routeur [reference](/api/application#appusepath-callback--callback).
 
 ```js
 const router = express.Router({ mergeParams: true });

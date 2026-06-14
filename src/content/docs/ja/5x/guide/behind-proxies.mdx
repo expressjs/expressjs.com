@@ -86,17 +86,17 @@ app.set('trust proxy', (ip) => {
 
 <ul>
   <li markdown="1">
-    [req.hostname](/en/api#req.hostname) の値は、 `X-Forwarded-Host`
+    [req.hostname](/api#req.hostname) の値は、 `X-Forwarded-Host`
     ヘッダで設定された値から取得されます。 クライアントやプロキシによって設定できます
   </li>
   <li markdown="1">
     `X-Forwarded-Proto` はリバースプロキシによって設定することで、アプリが https`か`http\`
-    か無効な名前かをアプリに伝えることができます。 この値は [req.protocol](/en/api#req.protocol)
+    か無効な名前かをアプリに伝えることができます。 この値は [req.protocol](/api#req.protocol)
     で反映されます。
   </li>
   <li markdown="1">
-    [req.ip](/en/api#req.ip) と [req.ips](/en/api#req.ips) の値は、 ソケットアドレスと
-    `X-Forwarded-For` ヘッダーに基づいて入力されます。 最初の信頼されていないアドレスから始めます
+    [req.ip](/api#req.ip) と [req.ips](/api#req.ips) の値は、 ソケットアドレスと `X-Forwarded-For`
+    ヘッダーに基づいて入力されます。 最初の信頼されていないアドレスから始めます
   </li>
 </ul>
 

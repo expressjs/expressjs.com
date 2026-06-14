@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 O argumento `root` especifica o diretório raiz do qual se destinam os assets estáticos.
-Para obter mais informações sobre o argumento `options`, consulte [express.static](/en/5x/api#express.static).
+Para obter mais informações sobre o argumento `options`, consulte [express.static](/api#express.static).
 
 Por exemplo, use o seguinte código para servir imagens, arquivos CSS e arquivos JavaScript em um diretório chamado `public`:
 
@@ -56,7 +56,7 @@ servindo ativos estáticos.
 
 </Alert>
 
-Para criar um prefixo de caminho virtual (onde o caminho não existe realmente no sistema de arquivos) para arquivos que são servidos pelo `express. função tática`, [especifique um caminho de montagem](/en/5x/api#app.use) para o diretório estático, conforme mostrado abaixo:
+Para criar um prefixo de caminho virtual (onde o caminho não existe realmente no sistema de arquivos) para arquivos que são servidos pelo `express. função tática`, [especifique um caminho de montagem](/api#app.use) para o diretório estático, conforme mostrado abaixo:
 
 ```js
 app.use('/static', express.static('public'));
@@ -79,4 +79,4 @@ const path = require('path');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
-Para mais detalhes sobre a função `serve-static` e suas opções, consulte [serve-static](/en/resources/middleware/serve-static).
+Para mais detalhes sobre a função `serve-static` e suas opções, consulte [serve-static](/resources/middleware/serve-static).

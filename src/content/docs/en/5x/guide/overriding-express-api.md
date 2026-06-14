@@ -14,7 +14,7 @@ Altering the global prototypes will affect all loaded Express apps in the same p
 
 You can override the signature and behavior of existing methods with your own, by assigning a custom function.
 
-Following is an example of overriding the behavior of [res.sendStatus](/en/5x/api/response/#ressendstatusstatuscode).
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatusstatuscode).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {

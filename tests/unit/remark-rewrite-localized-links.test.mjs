@@ -3,14 +3,22 @@ import { test } from 'node:test';
 
 import remarkRewriteLocalizedLinks from '../../src/plugins/remark-rewrite-localized-links.mjs';
 
-const PREFIXES = ['guide', 'starter', 'api'];
+const PREFIXES = ['guide', 'starter', 'api', 'resources', 'advanced', 'support', 'blog'];
+const OPTIONS = {
+  prefixes: PREFIXES,
+  versionedSections: ['api', 'starter'],
+  defaultVersion: '5x',
+};
+
+const API_4X = '/repo/src/content/api/4x/api/response/index.mdx';
 
 // Representative source paths for each collection layout.
 const DOCS_EN_5X = '/repo/src/content/docs/en/5x/guide/routing.md';
 const DOCS_ES_4X = '/repo/src/content/docs/es/4x/guide/routing.md';
-const PAGES_ES = '/repo/src/content/pages/es/guide/routing.md';
+const PAGES_ES = '/repo/src/content/pages/es/guide/migrating-5.mdx';
 const PAGES_DE_RESOURCES = '/repo/src/content/pages/de/resources/middleware/index.md';
 const API_5X = '/repo/src/content/api/5x/api/express/index.mdx';
+const BLOG = '/repo/src/content/blog/2024-10-15-v5-release.md';
 
 /**
  * Runs the plugin against a single link URL for a given source file path and
@@ -20,7 +28,7 @@ const API_5X = '/repo/src/content/api/5x/api/express/index.mdx';
  * @param {string} filePath
  * @param {object} [options]
  */
-function rewriteLink(url, filePath, options = { prefixes: PREFIXES }) {
+function rewriteLink(url, filePath, options = OPTIONS) {
   const node = { type: 'link', url, children: [] };
   const tree = { type: 'root', children: [node] };
 
@@ -29,33 +37,91 @@ function rewriteLink(url, filePath, options = { prefixes: PREFIXES }) {
   return node.url;
 }
 
-test('docs: injects language and version segments', () => {
-  assert.equal(rewriteLink('/guide/routing', DOCS_EN_5X), '/en/5x/guide/routing/');
+test('docs: prefixes the file language to a versioned link', () => {
+  assert.equal(rewriteLink('/5x/api/express', DOCS_EN_5X), '/en/5x/api/express/');
 });
 
-test('docs: derives language and version from the source path', () => {
-  assert.equal(rewriteLink('/guide/routing', DOCS_ES_4X), '/es/4x/guide/routing/');
+test('docs: uses the language of the source file', () => {
+  assert.equal(rewriteLink('/4x/api/router', DOCS_ES_4X), '/es/4x/api/router/');
 });
 
-test('pages: injects language but no version', () => {
-  assert.equal(rewriteLink('/guide/routing', PAGES_ES), '/es/guide/routing/');
+test('docs: preserves a cross-version link (version is never re-derived)', () => {
+  // A 4x file linking to a 5x page must keep the 5x version, only the language changes.
+  assert.equal(rewriteLink('/5x/api/response', DOCS_ES_4X), '/es/5x/api/response/');
 });
 
-test('pages: localizes nested resources by their own language', () => {
-  assert.equal(rewriteLink('/starter/installing', PAGES_DE_RESOURCES), '/de/starter/installing/');
+test('pages: prefixes language to an unversioned link', () => {
+  assert.equal(rewriteLink('/guide/migrating-5', PAGES_ES), '/es/guide/migrating-5/');
 });
 
-test('api: version-first collection falls back to the default language', () => {
+test('pages: localizes resources by the file language', () => {
+  assert.equal(
+    rewriteLink('/resources/middleware', PAGES_DE_RESOURCES),
+    '/de/resources/middleware/'
+  );
+});
+
+test('localizes single-segment sections like support', () => {
+  assert.equal(rewriteLink('/support', PAGES_ES), '/es/support/');
+});
+
+test('api: shared collection falls back to the default language', () => {
   // `api` content is shared across languages, so the path carries no language.
-  assert.equal(rewriteLink('/api/express', API_5X), '/en/api/express/');
+  assert.equal(rewriteLink('/5x/api/router', API_5X), '/en/5x/api/router/');
+});
+
+test('blog: flat shared collection falls back to the default language', () => {
+  // `blog` is flat (no language segment), so the filename must not be read as a language.
+  assert.equal(
+    rewriteLink('/blog/2024-09-29-security-releases', BLOG),
+    '/en/blog/2024-09-29-security-releases/'
+  );
+});
+
+test('versioned section: injects the file version when the link omits one', () => {
+  assert.equal(rewriteLink('/api/express', API_5X), '/en/5x/api/express/');
+  assert.equal(rewriteLink('/api/response', API_4X), '/en/4x/api/response/');
+});
+
+test('versioned section: injects the version for bare api links from docs files', () => {
+  assert.equal(rewriteLink('/api/response', DOCS_ES_4X), '/es/4x/api/response/');
+});
+
+test('versioned section: injects the file version for starter links from docs', () => {
+  assert.equal(rewriteLink('/starter/installing', DOCS_ES_4X), '/es/4x/starter/installing/');
+});
+
+test('versioned section: unversioned collections use the latest version', () => {
+  // A pages/blog file has no version, so a bare api/starter link gets defaultVersion.
+  assert.equal(rewriteLink('/api/express', PAGES_ES), '/es/5x/api/express/');
+  assert.equal(rewriteLink('/api/router', BLOG), '/en/5x/api/router/');
+});
+
+test('versioned section: preserves an explicit (cross-)version', () => {
+  // 4x file linking to 5x api must keep 5x, not be replaced by the file version.
+  assert.equal(rewriteLink('/5x/api/response', API_4X), '/en/5x/api/response/');
+});
+
+test('non-versioned section: never gets a version injected', () => {
+  // `guide` is split across versioned/unversioned content, so it is not in versionedSections.
+  assert.equal(rewriteLink('/guide/routing', DOCS_ES_4X), '/es/guide/routing/');
+});
+
+test('non-versioned section: drops an explicit version (always latest)', () => {
+  // guide/advanced point to the latest, so any version is stripped to the unversioned URL.
+  assert.equal(rewriteLink('/4x/guide/routing', DOCS_ES_4X), '/es/guide/routing/');
+  assert.equal(
+    rewriteLink('/5x/advanced/best-practice-performance', DOCS_EN_5X),
+    '/en/advanced/best-practice-performance/'
+  );
 });
 
 test('skips paths that already start with a language segment', () => {
-  assert.equal(rewriteLink('/en/guide/routing', DOCS_EN_5X), '/en/guide/routing');
+  assert.equal(rewriteLink('/en/5x/guide/routing', DOCS_EN_5X), '/en/5x/guide/routing');
 });
 
-test('skips paths whose first segment is not a configured prefix', () => {
-  assert.equal(rewriteLink('/resources/middleware', DOCS_EN_5X), '/resources/middleware');
+test('skips paths whose target section is not a configured prefix', () => {
+  assert.equal(rewriteLink('/images/express-mw.png', DOCS_EN_5X), '/images/express-mw.png');
 });
 
 test('leaves external URLs untouched', () => {
@@ -72,8 +138,8 @@ test('leaves relative and pure-hash links untouched', () => {
 
 test('preserves query string and hash fragment', () => {
   assert.equal(
-    rewriteLink('/guide/routing?tab=cjs#errors', DOCS_EN_5X),
-    '/en/5x/guide/routing/?tab=cjs#errors'
+    rewriteLink('/5x/api/express#expressstaticroot-options', DOCS_EN_5X),
+    '/en/5x/api/express/#expressstaticroot-options'
   );
 });
 
@@ -83,17 +149,14 @@ test('rewrites reference-style definition nodes', () => {
 
   remarkRewriteLocalizedLinks({ prefixes: PREFIXES })(tree, { path: DOCS_EN_5X });
 
-  assert.equal(node.url, '/en/5x/guide/routing/');
+  assert.equal(node.url, '/en/guide/routing/');
 });
 
-test('falls back to defaults when the path is outside src/content', () => {
+test('falls back to the default language when the path is outside src/content', () => {
   assert.equal(rewriteLink('/guide/routing', '/somewhere/else/file.md'), '/en/guide/routing/');
 });
 
 test('respects custom prefixes from options', () => {
   // `guide` is not configured here, so it must be left untouched.
-  assert.equal(
-    rewriteLink('/guide/routing', DOCS_EN_5X, { prefixes: ['api'] }),
-    '/guide/routing'
-  );
+  assert.equal(rewriteLink('/guide/routing', DOCS_EN_5X, { prefixes: ['api'] }), '/guide/routing');
 });

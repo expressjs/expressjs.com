@@ -5,7 +5,7 @@ description: Learn how to write custom middleware functions for Express.js appli
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Middleware_ functions are functions that have access to the [request object](/en/4x/api/request) (`req`), the [response object](/en/4x/api/response) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_Middleware_ functions are functions that have access to the [request object](/api/request) (`req`), the [response object](/api/response) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 Middleware functions can perform the following tasks:
 
@@ -39,11 +39,10 @@ The following figure shows the elements of a middleware function call:
 </div>
 
 <div class="callout" id="callout5">
-  HTTP [response](/en/4x/api/response) argument to the middleware function, called "res" by
-  convention.
+  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
 </div>
 
-<div class="callout" id="callout6">HTTP [request](/en/4x/api/request) argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 </div>
@@ -171,7 +170,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Here, we use the [`cookie-parser`](/en/resources/middleware/cookie-parser) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+Here, we use the [`cookie-parser`](/resources/middleware/cookie-parser) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
 
 ```js
 const express = require('express');
@@ -209,7 +208,7 @@ functions.
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: [Using Express middleware](/en/4x/guide/using-middleware).
+For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware).
 
 ## Configurable middleware
 
