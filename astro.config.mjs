@@ -10,7 +10,6 @@ import Icons from 'unplugin-icons/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import redirects from './src/config/redirect.js';
-import { DEFAULT_VERSION } from './src/config/versions.ts';
 import { accessibleTablesIntegration } from './src/plugins/rehype-accessible-tables.mjs';
 import remarkRewriteLocalizedLinks from './src/plugins/remark-rewrite-localized-links.mjs';
 import rehypeRewriteLocalizedLinks from './src/plugins/rehype-rewrite-localized-links.mjs';
@@ -20,22 +19,17 @@ const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env
 
 const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 
-// Shared options for the link-localization plugins (remark for Markdown links,
-// rehype for raw HTML/JSX `<a href>`).
-const localizedLinksOptions = {
-  prefixes: ['guide', 'starter', 'api', 'resources', 'advanced', 'support', 'blog'],
-  versionedSections: ['api', 'starter'],
-  defaultVersion: DEFAULT_VERSION,
-};
-
 // https://astro.build/config
 export default defineConfig({
   redirects,
   site,
   markdown: {
-    remarkPlugins: [[remarkRewriteLocalizedLinks, localizedLinksOptions]],
+    // Link localization (Markdown links + raw HTML/JSX `<a href>`). Configuration —
+    // localized sections, versioned sections, default version, and the "global" pages
+    // exception — lives in the plugin defaults; no options needed here.
+    remarkPlugins: [remarkRewriteLocalizedLinks],
     rehypePlugins: [
-      [rehypeRewriteLocalizedLinks, localizedLinksOptions],
+      rehypeRewriteLocalizedLinks,
       rehypeSlug,
       [
         rehypeAutolinkHeadings,

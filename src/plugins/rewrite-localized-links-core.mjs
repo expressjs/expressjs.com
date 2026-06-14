@@ -10,16 +10,45 @@
  * Rules:
  * - Localizes only absolute internal paths whose target section matches a
  *   configured prefix (e.g. `/guide/...`, `/api/...`, `/resources/...`).
- * - Sections listed in `versionedSections` (e.g. `api`, `starter`) keep an
- *   explicit version, or get one injected when the link omits it: the source
- *   file's own version (versioned collections like docs/api), otherwise the
- *   latest version (`defaultVersion`) for unversioned collections (pages/blog).
- * - Other sections (e.g. `guide`, `advanced`) drop any version segment and point
- *   to the latest, since their content is also served at unversioned URLs.
+ * - Sections listed in `versionedSections` (e.g. `api`, `starter`, `guide`,
+ *   `advanced`) carry a version: an explicit one is kept, or the source file's
+ *   version (versioned collections like docs/api) — or the latest
+ *   (`defaultVersion`) for unversioned collections (pages/blog) — is injected.
+ * - "Global" pages inside those sections (the `pages`-collection ones, derived
+ *   from the menu's `global: true` items) have no versioned URL, so they stay
+ *   unversioned. Other sections (`resources`, `support`, `blog`) are never versioned.
  * - Preserves query string and hash fragments.
  * - Skips already-localized paths (e.g. `/en/...`), external URLs, relative
  *   paths and pure-hash anchors.
  */
+
+import { docsMenu } from '../config/menu/docs.ts';
+import { DEFAULT_VERSION } from '../config/versions.ts';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Defaults — tweak these to change how links are localized.
+// (The latest version comes from `src/config/versions.ts`; the unversioned
+// "global" pages are derived from the menu's `global: true` items.)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Sections whose internal links are localized. */
+const DEFAULT_PREFIXES = ['guide', 'starter', 'api', 'resources', 'advanced', 'support', 'blog'];
+
+/** Sections that carry a version (every other section is language-only). */
+const DEFAULT_VERSIONED_SECTIONS = ['api', 'starter', 'guide', 'advanced'];
+
+/** Language used when it cannot be inferred from the source path. */
+const DEFAULT_LANG = 'en';
+
+/**
+ * Collections whose source path has no language segment because the content is
+ * shared across all languages (rendered under every `/{lang}/` route):
+ * - `api` is version-first (`api/5x/api/express.mdx`).
+ * - `blog` is flat (`blog/2024-10-15-v5-release.md`).
+ *
+ * For these the language falls back to the default.
+ */
+const SHARED_COLLECTIONS = new Set(['api', 'blog']);
 
 /**
  * @typedef {Object} LocalizeLinksOptions
@@ -27,8 +56,13 @@
  * @property {string} [defaultLang='en'] Language used when it cannot be inferred from the source path.
  * @property {string} [defaultVersion='5x'] Latest version, injected into versioned-section links
  *   authored in unversioned collections (pages/blog).
- * @property {string[]} [versionedSections=[]] Sections (e.g. `api`, `starter`) whose links get a
- *   version injected when the link omits one. Explicit versions are always preserved.
+ * @property {string[]} [versionedSections=[]] Sections (e.g. `api`, `starter`, `guide`, `advanced`)
+ *   whose links are versioned: the link's own version is kept, or the source file's version (or the
+ *   latest) is injected when the link omits it.
+ * @property {string[]} [unversionedPaths] Specific `section/slug` targets inside a versioned
+ *   section that have no versioned URL (the "global" pages living in the `pages` collection, e.g.
+ *   `guide/migrating-5`). These are forced to the unversioned URL. Defaults to the menu's
+ *   `global: true` items, so this normally needs no configuration.
  */
 
 /**
@@ -41,14 +75,33 @@
 const CONTENT_MARKER = '/src/content/';
 
 /**
- * Collections whose source path has no language segment because the content is
- * shared across all languages (rendered under every `/{lang}/` route):
- * - `api` is version-first (`api/5x/api/express.mdx`).
- * - `blog` is flat (`blog/2024-10-15-v5-release.md`).
- *
- * For these the language falls back to the default.
+ * Collects the `section/slug` of every menu item flagged `global: true` — pages that
+ * live in the unversioned `pages` collection and therefore have no versioned URL.
+ * @param {{ items?: any[]; sections?: { items?: any[] }[] }} menu
+ * @returns {string[]}
  */
-const SHARED_COLLECTIONS = new Set(['api', 'blog']);
+function collectGlobalPaths(menu) {
+  /** @type {string[]} */
+  const paths = [];
+  const visitItems = (items = []) => {
+    for (const item of items) {
+      if (item.submenu) visit(item.submenu);
+      else if (item.global && item.href) paths.push(item.href.replace(/^\/+|\/+$/g, ''));
+    }
+  };
+  const visit = (m) => {
+    visitItems(m.items);
+    for (const section of m.sections ?? []) visitItems(section.items);
+  };
+  visit(menu);
+  return paths;
+}
+
+/**
+ * Default unversioned targets: the "global" pages declared in the menu. Computed
+ * once so consumers (and `astro.config`) don't have to wire this up themselves.
+ */
+const DEFAULT_UNVERSIONED_PATHS = collectGlobalPaths(docsMenu);
 
 /**
  * Validates whether a path segment matches version format (e.g. `5x`, `4x`).
@@ -100,19 +153,25 @@ function ensureTrailingSlash(pathname) {
 
 /**
  * Normalizes plugin options into ready-to-use lookup sets and defaults.
+ *
+ * The defaults match this site, so the plugins work with no options; pass options
+ * only to override.
+ *
  * @param {LocalizeLinksOptions} [options]
  */
 export function resolveOptions(options = {}) {
   const {
-    prefixes = ['guide'],
-    defaultLang = 'en',
-    defaultVersion = '5x',
-    versionedSections = [],
+    prefixes = DEFAULT_PREFIXES,
+    defaultLang = DEFAULT_LANG,
+    defaultVersion = DEFAULT_VERSION,
+    versionedSections = DEFAULT_VERSIONED_SECTIONS,
+    unversionedPaths = DEFAULT_UNVERSIONED_PATHS,
   } = options;
 
   return {
     prefixesSet: new Set(prefixes),
     versionedSectionsSet: new Set(versionedSections),
+    unversionedPathsSet: new Set(unversionedPaths),
     defaultLang,
     defaultVersion,
   };
@@ -163,11 +222,9 @@ export function deriveContextFromFile(filePath, defaultLang) {
  *
  * @param {string} url
  * @param {RewriteContext} context
- * @param {Set<string>} prefixesSet
- * @param {Set<string>} versionedSectionsSet
- * @param {string} defaultVersion
+ * @param {ReturnType<typeof resolveOptions>} config
  */
-export function rewriteUrl(url, context, prefixesSet, versionedSectionsSet, defaultVersion) {
+export function rewriteUrl(url, context, config) {
   if (typeof url !== 'string' || !url) {
     return url;
   }
@@ -182,6 +239,8 @@ export function rewriteUrl(url, context, prefixesSet, versionedSectionsSet, defa
     return url;
   }
 
+  const { prefixesSet, versionedSectionsSet, unversionedPathsSet, defaultVersion } = config;
+
   const segments = pathname.replace(/^\/+/, '').split('/');
   const hasVersion = isVersionSegment(segments[0]);
   const section = hasVersion ? segments[1] : segments[0];
@@ -192,9 +251,13 @@ export function rewriteUrl(url, context, prefixesSet, versionedSectionsSet, defa
 
   // Path without the (optional) leading version segment.
   const rest = hasVersion ? segments.slice(1) : segments;
+  const targetPath = rest.filter(Boolean).join('/');
 
+  // A versioned section is versioned unless this specific target is a "global"
+  // page (which only exists at an unversioned URL). When versioned, keep the
+  // link's own version or inject the source file's (or the latest) when omitted.
   let versionPrefix = '';
-  if (versionedSectionsSet.has(section)) {
+  if (versionedSectionsSet.has(section) && !unversionedPathsSet.has(targetPath)) {
     const version = hasVersion ? segments[0] : context.version || defaultVersion;
     if (version) {
       versionPrefix = `/${version}`;

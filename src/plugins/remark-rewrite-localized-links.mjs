@@ -21,15 +21,14 @@ import {
  * @param {import('./rewrite-localized-links-core.mjs').LocalizeLinksOptions} [options]
  */
 export default function remarkRewriteLocalizedLinks(options = {}) {
-  const { prefixesSet, versionedSectionsSet, defaultLang, defaultVersion } =
-    resolveOptions(options);
+  const config = resolveOptions(options);
 
   return (tree, file) => {
-    const context = deriveContextFromFile(file?.path, defaultLang);
+    const context = deriveContextFromFile(file?.path, config.defaultLang);
 
     walkTree(tree, (node) => {
       if (node.type === 'link' || node.type === 'definition') {
-        node.url = rewriteUrl(node.url, context, prefixesSet, versionedSectionsSet, defaultVersion);
+        node.url = rewriteUrl(node.url, context, config);
       }
     });
   };

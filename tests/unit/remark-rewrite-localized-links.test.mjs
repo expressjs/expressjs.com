@@ -6,8 +6,18 @@ import remarkRewriteLocalizedLinks from '../../src/plugins/remark-rewrite-locali
 const PREFIXES = ['guide', 'starter', 'api', 'resources', 'advanced', 'support', 'blog'];
 const OPTIONS = {
   prefixes: PREFIXES,
-  versionedSections: ['api', 'starter'],
+  versionedSections: ['api', 'starter', 'guide', 'advanced'],
   defaultVersion: '5x',
+  // "global" guide/advanced pages (live in the unversioned `pages` collection).
+  unversionedPaths: [
+    'guide/database-integration',
+    'guide/migrating-4',
+    'guide/migrating-5',
+    'advanced/best-practice-performance',
+    'advanced/best-practice-security',
+    'advanced/healthcheck-graceful-shutdown',
+    'advanced/security-updates',
+  ],
 };
 
 const API_4X = '/repo/src/content/api/4x/api/response/index.mdx';
@@ -102,18 +112,42 @@ test('versioned section: preserves an explicit (cross-)version', () => {
   assert.equal(rewriteLink('/5x/api/response', API_4X), '/en/5x/api/response/');
 });
 
-test('non-versioned section: never gets a version injected', () => {
-  // `guide` is split across versioned/unversioned content, so it is not in versionedSections.
-  assert.equal(rewriteLink('/guide/routing', DOCS_ES_4X), '/es/guide/routing/');
+test('split section: a bare guide link gets the source file version', () => {
+  // `routing` is a versioned docs page → gets the file's version.
+  assert.equal(rewriteLink('/guide/routing', DOCS_ES_4X), '/es/4x/guide/routing/');
+  assert.equal(rewriteLink('/guide/routing', DOCS_EN_5X), '/en/5x/guide/routing/');
 });
 
-test('non-versioned section: drops an explicit version (always latest)', () => {
-  // guide/advanced point to the latest, so any version is stripped to the unversioned URL.
-  assert.equal(rewriteLink('/4x/guide/routing', DOCS_ES_4X), '/es/guide/routing/');
+test('split section: an explicit version on a guide link is preserved', () => {
+  assert.equal(rewriteLink('/4x/guide/routing', DOCS_EN_5X), '/en/4x/guide/routing/');
+});
+
+test('split section: a global page stays unversioned (no versioned URL exists)', () => {
+  // `migrating-5`/`best-practice-performance` live in `pages`.
+  assert.equal(rewriteLink('/guide/migrating-5', DOCS_EN_5X), '/en/guide/migrating-5/');
   assert.equal(
-    rewriteLink('/5x/advanced/best-practice-performance', DOCS_EN_5X),
+    rewriteLink('/advanced/best-practice-performance', DOCS_EN_5X),
     '/en/advanced/best-practice-performance/'
   );
+});
+
+test('split section: an explicit version on a global page is dropped', () => {
+  assert.equal(rewriteLink('/5x/guide/migrating-5', DOCS_EN_5X), '/en/guide/migrating-5/');
+});
+
+test('global pages default to the menu (no unversionedPaths needed)', () => {
+  // Without passing unversionedPaths, the plugin derives them from the menu's global items.
+  const opts = { prefixes: PREFIXES, versionedSections: ['guide'], defaultVersion: '5x' };
+  assert.equal(rewriteLink('/guide/migrating-5', DOCS_EN_5X, opts), '/en/guide/migrating-5/');
+  assert.equal(rewriteLink('/guide/routing', DOCS_EN_5X, opts), '/en/5x/guide/routing/');
+});
+
+test('resources/support/blog: language only, never a version', () => {
+  assert.equal(
+    rewriteLink('/resources/middleware', PAGES_DE_RESOURCES),
+    '/de/resources/middleware/'
+  );
+  assert.equal(rewriteLink('/support', PAGES_ES), '/es/support/');
 });
 
 test('skips paths that already start with a language segment', () => {
@@ -147,13 +181,16 @@ test('rewrites reference-style definition nodes', () => {
   const node = { type: 'definition', identifier: 'routing', url: '/guide/routing' };
   const tree = { type: 'root', children: [node] };
 
-  remarkRewriteLocalizedLinks({ prefixes: PREFIXES })(tree, { path: DOCS_EN_5X });
+  remarkRewriteLocalizedLinks(OPTIONS)(tree, { path: DOCS_EN_5X });
 
-  assert.equal(node.url, '/en/guide/routing/');
+  assert.equal(node.url, '/en/5x/guide/routing/');
 });
 
 test('falls back to the default language when the path is outside src/content', () => {
-  assert.equal(rewriteLink('/guide/routing', '/somewhere/else/file.md'), '/en/guide/routing/');
+  assert.equal(
+    rewriteLink('/resources/middleware', '/somewhere/else/file.md'),
+    '/en/resources/middleware/'
+  );
 });
 
 test('respects custom prefixes from options', () => {

@@ -41,13 +41,11 @@ function findMdxHrefAttribute(node) {
  * @param {import('./rewrite-localized-links-core.mjs').LocalizeLinksOptions} [options]
  */
 export default function rehypeRewriteLocalizedLinks(options = {}) {
-  const { prefixesSet, versionedSectionsSet, defaultLang, defaultVersion } =
-    resolveOptions(options);
+  const config = resolveOptions(options);
 
   return (tree, file) => {
-    const context = deriveContextFromFile(file?.path, defaultLang);
-    const localize = (url) =>
-      rewriteUrl(url, context, prefixesSet, versionedSectionsSet, defaultVersion);
+    const context = deriveContextFromFile(file?.path, config.defaultLang);
+    const localize = (url) => rewriteUrl(url, context, config);
 
     walkTree(tree, (node) => {
       // Standard hast anchor (from Markdown or raw HTML in plain `.md`).
