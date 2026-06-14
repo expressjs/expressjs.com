@@ -55,7 +55,7 @@ En fin de compte, la responsabilité de valider et de gérer correctement les ty
 
 ### Empêcher les redirections ouvertes
 
-Un exemple de saisie potentiellement dangereuse de l'utilisateur est une redirection \_ouverte, où une application accepte une URL comme entrée utilisateur (souvent dans la requête URL, par exemple `? rl=https://exemple. ) et utilise `res.redirect`pour définir l'en-tête`location\` et
+Un exemple de saisie potentiellement dangereuse de l'utilisateur est une redirection \_ouverte, où une application accepte une URL comme entrée utilisateur (souvent dans la requête URL, par exemple `?url=https://example.com`) et utilise `res.redirect` pour définir l'en-tête `location` et
 retourne un statut 3xx.
 
 Une application doit valider qu'elle prend en charge la redirection vers l'URL entrante pour éviter d'envoyer des utilisateurs à des liens malveillants tels que des sites Web d'hameçonnage, entre autres risques.

@@ -55,7 +55,7 @@ Letztlich liegt die Verantwortung für die Validierung und korrekte Handhabung d
 
 ### Offene Weiterleitungen verhindern
 
-Ein Beispiel für potenziell gefährliche Benutzereingaben ist eine _open redirect_, wo eine Anwendung akzeptiert eine URL als Benutzereingabe (oft in der URL-Abfrage, zum Beispiel "? rl=https://Beispiel. om`) und verwendet `res.redirect`um den`location\` Header und
+Ein Beispiel für potenziell gefährliche Benutzereingaben ist eine _open redirect_, wo eine Anwendung akzeptiert eine URL als Benutzereingabe (oft in der URL-Abfrage, zum Beispiel `?url=https://example.com`) und verwendet `res.redirect`, um den `location`-Header und
 einen 3xx Status zu setzen.
 
 Eine Anwendung muss überprüfen, dass sie eine Umleitung auf die eingehende URL unterstützt, um zu vermeiden, dass Benutzer an böswillige Links wie Phishing-Websites geschickt werden unter anderem Risiken.

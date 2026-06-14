@@ -55,7 +55,7 @@ In definitiva, la responsabilità di convalidare e gestire correttamente i tipi 
 
 ### Impedisci reindirizzamenti aperti
 
-Un esempio di input utente potenzialmente pericoloso è un _open redirect_, dove un'applicazione accetta un URL come input utente (spesso nella domanda URL, ad esempio `? rl=https://esempio. om`) e utilizza `res.redirect` per impostare l'intestazione `location` e
+Un esempio di input utente potenzialmente pericoloso è un _open redirect_, dove un'applicazione accetta un URL come input utente (spesso nella domanda URL, ad esempio `?url=https://example.com`) e utilizza `res.redirect` per impostare l'intestazione `location` e
 restituisce uno stato 3xx.
 
 Un'applicazione deve convalidare che supporta il reindirizzamento all'URL in arrivo per evitare di inviare gli utenti a link dannosi come siti web di phishing, tra gli altri rischi.

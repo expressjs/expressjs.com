@@ -55,7 +55,7 @@ En última instancia, la responsabilidad de validar y manejar correctamente los 
 
 ### Evitar redirecciones abiertas
 
-Un ejemplo de entrada de usuario potencialmente peligrosa es una _open redirect_, donde una aplicación acepta una URL como entrada de usuario (a menudo en la consulta de URL, por ejemplo `? rl=https://ejemplo. om`) y usa `res.redirect` para establecer la cabecera `location` y
+Un ejemplo de entrada de usuario potencialmente peligrosa es una _open redirect_, donde una aplicación acepta una URL como entrada de usuario (a menudo en la consulta de URL, por ejemplo `?url=https://example.com`) y usa `res.redirect` para establecer la cabecera `location` y
 devuelve un estado de 3xx.
 
 Una aplicación debe validar que soporta redirección a la URL entrante para evitar enviar usuarios a enlaces maliciosos como sitios web de phishing, entre otros riesgos.

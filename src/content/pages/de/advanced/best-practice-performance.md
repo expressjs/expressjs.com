@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Für eine stark frequentierte Website in der Produktion, der beste Weg zur Komprimierung ist die Implementierung auf umgekehrter Proxyebene (siehe [Reverse Proxy](#use-a-reverse-proxy)) . In diesem Fall brauchen Sie keine Komprimierungsmittelware. Details zum Aktivieren der gzip-Komprimierung in Nginx finden Sie unter [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) in der Nginx-Dokumentation.
+Für eine stark frequentierte Website in der Produktion, der beste Weg zur Komprimierung ist die Implementierung auf umgekehrter Proxyebene (siehe [Reverse Proxy](#use-a-reverse-proxy)) . In diesem Fall brauchen Sie keine Komprimierungsmittelware. Details zum Aktivieren der gzip-Komprimierung in Nginx finden Sie unter [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in der Nginx-Dokumentation.
 
 ### Keine synchronen Funktionen verwenden
 
@@ -49,11 +49,11 @@ Synchronische Funktionen und Methoden binden den Ausführungsprozess bis sie zur
 
 Obwohl Node und viele Module synchrone und asynchrone Versionen ihrer Funktionen liefern, verwenden Sie immer die asynchrone Version in der Produktion. Die einzige Zeit, in der eine synchrone Funktion gerechtfertigt werden kann, ist beim ersten Start.
 
-Du kannst das `--trace-sync-io` Kommandozeilen-Flag verwenden, um eine Warnung und einen Stack-Trace zu drucken, wann immer deine Anwendung eine synchrone API verwendet. Natürlich möchten Sie dies nicht in der Produktion verwenden, sondern vielmehr sicherstellen, dass Ihr Code produktionsbereit ist. Weitere Informationen finden Sie in der [Knoten Kommandozeilenoptionen Dokumentation](https://nodejs.org/api/cli#cli_trace_sync_io) .
+Du kannst das `--trace-sync-io` Kommandozeilen-Flag verwenden, um eine Warnung und einen Stack-Trace zu drucken, wann immer deine Anwendung eine synchrone API verwendet. Natürlich möchten Sie dies nicht in der Produktion verwenden, sondern vielmehr sicherstellen, dass Ihr Code produktionsbereit ist. Weitere Informationen finden Sie in der [Knoten Kommandozeilenoptionen Dokumentation](https://nodejs.org/api/cli.html#trace-sync-io) .
 
 ### Logging korrekt
 
-Im Allgemeinen gibt es zwei Gründe für die Protokollierung aus Ihrer App: Für das Debuggen und für die Protokollierung von App-Aktivitäten (im Wesentlichen alles andere). Die Verwendung von `console.log()` oder `console.error()` zum Drucken von Logmeldungen an das Terminal ist gängige Praxis in der Entwicklung. Aber [diese Funktionen sind synchronisiert](https://nodejs.org/api/console#console), wenn das Ziel ein Terminal oder eine Datei ist so dass sie nicht für die Produktion geeignet sind, es sei denn, Sie rollen die Ausgabe zu einem anderen Programm.
+Im Allgemeinen gibt es zwei Gründe für die Protokollierung aus Ihrer App: Für das Debuggen und für die Protokollierung von App-Aktivitäten (im Wesentlichen alles andere). Die Verwendung von `console.log()` oder `console.error()` zum Drucken von Logmeldungen an das Terminal ist gängige Praxis in der Entwicklung. Aber [diese Funktionen sind synchronisiert](https://nodejs.org/api/console.html#console), wenn das Ziel ein Terminal oder eine Datei ist so dass sie nicht für die Produktion geeignet sind, es sei denn, Sie rollen die Ausgabe zu einem anderen Programm.
 
 #### Zum Debuggen
 
@@ -134,9 +134,9 @@ Best Practices ist es, Fehler so nah wie möglich an der Website zu behandeln. S
 
 Eine Sache, die du _nicht_ tun solltest ist, auf das `uncaptException` Event zu hören emittiert, wenn eine Ausnahme den ganzen Weg zurück zur Ereignis-Schleife weht. Das Hinzufügen eines Ereignis-Listeners für `uncaughtException` ändert das Standardverhalten des Prozesses, der auf eine Ausnahme stößt; wird der Prozess trotz der Ausnahme weiterhin laufen. Dies könnte nach einer guten Möglichkeit klingen, um zu verhindern, dass Ihre App abstürzt, aber die Anwendung nach einer nicht gefangenen Ausnahme weiterhin zu laufen ist eine gefährliche Praxis und wird nicht empfohlen, weil der Zustand des Prozesses unzuverlässig und unberechenbar wird.
 
-Zusätzlich wird die Verwendung von `uncaughtException` offiziell als [crude]anerkannt (https://nodejs.org/api/process#process_event_uncaughtexception). Also ist das Hören auf `uncaughtException` eine schlechte Idee. Aus diesem Grund empfehlen wir Dinge wie mehrere Prozesse und Supervisoren: Absturz und Neustart sind oft der zuverlässigste Weg, um einen Fehler zu beheben.
+Zusätzlich wird die Verwendung von `uncaughtException` offiziell als [crude]anerkannt (https://nodejs.org/api/process.html#event-uncaughtexception). Also ist das Hören auf `uncaughtException` eine schlechte Idee. Aus diesem Grund empfehlen wir Dinge wie mehrere Prozesse und Supervisoren: Absturz und Neustart sind oft der zuverlässigste Weg, um einen Fehler zu beheben.
 
-Wir empfehlen auch nicht [domains]zu verwenden (https://nodejs.org/api/domain). Es löst das Problem im Allgemeinen nicht und ist ein veraltetes Modul.
+Wir empfehlen auch nicht [domains]zu verwenden (https://nodejs.org/api/domain.html). Es löst das Problem im Allgemeinen nicht und ist ein veraltetes Modul.
 
 ## Dinge zu tun in Ihrer Umgebung / Einrichtung
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Weitere Informationen zum System finden Sie unter [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
+Weitere Informationen zum System finden Sie unter [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Starte deine App in einem Cluster
 
@@ -254,7 +254,7 @@ In geclusterten Apps können Worker-Prozesse individuell abstürzen, ohne den Re
 
 #### Cluster-Modul des Knotens
 
-Clustering wird mit Knotens [Cluster-Modul](https://nodejs.org/api/cluster) ermöglicht. Dies ermöglicht es einem Master-Prozess, Worker-Prozesse zu generieren und eingehende Verbindungen unter den Arbeitern zu verteilen.
+Clustering wird mit Knotens [Cluster-Modul](https://nodejs.org/api/cluster.html) ermöglicht. Dies ermöglicht es einem Master-Prozess, Worker-Prozesse zu generieren und eingehende Verbindungen unter den Arbeitern zu verteilen.
 
 #### PM2 verwenden
 

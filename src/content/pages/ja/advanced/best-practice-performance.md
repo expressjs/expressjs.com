@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). その場合、圧縮ミドルウェアを使用する必要はありません。 Nginx で gzip 圧縮を有効にする方法については、Nginx ドキュメントの [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) を参照してください。
+For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). その場合、圧縮ミドルウェアを使用する必要はありません。 Nginx で gzip 圧縮を有効にする方法については、Nginx ドキュメントの [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) を参照してください。
 
 ### 同期関数を使用しない
 
@@ -49,11 +49,11 @@ For a high-traffic website in production, the best way to put compression in pla
 
 Node と多くのモジュールは同期バージョンと非同期バージョンの関数を提供しますが、本番環境では常に非同期バージョンを使用します。 同期関数を正当化できる唯一の時間は、最初の起動時です。
 
-`--trace-sync-io` コマンドラインフラグを使用すると、アプリケーションが同期 API を使用するたびに警告とスタックトレースを表示できます。 もちろん、本番環境では使用したくないのではなく、コードが本番環境で使用できるようにしてください。 詳細は [node command-line options documentation](https://nodejs.org/api/cli#cli_trace_sync_io) を参照してください。
+`--trace-sync-io` コマンドラインフラグを使用すると、アプリケーションが同期 API を使用するたびに警告とスタックトレースを表示できます。 もちろん、本番環境では使用したくないのではなく、コードが本番環境で使用できるようにしてください。 詳細は [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) を参照してください。
 
 ### 正しくログを行う
 
-一般的に、アプリからログを記録するには、次の2つの理由があります。デバッグとアプリアクティビティのロギング(基本的には他のすべて)です。 `console.log()` または `console.error()` を使って、ターミナルにログメッセージを出力するのが一般的です。 デスティネーションが端末やファイルの場合、[これらの関数は同期されます](https://nodejs.org/api/console#console) 別のプログラムに出力を送らない限り生産には向いていません
+一般的に、アプリからログを記録するには、次の2つの理由があります。デバッグとアプリアクティビティのロギング(基本的には他のすべて)です。 `console.log()` または `console.error()` を使って、ターミナルにログメッセージを出力するのが一般的です。 デスティネーションが端末やファイルの場合、[これらの関数は同期されます](https://nodejs.org/api/console.html#console) 別のプログラムに出力を送らない限り生産には向いていません
 
 #### デバッグ用
 
@@ -134,9 +134,9 @@ app.use(async (req, res, next) => {
 
 `unchaughtException`をリッスンするのは\_しないでください。 イベントループに戻るまで例外が発生した場合に発生します。 `uncaughtException` に対してイベントリスナーを追加すると、例外に遭遇するプロセスのデフォルトの動作が変更されます。 例外にもかかわらずこのプロセスは続けられます これはアプリがクラッシュするのを防ぐ良い方法に思えるかもしれません。 しかし、未取得の例外が危険な方法であり、推奨されていない場合、アプリを実行し続けます。 プロセスの状態は信頼できず予測不能になるからです
 
-さらに、 `uncaughtException` を使用すると、公式に [crude](https://nodejs.org/api/process#process_event_uncaughtexception) として認識されます。 ですから、 `unchaughtException` を聴くのは悪い考えです。 このため、複数のプロセスやスーパーバイザのようなものをお勧めします。クラッシュと再起動は、多くの場合、エラーから回復する最も信頼性の高い方法です。
+さらに、 `uncaughtException` を使用すると、公式に [crude](https://nodejs.org/api/process.html#event-uncaughtexception) として認識されます。 ですから、 `unchaughtException` を聴くのは悪い考えです。 このため、複数のプロセスやスーパーバイザのようなものをお勧めします。クラッシュと再起動は、多くの場合、エラーから回復する最も信頼性の高い方法です。
 
-また、 [domains](https://nodejs.org/api/domain) の使用はお勧めしません。 これは一般的に問題を解決せず、非推奨のモジュールです。
+また、 [domains](https://nodejs.org/api/domain.html) の使用はお勧めしません。 これは一般的に問題を解決せず、非推奨のモジュールです。
 
 ## 環境/設定
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-systemd の詳細については、[systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit)を参照してください。
+systemd の詳細については、[systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html)を参照してください。
 
 ### クラスターでアプリを実行
 
@@ -254,7 +254,7 @@ systemd の詳細については、[systemd reference (man page)](http://www.fre
 
 #### ノードのクラスタモジュールの使用
 
-ノードの [cluster module](https://nodejs.org/api/cluster) でクラスタリングが可能になりました。 これにより、マスタープロセスはワーカープロセスを生成し、ワーカー間の受信接続を分配することができます。
+ノードの [cluster module](https://nodejs.org/api/cluster.html) でクラスタリングが可能になりました。 これにより、マスタープロセスはワーカープロセスを生成し、ワーカー間の受信接続を分配することができます。
 
 #### PM2の使用
 

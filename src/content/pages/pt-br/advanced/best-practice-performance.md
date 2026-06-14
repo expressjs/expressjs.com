@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Para um sítio web de alto tráfego, em produção, a melhor maneira de colocar a compressão no lugar é implementá-la a um nível de proxy reverso (veja [usar um proxy reverso](#use-a-reverse-proxy)). Nesse caso, não é necessário utilizar um middleware de compressão. Para detalhes sobre como ativar a compressão gzip no Nginx, consulte [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) na documentação do Nginx.
+Para um sítio web de alto tráfego, em produção, a melhor maneira de colocar a compressão no lugar é implementá-la a um nível de proxy reverso (veja [usar um proxy reverso](#use-a-reverse-proxy)). Nesse caso, não é necessário utilizar um middleware de compressão. Para detalhes sobre como ativar a compressão gzip no Nginx, consulte [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) na documentação do Nginx.
 
 ### Não usar funções síncronas
 
@@ -49,11 +49,11 @@ Os métodos e funções síncríveis ligam o processo de execução até que ret
 
 Embora o Node e muitos módulos fornecem versões sincronizadas e assíncronas de suas funções, sempre use a versão assíncrona em produção. O único momento em que uma função síncrona pode ser justificada é na inicialização inicial.
 
-Você pode usar o sinalizador de linha de comando `--trace-sync-io` para imprimir um aviso e um rastreamento de pilha sempre que seu aplicativo usar uma API síncrona. Claro, você não gostaria de usar isto em produção, mas sim de garantir que seu código esteja pronto para produção. Veja a [documentação de opções de linha de comando do nó](https://nodejs.org/api/cli#cli_trace_sync_io) para mais informações.
+Você pode usar o sinalizador de linha de comando `--trace-sync-io` para imprimir um aviso e um rastreamento de pilha sempre que seu aplicativo usar uma API síncrona. Claro, você não gostaria de usar isto em produção, mas sim de garantir que seu código esteja pronto para produção. Veja a [documentação de opções de linha de comando do nó](https://nodejs.org/api/cli.html#trace-sync-io) para mais informações.
 
 ### Faça o login corretamente
 
-Em geral, existem duas razões para registrar seu aplicativo: para depuração e para registrar a atividade do aplicativo (essencialmente, tudo o mais). Usar `console.log()` ou `console.error()` para imprimir mensagens de log no terminal é uma prática comum de desenvolvimento. Mas [essas funções são sincronizadas](https://nodejs.org/api/console#console) quando o destino é um terminal ou um arquivo, então eles não são adequados para produção, a menos que você canalize a saída para outro programa.
+Em geral, existem duas razões para registrar seu aplicativo: para depuração e para registrar a atividade do aplicativo (essencialmente, tudo o mais). Usar `console.log()` ou `console.error()` para imprimir mensagens de log no terminal é uma prática comum de desenvolvimento. Mas [essas funções são sincronizadas](https://nodejs.org/api/console.html#console) quando o destino é um terminal ou um arquivo, então eles não são adequados para produção, a menos que você canalize a saída para outro programa.
 
 #### Para depuração
 
@@ -134,9 +134,9 @@ A melhor prática é lidar com os erros o mais próximo possível do site. Entã
 
 Uma coisa que você não deveria fazer é ouvir o evento `uncaughtException`, emitido quando uma exceção bolha até o laço de repetição do evento. Adicionando um listener de eventos para `uncaughtException` mudará o comportamento padrão do processo que está encontrando uma exceção; o processo continuará a decorrer apesar da excepção. Isso pode soar como uma boa maneira de impedir que seu aplicativo caia, mas continuar a executar o aplicativo após uma exceção não detectada é uma prática perigosa e não é recomendado, porque o estado do processo se torna pouco fiável e imprevisível.
 
-Além disso, usar `uncaughtException` é oficialmente reconhecido como [crude](https://nodejs.org/api/process#process_event_uncaughtexception). Então ouvir por `uncaughtException` é apenas uma má ideia. É por isso que recomendamos coisas como processos múltiplos e supervisores: falhar e reiniciar é muitas vezes a maneira mais confiável de recuperar de um erro.
+Além disso, usar `uncaughtException` é oficialmente reconhecido como [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Então ouvir por `uncaughtException` é apenas uma má ideia. É por isso que recomendamos coisas como processos múltiplos e supervisores: falhar e reiniciar é muitas vezes a maneira mais confiável de recuperar de um erro.
 
-Também não recomendamos o uso de [domains](https://nodejs.org/api/domain). Geralmente isso não resolve o problema e é um módulo obsoleto.
+Também não recomendamos o uso de [domains](https://nodejs.org/api/domain.html). Geralmente isso não resolve o problema e é um módulo obsoleto.
 
 ## Coisas a fazer no seu ambiente / configuração
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Para obter mais informações sobre o sistema, consulte a [referência do sistema (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
+Para obter mais informações sobre o sistema, consulte a [referência do sistema (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Executar seu aplicativo em um cluster
 
@@ -254,7 +254,7 @@ Em apps agrupados, os processos dos trabalhadores podem falhar individualmente s
 
 #### Usando módulo de cluster do Node
 
-É possível agrupar com o [módulo cluster do Node](https://nodejs.org/api/cluster). Isto permite a um processo mestre gerar processos de trabalhadores e distribuir conexões de entrada entre os trabalhadores.
+É possível agrupar com o [módulo cluster do Node](https://nodejs.org/api/cluster.html). Isto permite a um processo mestre gerar processos de trabalhadores e distribuir conexões de entrada entre os trabalhadores.
 
 #### Usando PM2
 
