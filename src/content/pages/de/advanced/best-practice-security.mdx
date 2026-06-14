@@ -44,7 +44,7 @@ Vergewissern Sie sich auch, dass Sie keine der verwundbaren Express-Versionen au
 
 Wenn Ihre App sensible Daten behandelt oder übermittelt, verwenden Sie [Transport-Layer-Sicherheit](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) um die Verbindung und die Daten zu sichern. Diese Technologie verschlüsselt Daten, bevor sie vom Client an den Server gesendet werden, und verhindert so einige häufige (und einfache) Hacks. Obwohl Ajax und POST Anfragen möglicherweise nicht sichtbar sind und im Browser "versteckt" zu sein scheinen, ihr Netzwerkverkehr ist anfällig für [Paket-Sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) und [Man-in-the-middle-Angriffe](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Sie können mit der Verschlüsselung Secure Socket Layer (SSL) vertraut sein. [TLS ist einfach die nächste Weiterentwicklung von SSL](<%3Chttps://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx%3E>). Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Im Allgemeinen empfehlen wir Nginx mit TLS umzugehen. Für eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) siehe [Empfohlene Server-Konfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Sie können mit der Verschlüsselung Secure Socket Layer (SSL) vertraut sein. [TLS ist einfach die nächste Weiterentwicklung von SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Im Allgemeinen empfehlen wir Nginx mit TLS umzugehen. Für eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) siehe [Empfohlene Server-Konfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Ein praktisches Werkzeug, um ein kostenloses TLS-Zertifikat zu erhalten, ist [Let's Encrypt](https://letsencrypt.org/about/), ein kostenloses und automatisiertes TLS-Zertifikat und offene Zertifizierungsstelle (CA) zur Verfügung gestellt von der [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -244,7 +244,7 @@ $ npm audit
 
 Wenn du sicherer bleiben möchtest, bedenke [Snyk](https://snyk.io/).
 
-Snyk bietet sowohl ein [Kommandozeilenwerkzeug](https://www.npmjs.com/package/snyk) als auch eine [Github-Integration](https://snyk.io/docs/github), die Ihre Anwendung auf [Snyk's Open-Source-Verwundbarkeitsdatenbank] (https://snyk.io/vuln/) auf bekannte Verwundbarkeiten in Ihren Abhängigkeiten überprüft. Installieren Sie das CLI wie folgt:
+Snyk bietet sowohl ein [Kommandozeilenwerkzeug](https://www.npmjs.com/package/snyk) als auch eine [Github-Integration](https://snyk.io/docs/github), die Ihre Anwendung auf [Snyk's Open-Source-Verwundbarkeitsdatenbank](https://snyk.io/vuln/) auf bekannte Verwundbarkeiten in Ihren Abhängigkeiten überprüft. Installieren Sie das CLI wie folgt:
 
 ```bash
 $ npm install -g snyk

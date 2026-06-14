@@ -280,7 +280,7 @@ memory storage is used.
 
 ### `limites`
 
-Un objet spécifiant les limites de taille des propriétés optionnelles suivantes. Multer passe cet objet directement dans busboy, et les détails des propriétés peuvent être trouvés sur la page [busboy's page] (https://github.com/mscdex/busboy#busboy-methods).
+Un objet spécifiant les limites de taille des propriétés optionnelles suivantes. Multer passe cet objet directement dans busboy, et les détails des propriétés peuvent être trouvés sur la page [busboy's page](https://github.com/mscdex/busboy#busboy-methods).
 
 Les valeurs entières suivantes sont disponibles :
 
@@ -320,7 +320,7 @@ function fileFilter(req, file, cb) {
 ## Gestion des erreurs
 
 En cas d'erreur, Multer délègue l'erreur à Express. Vous pouvez
-afficher une belle page d'erreur en utilisant [le type express way](http://expressjs.com/guide/error-handling.html).
+afficher une belle page d'erreur en utilisant [le type express way](/guide/error-handling).
 
 Si vous voulez attraper des erreurs spécifiques à Multer, vous pouvez appeler la fonction
 middleware par vous-même. Aussi, si vous voulez attraper seulement [les erreurs Multer](https://github.com/expressjs/multer/blob/main/lib/multer-error.js), vous pouvez utiliser la classe `MulterError` qui est attachée à l'objet `multer` lui-même (e. . `err instanceof multer.MulterError`).

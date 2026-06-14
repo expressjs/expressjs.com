@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Para más información, vea [Gestión de errores] (/en/guide/error-handling).
+Para más información, vea [Gestión de errores](/en/guide/error-handling).
 
 ## ¿Cómo renderizo HTML plano?
 

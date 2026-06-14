@@ -95,6 +95,16 @@ LIST_END
   BASEURL="https://github.com/$org/$repo/blob/HEAD"
   CONTENT=$(echo "$CONTENT" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
 
+  # Turn absolute self-links (https://expressjs.com/en/guide/x.html) into internal,
+  # language-agnostic paths (/guide/x) so they resolve on this site and get localized
+  # by the link plugin. Drops the host, a trailing .html, and a leading /<lang>/ segment.
+  CONTENT=$(echo "$CONTENT" | perl -pe 's{https?://(?:www\.)?expressjs\.com(/[^\s)">]*)?}{
+    my $p = defined($1) ? $1 : q{/};
+    $p =~ s/\.html\b//;
+    $p =~ s{^/[a-z]{2}(?:-[a-z]{2})?(?=/|$)}{};
+    length($p) ? $p : q{/}
+  }ge')
+
   # Build the MDX import and component
   IMPORT="import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';"

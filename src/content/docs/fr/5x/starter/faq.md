@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Pour plus d'informations, voir [Gestion des erreurs] (/en/guide/error-handling).
+Pour plus d'informations, voir [Gestion des erreurs](/en/guide/error-handling).
 
 ## Comment rendre le HTML simple ?
 

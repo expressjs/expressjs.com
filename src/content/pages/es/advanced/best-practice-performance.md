@@ -10,7 +10,7 @@ Este tema entra claramente en el mundo de los "devops", que abarca tanto el desa
 - Cosas que hacer en tu código (la parte del desarrollador):
   - [Usar compresión gzip](#use-gzip-compression)
   - [No usar funciones sincrónicas](#dont-use-synchronous-functions)
-  - [Registrar correctamente] (#do-logging-correctly)
+  - [Registrar correctamente](#do-logging-correctly)
   - [Manejar excepciones correctamente](#handle-exceptions-properly)
 - Cosas que hacer en tu entorno / configuración (parte de la opción):
   - [Establecer NODE_ENV a "producción"](#set-node_env-to-production)
@@ -26,7 +26,7 @@ Aquí hay algunas cosas que puedes hacer en tu código para mejorar el rendimien
 
 - [Usar compresión gzip](#use-gzip-compression)
 - [No usar funciones sincrónicas](#dont-use-synchronous-functions)
-- [Registrar correctamente] (#do-logging-correctly)
+- [Registrar correctamente](#do-logging-correctly)
 - [Manejar excepciones correctamente](#handle-exceptions-properly)
 
 ### Usar compresión gzip
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Para más información sobre el sistema, vea la [referencia del sistema (página de manu)] (http://www.freedesktop.org/software/systemd/man/systemd.unit).
+Para más información sobre el sistema, vea la [referencia del sistema (página de manu)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
 
 ### Ejecutar tu aplicación en un clúster
 
@@ -294,7 +294,7 @@ Usa un servidor de caché como [Varnish](https://www.varnish-cache.org/) o [Ngin
 
 No importa cuán optimizada sea una aplicación, una sola instancia puede manejar sólo una cantidad limitada de carga y tráfico. Una forma de escalar una aplicación es ejecutar múltiples instancias de ella y distribuir el tráfico a través de un equilibrador de carga. Configurar un balanceador de carga puede mejorar el rendimiento y la velocidad de tu aplicación, y permitirla escalar más de lo posible con una sola instancia.
 
-Un balanceador de carga es generalmente un proxy inverso que orchestriza tráfico hacia y desde múltiples instancias y servidores de la aplicación. Puedes configurar fácilmente un equilibrador de carga para tu aplicación usando [Nginx](https://nginx.org/en/docs/http/load_balancing) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Un balanceador de carga es generalmente un proxy inverso que orchestriza tráfico hacia y desde múltiples instancias y servidores de la aplicación. Puedes configurar fácilmente un equilibrador de carga para tu aplicación usando [Nginx](https://nginx.org/en/docs/http/load_balancing.html) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Con el saldo de carga, puede que tenga que asegurarse de que las peticiones que están asociadas con un ID de sesión particular se conectan al proceso que las originó. Esto se conoce como _session affinity_, o _sticky sessions_, y puede ser abordado por la sugerencia anterior de utilizar un almacén de datos como Redis para datos de sesión (dependiendo de su aplicación). Para una discusión, vea [Usando múltiples nodos](https://socket.io/docs/v4/using-multiple-nodes/).
 
