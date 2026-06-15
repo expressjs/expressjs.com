@@ -40,7 +40,7 @@ Also ensure you are not using any of the vulnerable Express versions listed on t
 
 ## 使用 TLS
 
-如果您的应用处理或传输敏感数据，请使用 [传输图层安全](https://en.wikipedia.org/wiki/Transport_Layer_Security(TLS) 来保护连接和数据。 该技术会在客户端向服务器发送数据前对数据进行加密，从而防范部分常见且易实施的攻击。 尽管 AJAX 和 POST 请求在浏览器中不会直观展现、看似处于 “隐藏” 状态，但它们的网络流量容易遭到[抓包分析](https://en.wikipedia.org/wiki/Packet_analyzer)与[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+如果您的应用处理或传输敏感数据，请使用 [传输图层安全](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) 来保护连接和数据。 该技术会在客户端向服务器发送数据前对数据进行加密，从而防范部分常见且易实施的攻击。 尽管 AJAX 和 POST 请求在浏览器中不会直观展现、看似处于 “隐藏” 状态，但它们的网络流量容易遭到[抓包分析](https://en.wikipedia.org/wiki/Packet_analyzer)与[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
 你或许熟悉安全套接字层（SSL）加密。 In general, we recommend Nginx to handle TLS. 换言之，若此前使用SSL，建议升级至TLS。 In other words, if you were using SSL before, consider upgrading to TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
