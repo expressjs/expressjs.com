@@ -7,7 +7,7 @@ import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.a
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 <MiddlewareInfo
-  version="2.1.1"
+  version="2.2.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -284,15 +284,16 @@ An object specifying the size limits of the following optional properties. Multe
 
 The following integer values are available:
 
-| Key             | Description                                                             | Default   |
-| --------------- | ----------------------------------------------------------------------- | --------- |
-| `fieldNameSize` | Max field name size                                                     | 100 bytes |
-| `fieldSize`     | Max field value size (in bytes)                                         | 1MB       |
-| `fields`        | Max number of non-file fields                                           | Infinity  |
-| `fileSize`      | For multipart forms, the max file size (in bytes)                       | Infinity  |
-| `files`         | For multipart forms, the max number of file fields                      | Infinity  |
-| `parts`         | For multipart forms, the max number of parts (fields + files)           | Infinity  |
-| `headerPairs`   | For multipart forms, the max number of header key=>value pairs to parse | 2000      |
+| Key                 | Description                                                                | Default   |
+| ------------------- | -------------------------------------------------------------------------- | --------- |
+| `fieldNameSize`     | Max field name size                                                        | 100 bytes |
+| `fieldSize`         | Max field value size (in bytes)                                            | 1MB       |
+| `fields`            | Max number of non-file fields                                              | Infinity  |
+| `fileSize`          | For multipart forms, the max file size (in bytes)                          | Infinity  |
+| `files`             | For multipart forms, the max number of file fields                         | Infinity  |
+| `parts`             | For multipart forms, the max number of parts (fields + files)              | Infinity  |
+| `headerPairs`       | For multipart forms, the max number of header key=>value pairs to parse    | 2000      |
+| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels) | Infinity  |
 
 Specifying the limits can help protect your site against denial of service (DoS) attacks.
 
@@ -316,6 +317,15 @@ function fileFilter(req, file, cb) {
   cb(new Error("I don't have a clue!"));
 }
 ```
+
+## Security
+
+Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
+
+- `fileSize` -- set to the maximum expected file size for your use case
+- `files` -- set to the maximum number of files per request
+- `fields` -- set to the maximum number of text fields per request
+- `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
 
 ## Error handling
 
