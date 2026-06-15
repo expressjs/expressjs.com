@@ -1,28 +1,28 @@
 ---
-title: Serving static files in Express
-description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
+title: 在 Express 中托管静态文件
+description: 了解如何在 Express.js 应用中使用内置的 `static` 中间件托管图片、CSS 和 JavaScript 等静态文件。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
+要托管图片、CSS 文件和 JavaScript 文件等静态文件，需使用 Express 内置的 `express.static` 中间件函数。
 
-The function signature is:
+该函数的签名为：
 
 ```js
 express.static(root, [options]);
 ```
 
-The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/en/5x/api#express.static).
+`root` 参数用于指定托管静态资源的根目录。
+For more information on the `options` argument, see [express.static](/api#express.static).
 
-For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
+例如，使用以下代码来托管 `public` 目录中的图片、CSS 文件和 JavaScript 文件：
 
 ```js
 app.use(express.static('public'));
 ```
 
-Now, you can load the files that are in the `public` directory:
+现在，你就可以加载 `public` 目录中的文件了：
 
 ```text
 http://localhost:3000/images/kitten.jpg
@@ -34,19 +34,18 @@ http://localhost:3000/hello.html
 
 <Alert type="info">
 
-Express looks up the files relative to the static directory, so the name of the static directory
-is not part of the URL.
+Express 查找文件时是相对于静态目录的，因此静态目录名称不会出现在 URL 中。
 
 </Alert>
 
-To use multiple static assets directories, call the `express.static` middleware function multiple times:
+若要使用多个静态资源目录，需多次调用 `express.static` 中间件函数：
 
 ```js
 app.use(express.static('public'));
 app.use(express.static('files'));
 ```
 
-Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
+Express 会按照你使用 `express.static` 中间件设置静态目录的**顺序**来查找文件。
 
 <Alert type="info">
 
@@ -62,7 +61,7 @@ To create a virtual path prefix (where the path does not actually exist in the f
 app.use('/static', express.static('public'));
 ```
 
-Now, you can load the files that are in the `public` directory from the `/static` path prefix.
+现在，你可以通过 `/static` 路径前缀加载存放在 `public` 目录中的文件。
 
 ```text
 http://localhost:3000/static/images/kitten.jpg
@@ -72,7 +71,7 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ```
 
-However, the path that you provide to the `express.static` function is relative to the directory from where you launch your `node` process. If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
+但是，你提供给 `express.static` 函数的路径是相对于你启动 `node` 进程的目录而言的。 如果你从其他目录启动 Express 应用，使用你要托管的目录的绝对路径会更安全：
 
 ```js
 const path = require('path');

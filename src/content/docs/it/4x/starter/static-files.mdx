@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 L'argomento `root` specifica la directory radice da cui servire le risorse statiche.
-Per ulteriori informazioni sull'argomento `options`, vedere [express.static](/en/5x/api#express.static).
+Per ulteriori informazioni sull'argomento `options`, vedere [express.static](/api#express.static).
 
 Per esempio, utilizzare il seguente codice per servire immagini, file CSS e file JavaScript in una directory chiamata `public`:
 
@@ -56,7 +56,7 @@ che servono risorse statiche.
 
 </Alert>
 
-Per creare un prefisso di percorso virtuale (dove il percorso non esiste effettivamente nel file system) per i file serviti dal `express. funzione tatic`, [specify a mount path](/en/5x/api#app.use) per la directory statica, come mostrato di seguito:
+Per creare un prefisso di percorso virtuale (dove il percorso non esiste effettivamente nel file system) per i file serviti dal `express. funzione tatic`, [specify a mount path](/api#app.use) per la directory statica, come mostrato di seguito:
 
 ```js
 app.use('/static', express.static('public'));

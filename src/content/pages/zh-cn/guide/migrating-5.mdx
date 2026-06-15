@@ -1,59 +1,59 @@
 ---
-title: Upgrade to Express v5
-description: A comprehensive guide to migrating your Express.js applications from version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
+title: 升级到 Express v5
+description: Express.js 应用从 4 版升级至 5 版完整迁移指南，详述破坏性变更、废弃方法与新增优化项
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 5 is not very different from Express 4; although it maintains the same basic API, there are still changes that break compatibility with the previous version. Therefore, an application built with Express 4 might not work if you update it to use Express 5.
+Express 5 与 Express 4 差异不大；尽管基础 API 保持一致，但仍存在部分导致无法向下兼容的改动。 因此，基于 Express 4 构建的应用在升级至 Express 5 后可能无法正常运行。
 
-## Installation
+## 安装
 
-To install this version, you need to have a **Node.js version 18 or higher**. Then, execute the following command in your application directory:
+安装该版本需要 **Node.js 18 及以上版本**。 随后在应用目录中执行以下命令：
 
 ```sh
 npm install "express@5"
 ```
 
-You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
+随后你可以运行自动化测试来排查失败项，并根据下方列出的更新内容修复问题。 解决测试失败问题后，运行应用查看出现的错误。 你可以立刻发现应用是否使用了任何不受支持的方法或属性。
 
 ## Express 5 Codemods
 
-To help you migrate your express server, we have created a set of codemods that will help you automatically update your code to the latest version of Express.
+为帮助你迁移 Express 服务器，我们提供了一套代码转换工具，可自动将代码更新至最新版 Express。
 
-Run the following command for run all the codemods available:
+运行以下命令以执行所有可用的代码转换：
 
 ```sh
 npx codemod@latest @expressjs/v5-migration-recipe
 ```
 
-If you want to run a specific codemod, you can run the following command:
+若要运行特定的代码转换，可执行以下命令：
 
 ```sh
 npx codemod@latest @expressjs/name-of-the-codemod
 ```
 
-You can find the list of available codemods [here](https://codemod.link/express).
+可在[此处](https://codemod.link/express)查看可用的代码转换列表。
 
-## Removed methods and properties
+## 移除方法和属性
 
-If you use any of these methods or properties in your app, it will crash. So, you'll need to change your app after you update to version 5.
+如果你的应用中使用了上述任意方法或属性，应用将会崩溃。 因此，更新到 5 版本后，你需要修改你的应用。
 
 ### app.del()
 
-Express 5 no longer supports the `app.del()` function. If you use this function, an error is thrown. For registering HTTP DELETE routes, use the `app.delete()` function instead.
+Express 5 不再支持 `app.del()` 函数。 如果您使用此函数，将会出现错误。 要注册 HTTP DELETE 路由，请使用 `app.delete()` 函数。
 
-Initially, `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names.
+起初，使用 `del` 而非 `delete`，因为 `delete` 是 JavaScript 中的保留关键字。 但从 ECMAScript 6 开始，`delete` 及其他保留关键字可以合法用作属性名。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/route-del-to-delete
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
 -app.del('/user/:id', (req, res) => {
@@ -64,27 +64,27 @@ Or you can update your code manually:
 
 ### app.param(fn)
 
-The `app.param(fn)` signature was used for modifying the behavior of the `app.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
+`app.param(fn)` 签名用于修改 `app.param(name, fn)` 函数的行为。 该方法自 v4.11.0 起已被弃用，Express 5 完全不再支持它。
 
-### Pluralized method names
+### 复数形式的方法名
 
-The following method names have been pluralized. In Express 4, using the old methods resulted in a deprecation warning. Express 5 no longer supports them at all:
+以下方法名已改为复数形式。 在 Express 4 中，使用旧方法会触发弃用警告。 Express 5 已完全不再支持这些方法：
 
-`req.acceptsCharset()` is replaced by `req.acceptsCharsets()`.
+`req.acceptsCharset()`替换为`req.acceptsets()`。
 
-`req.acceptsEncoding()` is replaced by `req.acceptsEncodings()`.
+`req.acceptsEncoding()` 替换为 `req.acceptsEncodings()` 。
 
-`req.acceptsLanguage()` is replaced by `req.acceptsLanguages()`.
+`req.acceptsLanguage()` 替换为 `req.acceptsLanguages()` 。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/pluralize-method-names
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.all('/', (req, res) => {
@@ -99,25 +99,25 @@ Or you can update your code manually:
  });
 ```
 
-### Leading colon (:) in the name for app.param(name, fn)
+### `app.param(name, fn)` 中名称前的冒号（:）
 
-A leading colon character (:) in the name for the `app.param(name, fn)` function is a remnant of Express 3, and for the sake of backwards compatibility, Express 4 supported it with a deprecation notice. Express 5 will silently ignore it and use the name parameter without prefixing it with a colon.
+`app.param(name, fn)` 函数中名称开头的冒号（:）是 Express 3 的遗留用法，为了向后兼容，Express 4 虽支持该用法但会抛出弃用提示。 Express 5 会静默忽略该冒号，并直接使用不带冒号前缀的名称参数。
 
 This should not affect your code if you follow the Express 4 documentation of [app.param](/en/4x/api#app.param), as it makes no mention of the leading colon.
 
 ### req.param(name)
 
-This potentially confusing and dangerous method of retrieving form data has been removed. You will now need to specifically look for the submitted parameter name in the `req.params`, `req.body`, or `req.query` object.
+这种可能造成混淆且存在风险的表单数据获取方法已被移除。 现在你需要在 `req.params`、`req.body` 或 `req.query` 对象中显式查找提交的参数名称。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/explicit-request-params
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.post('/user', (req, res) => {
@@ -134,17 +134,17 @@ Or you can update your code manually:
 
 ### res.json(obj, status)
 
-Express 5 no longer supports the signature `res.json(obj, status)`. Instead, set the status and then chain it to the `res.json()` method like this: `res.status(status).json(obj)`.
+Express 5 不再支持 `res.json(obj, status)` 签名。 取而代之的是，先设置状态码，再链式调用 `res.json()` 方法，写法如下：`res.status(status).json(obj)`。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/status-send-order
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.post('/user', (req, res) => {
@@ -155,17 +155,17 @@ Or you can update your code manually:
 
 ### res.jsonp(obj, status)
 
-Express 5 no longer supports the signature `res.jsonp(obj, status)`. Instead, set the status and then chain it to the `res.jsonp()` method like this: `res.status(status).jsonp(obj)`.
+Express 5 不再支持 `res.jsonp(obj, status)` 签名。 取而代之的是，先设置状态码，再链式调用 `res.jsonp()` 方法，写法如下：`res.status(status).jsonp(obj)`。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/status-send-order
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.post('/user', (req, res) => {
@@ -176,17 +176,17 @@ Or you can update your code manually:
 
 ### res.redirect(url, status)
 
-Express 5 no longer supports the signature `res.redirect(url, status)`. Instead, use the following signature: `res.redirect(status, url)`.
+Express 5 不再支持 `res.redirect(url, status)` 签名。 相反，使用下列签名：`res.redirect(status, url)`。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/redirect-arg-order
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.get('/user', (req, res) => {
@@ -195,19 +195,19 @@ Or you can update your code manually:
  });
 ```
 
-### res.redirect('back') and res.location('back')
+### res.redirect('back') 与 res.location('back')
 
-Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the `res.redirect('back')` and `res.location('back')` methods were deprecated.
+Express 5 不再支持 `res.redirect()` 和 `res.location()` 方法中的魔法字符串 `back`。 取而代之，请使用 `req.get('Referrer') || '/'` 来重定向回上一页。 在 Express 4 中，`res.redirect('back')` 和 `res.location('back')` 方法已被弃用。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/back-redirect-deprecated
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.get('/user', (req, res) => {
@@ -218,17 +218,17 @@ Or you can update your code manually:
 
 ### res.send(body, status)
 
-Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set the status and then chain it to the `res.send()` method like this: `res.status(status).send(obj)`.
+Express 5 不再支持 `res.send(obj, status)` 这种签名。 取而代之的是，先设置状态码，再链式调用 `res.send()` 方法，写法如下：`res.status(status).send(obj)`。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/status-send-order
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.get('/user', (req, res) => {
@@ -239,18 +239,18 @@ Or you can update your code manually:
 
 ### res.send(status)
 
-Express 5 no longer supports the signature `res.send(status)`, where `status` is a number. Instead, use the `res.sendStatus(statusCode)` function, which sets the HTTP response header status code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
-If you need to send a number by using the `res.send()` function, quote the number to convert it to a string, so that Express does not interpret it as an attempt to use the unsupported old signature.
+Express 5 不再支持签名 `res.send(status)` 是一个数字。 取而代之，请使用 `res.sendStatus(statusCode)` 函数，该函数会设置 HTTP 响应头状态码并发送该状态码的文本版本：“未找到”、“服务器内部错误”等。
+如果需要通过 `res.send()` 函数发送数字，请将数字用引号包裹转换为字符串，避免 Express 将其误判为尝试使用已不支持的旧签名。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/status-send-order
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.get('/user', (req, res) => {
@@ -261,17 +261,17 @@ Or you can update your code manually:
 
 ### res.sendfile()
 
-The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
+在 Express 5 中，`res.sendfile()` 函数已替换为驼峰命名的版本 `res.sendFile()`。
 
-#### How to update
+#### 如何更新
 
-You can automatically update your code by running the following command:
+你可以通过运行以下命令自动更新你的代码：
 
 ```sh
 npx codemod@latest @expressjs/camelcase-sendfile
 ```
 
-Or you can update your code manually:
+或者您可以手动更新您的代码：
 
 ```diff
  app.get('/user', (req, res) => {
@@ -282,9 +282,9 @@ Or you can update your code manually:
 
 ### res.sendFile() options
 
-The `hidden` and `from` options for `res.sendFile()` are no longer supported. Use `dotfiles` and `root` instead.
+`res.sendFile()` 的 `hidden` 和 `from` 选项已不再支持。 使用 `dotfiles` 和 `root` 代替。
 
-#### How to update
+#### 如何更新
 
 ```diff
  app.get('/files/:name', (req, res) => {
@@ -295,9 +295,9 @@ The `hidden` and `from` options for `res.sendFile()` are no longer supported. Us
 
 ### express.static() options
 
-The `hidden` and `from` options for `express.static()` are no longer supported. Use `dotfiles` and `root` instead. Note that `from` was never documented in the API but was accepted as an alias for `root`. The default value of `dotfiles` is now `"ignore"`.
+不再支持 `expres.static()` 的 `hidden` 和 `from` 两个选项。 使用 `dotfiles` 和 `root` 代替。 注意，`from` 从未在 API 文档中记载，但曾被接受作为 `root` 的别名。 `dotfiles`的默认值现在是 \`"ignore"。
 
-#### How to update
+#### 如何更新
 
 ```diff
  const express = require('express');
@@ -309,14 +309,14 @@ The `hidden` and `from` options for `express.static()` are no longer supported. 
 
 ### router.param(fn)
 
-The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
+`router.param(fn)` 签名曾用于修改 `router.param(name, fn)` 函数的行为。 该方法自 v4.11.0 起已被弃用，Express 5 完全不再支持它。
 
 ### express.static.mime
 
-In Express 5, `mime` is no longer an exported property of the `static` field.
-Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
+在 Express 5 中，`mime` 不再是 `static` 字段的导出属性。
+请使用 [`mime-types` 包](https://github.com/jshttp/mime-types) 处理 MIME 类型值。
 
-#### How to update
+#### 如何更新
 
 ```diff
 -express.static.mime.lookup('json');
@@ -324,17 +324,17 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 +mime.lookup('json');
 ```
 
-### MIME type changes
+### MIME 类型更改
 
-Several MIME types have changed due to updates in [`mime-db`](https://github.com/jshttp/mime-db). These changes only affect `express.static()` and `res.sendFile()`. For a full list of changes, see the [`mime-db` changelog](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md).
+由于[`mime-db`](https://github.com/jshttp/mime-db) 的更新，几种MIME类型已经更改。 这些更改只会影响 `expres.static()` 和 `res.sendFile()` 。 完整的更改列表见[`mime-db`更新日志](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md)。
 
-Express 4 uses `mime-db` version **1.52.0**, while Express 5 uses newer versions that reflect updates to IANA and other MIME type specifications. The most notable change is that JavaScript files (`.js`) are now served as `text/javascript` instead of `application/javascript`.
+Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新的版本，以反映 IANA 及其他 MIME 类型规范的更新。 最显著的变化是，JavaScript 文件（`.js`）现在以 `text/javascript` 提供服务，而非 `application/javascript`。
 
-In Express 5, changes to MIME types from `mime-db` updates are not considered breaking changes, so be careful when updating your dependencies as MIME types may change between minor or patch versions.
+在 Express 5 中，由 `mime-db` 更新带来的 MIME 类型变更**不被视为破坏性变更**，因此在更新依赖项时请务必谨慎，因为 MIME 类型可能在次要版本或补丁版本之间发生变化。
 
-### express:router debug logs
+### express:router 调试日志
 
-Router handling logic is now performed by a separate dependency ([`router`](https://github.com/pillarjs/router)) maintained by the Express team, so debug logs have moved to a different namespace. Before Express 5.1, these debug logs did not exist. To get them, update to a recent Express 5 version or update the `router` package in your `package-lock.json`:
+路由器处理逻辑现在由 Express 团队维护的独立依赖项（[`router`](https://github.com/pillarjs/router)）执行，因此调试日志已迁移至其他命名空间。 在Express 5.1之前，这些调试日志不存在。 若要获取这些日志，请更新至最新的 Express 5 版本，或更新 `package-lock.json` 中的 `router` 包：
 
 | v4                         | v5                                  |
 | -------------------------- | ----------------------------------- |
@@ -343,22 +343,22 @@ Router handling logic is now performed by a separate dependency ([`router`](http
 | `express:router:route`     | `router:route`                      |
 | `express:*` (includes all) | `express:*` + `router` + `router:*` |
 
-#### How to update
+#### 如何更新
 
 ```diff
 -DEBUG=express:* node index.js
 +DEBUG=express:*,router,router:* node index.js
 ```
 
-## Changed
+## 更改
 
-These APIs still exist but their behavior has changed. Review these changes to make sure your app works as expected.
+这些 API 仍然保留，但行为已发生变更。 请检查这些变更，确保你的应用正常运行。
 
-### Path route matching syntax
+### 路径路由匹配语法
 
-Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
+路径路由匹配语法是指将字符串作为第一个参数传递给 `app.all()`、`app.use()`、`app.METHOD()`、`router.all()`、`router.METHOD()` 和 `router.use()` 这些 API。 已对路径字符串与传入请求的匹配规则做出如下修改：
 
-- The wildcard `*` must have a name, matching the behavior of parameters `:`, use `/*splat` instead of `/*`
+- 通配符 `*` 必须指定名称，和参数标记 `:` 的使用规则保持一致，请使用 `/*splat` 而非 `/*`
 
   ```diff
   -app.get('/*', async (req, res) => {
@@ -369,7 +369,7 @@ Path route matching syntax is when a string is supplied as the first parameter t
 
   <Alert type="info">
 
-  `*splat` matches any path without the root path. If you need to match the root path as well `/`, you can use `/{*splat}`, wrapping the wildcard in braces.
+  `*splat` 匹配没有根路径的任何路径。 如果你需要同时匹配根路径，你可以使用 `/{*splat}` 来包装括号中的通配符。
 
   ```js
   app.get('/{*splat}', async (req, res) => {
@@ -379,7 +379,7 @@ Path route matching syntax is when a string is supplied as the first parameter t
 
   </Alert>
 
-- The optional character `?` is no longer supported, use braces instead.
+- 可选标识 `?` 不再受支持，请改用大括号写法。
 
   ```diff
   -app.get('/:file.:ext?', async (req, res) => {
@@ -388,7 +388,7 @@ Path route matching syntax is when a string is supplied as the first parameter t
    });
   ```
 
-- Regexp characters are not supported. For example:
+- 路由路径中不支持正则表达式字符。 举个例子：
 
   ```diff
   -app.get('/[discussion|page]/:slug', async (req, res) => {
@@ -397,19 +397,19 @@ Path route matching syntax is when a string is supplied as the first parameter t
    });
   ```
 
-- Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
+- 部分字符已被预留保留以规避升级时的歧义（`()[]?+!`），如需使用请通过 `\` 进行转义。
 
-- Parameter names now support valid JavaScript identifiers, or quoted like `:"this"`.
+- 参数名称现支持合法的 JavaScript 标识符，或使用 `:"this"` 形式进行引号包裹。
 
-### Rejected promises handled from middleware and handlers
+### 处理来自中间件和处理器的被拒绝 Promise
 
-Request middleware and handlers that return rejected promises are now handled by forwarding the rejected value as an `Error` to the error handling middleware. This means that using `async` functions as middleware and handlers are easier than ever. When an error is thrown in an `async` function or a rejected promise is `await`ed inside an async function, those errors will be passed to the error handler as if calling `next(err)`.
+返回被拒绝 Promise 的请求中间件和处理程序，现会将被拒绝的值作为 `Error` 转发给错误处理中间件进行处理。 这意味着使用 `async` 函数编写中间件和处理程序变得前所未有的简便。 当在 `async` 函数中抛出错误，或在异步函数内 `await` 了一个被拒绝的 Promise 时，这些错误将被传递给错误处理程序，效果等同于调用 `next(err)`。
 
 Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling).
 
-#### How to update
+#### 如何更新
 
-You can now use `async/await` directly without manually catching errors. If `getUserById` throws an error or rejects, `next` will be called automatically with the rejected value.
+你现在可以直接使用 `async/await`，无需手动捕获错误。 若 `getUserById` 抛出错误或被拒绝，`next` 会自动以被拒绝的值作为参数被调用。
 
 ```diff
 -app.get('/user/:id', (req, res, next) => {
@@ -425,11 +425,11 @@ You can now use `async/await` directly without manually catching errors. If `get
 
 ### express.urlencoded
 
-The `express.urlencoded` method makes the `extended` option `false` by default.
+`express.urlencoded` 方法的 `extended` 选项默认值为 `false`。
 
-#### How to update
+#### 如何更新
 
-If your application relies on the `extended` behavior, explicitly set it to `true`:
+如果你的应用依赖 `extended` 特性，请将其显式设置为 `true`：
 
 ```diff
 -app.use(express.urlencoded());
@@ -438,11 +438,11 @@ If your application relies on the `extended` behavior, explicitly set it to `tru
 
 ### express.static dotfiles
 
-The `express.static` middleware's `dotfiles` option now defaults to `"ignore"`. In Express 4, dotfiles were served by default. As a result, files inside a directory that starts with a dot (`.`), such as `.well-known`, will no longer be accessible and will return a **404 Not Found** error. This can break functionality that depends on serving dot-directories, such as Android App Links and Apple Universal Links.
+`express.static` 中间件的 `dotfiles` 选项现在默认值为 `"ignore"`。 在 Express 4 中，点文件默认提供服务。 因此，以点（`.`）开头的目录（如 `.well-known`）内的文件将不再可访问，并会返回**404 未找到**错误。 这可能会破坏依赖于提供点目录服务的功能，例如 Android 应用链接和 Apple 通用链接。
 
-#### How to update
+#### 如何更新
 
-Serve specific dot-directories explicitly using the `dotfiles: "allow"` option. This allows you to safely serve only the intended dot-directories while keeping the default secure behavior for other dotfiles.
+使用 `dotfiles: "allow"` 选项显式提供特定的点目录服务。 这使你可以安全地仅提供预期的点目录，同时对其他点文件保持默认的安全行为。
 
 ```diff
 +app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
@@ -451,8 +451,8 @@ Serve specific dot-directories explicitly using the `dotfiles: "allow"` option. 
 
 ### app.listen
 
-In Express 5, the `app.listen` method will invoke the user-provided callback function (if provided) when the server receives an error event. In Express 4, such errors would be thrown. This change shifts error-handling responsibility to the callback function in Express 5. If there is an error, it will be passed to the callback as an argument.
-For example:
+在 Express 5 中，当服务器接收到错误事件时，`app.listen` 方法会调用用户提供的回调函数（若已指定）。 在 Express 4 中，这类错误会被直接抛出。 在 Express 5 中，此项变更将错误处理的职责转移给了回调函数。 如果发生错误，错误将作为参数传递给回调函数。
+举个例子：
 
 ```js ins={2-4}
 const server = app.listen(8080, '0.0.0.0', (error) => {
@@ -465,11 +465,11 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 
 ### app.router
 
-The `app.router` object, which was removed in Express 4, has made a comeback in Express 5. In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
+在 Express 4 中被移除的 `app.router` 对象，在 Express 5 中重新回归。 在新版本中，该对象只是对基础 Express 路由的引用，这与 Express 3 不同，在 Express 3 中应用必须显式加载它。
 
 ### req.body
 
-The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
+当请求体尚未被解析时，`req.body` 属性会返回 `undefined`。 在Express 4中，默认情况下返回 `{}` 。
 
 ```js del={4} ins={6}
 app.post('/user', (req, res) => {
@@ -483,15 +483,15 @@ app.post('/user', (req, res) => {
 
 ### req.host
 
-In Express 4, the `req.host` function incorrectly stripped off the port number if it was present. In Express 5, the port number is maintained.
+在Express 4中，如果存在`req.host`函数，它会不正确地删除端口号。 Express 5中保留端口号。
 
 ### req.params
 
-The `req.params` object now has a **null prototype** when using string paths. However, if the path is defined with a regular expression, `req.params` remains a standard object with a normal prototype. Additionally, there are two important behavioral changes:
+当使用字符串路径时，`req.params`对象现在有一个 **null 原型** 。 但是，如果路径使用正则表达式定义，`req.params` 仍为带有标准原型的普通对象。 此外，还有两项重要的行为变更：
 
-**Wildcard parameters are now arrays:**
+**WildCard 参数现在是数组：**
 
-Wildcards (e.g., `/*splat`) capture path segments as an array instead of a single string.
+Wildcards（例如 `/*splat`）会将路径片段捕获为数组，而非单个字符串。
 
 ```js
 app.get('/*splat', (req, res) => {
@@ -501,9 +501,9 @@ app.get('/*splat', (req, res) => {
 });
 ```
 
-**Unmatched parameters are omitted:**
+**未匹配参数：**
 
-In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` parameters (using `?`) had a key with value `undefined`. In Express 5, unmatched parameters are completely omitted from `req.params`.
+在 Express 4 中，不匹配的通配符为空字符串（`''`），可选 `:` 参数（使用 `?`）会存在键且值为 `undefined`。 在 Express 5 中，不匹配的参数会从 `req.params` 中完全省略。
 
 ```diff
 -// v4: unmatched wildcard is empty string
@@ -530,7 +530,7 @@ In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` par
 
 ### req.query
 
-The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
+`req.query` 属性不再是可写属性，而是一个 getter。 默认查询解析器已从 "extended" 更改为 "simple"。
 
 ```js del={3}
 app.get('/search', (req, res) => {
@@ -541,7 +541,7 @@ app.get('/search', (req, res) => {
 
 ### res.clearCookie
 
-The `res.clearCookie` method ignores the `maxAge` and `expires` options provided by the user.
+`res.clearCookie` 方法会忽略用户提供的 `maxAge` 和 `expires` 选项。
 
 ```diff
  app.get('/logout', (req, res) => {
@@ -552,7 +552,7 @@ The `res.clearCookie` method ignores the `maxAge` and `expires` options provided
 
 ### res.status
 
-The `res.status` method only accepts integers in the range of `100` to `999`, following the behavior defined by Node.js, and it returns an error when the status code is not an integer.
+`res.status` 方法仅接受 `100` 至 `999` 范围内的整数，遵循 Node.js 定义的行为，当状态码不是整数时会返回错误。
 
 ```js del={2}
 app.get('/user', (req, res) => {
@@ -563,7 +563,7 @@ app.get('/user', (req, res) => {
 
 ### res.vary
 
-The `res.vary` throws an error when the `field` argument is missing. In Express 4, if the argument was omitted, it gave a warning in the console.
+当缺少`field`参数时，`res.vary`会抛出错误。 在 Express 4 中，如果省略该参数，控制台会输出一条警告信息。
 
 ```js del={2}
 app.get('/user', (req, res) => {
@@ -572,14 +572,14 @@ app.get('/user', (req, res) => {
 });
 ```
 
-## Improvements
+## 改进
 
-These changes don't require any migration steps, but are worth knowing about when upgrading.
+这些变更无需执行任何迁移操作，但在升级时了解这些内容会很有帮助。
 
 ### res.render()
 
-This method now enforces asynchronous behavior for all view engines, avoiding bugs caused by view engines that had a synchronous implementation and that violated the recommended interface.
+该方法现在强制所有模板引擎遵循异步行为，避免了因部分模板引擎采用同步实现、违反推荐接口而导致的错误。
 
-### Brotli encoding support
+### Brotli编码支持
 
-Middleware like `express.json()`, `express.urlencoded()`, `express.text()`, and `express.raw()` now support Brotli (`Content-Encoding: br`) decompression for incoming request bodies, in addition to `gzip` and `deflate`.
+除 `gzip` 和 `deflate` 外，`express.json()`、`express.urlencoded()`、`express.text()` 和 `express.raw()` 等中间件现在还支持对传入请求体进行 Brotli（`Content-Encoding: br`）解压。

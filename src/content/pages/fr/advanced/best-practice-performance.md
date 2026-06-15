@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Pour un site internet à fort trafic en production, la meilleure façon de mettre en place une compression est de l'implémenter à un niveau de proxy inverse (voir [Utiliser un proxy inverse](#use-a-reverse-proxy)). Dans ce cas, vous n'avez pas besoin d'utiliser le middleware de compression. Pour plus de détails sur l'activation de la compression gzip dans Nginx, voir [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) dans la documentation Nginx.
+Pour un site internet à fort trafic en production, la meilleure façon de mettre en place une compression est de l'implémenter à un niveau de proxy inverse (voir [Utiliser un proxy inverse](#use-a-reverse-proxy)). Dans ce cas, vous n'avez pas besoin d'utiliser le middleware de compression. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
 ### Ne pas utiliser les fonctions synchrones
 
@@ -49,11 +49,11 @@ Les fonctions et méthodes synchrones lient le processus d'exécution jusqu'à c
 
 Bien que Node et de nombreux modules fournissent des versions synchrones et asynchrones de leurs fonctions, utilisez toujours la version asynchrone en production. Le seul moment où une fonction synchrone peut être justifiée est au démarrage initial.
 
-Vous pouvez utiliser le flag en ligne de commande `--trace-sync-io` pour afficher une alerte et une trace de pile chaque fois que votre application utilise une API synchrone. Bien sûr, vous ne voudriez pas utiliser cela en production, mais plutôt vous assurer que votre code est prêt pour la production. Voir la [documentation des options de la ligne de commande node](https://nodejs.org/api/cli#cli_trace_sync_io) pour plus d'informations.
+Vous pouvez utiliser le flag en ligne de commande `--trace-sync-io` pour afficher une alerte et une trace de pile chaque fois que votre application utilise une API synchrone. Bien sûr, vous ne voudriez pas utiliser cela en production, mais plutôt vous assurer que votre code est prêt pour la production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
 
 ### Faire la journalisation correctement
 
-En général, il y a deux raisons de se connecter depuis votre application : pour le débogage et pour l'activité des applications de journalisation (essentiellement tout le reste). Utiliser `console.log()` ou `console.error()` pour imprimer les messages de log vers le terminal est pratique courante dans le développement. Mais [ces fonctions sont synchronisées] (https://nodejs.org/api/console#console) lorsque la destination est un terminal ou un fichier, elles ne sont donc pas adaptées à la production, à moins que vous ne conduisiez la sortie vers un autre programme.
+En général, il y a deux raisons de se connecter depuis votre application : pour le débogage et pour l'activité des applications de journalisation (essentiellement tout le reste). Utiliser `console.log()` ou `console.error()` pour imprimer les messages de log vers le terminal est pratique courante dans le développement. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
 #### Pour le débogage
 
@@ -76,7 +76,7 @@ Avant de plonger dans ces sujets, vous devriez avoir une compréhension de base 
 
 Pour en savoir plus sur les fondamentaux de la gestion des erreurs, voir :
 
-- [Gestion des erreurs dans Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
+- [Error Handling in Node.js](https://web.archive.org/web/20210619211351/https://www.joyent.com/node-js/production/design/errors)
 
 #### Utiliser try-catch
 
@@ -134,9 +134,9 @@ La meilleure pratique est de gérer les erreurs le plus près possible du site. 
 
 Une chose que vous ne devriez pas _faire_ est d'écouter l'évènement `uncatghtException` émise lorsqu'une exception bulle tout le retour à la boucle d'événement. Ajouter un event listener pour `uncatghtException` changera le comportement par défaut du processus qui rencontre une exception ; le processus continuera à fonctionner malgré l'exception. Cela peut sembler un bon moyen d'empêcher votre application de planter, mais continuer à exécuter l'application après une exception non capturée est une pratique dangereuse et n'est pas recommandé, parce que l'état du processus devient peu fiable et imprévisible.
 
-De plus, l'utilisation de `uncaughtException` est officiellement reconnue comme [crude](https://nodejs.org/api/process#process_event_uncaughtexception). Donc l'écoute de `uncatghtException` est juste une mauvaise idée. C'est pourquoi nous recommandons des choses comme des processus multiples et des superviseurs : plantage et redémarrage est souvent le moyen le plus fiable de se remettre d'une erreur.
+Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Donc l'écoute de `uncatghtException` est juste une mauvaise idée. C'est pourquoi nous recommandons des choses comme des processus multiples et des superviseurs : plantage et redémarrage est souvent le moyen le plus fiable de se remettre d'une erreur.
 
-Nous ne recommandons pas non plus d'utiliser [domains](https://nodejs.org/api/domain). Il ne résout généralement pas le problème et est un module obsolète.
+We also don't recommend using [domains](https://nodejs.org/api/domain.html). Il ne résout généralement pas le problème et est un module obsolète.
 
 ## Choses à faire dans votre environnement / configuration
 
@@ -159,7 +159,7 @@ Définir NODE_ENV sur "production" rend Express:
 - Cache les fichiers CSS générés à partir des extensions CSS.
 - Générer des messages d'erreur moins verbeux.
 
-[Les tests indiquent](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) que cela peut améliorer les performances de l'application par un facteur de trois !
+[Tests indicate](https://web.archive.org/web/20250814011110/https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
 Si vous avez besoin d'écrire du code spécifique à l'environnement, vous pouvez vérifier la valeur de NODE_ENV avec `process.env.NODE_ENV`. Sachez que la vérification de la valeur d'une variable d'environnement entraîne une pénalité de performance, et qu'elle devrait donc être faite avec modération.
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Pour plus d'informations sur le système, voir [systemd reference (man page)] (http://www.freedesktop.org/software/systemd/man/systemd.unit).
+For more information on systemd, see the [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Exécutez votre application dans un cluster
 
@@ -248,13 +248,13 @@ Dans un système multi-cœurs, vous pouvez augmenter les performances d'une appl
 
 ![Balancing between application instances using the cluster API](/images/clustering.png)
 
-IMPORTANT: Puisque les instances de l'application s'exécutent sous forme de processus séparés, elles ne partagent pas le même espace mémoire. C'est-à-dire que les objets sont locaux à chaque instance de l'application. Par conséquent, vous ne pouvez pas maintenir l'état dans le code de l'application. Cependant, vous pouvez utiliser un datastore en mémoire comme [Redis](http://redis.io/) pour stocker des données et des états liés à la session. Cette mise en garde s'applique essentiellement à toutes les formes de mise à l'échelle horizontale, qu'il s'agisse de regroupement avec de multiples processus ou de multiples serveurs physiques.
+IMPORTANT: Puisque les instances de l'application s'exécutent sous forme de processus séparés, elles ne partagent pas le même espace mémoire. C'est-à-dire que les objets sont locaux à chaque instance de l'application. Par conséquent, vous ne pouvez pas maintenir l'état dans le code de l'application. However, you can use an in-memory datastore like [Redis](https://redis.io/) to store session-related data and state. Cette mise en garde s'applique essentiellement à toutes les formes de mise à l'échelle horizontale, qu'il s'agisse de regroupement avec de multiples processus ou de multiples serveurs physiques.
 
 Dans les applications groupées, les processus de travail peuvent planter individuellement sans affecter le reste des processus. Mis à part les avantages des performances, l'isolement des défaillances est une autre raison de lancer un cluster de processus applicatifs. À chaque fois qu'un processus worker plante, assurez-vous toujours de consigner l'événement et de faire apparaître un nouveau processus en utilisant la fonction cluster.fork().
 
 #### Utilisation du module de cluster de Node
 
-Le groupement est rendu possible avec le [module de clustage] (https://nodejs.org/api/cluster). Cela permet à un processus maître de faire apparaître des processus de travail et de distribuer des connexions entrantes entre les travailleurs.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). Cela permet à un processus maître de faire apparaître des processus de travail et de distribuer des connexions entrantes entre les travailleurs.
 
 #### Utilisation du PM2
 
@@ -288,13 +288,13 @@ Pour plus d'informations sur la grappe de serveurs avec PM2, voir [Mode clusters
 
 Une autre stratégie pour améliorer les performances en production est de mettre en cache le résultat des requêtes, afin que votre application ne répète pas l'opération pour répondre à la même requête de manière répétée.
 
-Utilisez un serveur de cache comme [Varnish](https://www.varnish-cache.org/) ou [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (voir aussi [Nginx Caching](https://serversforhackers.com/nginx-caching/)) pour améliorer considérablement la vitesse et les performances de votre application.
+Use a caching server like [Varnish](https://www.varnish.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/c/nginx-caching)) to greatly improve the speed and performance of your app.
 
 ### Utiliser un répartiteur de charge
 
 Quelle que soit l'optimisation d'une application, une seule instance ne peut gérer qu'une quantité limitée de charge et de trafic. Une façon de mettre à l'échelle une application est d'exécuter plusieurs instances et de distribuer le trafic via un répartiteur de charge. La mise en place d'un répartiteur de charge peut améliorer les performances et la vitesse de votre application et l'activer pour augmenter la taille de votre système par une seule instance.
 
-Un répartiteur de charge est généralement un mandataire inversé qui orchestre le trafic entre et à partir de plusieurs instances et serveurs d'applications. Vous pouvez facilement configurer un répartiteur de charge pour votre application en utilisant [Nginx](https://nginx.org/en/docs/http/load_balancing) ou [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Un répartiteur de charge est généralement un mandataire inversé qui orchestre le trafic entre et à partir de plusieurs instances et serveurs d'applications. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Avec l'équilibrage de charge, vous devrez peut-être vous assurer que les requêtes qui sont associées à un ID de session particulier se connectent au processus qui les a originés. C'est connu sous le nom _affinity_, ou _sticky sessions_, et peut être adressé par la suggestion ci-dessus d'utiliser un stockage de données tel que Redis pour les données de session (selon votre application). Pour une discussion, voir [Utilisation de plusieurs nœuds](https://socket.io/docs/v4/using-multiple-nodes/).
 
@@ -302,4 +302,4 @@ Avec l'équilibrage de charge, vous devrez peut-être vous assurer que les requ�
 
 Un mandataire inversé se trouve devant une application Web et effectue des opérations de support sur les requêtes, en plus de diriger les requêtes vers l'application. Il peut gérer les pages d'erreurs, la compression, la mise en cache, le service de fichiers et l'équilibrage de charge, entre autres.
 
-Le transfert de tâches qui ne nécessitent pas de connaissance de l'état de l'application à un mandataire inversé libère Express pour effectuer des tâches d'application spécialisées. Pour cette raison, il est recommandé d'exécuter Express derrière un proxy inverse comme [Nginx](https://www.nginx.org/) ou [HAProxy](https://www.haproxy.org/) en production.
+Le transfert de tâches qui ne nécessitent pas de connaissance de l'état de l'application à un mandataire inversé libère Express pour effectuer des tâches d'application spécialisées. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.

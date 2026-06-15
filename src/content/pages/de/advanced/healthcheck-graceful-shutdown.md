@@ -22,7 +22,7 @@ process.on('SIGTERM', () => {
 
 ## Gesundheitschecks
 
-Ein Lastausgleicher verwendet Gesundheitsprüfungen, um festzustellen, ob eine Anwendungsinstanz gesund ist und Anfragen annehmen kann. Zum Beispiel [Kubernetes hat zwei Gesundheitschecke](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+Ein Lastausgleicher verwendet Gesundheitsprüfungen, um festzustellen, ob eine Anwendungsinstanz gesund ist und Anfragen annehmen kann. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes//):
 
 - 'liveness', das bestimmt, wann ein Container neu gestartet werden soll.
 - `readiness`, das bestimmt, wann ein Container bereit ist, den Verkehr zu akzeptieren. Wenn ein Pod nicht bereit ist, wird er aus den Lastausgleichern entfernt.

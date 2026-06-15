@@ -22,7 +22,7 @@ process.on('SIGTERM', () => {
 
 ## Revisiones de salud
 
-Un balanceador de carga utiliza cheques de salud para determinar si una instancia de aplicación es saludable y puede aceptar solicitudes. Por ejemplo, [Kubernetes tiene dos cheques de salud](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+Un balanceador de carga utiliza cheques de salud para determinar si una instancia de aplicación es saludable y puede aceptar solicitudes. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes//):
 
 - `liveness`, que determina cuándo reiniciar un contenedor.
 - `readiness`, que determina cuando un contenedor está listo para empezar a aceptar tráfico. Cuando un pod no está listo, se elimina de los balanceadores de carga de servicio.

@@ -1,40 +1,40 @@
 ---
-title: Installing
-description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
+title: 安装
+description: 学习如何在 Node.js 环境中安装 Express.js，包括创建项目目录以及使用 npm 管理依赖项。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-在开始前，请确保你有安装 [Node.js](https://nodejs.org/) 18 或更高版本。 Then, create a directory for your application and navigate into it.
+在开始前，请确保你有安装 [Node.js](https://nodejs.org/) 18 或更高版本。 然后，为你的应用创建一个目录并进入该目录。
 
 ```bash
 mkdir myapp
 cd myapp
 ```
 
-Use the `npm init` command to create a `package.json` file for your application.
-For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
+使用 `npm init` 命令为你的应用创建一个 `package.json` 文件。
+有关 `package.json` 工作机制的更多信息，请参阅 [npm 的 package.json 处理细则](https://docs.npmjs.com/files/package.json)。
 
 ```bash
 npm init
 ```
 
-This command prompts you for a number of things, such as the name and version of your application.
-For now, you can simply hit RETURN to accept the defaults for most of them, with the following exception:
+该命令会提示你输入一些信息，例如应用的名称和版本号。
+目前，你可以直接按回车键接受大多数默认值，但以下情况除外：
 
 ```
 entry point: (index.js)
 ```
 
-Enter `app.js`, or whatever you want the name of the main file to be. If you want it to be `index.js`, hit RETURN to accept the suggested default file name.
+输入 `app.js`，或者你希望作为主文件的其他名称。 如果希望使用 `index.js`，直接按回车键接受系统建议的默认文件名即可。
 
-Now, install Express in the `myapp` directory and save it in the dependencies list. For example:
+现在，在 `myapp` 目录中安装 Express，并将其保存到依赖列表中。 举个例子：
 
 ```bash
 npm install express
 ```
 
-To install Express temporarily and not add it to the dependencies list:
+如果只是临时安装 Express，而不将其加入依赖列表：
 
 ```bash
 npm install express --no-save

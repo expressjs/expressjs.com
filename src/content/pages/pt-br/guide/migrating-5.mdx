@@ -101,7 +101,7 @@ Ou você pode atualizar seu código manualmente:
 
 ### Posicionando dois pontos (:) no nome do app.param(name, fn)
 
-Um personagem com dois pontos principais (:) no nome do `app. aram(name, fn)` é um remanescente do Express 3, e por uma questão de compatibilidade retrógrada, Express 4 apoiou-o com um aviso de depreciação. Expresso 5 irá ignorá-lo silenciosamente e usar o parâmetro de nome sem prefixá-lo com dois-pontos.
+No Expresso 4, os caracteres curinga eram strings vazias (`''`) e parâmetros opcionais `:` (usando `?`) tinham uma chave com valor `undefined`. No Expresso 5, parâmetros não correspondentes são completamente omitidos de `req.params`.
 
 Isso não deve afetar o seu código se você seguir a documentação Express 4 do [app.param](/en/4x/api#app.param), uma vez que não faz qualquer menção ao casal principal.
 

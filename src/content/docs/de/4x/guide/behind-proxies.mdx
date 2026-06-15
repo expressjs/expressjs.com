@@ -91,8 +91,8 @@ Das Aktivieren von `trust proxy` hat folgende Auswirkungen:
   </li>
   <li markdown="1">
     `X-Forwarded-Proto` kann vom Reverse Proxy gesetzt werden, um der App mitzuteilen, ob es `https`
-    oder `http` oder sogar ein ungültiger Name ist. Dieser Wert wird von [req.protocol]reflektiert
-    (/en/api#req.protocol).
+    oder `http` oder sogar ein ungültiger Name ist. This value is reflected by
+    [req.protocol](/api/request/#reqprotocol).
   </li>
   <li markdown="1">
     Die Werte [req.ip](/en/api#req.ip) und [req.ips](/en/api#req.ips) werden auf der Basis der

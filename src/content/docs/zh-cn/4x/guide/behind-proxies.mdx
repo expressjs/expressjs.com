@@ -1,21 +1,19 @@
 ---
-title: Express behind proxies
-description: Learn how to configure Express.js applications to work correctly behind reverse proxies, including using the trust proxy setting to handle client IP addresses.
+title: 运行在反向代理后的 Express 应用
+description: 学习如何配置 Express.js 应用使其在反向代理后正常工作，包括使用 **trust proxy** 设置来获取客户端真实 IP 地址。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-When running an Express app behind a reverse proxy, some of the Express APIs may return different values than expected. In order to adjust for this, the `trust proxy` application setting may be used to expose information provided by the reverse proxy in the Express APIs. The most common issue is express APIs that expose the client's IP address may instead show an internal IP address of the reverse proxy.
+在反向代理后运行 Express 应用时，部分 Express API 的返回值可能与预期不符。 为此可配置应用设置项 `trust proxy` ，让 Express 接口能够获取反向代理转发的请求信息。 最常见的问题是，用于获取客户端IP的Express接口，获取到的IP实为反向代理的内网地址。
 
 <Alert type="info">
 
-When configuring the `trust proxy` setting, it is important to understand the exact setup of the
-reverse proxy. Since this setting will trust values provided in the request, it is important that
-the combination of the setting in Express matches how the reverse proxy operates.
+配置`trust proxy`设置时，务必清楚反向代理的具体部署架构。 由于该配置会信任请求中携带的参数值，因此Express中的配置必须与反向代理的运行方式完全匹配，这一点至关重要。
 
 </Alert>
 
-The application setting `trust proxy` may be set to one of the values listed in the following table.
+应用设置项 `trust proxy` 可设置为下表所列值之一。
 
 <table class="doctable" border="1" markdown="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
@@ -23,25 +21,25 @@ The application setting `trust proxy` may be set to one of the values listed in 
     <tr>
       <td>Boolean</td>
 <td markdown="1">
-If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-For` header.
+若设为 `true`，客户端IP地址将被认定为`X-Forwarded-For`请求头中最左侧的条目。
 
-If `false`, the app is understood as directly facing the client and the client's IP address is derived from `req.socket.remoteAddress`. This is the default setting.
+若设为 `false`，表示应用直接面向客户端，客户端IP地址取自 `req.socket.remoteAddress`。 该值为默认配置。
 
-<Alert type="warning">
-When setting to `true`, it is important to ensure that the last reverse proxy trusted is removing/overwriting all of the following HTTP headers: `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto`, otherwise it may be possible for the client to provide any value.
+<Alert type="警告">
+将此项设为 `true` 时，务必确保最后一级受信反向代理会**移除/覆盖**以下所有HTTP请求头：`X-Forwarded-For`、`X-Forwarded-Host` 和 `X-Forwarded-Proto`，否则客户端可能伪造任意值。
 </Alert>
 </td>
     </tr>
     <tr>
       <td>IP addresses</td>
 <td markdown="1">
-An IP address, subnet, or an array of IP addresses and subnets to trust as being a reverse proxy. The following list shows the pre-configured subnet names:
+可配置为一个IP地址、一个子网，或由多个IP地址和子网组成的数组，用于指定可信任的反向代理。 以下列表展示了预配置的子网名称：
 
 - loopback - `127.0.0.1/8`, `::1/128`
 - linklocal - `169.254.0.0/16`, `fe80::/10`
 - uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
-You can set IP addresses in any of the following ways:
+你可通过以下任意方式设置IP地址：
 
 ```js
 app.set('trust proxy', 'loopback'); // specify a single subnet
@@ -50,24 +48,24 @@ app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple 
 app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array
 ```
 
-When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address. This works by checking if `req.socket.remoteAddress` is trusted. If so, then each address in `X-Forwarded-For` is checked from right to left until the first non-trusted address.
+指定后，这些IP地址或子网将被排除在地址判定流程之外，最靠近应用服务器的非受信IP将被认定为客户端IP地址。 其工作原理是检查 `req.socket.remoteAddress` 是否为可信任地址。 若为可信地址，则从右向左检查`X-Forwarded-For`中的每个地址，直至找到第一个非可信地址。
 
 </td>
     </tr>
     <tr>
       <td>Number</td>
 <td markdown="1">
-Use the address that is at most `n` number of hops away from the Express application. `req.socket.remoteAddress` is the first hop, and the rest are looked for in the `X-Forwarded-For` header from right to left. A value of `0` means that the first untrusted address would be `req.socket.remoteAddress`, i.e. there is no reverse proxy.
+使用距离 Express 应用不超过 n 个网络跳数的地址。 `req.socket.remoteAddress` 为第一跳，其余地址从`X-Forwarded-For`请求头中从右向左查找。 取值为 `0` 表示：第一个非可信地址就是 `req.socket.remoteAddress`，即不存在反向代理。
 
-<Alert type="warning">
-When using this setting, it is important to ensure there are not multiple, different-length paths to the Express application such that the client can be less than the configured number of hops away, otherwise it may be possible for the client to provide any value.
+<Alert type="警告">
+使用该配置时，必须确保不存在多条长度不同的路径到达 Express 应用，避免客户端与服务的跳数少于配置值，否则客户端可能伪造任意值。
 </Alert>
 </td>
     </tr>
     <tr>
       <td>Function</td>
 <td markdown="1">
-Custom trust implementation.
+自定义信任实现。
 
 ```js
 app.set('trust proxy', (ip) => {
@@ -82,7 +80,7 @@ app.set('trust proxy', (ip) => {
   </tbody>
 </table>
 
-Enabling `trust proxy` will have the following impact:
+启用 `trust proxy` 会产生以下影响：
 
 <ul>
   <li markdown="1">
@@ -90,8 +88,8 @@ Enabling `trust proxy` will have the following impact:
     `X-Forwarded-Host` header, which can be set by the client or by the proxy.
   </li>
   <li markdown="1">
-    `X-Forwarded-Proto` can be set by the reverse proxy to tell the app whether it is `https` or
-    `http` or even an invalid name. This value is reflected by [req.protocol](/en/api#req.protocol).
+    反向代理可通过设置`X-Forwarded-Proto`请求头，告知应用当前请求协议是`https`、`http`，或是非法协议标识。
+    This value is reflected by [req.protocol](/api#req.protocol).
   </li>
   <li markdown="1">
     The [req.ip](/en/api#req.ip) and [req.ips](/en/api#req.ips) values are populated based on the
@@ -99,4 +97,4 @@ Enabling `trust proxy` will have the following impact:
   </li>
 </ul>
 
-The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
+`trust proxy` 配置项依托[proxy-addr](https://www.npmjs.com/package/proxy-addr)包实现。 更多详情请参阅该模块文档。

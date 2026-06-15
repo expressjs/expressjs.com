@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 El argumento `root` especifica el directorio raíz desde el cual servir activos estáticos.
-Para más información sobre el argumento `options`, vea [express.static](/en/5x/api#express.static).
+Para más información sobre el argumento `options`, vea [express.static](/api#express.static).
 
 Por ejemplo, utiliza el siguiente código para servir imágenes, archivos CSS y archivos JavaScript en un directorio llamado `public`:
 
@@ -56,7 +56,7 @@ sirviendo activos estáticos.
 
 </Alert>
 
-Para crear un prefijo de ruta virtual (donde la ruta no existe en el sistema de archivos) para archivos que son servidos por el `express. función tatic`, [especificar una ruta de montaje](/en/5x/api#app.use) para el directorio estático, como se muestra a continuación:
+Para crear un prefijo de ruta virtual (donde la ruta no existe en el sistema de archivos) para archivos que son servidos por el `express. función tatic`, [especificar una ruta de montaje](/api#app.use) para el directorio estático, como se muestra a continuación:
 
 ```js
 app.use('/static', express.static('public'));

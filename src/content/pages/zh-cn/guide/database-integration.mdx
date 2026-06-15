@@ -1,11 +1,11 @@
 ---
-title: Database integration
-description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
+title: 数据库集成
+description: 了解如何将各种数据库与 Express.js 应用程序集成，包括 MongoDB、MySQL、PostgreSQL 等的配置示例。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
+为 Express 应用添加连接数据库的功能，只需在应用中加载对应数据库的合适 Node.js 驱动程序即可。 本文简要说明如何在 Express 应用中添加并使用一些最流行的数据库系统 Node.js 模块：
 
 - [Cassandra](#cassandra)
 - [Couchbase](#couchbase)
@@ -23,8 +23,7 @@ Adding the capability to connect databases to Express apps is just a matter of l
 
 <Alert type="alert">
 
-These database drivers are among many that are available. For other options, search on the
-[npm](https://www.npmjs.com/) site.
+这些数据库驱动只是众多可选驱动中的一部分。 如需其他方案，可前往[npm](https://www.npmjs.com/)官网检索。
 
 </Alert>
 
@@ -32,13 +31,13 @@ These database drivers are among many that are available. For other options, sea
 
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install cassandra-driver
 ```
 
-### Example
+### 示例
 
 ```js
 const cassandra = require('cassandra-driver');
@@ -54,13 +53,13 @@ client.execute('select key from system.local', (err, result) => {
 
 **Module**: [couchnode](https://github.com/couchbase/couchnode)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install couchbase
 ```
 
-### Example
+### 示例
 
 ```js
 const couchbase = require('couchbase');
@@ -91,13 +90,13 @@ bucket.query(query, [13], (err, result) => {
 
 **Module**: [nano](https://github.com/dscape/nano)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install nano
 ```
 
-### Example
+### 示例
 
 ```js
 const nano = require('nano')('http://localhost:5984');
@@ -127,13 +126,13 @@ books.list((err, body) => {
 
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install level levelup leveldown
 ```
 
-### Example
+### 示例
 
 ```js
 const levelup = require('levelup');
@@ -154,13 +153,13 @@ db.put('name', 'LevelUP', (err) => {
 
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install mysql
 ```
 
-### Example
+### 示例
 
 ```js
 const mysql = require('mysql');
@@ -186,7 +185,7 @@ connection.end();
 
 **Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install mongodb
@@ -236,13 +235,13 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 
 **Module**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install neo4j-driver
 ```
 
-### Example
+### 示例
 
 ```js
 const neo4j = require('neo4j-driver');
@@ -266,7 +265,7 @@ session.readTransaction((tx) => {
 
 **Module**: [oracledb](https://github.com/oracle/node-oracledb)
 
-### Installation
+### 安装
 
 NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
@@ -274,7 +273,7 @@ NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-
 $ npm install oracledb
 ```
 
-### Example
+### 示例
 
 ```js
 const oracledb = require('oracledb');
@@ -310,13 +309,13 @@ getEmployee(101);
 
 **Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install pg-promise
 ```
 
-### Example
+### 示例
 
 ```js
 const pgp = require('pg-promise')(/* options */);
@@ -335,13 +334,13 @@ db.one('SELECT $1 AS value', 123)
 
 **Module**: [redis](https://github.com/mranney/node_redis)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install redis
 ```
 
-### Example
+### 示例
 
 ```js
 const redis = require('redis');
@@ -370,13 +369,13 @@ client.hkeys('hash key', (err, replies) => {
 
 **Module**: [tedious](https://github.com/tediousjs/tedious)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install tedious
 ```
 
-### Example
+### 示例
 
 ```js
 const Connection = require('tedious').Connection;
@@ -431,13 +430,13 @@ function executeStatement() {
 
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install sqlite3
 ```
 
-### Example
+### 示例
 
 ```js
 const sqlite3 = require('sqlite3').verbose();
@@ -465,13 +464,13 @@ db.close();
 
 **Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 
-### Installation
+### 安装
 
 ```bash
 $ npm install elasticsearch
 ```
 
-### Example
+### 示例
 
 ```js
 const elasticsearch = require('elasticsearch');

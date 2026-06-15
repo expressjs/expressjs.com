@@ -6,16 +6,21 @@ description: Express.jsアプリケーションでルートを定義して使用
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 _Routing_ とは、アプリケーションのエンドポイント(URI)がクライアントリクエストに対してどのように応答するかを指します。
-For an introduction to routing, see [Basic routing](/en/4x/starter/basic-routing).
+For an introduction to routing, see [Basic routing](/starter/basic-routing).
+For an introduction to routing, see [Basic routing](/starter/basic-routing).
 
 HTTPメソッドに対応するExpress `app` オブジェクトのメソッドを使用してルーティングを定義します。
+のように、`app。 POST リクエストを処理する GET リクエストと `app.post`を処理します。 For a full list,
+see [app.METHOD](/api/application#appmethodpath-callback--callback-). HTTPメソッドに対応するExpress`app` オブジェクトのメソッドを使用してルーティングを定義します。
 のように、`app。 POST リクエストを処理する GET リクエストと `app.post\` を処理します。 完全なリストについては、
 [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-) を参照してください。 [app.all()](/en/4x/api/application#appallpath-callback--callback-)を使用して、すべてのHTTPメソッドと[app]を処理することもできます。 se()](/en/4x/api/application#appusepath-callback--callback) to
 コールバック関数としてミドルウェアを指定する (詳細は [Using middleware](/en/4x/guide/using-middleware) を参照)。
 
-これらのルーティングメソッドは、アプリケーションが指定されたルート (エンドポイント) と HTTP メソッドへのリクエストを受け取ったときに呼び出されるコールバック関数 ("handler functions" と呼ばれることもあります) を指定します。 言い換えれば、アプリケーションは指定されたルートとメソッドに一致するリクエストを「リッスン」します。 マッチを検出すると、指定されたコールバック関数を呼び出します。
+これらのルーティングメソッドは、アプリケーションが指定されたルート (エンドポイント) と HTTP メソッドへのリクエストを受け取ったときに呼び出されるコールバック関数 ("handler functions" と呼ばれることもあります) を指定します。 言い換えれば、アプリケーションは指定されたルートとメソッドに一致するリクエストを「リッスン」します。 マッチを検出すると、指定されたコールバック関数を呼び出します。 言い換えれば、アプリケーションは指定されたルートとメソッドに一致するリクエストを「リッスン」します。 マッチを検出すると、指定されたコールバック関数を呼び出します。
 
 実際、ルーティングメソッドは引数として複数のコールバック関数を持つことができます。
+複数のコールバック関数を使用。 コールバック関数に `next` を引数として渡し、関数の本体内で `next()` を呼び出して、次のコールバックに
+を渡すことが重要です。
 複数のコールバック関数を使用。 コールバック関数に `next` を引数として渡し、関数の本体内で `next()` を呼び出して、次のコールバックに
 を渡すことが重要です。
 
@@ -50,9 +55,10 @@ app.post('/', (req, res) => {
 ```
 
 Expressは、すべてのHTTPリクエストメソッドに対応するメソッドをサポートしています: `get`、`post`など。
-完全なリストについては、 [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-) を参照してください。
+完全なリストについては、 [app.METHOD](/api/application#appmethodpath-callback--callback-) を参照してください。
+For a full list, see [app.METHOD](/api/application#appmethodpath-callback--callback-).
 
-特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。
+特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -63,11 +69,12 @@ app.all('/secret', (req, res, next) => {
 
 ## ルートパス
 
-ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列、文字列パターン、または正規表現であることができます。
+ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列または正規表現にすることができます。 ルートパスは文字列、文字列パターン、または正規表現であることができます。
 
 <Alert type="情報">
 
 Express はルートパスに一致する [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) を使用します。ルートパスの定義におけるすべての可能性については、path-to-regexp ドキュメントを参照してください。
+[Express Playground Router](https://bjohansebas.github.io/playground-router/)は、パターンマッチングをサポートしていませんが、基本的なExpressルートをテストするための便利なツールです。
 [Express Playground Router](https://bjohansebas.github.io/playground-router/)は、パターンマッチングをサポートしていませんが、基本的なExpressルートをテストするための便利なツールです。
 
 </Alert>
@@ -160,7 +167,7 @@ app.get(/.*fly$/, (req, res) => {
 
 ## ルートパラメータ
 
-ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 取得した値は `req.params` オブジェクト内に入力され、パス内でそれぞれのキーとして指定されたrouteパラメータの名前が入力されます。
+ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 取得した値は `req.params` オブジェクト内に入力され、パス内でそれぞれのキーとして指定されたrouteパラメータの名前が入力されます。
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -212,12 +219,12 @@ req.params: {"userId": "42"}
 </Alert>
 
 <Alert type="警告">
-The <a href="https://github.com/expressjs/express/issues/2495">`*` character in regular expressions is not interpreted in the usual way</a>. 回避策として、`*` の代わりに `{0,}` を使用します。
+The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. 回避策として、`*` の代わりに `{0,}` を使用します。
 </Alert>
 
 ## Route handlers
 
-リクエストを処理するために、 [middleware](/en/guide/using-middleware) のように動作する複数のコールバック関数を提供できます。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。
+リクエストを処理するために、 [middleware](/guide/using-middleware) のように動作する複数のコールバック関数を提供できます。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -239,7 +246,7 @@ app.get('/user/:id', (req, res) => {
 
 ルートハンドラは、次の例に示すように、関数、関数の配列、または両方の組み合わせの形式で使用できます。
 
-単一のコールバック関数はルートを処理できます。 例:
+単一のコールバック関数はルートを処理できます。 例: 例:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -247,7 +254,7 @@ app.get('/example/a', (req, res) => {
 });
 ```
 
-複数のコールバック関数がルートを処理できます (`next` オブジェクトを指定してください)。 例:
+複数のコールバック関数がルートを処理できます (`next` オブジェクトを指定してください)。 例: 例:
 
 ```js
 app.get(
@@ -262,7 +269,7 @@ app.get(
 );
 ```
 
-コールバック関数の配列はルートを処理できます。 例:
+コールバック関数の配列はルートを処理できます。 例: 例:
 
 ```js
 const cb0 = function (req, res, next) {
@@ -282,7 +289,7 @@ const cb2 = function (req, res) {
 app.get('/example/c', [cb0, cb1, cb2]);
 ```
 
-独立した関数と関数の配列の組み合わせは、ルートを処理することができます。 例:
+独立した関数と関数の配列の組み合わせは、ルートを処理することができます。 例: 例:
 
 ```js
 const cb0 = function (req, res, next) {
@@ -310,7 +317,7 @@ app.get(
 
 ## レスポンスメソッド
 
-次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。
+次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。
 
 | 方法                                                                         | 説明                                                                               |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
@@ -327,7 +334,8 @@ app.get(
 ## app.route()
 
 `app.route()` を使用すると、ルートパスに対してチェーン可能なルートハンドラを作成できます。
-パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/en/4x/api/router)。
+パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/api/router)。
+パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 For more information about routes, see: [Router() documentation](/api/router).
 
 以下は、`app.route()`を使用して定義されたルートハンドラの例です。
 
@@ -347,7 +355,7 @@ app
 
 ## express.Router
 
-`express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。
+`express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。
 
 次の例では、ルータをモジュールとして作成し、ミドルウェア関数をロードします。 いくつかのルートを定義し、メインアプリのパスにルータモジュールをマウントします。
 
@@ -388,7 +396,7 @@ app.use('/birds', birds);
 
 アプリは `/birds` と `/birds/about` へのリクエストを処理できるようになりました。 同様に、ルート固有の「timeLog」ミドルウェア関数を呼び出します。
 
-ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/en/4x/api/application#appusepath-callback--callback) に渡す必要があります。
+ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/api/application#appusepath-callback--callback) に渡す必要があります。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appusepath-callback--callback).
 
 ```js
 const router = express.Router({ mergeParams: true });

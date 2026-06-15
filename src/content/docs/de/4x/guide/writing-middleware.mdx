@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie benutzerdefinierte Middleware-Funktionen für
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), die [Antwort-Objekt](/en/5x/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
+_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/api#req) (`req`), die [Antwort-Objekt](/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
 
 Middleware-Funktionen können folgende Aufgaben ausführen:
 
@@ -40,11 +40,10 @@ Die folgende Abbildung zeigt die Elemente eines Middleware-Funktionsaufrufs:
 </div>
 
 <div class="callout" id="callout5">
-  HTTP <a href="/en/5x/api#res">Antwort</a> Argument auf die Middleware-Funktion, genannt "res" von
-  Konvention.
+  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
 </div>
 
-<div class="callout" id="callout6">HTTP <a href="/en/5x/api#req">Request</a> Argument an die Middleware-Funktion, genannt "req" von Konvention.</div>
+<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
 </td>
 </tr>
 </table>
@@ -173,7 +172,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Hier verwenden wir die [`cookie-parser`](/en/resources/middleware/cookie-parser) Middleware, um eingehende Cookies vom `req` Objekt zu analysieren und sie an unsere `cookieValidator` Funktion zu übergeben. Die `validateCookies` Middleware gibt ein Versprechen zurück, das bei Ablehnung automatisch unseren Fehlerhandler auslöst.
+Die `validateCookies` Middleware gibt ein Versprechen zurück, das bei Ablehnung automatisch unseren Fehlerhandler auslöst. Hier verwenden wir die [`cookie-parser`](/resources/middleware/cookie-parser) Middleware, um eingehende Cookies vom `req` Objekt zu analysieren und sie an unsere `cookieValidator` Funktion zu übergeben.
 
 ```js
 const express = require('express');

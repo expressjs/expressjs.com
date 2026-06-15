@@ -5,17 +5,18 @@ description: Pug、Handlebars、EJSなどのテンプレートエンジンをExp
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_template engine_ を使用すると、アプリケーションで静的なテンプレート ファイルを使用できます。 実行時に、テンプレートエンジンはテンプレートファイルの
+_template engine_ を使用すると、アプリケーションで静的なテンプレート ファイルを使用できます。 _template engine_ を使用すると、アプリケーションで静的なテンプレート ファイルを使用できます。 実行時に、テンプレートエンジンはテンプレートファイルの
 変数を実際の値に置き換えます。 をクリックして、テンプレートをクライアントに送信する HTML ファイルに変換します。
+このアプローチにより、HTML ページのデザインが容易になります。
 このアプローチにより、HTML ページのデザインが容易になります。
 
 The [Express application generator](/en/starter/generator) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
 
-テンプレートファイルをレンダリングするには、ジェネレータが作成したデフォルトの `app.js` で、次の[アプリケーション設定プロパティ](/en/4x/api#app.set)を設定します。
+テンプレートファイルをレンダリングするには、ジェネレータが作成したデフォルトの `app.js` で、次の[アプリケーション設定プロパティ](/api#app.set)を設定します。
 
 - `views` テンプレートファイルがあるディレクトリ。 例: `app.set('views', './views')` 。
   デフォルトはアプリケーションのルートディレクトリにある `views` ディレクトリです。
-- `viewengine` を使用するテンプレートエンジン。 たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使います。
+- `viewengine` を使用するテンプレートエンジン。 `viewengine` を使用するテンプレートエンジン。 たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使います。
 
 次に、対応するテンプレートエンジン npm パッケージをインストールします。例えば、Pug をインストールする場合:
 
@@ -27,7 +28,7 @@ $ npm install pug --save
 Pug のような Express 準拠のテンプレートエンジンは、 `__express(filePath, options, callback)` という名前の関数、 `res.render()` がテンプレートコードのレンダリングを呼び出す
 をエクスポートします。
 
-一部のテンプレートエンジンはこの規約に従っていません。 [@ladjs/integrate](https://www.npmjs.com/package/@ladjs/consolidate)
+一部のテンプレートエンジンはこの規約に従っていません。 一部のテンプレートエンジンはこの規約に従っていません。 [@ladjs/integrate](https://www.npmjs.com/package/@ladjs/consolidate)
 ライブラリは、一般的な Node.js テンプレートエンジンのすべてをマッピングすることによって、この規則に従っており、したがって、Express 内でシームレスに動作します。
 
 </Alert>
@@ -49,7 +50,7 @@ html
     h1= message
 ```
 
-`index.pug` ファイルをレンダリングするルートを作成します。 If the `view engine` property is not set,
+`index.pug` ファイルをレンダリングするルートを作成します。 `index.pug` ファイルをレンダリングするルートを作成します。 If the `view engine` property is not set,
 you must specify the extension of the `view` file. そうでなければ、それを省略することができます。
 
 ```js
@@ -60,4 +61,4 @@ app.get('/', (req, res) => {
 
 ホームページへのリクエストを行うと、 `index.pug` ファイルは HTML としてレンダリングされます。
 
-ビューエンジンキャッシュはテンプレートの出力の内容をキャッシュせず、元のテンプレート自体のみキャッシュします。 キャッシュがオンの場合でも、ビューはリクエストごとに再レンダリングされます。
+ビューエンジンキャッシュはテンプレートの出力の内容をキャッシュせず、元のテンプレート自体のみキャッシュします。 キャッシュがオンの場合でも、ビューはリクエストごとに再レンダリングされます。 キャッシュがオンの場合でも、ビューはリクエストごとに再レンダリングされます。

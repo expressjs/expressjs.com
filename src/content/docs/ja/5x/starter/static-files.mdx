@@ -14,7 +14,8 @@ express.static(root, [options]);
 ```
 
 `root` 引数は、静的アセットを提供するルートディレクトリを指定します。
-引数 `options` の詳細については、 [express.static](/en/5x/api#express.static) を参照してください。
+`root` 引数は、静的アセットを提供するルートディレクトリを指定します。
+引数 `options` の詳細については、 [express.static](/api#express.static) を参照してください。
 
 例えば、`public`という名前のディレクトリに画像、CSSファイル、JavaScriptファイルを表示するには、次のコードを使用します。
 
@@ -72,7 +73,7 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ```
 
-しかし、`express.static`関数に与えるパスは、`node`プロセスを起動したディレクトリからの相対パスです。 expressアプリを別のディレクトリから実行する場合、提供したいディレクトリの絶対パスを使用する方が安全です:
+しかし、`express.static`関数に与えるパスは、`node`プロセスを起動したディレクトリからの相対パスです。 expressアプリを別のディレクトリから実行する場合、提供したいディレクトリの絶対パスを使用する方が安全です: expressアプリを別のディレクトリから実行する場合、提供したいディレクトリの絶対パスを使用する方が安全です:
 
 ```js
 const path = require('path');

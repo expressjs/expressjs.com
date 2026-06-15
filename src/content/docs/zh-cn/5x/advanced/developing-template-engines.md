@@ -1,11 +1,11 @@
 ---
-title: Developing template engines for Express
-description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
+title: 为 Express 开发模板引擎
+description: 学习如何使用 app.engine() 为 Express.js 开发自定义模板引擎，并通过示例讲解如何创建和集成自定义模板渲染逻辑。
 ---
 
-Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, and `callback` is the template engine function, which accepts the following items as parameters: the location of the file, the options object, and the callback function.
+使用 `app.engine(ext, callback)` 方法创建自定义模板引擎。 `ext` 表示文件扩展名，`callback` 是模板引擎函数，它接收以下参数：文件路径、选项对象以及回调函数。
 
-The following code is an example of implementing a very simple template engine for rendering `.ntl` files.
+以下代码示例实现了一个极简的模板引擎，用于渲染 `.ntl` 文件。
 
 ```js
 const fs = require('fs'); // this engine requires the fs module
@@ -25,14 +25,14 @@ app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
 ```
 
-Your app will now be able to render `.ntl` files. Create a file named `index.ntl` in the `views` directory with the following content.
+你的应用现在将能够渲染 `.ntl` 文件。 在 `views` 目录中创建一个名为 `index.ntl` 的文件，并写入以下内容。
 
 ```pug
 #title#
 #message#
 ```
 
-Then, create the following route in your app.
+然后在你的应用中创建如下路由。
 
 ```js
 app.get('/', (req, res) => {
@@ -40,4 +40,4 @@ app.get('/', (req, res) => {
 });
 ```
 
-When you make a request to the home page, `index.ntl` will be rendered as HTML.
+当你向主页发起请求时，`index.ntl` 文件会被渲染为 HTML。

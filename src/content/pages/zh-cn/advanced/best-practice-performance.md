@@ -1,18 +1,18 @@
 ---
-title: 'Production best practices: performance and reliability'
-description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
+title: '生产环境最佳实践：性能与可靠性'
+description: 探寻生产环境下Express应用在性能与可靠性方面的最佳实践，涵盖实现最优性能所需的代码优化与环境配置。
 ---
 
-This article discusses performance and reliability best practices for Express applications deployed to production.
+本文介绍部署至生产环境的Express应用在性能和可靠性方面的最佳实践。
 
-This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
+该主题明显属于“开发运维（DevOps）”范畴，兼顾传统开发与运维两大领域。 因此，相关内容分为两部分：
 
-- Things to do in your code (the dev part):
+- 代码层面需要执行的操作（开发部分）：
   - [Use gzip compression](#use-gzip-compression)
   - [Don't use synchronous functions](#dont-use-synchronous-functions)
   - [Do logging correctly](#do-logging-correctly)
   - [Handle exceptions properly](#handle-exceptions-properly)
-- Things to do in your environment / setup (the ops part):
+- 环境/部署配置层面需要完成的事项（运维部分）：
   - [Set NODE_ENV to "production"](#set-node_env-to-production)
   - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
   - [Run your app in a cluster](#run-your-app-in-a-cluster)
@@ -20,18 +20,18 @@ This topic clearly falls into the "devops" world, spanning both traditional deve
   - [Use a load balancer](#use-a-load-balancer)
   - [Use a reverse proxy](#use-a-reverse-proxy)
 
-## Things to do in your code
+## 代码层面的优化事项
 
-Here are some things you can do in your code to improve your application's performance:
+你可以在代码中执行以下操作来提升应用性能：
 
 - [Use gzip compression](#use-gzip-compression)
 - [Don't use synchronous functions](#dont-use-synchronous-functions)
 - [Do logging correctly](#do-logging-correctly)
 - [Handle exceptions properly](#handle-exceptions-properly)
 
-### Use gzip compression
+### 使用gzip压缩
 
-Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
+Gzip压缩可大幅减小响应体大小，从而提升Web应用的运行速度。 在Express应用中使用 [compression](https://www.npmjs.com/package/compression) 中间件实现gzip压缩。 举个例子：
 
 ```js
 const compression = require('compression');
@@ -41,49 +41,49 @@ const app = express();
 app.use(compression());
 ```
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) in the Nginx documentation.
+对于生产环境中的高流量网站，实施压缩的最佳方式是在反向代理层实现（参见[使用反向代理](#use-a-reverse-proxy)）。 这种情况下，你无需使用压缩中间件。 For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
-### Don't use synchronous functions
+### 不要使用同步函数
 
-Synchronous functions and methods tie up the executing process until they return. A single call to a synchronous function might return in a few microseconds or milliseconds, however in high-traffic websites, these calls add up and reduce the performance of the app. Avoid their use in production.
+同步函数和方法会阻塞执行进程，直至其执行完毕并返回结果。 单次调用同步函数可能仅需几微秒或几毫秒即可返回，但在高流量网站中，这些调用会累积起来，降低应用性能。 在生产环境中应避免使用同步函数。
 
-Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in production. The only time when a synchronous function can be justified is upon initial startup.
+尽管Node.js及许多模块都提供了函数的同步和异步版本，但在生产环境中务必使用异步版本。 唯一可以合理使用同步函数的场景是应用初始启动阶段。
 
-You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli#cli_trace_sync_io) for more information.
+你可以使用 `--trace-sync-io` 命令行标志，在应用每次调用同步API时输出警告信息与堆栈跟踪。 当然，你不应该在生产环境中使用该标志，而应在代码准备部署到生产环境前使用它来排查问题。 See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
 
-### Do logging correctly
+### 正确进行日志记录
 
-In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.error()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+通常，应用程序记录日志有两个目的：调试，以及记录应用运行活动（除此之外的所有场景基本都归为此类）。 在开发过程中，使用 `console.log()` 或 `console.error()` 将日志信息打印到终端是常见做法。 But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
-#### For debugging
+#### 用于调试
 
-If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module enables you to use the DEBUG environment variable to control what debug messages are sent to `console.error()`, if any. To keep your app purely asynchronous, you'd still want to pipe `console.error()` to another program. But then, you're not really going to debug in production, are you?
+如果你的日志记录目的是调试，那么请使用专门的调试模块（例如 [debug](https://www.npmjs.com/package/debug)），而非使用 `console.log()`。 该模块允许你使用 DEBUG 环境变量来控制将哪些调试信息发送到 `console.error()`（如果存在的话）。 若要保持应用程序完全异步，你仍然需要将 `console.error()` 的输出通过管道传输到另一个程序。 但话说回来，你并不会真的在生产环境中进行调试，对吧？
 
-#### For app activity
+#### 用于应用运行活动记录
 
-If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Pino](https://www.npmjs.com/package/pino), which is the fastest and most efficient option available.
+如果你的目的是记录应用运行活动（例如追踪流量或API调用），请不要使用 `console.log()`，而是使用如 [Pino](https://www.npmjs.com/package/pino) 这样的日志库，它是目前速度最快、效率最高的选择。
 
-### Handle exceptions properly
+### 正确处理异常
 
-Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
+Node 应用在遇到未捕获异常时会崩溃。 不处理异常并采取相应措施会导致你的 Express 应用崩溃并下线。 如果你遵循下文 [确保应用自动重启](#ensure-your-app-automatically-restarts) 中的建议，那么你的应用将能从崩溃中恢复。 幸运的是，Express 应用的启动耗时通常很短。 尽管如此，你首先需要避免应用崩溃，而要做到这一点，就必须正确处理异常。
 
-To ensure you handle all exceptions, use the following techniques:
+为确保处理所有异常，请使用以下方法：
 
 - [Use try-catch](#use-try-catch)
 - [Use promises](#use-promises)
 
-Before diving into these topics, you should have a basic understanding of Node/Express error handling: using error-first callbacks, and propagating errors in middleware. Node uses an "error-first callback" convention for returning errors from asynchronous functions, where the first parameter to the callback function is the error object, followed by result data in succeeding parameters. To indicate no error, pass null as the first parameter. The callback function must correspondingly follow the error-first callback convention to meaningfully handle the error. And in Express, the best practice is to use the next() function to propagate errors through the middleware chain.
+在深入探讨这些主题之前，你应该对 Node/Express 错误处理有基本的了解：使用错误优先回调函数，以及在中间件中传递错误。 Node 使用**错误优先回调**约定从异步函数中返回错误，回调函数的第一个参数是错误对象，后续参数为结果数据。 若不存在错误，请将 `null` 作为第一个参数传递。 回调函数必须相应地遵循错误优先回调约定，才能有效处理错误。 而在 Express 中，最佳实践是使用 `next()` 函数沿着中间件链传递错误。
 
-For more on the fundamentals of error handling, see:
+如需了解错误处理基础的更多内容，请参阅：
 
-- [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
+- [Error Handling in Node.js](https://web.archive.org/web/20210619211351/https://www.joyent.com/node-js/production/design/errors)
 
-#### Use try-catch
+#### 使用 try-catch
 
-Try-catch is a JavaScript language construct that you can use to catch exceptions in synchronous code. Use try-catch, for example, to handle JSON parsing errors as shown below.
+`try-catch` 是一种 JavaScript 语言结构，可用于捕获同步代码中的异常。 例如，可使用 `try-catch` 处理 JSON 解析错误，如下所示。
 
-Here is an example of using try-catch to handle a potential process-crashing exception.
-This middleware function accepts a query field parameter named "params" that is a JSON object.
+以下是一个使用 `try-catch` 处理可能导致进程崩溃的异常的示例。
+该中间件函数接收一个名为 `params` 的查询字段参数，该参数是一个 JSON 对象。
 
 ```js
 app.get('/search', (req, res) => {
@@ -100,11 +100,11 @@ app.get('/search', (req, res) => {
 });
 ```
 
-However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
+但是，`try-catch` 仅适用于同步代码。 由于 Node 平台主要是异步的（尤其是在生产环境中），`try-catch` 无法捕获大量异常。
 
-#### Use promises
+#### 使用 Promise
 
-When an error is thrown in an `async` function or a rejected promise is awaited inside an `async` function, those errors will be passed to the error handler as if calling `next(err)`
+当在 `async` 函数中抛出错误，或在 `async` 函数内等待（await）一个已被拒绝的 Promise 时，这些错误会被传递给错误处理程序，效果等同于调用 `next(err)`。
 
 ```js
 app.get('/', async (req, res, next) => {
@@ -118,7 +118,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Also, you can use asynchronous functions for your middleware, and the router will handle errors if the promise fails, for example:
+此外，你可以将异步函数用于中间件，若 Promise 失败，路由器会自动处理错误，例如：
 
 ```js
 app.use(async (req, res, next) => {
@@ -128,19 +128,19 @@ app.use(async (req, res, next) => {
 });
 ```
 
-Best practice is to handle errors as close to the site as possible. So while this is now handled in the router, it’s best to catch the error in the middleware and handle it without relying on separate error-handling middleware.
+最佳实践是尽可能在错误发生的就近位置处理错误。 因此，虽然这类错误现在可由路由器处理，但最佳做法是在中间件中捕获并处理错误，而不依赖独立的错误处理中间件。
 
-#### What not to do
+#### 不要执行的操作
 
-One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
+你**不应**执行的操作之一是监听 `uncaughtException` 事件，该事件会在异常一直冒泡回到事件循环时触发。 为 `uncaughtException` 添加事件监听器会改变进程遇到异常时的默认行为；即便发生异常，进程仍会继续运行。 这听起来似乎是防止应用崩溃的好方法，但在发生未捕获异常后继续运行应用是一种危险的做法，**不推荐使用**，因为此时进程的状态会变得不可靠且不可预测。
 
-Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process#process_event_uncaughtexception). So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
+Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#event-uncaughtexception). 因此，监听 `uncaughtException` 是一种不可取的做法。 这也是我们推荐使用多进程和进程管理工具的原因：崩溃后重启通常是从错误中恢复的最可靠方式。
 
-We also don't recommend using [domains](https://nodejs.org/api/domain). It generally doesn't solve the problem and is a deprecated module.
+We also don't recommend using [domains](https://nodejs.org/api/domain.html). 该模块通常无法解决问题，且已被废弃。
 
-## Things to do in your environment / setup
+## 环境/安装设置注意事项
 
-Here are some things you can do in your system environment to improve your app's performance:
+你可以在系统环境中进行以下操作来提升应用性能：
 
 - [Set NODE_ENV to "production"](#set-node_env-to-production)
 - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
@@ -149,66 +149,66 @@ Here are some things you can do in your system environment to improve your app's
 - [Use a load balancer](#use-a-load-balancer)
 - [Use a reverse proxy](#use-a-reverse-proxy)
 
-### Set NODE_ENV to "production"
+### 将 `NODE_ENV` 设置为 `"production"`
 
-The NODE_ENV environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set NODE_ENV to `production`.
+`NODE_ENV` 环境变量用于指定应用的运行环境（通常为开发环境或生产环境）。 提升性能最简单的操作之一就是将 `NODE_ENV` 设为 `production`。
 
-Setting NODE_ENV to "production" makes Express:
+将 `NODE_ENV` 设置为 `"production"` 会使 Express：
 
-- Cache view templates.
-- Cache CSS files generated from CSS extensions.
-- Generate less verbose error messages.
+- 缓存视图模板。
+- 缓存由 CSS 扩展生成的 CSS 文件。
+- 生成更简洁的错误提示信息。
 
-[Tests indicate](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
+[Tests indicate](https://web.archive.org/web/20250814011110/https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
-If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
+若需要编写针对特定环境的代码，可通过 `process.env.NODE_ENV` 检查 `NODE_ENV` 的值。 请注意，检查任何环境变量的值都会产生性能损耗，因此应谨慎使用。
 
-In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general, you shouldn't do that on a production server; instead, use your OS's init system (systemd). The next section provides more details about using your init system in general, but setting `NODE_ENV` is so important for performance (and easy to do), that it's highlighted here.
+在开发环境中，你通常在交互式 shell 中设置环境变量，例如使用 `export` 命令或 `.bash_profile` 文件。 但通常情况下，你不应该在生产服务器上这样做；相反，应使用操作系统的初始化系统（systemd）。 下一节将详细介绍如何使用初始化系统，但由于设置 `NODE_ENV` 对性能至关重要（且操作简便），因此在此单独强调。
 
-With systemd, use the `Environment` directive in your unit file. For example:
+使用 systemd 时，在单元文件中使用 `Environment` 指令。 举个例子：
 
 ```sh
 
 Environment=NODE_ENV=production
 ```
 
-For more information, see [Using Environment Variables In systemd Units](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
+如需了解更多信息，参阅[在 systemd 单元中使用环境变量](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/)。
 
-### Ensure your app automatically restarts
+### 确保应用自动重启
 
-In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
+在生产环境中，你绝不希望应用程序出现离线状态。 这意味着你需要确保**无论应用崩溃还是服务器本身崩溃，应用都能自动重启**。 尽管你希望这两种情况都不会发生，但在实际场景中，你必须通过以下方式应对这两种情况：
 
-- Using a process manager to restart the app (and Node) when it crashes.
-- Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
+- 使用进程管理器在应用（及 Node）崩溃时将其重启。
+- 借助操作系统自带的初始化系统，在操作系统异常后重启进程管理器。 你也可以不使用进程管理器，直接使用初始化系统。
 
-Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#handle-exceptions-properly) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
+Node 应用在遇到未捕获异常时会崩溃。 首要任务是保证应用经过充分测试、妥善处理所有异常（详情参见[合理处理异常](#handle-exceptions-properly)）。 但作为故障安全保障，需部署一套机制，确保应用一旦崩溃便能**自动重启**。
 
-#### Use a process manager
+#### 使用进程管理器
 
-In development, you started your app simply from the command line with `node server.js` or something similar. But doing this in production is a recipe for disaster. If the app crashes, it will be offline until you restart it. To ensure your app restarts if it crashes, use a process manager. A process manager is a "container" for applications that facilitates deployment, provides high availability, and enables you to manage the application at runtime.
+在开发环境中，你通常只需通过命令行（例如执行 `node server.js`）来启动应用。 但在生产环境中采用这种启动方式极易引发故障。 倘若应用崩溃，服务就会中断，需要手动重启才能恢复。 如需应用程序意外崩溃后自动重启，请使用进程管理器。 进程管理器是应用的“容器”，可简化部署流程、保障高可用，并支持在运行阶段管理应用。
 
-In addition to restarting your app when it crashes, a process manager can enable you to:
+除了在应用崩溃时重启应用外，进程管理器还可实现以下功能：
 
-- Gain insights into runtime performance and resource consumption.
-- Modify settings dynamically to improve performance.
-- Control clustering (pm2).
+- 查看运行时性能与资源占用情况。
+- 动态修改配置以优化性能。
+- 控制集群（pm2）。
 
-Historically, it was popular to use a Node.js process manager like [PM2](https://github.com/Unitech/pm2). See their documentation if you wish to do this. However, we recommend using your init system for process management.
+以往，使用 [PM2](https://github.com/Unitech/pm2) 这类 Node.js 进程管理器十分普遍。 如需使用，请查阅其官方文档。 不过我们建议采用系统初始化程序进行进程管理。
 
-#### Use an init system
+#### ### 使用系统初始化服务
 
-The next layer of reliability is to ensure that your app restarts when the server restarts. Systems can still go down for a variety of reasons. To ensure that your app restarts if the server crashes, use the init system built into your OS. The main init system in use today is [systemd](https://wiki.debian.org/systemd).
+保障可靠性的下一步是确保服务器重启时应用也能自动重启。 服务器仍可能因各类故障宕机。 如需在服务器崩溃后重启应用，请使用操作系统内置的初始化系统。 如今主流的初始化系统为 [systemd](https://wiki.debian.org/systemd)。
 
-There are two ways to use init systems with your Express app:
+在 Express 应用中使用初始化系统有两种方式：
 
-- Run your app in a process manager, and install the process manager as a service with the init system. The process manager will restart your app when the app crashes, and the init system will restart the process manager when the OS restarts. This is the recommended approach.
-- Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
+- 在进程管理器中运行应用，并通过初始化系统将该进程管理器安装为系统服务。 应用崩溃时进程管理器会重启应用，操作系统重启时初始化系统会重启进程管理器。 该方案为推荐方案。
+- 直接通过初始化系统运行你的应用（以及 Node）。 该方式相对简便，但无法获得使用进程管理器带来的额外优势。
 
 ##### Systemd
 
-Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
+systemd 是一款 Linux 系统与服务管理器。 多数主流 Linux 发行版已将 systemd 设为默认初始化系统。
 
-A systemd service configuration file is called a _unit file_, with a filename ending in `.service`. Here's an example unit file to manage a Node app directly. Replace the values enclosed in `<angle brackets>` for your system and app:
+systemd 服务配置文件被称为**单元文件**，文件名以 `.service` 结尾。 以下是一个直接管理 Node 应用的单元文件示例。 请根据你的系统和应用替换 `<0>` 包裹的参数值：
 
 ```sh
 [Unit]
@@ -242,27 +242,27 @@ WantedBy=multi-user.target
 
 For more information on systemd, see the [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
 
-### Run your app in a cluster
+### 以集群模式运行应用
 
-In a multi-core system, you can increase the performance of a Node app by many times by launching a cluster of processes. A cluster runs multiple instances of the app, ideally one instance on each CPU core, thereby distributing the load and tasks among the instances.
+在多核系统中，通过启动进程集群可以将 Node 应用的性能提升数倍。 集群会运行应用的多个实例，理想情况下每个 CPU 核心运行一个实例，从而在各实例之间分配负载与任务。
 
 ![Balancing between application instances using the cluster API](/images/clustering.png)
 
-IMPORTANT: Since the app instances run as separate processes, they do not share the same memory space. That is, objects are local to each instance of the app. Therefore, you cannot maintain state in the application code. However, you can use an in-memory datastore like [Redis](http://redis.io/) to store session-related data and state. This caveat applies to essentially all forms of horizontal scaling, whether clustering with multiple processes or multiple physical servers.
+重要提示：由于应用实例以独立进程运行，它们不共享相同的内存空间。 也就是说，对象仅作用于应用的每个独立实例。 因此，你无法在应用代码中维护状态。 不过你可以使用 [Redis](http://redis.io/) 这类内存型数据存储来存储会话相关数据与状态。 该注意事项基本适用于所有形式的水平扩展，无论是多进程集群还是多物理服务器部署。
 
-In clustered apps, worker processes can crash individually without affecting the rest of the processes. Apart from performance advantages, failure isolation is another reason to run a cluster of app processes. Whenever a worker process crashes, always make sure to log the event and spawn a new process using cluster.fork().
+在集群化应用中，工作进程可单独崩溃而不会影响其余进程。 除性能优势外，故障隔离是采用应用进程集群部署的另一原因。 每当工作进程崩溃时，务必记录该事件，并使用 cluster.fork() 生成新进程。
 
 #### Using Node's cluster module
 
-Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster). This enables a master process to spawn worker processes and distribute incoming connections among the workers.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). 该模块可让主进程创建多个工作进程，并将接入的连接分发至各个工作进程。
 
-#### Using PM2
+#### 使用 PM2
 
-If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code. You should ensure your [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
+如果使用 PM2 部署应用，**无需**修改应用代码即可使用集群功能。 你应当首先确保[应用为无状态应用](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps)，即不在进程内存储本地数据（例如会话、WebSocket 连接等数据）。
 
-When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
+使用 PM2 运行应用程序时，你可以启用**集群模式**，以指定数量的实例（例如与机器上可用 CPU 数量匹配）集群化运行应用。 你可以使用 `pm2` 命令行工具，**无需停止应用**，手动调整集群中的进程数量。
 
-To enable cluster mode, start your application like so:
+要启用集群模式，请按如下方式启动应用程序：
 
 ```bash
 
@@ -271,9 +271,9 @@ $ pm2 start npm --name my-app -i 4 -- start
 $ pm2 start npm --name my-app -i max -- start
 ```
 
-This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
+这也可以在 PM2 进程文件（`ecosystem.config.js` 或类似文件）中进行配置，将 `exec_mode` 设置为 `cluster`，并将 `instances` 设置为要启动的工作进程数量。
 
-Once running, the application can be scaled like so:
+应用启动后，可按如下方式进行扩容：
 
 ```bash
 
@@ -282,24 +282,24 @@ $ pm2 scale my-app +3
 $ pm2 scale my-app 2
 ```
 
-For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
+如需了解更多关于使用 PM2 实现集群部署的相关信息，请参阅 PM2 文档中的[集群模式](https://pm2.keymetrics.io/docs/usage/cluster-mode/)。
 
-### Cache request results
+### 缓存请求结果
 
-Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
+优化生产环境性能的另一方案是缓存请求返回结果，避免应用重复处理相同请求。
 
-Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/nginx-caching/)) to greatly improve the speed and performance of your app.
+Use a caching server like [Varnish](https://www.varnish.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/c/nginx-caching)) to greatly improve the speed and performance of your app.
 
-### Use a load balancer
+### 使用负载均衡器
 
-No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance and speed, and enable it to scale more than is possible with a single instance.
+无论应用优化程度多高，单个实例所能承载的负载与流量都存在上限。 应用扩容的一种方案：部署多实例，并通过负载均衡分发流量。 配置负载均衡能够提升应用性能与访问速度，同时让应用实现单实例无法达成的扩容能力。
 
-A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+负载均衡器通常是一种反向代理，用于调度多应用实例与多服务器之间的往来流量。 You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
-With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](https://socket.io/docs/v4/using-multiple-nodes/).
+使用负载均衡时，你可能需要确保与特定会话 ID 关联的请求能连接到创建该会话的进程。 这被称为**会话亲和性**（_session affinity_），即**粘性会话**（_sticky sessions_），可通过上述建议解决（根据你的应用场景，可采用 Redis 等数据存储来存放会话数据）。 相关说明请参阅[多节点部署](https://socket.io/docs/v4/using-multiple-nodes/)。
 
-### Use a reverse proxy
+### # 使用反向代理
 
-A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
+反向代理部署在 Web 应用前端，除了将请求转发至应用外，还会对请求执行各类辅助操作。 它可处理错误页面、压缩、缓存、静态资源托管以及负载均衡等多项工作。
 
-Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.
+将无需感知应用状态的任务交由反向代理处理，可释放 Express 专注处理各类应用专属任务。 For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.

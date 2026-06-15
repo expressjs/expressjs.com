@@ -143,7 +143,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Qui utilizziamo il middleware [`cookie-parser`](/en/resources/middleware/cookie-parser) per analizzare i cookie in arrivo fuori dall'oggetto `req` e passarli alla nostra funzione `cookieValidator`. Il middleware `validateCookies` restituisce una Promessa che al momento del rifiuto attiverà automaticamente il nostro gestore di errori.
+Il middleware `validateCookies` restituisce una Promessa che al momento del rifiuto attiverà automaticamente il nostro gestore di errori. Qui utilizziamo il middleware [`cookie-parser`](/resources/middleware/cookie-parser) per analizzare i cookie in arrivo fuori dall'oggetto `req` e passarli alla nostra funzione `cookieValidator`.
 
 ```js
 const express = require('express');
