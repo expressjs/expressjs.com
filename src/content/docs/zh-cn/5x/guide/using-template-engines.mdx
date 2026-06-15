@@ -1,45 +1,42 @@
 ---
-title: Using template engines with Express
-description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
+title: 在 Express 中使用模板引擎
+description: 了解如何在 Express.js 中集成并使用 Pug、Handlebars、EJS 等模板引擎，高效渲染动态 HTML 页面。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-A _template engine_ enables you to use static template files in your application. At runtime, the template engine replaces
-variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
-This approach makes it easier to design an HTML page.
+模板引擎能够让你在应用中使用静态模板文件。 运行时，模板引擎会将模板文件中的变量替换为实际值，并把模板转换成HTML文件发送至客户端。
+这种方式能够简化HTML页面的开发。
 
-The [Express application generator](/starter/generator) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
+[Express应用生成器](/en/starter/generator)默认使用[Pug](https://pugjs.org/api/getting-started.html)，同时也支持[Handlebars](https://www.npmjs.com/package/handlebars)、[EJS](https://www.npmjs.com/package/ejs)等模板引擎。
 
-To render template files, set the following [application setting properties](/4x/api#app.set), in the default `app.js` created by the generator:
+To render template files, set the following [application setting properties](/api#app.set), in the default `app.js` created by the generator:
 
-- `views`, the directory where the template files are located. Eg: `app.set('views', './views')`.
-  This defaults to the `views` directory in the application root directory.
-- `view engine`, the template engine to use. For example, to use the Pug template engine: `app.set('view engine', 'pug')`.
+- `views`，模板文件所在的目录。 例如：`app.set('views', './views')`。
+  该配置默认为应用根目录下的`views`目录。
+- `view engine`，要使用的模板引擎。 例如，要使用 Pug 模板引擎：`app.set('view engine', 'pug')`。
 
-Then install the corresponding template engine npm package; for example to install Pug:
+然后安装对应的模板引擎 npm 包；例如要安装 Pug：
 
 ```bash
 $ npm install pug --save
 ```
 
 <Alert type="alert">
-Express-compliant template engines such as Pug export a function named `__express(filePath, options, callback)`,
-which `res.render()` calls to render the template code.
+符合 Express 规范的模板引擎如 Pug会导出一个名为`__express(filePath, options, callback)`的函数，`res.render()`会调用该函数来渲染模板代码。
 
-Some template engines do not follow this convention. The [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
-library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.
+有些模板引擎并不遵循此规范。 [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)库遵循此规范，对所有主流Node.js模板引擎进行了统一封装，因此可在Express中无缝使用。
 
 </Alert>
 
-After the view engine is set, you don't have to specify the engine or load the template engine module in your app;
-Express loads the module internally, for example:
+设置视图引擎后，你无需在应用中指定引擎或加载模板引擎模块；
+Express 会在内部自动加载该模块，例如：
 
 ```js
 app.set('view engine', 'pug');
 ```
 
-Then, create a Pug template file named `index.pug` in the `views` directory, with the following content:
+然后，在`views`目录中创建一个名为`index.pug`的Pug模板文件，内容如下：
 
 ```pug
 html
@@ -49,8 +46,7 @@ html
     h1= message
 ```
 
-Create a route to render the `index.pug` file. If the `view engine` property is not set,
-you must specify the extension of the `view` file. Otherwise, you can omit it.
+创建一条路由来渲染`index.pug`文件。 如果未配置`view engine`属性，则必须指明视图文件的后缀名。 否则可以省略文件后缀。
 
 ```js
 app.get('/', (req, res) => {
@@ -58,6 +54,6 @@ app.get('/', (req, res) => {
 });
 ```
 
-When you make a request to the home page, the `index.pug` file will be rendered as HTML.
+当访问首页时，`index.pug` 文件会被渲染成 HTML。
 
-The view engine cache does not cache the contents of the template's output, only the underlying template itself. The view is still re-rendered with every request even when the cache is on.
+视图引擎缓存不会缓存模板渲染后的输出内容，仅缓存原始模板文件本身。 即便开启缓存，每次请求视图仍会重新渲染。

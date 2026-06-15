@@ -5,7 +5,7 @@ description: Aprenda a escrever funções de middleware personalizadas para apli
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Middleware\_ são funções que têm acesso ao [objeto de requisição](/5x/api#req) (`req`), a [objeto de resposta](/5x/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
+Middleware\_ são funções que têm acesso ao [objeto de requisição](/api#req) (`req`), a [objeto de resposta](/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
 
 As funções do Middleware podem executar as seguintes tarefas:
 
@@ -40,11 +40,10 @@ A figura a seguir mostra os elementos de uma chamada de função middleware:
 </div>
 
 <div class="callout" id="callout5">
-  HTTP <a href="/5x/api#res">resposta</a> argumento para a função middleware, chamada de "res" pela
-  convenção .
+  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
 </div>
 
-<div class="callout" id="callout6">HTTP <a href="/5x/api#req">request</a> argumento para a função middleware, chamado de "req" pela convenção.</div>
+<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
 </td>
 </tr>
 </table>
@@ -173,7 +172,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Aqui, usamos o [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analisar cookies recebidos do objeto `req` e passá-los para a nossa função `cookieValidator`. O middleware 'validateCookies' retorna a promessa de que, após a rejeição, irá automaticamente acionar o nosso manipulador de erros.
+O middleware 'validateCookies' retorna a promessa de que, após a rejeição, irá automaticamente acionar o nosso manipulador de erros. Aqui, usamos o [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analisar cookies recebidos do objeto `req` e passá-los para a nossa função `cookieValidator`.
 
 ```js
 const express = require('express');

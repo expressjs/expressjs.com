@@ -1,33 +1,32 @@
 ---
-title: Writing middleware for use in Express apps
-description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
+title: 编写 Express 应用使用的中间件
+description: 学习如何为 Express.js 应用编写自定义中间件函数，包含用于增强请求和响应处理的示例与最佳实践。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Middleware_ functions are functions that have access to the [request object](/api#req) (`req`), the [response object](/api#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_Middleware_ functions are functions that have access to the [request object](/api#req) (`req`), the [response object](/api#res) (`res`), and the `next` function in the application's request-response cycle. `next` 函数是 Express 路由器中的一个函数，调用该函数时，会执行当前中间件之后的下一个中间件。
 
-Middleware functions can perform the following tasks:
+中间件函数可执行下列任务：
 
-- Execute any code.
-- Make changes to the request and the response objects.
-- End the request-response cycle.
-- Call the next middleware in the stack.
+- 执行任意代码。
+- 修改请求对象与响应对象。
+- 终止请求-响应周期。
+- 调用堆栈中的下一个中间件。
 
-If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
+如果当前中间件函数没有终止请求-响应周期，它必须调用 `next()` 以将控制权传递给下一个中间件函数。 否则，请求将会被挂起。
 
-The following figure shows the elements of a middleware function call:
+下图展示了中间件函数调用的组成要素：
 
 ![Elements of a middleware function call](/images/express-mw.png)
 
-Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
+从 Express 5 开始，返回 Promise 的中间件函数在被拒绝或抛出错误时，会自动调用 `next(value)`。 `next` 函数将以被拒绝的值或抛出的错误对象作为参数被调用。
 
-## Example
+## 示例
 
-Here is an example of a simple "Hello World" Express application.
-The remainder of this article will define and add three middleware functions to the application:
-one called `myLogger` that prints a simple log message, one called `requestTime` that
-displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
+以下是一个简单的 Express “Hello World” 应用示例。
+本文的后续部分将为该应用定义并添加三个中间件函数：
+一个名为 `myLogger`，用于打印简单的日志信息；一个名为 `requestTime`，用于显示 HTTP 请求的时间戳；还有一个名为 `validateCookies`，用于验证传入的 Cookie。
 
 ```js
 const express = require('express');
@@ -40,11 +39,9 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
-### Middleware function myLogger
+### 中间件函数 myLogger
 
-Here is a simple example of a middleware function called "myLogger". This function just prints
-"LOGGED" when a request to the app passes through it. The middleware function is assigned to a
-variable named `myLogger`.
+以下是一个名为 `myLogger` 的简单中间件函数示例。 当对应用的请求经过该函数时，它只会打印 "LOGGED"。 该中间件函数被赋值给了一个名为 `myLogger` 的变量。
 
 ```js
 const myLogger = function (req, res, next) {
@@ -55,15 +52,12 @@ const myLogger = function (req, res, next) {
 
 <Alert type="alert">
 
-Notice the call above to `next()`. Calling this function invokes the next middleware function in
-the app. The `next()` function is not a part of the Node.js or Express API, but is the third
-argument that is passed to the middleware function. The `next()` function could be named anything,
-but by convention it is always named "next". To avoid confusion, always use this convention.
+注意上述代码中对 `next()` 的调用。 调用该函数会执行应用中的下一个中间件函数。 `next()` 函数并非 Node.js 或 Express API 的一部分，而是传递给中间件函数的第三个参数。 `next()` 函数可以被命名为任意名称，但按照惯例，它始终被命名为 `next`。 为避免混淆，请始终遵循此命名惯例。
 
 </Alert>
 
-To load the middleware function, call `app.use()`, specifying the middleware function.
-For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
+加载中间件函数时，需调用 `app.use()` 并传入该中间件函数。
+例如，以下代码在根路径（/）路由之前加载 `myLogger` 中间件函数。
 
 ```js
 const express = require('express');
@@ -83,18 +77,17 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
-Every time the app receives a request, it prints the message "LOGGED" to the terminal.
+每当应用接收到请求时，都会在终端中打印消息 "LOGGED"。
 
-The order of middleware loading is important: middleware functions that are loaded first are also executed first.
+中间件的加载顺序至关重要：先加载的中间件会先执行。
 
-If `myLogger` is loaded after the route to the root path, the request never reaches it and the app doesn't print "LOGGED", because the route handler of the root path terminates the request-response cycle.
+如果 `myLogger` 在根路径路由之后加载，请求永远不会到达该中间件，应用也不会打印 "LOGGED"，因为根路径的路由处理程序会终止请求-响应循环。
 
-The middleware function `myLogger` simply prints a message, then passes on the request to the next middleware function in the stack by calling the `next()` function.
+中间件函数 `myLogger` 仅打印一条消息，然后通过调用 `next()` 函数将请求传递给栈中的下一个中间件函数。
 
-### Middleware function requestTime
+### 中间件函数 requestTime
 
-Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
-to the request object.
+接下来，我们将创建一个名为 `requestTime` 的中间件函数，并向请求对象添加一个名为 `requestTime` 的属性。
 
 ```js
 const requestTime = function (req, res, next) {
@@ -103,7 +96,7 @@ const requestTime = function (req, res, next) {
 };
 ```
 
-The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
+该应用现在使用了 `requestTime` 中间件函数。 此外，根路径路由的回调函数使用了中间件函数挂载到`req`（请求对象）上的属性。
 
 ```js
 const express = require('express');
@@ -125,13 +118,13 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
-When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
+向应用根路径发起请求后，应用便会在浏览器中展示本次请求的时间戳。
 
-### Middleware function validateCookies
+### 中间件函数 validateCookies
 
-Finally, we'll create a middleware function that validates incoming cookies and sends a 400 response if cookies are invalid.
+最后，我们将创建一个中间件函数来验证传入的 Cookie，如果 Cookie 无效，则返回 400 响应。
 
-Here's an example function that validates cookies with an external async service.
+下面是一个示例函数，它通过外部异步服务验证 Cookie。
 
 ```js
 async function cookieValidator(cookies) {
@@ -143,7 +136,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Here, we use the [`cookie-parser`](/resources/middleware/cookie-parser) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+此处我们使用 [`cookie-parser`](/en/resources/middleware/cookie-parser) 中间件从 `req` 对象中解析传入的 Cookie，并将其传给 `cookieValidator` 函数。 `validateCookies` 中间件会返回一个 Promise，该 Promise 被拒绝时将自动触发我们的错误处理程序。
 
 ```js
 const express = require('express');
@@ -171,23 +164,19 @@ app.listen(3000);
 
 <Alert type="alert">
 
-Note how `next()` is called after `await cookieValidator(req.cookies)`. This ensures that if
-`cookieValidator` resolves, the next middleware in the stack will get called. If you pass anything
-to the `next()` function (except the string `'route'` or `'router'`), Express regards the current
-request as being an error and will skip any remaining non-error handling routing and middleware
-functions.
+注意 `next()` 是在 `await cookieValidator(req.cookies)` 之后调用的。 这能确保如果 `cookieValidator` 状态变为已兑现，堆栈中的下一个中间件将会被调用。 如果你向 `next()` 函数传入任何内容（字符串 `'route'` 或 `'router'` 除外），Express 会将当前请求视为错误，并跳过所有剩余的非错误处理路由和中间件函数。
 
 </Alert>
 
-Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
+由于你可以访问请求对象、响应对象、堆栈中的下一个中间件函数以及整个 Node.js API，因此中间件函数的用途是无限的。
 
 For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware).
 
-## Configurable middleware
+## 可配置中间件
 
-If you need your middleware to be configurable, export a function which accepts an options object or other parameters, which, then returns the middleware implementation based on the input parameters.
+如果需要让你的中间件具备可配置性，可导出一个接收选项对象或其他参数的函数，该函数会根据输入参数返回对应的中间件实现。
 
-File: `my-middleware.js`
+文件：`my-middleware.js`
 
 ```js
 module.exports = function (options) {
@@ -198,7 +187,7 @@ module.exports = function (options) {
 };
 ```
 
-The middleware can now be used as shown below.
+该中间件现在可如下所示使用。
 
 ```js
 const mw = require('./my-middleware.js');
@@ -206,4 +195,4 @@ const mw = require('./my-middleware.js');
 app.use(mw({ option1: '1', option2: '2' }));
 ```
 
-Refer to [cookie-session](https://github.com/expressjs/cookie-session) and [compression](https://github.com/expressjs/compression) for examples of configurable middleware.
+有关可配置中间件的示例，请参考 [cookie-session](https://github.com/expressjs/cookie-session) 和 [compression](https://github.com/expressjs/compression)。

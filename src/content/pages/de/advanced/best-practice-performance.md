@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Für eine stark frequentierte Website in der Produktion, der beste Weg zur Komprimierung ist die Implementierung auf umgekehrter Proxyebene (siehe [Reverse Proxy](#use-a-reverse-proxy)) . In diesem Fall brauchen Sie keine Komprimierungsmittelware. Details zum Aktivieren der gzip-Komprimierung in Nginx finden Sie unter [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in der Nginx-Dokumentation.
+Für eine stark frequentierte Website in der Produktion, der beste Weg zur Komprimierung ist die Implementierung auf umgekehrter Proxyebene (siehe [Reverse Proxy](#use-a-reverse-proxy)) . In diesem Fall brauchen Sie keine Komprimierungsmittelware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
 ### Keine synchronen Funktionen verwenden
 
@@ -49,11 +49,11 @@ Synchronische Funktionen und Methoden binden den Ausführungsprozess bis sie zur
 
 Obwohl Node und viele Module synchrone und asynchrone Versionen ihrer Funktionen liefern, verwenden Sie immer die asynchrone Version in der Produktion. Die einzige Zeit, in der eine synchrone Funktion gerechtfertigt werden kann, ist beim ersten Start.
 
-Du kannst das `--trace-sync-io` Kommandozeilen-Flag verwenden, um eine Warnung und einen Stack-Trace zu drucken, wann immer deine Anwendung eine synchrone API verwendet. Natürlich möchten Sie dies nicht in der Produktion verwenden, sondern vielmehr sicherstellen, dass Ihr Code produktionsbereit ist. Weitere Informationen finden Sie in der [Knoten Kommandozeilenoptionen Dokumentation](https://nodejs.org/api/cli.html#trace-sync-io) .
+Du kannst das `--trace-sync-io` Kommandozeilen-Flag verwenden, um eine Warnung und einen Stack-Trace zu drucken, wann immer deine Anwendung eine synchrone API verwendet. Natürlich möchten Sie dies nicht in der Produktion verwenden, sondern vielmehr sicherstellen, dass Ihr Code produktionsbereit ist. See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
 
 ### Logging korrekt
 
-Im Allgemeinen gibt es zwei Gründe für die Protokollierung aus Ihrer App: Für das Debuggen und für die Protokollierung von App-Aktivitäten (im Wesentlichen alles andere). Die Verwendung von `console.log()` oder `console.error()` zum Drucken von Logmeldungen an das Terminal ist gängige Praxis in der Entwicklung. Aber [diese Funktionen sind synchronisiert](https://nodejs.org/api/console.html#console), wenn das Ziel ein Terminal oder eine Datei ist so dass sie nicht für die Produktion geeignet sind, es sei denn, Sie rollen die Ausgabe zu einem anderen Programm.
+Im Allgemeinen gibt es zwei Gründe für die Protokollierung aus Ihrer App: Für das Debuggen und für die Protokollierung von App-Aktivitäten (im Wesentlichen alles andere). Die Verwendung von `console.log()` oder `console.error()` zum Drucken von Logmeldungen an das Terminal ist gängige Praxis in der Entwicklung. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
 #### Zum Debuggen
 
@@ -76,7 +76,7 @@ Bevor Sie in diese Themen eintauchen, sollten Sie ein grundlegendes Verständnis
 
 Für mehr über die Grundlagen der Fehlerbehandlung, siehe:
 
-- [Fehler beim Umgang mit Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
+- [Error Handling in Node.js](https://web.archive.org/web/20210619211351/https://www.joyent.com/node-js/production/design/errors)
 
 #### Versuchsfang verwenden
 
@@ -134,9 +134,9 @@ Best Practices ist es, Fehler so nah wie möglich an der Website zu behandeln. S
 
 Eine Sache, die du _nicht_ tun solltest ist, auf das `uncaptException` Event zu hören emittiert, wenn eine Ausnahme den ganzen Weg zurück zur Ereignis-Schleife weht. Das Hinzufügen eines Ereignis-Listeners für `uncaughtException` ändert das Standardverhalten des Prozesses, der auf eine Ausnahme stößt; wird der Prozess trotz der Ausnahme weiterhin laufen. Dies könnte nach einer guten Möglichkeit klingen, um zu verhindern, dass Ihre App abstürzt, aber die Anwendung nach einer nicht gefangenen Ausnahme weiterhin zu laufen ist eine gefährliche Praxis und wird nicht empfohlen, weil der Zustand des Prozesses unzuverlässig und unberechenbar wird.
 
-Zusätzlich wird die Verwendung von `uncaughtException` offiziell als [crude]anerkannt (https://nodejs.org/api/process.html#event-uncaughtexception). Also ist das Hören auf `uncaughtException` eine schlechte Idee. Aus diesem Grund empfehlen wir Dinge wie mehrere Prozesse und Supervisoren: Absturz und Neustart sind oft der zuverlässigste Weg, um einen Fehler zu beheben.
+Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Also ist das Hören auf `uncaughtException` eine schlechte Idee. Aus diesem Grund empfehlen wir Dinge wie mehrere Prozesse und Supervisoren: Absturz und Neustart sind oft der zuverlässigste Weg, um einen Fehler zu beheben.
 
-Wir empfehlen auch nicht [domains]zu verwenden (https://nodejs.org/api/domain.html). Es löst das Problem im Allgemeinen nicht und ist ein veraltetes Modul.
+We also don't recommend using [domains](https://nodejs.org/api/domain.html). Es löst das Problem im Allgemeinen nicht und ist ein veraltetes Modul.
 
 ## Dinge zu tun in Ihrer Umgebung / Einrichtung
 
@@ -159,7 +159,7 @@ Setze NODE_ENV auf "production" makes Express:
 - Cache-CSS-Dateien, die aus CSS-Erweiterungen generiert wurden.
 - Weniger ausführliche Fehlermeldungen generieren.
 
-[Tests deuten an](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/), dass dies die Leistung der App um einen Faktor von drei verbessern kann!
+[Tests indicate](https://web.archive.org/web/20250814011110/https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
 Wenn Sie umweltspezifischen Code schreiben müssen, können Sie den Wert von NODE_ENV mit `process.env.NODE_ENV` überprüfen. Beachten Sie, dass die Überprüfung des Wertes einer Umgebungsvariable eine Leistungsstrafe verursacht und daher sparsam durchgeführt werden sollte.
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Weitere Informationen zum System finden Sie unter [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
+For more information on systemd, see the [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Starte deine App in einem Cluster
 
@@ -248,13 +248,13 @@ In einem Multi-Core-System können Sie die Leistung einer Knoten-App um ein Viel
 
 ![Balance zwischen Anwendungsinstanzen mit der Cluster-API](/images/clustering.png)
 
-WICHTIG: Da die App-Instanzen als separate Prozesse laufen, teilen sie nicht den gleichen Speicherplatz. Das heißt, Objekte sind lokal für jede Instanz der App. Daher können Sie den Status im Anwendungscode nicht beibehalten. Du kannst jedoch einen Speicherdatenspeicher wie [Redis](http://redis.io/) verwenden, um Sitzungsdaten und -status zu speichern. Dieser Vorbehalt bezieht sich im Wesentlichen auf alle Formen der horizontalen Skalierung, sei es beim Clustering mit mehreren Prozessen oder mehreren physischen Servern.
+WICHTIG: Da die App-Instanzen als separate Prozesse laufen, teilen sie nicht den gleichen Speicherplatz. Das heißt, Objekte sind lokal für jede Instanz der App. Daher können Sie den Status im Anwendungscode nicht beibehalten. However, you can use an in-memory datastore like [Redis](https://redis.io/) to store session-related data and state. Dieser Vorbehalt bezieht sich im Wesentlichen auf alle Formen der horizontalen Skalierung, sei es beim Clustering mit mehreren Prozessen oder mehreren physischen Servern.
 
 In geclusterten Apps können Worker-Prozesse individuell abstürzen, ohne den Rest der Prozesse zu beeinträchtigen. Abgesehen von den Leistungsvorteilen ist die Fehlerisolierung ein weiterer Grund, einen Cluster von App-Prozessen auszuführen. Immer wenn ein Worker-Prozess abstürzt, vergewissern Sie sich, das Ereignis zu protokollieren und einen neuen Prozess mit cluster.fork() zu erzeugen.
 
 #### Cluster-Modul des Knotens
 
-Clustering wird mit Knotens [Cluster-Modul](https://nodejs.org/api/cluster.html) ermöglicht. Dies ermöglicht es einem Master-Prozess, Worker-Prozesse zu generieren und eingehende Verbindungen unter den Arbeitern zu verteilen.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). Dies ermöglicht es einem Master-Prozess, Worker-Prozesse zu generieren und eingehende Verbindungen unter den Arbeitern zu verteilen.
 
 #### PM2 verwenden
 
@@ -288,13 +288,13 @@ Weitere Informationen zum Clustering mit PM2 finden Sie unter [Cluster Mode](htt
 
 Eine weitere Strategie zur Verbesserung der Leistung in der Produktion ist das Cache-Ergebnis von Anfragen so dass Ihre App die Operation nicht wiederholt, um dieselbe Anfrage wiederholt zu bedienen.
 
-Benutze einen Caching-Server wie [Varnish](https://www.varnish-cache.org/) oder [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (siehe auch [Nginx Caching](https://serversforhackers.com/nginx-caching/)) um die Geschwindigkeit und Leistung deiner App deutlich zu verbessern.
+Use a caching server like [Varnish](https://www.varnish.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/c/nginx-caching)) to greatly improve the speed and performance of your app.
 
 ### Lastausgleich verwenden
 
 Egal wie optimiert eine App ist, eine einzelne Instanz kann nur eine begrenzte Menge an Last und Traffic verwalten. Eine Möglichkeit, eine App zu skalieren, besteht darin, mehrere Instanzen davon auszuführen und den Traffic über einen Lastausgleicher zu verteilen. Das Einrichten eines Lastausgleichs kann die Leistung und Geschwindigkeit Ihrer App verbessern und es ermöglichen, mehr zu skalieren, als mit einer einzigen Instanz möglich ist.
 
-Ein Loadbalancer ist in der Regel ein Reverse-Proxy, der den Datenverkehr zu und von mehreren Anwendungsinstanzen und Servern regelt. Mit [Nginx](https://nginx.org/en/docs/http/load_balancing.html) oder [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts) können Sie ganz einfach einen Lastausgleich für Ihre App einrichten.
+Ein Loadbalancer ist in der Regel ein Reverse-Proxy, der den Datenverkehr zu und von mehreren Anwendungsinstanzen und Servern regelt. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Bei Loadbalancing müssen Sie eventuell sicherstellen, dass Anforderungen, die mit einer bestimmten Session-ID in Verbindung stehen, mit dem Prozess verbunden sind, der sie verursacht hat. Dies ist _session_, oder _sticky sessions_, bekannt und kann durch den oben genannten Vorschlag angesprochen werden, um einen Datenspeicher wie Redis für Sitzungsdaten (je nach Anwendung) zu verwenden. Für eine Diskussion siehe [Mehrere Knoten verwenden](https://socket.io/docs/v4/using-multiple-nodes/).
 
@@ -302,4 +302,4 @@ Bei Loadbalancing müssen Sie eventuell sicherstellen, dass Anforderungen, die m
 
 Ein Reverse Proxy sitzt vor einer Web-App und führt unterstützende Operationen auf den Anfragen aus, abgesehen von der Weiterleitung von Anfragen an die App. Es kann Fehlerseiten, Komprimierung, Caching, Servieren von Dateien und laden Balancing unter anderem.
 
-Die Übergabe von Aufgaben, die keine Kenntnisse des Anwendungszustands an einen Reverse Proxy erfordern, gibt Express frei, spezielle Anwendungsaufgaben durchzuführen. Aus diesem Grund wird empfohlen, Express in der Produktion hinter einem umgekehrten Proxy wie [Nginx](https://www.nginx.org/) oder [HAProxy](https://www.haproxy.org/) auszuführen.
+Die Übergabe von Aufgaben, die keine Kenntnisse des Anwendungszustands an einen Reverse Proxy erfordern, gibt Express frei, spezielle Anwendungsaufgaben durchzuführen. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.

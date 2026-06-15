@@ -10,8 +10,8 @@ da escala do seu aplicativo e da equipe que está envolvida. Para ser o mais fle
 flexível, Express não faz suposições em termos de estrutura.
 
 Rotas e outras lógicas específicas do aplicativo podem viver em quantos arquivos
-você quiser, em qualquer estrutura de diretório que preferir. View the following
-examples for inspiration:
+você quiser, em qualquer estrutura de diretório que preferir. Veja os seguintes exemplos
+de inspiração:
 
 - [Lista de rotas](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
 - [Mapa de rotas](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
@@ -23,9 +23,9 @@ Além disso, existem extensões para o Express, que simplificam alguns desses pa
 
 ## Como faço para definir modelos?
 
-Expresso não tem noção de um banco de dados. This concept is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Expresso não tem noção de um banco de dados. Este conceito é
+deixado para módulos de Nó de terceiros, permitindo a você
+interface com quase qualquer banco de dados.
 
 Veja [LoopBack](http://loopback.io) para um framework baseado em Express que é centralizado em torno de modelos.
 

@@ -101,7 +101,7 @@ Oder Sie können Ihren Code manuell aktualisieren:
 
 ### Führender Doppelpunkt (:) im Namen von app.param(name, fn)
 
-Ein führendes Doppelzeichen (:) im Namen der `app. aram(name, fn)` Funktion ist ein Überbleibsel von Express 3, und um der Abwärtskompatibilität willen hat Express 4 sie mit einer Veraltungsmeldung unterstützt. Express 5 ignoriert es stillschweigend und verwendet den Namensparameter, ohne ihn mit einem Doppelpunkt zu präfixieren.
+In Express 4 waren unpassende Platzhalter leere Zeichenketten (`''`) und optionale `:` Parameter (mit `?`) hatten einen Schlüssel mit dem Wert `undefiniert`. In Express 5 werden unübertroffene Parameter vollständig aus `req.params` entfernt.
 
 Dies sollte deinen Code nicht beeinflussen, wenn du der Express-4-Dokumentation von [app.param]folgst (/en/4x/api#app.param), da es keine Erwähnung des führenden Doppelpunkts.
 
@@ -134,7 +134,7 @@ Oder Sie können Ihren Code manuell aktualisieren:
 
 ### res.json(obj, Status)
 
-Express 5 unterstützt nicht mehr die Signatur `res.json(obj, status)`. Setze stattdessen den Status und verkette ihn auf die Methode `res.json()` wie folgt: `res.status(status).json(obj)`.
+Express 5 unterstützt nicht mehr die Signatur `res.jsonp(obj, status)`. Setze stattdessen den Status und verkette ihn auf die `res.jsonp()` Methode wie folgt: `res.status(status).jsonp(obj)`.
 
 #### Wie aktualisiere ich
 
@@ -155,7 +155,7 @@ Oder Sie können Ihren Code manuell aktualisieren:
 
 ### res.jsonp(obj, status)
 
-Express 5 unterstützt nicht mehr die Signatur `res.jsonp(obj, status)`. Setze stattdessen den Status und verkette ihn auf die `res.jsonp()` Methode wie folgt: `res.status(status).jsonp(obj)`.
+Express 5 unterstützt nicht mehr die Signatur `res.json(obj, status)`. Setze stattdessen den Status und verkette ihn auf die Methode `res.json()` wie folgt: `res.status(status).json(obj)`.
 
 #### Wie aktualisiere ich
 
@@ -491,7 +491,7 @@ Das `req.params` Objekt hat nun einen **null Prototyp** wenn man String Pfade be
 
 **Wildcard-Parameter sind jetzt Arrays:**
 
-Platzhalter (z.B. `/*splat`) erfassen Pfadsegmente als Array anstelle eines einzelnen Strings.
+`/*splat`) erfassen Pfadsegmente als Array anstelle eines einzelnen Strings.
 
 ```js
 app.get('/*splat', (req, res) => {

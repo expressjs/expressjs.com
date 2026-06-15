@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 Das `root` Argument gibt das Wurzelverzeichnis an, von dem aus statische Assets ausgeliefert werden sollen.
-Für weitere Informationen zum Argument `options` siehe [express.static](/5x/api#express.static).
+Für weitere Informationen zum Argument `options` siehe [express.static](/api#express.static).
 
 Verwenden Sie zum Beispiel den folgenden Code, um Bilder, CSS-Dateien und JavaScript-Dateien in einem Verzeichnis mit dem Namen `public` auszugeben:
 
@@ -56,7 +56,7 @@ zu verbessern und statische Assets zu bedienen.
 
 </Alert>
 
-Um einen virtuellen Pfad-Präfix zu erstellen (wo der Pfad existiert eigentlich nicht im Dateisystem) für Dateien, die durch die `express. tatic` Funktion, [einen Mount-Pfad angeben](/5x/api#app.use) für das statische Verzeichnis angeben, wie unten angezeigt:
+Um einen virtuellen Pfad-Präfix zu erstellen (wo der Pfad existiert eigentlich nicht im Dateisystem) für Dateien, die durch die `express. tatic` Funktion, [einen Mount-Pfad angeben](/api#app.use) für das statische Verzeichnis angeben, wie unten angezeigt:
 
 ```js
 app.use('/static', express.static('public'));

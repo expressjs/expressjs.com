@@ -97,8 +97,8 @@ e passá-los para o Express. Se o bloco `tentar...catch`
 fosse omitido, Express não pegaria o erro, uma vez que ele não faz parte do código de manipulador
 síncrono.
 
-Use promessas para evitar a sobrecarga do bloco `tentar... capturar` ou ao usar funções
-que retornam promessas. Por exemplo:
+Você também pode usar uma cadeia de manipuladores para confiar em erro síncrono
+de recuperação, reduzindo o código assíncrono a algo trivial. Por exemplo:
 
 ```js
 app.get('/', (req, res, next) => {
@@ -114,8 +114,7 @@ Since promises automatically catch both synchronous errors and rejected promises
 you can simply provide `next` as the final catch handler and Express will catch errors,
 because the catch handler is given the error as the first argument.
 
-Você também pode usar uma cadeia de manipuladores para confiar em erro síncrono
-de recuperação, reduzindo o código assíncrono a algo trivial. Por exemplo:
+Se você tiver um gerenciador de rotas com múltiplas funções de retorno de chamada, você pode usar o parâmetro `rota` para pular para o próximo manipulador de rota. Por exemplo:
 
 ```js
 app.get('/', [

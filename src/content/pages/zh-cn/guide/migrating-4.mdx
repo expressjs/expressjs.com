@@ -1,63 +1,42 @@
 ---
-title: Moving to Express 4
-description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
+title: 迁移至 Express 4
+description: 一份将 Express.js 应用从 3 版迁移至 4 版的指南，涵盖中间件与路由的变更，以及高效更新代码库的方法。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 4 is a breaking change from Express 3. That means an existing Express 3 app will _not_ work if you update the Express version in its dependencies.
+Express 4 相对于 Express 3 是一个破坏性变更版本。 这意味着如果在依赖项中更新 Express 版本，现有的 Express 3 应用将**无法**正常运行。
 
-This article covers:
+本文包括：
 
-<ul class="doclist">
-  <li>
-    <a href="#changes">Changes in Express 4</a>.
-  </li>
-  <li>
-    <a href="#example-migration">An example</a> of migrating an Express 3 app to Express 4.
-  </li>
-  <li>
-    <a href="#app-gen">Upgrading to the Express 4 app generator</a>.
-  </li>
-</ul>
+- [Changes in Express 4](#changes-in-express-4).
+- [An example](#example-app-migration) of migrating an Express 3 app to Express 4.
+- [Upgrading to the Express 4 app generator](#upgrading-to-the-express-4-app-generator).
 
-## Changes in Express 4
+## Express 4 的变更
 
-There are several significant changes in Express 4:
+Express 4 中有几项重大变更：
 
-<ul class="doclist">
-  <li>
-    <a href="#core-changes">Changes to Express core and middleware system.</a> The dependencies on
-    Connect and built-in middleware were removed, so you must add middleware yourself.
-  </li>
-  <li>
-    <a href="#routing">Changes to the routing system.</a>
-  </li>
-  <li>
-    <a href="#other-changes">Various other changes.</a>
-  </li>
-</ul>
+- [Changes to Express core and middleware system.](#changes-to-express-core-and-middleware-system) The dependencies on Connect and built-in middleware were removed, so you must add middleware yourself.
+- [Changes to the routing system.](#the-routing-system)
+- [Various other changes.](#other-changes)
 
-See also:
+参阅：
 
-- [New features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-- [Migrating from 3.x to 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+- [新功能在 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [从 3.x 迁移到 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
-### Changes to Express core and middleware system
+### Express 核心和中间件系统的变更
 
-Express 4 no longer depends on Connect, and removes all built-in
-middleware from its core, except for the `express.static` function. This means that
-Express is now an independent routing and middleware web framework, and
-Express versioning and releases are not affected by middleware updates.
+Express 4 不再依赖 Connect，并从核心中移除了所有内置中间件，`express.static` 函数除外。 这意味着 Express 现在是一个独立的路由与中间件 Web 框架，其版本和发布不再受中间件更新的影响。
 
-Without built-in middleware, you must explicitly add all the
-middleware that is required to run your app. Simply follow these steps:
+由于不再包含内置中间件，你必须显式添加应用运行所需的全部中间件。 只需按照以下步骤操作：
 
 1. Install the module: `npm install --save \<module-name>`
-2. In your app, require the module: `require('module-name')`
-3. Use the module according to its documentation: `app.use( ... )`
+2. 在你的应用中，引入该模块：`require('module-name')`
+3. 按照其文档说明使用该模块：`app.use( ...` )\`
 
-The following table lists Express 3 middleware and their counterparts in Express 4.
+下表列出了 Express 3 中间件及其在 Express 4 中的对应模块。
 
 <table class="doctable" border="1">
   <tr>
@@ -187,16 +166,14 @@ The following table lists Express 3 middleware and their counterparts in Express
   </tr>
 </table>
 
-Here is the [complete list](https://github.com/senchalabs/connect#middleware) of Express 4 middleware.
+此处为 Express 4 中间件的[完整清单](https://github.com/senchalabs/connect#middleware)。
 
-In most cases, you can simply replace the old version 3 middleware with
-its Express 4 counterpart. For details, see the module documentation in
-GitHub.
+大多数情况下，你只需将旧版3中间件替换为对应的Express 4版本即可。 详情请参阅 GitHub 上的模块文档。
 
-#### `app.use` accepts parameters
+#### `app.use` 接受参数
 
-In version 4 you can use a variable parameter to define the path where middleware functions are loaded, then read the value of the parameter from the route handler.
-For example:
+在版本4中，你可以使用可变参数来定义加载中间件函数的路径，然后从路由处理程序中读取该参数的值。
+举个例子：
 
 ```js
 app.use('/book/:id', (req, res, next) => {
@@ -205,25 +182,21 @@ app.use('/book/:id', (req, res, next) => {
 });
 ```
 
-### The routing system
+### 路由系统
 
-Apps now implicitly load routing middleware, so you no longer have to
-worry about the order in which middleware is loaded with respect to
-the `router` middleware.
+应用现在会隐式加载路由中间件，因此你无需再担心中间件相对于 `router` 中间件的加载顺序。
 
-The way you define routes is unchanged, but the routing system has two
-new features to help organize your routes:
+定义路由的方式未发生改变，但路由系统新增了两项功能，可帮助你更好地组织路由：
 
-- A new method, `app.route()`, to create chainable route handlers for a route path.
-- A new class, `express.Router`, to create modular mountable route handlers.
+- 新增方法 `app.route()`，用于为路由路径创建可链式调用的路由处理程序。
+- 新增类 `express.Router`，用于创建模块化的、可挂载的路由处理程序。
 
-#### `app.route()` method
+#### `app.route()` 方法
 
-The new `app.route()` method enables you to create chainable route handlers
-for a route path. Because the path is specified in a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more
+新增的 `app.route()` 方法支持你为路由路径创建可链式调用的路由处理程序。 由于路径在单一位置指定，因此创建模块化路由十分实用，同时还能减少冗余代码和拼写错误。 For more
 information about routes, see [`Router()` documentation](/4x/api#router).
 
-Here is an example of chained route handlers that are defined by using the `app.route()` function.
+以下是使用 `app.route()` 函数定义的链式路由处理程序示例。
 
 ```js
 app
@@ -239,18 +212,13 @@ app
   });
 ```
 
-#### `express.Router` class
+#### `express.Router` 类
 
-The other feature that helps to organize routes is a new class,
-`express.Router`, that you can use to create modular mountable
-route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".
+另一项有助于组织路由的功能是新增的 `express.Router` 类，你可以使用它创建模块化的、可挂载的路由处理程序。 `Router` 实例是完整的中间件和路由系统；因此它通常被称为“迷你应用”。
 
-The following example creates a router as a module, loads middleware in
-it, defines some routes, and mounts it on a path on the main app.
+以下示例创建一个路由作为模块，在其中加载中间件、定义若干路由，并将其挂载到主应用的路径上。
 
-For example, create a router file named `birds.js` in the app directory,
-with the following content:
+例如，在应用目录中创建一个名为 `birds.js` 的路由文件，内容如下：
 
 ```js
 var express = require('express');
@@ -273,7 +241,7 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
-Then, load the router module in the app:
+然后，在应用程序中加载路由模块：
 
 ```js
 var birds = require('./birds');
@@ -283,13 +251,11 @@ var birds = require('./birds');
 app.use('/birds', birds);
 ```
 
-The app will now be able to handle requests to the `/birds` and
-`/birds/about` paths, and will call the `timeLog`
-middleware that is specific to the route.
+应用现在能够处理 `/birds` 和 `/birds/about` 路径的请求，并会调用专用于该路由的 `timeLog` 中间件。
 
-### Other changes
+### 其他改变：
 
-The following table lists other small but important changes in Express 4:
+下表列出了 Express 4 中其他细微但重要的变更：
 
 <table class="doctable" border="1">
   <tr>
@@ -298,82 +264,79 @@ The following table lists other small but important changes in Express 4:
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.</td>
+    <td>Express 4 requires Node.js 0.10.x 或更高版本，并且已经放弃了对 Node.js 0.8.x的支持。</td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
     <td markdown="1">
-      The `http` module is no longer needed, unless you need to directly work with it
-      (socket.io/SPDY/HTTPS). The app can be started by using the `app.listen()` function.
+      不再需要`http`模块，除非你需要直接使用 (socket.io/SPDY/HTTPS). 可通过 `app.listen()`
+      函数启动应用。
     </td>
   </tr>
   <tr>
     <td markdown="1">`app.configure()`</td>
     <td markdown="1">
-      The `app.configure()` function has been removed. Use the `process.env.NODE_ENV` or
-      `app.get('env')` function to detect the environment and configure the app accordingly.
+      `app.configure()` 函数已被删除。 使用 `process.env.NODE_ENV` 或 `app.get('env)`
+      函数检测环境并相应配置应用程序。
     </td>
   </tr>
   <tr>
     <td markdown="1">`json spaces`</td>
-    <td markdown="1">
-      The `json spaces` application property is disabled by default in Express 4.
-    </td>
+    <td markdown="1">Express 4默认禁用了 "json spaces" 应用程序属性。</td>
   </tr>
   <tr>
     <td markdown="1">`req.accepted()`</td>
     <td markdown="1">
-      Use `req.accepts()`, `req.acceptsEncodings()`, `req.acceptsCharsets()`, and
+      使用`req.accepts()`, `req.acceptsEncodings()`, `req.acceptsCharsets()`, 和
       `req.acceptsLanguages()`.
     </td>
   </tr>
   <tr>
     <td markdown="1">`res.location()`</td>
-    <td markdown="1">No longer resolves relative URLs.</td>
+    <td markdown="1">不再解析相对 URL。</td>
   </tr>
   <tr>
     <td markdown="1">`req.params`</td>
-    <td markdown="1">Was an array; now an object.</td>
+    <td markdown="1">原为数组；现为对象。 </td>
   </tr>
   <tr>
     <td markdown="1">`res.locals`</td>
-    <td markdown="1">Was a function; now an object.</td>
+    <td markdown="1">原为函数；现为对象。</td>
   </tr>
   <tr>
-    <td markdown="1">`res.headerSent`</td>
-    <td markdown="1">Changed to `res.headersSent`.</td>
+    <td markdown="1">"res.headerSent"</td>
+    <td markdown="1">更改为 "res.headersSent"。</td>
   </tr>
   <tr>
-    <td markdown="1">`app.route`</td>
-    <td markdown="1">Now available as `app.mountpath`.</td>
+    <td markdown="1">"app.route"</td>
+    <td markdown="1">现在可用于“app.mountpath"。</td>
   </tr>
   <tr>
     <td markdown="1">`res.on('header')`</td>
-    <td markdown="1">Removed.</td>
+    <td markdown="1">删除。</td>
   </tr>
   <tr>
     <td markdown="1">`res.charset`</td>
-    <td markdown="1">Removed.</td>
+    <td markdown="1">删除。</td>
   </tr>
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      Functionality is now limited to setting the basic cookie value. Use `res.cookie()` for added
-      functionality.
+      功能现已受限，仅用于设置基础的 Cookie 值。 如需使用更多功能，请使用 `res.cookie()`。
     </td>
   </tr>
 </table>
 
-## Example app migration
+## 应用迁移示例
 
-Here is an example of migrating an Express 3 application to Express 4.
-The files of interest are `app.js` and `package.json`.
+以下是将 Express 3 应用迁移至 Express 4 的示例。
+需要关注的文件是 `app.js` 和 `package.json`。
 
-### Version 3 app
+### 版本 3 应用
 
 #### `app.js`
 
-Consider an Express v.3 application with the following `app.js` file:
+假设一个 Express 3 版本的应用拥有如下 `app.js` 文件：
 
 ```js
 var express = require('express');
@@ -411,8 +374,7 @@ http.createServer(app).listen(app.get('port'), () => {
 
 #### `package.json`
 
-The accompanying version 3 `package.json` file might look
-something like this:
+对应的 Express 3 版 `package.json` 文件大致如下：
 
 ```json
 {
@@ -429,36 +391,28 @@ something like this:
 }
 ```
 
-### Process
+### 流程
 
-Begin the migration process by installing the required middleware for the
-Express 4 app and updating Express and Pug to their respective latest
-version with the following command:
+开始迁移流程：执行以下命令，安装 Express 4 应用所需的中间件，并将 Express 和 Pug 更新至各自的最新版本。
 
 ```bash
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 ```
 
-Make the following changes to `app.js`:
+对 `app.js` 进行如下修改：
 
-1. The built-in Express middleware functions `express.favicon`,
-   `express.logger`, `express.methodOverride`,
-   `express.session`, `express.bodyParser` and
-   `express.errorHandler` are no longer available on the
-   `express` object. You must install their alternatives
-   manually and load them in the app.
+1. Express 内置中间件函数 `express.favicon`、`express.logger`、`express.methodOverride`、`express.session`、`express.bodyParser` 和 `express.errorHandler` 已从 `express` 对象中移除。 你必须手动安装它们的替代模块，并在应用中引入加载。
 
-2. You no longer need to load the `app.router` function.
-   It is not a valid Express 4 app object, so remove the
-   `app.use(app.router);` code.
+2. 你不再需要加载 `app.router` 函数。
+   它并非有效的 Express 4 应用对象，因此请删除 `app.use(app.router); `代码。
 
-3. Make sure that the middleware functions are loaded in the correct order - load `errorHandler` after loading the app routes.
+3. 确保中间件函数按正确顺序加载——在应用路由加载完毕后再加载`errorHandler`。
 
-### Version 4 app
+### 版本 4 应用
 
 #### `package.json`
 
-Running the above `npm` command will update `package.json` as follows:
+运行上述 `npm` 命令将会按如下方式更新 `package.json` 文件：
 
 ```json
 {
@@ -484,8 +438,7 @@ Running the above `npm` command will update `package.json` as follows:
 
 #### `app.js`
 
-Then, remove invalid code, load the required middleware, and make other
-changes as necessary. The `app.js` file will look like this:
+然后，移除无效代码，加载所需的中间件，并根据需要进行其他更改。 `app.js`文件看起来像这样：
 
 ```js
 var http = require('http');
@@ -538,7 +491,7 @@ server.listen(app.get('port'), () => {
 ```
 
 <Alert type="info">
-Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), loading it is not required, and the app can be simply started this way:
+除非你需要直接操作 `http` 模块（socket.io/SPDY/HTTPS），否则无需加载该模块，应用可通过以下方式直接启动：
 
 ```js
 app.listen(app.get('port'), () => {
@@ -548,97 +501,73 @@ app.listen(app.get('port'), () => {
 
 </Alert>
 
-### Run the app
+### 运行应用
 
-The migration process is complete, and the app is now an
-Express 4 app. To confirm, start the app by using the following command:
+迁移流程已完成，当前应用已升级为 Express 4 应用。 若要确认，请使用以下命令启动应用：
 
 ```bash
 $ node .
 ```
 
-Load [http://localhost:3000](http://localhost:3000)
-and see the home page being rendered by Express 4.
+访问 [http://localhost:3000](http://localhost:3000)，查看由 Express 4 渲染的首页。
 
-## Upgrading to the Express 4 app generator
+## 升级至 Express 4 应用生成器
 
-The command-line tool to generate an Express app is still
-`express`, but to upgrade to the new version, you must uninstall
-the Express 3 app generator and then install the new
-`express-generator`.
+用于生成 Express 应用的命令行工具仍为 `express`，但要升级至新版本，你必须先卸载 Express 3 应用生成器，然后安装全新的 `express-generator`。
 
-### Installing
+### 安装
 
-If you already have the Express 3 app generator installed on your system,
-you must uninstall it:
+如果你的系统中已安装 Express 3 应用生成器，必须先将其卸载：
 
 ```bash
 $ npm uninstall -g express
 ```
 
-Depending on how your file and directory privileges are configured,
-you might need to run this command with `sudo`.
+根据你的文件和目录权限配置，你可能需要使用 `sudo` 运行该命令。
 
-Now install the new generator:
+现在安装新版生成器：
 
 ```bash
 $ npm install -g express-generator
 ```
 
-Depending on how your file and directory privileges are configured,
-you might need to run this command with `sudo`.
+根据你的文件和目录权限配置，你可能需要使用 `sudo` 运行该命令。
 
-Now the `express` command on your system is updated to the
-Express 4 generator.
+现在，你系统中的 `express` 命令已更新为 Express 4 生成器。
 
-### Changes to the app generator
+### 更改应用生成器
 
-Command options and use largely remain the same, with the following exceptions:
+命令选项和用法基本保持不变，仅存在以下例外：
 
-- Removed the `--sessions` option.
-- Removed the `--jshtml` option.
+- 已移除`--sessions`选项。
+- 移除了 "--jshtml" 选项。
 - Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
 
-### Example
+### 示例
 
-Execute the following command to create an Express 4 app:
+执行以下命令来创建一个Express 4应用：
 
 ```bash
 $ express app4
 ```
 
-If you look at the contents of the `app4/app.js` file, you will notice
-that all the middleware functions (except `express.static`) that are required for
-the app are loaded as independent modules, and the `router` middleware
-is no longer explicitly loaded in the app.
+查看 `app4/app.js` 文件的内容，你会发现应用所需的所有中间件函数（`express.static` 除外）均作为独立模块加载，且应用中不再显式加载 `router` 中间件。
 
-You will also notice that the `app.js` file is now a Node.js module, in contrast to the standalone app that was generated by the old generator.
+你还会注意到，`app.js` 文件现在是一个 Node.js 模块，这与旧版生成器生成的独立应用不同。
 
-After installing the dependencies, start the app by using the following command:
+安装依赖项后，使用以下命令启动应用：
 
 ```bash
 $ npm start
 ```
 
-If you look at the `npm start` script in the `package.json` file,
-you will notice that the actual command that starts the app is
-`node ./bin/www`, which used to be `node app.js`
-in Express 3.
+查看 `package.json` 文件中的 `npm start` 脚本，你会发现启动应用的实际命令是 `node ./bin/www`，而在 Express 3 中该命令为 `node app.js`。
 
-Because the `app.js` file that was generated by the Express 4 generator
-is now a Node.js module, it can no longer be started independently as an app
-(unless you modify the code). The module must be loaded in a Node.js file
-and started via the Node.js file. The Node.js file is `./bin/www`
-in this case.
+由于 Express 4 生成器生成的 `app.js` 文件现已成为一个 Node.js 模块，因此无法再作为应用独立启动（除非你修改代码）。 必须将该模块加载到 Node.js 文件中，并通过该文件启动应用。 在本例中，这个 Node.js 文件就是 `./bin/www`。
 
-Neither the `bin` directory nor the extensionless `www`
-file is mandatory for creating an Express app or starting the app. They are
-just suggestions made by the generator, so feel free to modify them to suit your
-needs.
+创建或启动 Express 应用时，`bin` 目录和无后缀的 `www` 文件都不是必需的。 这些仅为生成器给出的建议，你可按需自行修改。
 
-To get rid of the `www` directory and keep things the "Express 3 way",
-delete the line that says `module.exports = app;` at the end of the
-`app.js` file, then paste the following code in its place:
+若要移除 `www` 目录并沿用“Express 3 风格”，请删除 `app.js` 文件末尾的 `module.exports = app;` 这一行，然后将以下代码粘贴到该位置：
 
 ```js
 app.set('port', process.env.PORT || 3000);
@@ -648,15 +577,12 @@ var server = app.listen(app.get('port'), () => {
 });
 ```
 
-Ensure that you load the `debug` module at the top of the `app.js` file by using the following code:
+确保你通过以下代码在 `app.js` 文件顶部加载 `debug` 模块：
 
 ```js
 var debug = require('debug')('app4');
 ```
 
-Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start": "node app.js"`.
+接下来，将 `package.json` 文件中的 `"start": "node ./bin/www"` 改为 `"start": "node app.js"`。
 
-You have now moved the functionality of `./bin/www` back to
-`app.js`. This change is not recommended, but the exercise helps you
-to understand how the `./bin/www` file works, and why the `app.js` file
-no longer starts on its own.
+你现已将 `./bin/www` 的功能移回至 `app.js`。 不推荐进行此项修改，但该实操能帮你理解 `./bin/www` 文件的工作原理，以及 `app.js` 无法独立启动的原因。

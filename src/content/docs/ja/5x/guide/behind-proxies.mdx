@@ -5,7 +5,7 @@ description: クライアントの IP アドレスを処理するトラストプ
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-リバースプロキシの背後で Express アプリケーションを実行する場合、Express API の中には予想以外の値が返されるものがあります。 これを調整するために `trust proxy` アプリケーションの設定は、Express API のリバースプロキシによって提供された情報を公開するために使用することができます。 最も一般的な問題は、クライアントのIPアドレスを公開するAPIで、リバースプロキシの内部IPアドレスが表示される可能性があります。
+リバースプロキシの背後で Express アプリケーションを実行する場合、Express API の中には予想以外の値が返されるものがあります。 これを調整するために `trust proxy` アプリケーションの設定は、Express API のリバースプロキシによって提供された情報を公開するために使用することができます。 最も一般的な問題は、クライアントのIPアドレスを公開するAPIで、リバースプロキシの内部IPアドレスが表示される可能性があります。 これを調整するために `trust proxy` アプリケーションの設定は、Express API のリバースプロキシによって提供された情報を公開するために使用することができます。 最も一般的な問題は、クライアントのIPアドレスを公開するAPIで、リバースプロキシの内部IPアドレスが表示される可能性があります。
 
 <Alert type="情報">
 
@@ -25,7 +25,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 <td markdown="1">
 `true` の場合、クライアントの IP アドレスは `X-Forwarded-For` ヘッダーの中の一番左のエントリとして理解されます。
 
-`false` の場合、アプリはクライアントに直接向いていると理解され、クライアントの IP アドレスは `req.socket.remoteAddress` に由来します。 これはデフォルトの設定です。
+`false` の場合、アプリはクライアントに直接向いていると理解され、クライアントの IP アドレスは `req.socket.remoteAddress` に由来します。 これはデフォルトの設定です。 これはデフォルトの設定です。
 
 <Alert type="警告">
 `true` に設定する場合、信頼されている最後のリバースプロキシが以下のすべての HTTP ヘッダを削除/上書きすることが重要です: `X-Forwarded-For` 。 `X-Forwarded-Host` と `X-Forwarded-Proto` があれば、クライアントが何らかの値を提供できるかもしれません。
@@ -35,7 +35,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
     <tr>
       <td>IPアドレス</td>
 <td markdown="1">
-リバースプロキシとして信頼する IP アドレス、サブネット、または IP アドレスとサブネットの配列。 次のリストに、事前に設定されたサブネット名が表示されます。
+リバースプロキシとして信頼する IP アドレス、サブネット、または IP アドレスとサブネットの配列。 次のリストに、事前に設定されたサブネット名が表示されます。 次のリストに、事前に設定されたサブネット名が表示されます。
 
 - loopback - `127.0.0.1/8`, `::1/128`
 - linklocal - `169.254.0.0/16`, `fe80::/10`
@@ -57,7 +57,7 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify mul
     <tr>
       <td>数字</td>
 <td markdown="1">
-Expressアプリケーションから離れたホップの最大数のアドレスを使用してください。 `req.socket.remoteAddress` は最初のホップで、残りは右から左への `X-Forwarded-For` ヘッダで探します。 `0`の値は、最初に信頼されていないアドレスが`req.socket.remoteAddress`であることを意味します。つまり、リバースプロキシは存在しません。
+Expressアプリケーションから離れたホップの最大数のアドレスを使用してください。 `req.socket.remoteAddress` は最初のホップで、残りは右から左への `X-Forwarded-For` ヘッダで探します。 Expressアプリケーションから離れたホップの最大数のアドレスを使用してください。 `req.socket.remoteAddress` は最初のホップで、残りは右から左への `X-Forwarded-For` ヘッダで探します。 `0`の値は、最初に信頼されていないアドレスが`req.socket.remoteAddress`であることを意味します。つまり、リバースプロキシは存在しません。
 
 <Alert type="警告">
 この設定を使用する場合は、複数がないことを確認することが重要です。 Expressアプリケーションへの異なる長さのパスは、クライアントが設定されたホップ数よりも少なくすることができるようになります。 それ以外の場合は、クライアントが何らかの価値を提供することができます。
@@ -86,13 +86,13 @@ app.set('trust proxy', (ip) => {
 
 <ul>
   <li markdown="1">
-    [req.hostname](/api#req.hostname) の値は、 `X-Forwarded-Host`
-    ヘッダで設定された値から取得されます。 クライアントやプロキシによって設定できます
+    The value of [req.hostname](/api/request/#reqhostname) is derived from the value set in the
+    `X-Forwarded-Host` header, which can be set by the client or by the proxy.
   </li>
   <li markdown="1">
     `X-Forwarded-Proto` はリバースプロキシによって設定することで、アプリが https`か`http\`
-    か無効な名前かをアプリに伝えることができます。 この値は [req.protocol](/api#req.protocol)
-    で反映されます。
+    か無効な名前かをアプリに伝えることができます。 This value is reflected by
+    [req.protocol](/api/request/#reqprotocol).
   </li>
   <li markdown="1">
     [req.ip](/api#req.ip) と [req.ips](/api#req.ips) の値は、 ソケットアドレスと `X-Forwarded-For`
@@ -100,4 +100,4 @@ app.set('trust proxy', (ip) => {
   </li>
 </ul>
 
-`trust proxy` は、 [proxy-addr](https://www.npmjs.com/package/proxy-addr) パッケージを使用して実装されています。 詳細については、そのドキュメントを参照してください。
+`trust proxy` は、 [proxy-addr](https://www.npmjs.com/package/proxy-addr) パッケージを使用して実装されています。 詳細については、そのドキュメントを参照してください。 詳細については、そのドキュメントを参照してください。

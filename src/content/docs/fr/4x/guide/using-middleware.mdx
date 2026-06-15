@@ -7,7 +7,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express est un framework web de routage et de middleware qui possède des fonctionnalités minimales : Une application Express est essentiellement une série d'appels de fonctions de middleware.
 
-Les fonctions _Middleware_ sont des fonctions qui ont accès à l'objet [request object](/5x/api#req) (`req`), l'objet [réponse](/5x/api#res) (`res`), et la prochaine fonction du middleware dans le cycle de réponse de l'application. La prochaine fonction du middleware est généralement dénotée par une variable nommée `next`.
+Les fonctions _Middleware_ sont des fonctions qui ont accès à l'objet [request object](/api#req) (`req`), l'objet [réponse](/api#res) (`res`), et la prochaine fonction du middleware dans le cycle de réponse de l'application. La prochaine fonction du middleware est généralement dénotée par une variable nommée `next`.
 
 Les fonctions Middleware peuvent effectuer les tâches suivantes :
 
@@ -31,7 +31,7 @@ Vous pouvez également charger une série de fonctions middleware ensemble, ce q
 
 ## Outil d'interface de l'application
 
-Lier le middleware au niveau de l'application à une instance de l'objet [app object](/5x/api#app) en utilisant `app.use()` et `app. Les fonctions ETHOD()`, où `METHOD` est la méthode HTTP de la requête que la fonction middleware gère (comme GET, PUT ou POST) en minuscule.
+Lier le middleware au niveau de l'application à une instance de l'objet [app object](/api#app) en utilisant `app.use()` et `app. Les fonctions ETHOD()`, où `METHOD` est la méthode HTTP de la requête que la fonction middleware gère (comme GET, PUT ou POST) en minuscule.
 
 Cet exemple montre une fonction middleware sans chemin de montage. La fonction est exécutée chaque fois que l'application reçoit une requête.
 
@@ -271,9 +271,9 @@ qui étaient précédemment incluses avec Express sont maintenant dans des modul
 
 Express a les fonctions internes suivantes :
 
-- [express.static](/5x/api#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/5x/api#express.json) analyse les requêtes entrantes avec des charges utiles JSON. **NOTE : Disponible avec Express 4.16.0+**
-- [express.urlencoded](/5x/api#express.urlencoded) analyse les requêtes entrantes avec des charges utiles encodées en URL. **NOTE : Disponible avec Express 4.16.0+**
+- [express.static](/api#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/api#express.json) analyse les requêtes entrantes avec des charges utiles JSON. **NOTE : Disponible avec Express 4.16.0+**
+- [express.urlencoded](/api#express.urlencoded) analyse les requêtes entrantes avec des charges utiles encodées en URL. **NOTE : Disponible avec Express 4.16.0+**
 
 ## middleware de tierce partie
 

@@ -5,7 +5,7 @@ description: Aprenda cómo escribir funciones personalizadas de middleware para 
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Las funciones _Middleware_ son funciones que tienen acceso al [objeto de solicitud](/api#req) (`req`), el [objeto de respuesta](/api#res) (`res`), y la función `next` en el ciclo de solicitud y respuesta de la aplicación. La función `siguiente` es una función en el router Express que, cuando se invoca, ejecuta el middleware sucediendo al middleware actual.
+Además, la función de callback de la ruta raíz utiliza la propiedad que la función middleware añade a `req` (el objeto de la solicitud). La aplicación ahora utiliza la función de middleware `requestTime`.
 
 Las funciones de Middleware pueden realizar las siguientes tareas:
 
@@ -143,7 +143,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Aquí usamos el [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analizar las cookies entrantes del objeto `req` y pasarlas a nuestra función `cookieValidator`. El middleware `validateCookies` devuelve una Promesa que al rechazar activará automáticamente nuestro gestor de errores.
+El middleware `validateCookies` devuelve una Promesa que al rechazar activará automáticamente nuestro gestor de errores. Aquí usamos el [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analizar las cookies entrantes del objeto `req` y pasarlas a nuestra función `cookieValidator`.
 
 ```js
 const express = require('express');

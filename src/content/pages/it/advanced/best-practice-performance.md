@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Per un sito web ad alto traffico in produzione, il modo migliore per mettere in atto la compressione è implementarla a un livello di proxy inverso (vedere [Usa un proxy inverso](#use-a-reverse-proxy)). In tal caso, non è necessario utilizzare middleware di compressione. Per maggiori dettagli sull'attivazione della compressione gzip in Nginx, vedere [Modulo ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) nella documentazione Nginx.
+Per un sito web ad alto traffico in produzione, il modo migliore per mettere in atto la compressione è implementarla a un livello di proxy inverso (vedere [Usa un proxy inverso](#use-a-reverse-proxy)). In tal caso, non è necessario utilizzare middleware di compressione. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
 ### Non utilizzare funzioni sincrone
 
@@ -49,11 +49,11 @@ Le funzioni e i metodi sincroni legano il processo di esecuzione fino al loro ri
 
 Sebbene Node e molti moduli forniscano versioni sincrone e asincrone delle loro funzioni, utilizzare sempre la versione asincrona in produzione. L'unico momento in cui una funzione sincrona può essere giustificata è all'avvio iniziale.
 
-Puoi usare il flag da riga di comando `--trace-sync-io` per stampare un avviso e uno stack trace ogni volta che la tua applicazione utilizza un'API sincrona. Naturalmente, non si desidera utilizzare questo in produzione, ma piuttosto per garantire che il codice è pronto per la produzione. Vedi la [documentazione delle opzioni a riga di comando del nodo](https://nodejs.org/api/cli.html#trace-sync-io) per maggiori informazioni.
+Puoi usare il flag da riga di comando `--trace-sync-io` per stampare un avviso e uno stack trace ogni volta che la tua applicazione utilizza un'API sincrona. Naturalmente, non si desidera utilizzare questo in produzione, ma piuttosto per garantire che il codice è pronto per la produzione. See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
 
 ### Effettuare la registrazione correttamente
 
-In generale, ci sono due motivi per la registrazione dalla tua app: Per il debug e per la registrazione delle attività delle app (essenzialmente, tutto il resto). Usare `console.log()` o `console.error()` per stampare i messaggi di log sul terminale è una pratica comune nello sviluppo. Ma [queste funzioni sono sincrone](https://nodejs.org/api/console.html#console) quando la destinazione è un terminale o un file, in modo che non siano adatti per la produzione, a meno che non convogliate l'uscita ad un altro programma.
+In generale, ci sono due motivi per la registrazione dalla tua app: Per il debug e per la registrazione delle attività delle app (essenzialmente, tutto il resto). Usare `console.log()` o `console.error()` per stampare i messaggi di log sul terminale è una pratica comune nello sviluppo. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
 #### Per il debug
 
@@ -76,7 +76,7 @@ Prima di immergersi in questi argomenti, si dovrebbe avere una comprensione di b
 
 Per maggiori informazioni sui fondamenti della gestione degli errori, consultare:
 
-- [Gestione degli errori in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
+- [Error Handling in Node.js](https://web.archive.org/web/20210619211351/https://www.joyent.com/node-js/production/design/errors)
 
 #### Usa try-catch
 
@@ -134,9 +134,9 @@ La migliore pratica è quella di gestire gli errori il più vicino possibile al 
 
 Una cosa che dovresti _non_ fare è ascoltare per l'evento `uncaughtException`, emessa quando una bolla di eccezione ritorna fino al ciclo evento. L'aggiunta di un ascoltatore di eventi per `uncaughtException` cambierà il comportamento predefinito del processo che sta incontrando un'eccezione; il processo continuerà a funzionare nonostante l'eccezione. Questo potrebbe sembrare un buon modo per impedire che la tua app si blocchi, ma continuare ad eseguire l'app dopo un'eccezione non catturata è una pratica pericolosa e non è raccomandato, perché lo stato del processo diventa inaffidabile e imprevedibile.
 
-Inoltre, l'utilizzo di `uncaughtException` è ufficialmente riconosciuto come [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Quindi ascoltare `uncaughtException` è solo una cattiva idea. Questo è il motivo per cui consigliamo cose come più processi e supervisori: crash e riavvio è spesso il modo più affidabile per recuperare da un errore.
+Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Quindi ascoltare `uncaughtException` è solo una cattiva idea. Questo è il motivo per cui consigliamo cose come più processi e supervisori: crash e riavvio è spesso il modo più affidabile per recuperare da un errore.
 
-Inoltre non consigliamo di utilizzare [domains](https://nodejs.org/api/domain.html). Generalmente non risolve il problema ed è un modulo deprecato.
+We also don't recommend using [domains](https://nodejs.org/api/domain.html). Generalmente non risolve il problema ed è un modulo deprecato.
 
 ## Cose da fare nel tuo ambiente / configurazione
 
@@ -159,7 +159,7 @@ Impostando NODE_ENV a "production" makes Express:
 - File CSS della cache generati dalle estensioni CSS.
 - Genera messaggi di errore meno dettagliati.
 
-[Tests indicate](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) che solo facendo questo può migliorare le prestazioni dell'app di un fattore di tre!
+[Tests indicate](https://web.archive.org/web/20250814011110/https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
 Se è necessario scrivere un codice specifico per l'ambiente, è possibile controllare il valore di NODE_ENV con `process.env.NODE_ENV`. Essere consapevoli che il controllo del valore di qualsiasi variabile ambientale comporta una penalità di prestazione, e quindi dovrebbe essere fatto con parsimonia.
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Per ulteriori informazioni sul sistema, vedere [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
+For more information on systemd, see the [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Esegui la tua app in un cluster
 
@@ -248,13 +248,13 @@ In un sistema multi-core, è possibile aumentare le prestazioni di un'applicazio
 
 ![Bilanciamento tra istanze dell'applicazione utilizzando l'API cluster](/images/clustering.png)
 
-IMPORTANTE: Poiché le istanze dell'app vengono eseguite come processi separati, non condividono lo stesso spazio di memoria. Cioè, gli oggetti sono locali per ogni istanza dell'app. Pertanto, non è possibile mantenere lo stato nel codice dell'applicazione. Tuttavia, è possibile utilizzare un datastore in memoria come [Redis](http://redis.io/) per memorizzare i dati e lo stato relativi alla sessione. Questa avvertenza si applica essenzialmente a tutte le forme di ridimensionamento orizzontale, sia che si tratti di raggruppamento con più processi o più server fisici.
+IMPORTANTE: Poiché le istanze dell'app vengono eseguite come processi separati, non condividono lo stesso spazio di memoria. Cioè, gli oggetti sono locali per ogni istanza dell'app. Pertanto, non è possibile mantenere lo stato nel codice dell'applicazione. However, you can use an in-memory datastore like [Redis](https://redis.io/) to store session-related data and state. Questa avvertenza si applica essenzialmente a tutte le forme di ridimensionamento orizzontale, sia che si tratti di raggruppamento con più processi o più server fisici.
 
 Nelle applicazioni raggruppate, i processi di lavoro possono bloccarsi individualmente senza influenzare il resto dei processi. Oltre ai vantaggi delle prestazioni, l'isolamento del guasto è un altro motivo per eseguire un cluster di processi app. Ogni volta che un processo di lavoro si blocca, assicurarsi sempre di registrare l'evento e generare un nuovo processo utilizzando cluster.fork().
 
 #### Uso del modulo cluster Node
 
-Il cluster è reso possibile con il [modulo cluster di Node](https://nodejs.org/api/cluster.html). Ciò consente a un processo master di generare processi di lavoro e distribuire le connessioni in entrata tra i lavoratori.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). Ciò consente a un processo master di generare processi di lavoro e distribuire le connessioni in entrata tra i lavoratori.
 
 #### Uso PM2
 
@@ -288,13 +288,13 @@ Per ulteriori informazioni sul clustering con PM2, vedere [Modalità cluster](ht
 
 Un'altra strategia per migliorare le prestazioni nella produzione è quella di nascondere il risultato delle richieste, in modo che l'app non ripeta l'operazione per servire la stessa richiesta ripetutamente.
 
-Usa un server di cache come [Varnish](https://www.varnish-cache.org/) o [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (vedi anche [Nginx Caching](https://serversforhackers.com/nginx-caching/)) per migliorare notevolmente la velocità e le prestazioni della tua app.
+Use a caching server like [Varnish](https://www.varnish.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/c/nginx-caching)) to greatly improve the speed and performance of your app.
 
 ### Usa un bilanciatore di carico
 
 Non importa quanto sia ottimizzata un'app, una singola istanza può gestire solo una quantità limitata di carico e traffico. Un modo per scalare un'app è quello di eseguire più istanze di esso e distribuire il traffico tramite un balancer. La configurazione di un bilanciatore di carico può migliorare le prestazioni e la velocità della tua app e permetterle di scalare più di quanto sia possibile con una singola istanza.
 
-Un bilanciatore di carico è di solito un proxy inverso che orchestra il traffico da e verso più istanze di applicazione e server. Puoi configurare facilmente un bilanciatore di carico per la tua app utilizzando [Nginx](https://nginx.org/en/docs/http/load_balancing.html) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Un bilanciatore di carico è di solito un proxy inverso che orchestra il traffico da e verso più istanze di applicazione e server. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Con il bilanciamento del carico, potrebbe essere necessario assicurarsi che le richieste associate a un particolare ID di sessione si connettano al processo che le ha originate. Questo è conosciuto come _session affinity_, o _sticky sessions_, e può essere affrontato dal suggerimento di cui sopra per utilizzare un archivio dati come Redis per i dati di sessione (a seconda della tua applicazione). Per una discussione, vedere [Utilizzo di nodi multipli](https://socket.io/docs/v4/using-multiple-nodes/).
 
@@ -302,4 +302,4 @@ Con il bilanciamento del carico, potrebbe essere necessario assicurarsi che le r
 
 Un proxy inverso si siede davanti ad una web app ed esegue operazioni di supporto sulle richieste, oltre a dirigere le richieste verso l'app. Può gestire pagine di errore, compressione, caching, servire i file, e bilanciamento del carico tra le altre cose.
 
-Spostare le attività che non richiedono la conoscenza dello stato dell'applicazione per un proxy inverso libera Express per eseguire attività di applicazione specializzate. Per questo motivo, si raccomanda di eseguire Express dietro un proxy inverso come [Nginx](https://www.nginx.org/) o [HAProxy](https://www.haproxy.org/) in produzione.
+Spostare le attività che non richiedono la conoscenza dello stato dell'applicazione per un proxy inverso libera Express per eseguire attività di applicazione specializzate. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.

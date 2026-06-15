@@ -124,9 +124,8 @@ Gibt den `boolean` Wert für das [`Partitioned` `Set-Cookie`](https://github.com
 Attribut an. Wenn Wahrheit, ist das `Partitioned` Attribut gesetzt, andernfalls nicht.
 Standardmäßig ist das Attribut `Partitioned` nicht gesetzt.
 
-**Notiz** Dies ist ein Attribut, das noch nicht vollständig standardisiert wurde und in Zukunft
-ändern kann. Dies bedeutet auch, dass viele Kunden dieses Attribut ignorieren können, bis sie es
-verstehen.
+**Notiz** Dies ist ein Attribut, das noch nicht vollständig standardisiert wurde und in Zukunft in
+ändern kann. Dies bedeutet auch, dass viele Clients dieses Attribut ignorieren können, bis sie es verstehen.
 
 Weitere Informationen finden Sie in [dem Vorschlag](https://github.com/privacycg/CHIPS).
 
@@ -164,7 +163,7 @@ Standardmäßig ist dies `false`.
 Weitere Informationen über die verschiedenen Durchsetzungsstufen finden Sie unter
 [die Spezifikation][rfc-6265bis-03-4.1.2.7].
 
-**Notiz** Dies ist ein Attribut, das noch nicht vollständig standardisiert wurde und in Zukunft in
+**Notiz** Dies ist ein Attribut, das noch nicht vollständig standardisiert wurde und in Zukunft
 ändern kann. Dies bedeutet auch, dass viele Clients dieses Attribut ignorieren können, bis sie es verstehen.
 
 **Hinweis** Es gibt ein [Entwurfsspekta](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
@@ -285,8 +284,7 @@ Erzwingt die Sitzung, wieder im Session-Store zu speichern, selbst wenn die Sitz
 während der Anfrage nie geändert wurde. Abhängig von Ihrem Shop könnte dies
 notwendig sein aber es kann auch Rennbedingungen schaffen, bei denen ein Client zwei
 parallele Anfragen an Ihren Server stellt und Änderungen an der Sitzung in einer
-Anfrage können überschrieben werden, wenn die andere Anfrage beendet ist. auch wenn es keine
-Änderungen vorgenommen hat (dieses Verhalten hängt auch davon ab, welcher Shop Sie verwenden).
+Anfrage können überschrieben werden, wenn die andere Anfrage beendet ist.
 
 Der Standardwert ist `true`, aber die Verwendung des Standardwertes wurde veraltet,
 als Standardwert wird sich in Zukunft ändern. Bitte prüfen Sie diese Einstellung

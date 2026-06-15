@@ -7,7 +7,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express ist ein Routing- und Middleware-Webframework mit minimaler Funktionalität: Eine Express-Anwendung ist im Wesentlichen eine Reihe von Middleware-Funktionsaufrufen.
 
-_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/5x/api#req) (`req`), das [Antwort-Objekt](/5x/api#res) (`res`) und die nächste Middleware-Funktion im Request-Antwort-Zyklus der Anwendung. Die nächste Middleware-Funktion wird üblicherweise durch eine Variable namens `next` bezeichnet.
+_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/api#req) (`req`), das [Antwort-Objekt](/api#res) (`res`) und die nächste Middleware-Funktion im Request-Antwort-Zyklus der Anwendung. Die nächste Middleware-Funktion wird üblicherweise durch eine Variable namens `next` bezeichnet.
 
 Middleware-Funktionen können folgende Aufgaben ausführen:
 
@@ -31,7 +31,7 @@ Sie können auch eine Reihe von Middleware-Funktionen zusammen laden, die einen 
 
 ## Middleware auf Anwendungsebene
 
-Binde Middleware auf Anwendungsebene an eine Instanz des [app object](/5x/api#app) durch Verwendung der `app.use()` und `app. ETHOD()` Funktionen, wobei `METHOD` die HTTP-Methode der Anfrage ist, die die Middleware-Funktion in Kleinbuchstaben behandelt (wie GET, PUT, oder POST)
+Binde Middleware auf Anwendungsebene an eine Instanz des [app object](/api#app) durch Verwendung der `app.use()` und `app. ETHOD()` Funktionen, wobei `METHOD` die HTTP-Methode der Anfrage ist, die die Middleware-Funktion in Kleinbuchstaben behandelt (wie GET, PUT, oder POST)
 
 Dieses Beispiel zeigt eine Middleware-Funktion ohne Mount-Pfad. Die Funktion wird jedes Mal ausgeführt, wenn die App eine Anfrage erhält.
 
@@ -271,9 +271,9 @@ Ab Version 4.x ist Express nicht mehr abhängig von [Connect](https://github.com
 
 Express hat die folgenden integrierten Middleware-Funktionen:
 
-- [express.static](/5x/api#express.static) dient statischen Assets wie HTML-Dateien, Bilder und so weiter.
-- [express.json](/5x/api#express.json) analysiert eingehende Anfragen mit JSON Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
-- [express.urlencoded](/5x/api#express.urlencoded) analysiert eingehende Anfragen mit URL-kodierten Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
+- [express.static](/api#express.static) dient statischen Assets wie HTML-Dateien, Bilder und so weiter.
+- [express.json](/api#express.json) analysiert eingehende Anfragen mit JSON Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
+- [express.urlencoded](/api#express.urlencoded) analysiert eingehende Anfragen mit URL-kodierten Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
 
 ## Drittanbieter-Middleware
 

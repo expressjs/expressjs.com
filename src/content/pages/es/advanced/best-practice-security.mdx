@@ -18,21 +18,19 @@ Políticas y procedimientos.
 
 Las mejores prácticas de seguridad para aplicaciones Express en producción incluyen:
 
-- [Prácticas Mejores de Producción: Seguridad](#production-best-practices-security)
-  - [Overview](#overview)
-  - [No usar versiones obsoletas o vulnerables de Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-  - [Usar TLS](#use-tls)
-  - [No confiar en la entrada del usuario](#do-not-trust-user-input)
-    - [Prevenir redirecciones abiertas](#prevent-open-redirects)
-  - [Casco de Uso](#use-helmet)
-  - [Reducir la huella dactilar](#reduce-fingerprinting)
-  - [Usar cookies de forma segura](#use-cookies-securely)
-    - [No usar el nombre de cookie de sesión predeterminado](#dont-use-the-default-session-cookie-name)
-    - [Establecer opciones de seguridad de cookies](#set-cookie-security-options)
-  - [Prevenir ataques de fuerza bruta contra autorización](#prevent-brute-force-attacks-against-authorization)
-  - [Asegúrate de que tus dependencias son seguras](#ensure-your-dependencies-are-secure)
-    - [Evitar otras vulnerabilidades conocidas](#avoid-other-known-vulnerabilities)
-  - [Examen adicional](#additional-considerations)
+- [No usar versiones obsoletas o vulnerables de Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+- [Usar TLS](#use-tls)
+- [No confiar en la entrada del usuario](#do-not-trust-user-input)
+  - [Prevenir redirecciones abiertas](#prevent-open-redirects)
+- [Casco de Uso](#use-helmet)
+- [Reducir la huella dactilar](#reduce-fingerprinting)
+- [Usar cookies de forma segura](#use-cookies-securely)
+  - [No usar el nombre de cookie de sesión predeterminado](#dont-use-the-default-session-cookie-name)
+  - [Establecer opciones de seguridad de cookies](#set-cookie-security-options)
+- [Prevenir ataques de fuerza bruta contra autorización](#prevent-brute-force-attacks-against-authorization)
+- [Asegúrate de que tus dependencias son seguras](#ensure-your-dependencies-are-secure)
+  - [Evitar otras vulnerabilidades conocidas](#avoid-other-known-vulnerabilities)
+- [Examen adicional](#additional-considerations)
 
 ## No utilizar versiones obsoletas o vulnerables de Express
 
@@ -44,7 +42,7 @@ También asegúrese de que no está usando ninguna de las versiones Express vuln
 
 Si tu aplicación trata o transmite datos confidenciales, usa [Seguridad de la capa de transporte](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) para asegurar la conexión y los datos. Esta tecnología encripta los datos antes de que sean enviados desde el cliente al servidor, evitando así algunos hacks comunes (y fáciles). Aunque las solicitudes Ajax y POST pueden no ser visiblemente obvias y parecen "ocultas" en los navegadores, su tráfico de red es vulnerable a [sniffing de paquetes](https://en.wikipedia.org/wiki/Packet_analyzer) y [ataques man-in-the-midds](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Puede estar familiarizado con el cifrado de la capa de conector seguro (SSL). [TLS es simplemente la siguiente progresión de SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). En otras palabras, si estaba usando SSL antes, considere actualizar a TLS. En general, recomendamos Nginx para manejar TLS. Para una buena referencia para configurar TLS en Nginx (y otros servidores), vea [Configuraciones Recomendadas del servidor (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Puede estar familiarizado con el cifrado de la capa de conector seguro (SSL). En general, recomendamos Nginx para manejar TLS. En otras palabras, si estaba usando SSL antes, considere actualizar a TLS. En otras palabras, si estaba usando SSL antes, considere actualizar a TLS. Para una buena referencia para configurar TLS en Nginx (y otros servidores), vea [Configuraciones Recomendadas del servidor (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Además, una útil herramienta para obtener un certificado TLS gratis es [Vamos a cifrar](https://letsencrypt.org/about/), un gratuito, automatizado, y autoridad certificadora abierta (CA) proporcionada por el [Grupo de Investigación sobre Seguridad de Internet (ISRG)](https://www.abetterinternet.org/).
 
@@ -117,7 +115,7 @@ app.use(helmet());
 ## Reduce la toma de huellas digitales
 
 Puede ayudar a proporcionar una capa extra de seguridad para reducir la capacidad de los atacantes para determinar
-el software que utiliza un servidor. conocido como "huella dactilar". Aunque no es un problema de seguridad en sí mismo,
+el software que utiliza un servidor. Aunque no es un problema de seguridad en sí mismo,
 reducir la capacidad de huellas dactilares de una aplicación mejora su posición general de seguridad.
 El software del servidor puede ser tomado con huellas dactilares en cómo responde a peticiones específicas, por ejemplo en
 las cabeceras de respuesta HTTP.
@@ -259,7 +257,7 @@ $ snyk test
 
 ### Evitar otras vulnerabilidades conocidas
 
-Esté atento a los avisos de [Node Security Project](https://npmjs.com/advisories) o [Snyk](https://snyk.io/vuln/) que pueden afectar a Express u otros módulos que tu aplicación utiliza. En general, estas bases de datos son excelentes recursos para conocimientos y herramientas sobre la seguridad de Node.
+Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. En general, estas bases de datos son excelentes recursos para conocimientos y herramientas sobre la seguridad de Node.
 
 Finalmente, las aplicaciones Express&mdash;como cualquier otra aplicación web&mdash;pueden ser vulnerables a una variedad de ataques basados en la web. Familiarizarse con [vulnerabilidades web](https://www.owasp.org/www-project-top-ten/) y tomar precauciones para evitarlas.
 

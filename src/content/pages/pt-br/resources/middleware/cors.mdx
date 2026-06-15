@@ -12,7 +12,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
   npm="https://www.npmjs.com/package/cors"
 />
 
-CORS é um [Node.js](https://nodejs.org/en/) middleware para [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect) que define os cabeçalhos de resposta [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS). Estes cabeçalhos indicam aos navegadores que originam as respostas do seu servidor.
+CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](/)/[Connect](https://github.com/senchalabs/connect) that sets [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) response headers. Estes cabeçalhos indicam aos navegadores que originam as respostas do seu servidor.
 
 <Alert type="informações">
 
@@ -232,7 +232,7 @@ app.listen(80, function () {
 - `origin`: Configura o cabeçalho CORS **Access-Control-Allow-Origin**. Valores possíveis:
   - `Boolean` - defina `origin` como `true` para refletir a [origem da solicitação](https://datatracker.ietf.org/doc/html/draft-abarth-origin-09), conforme definido por `req.header('Origin')`, ou defina-o como `false` para desabilitar CORS.
   - `String` - defina `origin` para uma origem específica. Por exemplo, se você definir isso para
-    - `"http://example.com"` somente requisições de "http://example.com" serão permitidas.
+    - Será permitido "http://example.com"\` somente requisições de "http://example.com" .
     - `"*"` para todos os domínios serem permitidos.
   - `RegExp` - define `origin` para um padrão de expressão regular que será usado para testar a origem da solicitação. Se for uma correspondência, a origem do pedido será refletida. Por exemplo, o padrão `/example\.com$/` irá refletir qualquer solicitação que esteja vindo de uma origem que termina com "example.com".
   - `Array` - defina `origin` para uma matriz de origens válidas. Cada origem pode ser uma `String` ou um `RegExp`. Por exemplo, `["http://example1.com", /\.example2\.com$/]` aceitará qualquer solicitação de "http://example1.com" ou de um subdomínio de "example2.com".

@@ -1,23 +1,23 @@
 ---
-title: Version Support
-description: Find information about the support schedule for different Express.js versions, including which versions are currently maintained and end-of-life policies.
+title: 版本支持
+description: 了解不同 Express.js 版本的支持计划，包括当前仍受维护的版本以及生命周期终止政策。
 ---
 
-Only the latest version of any given major release line is supported.
+任何主版本分支仅支持其最新版本。
 
-Versions that are EOL (end-of-life) _may_ receive updates for critical security vulnerabilities, but the Express team offers no guarantee and does not plan to address or release fixes for any issues found.
+已终止生命周期（end-of-life）的版本**可能**会针对严重安全漏洞发布更新，但 Express 团队不作任何保证，也不计划修复或发布任何已发现问题的补丁。
 
-| Major Version       | Minimum Node.js Version | Support Start Date | Support End Date |
-| ------------------- | ----------------------- | ------------------ | ---------------- |
-| [**v5.x**](/5x/api) | 18                      | September 2024     | **ongoing**      |
-| [**v4.x**](/4x/api) | 0.10.0                  | April 2014         | **ongoing**      |
-| [**v3.x**](/3x/api) | 0.8.0                   | October 2012       | July 2015        |
-| [**v2.x**](/2x/)    | 0.4.1                   | March 2011         | July 2012        |
-| **v1.x**            | 0.2.0                   | December 2010      | March 2011       |
-| **v0.14.x**         | 0.1.98                  | December 2010      | December 2010    |
+| 主版本号                                                       | 最低 Node.js 版本要求 | 支持开始日期   | 支持结束日期  |
+| -------------------------------------------------------------- | --------------------- | -------------- | ------------- |
+| [**v5.x**](/5x/api)                                            | 18                    | September 2024 | **ongoing**   |
+| [**v4.x**](/4x/api)                                            | 0.10.0                | April 2014     | **ongoing**   |
+| [**v3.x**](/3x/api)                                            | 0.8.0                 | October 2012   | July 2015     |
+| [**v2.x**](https://github.com/expressjs/expressjs.com/tree/2x) | 0.4.1                 | March 2011     | July 2012     |
+| **v1.x**                                                       | 0.2.0                 | December 2010  | March 2011    |
+| **v0.14.x**                                                    | 0.1.98                | December 2010  | December 2010 |
 
-## Commercial Support Options
+## 商业支持选项
 
-If you are unable to update to a supported version of Express, please contact one of our partners to receive security updates:
+如果你无法升级到受支持的 Express 版本，请联系以下合作伙伴获取安全更新：
 
 - [HeroDevs Never-Ending Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)

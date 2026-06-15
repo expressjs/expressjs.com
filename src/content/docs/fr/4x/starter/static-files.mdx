@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 L'argument `root` spécifie le répertoire racine à partir duquel servir les actifs statiques.
-Pour plus d'informations sur l'argument `options`, voir [express.static](/5x/api#express.static).
+Pour plus d'informations sur l'argument `options`, voir [express.static](/api#express.static).
 
 Par exemple, utilisez le code suivant pour servir les images, les fichiers CSS et JavaScript dans un répertoire nommé `public`:
 
@@ -56,7 +56,7 @@ servant des actifs statiques.
 
 </Alert>
 
-Pour créer un préfixe de chemin virtuel (où le chemin n'existe pas dans le système de fichiers) pour les fichiers qui sont servis par le fichier `express. fonction tatic`, [spécifiez un chemin de montage](/5x/api#app.use) pour le répertoire statique, comme indiqué ci-dessous:
+Pour créer un préfixe de chemin virtuel (où le chemin n'existe pas dans le système de fichiers) pour les fichiers qui sont servis par le fichier `express. fonction tatic`, [spécifiez un chemin de montage](/api#app.use) pour le répertoire statique, comme indiqué ci-dessous:
 
 ```js
 app.use('/static', express.static('public'));

@@ -18,21 +18,19 @@ Richtlinien und Prozeduren.
 
 Best Practices für Express-Anwendungen in der Produktion beinhalten:
 
-- [Beste Produktionspraktiken: Sicherheit](#production-best-practices-security)
-  - [Overview](#overview)
-  - [Veraltete oder verwundbare Versionen von Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-  - [Benutze TLS](#use-tls)
-  - [Nicht auf Benutzereingabe vertrauen](#do-not-trust-user-input)
-    - [Verhindere offene Weiterleitungen](#prevent-open-redirects)
-  - [Helm verwenden](#use-helmet)
-  - [Fingerabdruck reduzieren](#reduce-fingerprinting)
-  - [Cookies sicher verwenden](#use-cookies-securely)
-    - [Benutze nicht den Standard-Sitzungs-Cookie Name](#dont-use-the-default-session-cookie-name)
-    - [Cookie Sicherheitseinstellungen setzen](#set-cookie-security-options)
-  - [Verhindere Brute-Force-Angriffe gegen Autorisierung](#prevent-brute-force-attacks-against-authorization)
-  - [Vergewissern Sie sich, dass Ihre Abhängigkeiten sicher sind](#ensure-your-dependencies-are-secure)
-    - [Vermeide andere bekannte Schwachstellen aus](#avoid-other-known-vulnerabilities)
-  - [Zusätzliche Überlegungen](#additional-considerations)
+- [Veraltete oder verwundbare Versionen von Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+- [Benutze TLS](#use-tls)
+- [Nicht auf Benutzereingabe vertrauen](#do-not-trust-user-input)
+  - [Verhindere offene Weiterleitungen](#prevent-open-redirects)
+- [Helm verwenden](#use-helmet)
+- [Fingerabdruck reduzieren](#reduce-fingerprinting)
+- [Cookies sicher verwenden](#use-cookies-securely)
+  - [Benutze nicht den Standard-Sitzungs-Cookie Name](#dont-use-the-default-session-cookie-name)
+  - [Cookie Sicherheitseinstellungen setzen](#set-cookie-security-options)
+- [Verhindere Brute-Force-Angriffe gegen Autorisierung](#prevent-brute-force-attacks-against-authorization)
+- [Vergewissern Sie sich, dass Ihre Abhängigkeiten sicher sind](#ensure-your-dependencies-are-secure)
+  - [Vermeide andere bekannte Schwachstellen aus](#avoid-other-known-vulnerabilities)
+- [Zusätzliche Überlegungen](#additional-considerations)
 
 ## Veraltete oder verwundbare Versionen von Express nicht verwenden
 
@@ -44,7 +42,7 @@ Vergewissern Sie sich auch, dass Sie keine der verwundbaren Express-Versionen au
 
 Wenn Ihre App sensible Daten behandelt oder übermittelt, verwenden Sie [Transport-Layer-Sicherheit](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) um die Verbindung und die Daten zu sichern. Diese Technologie verschlüsselt Daten, bevor sie vom Client an den Server gesendet werden, und verhindert so einige häufige (und einfache) Hacks. Obwohl Ajax und POST Anfragen möglicherweise nicht sichtbar sind und im Browser "versteckt" zu sein scheinen, ihr Netzwerkverkehr ist anfällig für [Paket-Sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) und [Man-in-the-middle-Angriffe](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Sie können mit der Verschlüsselung Secure Socket Layer (SSL) vertraut sein. [TLS ist einfach die nächste Weiterentwicklung von SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Im Allgemeinen empfehlen wir Nginx mit TLS umzugehen. Für eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) siehe [Empfohlene Server-Konfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Sie können mit der Verschlüsselung Secure Socket Layer (SSL) vertraut sein. Im Allgemeinen empfehlen wir Nginx mit TLS umzugehen. Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Für eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) siehe [Empfohlene Server-Konfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Ein praktisches Werkzeug, um ein kostenloses TLS-Zertifikat zu erhalten, ist [Let's Encrypt](https://letsencrypt.org/about/), ein kostenloses und automatisiertes TLS-Zertifikat und offene Zertifizierungsstelle (CA) zur Verfügung gestellt von der [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -244,7 +242,7 @@ $ npm audit
 
 Wenn du sicherer bleiben möchtest, bedenke [Snyk](https://snyk.io/).
 
-Snyk bietet sowohl ein [Kommandozeilenwerkzeug](https://www.npmjs.com/package/snyk) als auch eine [Github-Integration](https://snyk.io/docs/github), die Ihre Anwendung auf [Snyk's Open-Source-Verwundbarkeitsdatenbank](https://snyk.io/vuln/) auf bekannte Verwundbarkeiten in Ihren Abhängigkeiten überprüft. Installieren Sie das CLI wie folgt:
+Snyk bietet sowohl ein [Kommandozeilenwerkzeug](https://www.npmjs.com/package/snyk) als auch eine [Github-Integration](https://snyk.io/docs/github), die Ihre Anwendung auf [Snyk's Open-Source-Verwundbarkeitsdatenbank](https://snyk.io/vuln/) auf bekannte Verwundbarkeiten in Ihren Abhängigkeiten überprüft. Installieren Sie das CLI wie folgt: Installieren Sie das CLI wie folgt:
 
 ```bash
 $ npm install -g snyk
@@ -259,7 +257,7 @@ $ snyk test
 
 ### Vermeiden Sie andere bekannte Schwachstellen
 
-Halten Sie Ausschau nach [Node Security Project](https://npmjs.com/advisories) oder [Snyk](https://snyk.io/vuln/) Ankündigungen, die Express oder andere Module, die Ihre App verwendet, beeinflussen können. Im Allgemeinen sind diese Datenbanken ausgezeichnete Ressourcen für Wissen und Werkzeuge rund um die Knotensicherheit.
+Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. Im Allgemeinen sind diese Datenbanken ausgezeichnete Ressourcen für Wissen und Werkzeuge rund um die Knotensicherheit.
 
 Schließlich können Express-Apps&mdash;wie alle anderen Web-Apps&mdash;anfällig für eine Vielzahl webbasierter Angriffe sein. Vertrauen Sie sich mit bekannten [Web-Verwundbarkeiten](https://www.owasp.org/www-project-top-ten/) und ergreifen Sie Vorsichtsmaßnahmen, um sie zu vermeiden.
 
