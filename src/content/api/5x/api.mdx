@@ -6,6 +6,7 @@ description: API Reference for version 5.x
 import Alert from '@components/primitives/Alert/Alert.astro';
 import Card from '@components/primitives/Card/Card.astro';
 import { CardList } from '@components/patterns';
+import LocalizedLink from '@components/patterns/LocalizedLink/LocalizedLink.astro';
 
 This section provides an overview of the modules and APIs available in Express 5.x for building web applications and HTTP services.
 
@@ -29,31 +30,31 @@ Express 5.x requires **Node.js 18 or higher**.
 With express v5.x, you can define routes, configure middleware, and start handling HTTP requests using the application instance created by the `express()` function. The API is organized into the following sections:
 
 <CardList gap="6">
-  <a href="/api/express">
+  <LocalizedLink href="/api/express">
     <Card
       title="express()"
       body="Learn about the express() function, which creates an Express application."
     />
-  </a>
-  <a href="/api/application">
+  </LocalizedLink>
+  <LocalizedLink href="/api/application">
     <Card
       title="Application Object"
       body="Learn about the properties and methods of the Express 5.x application object."
     />
-  </a>
-  <a href="/api/request">
+  </LocalizedLink>
+  <LocalizedLink href="/api/request">
     <Card
       title="Request Object"
       body="Learn about the properties and methods of the Express 5.x request object."
     />
-  </a>
-  <a href="/api/response">
+  </LocalizedLink>
+  <LocalizedLink href="/api/response">
     <Card
       title="Response Object"
       body="Learn about the properties and methods of the Express 5.x response object."
     />
-  </a>
-  <a href="/api/router">
+  </LocalizedLink>
+  <LocalizedLink href="/api/router">
     <Card title="Router" body="Learn about the properties and methods of the Express 5.x router." />
-  </a>
+  </LocalizedLink>
 </CardList>

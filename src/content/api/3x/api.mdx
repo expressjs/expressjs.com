@@ -6,6 +6,7 @@ description: Access the API reference for Express.js version 3.x, noting that th
 import Alert from '@components/primitives/Alert/Alert.astro';
 import Card from '@components/primitives/Card/Card.astro';
 import { CardList } from '@components/patterns';
+import LocalizedLink from '@components/patterns/LocalizedLink/LocalizedLink.astro';
 
 <Alert type="warning" title="Express 3.x IS END-OF-LIFE AND NO LONGER MAINTAINED">
 
@@ -43,28 +44,28 @@ app.listen(3000);
 After creating an application instance, you can define routes, configure middleware, and start handling HTTP requests
 
 <CardList gap="6">
-  <a href="/api/application">
+  <LocalizedLink href="/api/application">
     <Card
       title="Application Object"
       body="Learn about the properties and methods of the Express 3.x application object."
     />
-  </a>
-  <a href="/api/request">
+  </LocalizedLink>
+  <LocalizedLink href="/api/request">
     <Card
       title="Request Object"
       body="Learn about the properties and methods of the Express 3.x request object."
     />
-  </a>
-  <a href="/api/response">
+  </LocalizedLink>
+  <LocalizedLink href="/api/response">
     <Card
       title="Response Object"
       body="Learn about the properties and methods of the Express 3.x response object."
     />
-  </a>
-  <a href="/api/middleware">
+  </LocalizedLink>
+  <LocalizedLink href="/api/middleware">
     <Card
       title="Middleware"
       body="Learn about middleware in Express 3.x, including built-in and third-party options."
     />
-  </a>
+  </LocalizedLink>
 </CardList>
