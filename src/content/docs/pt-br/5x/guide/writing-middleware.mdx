@@ -5,7 +5,7 @@ description: Aprenda a escrever funções de middleware personalizadas para apli
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Middleware\_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
+Middleware\_ são funções que têm acesso ao [objeto de requisição](/api#req) (`req`), a [objeto de resposta](/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
 
 As funções do Middleware podem executar as seguintes tarefas:
 
@@ -143,7 +143,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Aqui, usamos o [`cookie-parser`](/en/resources/middleware/cookie-parser) middleware para analisar cookies recebidos do objeto `req` e passá-los para a nossa função `cookieValidator`. O middleware 'validateCookies' retorna a promessa de que, após a rejeição, irá automaticamente acionar o nosso manipulador de erros.
+Aqui, usamos o [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analisar cookies recebidos do objeto `req` e passá-los para a nossa função `cookieValidator`. O middleware 'validateCookies' retorna a promessa de que, após a rejeição, irá automaticamente acionar o nosso manipulador de erros.
 
 ```js
 const express = require('express');
@@ -181,7 +181,7 @@ atual é um erro e pulará quaisquer funções que ainda não sejam de manipula�
 
 Como você tem acesso ao objeto de solicitação, o objeto de resposta, a próxima função de middleware na pilha, e todo o nó. s API, as possibilidades com funções de middleware são infinitas.
 
-Para mais informações sobre Express middleware, veja: [Usando Express middleware](/en/guide/using-middleware).
+Para mais informações sobre Express middleware, veja: [Usando Express middleware](/guide/using-middleware).
 
 ## middleware configurável
 

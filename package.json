@@ -24,6 +24,7 @@
     "fix": "npm run format && npm run lint:fix",
     "prepare": "husky",
     "lint-staged": "lint-staged",
+    "test:unit": "node --test tests/unit/*.test.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

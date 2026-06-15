@@ -67,7 +67,7 @@ module.exports = function (req, res) {
 
 The URL path on which a router instance was mounted.
 
-The `req.baseUrl` property is similar to the [mountpath](/en/4x/api/application/#appmountpath) property of the `app` object,
+The `req.baseUrl` property is similar to the [mountpath](/api/application/#appmountpath) property of the `app` object,
 except `app.mountpath` returns the matched path pattern(s).
 
 For example:
@@ -98,7 +98,7 @@ made to `/hello/jp`, `req.baseUrl` is "/hello".
 
 Contains key-value pairs of data submitted in the request body.
 By default, it is `undefined`, and is populated when you use body-parsing middleware such
-as [`express.json()`](/en/4x/api/express/#expressjsonoptions) or [`express.urlencoded()`](/en/4x/api/express/#expressurlencodedoptions).
+as [`express.json()`](/api/express/#expressjsonoptions) or [`express.urlencoded()`](/api/express/#expressurlencodedoptions).
 
 <Alert type="warning">
 
@@ -158,7 +158,7 @@ console.dir(req.fresh);
 
 Contains the hostname derived from the `Host` HTTP header.
 
-When the [`trust proxy` setting](/en/4x/api/application/#options-for-trust-proxy-setting)
+When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting)
 does not evaluate to `false`, this property will instead get the value
 from the `X-Forwarded-Host` header field. This header can be set by
 the client or by the proxy.
@@ -184,7 +184,7 @@ console.dir(req.hostname);
 
 Contains the remote IP address of the request.
 
-When the [`trust proxy` setting](/en/4x/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
+When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
 the value of this property is derived from the left-most entry in the
 `X-Forwarded-For` header. This header can be set by the client or by the proxy.
 
@@ -195,7 +195,7 @@ console.dir(req.ip);
 
 ### req.ips
 
-When the [`trust proxy` setting](/en/4x/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
+When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
 this property contains an array of IP addresses
 specified in the `X-Forwarded-For` request header. Otherwise, it contains an
 empty array. This header can be set by the client or by the proxy.
@@ -219,7 +219,7 @@ module](https://nodejs.org/api/http.html#http_message_url).
 
 This property is much like `req.url`; however, it retains the original request URL,
 allowing you to rewrite `req.url` freely for internal routing purposes. For example,
-the "mounting" feature of [app.use()](/en/4x/api/application/#appusepath-callback--callback) will rewrite `req.url` to strip the mount point.
+the "mounting" feature of [app.use()](/api/application/#appusepath-callback--callback) will rewrite `req.url` to strip the mount point.
 
 ```js
 // GET /search?q=something
@@ -242,7 +242,7 @@ app.use('/admin', function (req, res, next) {
 
 ### req.params
 
-This property is an object containing properties mapped to the [named route "parameters"](/en/4x/guide/routing/#route-parameters). For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `{}`.
+This property is an object containing properties mapped to the [named route "parameters"](/guide/routing/#route-parameters). For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `{}`.
 
 ```js
 // GET /user/tj
@@ -260,7 +260,7 @@ console.dir(req.params[0]);
 
 Named capturing groups in regular expressions behave like named route parameters. For example the group from `/^\/file\/(?<path>.*)$/` expression is available as `req.params.path`.
 
-If you need to make changes to a key in `req.params`, use the [app.param](/en/4x/api/application/#appparamname-callback) handler. Changes are applicable only to [parameters](/en/4x/guide/routing/#route-parameters) already defined in the route path.
+If you need to make changes to a key in `req.params`, use the [app.param](/api/application/#appparamname-callback) handler. Changes are applicable only to [parameters](/guide/routing/#route-parameters) already defined in the route path.
 
 Any changes made to the `req.params` object in a middleware or route handler will be reset.
 
@@ -283,7 +283,7 @@ console.dir(req.path);
 <Alert type="info">
 
 When called from a middleware, the mount point is not included in `req.path`. See
-[app.use()](/en/4x/api/application/#appusepath-callback--callback) for more details.
+[app.use()](/api/application/#appusepath-callback--callback) for more details.
 
 </Alert>
 
@@ -291,7 +291,7 @@ When called from a middleware, the mount point is not included in `req.path`. Se
 
 Contains the request protocol string: either `http` or (for TLS requests) `https`.
 
-When the [`trust proxy` setting](/en/4x/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
+When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
 this property will use the value of the `X-Forwarded-Proto` header field if present.
 This header can be set by the client or by the proxy.
 
@@ -303,7 +303,7 @@ console.dir(req.protocol);
 ### req.query
 
 This property is an object containing a property for each query string parameter in the route.
-When [query parser](/en/4x/api/application/#application-settings) is set to disabled, it is an empty object `{}`, otherwise it is the result of the configured query parser.
+When [query parser](/api/application/#application-settings) is set to disabled, it is an empty object `{}`, otherwise it is the result of the configured query parser.
 
 <Alert type="warning">
 
@@ -314,7 +314,7 @@ may not be a function and instead a string or other user-input.
 
 </Alert>
 
-The value of this property can be configured with the [query parser application setting](/en/4x/api/application/#application-settings) to work how your application needs it. A very popular query string parser is the [`qs` module](https://www.npmjs.com/package/qs), and this is used by default. The `qs` module is very configurable with many settings, and it may be desirable to use different settings than the default to populate `req.query`:
+The value of this property can be configured with the [query parser application setting](/api/application/#application-settings) to work how your application needs it. A very popular query string parser is the [`qs` module](https://www.npmjs.com/package/qs), and this is used by default. The `qs` module is very configurable with many settings, and it may be desirable to use different settings than the default to populate `req.query`:
 
 ```js
 var qs = require('qs');
@@ -325,11 +325,11 @@ app.set('query parser', function (str) {
 });
 ```
 
-Check out the [query parser application setting](/en/4x/api/application/#application-settings) documentation for other customization options.
+Check out the [query parser application setting](/api/application/#application-settings) documentation for other customization options.
 
 ### req.res
 
-This property holds a reference to the [response object](/en/4x/api/response)
+This property holds a reference to the [response object](/api/response)
 that relates to this request object.
 
 ### req.route
@@ -407,7 +407,7 @@ console.dir(req.subdomains);
 
 The application property `subdomain offset`, which defaults to 2, is used for determining the
 beginning of the subdomain segments. To change this behavior, change its value
-using [app.set](/en/4x/api/application/#appsetname-value).
+using [app.set](/api/application/#appsetname-value).
 
 ### req.xhr
 

@@ -10,9 +10,9 @@ as a "mini-application," capable only of performing middleware and routing
 functions. Every Express application has a built-in app router.
 
 A router behaves like middleware itself, so you can use it as an argument to
-[app.use()](/en/4x/api/application#appusepath-callback--callback) or as the argument to another router's [use()](#routerusepath-function--function) method.
+[app.use()](/api/application#appusepath-callback--callback) or as the argument to another router's [use()](#routerusepath-function--function) method.
 
-The top-level `express` object has a [Router()](/en/4x/api/express#expressrouteroptions) method that creates a new `router` object.
+The top-level `express` object has a [Router()](/api/express#expressrouteroptions) method that creates a new `router` object.
 
 Once you've created a router object, you can add middleware and HTTP method routes (such as `get`, `put`, `post`,
 and so on) to it just like an application. For example:
@@ -306,8 +306,8 @@ belong to the route to which they were added.
 
 Uses the specified middleware function or functions, with optional mount path `path`, that defaults to "/".
 
-This method is similar to [app.use()](/en/4x/api/application#appusepath-callback--callback). A simple example and use case is described below.
-See [app.use()](/en/4x/api/application#appusepath-callback--callback) for more information.
+This method is similar to [app.use()](/api/application#appusepath-callback--callback). A simple example and use case is described below.
+See [app.use()](/api/application#appusepath-callback--callback) for more information.
 
 Middleware is like a plumbing pipe: requests start at the first middleware function defined
 and work their way "down" the middleware stack processing for each path they match.

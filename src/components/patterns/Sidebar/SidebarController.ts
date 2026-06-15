@@ -1,5 +1,6 @@
 import { SidebarVersionManager } from './SidebarVersionManager';
 import { SidebarFocusTrap } from './SidebarFocusTrap';
+import { DEFAULT_VERSION } from '@/config/versions';
 
 // CSS transition duration in milliseconds (must match Sidebar.css --duration-300)
 const TRANSITION_DURATION = 300;
@@ -33,7 +34,7 @@ export class SidebarController {
     this.toggleNestedButton = document.querySelector('[data-toggle-nested-button]');
 
     if (this.sidebar && this.backdrop) {
-      const currentVersion = this.sidebar.dataset.currentVersion || '5x';
+      const currentVersion = this.sidebar.dataset.currentVersion || DEFAULT_VERSION;
       this.versionManager = new SidebarVersionManager(
         this.sidebar,
         currentVersion,

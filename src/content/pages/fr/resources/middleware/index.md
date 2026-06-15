@@ -6,24 +6,24 @@ description: Explorez une liste de modules de middleware Express.js maintenus pa
 Les modules middleware Express listés ici sont maintenus par la
 [équipe Expressjs](https://github.com/orgs/expressjs/people).
 
-| Module Middleware                                           | Libellé                                                                                                        |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [body-parser](/en/resources/middleware/body-parser)         | Analyse du corps de la requête HTTP.                                                                           |
-| [compression](/en/resources/middleware/compression)         | Compresser les réponses HTTP.                                                                                  |
-| [cookie-parser](/en/resources/middleware/cookie-parser)     | Analyser l'en-tête des cookies et remplir `req.cookies`. Voir aussi [cookies](https://github.com/jed/cookies). |
-| [cookie-session](/en/resources/middleware/cookie-session)   | Établir des sessions basées sur les cookies.                                                                   |
-| [cors](/en/resources/middleware/cors)                       | Activer le partage de ressources entre les origines multiples (CORS) avec diverses options.                    |
-| [errorhandler](/en/resources/middleware/errorhandler)       | Gestion des erreurs de développement/débogage.                                                                 |
-| [method-override](/en/resources/middleware/method-override) | Remplacer les méthodes HTTP par des en-têtes.                                                                  |
-| [morgan](/en/resources/middleware/morgan)                   | Enregistreur de requêtes HTTP.                                                                                 |
-| [multer](/en/resources/middleware/multer)                   | Gérer les données de formulaires multi-pièces.                                                                 |
-| [response-time](/en/resources/middleware/response-time)     | Enregistrer le temps de réponse HTTP.                                                                          |
-| [serve-favicon](/en/resources/middleware/serve-favicon)     | Servez un favicon.                                                                                             |
-| [serve-index](/en/resources/middleware/serve-index)         | Servez la liste des répertoires pour un chemin donné.                                                          |
-| [serve-static](/en/resources/middleware/serve-static)       | Servir les fichiers statiques.                                                                                 |
-| [session](/en/resources/middleware/session)                 | Établir des sessions basées sur le serveur (développement uniquement).                                         |
-| [timeout](/en/resources/middleware/timeout)                 | Définir un délai de traitement des requêtes HTTP expiré.                                                       |
-| [vhost](/en/resources/middleware/vhost)                     | Créer des domaines virtuels.                                                                                   |
+| Module Middleware                                        | Libellé                                                                                                        |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [body-parser](/resources/middleware/body-parser)         | Analyse du corps de la requête HTTP.                                                                           |
+| [compression](/resources/middleware/compression)         | Compresser les réponses HTTP.                                                                                  |
+| [cookie-parser](/resources/middleware/cookie-parser)     | Analyser l'en-tête des cookies et remplir `req.cookies`. Voir aussi [cookies](https://github.com/jed/cookies). |
+| [cookie-session](/resources/middleware/cookie-session)   | Établir des sessions basées sur les cookies.                                                                   |
+| [cors](/resources/middleware/cors)                       | Activer le partage de ressources entre les origines multiples (CORS) avec diverses options.                    |
+| [errorhandler](/resources/middleware/errorhandler)       | Gestion des erreurs de développement/débogage.                                                                 |
+| [method-override](/resources/middleware/method-override) | Remplacer les méthodes HTTP par des en-têtes.                                                                  |
+| [morgan](/resources/middleware/morgan)                   | Enregistreur de requêtes HTTP.                                                                                 |
+| [multer](/resources/middleware/multer)                   | Gérer les données de formulaires multi-pièces.                                                                 |
+| [response-time](/resources/middleware/response-time)     | Enregistrer le temps de réponse HTTP.                                                                          |
+| [serve-favicon](/resources/middleware/serve-favicon)     | Servez un favicon.                                                                                             |
+| [serve-index](/resources/middleware/serve-index)         | Servez la liste des répertoires pour un chemin donné.                                                          |
+| [serve-static](/resources/middleware/serve-static)       | Servir les fichiers statiques.                                                                                 |
+| [session](/resources/middleware/session)                 | Établir des sessions basées sur le serveur (développement uniquement).                                         |
+| [timeout](/resources/middleware/timeout)                 | Définir un délai de traitement des requêtes HTTP expiré.                                                       |
+| [vhost](/resources/middleware/vhost)                     | Créer des domaines virtuels.                                                                                   |
 
 ## Modules middleware additionnels
 

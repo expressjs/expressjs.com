@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# URL replacements applied to every fetched README, as "from|to" pairs.
+# Use this for dead or moved links (e.g. pointing to a Wayback Machine snapshot).
+# Add or remove entries as needed.
+URL_REPLACEMENTS=(
+  "http://www.famfamfam.com/lab/icons/silk/|https://web.archive.org/web/20230105212205/http://www.famfamfam.com/lab/icons/silk/"
+  "http://www.famfamfam.com/|https://web.archive.org/web/20251120154741/http://www.famfamfam.com/"
+)
+
 # The following is a 3 column list of org, repo, and branch.
 # - If the branch is NOT specified, then the README for that project
 #   will be pulled from npmjs.org instead and will reflect the latest
@@ -94,6 +102,25 @@ LIST_END
   # Convert relative links to absolute GitHub URLs
   BASEURL="https://github.com/$org/$repo/blob/HEAD"
   CONTENT=$(echo "$CONTENT" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
+
+  # Turn absolute self-links (https://expressjs.com/en/guide/x.html) into internal,
+  # language-agnostic paths (/guide/x) so they resolve on this site and get localized
+  # by the link plugin. Drops the host, a trailing .html, and a leading /<lang>/ segment.
+  CONTENT=$(echo "$CONTENT" | perl -pe 's{https?://(?:www\.)?expressjs\.com(/[^\s)">]*)?}{
+    my $p = defined($1) ? $1 : q{/};
+    $p =~ s/\.html\b//;
+    $p =~ s{^/[a-z]{2}(?:-[a-z]{2})?(?=/|$)}{};
+    length($p) ? $p : q{/}
+  }ge')
+
+  # Apply configured URL replacements (dead/moved links → working alternatives).
+  # The lookahead requires the match to end at a URL boundary, so a URL that is a
+  # prefix of another (e.g. the site root vs a sub-path) isn't corrupted.
+  for pair in "${URL_REPLACEMENTS[@]}"; do
+    FROM="${pair%%|*}"
+    TO="${pair#*|}"
+    CONTENT=$(FROM="$FROM" TO="$TO" perl -pe 's/\Q$ENV{FROM}\E(?=[\s)">]|$)/$ENV{TO}/g' <<<"$CONTENT")
+  done
 
   # Build the MDX import and component
   IMPORT="import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';

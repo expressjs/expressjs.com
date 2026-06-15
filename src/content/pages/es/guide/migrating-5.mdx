@@ -103,7 +103,7 @@ O puedes actualizar tu código manualmente:
 
 Un personaje con dos puntos (:) en el nombre de la aplicación `. aram(name, fn)` función es un remanente de Express 3, y por el bien de la compatibilidad hacia atrás, Express 4 lo soportó con un aviso de desaprobación. Express 5 lo ignorará silenciosamente y usará el parámetro de nombre sin prefijarlo con dos puntos.
 
-Esto no debería afectar tu código si sigues la documentación Express 4 de [app.param](/en/4x/api#app.param), ya que no hace mención alguna de los dos puntos principales.
+Esto no debería afectar tu código si sigues la documentación Express 4 de [app.param](/4x/api#app.param), ya que no hace mención alguna de los dos puntos principales.
 
 ### req.param(nombre)
 
@@ -405,7 +405,7 @@ Ruta de ruta que coincide con la sintaxis es cuando se proporciona una cadena co
 
 Solicitar middleware y manejadores que devuelven promesas rechazadas ahora son manejados reenviando el valor rechazado como un `Error` al middleware que maneja errores. Esto significa que usar 'async' funciones como middleware y manejadores son más fáciles que nunca. Cuando se arroja un error en una función `async` o una promesa rechazada es `await`ed dentro de una función asíncrona, esos errores se pasarán al gestor de errores como si llamara a `next(err)`.
 
-Detalles de cómo Express maneja los errores se cubren en la [documentación de manejo de errores](/en/guide/error-handling).
+Detalles de cómo Express maneja los errores se cubren en la [documentación de manejo de errores](/guide/error-handling).
 
 #### Cómo actualizar
 

@@ -103,7 +103,7 @@ npx codemod@latest @expressjs/pluralize-method-names
 
 \`appの名前の先頭にあるコロン文字 (:) です。 aram(name, fn)関数はExpress 3の名残であり、後方互換性のため、Express 4は廃止予定の通知でサポートしています。 Express 5は黙って無視し、コロンをつけずに名前パラメータを使用します。
 
-Express 4 の [app.param](/en/4x/api#app.param) のドキュメントに従っている場合、これはあなたのコードには影響しません。 主要な結腸については言及していません
+Express 4 の [app.param](/4x/api#app.param) のドキュメントに従っている場合、これはあなたのコードには影響しません。 主要な結腸については言及していません
 
 ### req.param(name)
 
@@ -405,7 +405,7 @@ Expressチームが管理する別の依存関係([`router`](https://github.com/
 
 rejected promiseを返すリクエストミドルウェアとハンドラは、「Error」として拒否された値をエラー処理ミドルウェアに転送することで処理されるようになりました。 つまり、 `async` 関数をミドルウェアとして、ハンドラを使うのはこれまで以上に簡単です。 `async` 関数でエラーがスローされるか、拒否された Promise が async 関数内で `await`ed になります。 これらのエラーは、`next(err)`を呼び出すかのようにエラーハンドラに渡されます。
 
-Express でのエラー処理の詳細については、[Error handling documentation](/en/guide/error-handling)を参照してください。
+Express でのエラー処理の詳細については、[Error handling documentation](/guide/error-handling)を参照してください。
 
 #### 更新方法
 

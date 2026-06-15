@@ -36,7 +36,7 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 
 This property holds a reference to the instance of the Express application that is using the middleware.
 
-`res.app` is identical to the [req.app](/en/5x/api/request/#reqapp) property in the request object.
+`res.app` is identical to the [req.app](/api/request/#reqapp) property in the request object.
 
 ### res.headersSent
 
@@ -66,7 +66,7 @@ for the used view engine for additional considerations.
 </Alert>
 
 In order to keep local variables for use in template rendering between requests, use
-[app.locals](/en/5x/api/application/#applocals) instead.
+[app.locals](/api/application/#applocals) instead.
 
 This property is useful for exposing request-level information such as the request path name,
 authenticated user, user settings, and so on to templates rendered within the application.
@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 
 ### res.req
 
-This property holds a reference to the [request object](/en/5x/api/request/)
+This property holds a reference to the [request object](/api/request/)
 that relates to this response object.
 
 ## Methods
@@ -230,7 +230,7 @@ Then, `res.cookie()` will use the secret passed to `cookieParser(secret)` to sig
 res.cookie('name', 'tobi', { signed: true });
 ```
 
-Later, you may access this value through the [req.signedCookies](/en/5x/api/request/#reqsignedcookies) object.
+Later, you may access this value through the [req.signedCookies](/api/request/#reqsignedcookies) object.
 
 ### res.download(path [, filename] [, options] [, fn])
 
@@ -300,7 +300,7 @@ res.status(404).end();
 ### res.format(object)
 
 Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
-It uses [req.accepts()](/en/5x/api/request/#reqacceptstypes) to select a handler for the request, based on the acceptable
+It uses [req.accepts()](/api/request/#reqacceptstypes) to select a handler for the request, based on the acceptable
 types ordered by their quality values. If the header is not specified, the first callback is invoked.
 When no match is found, the server responds with 406 "Not Acceptable", or invokes the `default` callback.
 
@@ -392,7 +392,7 @@ res.status(500).jsonp({ error: 'message' });
 
 By default, the JSONP callback name is simply `callback`. Override this with the
 
-[jsonp callback name](/en/5x/api/application/#application-settings) setting.
+[jsonp callback name](/api/application/#application-settings) setting.
 
 The following are some examples of JSONP responses using the same code:
 
@@ -497,7 +497,7 @@ res.redirect('..');
 ```
 
 See also [Security best practices: Prevent open redirect
-vulnerabilities](/en/advanced/best-practice-security/#prevent-open-redirects).
+vulnerabilities](/advanced/best-practice-security/#prevent-open-redirects).
 
 ### res.render(view [, locals] [, callback])
 
@@ -509,7 +509,7 @@ Optional parameters:
 
 The `view` argument is a string that is the file path of the view file to render. This can be an absolute path, or a path relative to the `views` setting. If the path does not contain a file extension, then the `view engine` setting determines the file extension. If the path does contain a file extension, then Express will load the module for the specified template engine (via `require()`) and render it using the loaded module's `__express` function.
 
-For more information, see [Using template engines with Express](/en/5x/guide/using-template-engines).
+For more information, see [Using template engines with Express](/guide/using-template-engines).
 
 <Alert type="warning">
 

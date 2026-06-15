@@ -86,18 +86,17 @@ Habilitar `proxy de confianza` tendrá el siguiente impacto:
 
 <ul>
   <li markdown="1">
-    El valor de [req.hostname](/en/api#req.hostname) se deriva del valor establecido en la cabecera
+    El valor de [req.hostname](/api#req.hostname) se deriva del valor establecido en la cabecera
     `X-Forwarded-Host`, que puede ser definido por el cliente o por el proxy.
   </li>
   <li markdown="1">
     `X-Forwarded-Proto` puede ser establecido por el proxy inverso para decirle a la aplicación si
     es `https` o `http` o incluso un nombre inválido. Este valor se refleja en
-    [req.protocol](/en/api#req.protocol).
+    [req.protocol](/api#req.protocol).
   </li>
   <li markdown="1">
-    Los valores [req.ip](/en/api#req.ip) y [req.ips](/en/api#req.ips) son poblados según la
-    dirección del socket y la cabecera `X-Forwarded-For`, comenzando en la primera dirección no
-    confiable.
+    Los valores [req.ip](/api#req.ip) y [req.ips](/api#req.ips) son poblados según la dirección del
+    socket y la cabecera `X-Forwarded-For`, comenzando en la primera dirección no confiable.
   </li>
 </ul>
 
