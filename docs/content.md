@@ -227,9 +227,10 @@ and version:
 - `src/plugins/rehype-rewrite-localized-links.mjs` — raw HTML/JSX anchors `<a href="/...">` (e.g.
   cards that wrap a `<Card>` component), which Markdown link syntax can't express.
 
-Both share the logic in `src/plugins/rewrite-localized-links-core.mjs` and are configured in
-`astro.config.mjs` (`prefixes` = localizable sections, `versionedSections` = sections that carry a
-version).
+Both share the logic — and the defaults — in `src/plugins/rewrite-localized-links-core.mjs`
+(`DEFAULT_PREFIXES` = localizable sections, `DEFAULT_VERSIONED_SECTIONS` = sections that carry a
+version; the latest version comes from `src/config/versions.ts` and the unversioned "global" pages
+are derived from the menu). They're registered in `astro.config.mjs` with no options needed.
 
 ### How to write a link
 
