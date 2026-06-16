@@ -113,6 +113,27 @@ The optional `options` parameter specifies the behavior of the router.
 | `strict`        | Enable strict routing.                                                                                                                                | Disabled by default, "/foo" and "/foo/" are treated the same by the router. | &nbsp;       |
 
 </div>
+**Examples:**
+
+```js
+// caseSensitive: treat "/Foo" and "/foo" as different routes
+const router = express.Router({ caseSensitive: true });
+router.get('/Foo', (req, res) => res.send('Matched /Foo exactly'));
+
+// mergeParams: access parent route params in child router
+const parent = express.Router();
+const child = express.Router({ mergeParams: true });
+
+parent.use('/user/:userId', child);
+child.get('/comments', (req, res) => {
+  // req.params.userId is available because mergeParams: true
+  res.send(`Comments for user ${req.params.userId}`);
+});
+
+// strict: treat "/foo" and "/foo/" as different routes
+const strictRouter = express.Router({ strict: true });
+strictRouter.get('/foo/', (req, res) => res.send('Matched /foo/ with trailing slash'));
+```
 
 You can add middleware and HTTP method routes (such as `get`, `put`, `post`, and
 so on) to `router` just like an application.
