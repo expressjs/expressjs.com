@@ -4,6 +4,7 @@ description: A comprehensive guide to migrating your Express.js applications fro
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express 5 is not very different from Express 4; although it maintains the same basic API, there are still changes that break compatibility with the previous version. Therefore, an application built with Express 4 might not work if you update it to use Express 5.
 
@@ -11,9 +12,7 @@ Express 5 is not very different from Express 4; although it maintains the same b
 
 To install this version, you need to have a **Node.js version 18 or higher**. Then, execute the following command in your application directory:
 
-```sh
-npm install "express@5"
-```
+<PackageManagerCommand command='npm install "express@5"' />
 
 You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 
@@ -23,15 +22,11 @@ To help you migrate your express server, we have created a set of codemods that 
 
 Run the following command for run all the codemods available:
 
-```sh
-npx codemod@latest @expressjs/v5-migration-recipe
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/v5-migration-recipe" />
 
 If you want to run a specific codemod, you can run the following command:
 
-```sh
-npx codemod@latest @expressjs/name-of-the-codemod
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/name-of-the-codemod" />
 
 You can find the list of available codemods [here](https://codemod.link/express).
 
@@ -49,9 +44,7 @@ Initially, `del` was used instead of `delete`, because `delete` is a reserved ke
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/route-del-to-delete
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/route-del-to-delete" />
 
 Or you can update your code manually:
 
@@ -80,9 +73,7 @@ The following method names have been pluralized. In Express 4, using the old met
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/pluralize-method-names
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/pluralize-method-names" />
 
 Or you can update your code manually:
 
@@ -113,9 +104,7 @@ This potentially confusing and dangerous method of retrieving form data has been
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/explicit-request-params
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/explicit-request-params" />
 
 Or you can update your code manually:
 
@@ -140,9 +129,7 @@ Express 5 no longer supports the signature `res.json(obj, status)`. Instead, set
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 Or you can update your code manually:
 
@@ -161,9 +148,7 @@ Express 5 no longer supports the signature `res.jsonp(obj, status)`. Instead, se
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 Or you can update your code manually:
 
@@ -182,9 +167,7 @@ Express 5 no longer supports the signature `res.redirect(url, status)`. Instead,
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/redirect-arg-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/redirect-arg-order" />
 
 Or you can update your code manually:
 
@@ -203,9 +186,7 @@ Express 5 no longer supports the magic string `back` in the `res.redirect()` and
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/back-redirect-deprecated
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/back-redirect-deprecated" />
 
 Or you can update your code manually:
 
@@ -224,9 +205,7 @@ Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 Or you can update your code manually:
 
@@ -246,9 +225,7 @@ If you need to send a number by using the `res.send()` function, quote the numbe
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 Or you can update your code manually:
 
@@ -267,9 +244,7 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 
 You can automatically update your code by running the following command:
 
-```sh
-npx codemod@latest @expressjs/camelcase-sendfile
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/camelcase-sendfile" />
 
 Or you can update your code manually:
 

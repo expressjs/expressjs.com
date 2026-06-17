@@ -4,6 +4,7 @@ description: Learn how to use middleware in Express.js applications, including a
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
 
@@ -283,9 +284,7 @@ Install the Node.js module for the required functionality, then load it in your 
 
 The following example illustrates installing and loading the cookie-parsing middleware function `cookie-parser`.
 
-```bash
-$ npm install cookie-parser
-```
+<PackageManagerCommand command="npm install cookie-parser" />
 
 ```js
 const express = require('express');
