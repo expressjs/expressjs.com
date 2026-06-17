@@ -34,7 +34,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@orama/core": "^1.2.19",
     "@orama/ui": "^1.5.4",
-    "astro": "^6.1.2",
+    "astro": "^6.4.7",
     "astro-expressive-code": "^0.42.0",
     "astro-icon": "^1.1.5",
     "gray-matter": "^4.0.3",
