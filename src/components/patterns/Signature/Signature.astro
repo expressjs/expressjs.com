@@ -1,0 +1,79 @@
+---
+/**
+ * Signature
+ *
+ * Shows the arguments and return value of an API method, or the type of an API
+ * property, plus an optional "Added in" version. It only renders the structured
+ * data — write the member title as a normal Markdown heading above it and the
+ * prose description around it.
+ *
+ * Colors follow the site theme via design tokens (light/dark aware).
+ *
+ * @example
+ * <Signature returns="Function" since="v4.16.0">
+ *   <Fragment slot="attributes">
+ *     <Param name="limit" type="Number | String" default='"100kb"'>…</Param>
+ *   </Fragment>
+ * </Signature>
+ *
+ * <Signature type="Boolean" since="v4.5.0" />
+ */
+import './Signature.css';
+
+interface Props {
+  /** Return type for a method. Use the `returns` slot for richer content. */
+  returns?: string;
+  /** Type for a property. */
+  type?: string;
+  /** Version the member was added in, e.g. `"v4.16.0"`. */
+  since?: string;
+  /** Heading text for the arguments section. */
+  attributesTitle?: string;
+}
+
+const { returns, type, since, attributesTitle = 'Arguments' } = Astro.props;
+
+const hasReturnsSlot = Astro.slots.has('returns');
+const hasReturns = hasReturnsSlot || Boolean(returns);
+const hasAttributes = Astro.slots.has('attributes');
+const hasFooter = Boolean(type) || hasReturns || Boolean(since);
+---
+
+<section class="signature">
+  {
+    hasAttributes && (
+      <div class="signature__attributes">
+        <h4 class="signature__attributes-title">{attributesTitle}</h4>
+        <slot name="attributes" />
+      </div>
+    )
+  }
+
+  {
+    hasFooter && (
+      <div class="signature__footer">
+        {type && (
+          <p class="signature__line">
+            <span class="signature__line-label">Type:</span>
+            <code class="type-tag">{type}</code>
+          </p>
+        )}
+        {hasReturns && (
+          <p class="signature__line">
+            <span class="signature__line-arrow" aria-hidden="true">
+              ↵
+            </span>
+            <span class="signature__line-label">Returns:</span>
+            {hasReturnsSlot ? <slot name="returns" /> : <code class="type-tag">{returns}</code>}
+          </p>
+        )}
+        {since && (
+          <p class="signature__line">
+            <span class="signature__line-label">Added in:</span>
+            <code class="type-tag">{since}</code>
+          </p>
+        )}
+      </div>
+    )
+  }
+</section>

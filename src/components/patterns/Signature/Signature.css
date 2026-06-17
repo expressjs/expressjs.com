@@ -1,0 +1,147 @@
+@layer patterns {
+  /* ============================================
+     Type token — shared by returns and params
+     ============================================ */
+  .type-tag {
+    display: inline-block;
+    padding: var(--space-0-5) var(--space-2);
+    /* A crisp "chip" using palette tokens — good contrast in light and dark. */
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+  }
+
+  /* ============================================
+     Signature — a single box holding the
+     arguments and the return value / type
+     ============================================ */
+  .signature {
+    margin: var(--space-6) 0;
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+    background-color: var(--color-bg-primary);
+  }
+
+  .signature__attributes-title {
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* Footer: Type / Returns / Added in, grouped in one strip that follows the
+     theme (light gray in light mode, ~#222 in dark mode). */
+  .signature__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-top: var(--border-width-1) solid var(--color-border-secondary);
+    background-color: var(--color-bg-tertiary);
+  }
+
+  /* When the box only has the footer (e.g. a property), there is no divider. */
+  .signature__footer:first-child {
+    border-top: 0;
+  }
+
+  .signature__line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  .signature__line-arrow,
+  .signature__line-label {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ============================================
+     Param — a row inside the box
+     ============================================ */
+  .param {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .param + .param {
+    border-top: var(--border-width-1) solid var(--color-border-secondary);
+  }
+
+  .param__head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .param__name {
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .param__flag {
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-full);
+    background-color: light-dark(var(--amber-100), var(--amber-900));
+    color: light-dark(var(--amber-800), var(--amber-200));
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Meta: labelled "Type:" / "Default:" / "Added in:" pairs, one per line
+     (label inline with its value). */
+  .param__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .param__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .param__label {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .param__value {
+    font-family: var(--font-family-mono);
+    color: var(--color-text-primary);
+  }
+
+  .param__desc {
+    margin-top: var(--space-5);
+    color: var(--color-text-secondary);
+
+    /* Collapse the outer margins of content rendered from the MDX slot. */
+    & > :first-child {
+      margin-top: 0;
+    }
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}

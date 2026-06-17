@@ -4,6 +4,7 @@ description: The req object represents the HTTP request and has properties for t
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import Signature from '@components/patterns/Signature/Signature.astro';
 
 The `req` object represents the HTTP request and has properties for the
 request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention,
@@ -43,6 +44,8 @@ or [pez](https://www.npmjs.com/package/pez).
 </Alert>
 
 ### req.app
+
+<Signature type="Application" />
 
 This property holds a reference to the instance of the Express application that is using the middleware.
 

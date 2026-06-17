@@ -1,0 +1,67 @@
+---
+/**
+ * Param
+ *
+ * A single parameter / attribute / option inside a `Signature`. Renders a
+ * styled box with the name, an optional type token, an optional default value
+ * and an optional "Added in" version. The description is the default slot, so it
+ * stays MDX (keeping localized links working).
+ *
+ * @example
+ * <Param name="depth" type="Number" default="32" since="v4.20.0">
+ *   Configures the maximum depth…
+ * </Param>
+ */
+import './Signature.css';
+
+interface Props {
+  /** Parameter name, rendered in monospace. */
+  name: string;
+  /** Type, rendered as a type token (e.g. `Boolean`, `Function`, `Compiler`). */
+  type?: string;
+  /** Default value, rendered as inline code. */
+  default?: string;
+  /** Whether the parameter is optional. */
+  optional?: boolean;
+  /** Version the parameter was added in, e.g. `"v4.20.0"`. */
+  since?: string;
+}
+
+const { name, type, default: defaultValue, optional = false, since } = Astro.props;
+---
+
+<div class="param">
+  <div class="param__head">
+    <code class="param__name">{name}</code>
+    {optional && <span class="param__flag">optional</span>}
+  </div>
+
+  {
+    (type || defaultValue !== undefined || since) && (
+      <div class="param__meta">
+        {type && (
+          <span class="param__meta-item">
+            <span class="param__label">Type:</span>
+            <code class="type-tag">{type}</code>
+          </span>
+        )}
+        {defaultValue !== undefined && (
+          <span class="param__meta-item">
+            <span class="param__label">Default:</span>
+            <code class="param__value">{defaultValue}</code>
+          </span>
+        )}
+        {since && (
+          <span class="param__meta-item">
+            <span class="param__label">Added in:</span>
+            <code class="param__value">{since}</code>
+          </span>
+        )}
+      </div>
+    )
+  }
+
+  <div class="param__desc">
+    <slot />
+  </div>
+</div>
