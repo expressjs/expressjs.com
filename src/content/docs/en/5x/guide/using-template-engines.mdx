@@ -4,6 +4,7 @@ description: Discover how to integrate and use template engines like Pug, Handle
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 A _template engine_ enables you to use static template files in your application. At runtime, the template engine replaces
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
@@ -19,9 +20,7 @@ To render template files, set the following [application setting properties](/ap
 
 Then install the corresponding template engine npm package; for example to install Pug:
 
-```bash
-$ npm install pug --save
-```
+<PackageManagerCommand command="npm install pug --save" />
 
 <Alert type="alert">
 Express-compliant template engines such as Pug export a function named `__express(filePath, options, callback)`,

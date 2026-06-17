@@ -4,6 +4,7 @@ description: A guide to migrating your Express.js applications from version 3 to
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express 4 is a breaking change from Express 3. That means an existing Express 3 app will _not_ work if you update the Express version in its dependencies.
 
@@ -418,9 +419,7 @@ Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Pug to their respective latest
 version with the following command:
 
-```bash
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-```
+<PackageManagerCommand command="npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save" />
 
 Make the following changes to `app.js`:
 
@@ -555,18 +554,14 @@ the Express 3 app generator and then install the new
 If you already have the Express 3 app generator installed on your system,
 you must uninstall it:
 
-```bash
-$ npm uninstall -g express
-```
+<PackageManagerCommand command="npm uninstall -g express" />
 
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
 
 Now install the new generator:
 
-```bash
-$ npm install -g express-generator
-```
+<PackageManagerCommand command="npm install -g express-generator" />
 
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
