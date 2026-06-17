@@ -16,8 +16,7 @@ const mdToText = (content) =>
 // extension and any trailing `index` so `foo/index.mdx` -> `foo`. This matches
 // Astro's glob loader, which serves index files at their directory URL (without
 // a trailing `/index`).
-const toPathSegment = (relPath) =>
-  relPath.replace(/\.mdx?$/, '').replace(/(?:^|\/)index$/, '');
+const toPathSegment = (relPath) => relPath.replace(/\.mdx?$/, '').replace(/(?:^|\/)index$/, '');
 
 const collectMdFiles = async (dir, base = dir) => {
   const entries = await readdir(dir);
