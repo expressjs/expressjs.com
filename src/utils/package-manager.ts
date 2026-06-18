@@ -106,8 +106,6 @@ export function convertPackageManagerCommand(command: string): CommandMap {
           ? null
           : join('pnpm add', isDev && '--save-dev', isGlobal && '--global', pkgs, extras),
         bun: join('bun add', isDev && '--dev', isGlobal && '--global', pkgs, extras),
-        // `deno add` is an alias of `deno install`; use `deno install -g` for
-        // global installs. Deno has no `--no-save` equivalent.
         deno: hasNoSave
           ? null
           : join(isGlobal ? 'deno install -g' : 'deno add', isDev && '--dev', pkgs, extras),
