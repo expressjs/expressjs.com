@@ -62,7 +62,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
       yarn: join('yarn dlx', exec),
       pnpm: join('pnpm dlx', exec),
       bun: join('bunx', exec),
-      deno: exec ? join('deno x', exec) : null,
+      deno: join('deno x', exec),
     };
   }
 
@@ -106,9 +106,11 @@ export function convertPackageManagerCommand(command: string): CommandMap {
           ? null
           : join('pnpm add', isDev && '--save-dev', isGlobal && '--global', pkgs, extras),
         bun: join('bun add', isDev && '--dev', isGlobal && '--global', pkgs, extras),
-        // Deno adds to deno.json/package.json; it has no `--no-save`, and global
-        // tool installs use a different verb (`deno install -g`), so skip those.
-        deno: hasNoSave || isGlobal ? null : join('deno add', isDev && '--dev', pkgs, extras),
+        // `deno add` is an alias of `deno install`; use `deno install -g` for
+        // global installs. Deno has no `--no-save` equivalent.
+        deno: hasNoSave
+          ? null
+          : join(isGlobal ? 'deno install -g' : 'deno add', isDev && '--dev', pkgs, extras),
       };
     }
 
