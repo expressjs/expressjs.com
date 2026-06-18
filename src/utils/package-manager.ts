@@ -124,7 +124,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
         yarn: isGlobal ? join('yarn global remove', pkgs) : join('yarn remove', pkgs),
         pnpm: join('pnpm remove', isGlobal && '--global', pkgs),
         bun: join('bun remove', isGlobal && '--global', pkgs),
-        deno: isGlobal ? join('deno uninstall --global', pkgs) : join('deno remove', pkgs),
+        deno: join('deno uninstall', isGlobal && '--global', pkgs),
       };
     }
 
