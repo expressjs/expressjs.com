@@ -54,7 +54,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
   const tokens = command.trim().split(/\s+/);
   const [bin, sub, ...rest] = tokens;
 
-  // npx codemod@latest ... -> yarn/pnpm dlx, bunx, deno run -A npm:
+  // npx codemod@latest ... -> yarn/pnpm dlx, bunx, deno x
   if (bin === 'npx') {
     const exec = tokens.slice(1).join(' ');
     return {
@@ -62,7 +62,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
       yarn: join('yarn dlx', exec),
       pnpm: join('pnpm dlx', exec),
       bun: join('bunx', exec),
-      deno: exec ? join('deno run -A', `npm:${exec}`) : null,
+      deno: exec ? join('deno x', exec) : null,
     };
   }
 
@@ -146,8 +146,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
         yarn: join('yarn create', args),
         pnpm: join('pnpm create', args),
         bun: join('bun create', args),
-        // `npm create <starter>` has no first-class Deno equivalent.
-        deno: null,
+        deno: join('deno create --npm', args),
       };
     }
 
