@@ -21,7 +21,7 @@
     "spell": "cspell --no-progress \"**/*.{md,mdx,astro,ts,tsx,js,mjs,css}\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run format:check && npm run lint",
+    "check": "npm run format:check && npm run lint && npm run spell",
     "fix": "npm run format && npm run lint:fix",
     "prepare": "husky",
     "lint-staged": "lint-staged",
