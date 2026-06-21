@@ -78,7 +78,7 @@ option defaults to "/".
 
 ```js
 res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
-res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
+res.cookie('remember_me', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
 ```
 
 The `maxAge` option is a convenience option for setting "expires"
@@ -86,7 +86,7 @@ relative to the current time in milliseconds. The following is equivalent to
 the previous example.
 
 ```js
-res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
+res.cookie('remember_me', '1', { maxAge: 900000, httpOnly: true });
 ```
 
 An object may be passed which is then serialized as JSON, which is

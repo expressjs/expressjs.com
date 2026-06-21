@@ -87,7 +87,6 @@ pillarjs
 plantae
 Português
 Prunus
-rememberme
 Riva
 SAWARATSUKI
 sder
