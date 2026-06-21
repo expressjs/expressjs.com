@@ -255,7 +255,7 @@ For example:
 
 ```js
 res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
-res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
+res.cookie('remember_me', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
 ```
 
 You can set multiple cookies in a single response by calling `res.cookie` multiple times, for example:
@@ -293,7 +293,7 @@ The `maxAge` option is a convenience option for setting "expires" relative to th
 The following is equivalent to the second example above.
 
 ```js
-res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
+res.cookie('remember_me', '1', { maxAge: 900000, httpOnly: true });
 ```
 
 You can pass an object as the `value` parameter; it is then serialized as JSON and parsed by `bodyParser()` middleware.
