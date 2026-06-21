@@ -24,7 +24,7 @@ res.send('<p>some html</p>');
 
 Response local variables are scoped to the request, thus only
 available to the view(s) rendered during that request / response
-cycle, if any. Otherwise this API is identical to <a href="#app.locals">app.locals</a>.
+cycle, if any. Otherwise this API is identical to [app.locals](/api/application/#applocals).
 
 This object is useful for exposing request-level information such as the
 request pathname, authenticated user, user settings etcetera.
@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
 
 ### res.req
 
-This property holds a reference to the <a href="#request">request object</a>
+This property holds a reference to the [request object](/api/request/)
 that relates to this response object.
 
 ## Methods
@@ -106,7 +106,7 @@ to sign the value.
 res.cookie('name', 'tobi', { signed: true });
 ```
 
-Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a>
+Later you may access this value through the [req.signedCookie](/api/request/#reqsignedcookies)
 object.
 
 ### res.download(path, [filename], [fn])
@@ -230,7 +230,7 @@ res.jsonp(500, { error: 'message' });
 ```
 
 By default the JSONP callback name is simply `callback`,
-however you may alter this with the <a href="#app-settings">jsonp callback name</a>
+however you may alter this with the [jsonp callback name](/api/application/#settings)
 setting. The following are some examples of JSONP responses using the same
 code:
 
@@ -302,7 +302,7 @@ Express supports a few forms of redirection, first being
 a fully qualified URI for redirecting to a different site:
 
 ```js
-res.redirect('http://google.com');
+res.redirect('https://google.com');
 ```
 
 The second form is the pathname-relative redirect, for example

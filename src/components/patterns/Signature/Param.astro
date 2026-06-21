@@ -1,0 +1,96 @@
+---
+/**
+ * Param
+ *
+ * A single parameter / attribute / option inside a `Signature`. Renders a
+ * two-column row — the name on the left, the type / default / description on
+ * the right. The description is the default slot, so it stays MDX (keeping
+ * localized links working).
+ *
+ * Nested options (e.g. the properties of an `options` object) go in the
+ * `properties` slot, where they render as a bordered nested table under this
+ * param — keeping them in the same table instead of a separate one. (The slot
+ * is named `properties`, not `children`, to avoid clashing with the special
+ * `children` prop in MDX.)
+ *
+ * @example
+ * <Param name="depth" type="Number" default="32" since="v4.20.0">
+ *   Configures the maximum depth…
+ * </Param>
+ *
+ * @example
+ * <Param name="options" type="Object" optional>
+ *   Configures how files are served.
+ *
+ *   <Fragment slot="properties">
+ *     <Param name="dotfiles" type="String" default="undefined">…</Param>
+ *   </Fragment>
+ * </Param>
+ */
+import './Signature.css';
+
+interface Props {
+  /** Parameter name, rendered in monospace. */
+  name: string;
+  /** Type, rendered as a type token (e.g. `Boolean`, `Function`, `Compiler`). */
+  type?: string;
+  /** Default value, rendered as inline code. */
+  default?: string;
+  /** Whether the parameter is optional. */
+  optional?: boolean;
+  /** Version the parameter was added in, e.g. `"v4.20.0"`. */
+  since?: string;
+}
+
+const { name, type, default: defaultValue, optional = false, since } = Astro.props;
+
+const hasProperties = Astro.slots.has('properties');
+
+// Show optionality on the type itself, by appending `| undefined`.
+const displayType = optional && type ? `${type} | undefined` : type;
+---
+
+<div class="param">
+  <div class="param__head">
+    <code class="param__name">{name}</code>
+  </div>
+
+  <div class="param__body">
+    {
+      (displayType || defaultValue !== undefined || since) && (
+        <div class="param__meta">
+          {displayType && (
+            <span class="param__meta-item">
+              <span class="param__label">Type:</span>
+              <code class="type-tag">{displayType}</code>
+            </span>
+          )}
+          {defaultValue !== undefined && (
+            <span class="param__meta-item">
+              <span class="param__label">Default:</span>
+              <code class="param__value">{defaultValue}</code>
+            </span>
+          )}
+          {since && (
+            <span class="param__meta-item">
+              <span class="param__label">Added in:</span>
+              <code class="param__value">{since}</code>
+            </span>
+          )}
+        </div>
+      )
+    }
+
+    <div class="param__desc">
+      <slot />
+    </div>
+
+    {
+      hasProperties && (
+        <div class="signature__params param__children">
+          <slot name="properties" />
+        </div>
+      )
+    }
+  </div>
+</div>

@@ -5,6 +5,7 @@ description: Cookie session middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.1.1"
@@ -44,9 +45,7 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install cookie-session
-```
+<PackageManagerCommand command="npm install cookie-session" />
 
 ## API
 
@@ -117,7 +116,7 @@ The options can also contain any of the following (for the full list, see
 - `partitioned`: a boolean indicating whether to partition the cookie in Chrome for the [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (`false` by default). If this is true, Cookies from embedded sites will be partitioned and only readable from the same top level site from which it was created.
 - `priority`: a string indicating the cookie priority. This can be set to `'low'`, `'medium'`, or `'high'`.
 - `sameSite`: a boolean or string indicating whether the cookie is a "same site" cookie (`false` by default). This can be set to `'strict'`, `'lax'`, `'none'`, or `true` (which maps to `'strict'`).
-- `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS). If this is set to `true` and Node.js is not directly over a TLS connection, be sure to read how to [setup Express behind proxies](https://expressjs.com/en/guide/behind-proxies.html) or the cookie may not ever set correctly.
+- `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS). If this is set to `true` and Node.js is not directly over a TLS connection, be sure to read how to [setup Express behind proxies](/guide/behind-proxies) or the cookie may not ever set correctly.
 - `httpOnly`: a boolean indicating whether the cookie is only to be sent over HTTP(S), and not made available to client JavaScript (`true` by default).
 - `signed`: a boolean indicating whether the cookie is to be signed (`true` by default).
 - `overwrite`: a boolean indicating whether to overwrite previously set cookies of the same name (`true` by default).

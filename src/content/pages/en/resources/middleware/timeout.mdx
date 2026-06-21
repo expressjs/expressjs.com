@@ -5,11 +5,12 @@ description: Request timeout middleware for Connect/Express
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="0.2.1"
+  version="1.9.1"
   github="https://github.com/expressjs/timeout"
-  npm="https://www.npmjs.com/package/timeout"
+  npm="https://www.npmjs.com/package/connect-timeout"
 />
 
 Times out a request in the Connect/Express application framework.
@@ -20,9 +21,7 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install connect-timeout
-```
+<PackageManagerCommand command="npm install connect-timeout" />
 
 ## API
 

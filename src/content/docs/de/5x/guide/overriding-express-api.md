@@ -14,7 +14,7 @@ Das Ändern der globalen Prototypen wirkt sich auf alle geladenen Express-Apps i
 
 Sie können die Signatur und das Verhalten bestehender Methoden mit eigenen überschreiben, indem Sie eine benutzerdefinierte Funktion zuweisen.
 
-Folgendes ist ein Beispiel für das Überschreiben des Verhaltens von [res.sendStatus](/en/4x/api#res.sendStatus).
+Folgendes ist ein Beispiel für das Überschreiben des Verhaltens von [res.sendStatus](/4x/api#res.sendStatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {

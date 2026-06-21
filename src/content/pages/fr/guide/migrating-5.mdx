@@ -103,7 +103,7 @@ Ou vous pouvez mettre à jour votre code manuellement :
 
 Un caractère de deux points (:) dans le nom de l'application`. aram(name, fn)` est un reste d'Express 3, et pour des raisons de compatibilité ascendante, Express 4 l'a supporté avec une notification de dépréciation. Express 5 l'ignorera silencieusement et utilisera le paramètre de nom sans le préfixer avec un deux-points.
 
-Cela ne devrait pas affecter votre code si vous suivez la documentation Express 4 de [app.param](/en/4x/api#app.param), car il ne fait aucune mention du côlon principal.
+Cela ne devrait pas affecter votre code si vous suivez la documentation Express 4 de [app.param](/4x/api#app.param), car il ne fait aucune mention du côlon principal.
 
 ### param(nom)
 
@@ -405,7 +405,7 @@ La syntaxe correspondante au chemin d'accès est lorsqu'une chaîne de caractèr
 
 Les requêtes de middleware et les gestionnaires qui retournent les promesses rejetées sont maintenant gérées en renvoyant la valeur rejetée comme une `Erreur` vers le middleware. Cela signifie que l'utilisation des fonctions `async` comme middleware et des gestionnaires est plus facile que jamais. Lorsqu'une erreur est levée dans une fonction `async` ou qu'une promesse rejetée est `attendu` dans une fonction asynchrone, ces erreurs seront passées au gestionnaire d'erreurs comme si elle appelait `next(err)`.
 
-Détail de la façon dont Express gère les erreurs est couvert dans la [documentation de gestion des erreurs](/en/guide/error-handling).
+Détail de la façon dont Express gère les erreurs est couvert dans la [documentation de gestion des erreurs](/guide/error-handling).
 
 #### Comment mettre à jour
 

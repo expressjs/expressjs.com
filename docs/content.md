@@ -56,6 +56,45 @@ Regular markdown content here.
 
 > Component imports must be placed **after** the frontmatter block and **before** the content where they are used. Do not place imports inside the frontmatter (`---`) block.
 
+## Code Tabs
+
+Show the same snippet as CommonJS / ESM / TypeScript variants behind a tab strip. Tag each fenced code block with a dialect language and the tabs are built for you — consecutive tagged blocks are grouped into a single `CodeTabs`, and its import is injected automatically (no manual import needed).
+
+| Fence | Tab label  | Highlighted as |
+| ----- | ---------- | -------------- |
+| `cjs` | CommonJS   | JavaScript     |
+| `mjs` | ESM        | JavaScript     |
+| `ts`  | TypeScript | TypeScript     |
+
+````mdx
+```cjs
+const express = require('express');
+const app = express();
+```
+
+```mjs
+import express from 'express';
+const app = express();
+```
+
+```ts
+import express, { Express } from 'express';
+const app: Express = express();
+```
+````
+
+For labels other than these dialects, tag the blocks with `tab="..."` instead:
+
+````mdx
+```js tab="npm"
+npm install express
+```
+
+```js tab="pnpm"
+pnpm add express
+```
+````
+
 ## API Reference
 
 The API reference lives in its own collection at `src/content/api/`, organized by version. Unlike `docs`, the API collection is not language-scoped — it is only available in English.
@@ -111,7 +150,10 @@ src/content/docs/
 
 ### How Versioning Works
 
-- **Default Version**: `5x` is the current default version
+The version list, prefixes, and default version are defined once in `src/config/versions.ts`
+(`VERSIONS`, `VERSION_PREFIXES`, `DEFAULT_VERSION`) and consumed everywhere else.
+
+- **Default Version**: `5x` is the current default version (`isDefault: true` in `VERSIONS`)
 - **Supported Versions**: `5x`, `4x`, `3x`
 - **URL Patterns**:
   - Versioned: `/en/5x/api/` → Express 5.x API docs
@@ -143,21 +185,26 @@ To add support for a new Express version (e.g., `6x`):
    export type VersionPrefix = '6x' | '5x' | '4x' | '3x';
    ```
 
-3. **Update default version and prefixes** in `src/pages/[lang]/[...slug].astro`:
+3. **Add the version** to `src/config/versions.ts` — the single source of truth for the
+   version list, prefixes, and default version:
 
    ```typescript
-   const DEFAULT_VERSION = '6x';
-   const VERSION_PREFIXES = ['6x', '5x', '4x', '3x'];
+   export const VERSIONS: VersionOption[] = [
+     { id: '6x', label: 'v6.x', isDefault: true },
+     { id: '5x', label: 'v5.x' },
+     { id: '4x', label: 'v4.x' },
+     { id: '3x', label: 'v3.x (deprecated)', isDeprecated: true },
+   ];
    ```
 
-4. **Update the sidebar** in `src/components/patterns/Sidebar/Sidebar.astro`:
-   - Add the new version to the `versions` array
-   - Update `defaultVersion`
+   `DEFAULT_VERSION` and `VERSION_PREFIXES` are derived from this array, and the routing
+   (`src/pages/[lang]/[...slug].astro`), the sidebar, and the link-localization plugins all
+   read from it — so you don't update the version in those places anymore.
 
-5. **Update menu versioning** in `src/config/menu/main.ts`:
+4. **Update menu versioning** in `src/config/menu/main.ts`:
    - Add `'6x'` to the `versioned` arrays
 
-6. **Review `omitFrom` entries** in `src/config/menu/api.ts`:
+5. **Review `omitFrom` entries** in `src/config/menu/api.ts`:
    - Determine which API features exist or are deprecated in the new version
 
 ### Global Pages (Non-Versioned)
@@ -208,3 +255,48 @@ Pages with a slug starting with `resources/` are treated as resource pages and w
    ```
 
    The `global: true` flag tells the sidebar to generate the link without a version prefix and prevents the version switcher from modifying its URL.
+
+## Internal Links
+
+Write internal links **without a language prefix** (and usually without a version) — just the
+section path. Two plugins localize them at build time so every page links within its own language
+and version:
+
+- `src/plugins/remark-rewrite-localized-links.mjs` — Markdown links `[text](/...)`.
+- `src/plugins/rehype-rewrite-localized-links.mjs` — raw HTML/JSX anchors `<a href="/...">` (e.g.
+  cards that wrap a `<Card>` component), which Markdown link syntax can't express.
+
+Both share the logic — and the defaults — in `src/plugins/rewrite-localized-links-core.mjs`
+(`DEFAULT_PREFIXES` = localizable sections, `DEFAULT_VERSIONED_SECTIONS` = sections that carry a
+version; the latest version comes from `src/config/versions.ts` and the unversioned "global" pages
+are derived from the menu). They're registered in `astro.config.mjs` with no options needed.
+
+### How to write a link
+
+For a link authored in a Spanish, 5.x page:
+
+| Write this              | Renders as                  | Why                                          |
+| ----------------------- | --------------------------- | -------------------------------------------- |
+| `/api/express`          | `/es/5x/api/express/`       | versioned section → file version injected    |
+| `/guide/routing`        | `/es/5x/guide/routing/`     | versioned docs page → file version injected  |
+| `/guide/migrating-5`    | `/es/guide/migrating-5/`    | "global" page → no versioned URL, stays bare |
+| `/4x/api/express`       | `/es/4x/api/express/`       | explicit version is preserved                |
+| `/resources/middleware` | `/es/resources/middleware/` | `resources` is never versioned               |
+
+Rules:
+
+- **Always omit the language.** The plugin prepends the current page's language. Never write
+  `/en/...` — translations sync from Crowdin verbatim, so a hardcoded language would make translated
+  pages link back to English.
+- **Versioned sections (`api`, `starter`, `guide`, `advanced`)** carry a version: the link's own
+  version is kept, or the source file's version (in `docs`/`api`) — or the latest (`DEFAULT_VERSION`)
+  from a non-versioned collection — is injected when the link omits one. Write `/api/express` or
+  `/guide/routing`; in a 5.x file both resolve under `/…/5x/…`.
+- **"Global" pages are the exception.** A handful of `guide`/`advanced` pages live in the unversioned
+  `pages` collection (`migrating-5`, `best-practice-performance`, …) and have no versioned URL, so
+  links to them always stay unversioned. This list is derived from the menu items flagged
+  `global: true` (in `src/config/menu/`) — no manual upkeep. (Adding a global page already requires
+  that flag; see [Adding a Global Page](#adding-a-global-page).)
+- **`resources`, `support`, `blog`** are never versioned; links are language-only.
+- External URLs, relative links (`./x`), pure anchors (`#x`) and already-localized links (`/en/...`)
+  are left untouched.

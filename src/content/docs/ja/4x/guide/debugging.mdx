@@ -18,7 +18,7 @@ Windows では、対応するコマンドを使用します。
 > $env:DEBUG = "express:*"; node index.js
 ```
 
-[express generator](/en/starter/generator) で生成されたデフォルトのアプリでこのコマンドを実行すると、以下の出力が出力されます。
+[express generator](/starter/generator) で生成されたデフォルトのアプリでこのコマンドを実行すると、以下の出力が出力されます。
 
 ```bash
 $ DEBUG=express:* node ./bin/www
@@ -118,7 +118,7 @@ Node.js を介して実行する場合、デバッグログの動作を変更す
 
 The environment variables beginning with `DEBUG_` end up being converted into an Options object
 that gets used with `%o`/`%O` formatters.
-[`util.inspect()`](https://nodejs.org/api/util#util_util_inspect_object_options) の完全な
+[`util.inspect()`](https://nodejs.org/api/util.html#utilinspectobject-options) の完全な
 リストについては Node.js のドキュメントを参照してください。
 
 </Alert>

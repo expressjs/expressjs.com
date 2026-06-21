@@ -103,7 +103,7 @@ Oppure è possibile aggiornare il codice manualmente:
 
 Un carattere principale (:) nel nome della `app. aram(name, fn)` function is a remnant of Express 3, and for the sake of backwards compatity, Express 4 supported it with a deprecation notice. Express 5 lo ignorerà silenziosamente e userà il parametro del nome senza prefissarlo con un colon.
 
-Questo non dovrebbe influenzare il tuo codice se segui la documentazione Express 4 di [app.param](/en/4x/api#app.param), in quanto non fa alcuna menzione del colon principale.
+Questo non dovrebbe influenzare il tuo codice se segui la documentazione Express 4 di [app.param](/4x/api#app.param), in quanto non fa alcuna menzione del colon principale.
 
 ### req.param(nome)
 
@@ -405,7 +405,7 @@ Il percorso percorso corrispondente alla sintassi è quando una stringa viene fo
 
 Richiedi middleware e gestori che restituiscono le promesse rifiutate sono ora gestiti inoltrando il valore rifiutato come `Error` alla gestione degli errori middleware. Ciò significa che usare le funzioni `async` come middleware e manipolatori sono più facili che mai. Quando un errore viene lanciato in una funzione `async` o una promessa rifiutata è `await`ed all'interno di una funzione asincrona, questi errori verranno passati al gestore degli errori come se chiamasse `next(err)`.
 
-Dettagli su come Express gestisce gli errori sono coperti nella [documentazione relativa alla gestione degli errori](/en/guide/error-handling).
+Dettagli su come Express gestisce gli errori sono coperti nella [documentazione relativa alla gestione degli errori](/guide/error-handling).
 
 #### Come aggiornare
 

@@ -42,7 +42,7 @@ Um die Schnittstellen der Template-Engine und das Caching zu normalisieren, lese
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 Projekt für Unterstützung. Nicht aufgelistete Template-Engines könnten die Express-Signatur trotzdem unterstützen.
 
-Weitere Informationen finden Sie unter [Template-Engines mit Express](/en/guide/using-template-engines).
+Weitere Informationen finden Sie unter [Template-Engines mit Express](/guide/using-template-engines).
 
 ## Wie gehe ich mit 404 Antworten um?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Weitere Informationen finden Sie unter [Fehlerbehandlung](/en/guide/error-handling).
+Weitere Informationen finden Sie unter [Fehlerbehandlung](/guide/error-handling).
 
 ## Wie kann ich plain HTML rendern?
 
@@ -86,5 +86,5 @@ Middleware-Funktion.
 
 ## Welche Version von Node.js benötigt Express?
 
-- [Express 4.x](/en/4x/api) benötigt Node.js 0.10 oder höher.
-- [Express 5.x](/en/5x/api) benötigt Node.js 18 oder höher.
+- [Express 4.x](/4x/api) benötigt Node.js 0.10 oder höher.
+- [Express 5.x](/api) benötigt Node.js 18 oder höher.
