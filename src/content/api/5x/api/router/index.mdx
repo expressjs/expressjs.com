@@ -4,13 +4,15 @@ description: A router object is an isolated instance of middleware and routes in
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import Signature from '@components/patterns/Signature/Signature.astro';
+import Param from '@components/patterns/Signature/Param.astro';
 
 A `router` object is an instance of middleware and routes. You can think of it
 as a "mini-application," capable only of performing middleware and routing
 functions. Every Express application has a built-in app router.
 
 A router behaves like middleware itself, so you can use it as an argument to
-[app.use()](/api/application/#appuse) or as the argument to another router's [use()](#routerusepath-function--function) method.
+[app.use()](/api/application/#appuse) or as the argument to another router's [use()](#routeruse) method.
 
 The top-level `express` object has a [Router()](/api/express/#expressrouter) method that creates a new `router` object.
 
@@ -40,9 +42,42 @@ app.use('/calendar', router);
 
 ## Methods
 
-### Router([options])
+### Router()
 
-### router.all(path, [callback, ...] callback)
+<Signature returns="Router">
+  <Fragment slot="attributes">
+    <Param name="options" type="Object" optional>
+      Options that configure the router's behavior.
+
+      <Fragment slot="properties">
+        <Param name="caseSensitive" type="Boolean" default="false">
+          Enable case sensitivity. Disabled by default, treating `/Foo` and `/foo` as the same.
+        </Param>
+        <Param name="mergeParams" type="Boolean" default="false">
+          Preserve the `req.params` values from the parent router. If the parent and the child have conflicting param names, the child's value takes precedence.
+        </Param>
+        <Param name="strict" type="Boolean" default="false">
+          Enable strict routing. Disabled by default, `/foo` and `/foo/` are treated the same by the router.
+        </Param>
+      </Fragment>
+    </Param>
+
+  </Fragment>
+</Signature>
+
+### router.all()
+
+<Signature returns="Router">
+  <Fragment slot="attributes">
+    <Param name="path" type="String | RegExp | Array">
+      The path for which the route callbacks are invoked.
+    </Param>
+    <Param name="callback" type="Function | Function[]">
+      One or more middleware/handler functions. Each may call `next('route')` to skip the remaining
+      callbacks.
+    </Param>
+  </Fragment>
+</Signature>
 
 This method is just like the `router.METHOD()` methods, except that it matches all HTTP methods (verbs).
 
@@ -74,7 +109,19 @@ the example is much like before, but it only restricts paths prefixed with
 router.all('/api/{*splat}', requireAuthentication);
 ```
 
-### router.METHOD(path, [callback, ...] callback)
+### router.METHOD()
+
+<Signature returns="Router">
+  <Fragment slot="attributes">
+    <Param name="path" type="String | RegExp | Array">
+      The path for which the route callbacks are invoked.
+    </Param>
+    <Param name="callback" type="Function | Function[]">
+      One or more middleware/handler functions. Each may call `next('route')` to skip the remaining
+      callbacks.
+    </Param>
+  </Fragment>
+</Signature>
 
 The `router.METHOD()` methods provide the routing functionality in Express,
 where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on,
@@ -142,7 +189,19 @@ app.get('/foo', (req, res) => {
 });
 ```
 
-### router.param(name, callback)
+### router.param()
+
+<Signature returns="Router">
+  <Fragment slot="attributes">
+    <Param name="name" type="String">
+      The name of the route parameter to attach the trigger to. Unlike `app.param()`, this does not
+      accept an array.
+    </Param>
+    <Param name="callback" type="Function">
+      The trigger called as `callback(req, res, next, value, name)`.
+    </Param>
+  </Fragment>
+</Signature>
 
 Adds callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The `name` parameter is required.
 
@@ -207,7 +266,15 @@ although this matches
 and this matches too
 ```
 
-### router.route(path)
+### router.route()
+
+<Signature returns="Route">
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The path of the route to create.
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns an instance of a single route which you can then use to handle HTTP verbs
 with optional middleware. Use `router.route()` to avoid duplicate route naming and
@@ -263,7 +330,18 @@ belong to the route to which they were added.
 
 </Alert>
 
-### router.use([path], [function, ...] function)
+### router.use()
+
+<Signature returns="Router">
+  <Fragment slot="attributes">
+    <Param name="path" type="String | RegExp | Array" optional>
+      The mount path for the middleware. Defaults to `/`.
+    </Param>
+    <Param name="callback" type="Function | Function[]">
+      One or more middleware functions to mount.
+    </Param>
+  </Fragment>
+</Signature>
 
 Uses the specified middleware function or functions, with optional mount path `path`, that defaults to "/".
 
