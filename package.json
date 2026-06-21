@@ -60,9 +60,9 @@
   "devDependencies": {
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/js": "^9.39.2",
-    "@iconify-json/fluent": "^1.2.41",
-    "@playwright/test": "^1.59.1",
-    "@types/node": "^25.3.2",
+    "@iconify-json/fluent": "^1.2.51",
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^26.0.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "cspell": "^10.0.1",
@@ -72,15 +72,15 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "globals": "^17.4.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
-    "postcss-custom-media": "^12.0.0",
+    "lint-staged": "^17.0.7",
+    "postcss-custom-media": "^12.0.1",
     "postcss-nested": "^7.0.2",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.53.1",
     "unplugin-icons": "^23.0.1",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite-plugin-svgr": "^5.2.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,astro}": [
