@@ -10,8 +10,20 @@ import LocalizedLink from '@components/patterns/LocalizedLink/LocalizedLink.astr
 
 This section provides an overview of the modules and APIs available in Express 5.x for building web applications and HTTP services.
 
-```js title="index.js"
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 app.get('/', (req, res) => {

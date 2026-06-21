@@ -9,8 +9,14 @@ import Param from '@components/patterns/Signature/Param.astro';
 
 Creates an Express application. The `express()` function is a top-level function exported by the `express` module.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 ```
 

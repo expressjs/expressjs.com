@@ -351,8 +351,37 @@ See [app.use()](/api/application/#appuse) for more information.
 Middleware is like a plumbing pipe: requests start at the first middleware function defined
 and work their way "down" the middleware stack processing for each path they match.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+const router = express.Router();
+
+// simple logger for this router's requests
+// all requests to this router will first hit this middleware
+router.use((req, res, next) => {
+  console.log('%s %s %s', req.method, req.url, req.path);
+  next();
+});
+
+// this will only be invoked if the path starts with /bar from the mount point
+router.use('/bar', (req, res, next) => {
+  // ... maybe some additional /bar logging ...
+  next();
+});
+
+// always invoked
+router.use((req, res, next) => {
+  res.send('Hello World');
+});
+
+app.use('/foo', router);
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 const router = express.Router();
 
@@ -387,8 +416,18 @@ The order in which you define middleware with `router.use()` is very important.
 They are invoked sequentially, thus the order defines middleware precedence. For example,
 usually a logger is the very first middleware you would use, so that every request gets logged.
 
-```js
+```cjs title="index.cjs"
 const logger = require('morgan');
+
+router.use(logger());
+router.use(express.static(path.join(__dirname, 'public')));
+router.use((req, res) => {
+  res.send('Hello');
+});
+```
+
+```mjs title="index.mjs"
+import logger from 'morgan';
 
 router.use(logger());
 router.use(express.static(path.join(__dirname, 'public')));

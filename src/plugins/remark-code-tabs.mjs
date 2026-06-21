@@ -78,18 +78,21 @@ function isTrigger(node) {
 
 /**
  * Returns the tab label and normalizes the node so expressive-code sees a plain
- * block: strips the `tab="..."` meta, and rewrites `cjs`/`mjs` to `js` for
- * highlighting.
+ * block. The two concerns are handled independently so every other meta token
+ * survives: the `tab="..."` token (and only it) is stripped from the meta, and a
+ * `cjs`/`mjs`/`ts` dialect lang is rewritten for highlighting — even when both
+ * apply to the same block (e.g. ```cjs tab="Foo" title="index.cjs"```).
  */
 function consumeTabBlock(node) {
   const meta = node.meta || '';
-  if (TAB_RE.test(meta)) {
-    node.meta = meta.replace(TAB_RE, '').trim() || null;
-    return meta.match(TAB_RE)[1];
+  const tabMatch = meta.match(TAB_RE);
+  if (tabMatch) {
+    // Drop only `tab="..."`; keep title=, {N}, /regex/, etc. intact.
+    node.meta = meta.replace(TAB_RE, ' ').replace(/\s+/g, ' ').trim() || null;
   }
-  const { label, lang } = LANG_TABS[node.lang];
-  node.lang = lang;
-  return label;
+  const dialect = LANG_TABS[node.lang];
+  if (dialect) node.lang = dialect.lang;
+  return tabMatch ? tabMatch[1] : dialect.label;
 }
 
 /** Builds a plain string (or boolean) MDX JSX attribute. */

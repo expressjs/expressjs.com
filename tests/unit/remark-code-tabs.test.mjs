@@ -112,6 +112,24 @@ test('preserves other meta tokens while stripping tab="..."', () => {
   assert.equal(findTabs(tree).children[0].children[0].meta, 'title="x"');
 });
 
+test('preserves a title="..." filename on cjs/mjs panels while normalizing lang', () => {
+  const tabs = findTabs(
+    run([code('cjs', 'title="index.cjs"'), code('mjs', 'title="index.mjs"')])
+  );
+  assert.deepEqual(panelLangs(tabs), ['js', 'js']);
+  assert.equal(tabs.children[0].children[0].meta, 'title="index.cjs"');
+  assert.equal(tabs.children[1].children[0].meta, 'title="index.mjs"');
+});
+
+test('strips only tab="..." but still normalizes a dialect lang and keeps other meta', () => {
+  const tabs = findTabs(
+    run([code('cjs', 'tab="Foo" title="index.cjs"'), code('mjs', 'title="index.mjs"')])
+  );
+  assert.equal(labelsOf(tabs), 'Foo,ESM');
+  assert.deepEqual(panelLangs(tabs), ['js', 'js']);
+  assert.equal(tabs.children[0].children[0].meta, 'title="index.cjs"');
+});
+
 test('groups tab blocks nested inside other container nodes', () => {
   const inner = { type: 'blockquote', children: [code('cjs'), code('mjs')] };
   const tree = run([inner]);

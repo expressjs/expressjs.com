@@ -46,14 +46,26 @@ and `require()` it in your main file, then the middleware can access the Express
 
 For example:
 
-```js
-// index.js
-app.get('/viewdirectory', require('./mymiddleware.js'));
+```cjs title="index.cjs"
+app.get('/viewdirectory', require('./mymiddleware.cjs'));
 ```
 
-```js
-// mymiddleware.js
+```mjs title="index.mjs"
+import mymiddleware from './mymiddleware.mjs';
+
+app.get('/viewdirectory', mymiddleware);
+```
+
+And the middleware module itself:
+
+```cjs title="mymiddleware.cjs"
 module.exports = (req, res) => {
+  res.send(`The views directory is ${req.app.get('views')}`);
+};
+```
+
+```mjs title="mymiddleware.mjs"
+export default (req, res) => {
   res.send(`The views directory is ${req.app.get('views')}`);
 };
 ```
@@ -110,8 +122,22 @@ may not be a function and instead a string or other user-input.
 
 The following example shows how to use body-parsing middleware to populate `req.body`.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+
+const app = express();
+
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.post('/profile', (req, res, next) => {
+  console.log(req.body);
+  res.json(req.body);
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
 
 const app = express();
 
@@ -369,8 +395,18 @@ may not be a function and instead a string or other user-input.
 
 The value of this property can be configured with the [query parser application setting](/api/application/#application-settings) to work how your application needs it. A very popular query string parser is the [`qs` module](https://www.npmjs.com/package/qs), and this is used by default. The `qs` module is very configurable with many settings, and it may be desirable to use different settings than the default to populate `req.query`:
 
-```js
+```cjs title="index.cjs"
 const qs = require('qs');
+app.set('query parser', (str) =>
+  qs.parse(str, {
+    /* custom options */
+  })
+);
+```
+
+```mjs title="index.mjs"
+import qs from 'qs';
+
 app.set('query parser', (str) =>
   qs.parse(str, {
     /* custom options */

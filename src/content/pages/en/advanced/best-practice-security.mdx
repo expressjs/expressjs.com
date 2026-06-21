@@ -102,10 +102,20 @@ Install Helmet like any other module:
 
 Then to use it in your code:
 
-```js
+```cjs title="index.cjs"
 // ...
 
 const helmet = require('helmet');
+app.use(helmet());
+
+// ...
+```
+
+```mjs title="index.mjs"
+import helmet from 'helmet';
+
+// ...
+
 app.use(helmet());
 
 // ...
@@ -174,8 +184,20 @@ Using the default session cookie name can open your app to attacks. The security
 
 To avoid this problem, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'express-session';
+
 app.set('trust proxy', 1); // trust first proxy
 app.use(
   session({
@@ -197,9 +219,31 @@ Set the following cookie options to enhance security:
 
 Here is an example using [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('cookie-session');
 const express = require('express');
+const app = express();
+
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
+    },
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'cookie-session';
+import express from 'express';
+
 const app = express();
 
 const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
