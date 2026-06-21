@@ -1,0 +1,68 @@
+---
+/**
+ * LanguageSelect Component
+ *
+ * Language selector built on top of the Select primitive.
+ * Uses the Select component with icon variant for language switching.
+ *
+ * @example
+ * <LanguageSelect
+ *   languages={[
+ *     { code: 'en', label: 'English' },
+ *     { code: 'es', label: 'Español' },
+ *   ]}
+ *   currentLanguage="en"
+ * />
+ */
+
+import { Select } from '@/components/primitives';
+import type { LanguageSelectProps } from './types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+type Props = LanguageSelectProps;
+
+const { languages, currentLanguage: propLanguage, class: className, id, ...rest } = Astro.props;
+const currentLanguage = propLanguage || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLanguage);
+
+const options = languages.map((lang) => ({
+  value: lang.code,
+  label: lang.label,
+  selected: lang.code === currentLanguage,
+}));
+---
+
+<Select
+  options={options}
+  value={currentLanguage}
+  icon="fluent:translate-16-regular"
+  hideLabel={true}
+  variant="icon"
+  dropdownAlign="right"
+  ariaLabel={t('language.selectLabel')}
+  class={className}
+  data-language-select
+  {...id && { id }}
+  {...rest}
+/>
+
+<script>
+  import { replaceLanguageInPath } from '@/i18n/utils';
+
+  function handleLanguageChange() {
+    const selects = document.querySelectorAll('[data-language-select]');
+
+    selects.forEach((select) => {
+      select.addEventListener('select-change', ((e: CustomEvent) => {
+        const code = e.detail.value;
+        const currentPath = window.location.pathname;
+        const newPath = replaceLanguageInPath(currentPath, code);
+
+        window.location.href = newPath;
+      }) as EventListener);
+    });
+  }
+
+  handleLanguageChange();
+  document.addEventListener('astro:page-load', handleLanguageChange);
+</script>

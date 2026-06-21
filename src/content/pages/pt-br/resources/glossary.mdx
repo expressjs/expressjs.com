@@ -1,0 +1,61 @@
+---
+title: Glossary
+description: Um glossário abrangente de termos relacionados ao Express.js, Node.js, middleware, routing e outros conceitos-chave para ajudá-lo a entender e usar o Express eficazmente.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+## aplicativo
+
+Em geral, um ou mais programas que são projetados para realizar operações para uma finalidade específica. No contexto da Express, um programa que usa o API Express executando na plataforma Node.js. Também pode se referir a um [objeto do aplicativo](/api#express).
+
+## API
+
+Interface de programação de aplicativos. Feitiço a abreviação quando ela for usada pela primeira vez.
+
+## Expresso
+
+Uma rápida, não-opinionada e minimalista estrutura web para aplicativos Node.js. Em geral, "Expresso" é preferida a "Express.js", embora este último seja aceitável.
+
+## libuv
+
+Uma biblioteca de suporte multiplataforma focada em E/O assíncrono, desenvolvida principalmente para uso pelo Node.js.
+
+## middleware
+
+Uma função que é invocada pela camada de roteamento Express antes do manipulador de requisições final, e assim situa-se no meio entre um pedido em bruto e a rota final pretendida. Alguns belos pontos de terminologia em torno do middleware:
+
+- `var foo = require('middleware')` é chamado de _requiring_ ou _usando_ um módulo Node.js. Então, a instrução `var mw = foo()` normalmente retorna o middleware.
+- `app.use(mw)` é chamado de _adicionando o middleware à pilha de processamento global_.
+- `app.get('/foo', mw, função (req, res) { ... })` é chamado de _adicionando o middleware para a pilha de processamento "GET /foo"_.
+
+## Node.js
+
+Uma plataforma de software usada para construir aplicações de rede escaláveis. Node.js usa JavaScript como sua linguagem de script e alcança alta taxa de transferência através de I/O não bloqueando e de um loop de eventos uni-la-thread. Ver [nodejs.org](https://nodejs.org/en/). **Nota de uso**: Inicialmente, "Node.js", em seguida, "Node".
+
+## código aberto, código aberto
+
+Quando usado como adjetivo, hífene; por exemplo: "Este é um software de código aberto". Veja [Software de código aberto na Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
+
+<Alert type="informações">
+
+Embora seja comum não fazer hifenização deste termo, estamos usando as regras padrão em inglês para
+hifenização de um adjetivo composto.
+
+</Alert>
+
+## solicitação
+
+Um pedido HTTP. Um cliente envia uma mensagem de solicitação HTTP para um servidor, que retorna uma resposta. A solicitação deve usar um dos vários [métodos de requisição](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) como GET, POST, e assim por diante.
+
+## Resposta
+
+Uma resposta HTTP. Um servidor retorna uma mensagem de resposta HTTP para o cliente. A resposta contém informações de estado de conclusão sobre o pedido e também pode conter conteúdo solicitado em seu corpo da mensagem.
+
+## rota
+
+Parte de uma URL que identifica um recurso. Por exemplo, em `http://foo.com/products/id`, "/products/id" é a rota.
+
+## roteador
+
+Ver [router](/api#router) na referência da API.

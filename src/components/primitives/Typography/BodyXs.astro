@@ -1,0 +1,30 @@
+---
+/**
+ * BodyXs - Extra small body text
+ *
+ * @example
+ * <BodyXs>Fine print text</BodyXs>
+ * <BodyXs color="secondary">Subdued small text</BodyXs>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './types.ts';
+
+type BaseProps = {
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+};
+
+type Props =
+  | ({ as?: 'small' } & BaseProps & HTMLAttributes<'small'>)
+  | ({ as: 'p' } & BaseProps & HTMLAttributes<'p'>)
+  | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>)
+  | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
+
+const { as = 'small', ...rest } = Astro.props as Props;
+---
+
+<Typography as={as} variant="body-xs" {...rest}>
+  <slot />
+</Typography>

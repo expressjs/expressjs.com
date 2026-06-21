@@ -1,0 +1,58 @@
+@layer patterns {
+  .pm-command {
+    margin: var(--space-8) 0;
+  }
+
+  .pm-command__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-bottom: var(--space-3);
+    border-bottom: var(--border-width-1) solid var(--color-border-primary);
+  }
+
+  .pm-command__tab {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-radius: 0;
+    border-bottom: var(--border-width-2) solid transparent;
+    /* Pull the active underline down onto the tab strip's bottom border. */
+    margin-bottom: calc(-1 * var(--border-width-1));
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover:not(.pm-command__tab--active) {
+      color: var(--color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-border-inverse);
+      outline-offset: 2px;
+    }
+  }
+
+  .pm-command__tab--active {
+    color: var(--color-text-primary);
+    border-bottom-color: var(--color-text-primary);
+  }
+
+  /* Expressive Code injects its own vertical margins; collapse them so the
+     code block sits flush under the tab strip. */
+  .pm-command__panel :global(.expressive-code) {
+    margin: 0;
+  }
+
+  .pm-command__panel[hidden] {
+    display: none;
+  }
+}

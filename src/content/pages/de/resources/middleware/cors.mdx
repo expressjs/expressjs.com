@@ -1,0 +1,283 @@
+---
+title: cors middleware
+description: Node.js CORS middleware
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.8.6"
+  github="https://github.com/expresjs/cors"
+  npm="https://www.npmjs.com/package/cors"
+/>
+
+CORS ist eine [Node.js](https://nodejs.org/en/) Middleware für [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect), die [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) Antwort-Kopfzeilen setzt. Diese Header geben Browsern an, welche Herkunft Antworten von Ihrem Server lesen kann.
+
+<Alert type="info">
+
+**Wie CORS funktioniert:** Dieses Paket setzt Antwort-Header – es blockiert keine Anfragen. CORS wird von Browsern durchgesetzt: Sie überprüfen die Kopfzeilen und entscheiden, ob JavaScript die Antwort lesen kann. Clients ohne Browser (curl, Postman, andere Servern) ignorieren CORS vollständig. Siehe [MDN CORS Anleitung](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) für Details.
+
+</Alert>
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Einfache Nutzung](#simple-usage-enable-all-cors-requests)
+  - [CORS für eine einzelne Route aktivieren](#enable-cors-for-a-single-route)
+  - [Configuring CORS](#configuring-cors)
+  - [CORS mit dynamischem Ursprung konfigurieren](#configuring-cors-w-dynamic-origin)
+  - [Aktiviere CORS Pre-Flight](#enabling-cors-pre-flight)
+  - [CORS-Einstellungen dynamisch pro Anfrage anpassen](#customizing-cors-settings-dynamically-per-request)
+- [Konfigurationsoptionen](#configuration-options)
+- [Gewöhnliche Fehlkonzeptionen](#common-misconceptions)
+- [License](#license)
+- [Original-Autor](#original-author)
+
+## Installation
+
+Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
+[npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
+[`npm install` Befehl](https://docs.npmjs.com/downloading-and-installing-packages-locally):
+
+```sh
+$ npm install cors
+```
+
+## Auslastung
+
+### Einfache Nutzung (Aktiviere _All_ CORS-Anfragen)
+
+```javascript
+var express = require('express');
+var cors = require('cors');
+var app = express();
+
+// Adds headers: Access-Control-Allow-Origin: *
+app.use(cors());
+
+app.get('/products/:id', function (req, res, next) {
+  res.json({ msg: 'Hello' });
+});
+
+app.listen(80, function () {
+  console.log('web server listening on port 80');
+});
+```
+
+### Aktiviere CORS für eine einzelne Route
+
+```javascript
+var express = require('express');
+var cors = require('cors');
+var app = express();
+
+// Adds headers: Access-Control-Allow-Origin: *
+app.get('/products/:id', cors(), function (req, res, next) {
+  res.json({ msg: 'Hello' });
+});
+
+app.listen(80, function () {
+  console.log('web server listening on port 80');
+});
+```
+
+### Configuring CORS
+
+Siehe [Konfigurationsoptionen](#configuration-options) für Details.
+
+```javascript
+var express = require('express');
+var cors = require('cors');
+var app = express();
+
+var corsOptions = {
+  origin: 'http://example.com',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+// Adds headers: Access-Control-Allow-Origin: http://example.com, Vary: Origin
+app.get('/products/:id', cors(corsOptions), function (req, res, next) {
+  res.json({ msg: 'Hello' });
+});
+
+app.listen(80, function () {
+  console.log('web server listening on port 80');
+});
+```
+
+### CORS mit dynamischem Ursprung konfigurieren
+
+Dieses Modul unterstützt die dynamische Validierung des Ursprungs mittels einer Funktion mit der Option `origin`
+. Diese Funktion wird eine Zeichenkette übergeben, die der Ursprung
+ist (oder `undefined` wenn die Anfrage keine Herkunft hat), und ein `callback` mit der Signatur
+`callback(error, origin)`.
+
+Das `origin` Argument zum Callback kann jeder Wert für die `origin`
+Option der Middleware außer einer Funktion sein. Siehe
+[Konfigurationsoptionen](#configuration-options) für weitere Informationen zu allen
+möglichen Werttypen.
+
+Diese Funktion ist so konzipiert, dass das dynamische Laden von erlaubten Ursprung(en) von
+eine Backup-Datenquelle, wie eine Datenbank, ermöglicht wird.
+
+```javascript
+var express = require('express');
+var cors = require('cors');
+var app = express();
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    // db.loadOrigins is an example call to load
+    // a list of origins from a backing database
+    db.loadOrigins(function (error, origins) {
+      callback(error, origins);
+    });
+  },
+};
+
+// Adds headers: Access-Control-Allow-Origin: <matched origin>, Vary: Origin
+app.get('/products/:id', cors(corsOptions), function (req, res, next) {
+  res.json({ msg: 'Hello' });
+});
+
+app.listen(80, function () {
+  console.log('web server listening on port 80');
+});
+```
+
+### Aktiviere CORS Pre-Flight
+
+Bestimmte CORS-Anfragen werden als 'komplex' angesehen und benötigen eine erste
+`OPTIONS` Anfrage (genannt die "Pre-Flug-Anfrage"). Ein Beispiel für eine
+'komplexe' CORS-Anfrage ist eine, die ein anderes HTTP-Verb als
+GET/HEAD/POST (wie z. B. DELETE) verwendet oder benutzerdefinierte Header verwendet. Um
+vor dem Flug zu aktivieren, müssen Sie einen neuen OPTIONS-Handler für die Route hinzufügen, die Sie
+unterstützen möchten:
+
+```javascript
+var express = require('express');
+var cors = require('cors');
+var app = express();
+
+app.options('/products/:id', cors()); // preflight for DELETE
+app.delete('/products/:id', cors(), function (req, res, next) {
+  res.json({ msg: 'Hello' });
+});
+
+app.listen(80, function () {
+  console.log('web server listening on port 80');
+});
+```
+
+Sie können auch vorläufige Flüge wie folgt aktivieren:
+
+```javascript
+app.options('*', cors()); // include before other routes
+```
+
+HINWEIS: Wenn diese Middleware als Middleware für Anwendungen verwendet wird (z.B.
+beispielsweise, `app.use(cors())`), werden Preflight-Anfragen bereits für alle
+Routen abgewickelt.
+
+### Anpassung der CORS-Einstellungen dynamisch pro Anfrage
+
+Für APIs, die unterschiedliche CORS-Konfigurationen für bestimmte Routen oder Anfragen benötigen, können Sie auf der Basis der eingehenden Anfrage dynamisch CORS-Optionen generieren. Die `cors` Middleware erlaubt dir, dies zu erreichen, indem du eine Funktion anstelle von statischen Optionen übergibt. Diese Funktion wird für jede eingehende Anfrage aufgerufen und muss das Callback-Muster verwenden, um die entsprechenden CORS-Optionen zurückzugeben.
+
+Die Funktion akzeptiert:
+
+1. **`req`**:
+   - Das eingehende Anfrageobjekt.
+
+2. **`callback(error, corsOptions)`**:
+   - Eine Funktion, die zur Rückgabe der berechneten CORS-Optionen verwendet wird.
+   - **Argumente**:
+     - **`error`**: `null` übergeben, wenn kein Fehler vorliegt, oder ein Fehlerobjekt, um einen Fehler anzuzeigen.
+     - **`corsOptions`**: Ein Objekt, das die CORS-Richtlinie für die aktuelle Anfrage angibt.
+
+Hier ein Beispiel, das sowohl öffentliche Routen als auch eingeschränkte, vertrauenswürdige Routen behandelt:
+
+```javascript
+var dynamicCorsOptions = function (req, callback) {
+  var corsOptions;
+  if (req.path.startsWith('/auth/connect/')) {
+    // Access-Control-Allow-Origin: http://mydomain.com, Access-Control-Allow-Credentials: true, Vary: Origin
+    corsOptions = {
+      origin: 'http://mydomain.com',
+      credentials: true,
+    };
+  } else {
+    // Access-Control-Allow-Origin: *
+    corsOptions = { origin: '*' };
+  }
+  callback(null, corsOptions);
+};
+
+app.use(cors(dynamicCorsOptions));
+
+app.get('/auth/connect/twitter', function (req, res) {
+  res.send('Hello');
+});
+
+app.get('/public', function (req, res) {
+  res.send('Hello');
+});
+
+app.listen(80, function () {
+  console.log('web server listening on port 80');
+});
+```
+
+## Konfigurationsoptionen
+
+- `origin`: Konfiguriert den **Access-Control-Allow-Origin** CORS-Header. Mögliche Werte:
+  - `Boolean` - setze `origin` auf `true` um die [request origin](https://datatracker.ietf.org/doc/html/draft-abarth-origin-09), wie sie von `req.header('Origin')` definiert wurde, zu reflektieren, oder setze sie auf `false` um CORS zu deaktivieren.
+  - `String` - Setze `origin` auf einen bestimmten Ursprung. Zum Beispiel, wenn Sie es setzen auf
+    - `"http://example.com"` nur Anfragen von "http://example.com" werden erlaubt.
+    - `"*"` für alle Domains erlaubt.
+  - `RegExp` - Setze `origin` auf ein reguläres Ausdruckmuster welches verwendet wird, um den Abfrage-Ursprung zu testen. Wenn es sich um eine Übereinstimmung handelt, wird der Ursprung der Anfrage reflektiert. Zum Beispiel spiegelt das Muster `/example\.com$/` jede Anfrage wider, die von einem Ursprungsland stammt, der mit "example.com" endet.
+  - `Array` - setze `origin` auf ein Array gültiger Quellen. Jeder Ursprung kann ein `String` oder eine `RegExp` sein. Zum Beispiel akzeptiert `["http://example1.com", /\.example2\.com$/]` jede Anfrage von "http://example1.com" oder von einer Subdomain von "example2.com".
+  - `Function` - Setze `origin` auf eine Funktion, die eine benutzerdefinierte Logik implementiert. Die Funktion nimmt den Abfrage-Ursprung als ersten Parameter und einen Rückruf (als `callback(err, origin)`, wobei `origin` ein nicht-Funktionswert der `origin` Option ist) als zweites ist.
+- `methods`: Konfiguriert den **Access-Control-Allow-Methoden** CORS-Header. Erwartet einen Komma-getrennten String (z. B.: 'GET,PUT,POST') oder ein Array (z. B.: `['GET', 'PUT', 'POST']`).
+- `allowedHeaders`: Konfiguriert den **Access-Control-Allow-Headers** CORS-Header. Erwartet einen Komma-getrennten String (z.B. 'Content-Type,Authorization') oder ein Array (z.B. `['Content-Type', 'Authorization']`). Falls nicht angegeben, wird standardmäßig die im Header **Access-Control-Request-Header** der Anfrage angegebenen Kopfzeilen reflektiert.
+- `exposedHeaders`: Konfiguriert den **Access-Control-Expose-Headers** CORS-Header. Erwartet einen kommaseparierten String (z.B. 'Content-Range,X-Content-Range') oder ein Array (z.B. `['Content-Range', 'X-Content-Range']`). Wenn nicht angegeben, werden keine benutzerdefinierten Header angezeigt.
+- `credentials`: Konfiguriert den **access-Control-Allow-Credentials** CORS-Header. Setze `true` um den Header zu übergeben, sonst wird er weggelassen.
+- `maxAge`: Konfiguriert den **Access-Control-Max-Age** CORS-Header. Setze auf eine Ganzzahl, um den Header zu übergeben, andernfalls wird er weggelassen.
+- `preflightContinue`: Übergeben Sie die CORS-Vorflug-Antwort an den nächsten Handler.
+- `optionsSuccessStatus`: Stellt einen Statuscode zur Verfügung, der für erfolgreiche `OPTIONS`-Anfragen verwendet werden kann, da einige alte Browser (IE11, verschiedene SmartTVs) auf `204` erstickt wurden.
+
+Die Standardkonfiguration ist das Äquivalent von:
+
+```json
+{
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+```
+
+## Häufige Fehlkonzepte
+
+### "CORS blockiert Anfragen von nicht erlaubten Ursprungen"
+
+**Nein.** Ihr Server empfängt und verarbeitet jede Anfrage. CORS-Header geben dem Browser an, ob JavaScript die Antwort lesen kann – nicht, ob die Anfrage erlaubt ist.
+
+### "CORS schützt meine API vor unbefugtem Zugriff"
+
+**Nein.** CORS ist keine Zugriffskontrolle. Jeder HTTP-Client (curl, Postman, ein anderer Server) kann Ihre API unabhängig von den CORS-Einstellungen aufrufen. Verwenden Sie Authentifizierung und Autorisierung, um Ihre API zu schützen.
+
+### "Setze `origin: 'http://example.com'` bedeutet nur, dass die Domain auf meinen Server zugreifen kann"
+
+**Nein.** Das bedeutet, dass Browser JavaScript nur von dieser Quelle lesen können. Der Server antwortet immer noch auf alle Anfragen.
+
+## Lizenz
+
+[MIT-Lizenz](http://www.opensource.org/licenses/mit-license.php)
+
+## Originalautor
+
+[Troy Goode](https://github.com/TroyGoode) ([troygoode@gmail.com](mailto:troygoode@gmail.com))
+
+[downloads-url]: https://npmjs.com/package/cors
+[github-actions-ci-url]: <https://github.com/express js/cors?query=workflow%3Aci>
+[npm-url]: https://npmjs.com/package/cors

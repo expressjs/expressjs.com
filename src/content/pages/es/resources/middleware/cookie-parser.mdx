@@ -1,0 +1,120 @@
+---
+title: middleware del analizador de cookies
+description: Analizar cookies de petición HTTP
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.4.7"
+  github="https://github.com/expressjs/cookie-parser"
+  npm="https://www.npmjs.com/package/cookie-parser"
+/>
+
+Analiza el encabezado `Cookie` y rellena `req.cookies` con un objeto tecleado por los nombres de la cookie
+. Opcionalmente puedes habilitar el soporte de cookies firmadas pasando una cadena
+`secret`, la cual asigna `req.secret` para que pueda ser utilizada por otro middleware
+.
+
+## Instalación
+
+```sh
+$ npm install cookie-parser
+```
+
+## API
+
+```js
+var cookieParser = require('cookie-parser');
+```
+
+### cookieParser(secreto, opciones)
+
+Crea una nueva función de analizador de cookie usando el `secret` y
+`options`.
+
+- `secret` una cadena o matriz usada para firmar cookies. Esto es opcional y si
+  no especificado, no analizará las cookies firmadas. Si se proporciona una cadena, esta
+  se utiliza como secreto. If an array is provided, an attempt will be made to
+  unsign the cookie with each secret in order.
+- `options` un objeto que se pasa a `cookie.parse` como segunda opción. Vea
+  [cookie](https://www.npmjs.org/package/cookie) para más información.
+  - `decode` una función para decodificar el valor de la cookie
+
+El middleware analizará la cabecera `Cookie` en la solicitud y expondrá los datos de la cookie
+como la propiedad `req. ookies` y, si un `secreto` fue proporcionado, como
+la propiedad `req.signedCookies`. Estas propiedades son pares de valor de nombre del nombre de la cookie
+al valor de la cookie.
+
+Cuando se proporciona `secret`, este módulo cancelará y validará cualquier valor de cookie
+firmado y moverá esos pares de valor de nombre de `req.cookies` a `req.signedCookies`.
+Una cookie firmada es una cookie que tiene un valor con prefijo `s:`. Las cookies firmadas
+que fallen la validación de la firma tendrán el valor `false` en lugar del valor
+manipulado.
+
+Además, este módulo soporta "cookies JSON" especiales. Estos son cookie donde
+el valor es prefijado con `j:`. Cuando se encuentran estos valores, el valor
+será expuesto como resultado de `JSON.parse`. Si falla, el valor original
+permanecerá.
+
+### cookieParser.JSONCookie(str)
+
+Analizar un valor de cookie como una cookie JSON. Esto devolverá el valor JSON analizado
+si era una cookie JSON, de lo contrario, devolverá el valor pasado.
+
+### cookieParser.JSONCookies(cookies)
+
+Dado un objeto, esto iterará sobre las claves y llamará `JSONCookie` en cada valor
+, reemplazando el valor original por el valor analizado. Esto devuelve el objeto
+mismo que fue pasado.
+
+### cookieParser.signedCookie(str, secreto)
+
+Analizar el valor de una cookie como una cookie firmada. Esto devolverá el valor
+analizado si era una cookie firmada y la firma era válida. Si el valor era
+no firmado, se devuelve el valor original. Si el valor fue firmado pero la firma
+no pudo ser validada, se devuelve `false`.
+
+El argumento `secret` puede ser un array o una cadena. Si se proporciona una cadena, esta
+se utiliza como secreto. If an array is provided, an attempt will be made to
+unsign the cookie with each secret in order.
+
+### cookieParser.signedCookies(cookies, secreto)
+
+Given an object, this will iterate over the keys and check if any value is a
+signed cookie. Si es una cookie firmada y la firma es válida, la clave
+se eliminará del objeto y se añadirá al nuevo objeto que se devuelve.
+
+El argumento `secret` puede ser un array o una cadena. Si se proporciona una cadena, esta
+se utiliza como secreto. If an array is provided, an attempt will be made to
+unsign the cookie with each secret in order.
+
+## Ejemplo
+
+```js
+var express = require('express');
+var cookieParser = require('cookie-parser');
+
+var app = express();
+app.use(cookieParser());
+
+app.get('/', function (req, res) {
+  // Cookies that have not been signed
+  console.log('Cookies: ', req.cookies);
+
+  // Cookies that have been signed
+  console.log('Signed Cookies: ', req.signedCookies);
+});
+
+app.listen(8080);
+
+// curl command that sends an HTTP request with two cookies
+// curl http://127.0.0.1:8080 --cookie "Cho=Kim;Greet=Hello"
+```
+
+## Licencia
+
+[MIT](https://github.com/expressjs/cookie-parser/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/cookie-parser

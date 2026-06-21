@@ -1,0 +1,29 @@
+# Prevent rate limit for npmjs links
+^https?://(www\.)?npmjs\.(com|org)/
+
+# Prevent github rate limit
+^https://github\.com/
+
+# Exclude 404 pages
+dist/(.*/)?404((/index)?\.html|/)$
+
+# Exclude Open Collective links
+^https://opencollective\.com/
+
+# Prevent netlify rate limit
+^https://www\.netlify\.com/
+
+# Ignore Coveralls links
+^https://coveralls\.io/
+
+# Prevent LinkedIn rate limit
+^https://www\.linkedin\.com/sharing/share-offsite/
+# LinkedIn profiles that exist return 404 if not logged in, but it's also easy to hit a rate limit
+^https://www\.linkedin\.com/in/
+
+# Ignore slack invite 403 (this will cause us to miss link invite expiration too)
+^https://slack-invite\.openjsf\.org/
+
+# Oracle pages return 403 when connected
+^https://www\.mysql\.com/
+^https://www\.oracle\.com/

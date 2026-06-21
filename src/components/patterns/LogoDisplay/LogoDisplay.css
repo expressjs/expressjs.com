@@ -1,0 +1,42 @@
+.logo-display {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.logo-display__card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.logo-display__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.logo-display__preview--light-bg {
+  background: #fff;
+}
+
+.logo-display__preview--dark-bg {
+  background: #1a1a1a;
+}
+
+.logo-display__img {
+  width: 200px;
+  aspect-ratio: 200 / 65;
+  object-fit: contain;
+}
+
+.logo-display__card .btn {
+  border: none;
+  border-radius: 0;
+  text-align: center;
+  justify-content: center;
+}

@@ -1,0 +1,124 @@
+---
+title: Expressのデバッグ
+description: DEBUG環境変数を設定して、Express.jsアプリケーションでデバッグログを有効にして使用する方法を学び、トラブルシューティングを強化します。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express で使用されるすべての内部ログを表示するには、アプリを起動するときに `DEBUG` 環境変数を
+`express:*` に設定します。
+
+```bash
+$ DEBUG=express:* node index.js
+```
+
+Windows では、対応するコマンドを使用します。
+
+```bash
+> $env:DEBUG = "express:*"; node index.js
+```
+
+[express generator](/starter/generator) で生成されたデフォルトのアプリでこのコマンドを実行すると、以下の出力が出力されます。
+
+```bash
+$ DEBUG=express:* node ./bin/www
+  express:router:route new / +0ms
+  express:router:layer new / +1ms
+  express:router:route get / +1ms
+  express:router:layer new / +0ms
+  express:router:route new / +1ms
+  express:router:layer new / +0ms
+  express:router:route get / +0ms
+  express:router:layer new / +0ms
+  express:application compile etag weak +1ms
+  express:application compile query parser extended +0ms
+  express:application compile trust proxy false +0ms
+  express:application booting in development mode +1ms
+  express:router use / query +0ms
+  express:router:layer new / +0ms
+  express:router use / expressInit +0ms
+  express:router:layer new / +0ms
+  express:router use / favicon +1ms
+  express:router:layer new / +0ms
+  express:router use / logger +0ms
+  express:router:layer new / +0ms
+  express:router use / jsonParser +0ms
+  express:router:layer new / +1ms
+  express:router use / urlencodedParser +0ms
+  express:router:layer new / +0ms
+  express:router use / cookieParser +0ms
+  express:router:layer new / +0ms
+  express:router use / stylus +90ms
+  express:router:layer new / +0ms
+  express:router use / serveStatic +0ms
+  express:router:layer new / +0ms
+  express:router use / router +0ms
+  express:router:layer new / +1ms
+  express:router use /users router +0ms
+  express:router:layer new /users +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+```
+
+アプリへのリクエストが行われると、Express コードで指定されたログが表示されます。
+
+```bash
+  express:router dispatching GET / +4h
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
+  express:router dispatching GET / +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
+
+ルータの実装からのみログを見るには、`DEBUG`の値を`express:router`に設定します。 同様に、アプリケーションの実装からのログのみを見るには、`DEBUG`の値を`express:application`などに設定します。
+
+## `express` で生成されたアプリケーション
+
+`express`コマンドによって生成されたアプリケーションは、`debug`モジュールを使用し、デバッグ名前空間はアプリケーションの名前をスコープします。
+
+例えば、 `$ express sample-app` を使用してアプリを生成した場合、次のコマンドでデバッグ文を有効にできます。
+
+```bash
+$ DEBUG=sample-app:* node ./bin/www
+```
+
+カンマ区切りの名前のリストを割り当てることで、複数のデバッグ名前空間を指定できます:
+
+```bash
+$ DEBUG=http,mail,express:* node index.js
+```
+
+## 高度なオプション
+
+Node.js を介して実行する場合、デバッグログの動作を変更するいくつかの環境変数を設定できます。
+
+| 名前                | 目的                                                   |
+| ------------------- | ------------------------------------------------------ |
+| `DEBUG`             | 特定のデバッグ名前空間を有効/無効にします。            |
+| `DEBUG_COLORS`      | デバッグ出力で色を使用するかどうか。                   |
+| `DEBUG_DEPTH`       | 物体検査の深さ。                                       |
+| `DEBUG_FD`          | デバッグ出力を書き込むファイル記述子。                 |
+| `DEBUG_SHOW_HIDDEN` | 検査対象オブジェクトに非表示のプロパティを表示します。 |
+
+<Alert type="情報">
+
+The environment variables beginning with `DEBUG_` end up being converted into an Options object
+that gets used with `%o`/`%O` formatters.
+[`util.inspect()`](https://nodejs.org/api/util.html#utilinspectobject-options) の完全な
+リストについては Node.js のドキュメントを参照してください。
+
+</Alert>

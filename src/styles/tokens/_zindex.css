@@ -1,0 +1,12 @@
+/**
+ * Z-Index Scale
+ * Values are ordered from lowest to highest.
+ * Each layer is spaced by 10 to allow for intermediate values if needed.
+ */
+
+:root {
+  --z-index-sidebar-backdrop: 10;
+  --z-index-header: 20;
+  --z-index-sidebar: 30;
+  --z-index-modal-overlay: 40;
+}

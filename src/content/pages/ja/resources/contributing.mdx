@@ -1,0 +1,377 @@
+---
+title: Expressに貢献する
+description: Express.jsに貢献する方法については、問題の報告、プルリクエストの提出、協力者となること、セキュリティポリシーの理解などをご覧ください。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express is an [OpenJS Foundation](https://openjsf.org/) project spread across three GitHub organizations: [expressjs](https://github.com/expressjs), [pillarjs](https://github.com/pillarjs), and [jshttp](https://github.com/jshttp). バグの報告、ドキュメントの改善、コードの提出など、すべての貢献は歓迎します。 以下のガイドラインでは、プロジェクトの運営方法と参加方法について説明します。
+
+## 技術委員会
+
+Express技術委員会は、アクティブなプロジェクトメンバーで構成され、Expressプロジェクトの開発とメンテナンスをガイドします。 詳細については、[Express Community - Technical Committee](/resources/community/#technical-committee)を参照してください。
+
+## コミュニティ貢献ガイド
+
+{/* SRC: expressjs/discussion docs/GOVERNANCE.md */}
+
+このドキュメントの目標は、以下のような貢献プロセスを作成することです。
+
+- 新しい貢献を奨励します。
+- 貢献者が関与し続けるよう促す。
+- 不必要なプロセスや官僚機構を可能な限り避けます。
+- 貢献者がどのように意思決定に関わることができるかを明確にする透明な意思決定プロセスを作成します。
+
+### ボキャブラリー
+
+- **コントリビューター** は課題やプルリクエストに対するコメントや作成を行う個人です。
+- **Committer** は、リポジトリへの書き込みアクセス権を与えられた貢献者のサブセットです。
+- **Project Captain** はリポジトリのリードメンテナーです。
+- \*\*TC (Technical Committee)\*\*は希少な紛争を解決するために必要な技術
+  の専門知識を代表するコミッターグループです。
+- **Triager** は、リポジトリへのトリアージアクセスを与えられた貢献者のサブセットです。
+
+### ログの問題
+
+質問または問題の問題を記録します。 When in doubt, log an issue, and
+any additional policies about what to include will be provided in the responses. 唯一
+例外は、私的に送信されるべきセキュリティディスクロージャーです。
+
+コミッターはあなたを別のリポジトリに誘導し、追加の説明を求め、問題が解決される前に
+適切なメタデータを追加することができます。
+
+礼儀正しく、尊敬してください。 すべての参加者は、
+プロジェクトの行動規範に従うことが期待されます。
+
+### 貢献
+
+このリポジトリのリソースへの変更は、プルリクエストでなければなりません。 これは、ドキュメント、コード、バイナリファイルなどのすべての変更
+に適用されます。 長期的なコミッターやTCメンバーであっても、
+プルリクエストを使用する必要があります。
+
+レビューされずにプルリクエストをマージすることはできません。
+
+些細な貢献ではない場合、他のタイムゾーンの
+貢献者がレビューする時間があることを確認するために、プルリクエストは少なくとも36時間座る必要があります。
+の週末やその他の休暇期間にも配慮しなければならず、アクティブなコミッターが
+議論とレビューのプロセスに参加するまでの合理的な時間を確保することができます。
+
+各コントリビューションのデフォルトは、コミッターが異議を持たない場合に受け入れられることです。
+During a review, committers may also request that a specific contributor who is most versed in a
+particular area gives a "LGTM" before the PR can be merged. 土地への貢献のための追加の「サインオフ」
+プロセスはありません。 Once all issues brought by committers are addressed it can
+be landed by any committer.
+
+別のコミッターによってプルリクエストで異議が提起された場合。
+コミッターは、議論によって
+表明される懸念に対処する方法により、コンセンサスに到達しようとすべきです。 提案された変更の妥協、または変更の撤回。
+
+もし貢献が論争の的であり、コミッターが
+の着陸方法について同意できない場合、または着陸すべき場合は、TCにエスカレートさせる必要があります。 TCメンバーは、決議を見つけるために、保留中の貢献について定期的に
+議論すべきです。 解決のためにTCには
+少数の問題しか持ち込まれず、その議論とコミッター間の
+妥協がデフォルトの解決メカニズムであることが期待されます。
+
+### Triager になる
+
+誰でもトリアージになれます！
+[triage process document](https://github.com/expressjs/discussions/blob/HEAD/contributing/triager-guide.md)でトリガーになるプロセスの詳細をお読みください。
+
+Currently, any existing [organization member](https://github.com/orgs/expressjs/people) can nominate
+a new triager. トリアガーになることに興味があるなら 私たちの最善のアドバイスは、トリアージやプルリクエストを支援することによって、コミュニティで
+積極的に参加することです。 また、
+は、TC会議に参加したり、Slack
+の議論に参加したりするなど、他のコミュニティ活動に参加することをお勧めします。 If you feel ready and have been helping triage some issues, reach out to an active member of the organization to ask if they'd
+be willing to support you. 同意すれば、指名を正式化するプルリクエストを作成できます。 指名に異議を申し立てた場合、トリアージチームは関与する個人と協力し、解決策を見つける責任があります。
+
+You can also reach out to any of the [organization members](https://github.com/orgs/expressjs/people)
+if you have questions or need guidance.
+
+### コミッターになる
+
+重要かつ貴重な貢献をしたすべての貢献者は、適時にオンボーディングする必要があります。
+とコミッターとして追加され、リポジトリへの書き込みアクセス権が与えられます。
+
+コミッターはこのポリシーに従い、引き続きプルリクエストを送信することが期待されています。
+適切なレビューを行い、他のコミッターにプルリクエストをマージさせます。
+
+### TC プロセス
+
+TCは、TCにエスカレートされた問題について「コンセンサスを求める」プロセスを使用します。
+グループは、TCメンバーの間に開かれた異議を持たない決議を見つけようとします。
+異議がないコンセンサスに到達できない場合は、多数決が
+と呼ばれます。 また、TCによって行われた決定の大部分が
+合意形成プロセスを通じて行われ、投票は最後の手段としてのみ使用されることが期待されます。
+
+解決には、
+合意に向けて前進する方法についての提案をプロジェクトキャプテンにこの問題を返すことが含まれます。 TCの
+会議では、その会議中に議題に関するすべての問題が解決されることは期待されておらず、プロジェクトキャプテン間で起こっている議論を
+継続することを好むかもしれません。
+
+メンバーはいつでもTCに追加できます。 Any TC member can nominate another committer
+to the TC and the TC uses its standard consensus seeking process to evaluate whether or
+not to add this new member. TCは、最低3人のアクティブメンバーと最大10の
+で構成されます。 TCが5人未満の場合、アクティブなTCメンバーは
+新しい誰かを指名する必要があります。 TCメンバーが辞任している場合、彼らは
+誰かに代わってもらうように指名することを奨励されます(必須ではありません)。
+
+TCメンバーは、役割で有効であるために必要な
+としてGithub組織、npm組織、およびその他のリソースに管理者として追加されます。
+
+TCメンバーが過去12ヶ月以内に参加し、
+連続したTCミーティングを見逃す必要があります。 Our goal is to increase participation, not punish
+people for any lack of participation, this guideline should be only be used as such
+(replace an inactive member with a new active one, for example). この
+を満たしていないメンバーは辞退することが求められます。 TCメンバーがステップダウンしない場合、
+ディスカッションリポジトリで問題を開き、それらを非アクティブ状態に移動できます。
+により停止または削除されたTCメンバーは、非アクティブ状態に移動されます。
+
+Inactive status members can become active members by self nomination if the TC is not already
+larger than the maximum of 10. 最大サイズで、
+アクティブなメンバーが下にステップダウンした場合、彼らはまた好みを与えられます。
+
+### プロジェクトキャプテンズ
+
+Express TC では、
+組織内の個々のプロジェクト/リポジトリのキャプテンを指定できます。 これらのキャプテンは、技術的およびコミュニティの前線でレポの主要な
+日々のメンテナーであることに責任があります。
+リポジトリのキャプテンは、リポジトリの所有権とパッケージの公開権を与えられます。
+When there are conflicts, especially on topics that effect the Express project
+at large, captains are responsible to raise it up to the TC and drive
+those conflicts to resolution. Captains are also responsible for making sure
+community members follow the community guidelines, maintaining the repo
+and the published package, as well as in providing user support.
+
+TCメンバーと同じように、レポキャプテンはコミッターの一部です。
+
+プロジェクトのキャプテンになるためには、候補者はリクエストの前に少なくとも6ヶ月間その
+プロジェクトに参加することが期待されます。
+がコードの貢献とトリアージの問題を助けてくれるはずです。 また、
+がGitHubとNPMの両方のアカウントで2FAを有効にしている必要があります。
+
+**同じ**リポジトリのTCメンバーまたは既存のキャプテンは、キャプテン役に別のコミッター
+を指名することができます。 そのためには、この文書にPRを提出する必要があります。
+**アクティブなプロジェクトキャプテン** セクション (並び替え順を維持しながら) をプロジェクト
+名で更新します。 ノミネート者のGitHubハンドルとそのnpmユーザー名 (異なる場合)。
+
+- レポは、仕事の範囲にとって意味のあるできるだけ多くのキャプテンを持つことができます。
+- TCメンバーまたは既存のリポジトリキャプテンは**同じプロジェクトにあります**。新しいキャプテンを指名できます。
+  他のプロジェクトからのレポキャプテンは、別のプロジェクトにキャプテンを指名してはいけません。
+
+PRは、TCメンバーから少なくとも2件の承認が必要であり、コメントおよび/または反対のために
+を許可する2週間の保留期間が必要です。 PRがマージされると、TCメンバーはそれを
+適切なGitHub/npmグループに追加します。
+
+#### アクティブなプロジェクトとキャプテンズ
+
+リストは [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#active-projects-and-members](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/キャプテンs_and_committers.md#active-projects-and-members) にあります。
+
+#### 現在のイニシアチブのキャプテン数
+
+リストは [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/キャプテンs_and_committers.md#current-initiative-capitals) にあります。
+
+### 任意のロールに対する非アクティブと名誉のポリシー
+
+プロジェクトの健全性と継続性をサポートするために、コミュニティ内で役割を持つすべての個人(Triagerなど)。 コミッター、WGメンバー、プロジェクトキャプテン、またはTCメンバー)は、積極的な参加を維持することをお勧めします。
+
+非活動とは、プロジェクトへの有意義な関与(コントリビューションなど)がないことと定義されます。 6ヶ月間、コードレビュー、トリアージ、ミーティング出席、またはディスカッション参加が継続的に行われます。
+
+#### 例外
+
+個人的または専門的な理由により、誰でも積極的な参加から一時的な休暇を申請することができます。 このような場合、個人は関連するチームまたは技術委員会(TC)に通知する必要があります。 この間、非アクティブポリシーは一時停止され、個人は非アクティブとしてフラグ付けされません。
+
+#### 非アクティブプロセス
+
+- 誰かが非アクティブとみなされた場合、個人は過去の貢献を反映した名誉の役割に移行される可能性があります。 これが起こったことを彼らに知らせるために最善の努力がなされます。 彼らは再びアクティブになる準備ができたときに復帰を要求することができます。
+- 名誉の状態は、時間の経過とともにプロジェクトを成形した貢献者の明確な記録を保持するのに役立ちます。
+
+#### Accountability
+
+- 技術委員会(TC)および各パッケージ/チームのそれぞれのキャプテンは、アクティビティのレベルを評価し、公正かつ透明性のある方針を定める責任があります。 他の関連チームと連携しています
+- 意見の相違がある場合は、TCまたは適切なチーム内のコンセンサスによって状況を議論し、解決することができます。
+
+### 開発者証明書発行元 1.1
+
+```text
+By making a contribution to this project, I certify that:
+
+ (a) The contribution was created in whole or in part by me and I
+     have the right to submit it under the open source license
+     indicated in the file; or
+
+ (b) The contribution is based upon previous work that, to the best
+     of my knowledge, is covered under an appropriate open source
+     license and I have the right under that license to submit that
+     work with modifications, whether created in whole or in part
+     by me, under the same open source license (unless I am
+     permitted to submit under a different license), as indicated
+     in the file; or
+
+ (c) The contribution was provided directly to me by some other
+     person who certified (a), (b) or (c) and I have not modified
+     it.
+
+ (d) I understand and agree that this project and the contribution
+     are public and that a record of the contribution (including all
+     personal information I submit with it, including my sign-off) is
+     maintained indefinitely and may be redistributed consistent with
+     this project or the open source license(s) involved.
+```
+
+## コラボレーターのガイド
+
+{/* SRC: expressjs/.github CONTRIBUTING.md */}
+
+### ウェブサイトの問題
+
+expressjs.com ウェブサイトの https://github.com/expressjs/expressjs.com で問題を開きます。
+
+他のExpressで問題が発生した場合は、リポジトリ（`expressjs`、`pillarjs`、`jshttp`）を管理しています。 適切なリポジトリで、必ずコントリビュートガイドと課題やPRを確認してください。
+
+### PRとコードの貢献
+
+- テストは合格しなければなりません。
+- [JavaScript Standard Style](https://standardjs.com/) と `npm run lint` をフォローします。
+- バグを修正する場合は、テストを追加します。
+
+### ブランチ
+
+`master` ブランチを使用して、現在のリリースストリームの
+を意図したバグ修正やマイナーな作業を行ってください。
+
+Expressの将来のリリースである
+を想定したものには、`6.x`のような名前付きブランチを使用してください。
+
+### 貢献するためのステップ
+
+1. 修正したい
+   バグや追加したい機能の問題を作成します。
+2. Create your own fork on GitHub, then
+   checkout your fork.
+3. ローカルコピーにコードを書きなさい。 必須ではありませんが、新しい課題ごとに
+   ブランチを作成することは良い方法です。
+4. テストスイートを実行するには、`npm install`、
+   を実行し、`npm test`を実行して依存関係をインストールします。
+5. Ensure your code is linted by running `npm run lint` -- fix any issue you
+   see listed.
+6. テストが合格した場合、変更をフォークに反映し、そこから
+   プルリクエストを作成することができます。 Issue 番号を含めることで、プル
+   リクエストのコメントを参照してください。例：`#123`。
+
+### 質問である問題
+
+私たちは通常、あなたが書いているいくつかの
+アプリに固有の漠然とした問題や質問を閉じます。 Please double check the docs and other references before
+being trigger happy with posting a question issue.
+
+あなたの質問の問題を確認するのに役立つことは次のとおりです。
+
+- 完全かつ実行可能なJSコード。
+- 問題の説明または予期しない動作をクリアします。
+- 期待される結果の明確な説明。
+- あなた自身でデバッグするために取ったステップ。
+
+質問を投稿し、上記の項目を概説したり、
+問題を理解し、再現することが容易になる場合。 閉店します
+
+If your question meets all of the above requirements but you do not believe it needs to be looked at
+by the maintainers
+(for example, if you are just looking for community input) please open it as a discussion topic instead
+of an issue. If you
+are unsure and open an issue, we may move it to discussions if we triage them and decide they do
+not need high
+visibility or maintainer input.
+
+## セキュリティポリシーと手順
+
+{/* SRC: expressjs/.github SECURITY.md */}
+
+このドキュメントでは、Express
+プロジェクトのセキュリティ手順と一般的なポリシーについて概説しています。
+
+- [Reporting a Bug or Security Vulnerability](#reporting-a-bug-or-security-vulnerability)
+- [Disclosure Policy](#disclosure-policy)
+- [Comments on this Policy](#comments-on-this-policy)
+- [The Express Threat Model](#the-express-threat-model)
+
+### バグまたはセキュリティ脆弱性の報告
+
+<Alert type="情報">
+
+脆弱性を報告する前に、[Express Threat Model](#the-express-threat-model)を確認し、Expressのセキュリティ範囲内に問題があるかどうかを確認してください。
+
+</Alert>
+
+Expressチームとコミュニティは、すべてのセキュリティ脆弱性を真剣に受け止めています。
+Express および関連プロジェクトのセキュリティを向上させていただきありがとうございます。
+We appreciate your efforts in responsible disclosure and will make every effort
+to acknowledge your contributions.
+
+A [Security triage team member](https://github.com/expressjs/security-wg#security-triage-team-expressjssecurity-triage)
+or [the repo captain](https://github.com/expressjs/discussions/blob/master/docs/contributing/captains_and_committers.md)
+will acknowledge your report as soon as possible.
+これらのタイムラインは、私たちのトリアージ
+ボランティアが休暇中、特に年末に離れているときに延長されるかもしれません。
+
+レポートへの最初の返信後 セキュリティチームは、
+修正と完全な
+発表に向けた進捗状況をお知らせするよう努めます。 追加情報やガイダンスを求めることもあります
+
+<Alert type="情報">
+
+You can find more information about our process in [this guide](https://github.com/expressjs/security-wg/blob/main/docs/incident_response_plan.md)
+
+</Alert>
+
+#### GitHub Security Advisory (Preferred) を介したセキュリティバグの報告
+
+セキュリティ脆弱性を報告するには、
+[GitHub Security Advisories](https://github.com/advisories)を使用します。
+これにより、報告書の
+の機密性を維持しながら修正に協力することができます。
+
+脆弱性
+([docs](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability) を報告するには:
+
+1. 影響を受けるリポジトリの **セキュリティ** タブを開きます。
+2. **脆弱性を報告**をクリックし、指定された手順に従ってください。
+
+このプロセスは、Express エコシステム内のリポジトリに適用されます。
+If you are unsure whether a repository falls under this policy,
+feel free to reach out via email.
+
+#### 電子メール経由で報告
+
+必要に応じて、 `express-security@lists.openjsf.org` にメールしてセキュリティ上の問題を報告することもできます。
+
+タイムリーな対応を確実にするために、外部ソースにリンクしたりファイルを添付したりするのではなく、関連するすべての詳細をメール本文に直接記入してください。
+
+リードメンテナは48時間以内にあなたのメールを認識し、次のステップの概要を説明する最初の回答を提供します。 セキュリティチームは、進捗状況を更新し続け、追加の詳細を要求することがあります。
+
+#### サードパーティーモジュール
+
+セキュリティの問題がExpressエコシステム内で直接メンテナンスされていないサードパーティモジュールに関連する場合。 そのモジュールの管理者に報告してください。
+
+### 開示方針
+
+セキュリティチームがセキュリティバグレポートを受け取ると、セキュリティバグレポートは
+プライマリハンドラに割り当てられます。 This person will coordinate the fix and release process,
+involving the following steps:
+
+- 問題を確認し、影響を受けるバージョンを確認します。
+- 潜在的な同様の問題を見つけるために監査コード。
+- メンテナンス中のすべてのリリースの修正を準備します。 これらの修正は、npmにできるだけ早く
+  リリースされます。
+
+### 本ポリシーに関するコメント
+
+このプロセスがどのように改善されるかについての提案がある場合は、
+プルリクエストを送信してください。
+
+### Express 脅威モデル
+
+Express脅威モデルは、フレームワークがセキュリティ責任を考慮している限界を定義します。 信頼される要素(開発者、ランタイム環境、アプリケーションコードなど)と信頼されない要素(ネットワーク接続からのデータなど)を決定します。 信頼された要素から生じる問題は範囲外とみなされ、Express は信頼されていないデータを安全に処理する責任を負います。
+
+一般的に報告されている懸念の多くは、Expressのセキュリティ範囲外であり、アプリケーション開発者の責任です。 アンサニタイズされたユーザー入力からのプロトタイプ汚染、誤った設定された静的ファイルの提供、サードパーティーの依存関係での問題など。
+
+詳細については、[Express Threat Model](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md)を参照してください。

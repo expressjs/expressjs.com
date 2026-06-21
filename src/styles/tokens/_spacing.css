@@ -1,0 +1,49 @@
+/**
+ * Spacing Tokens
+ *
+ * Based on a 4px grid system (0.25rem)
+ * Used for margin, padding, gap, etc.
+ */
+
+:root {
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.2rem; /* 2px */
+  --space-1: 0.4rem; /* 4px */
+  --space-1-5: 0.6rem; /* 6px */
+  --space-2: 0.8rem; /* 8px */
+  --space-2-5: 1rem; /* 10px */
+  --space-3: 1.2rem; /* 12px */
+  --space-3-5: 1.4rem; /* 14px */
+  --space-4: 1.6rem; /* 16px */
+  --space-5: 2rem; /* 20px */
+  --space-6: 2.4rem; /* 24px */
+  --space-7: 2.8rem; /* 28px */
+  --space-8: 3.2rem; /* 32px */
+  --space-9: 3.6rem; /* 36px */
+  --space-10: 4rem; /* 40px */
+  --space-11: 4.4rem; /* 44px */
+  --space-12: 4.8rem; /* 48px */
+  --space-14: 5.6rem; /* 56px */
+  --space-16: 6.4rem; /* 64px */
+  --space-18: 7.2rem; /* 72px */
+  --space-20: 8rem; /* 80px */
+  --space-24: 9.6rem; /* 96px */
+  --space-28: 11.2rem; /* 112px */
+  --space-32: 12.8rem; /* 128px */
+  --space-36: 14.4rem; /* 144px */
+  --space-40: 16rem; /* 160px */
+  --space-44: 17.6rem; /* 176px */
+  --space-48: 19.2rem; /* 192px */
+  --space-52: 20.8rem; /* 208px */
+  --space-56: 22.4rem; /* 224px */
+  --space-60: 24rem; /* 240px */
+  --space-64: 25.6rem; /* 256px */
+
+  /* Component specific */
+  --space-h1: var(--space-12);
+  --space-h2: var(--space-10);
+  --space-h3: var(--space-6);
+  --space-h4: var(--space-6);
+  --space-body: var(--space-5);
+}

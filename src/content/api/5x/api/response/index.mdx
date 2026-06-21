@@ -1,0 +1,1010 @@
+---
+title: Response
+description: The response object represents the HTTP response that an Express app sends when it gets an HTTP request.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+import Signature from '@components/patterns/Signature/Signature.astro';
+import Param from '@components/patterns/Signature/Param.astro';
+
+The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
+
+In this documentation and by convention,
+the object is always referred to as `res` (and the HTTP request is `req`) but its actual name is determined
+by the parameters to the callback function in which you're working.
+
+For example:
+
+```js
+app.get('/user/:id', (req, res) => {
+  res.send(`user ${req.params.id}`);
+});
+```
+
+But you could just as well have:
+
+```js
+app.get('/user/:id', (request, response) => {
+  response.send(`user ${request.params.id}`);
+});
+```
+
+The `res` object is an enhanced version of Node's own response object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+
+## Properties
+
+### res.app
+
+<Signature type="Application" />
+
+This property holds a reference to the instance of the Express application that is using the middleware.
+
+`res.app` is identical to the [req.app](/api/request/#reqapp) property in the request object.
+
+### res.headersSent
+
+<Signature type="Boolean" />
+
+Boolean property that indicates if the app sent HTTP headers for the response.
+
+```js
+app.get('/', (req, res) => {
+  console.log(res.headersSent); // false
+  res.send('OK');
+  console.log(res.headersSent); // true
+});
+```
+
+### res.locals
+
+<Signature type="Object" />
+
+Use this property to set variables accessible in templates rendered with [res.render](#resrender).
+The variables set on `res.locals` are available within a single request-response cycle, and will not
+be shared between requests.
+
+<Alert type="warning">
+
+The `locals` object is used by view engines to render a response. The object keys may be
+particularly sensitive and should not contain user-controlled input, as it may affect the
+operation of the view engine or provide a path to cross-site scripting. Consult the documentation
+for the used view engine for additional considerations.
+
+</Alert>
+
+In order to keep local variables for use in template rendering between requests, use
+[app.locals](/api/application/#applocals) instead.
+
+This property is useful for exposing request-level information such as the request path name,
+authenticated user, user settings, and so on to templates rendered within the application.
+
+```js
+app.use((req, res, next) => {
+  // Make `user` and `authenticated` available in templates
+  res.locals.user = req.user;
+  res.locals.authenticated = !req.user.anonymous;
+  next();
+});
+```
+
+### res.req
+
+<Signature type="Request" />
+
+This property holds a reference to the [request object](/api/request/)
+that relates to this response object.
+
+## Methods
+
+### res.append()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The name of the HTTP response header to append to.
+    </Param>
+    <Param name="value" type="String | String[]" optional>
+      The value(s) to append to the header.
+    </Param>
+  </Fragment>
+</Signature>
+
+Appends the specified `value` to the HTTP response header `field`. If the header is not already set,
+it creates the header with the specified value. The `value` parameter can be a string or an array.
+
+<Alert type="info">
+
+calling `res.set()` after `res.append()` will reset the previously-set header value.
+
+</Alert>
+
+```js
+res.append('Link', ['<http://localhost/>', '<http://localhost:3000/>']);
+res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
+res.append('Warning', '199 Miscellaneous warning');
+```
+
+### res.attachment()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="filename" type="String" optional>
+      The file name used to set the `Content-Disposition` "filename=" parameter and the
+      `Content-Type` (from its extension).
+    </Param>
+  </Fragment>
+</Signature>
+
+Sets the HTTP response `Content-Disposition` header field to "attachment". If a `filename` is given,
+then it sets the `Content-Type` based on the extension name via `res.type()`,
+and sets the `Content-Disposition` "filename=" parameter.
+
+```js
+res.attachment();
+// Content-Disposition: attachment
+
+res.attachment('path/to/logo.png');
+// Content-Disposition: attachment; filename="logo.png"
+// Content-Type: image/png
+```
+
+### res.clearCookie()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="name" type="String">
+      The name of the cookie to clear.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Cookie options, which should match those given to [res.cookie()](#rescookie) (excluding
+      `expires` and `maxAge`).
+    </Param>
+  </Fragment>
+</Signature>
+
+Clears the cookie with the specified `name` by sending a `Set-Cookie` header that sets its expiration date in the past.
+This instructs the client that the cookie has expired and is no longer valid. For more information
+about available `options`, see [res.cookie()](#rescookie).
+
+<Alert type="alert">The `expires` and `max-age` options are being ignored completely.</Alert>
+
+<Alert type="alert">
+
+Web browsers and other compliant clients will only clear the cookie if the given `options` is
+identical to those given to [res.cookie()](#rescookie)
+
+</Alert>
+
+```js
+res.cookie('name', 'tobi', { path: '/admin' });
+res.clearCookie('name', { path: '/admin' });
+```
+
+### res.cookie()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="name" type="String">
+      The name of the cookie.
+    </Param>
+    <Param name="value" type="String | Object">
+      The cookie value; an object is serialized as JSON.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options for the `Set-Cookie` header.
+
+      <Fragment slot="properties">
+        <Param name="domain" type="String">
+          Domain name for the cookie. Defaults to the domain name of the app.
+        </Param>
+        <Param name="encode" type="Function">
+          A synchronous function used for cookie value encoding. Defaults to `encodeURIComponent`.
+        </Param>
+        <Param name="expires" type="Date">
+          Expiry date of the cookie in GMT. If not specified or set to `0`, creates a session cookie.
+        </Param>
+        <Param name="httpOnly" type="Boolean">
+          Flags the cookie to be accessible only by the web server.
+        </Param>
+        <Param name="maxAge" type="Number">
+          Convenient option for setting the expiry time relative to the current time in milliseconds.
+        </Param>
+        <Param name="path" type="String" default='"/"'>
+          Path for the cookie. Defaults to "/".
+        </Param>
+        <Param name="partitioned" type="Boolean">
+          Indicates that the cookie should be stored using partitioned storage. See [CHIPS](https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Third-party_cookies/Partitioned_cookies) for more details.
+        </Param>
+        <Param name="priority" type="String">
+          Value of the "Priority" **Set-Cookie** attribute.
+        </Param>
+        <Param name="secure" type="Boolean">
+          Marks the cookie to be used with HTTPS only.
+        </Param>
+        <Param name="signed" type="Boolean">
+          Indicates if the cookie should be signed.
+        </Param>
+        <Param name="sameSite" type="Boolean | String">
+          Value of the "SameSite" **Set-Cookie** attribute.
+        </Param>
+      </Fragment>
+    </Param>
+
+  </Fragment>
+</Signature>
+
+Sets cookie `name` to `value`. The `value` parameter may be a string or object converted to JSON.
+
+<Alert type="alert">
+
+All `res.cookie()` does is set the HTTP `Set-Cookie` header with the options provided. Any option
+not specified defaults to the value stated in [RFC 6265](https://datatracker.ietf.org/doc/html/rfc6265).
+
+</Alert>
+
+For example:
+
+```js
+res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
+res.cookie('remember_me', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
+```
+
+You can set multiple cookies in a single response by calling `res.cookie` multiple times, for example:
+
+```js
+res
+  .status(201)
+  .cookie('access_token', `Bearer ${token}`, {
+    expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+  })
+  .cookie('test', 'test')
+  .redirect(301, '/admin');
+```
+
+The `encode` option allows you to choose the function used for cookie value encoding.
+Does not support asynchronous functions.
+
+Example use case: You need to set a domain-wide cookie for another site in your organization.
+This other site (not under your administrative control) does not use URI-encoded cookie values.
+
+```js
+// Default encoding
+res.cookie('some_cross_domain_cookie', 'http://mysubdomain.example.com', { domain: 'example.com' });
+// Result: 'some_cross_domain_cookie=http%3A%2F%2Fmysubdomain.example.com; Domain=example.com; Path=/'
+
+// Custom encoding
+res.cookie('some_cross_domain_cookie', 'http://mysubdomain.example.com', {
+  domain: 'example.com',
+  encode: String,
+});
+// Result: 'some_cross_domain_cookie=http://mysubdomain.example.com; Domain=example.com; Path=/;'
+```
+
+The `maxAge` option is a convenience option for setting "expires" relative to the current time in milliseconds.
+The following is equivalent to the second example above.
+
+```js
+res.cookie('remember_me', '1', { maxAge: 900000, httpOnly: true });
+```
+
+You can pass an object as the `value` parameter; it is then serialized as JSON and parsed by `bodyParser()` middleware.
+
+```js
+res.cookie('cart', { items: [1, 2, 3] });
+res.cookie('cart', { items: [1, 2, 3] }, { maxAge: 900000 });
+```
+
+When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this method also
+supports signed cookies. Simply include the `signed` option set to `true`.
+Then, `res.cookie()` will use the secret passed to `cookieParser(secret)` to sign the value.
+
+```js
+res.cookie('name', 'tobi', { signed: true });
+```
+
+Later, you may access this value through the [req.signedCookies](/api/request/#reqsignedcookies) object.
+
+### res.download()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The path to the file to transfer. If relative, it is resolved against the current working directory or the `root` option.
+    </Param>
+    <Param name="filename" type="String" optional>
+      The file name for the `Content-Disposition` "filename=" parameter; overrides the name derived from `path`.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options forwarded to [res.sendFile()](#ressendfile).
+
+      <Fragment slot="properties">
+        <Param name="maxAge" type="Number | String" default="0">
+          Sets the max-age property of the `Cache-Control` header in milliseconds, or a string in [ms format](https://www.npmjs.com/package/ms).
+        </Param>
+        <Param name="root" type="String">
+          Root directory for relative file names.
+        </Param>
+        <Param name="lastModified" type="Boolean" default="true">
+          Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
+        </Param>
+        <Param name="headers" type="Object">
+          Object containing HTTP headers to serve with the file.
+        </Param>
+        <Param name="dotfiles" type="String" default='"ignore"'>
+          Option for serving dotfiles. Possible values are `"allow"`, `"deny"`, and `"ignore"`.
+        </Param>
+        <Param name="acceptRanges" type="Boolean" default="true">
+          Enable or disable accepting ranged requests.
+        </Param>
+        <Param name="cacheControl" type="Boolean" default="true">
+          Enable or disable setting the `Cache-Control` response header.
+        </Param>
+        <Param name="immutable" type="Boolean" default="false">
+          Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching.
+        </Param>
+      </Fragment>
+    </Param>
+    <Param name="fn" type="Function" optional>
+      Callback `fn(err)` invoked when the transfer completes or an error occurs.
+    </Param>
+
+  </Fragment>
+</Signature>
+
+Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
+By default, the `Content-Disposition` header "filename=" parameter is derived from the `path` argument, but can be overridden with the `filename` parameter.
+If `path` is relative, then it will be based on the current working directory of the process or
+the `root` option, if provided.
+
+<Alert type="warning">
+This API provides access to data on the running file system. Ensure that either (a) the way in
+which the `path` argument was constructed is secure if it contains user input or (b) set the `root`
+option to the absolute path of a directory to contain access within.
+
+When the `root` option is provided, Express will validate that the relative path provided as
+`path` will resolve within the given `root` option.
+
+</Alert>
+
+The method invokes the callback function `fn(err)` when the transfer is complete
+or when an error occurs. If the callback function is specified and an error occurs,
+the callback function must explicitly handle the response process either by
+ending the request-response cycle, or by passing control to the next route.
+
+```js
+res.download('/report-12345.pdf');
+
+res.download('/report-12345.pdf', 'report.pdf');
+
+res.download('/report-12345.pdf', 'report.pdf', (err) => {
+  if (err) {
+    // Handle error, but keep in mind the response may be partially-sent
+    // so check res.headersSent
+  } else {
+    // decrement a download credit, etc.
+  }
+});
+```
+
+### res.end()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="data" type="String | Buffer" optional>
+      Data to write before ending the response.
+    </Param>
+    <Param name="encoding" type="String" optional>
+      The encoding for `data` when it is a string.
+    </Param>
+    <Param name="callback" type="Function" optional>
+      Called once the response has finished.
+    </Param>
+  </Fragment>
+</Signature>
+
+Ends the response process. This method actually comes from Node core, specifically the [response.end() method of http.ServerResponse](https://nodejs.org/api/http.html#responseenddata-encoding-callback).
+
+Use to quickly end the response without any data. If you need to respond with data, instead use methods such as [res.send()](#ressend) and [res.json()](#resjson).
+
+```js
+res.end();
+res.status(404).end();
+```
+
+### res.format()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="object" type="Object">
+      An object whose keys are MIME types (or extension names) mapped to handler functions,
+      optionally with a `default` handler.
+    </Param>
+  </Fragment>
+</Signature>
+
+Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
+It uses [req.accepts()](/api/request/#reqaccepts) to select a handler for the request, based on the acceptable
+types ordered by their quality values. If the header is not specified, the first callback is invoked.
+When no match is found, the server responds with 406 "Not Acceptable", or invokes the `default` callback.
+
+The `Content-Type` response header is set when a callback is selected. However, you may alter
+this within the callback using methods such as `res.set()` or `res.type()`.
+
+The following example would respond with `{ "message": "hey" }` when the `Accept` header field is set
+to "application/json" or "\*/json" (however, if it is "\*/\*", then the response will be "hey").
+
+```js
+res.format({
+  'text/plain'() {
+    res.send('hey');
+  },
+
+  'text/html'() {
+    res.send('<p>hey</p>');
+  },
+
+  'application/json'() {
+    res.send({ message: 'hey' });
+  },
+
+  default() {
+    // log the request and respond with 406
+    res.status(406).send('Not Acceptable');
+  },
+});
+```
+
+In addition to canonicalized MIME types, you may also use extension names mapped
+to these types for a slightly less verbose implementation:
+
+```js
+res.format({
+  text() {
+    res.send('hey');
+  },
+
+  html() {
+    res.send('<p>hey</p>');
+  },
+
+  json() {
+    res.send({ message: 'hey' });
+  },
+});
+```
+
+### res.get()
+
+<Signature returns="String">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The name of the response header to read (case-insensitive).
+    </Param>
+  </Fragment>
+</Signature>
+
+Returns the HTTP response header specified by `field`.
+The match is case-insensitive.
+
+```js
+res.get('Content-Type');
+// => "text/plain"
+```
+
+### res.json()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="body" type="any" optional>
+      The value to send as JSON. Can be any JSON type: object, array, string, Boolean, number, or
+      null.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a
+JSON string using [JSON.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
+
+The parameter can be any JSON type, including object, array, string, Boolean, number, or null,
+and you can also use it to convert other values to JSON.
+
+```js
+res.json(null);
+res.json({ user: 'tobi' });
+res.status(500).json({ error: 'message' });
+```
+
+### res.jsonp()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="body" type="any" optional>
+      The value to send as a JSONP response. Can be any JSON type.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sends a JSON response with JSONP support. This method is identical to `res.json()`,
+except that it opts-in to JSONP callback support.
+
+```js
+res.jsonp(null);
+// => callback(null)
+
+res.jsonp({ user: 'tobi' });
+// => callback({ "user": "tobi" })
+
+res.status(500).jsonp({ error: 'message' });
+// => callback({ "error": "message" })
+```
+
+By default, the JSONP callback name is simply `callback`. Override this with the
+
+[jsonp callback name](/api/application/#application-settings) setting.
+
+The following are some examples of JSONP responses using the same code:
+
+```js
+// ?callback=foo
+res.jsonp({ user: 'tobi' });
+// => foo({ "user": "tobi" })
+
+app.set('jsonp callback name', 'cb');
+
+// ?cb=foo
+res.status(500).jsonp({ error: 'message' });
+// => foo({ "error": "message" })
+```
+
+### res.links()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="links" type="Record<String, String | String[]>">
+      An object whose properties (such as `next` and `last`) populate the `Link` response header.
+      Each value can be a single URL string, or an array of URL strings to emit multiple links for
+      the same relation.
+    </Param>
+  </Fragment>
+</Signature>
+
+Joins the `links` provided as properties of the parameter to populate the response's
+`Link` HTTP header field.
+
+For example, the following call:
+
+```js
+res.links({
+  next: 'http://api.example.com/users?page=2',
+  last: 'http://api.example.com/users?page=5',
+});
+```
+
+Yields the following results:
+
+```
+Link: <http://api.example.com/users?page=2>; rel="next",
+      <http://api.example.com/users?page=5>; rel="last"
+```
+
+### res.location()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The URL to set in the `Location` header.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sets the response `Location` HTTP header to the specified `path` parameter.
+
+```js
+res.location('/foo/bar');
+res.location('http://example.com');
+```
+
+<Alert type="warning">
+After encoding the URL, if not encoded already, Express passes the specified URL to the browser in the `Location` header,
+without any validation.
+
+Browsers take the responsibility of deriving the intended URL from the current URL
+or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
+
+</Alert>
+
+### res.redirect()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="status" type="Number" optional>
+      The HTTP status code to use. Defaults to `302` (Found).
+    </Param>
+    <Param name="path" type="String">
+      The URL to redirect to.
+    </Param>
+  </Fragment>
+</Signature>
+
+Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer
+that corresponds to an [HTTP status code](https://www.rfc-editor.org/rfc/rfc9110#name-status-codes).
+If not specified, `status` defaults to `302 "Found"`.
+
+```js
+res.redirect('/foo/bar');
+res.redirect('http://example.com');
+res.redirect(301, 'http://example.com');
+res.redirect('../login');
+```
+
+Redirects can be a fully-qualified URL for redirecting to a different site:
+
+```js
+res.redirect('https://google.com');
+```
+
+Redirects can be relative to the root of the host name. For example, if the
+application is on `http://example.com/admin/post/new`, the following
+would redirect to the URL `http://example.com/admin`:
+
+```js
+res.redirect('/admin');
+```
+
+Redirects can be relative to the current URL. For example,
+from `http://example.com/blog/admin/` (notice the trailing slash), the following
+would redirect to the URL `http://example.com/blog/admin/post/new`.
+
+```js
+res.redirect('post/new');
+```
+
+Redirecting to `post/new` from `http://example.com/blog/admin` (no trailing slash),
+will redirect to `http://example.com/blog/post/new`.
+
+If you found the above behavior confusing, think of path segments as directories
+(with trailing slashes) and files, it will start to make sense.
+
+Path-relative redirects are also possible. If you were on
+`http://example.com/admin/post/new`, the following would redirect to
+`http://example.com/admin/post`:
+
+```js
+res.redirect('..');
+```
+
+See also [Security best practices: Prevent open redirect
+vulnerabilities](/advanced/best-practice-security/#prevent-open-redirects).
+
+### res.render()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="view" type="String">
+      The file path of the view to render (absolute or relative to the `views` setting).
+    </Param>
+    <Param name="locals" type="Object" optional>
+      An object whose properties define local variables for the view.
+    </Param>
+    <Param name="callback" type="Function" optional>
+      Called as `callback(err, html)`. When provided, the rendered HTML is not sent automatically.
+    </Param>
+  </Fragment>
+</Signature>
+
+Renders a `view` and sends the rendered HTML string to the client.
+Optional parameters:
+
+- `locals`, an object whose properties define local variables for the view.
+- `callback`, a callback function. If provided, the method returns both the possible error and rendered string, but does not perform an automated response. When an error occurs, the method invokes `next(err)` internally.
+
+The `view` argument is a string that is the file path of the view file to render. This can be an absolute path, or a path relative to the `views` setting. If the path does not contain a file extension, then the `view engine` setting determines the file extension. If the path does contain a file extension, then Express will load the module for the specified template engine (via `require()`) and render it using the loaded module's `__express` function.
+
+For more information, see [Using template engines with Express](/guide/using-template-engines).
+
+<Alert type="warning">
+
+The `view` argument performs file system operations like reading a file from disk and evaluating
+Node.js modules, and as so for security reasons should not contain input from the end-user.
+
+</Alert>
+
+<Alert type="warning">
+
+The `locals` object is used by view engines to render a response. The object keys may be
+particularly sensitive and should not contain user-controlled input, as it may affect the
+operation of the view engine or provide a path to cross-site scripting. Consult the documentation
+for the used view engine for additional considerations.
+
+</Alert>
+
+<Alert type="alert">
+
+The local variable `cache` enables view caching. Set it to `true`, to cache the view during
+development; view caching is enabled in production by default.
+
+</Alert>
+
+```js
+// send the rendered view to the client
+res.render('index');
+
+// if a callback is specified, the rendered HTML string has to be sent explicitly
+res.render('index', (err, html) => {
+  res.send(html);
+});
+
+// pass a local variable to the view
+res.render('user', { name: 'Tobi' }, (err, html) => {
+  // ...
+});
+```
+
+### res.send()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="body" type="String | Buffer | Object | Array | Boolean" optional>
+      The response body. Strings are sent as HTML; objects and arrays as JSON; Buffers as binary.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sends the HTTP response.
+
+The `body` parameter can be a `Buffer` object, a `String`, an object, `Boolean`, or an `Array`.
+For example:
+
+```js
+res.send(Buffer.from('whoop'));
+res.send({ some: 'json' });
+res.send('<p>some html</p>');
+res.status(404).send('Sorry, we cannot find that!');
+res.status(500).send({ error: 'something blew up' });
+```
+
+This method performs many useful tasks for simple non-streaming responses:
+For example, it automatically assigns the `Content-Length` HTTP response header field
+and provides automatic HEAD and HTTP cache freshness support.
+
+When the parameter is a `Buffer` object, the method sets the `Content-Type`
+response header field to "application/octet-stream", unless previously defined as shown below:
+
+```js
+res.set('Content-Type', 'text/html');
+res.send(Buffer.from('<p>some html</p>'));
+```
+
+When the parameter is a `String`, the method sets the `Content-Type` to "text/html":
+
+```js
+res.send('<p>some html</p>');
+```
+
+When the parameter is an `Array` or `Object`, Express responds with the JSON representation:
+
+```js
+res.send({ user: 'tobi' });
+res.send([1, 2, 3]);
+```
+
+### res.sendFile()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The path to the file to transfer. Must be absolute unless the `root` option is set.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options for serving the file.
+
+      <Fragment slot="properties">
+        <Param name="maxAge" type="Number | String" default="0">
+          Sets the max-age property of the `Cache-Control` header in milliseconds, or a string in [ms format](https://www.npmjs.com/package/ms).
+        </Param>
+        <Param name="root" type="String">
+          Root directory for relative file names.
+        </Param>
+        <Param name="lastModified" type="Boolean" default="true">
+          Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
+        </Param>
+        <Param name="headers" type="Object">
+          Object containing HTTP headers to serve with the file.
+        </Param>
+        <Param name="dotfiles" type="String" default='"ignore"'>
+          Option for serving dotfiles. Possible values are `"allow"`, `"deny"`, and `"ignore"`.
+        </Param>
+        <Param name="acceptRanges" type="Boolean" default="true">
+          Enable or disable accepting ranged requests.
+        </Param>
+        <Param name="cacheControl" type="Boolean" default="true">
+          Enable or disable setting the `Cache-Control` response header.
+        </Param>
+        <Param name="immutable" type="Boolean" default="false">
+          Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching.
+        </Param>
+      </Fragment>
+    </Param>
+    <Param name="fn" type="Function" optional>
+      Callback `fn(err)` invoked when the transfer completes or an error occurs.
+    </Param>
+
+  </Fragment>
+</Signature>
+
+Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
+based on the filename's extension. Unless the `root` option is set in
+the options object, `path` must be an absolute path to the file.
+
+<Alert type="warning">
+This API provides access to data on the running file system. Ensure that either (a) the way in
+which the `path` argument was constructed into an absolute path is secure if it contains user
+input or (b) set the `root` option to the absolute path of a directory to contain access within.
+
+When the `root` option is provided, the `path` argument is allowed to be a relative path,
+including containing `..`. Express will validate that the relative path provided as `path` will
+resolve within the given `root` option.
+
+</Alert>
+
+The method invokes the callback function `fn(err)` when the transfer is complete
+or when an error occurs. If the callback function is specified and an error occurs,
+the callback function must explicitly handle the response process either by
+ending the request-response cycle, or by passing control to the next route.
+
+Here is an example of using `res.sendFile` with all its arguments.
+
+```js
+app.get('/file/:name', (req, res, next) => {
+  const options = {
+    root: path.join(__dirname, 'public'),
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true,
+    },
+  };
+
+  const fileName = req.params.name;
+  res.sendFile(fileName, options, (err) => {
+    if (err) {
+      next(err);
+    } else {
+      console.log('Sent:', fileName);
+    }
+  });
+});
+```
+
+The following example illustrates using
+`res.sendFile` to provide fine-grained support for serving files:
+
+```js
+app.get('/user/:uid/photos/:file', (req, res) => {
+  const uid = req.params.uid;
+  const file = req.params.file;
+
+  req.user.mayViewFilesFrom(uid, (yes) => {
+    if (yes) {
+      res.sendFile(`/uploads/${uid}/${file}`);
+    } else {
+      res.status(403).send("Sorry! You can't see that.");
+    }
+  });
+});
+```
+
+For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).
+
+### res.sendStatus()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="statusCode" type="Number">
+      The HTTP status code to set; its registered status message becomes the response body.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sets the response HTTP status code to `statusCode` and sends the registered status message as the text response body. If an unknown status code is specified, the response body will just be the code number.
+
+```js
+res.sendStatus(404);
+```
+
+<Alert type="alert">
+
+Some versions of Node.js will throw when `res.statusCode` is set to an invalid HTTP status code
+(outside of the range `100` to `599`). Consult the HTTP server documentation for the Node.js
+version being used.
+
+</Alert>
+
+[More about HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+### res.set()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="field" type="String | Object">
+      The header name, or an object of header name/value pairs to set multiple headers at once.
+    </Param>
+    <Param name="value" type="String | String[]" optional>
+      The header value (when `field` is a string).
+    </Param>
+  </Fragment>
+</Signature>
+
+Sets the response's HTTP header `field` to `value`.
+To set multiple fields at once, pass an object as the parameter.
+
+```js
+res.set('Content-Type', 'text/plain');
+
+res.set({
+  'Content-Type': 'text/plain',
+  'Content-Length': '123',
+  ETag: '12345',
+});
+```
+
+Aliased as `res.header(field [, value])`.
+
+### res.status()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="code" type="Number">
+      The HTTP status code for the response.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sets the HTTP status for the response.
+It is a chainable alias of Node's [response.statusCode](https://nodejs.org/api/http.html#http_response_statuscode).
+
+```js
+res.status(403).end();
+res.status(400).send('Bad Request');
+res.status(404).sendFile('/absolute/path/to/404.png');
+```
+
+### res.type()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="type" type="String">
+      The MIME type, or a file extension that is looked up to a MIME type. If it contains `/`, it is
+      used as-is.
+    </Param>
+  </Fragment>
+</Signature>
+
+Sets the `Content-Type` HTTP header to the MIME type as determined by the specified `type`. If `type` contains the "/" character, then it sets the `Content-Type` to the exact value of `type`, otherwise it is assumed to be a file extension and the MIME type is looked up using the `contentType()` method of the `mime-types` package.
+
+```js
+res.type('.html'); // => 'text/html'
+res.type('html'); // => 'text/html'
+res.type('json'); // => 'application/json'
+res.type('application/json'); // => 'application/json'
+res.type('png'); // => image/png:
+```
+
+Aliased as `res.contentType(type)`.
+
+### res.vary()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The header field name to add to the `Vary` response header.
+    </Param>
+  </Fragment>
+</Signature>
+
+Adds the field to the `Vary` response header, if it is not there already.
+
+```js
+res.vary('User-Agent').render('docs');
+```

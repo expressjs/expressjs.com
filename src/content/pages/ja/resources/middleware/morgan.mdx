@@ -1,0 +1,452 @@
+---
+title: モーガンミドルウェア
+description: Node.js 用の HTTP リクエストロガーミドルウェア
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.10.1"
+  github="https://github.com/expressjs/morgan"
+  npm="https://www.npmjs.com/package/morgan"
+/>
+
+HTTPリクエストロガーミドルウェア for node.js
+
+> [Dexter](http://en.wikipedia.org/wiki/Dexter_Morgan) にちなんで命名された番組は、完成するまで見てはいけません。
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install morgan
+```
+
+## API
+
+{/* eslint-disable no-unused-var */}
+
+```js
+var morgan = require('morgan');
+```
+
+### モルガン（書式、オプション）
+
+与えられた `format` と `options` を使用して、新しいモーガンロガーミドルウェア関数を作成します。
+引数`format`は、定義済みの名前の文字列を指定することができます (以下を参照してください)
+フォーマット文字列の文字列、またはログエントリを生成する関数。
+
+`format`関数は、`tokens`、`req`、`res`の3つの引数で呼び出されます。
+`tokens` がすべて定義されたトークンを持つオブジェクトである場合、`req` はHTTPリクエスト、`res`
+はHTTPレスポンスです。 関数はログ
+行になる文字列を返すことが期待されます。ログをスキップするには`undefined` / `null`を返します。
+
+#### 定義済みの書式文字列の使用
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan('tiny');
+```
+
+#### 定義済みトークンのフォーマット文字列を使用
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(':method :url :status :res[content-length] - :response-time ms');
+```
+
+#### カスタムフォーマット関数の使用
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](https://github.com/expressjs/morgan/blob/HEAD/req, res), 'ms'
+  ].join(' ')
+})
+```
+
+#### オプション
+
+Morgan は options オブジェクトでこれらのプロパティを受け付けます。
+
+##### immediate
+
+レスポンスの代わりにリクエスト時にログ行を書き込みます。 This means that a requests will
+be logged even if the server crashes, *but data from the response (like the
+response code, content length, etc.) logged*はできません。
+
+##### スキップ
+
+ログをスキップするかどうかを決定する関数。デフォルトは `false` です。 この関数
+は`skip(req, res)` として呼び出されます。
+
+{/* eslint-disable no-undef */}
+
+```js
+// EXAMPLE: only log error responses
+morgan('combined', {
+  skip: function (req, res) {
+    return res.statusCode < 400;
+  },
+});
+```
+
+##### ストリーム
+
+ログ行を書くためのストリームを出力します。デフォルトは `process.stdout` です。
+
+#### 定義済みのフォーマット
+
+様々な事前定義されたフォーマットが用意されています:
+
+##### 結合された
+
+標準の Apache 組み合わせログ出力。
+
+```
+:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
+# will output
+::1 - - [27/Nov/2024:06:21:42 +0000] "GET /combined HTTP/1.1" 200 2 "-" "curl/8.7.1"
+```
+
+##### 共通の
+
+標準の Apache 共通ログ出力。
+
+```
+:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]
+# will output
+::1 - - [27/Nov/2024:06:21:46 +0000] "GET /common HTTP/1.1" 200 2
+```
+
+##### dev
+
+開発用のレスポンスステータスで色付けされた出力をConcise します。 The `:status`
+token will be colored green for success codes, red for server error codes,
+yellow for client error codes, cyan for redirection codes, and uncolored
+for information codes.
+
+```
+:method :url :status :response-time ms - :res[content-length]
+# will output
+GET /dev 200 0.224 ms - 2
+```
+
+##### 短い
+
+デフォルトよりも短く、応答時間も含まれます。
+
+```
+:remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms
+# will output
+::1 - GET /short HTTP/1.1 200 2 - 0.283 ms
+```
+
+##### 小さく
+
+最小出力。
+
+```
+:method :url :status :res[content-length] - :response-time ms
+# will output
+GET /tiny 200 2 - 0.188 ms
+```
+
+#### トークン
+
+##### 新しいトークンを作成中
+
+トークンを定義するには、名前とコールバック関数で `morgan.token()` を呼び出します。
+このコールバック関数は文字列の値を返すことが期待されます。 この場合、返される値は
+は ":type" として使用できます:
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan.token('type', function (req, res) {
+  return req.headers['content-type'];
+});
+```
+
+既存のトークンと同じ名前で`morgan.token()`を呼び出すと、その
+トークン定義が上書きされます。
+
+The token function is expected to be called with the arguments `req` and `res`, representing
+the HTTP request and HTTP response. Additionally, the token can accept further arguments of
+it's choosing to customize behavior.
+
+##### :date[format]
+
+UTCの現在の日付と時刻。 利用可能なフォーマットは次のとおりです。
+
+- `clf` for the common log format (`"10/Oct/2000:13:55:36 +0000"`)
+- ISO 8601 の日付時刻形式 (`2000-10-10T13:55:36.000Z`) の`iso`
+- 共通のRFC 1123日付時刻フォーマットの`web` (`Tue, 10 Oct 2000 13:55:36 GMT`)
+
+フォーマットが指定されていない場合、デフォルトは `web` です。
+
+##### :http-version
+
+リクエストの HTTP バージョン。
+
+##### :method
+
+リクエストの HTTP メソッド。
+
+##### :pid
+
+Node.js プロセスのプロセス ID がリクエストを処理します。
+
+##### :referrer
+
+リクエストの Referrer ヘッダー。 これは、標準のスペルの間違いの Referer ヘッダが存在する場合に使用します。そうでなければ、Referrerです。
+
+##### :remote-addr
+
+リクエストのリモートアドレス これは `req.ip` を使用します。それ以外の場合は、標準 `req.connection.remoteAddress` 値 (ソケットアドレス) を使用します。
+
+##### :remote-user
+
+ユーザーは、基本認証の一部としてリクエストのために認証されました。
+
+##### :req[header]
+
+リクエストの与えられた `header` 。 ヘッダが存在しない場合、
+値はログに`"-"`として表示されます。
+
+##### :res[header]
+
+レスポンスの `header` を指定しました。 ヘッダが存在しない場合、
+値はログに`"-"`として表示されます。
+
+##### :responsetime[digits]
+
+リクエストが `morgan` に入ってくるまでの時間と、レスポンスの
+ヘッダーが書き込まれるまでの時間。
+
+引数`digit`は、数字に
+を含める桁数を指定する数値で、マイクロ秒の精度を提供する`3`をデフォルト値とします。
+
+##### :status
+
+レスポンスのステータスコード。
+
+If the request/response cycle completes before a response was sent to the
+client (for example, the TCP socket closed prematurely by a client aborting
+the request), then the status will be empty (displayed as `"-"` in the log).
+
+##### :totaltime[digits]
+
+リクエストが `morgan` に入ってくるまでの時間と、応答が
+の終了までの時間。ミリ秒単位で接続に書き出されます。
+
+引数`digit`は、数字に
+を含める桁数を指定する数値で、マイクロ秒の精度を提供する`3`をデフォルト値とします。
+
+##### :url
+
+リクエストの URL `req.originalUrl` が存在する場合は使用します。存在しない場合は、 `req.url` を使用します。
+
+##### :user-agent
+
+リクエストの User-Agent ヘッダーの内容。
+
+### morgan.compile(format)
+
+書式文字列を `format` 関数に `morgan` で使用するようにコンパイルします。 フォーマット文字列
+は、単一のログ行を表し、トークン構文を利用できる文字列です。
+トークンは `:token-name` による参照です。 If tokens accept arguments, they can
+be passed using `[]`, for example: `:token-name[pretty]` would pass the string
+`'pretty'` as an argument to the token `token-name`.
+
+The function returned from `morgan.compile` takes three arguments `tokens`, `req`, and
+`res`, where `tokens` is object with all defined tokens, `req` is the HTTP request and
+`res` is the HTTP response. 関数はログをスキップするためにログ行、
+または `undefined` / `null` になる文字列を返します。
+
+通常、フォーマットは `morgan.format(name, format)` を使用して定義されますが、特定の
+高度な用途では、このコンパイル関数は直接利用可能です。
+
+## 例
+
+### エクスプレス/接続
+
+Apache の組み合わせ形式ですべてのリクエストを STDOUT にログ収集するサンプルアプリ
+
+```js
+var express = require('express');
+var morgan = require('morgan');
+
+var app = express();
+
+app.use(morgan('combined'));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### vanilla http サーバー
+
+Apache の組み合わせ形式ですべてのリクエストを STDOUT にログ収集するサンプルアプリ
+
+```js
+var finalhandler = require('finalhandler');
+var http = require('http');
+var morgan = require('morgan');
+
+// create "middleware"
+var logger = morgan('combined');
+
+http.createServer(function (req, res) {
+  var done = finalhandler(req, res);
+  logger(req, res, function (err) {
+    if (err) return done(err);
+
+    // respond to request
+    res.setHeader('content-type', 'text/plain');
+    res.end('hello, world!');
+  });
+});
+```
+
+### ログをファイルに書き込み
+
+#### 単一のファイル
+
+Apache の組み合わせ形式のすべてのリクエストを
+`access.log` にログ収集するサンプルアプリです。
+
+```js
+var express = require('express');
+var fs = require('fs');
+var morgan = require('morgan');
+var path = require('path');
+
+var app = express();
+
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
+// setup the logger
+app.use(morgan('combined', { stream: accessLogStream }));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+#### ログファイルの回転
+
+Sample app that will log all requests in the Apache combined format to one log
+file per day in the `log/` directory using the
+[rotating-file-stream module](https://www.npmjs.com/package/rotating-file-stream).
+
+```js
+var express = require('express');
+var morgan = require('morgan');
+var path = require('path');
+var rfs = require('rotating-file-stream'); // version 2.x
+
+var app = express();
+
+// create a rotating write stream
+var accessLogStream = rfs.createStream('access.log', {
+  interval: '1d', // rotate daily
+  path: path.join(__dirname, 'log'),
+});
+
+// setup the logger
+app.use(morgan('combined', { stream: accessLogStream }));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### スプリット/デュアルログ
+
+`morgan`ミドルウェアは必要な回数だけ使用できます。
+のような組み合わせを有効にします。
+
+- リクエストと応答時にエントリをログに記録する
+- すべてのリクエストをファイルに記録しますが、エラーをコンソールに記録します
+- ... 他にも!
+
+Apache フォーマットですべてのリクエストをファイルに記録するサンプルアプリですが、
+エラー応答はコンソールに記録されます:
+
+```js
+var express = require('express');
+var fs = require('fs');
+var morgan = require('morgan');
+var path = require('path');
+
+var app = express();
+
+// log only 4xx and 5xx responses to console
+app.use(
+  morgan('dev', {
+    skip: function (req, res) {
+      return res.statusCode < 400;
+    },
+  })
+);
+
+// log all requests to access.log
+app.use(
+  morgan('common', {
+    stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' }),
+  })
+);
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### カスタムトークンフォーマットを使用
+
+カスタムトークンフォーマットを使用するサンプルアプリ。 これにより、すべてのリクエストに ID が追加され、`:id` トークンを使用して表示されます。
+
+```js
+var express = require('express');
+var morgan = require('morgan');
+var uuid = require('node-uuid');
+
+morgan.token('id', function getId(req) {
+  return req.id;
+});
+
+var app = express();
+
+app.use(assignId);
+app.use(morgan(':id :method :url :response-time'));
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+
+function assignId(req, res, next) {
+  req.id = uuid.v4();
+  next();
+}
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/morgan/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/morgan

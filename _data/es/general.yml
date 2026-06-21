@@ -1,8 +1,0 @@
-title_announcement: "Express@5.1.0: Ahora la versión por defecto en npm con cronograma LTS"
-body_announcement: "Express 5.1.0 es ahora es la versión predeterminada en npm, y estamos introduciendo un cronograma oficial de LTS para las líneas de lanzamiento v4 y v5. <a href='https://expressjs.com/2025/03/31/v5-1-latest-release.html'>Mira nuestro último blog para más información.</a>"
-community-caveat-alert: "Esta información se refiere a sitios, productos o módulos de terceros que no son mantenidos por el equipo de Expressjs. La lista aquí no constituye un respaldo o una recomendación del equipo del proyecto Expressjs."
-warning: 'Advertencia'
-note: 'Nota'
-caution: 'Precaución'
-i18n_notice: "Este documento puede estar desactualizado en relación con la documentación en inglés. Para las últimas actualizaciones, por favor consulte la"
-i18n_notice_link_text: "documentación en inglés"

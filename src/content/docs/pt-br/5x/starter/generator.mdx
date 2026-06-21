@@ -1,0 +1,125 @@
+---
+title: Gerador de aplicação expressa
+description: Aprenda a usar a ferramenta gerador de aplicativo Express para criar rapidamente um esqueleto para seus aplicativos Express.js, otimização de configuração e configuração.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Use a ferramenta de gerador de aplicação, `express-generator`, para criar rapidamente um esqueleto de aplicação.
+
+Você pode executar o gerador de aplicação com o comando `npx` (disponível em Node.js 8.2.0).
+
+```bash
+$ npx express-generator
+```
+
+Para versões anteriores do Nó, instale o gerador de aplicativo como um pacote npm global e, em seguida, inicie-o:
+
+```bash
+$ npm install -g express-generator
+$ express
+```
+
+Exibe as opções de comando com a opção '-h':
+
+```bash
+$ express -h
+
+  Usage: express [options] [dir]
+
+  Options:
+
+    -h, --help          output usage information
+        --version       output the version number
+    -e, --ejs           add ejs engine support
+        --hbs           add handlebars engine support
+        --pug           add pug engine support
+    -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
+    -f, --force         force on non-empty directory
+```
+
+Por exemplo, o seguinte cria um aplicativo Expresso chamado _myapp_. O aplicativo será criado em uma pasta chamada _myapp_ no diretório de trabalho atual e o mecanismo de visualização será definido para <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+
+```bash
+$ express --view=pug myapp
+
+   create : myapp
+   create : myapp/package.json
+   create : myapp/app.js
+   create : myapp/public
+   create : myapp/public/javascripts
+   create : myapp/public/images
+   create : myapp/routes
+   create : myapp/routes/index.js
+   create : myapp/routes/users.js
+   create : myapp/public/stylesheets
+   create : myapp/public/stylesheets/style.css
+   create : myapp/views
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
+   create : myapp/bin
+   create : myapp/bin/www
+```
+
+Em seguida, instale dependências:
+
+```bash
+$ cd myapp
+$ npm install
+```
+
+No MacOS ou Linux, execute o aplicativo com este comando:
+
+```bash
+$ DEBUG=myapp:* npm start
+```
+
+No prompt de comando Windows, use este comando:
+
+```bash
+> set DEBUG=myapp:* & npm start
+```
+
+No Windows PowerShell, use este comando:
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
+Em seguida, carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
+
+O aplicativo gerado possui a seguinte estrutura de diretórios:
+
+```bash
+.
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
+
+7 directories, 9 files
+```
+
+<Alert type="informações">
+
+A estrutura do aplicativo criada pelo gerador é apenas uma das muitas maneiras de estruturar aplicativos Express.
+Sinta-se livre para usar esta estrutura ou modificá-la para atender às suas necessidades.
+
+</Alert>

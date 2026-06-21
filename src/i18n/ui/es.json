@@ -1,0 +1,188 @@
+{
+  "home": {
+    "welcome": "Bienvenida",
+    "workInProgress": "Esta es una página de trabajo en progreso.",
+    "reviewDesignSystem": {
+      "prefix": "Revisar el",
+      "link": "Fundaciones del sistema de diseño",
+      "suffix": "página de demostración para explorar todos los tokens, primitivos y patrones."
+    }
+  },
+  "search": {
+    "placeholder": "Comience a escribir...",
+    "ariaLabel": "Empezar a escribir para buscar"
+  },
+  "theme": {
+    "toggle": "Cambiar tema",
+    "switchToLight": "Cambiar al modo de luz",
+    "switchToDark": "Cambiar a modo oscuro"
+  },
+  "version": {
+    "selectLabel": "Seleccionar versión API"
+  },
+  "language": {
+    "selectLabel": "Seleccionar idioma"
+  },
+  "nav": {
+    "mainMenu": "Menú principal",
+    "toggleMenu": "Cambiar menú",
+    "home": "casa",
+    "breadcrumb": "migas de pan",
+    "mainNavigation": "Navegación principal",
+    "selectVersion": "Seleccione la versión de documentación"
+  },
+  "menu": {
+    "main": {
+      "docs": "Documentos",
+      "api": "API",
+      "resources": "Recursos",
+      "blog": "Blog",
+      "support": "Soporte"
+    },
+    "sections": {
+      "gettingStarted": "Comenzando",
+      "guide": "Guía",
+      "migration": "Guías de Migración",
+      "advanced": "Temas avanzados",
+      "express": "express()",
+      "application": "Aplicación",
+      "request": "Solicitud",
+      "response": "Respuesta",
+      "router": "Enrutador",
+      "middleware": "Medios"
+    },
+    "items": {
+      "installing": "Instalando",
+      "helloWorld": "Hola mundo",
+      "expressGenerator": "Generador exprés",
+      "basicRouting": "Ruta básica",
+      "staticFiles": "Subrayando archivos estáticos",
+      "examples": "Ejemplos",
+      "faq": "FAQ",
+      "routing": "Ruta",
+      "writingMiddleware": "Escribiendo middleware",
+      "usingMiddleware": "Usando middleware",
+      "usingTemplateEngines": "Utilizando motores de plantillas",
+      "errorHandling": "Manejo de errores",
+      "debugging": "Depuración",
+      "behindProxies": "Behind proxies",
+      "databaseIntegration": "Integración de la base de datos",
+      "overridingExpressApi": "Reemplazar la API Express",
+      "migratingTo4": "Moviendo a Express 4",
+      "migratingTo5": "Moviendo a Express 5",
+      "buildingTemplateEngines": "Construcción de motores de plantillas",
+      "bestPracticePerformance": "Mejores prácticas de rendimiento",
+      "bestPracticeSecurity": "Buenas prácticas de seguridad",
+      "healthcheckGracefulShutdown": "Revisiones de salud y apagado con gracia",
+      "securityUpdates": "Actualización de seguridad",
+      "overview": "Resumen",
+      "properties": "Propiedades",
+      "methods": "Métodos",
+      "events": "Eventos",
+      "types": "Integrado",
+      "community": "Comunidad",
+      "glossary": "Glossary",
+      "contributing": "Contribuyendo",
+      "utils": "Utilidades",
+      "changelog": "Cambios",
+      "middleware": "Medios"
+    },
+    "aria": {
+      "docs": "Documentación",
+      "api": "Referencia API",
+      "resources": "Recursos",
+      "blog": "Blog",
+      "support": "Soporte",
+      "installing": "Instalando Express",
+      "helloWorld": "Hola ejemplo de mundo",
+      "expressGenerator": "Generador exprés",
+      "routing": "Guía de ruta",
+      "writingMiddleware": "Guía de middleware de escritura",
+      "usingMiddleware": "Usando la guía de middleware",
+      "usingTemplateEngines": "Usando la guía de motores de plantillas",
+      "errorHandling": "Guía de manejo de errores",
+      "debugging": "Depuración Express",
+      "behindProxies": "Expresar detrás de proxies",
+      "databaseIntegration": "Guía de integración de base de datos",
+      "overridingExpressApi": "Reemplazar la guía Express API",
+      "application": "Resumen de la aplicación",
+      "request": "Resumen de solicitudes",
+      "response": "Respuesta general",
+      "router": "Resumen de ruta",
+      "middleware": "Recursos de Middleware",
+      "community": "Recursos de la comunidad",
+      "glossary": "Glosario de términos",
+      "contributing": "Guía de contribución",
+      "utils": "Utilidades",
+      "changelog": "Registro de cambios urgente"
+    }
+  },
+  "doc": {
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente",
+    "pageNavigation": "Page navigation"
+  },
+  "page": {
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "Traducir esta página"
+  },
+  "announcement": {
+    "readMore": "Leer más",
+    "checkLatestBlog": "Echa un vistazo a nuestro último blog"
+  },
+  "post": {
+    "share": "Compartir",
+    "shareOnX": "Compartir en X",
+    "shareOnBluesky": "Compartir en Bluesky",
+    "shareOnLinkedIn": "Compartir en LinkedIn",
+    "shareOnSlack": "Compartir en Slack",
+    "shareOnTelegram": "Compartir en Telegram",
+    "shareOnWhatsApp": "Compartir en WhatsApp",
+    "rssFeed": "Feed RSS",
+    "copyLink": "Copiar enlace",
+    "linkCopied": "¡Enlace copiado!",
+    "toc": "En esta página",
+    "more": "Más de Express",
+    "writeBanner": "¿Interesado en escribir una publicación? \n Revisa nuestras directrices para empezar.",
+    "writeGuidelines": "Leer las directrices"
+  },
+  "toc": {
+    "overview": "Resumen"
+  },
+  "features": {
+    "title": "Claridad sobre complejidad. Para cada desarrollador.",
+    "performance": {
+      "title": "Rendimiento",
+      "body": "Express proporciona una capa delgada de características fundamentales de la aplicación web, sin ocultar las características de Node.js que usted conoce y ama."
+    },
+    "api": {
+      "title": "APIs",
+      "body": "Con una infinidad de métodos de utilidad HTTP y middleware a tu disposición, crear una API robusta es rápido y fácil."
+    },
+    "middleware": {
+      "title": "Medios",
+      "body": "Express es un marco de enrutamiento ligero y flexible, con características básicas mínimas destinadas a ser incrementado mediante el uso de módulos Express middleware."
+    },
+    "webapplication": {
+      "title": "Aplicaciones Web",
+      "body": "Express es un marco de aplicación web de Node.js mínimo y flexible que proporciona un robusto conjunto de características para aplicaciones web y móviles."
+    }
+  },
+  "error404": {
+    "title": "404 - Página no encontrada",
+    "description": "La página que estás buscando no se pudo encontrar.",
+    "heading": "Página no encontrada",
+    "message": "La página que buscas no existe o ha sido movida.",
+    "goHome": "Ir a Inicio"
+  },
+  "common": {
+    "download": "Descargar"
+  },
+  "hero": {
+    "tagline": "El framework web rápido, minimalista y sin imposiciones para Node.js",
+    "getStarted": "Empezar",
+    "kawaiiLogoAlt": "Logo de Express.js kawaii",
+    "videoPause": "Pausar vídeo de fondo",
+    "videoPlay": "Reproducir vídeo de fondo"
+  }
+}

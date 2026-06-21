@@ -1,0 +1,165 @@
+---
+/**
+ * PostHeader Pattern Component
+ *
+ * A blog post header section with tags, title, author avatar, and share icons.
+ *
+ * @example — Single author
+ * <PostHeader
+ *   labels={["Security"]}
+ *   title="How to secure your Express app"
+ *   authors={[{ src: "/images/author.jpg", name: "John Doe" }]}
+ *   date="Jun 05, 2025"
+ * />
+ *
+ * @example — Multiple authors, no tags
+ * <PostHeader
+ *   title="Express 5.0 is here"
+ *   authors={[
+ *     { src: "/images/author1.jpg", name: "Jane Smith" },
+ *     { src: "/images/author2.jpg", name: "John Doe" },
+ *   ]}
+ *   date="Mar 04, 2026"
+ * />
+ */
+import './PostHeader.css';
+import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
+import { H1, Avatar, Tag, Flex } from '@components/primitives';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Author {
+  src: string;
+  alt?: string;
+  name: string;
+}
+
+interface Props extends HTMLAttributes<'div'> {
+  labels?: string[];
+  title: string;
+  authors: Author[];
+  date?: string;
+  cover?: string;
+}
+
+const { labels = [], title, authors, date, cover, class: className, ...rest } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const pageUrl = Astro.url.href;
+const encodedUrl = encodeURIComponent(pageUrl);
+const encodedTitle = encodeURIComponent(title);
+
+const xShareUrl = `https://x.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
+const bskyShareUrl = `https://bsky.app/intent/compose?text=${encodedTitle}%20${encodedUrl}`;
+const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+const telegramShareUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
+const whatsappShareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+---
+
+<div class:list={['post-header', className]} {...rest}>
+  {
+    labels.length > 0 && (
+      <Flex gap="2" wrap="wrap">
+        {labels.map((label) => (
+          <Tag>{label}</Tag>
+        ))}
+      </Flex>
+    )
+  }
+  <H1 id="overview" vMargin={false} class="post-header__title"><a href="#overview">{title}</a></H1>
+  {authors.length > 0 && <Avatar authors={authors} caption={date} size="md" />}
+  <div class="post-header__share" role="group" aria-label={t('post.share')}>
+    <a
+      class="post-header__share-btn"
+      href={xShareUrl}
+      aria-label={t('post.shareOnX')}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="x" aria-hidden="true" />
+    </a>
+    <a
+      class="post-header__share-btn"
+      href={bskyShareUrl}
+      aria-label={t('post.shareOnBluesky')}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="bsky" aria-hidden="true" />
+    </a>
+    <a
+      class="post-header__share-btn"
+      href={linkedinShareUrl}
+      aria-label={t('post.shareOnLinkedIn')}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="linkedin" aria-hidden="true" />
+    </a>
+    <a
+      class="post-header__share-btn"
+      href={telegramShareUrl}
+      aria-label={t('post.shareOnTelegram')}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="telegram" aria-hidden="true" />
+    </a>
+    <a
+      class="post-header__share-btn"
+      href={whatsappShareUrl}
+      aria-label={t('post.shareOnWhatsApp')}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="whatsapp" aria-hidden="true" />
+    </a>
+    <a class="post-header__share-btn" href="/feed.xml" aria-label={t('post.rssFeed')}>
+      <Icon name="rss" aria-hidden="true" />
+    </a>
+    <button
+      class="post-header__share-btn post-header__copy-btn"
+      type="button"
+      aria-label={t('post.copyLink')}
+      data-url={pageUrl}
+      data-label-copy={t('post.copyLink')}
+      data-label-copied={t('post.linkCopied')}
+    >
+      <Icon name="fluent:link-24-regular" aria-hidden="true" />
+    </button>
+  </div>
+
+  {
+    cover && (
+      <div class="post-header__cover">
+        <Image
+          src={cover}
+          alt=""
+          aria-hidden="true"
+          width={1200}
+          height={630}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.post-header__copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.url ?? window.location.href;
+      await navigator.clipboard.writeText(url);
+      btn.setAttribute('aria-label', btn.dataset.labelCopied ?? 'Copied!');
+      btn.classList.add('post-header__copy-btn--copied');
+      setTimeout(() => {
+        btn.setAttribute('aria-label', btn.dataset.labelCopy ?? '');
+        btn.classList.remove('post-header__copy-btn--copied');
+      }, 2000);
+    });
+  });
+</script>

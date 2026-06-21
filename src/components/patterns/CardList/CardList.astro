@@ -1,0 +1,60 @@
+---
+/**
+ * CardList Pattern Component
+ *
+ * A responsive cards list built on top of the Grid primitive.
+ * Add cards (or card links) through the default slot.
+ */
+
+import './CardList.css';
+import type { HTMLAttributes } from 'astro/types';
+import { Grid } from '@/components/primitives';
+import type { GapSize, ColSpan } from '@/components/primitives/Grid/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  /** Gap between items */
+  gap?: GapSize;
+  /** Vertical gap override */
+  rowGap?: GapSize;
+  /** Horizontal gap override */
+  columnGap?: GapSize;
+  /** Columns span per item on mobile */
+  itemXs?: ColSpan;
+  /** Columns span per item on tablet */
+  itemMd?: ColSpan;
+  /** Columns span per item on desktop */
+  itemLg?: ColSpan;
+}
+
+const {
+  gap = '4',
+  rowGap,
+  columnGap,
+  itemXs = 12,
+  itemMd = 6,
+  itemLg = 4,
+  class: className,
+  style,
+  ...rest
+} = Astro.props;
+
+const responsiveStyle = [
+  `--card-list-item-xs: ${itemXs}`,
+  `--card-list-item-md: ${itemMd}`,
+  `--card-list-item-lg: ${itemLg}`,
+  style,
+]
+  .filter(Boolean)
+  .join('; ');
+---
+
+<Grid
+  gap={gap}
+  rowGap={rowGap}
+  columnGap={columnGap}
+  class:list={['card-list', className]}
+  style={responsiveStyle}
+  {...rest}
+>
+  <slot />
+</Grid>

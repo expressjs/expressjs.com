@@ -1,0 +1,45 @@
+---
+/**
+ * Link override for shared content (`api`, `blog`).
+ *
+ * Shared collections have no per-language source files, so their MDX is compiled
+ * once and can't be localized per render-language at build time. This component
+ * localizes links at render, using the current page's language/version (taken from
+ * `Astro.url`):
+ *
+ * - Used as the `a` element override (`<Content components={{ a: LocalizedLink }} />`)
+ *   it catches Markdown links, which the plugin baked to the default language
+ *   (`/en/...`) — they get re-pointed to the current language.
+ * - Used directly in MDX (`<LocalizedLink href="/api/...">`) it catches raw JSX
+ *   anchors, which the plugin can't bake; their bare paths are localized from scratch
+ *   with the shared core logic.
+ *
+ * Anchors, external links and relative links are left untouched.
+ */
+import { resolveOptions, rewriteUrl } from '@/plugins/rewrite-localized-links-core.mjs';
+
+const DEFAULT_LANG = 'en';
+const config = resolveOptions();
+
+const { href, ...rest } = Astro.props;
+
+// Current page context, e.g. `/es/5x/api/express` → lang `es`, version `5x`.
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const lang = segments[0] || DEFAULT_LANG;
+const version = /^\d+x$/.test(segments[1] ?? '') ? segments[1] : undefined;
+
+let localizedHref = href;
+if (typeof href === 'string') {
+  if (href.startsWith(`/${DEFAULT_LANG}/`)) {
+    // Baked to the default language at compile time → re-point to the current one.
+    if (lang !== DEFAULT_LANG) {
+      localizedHref = href.replace(new RegExp(`^/${DEFAULT_LANG}/`), `/${lang}/`);
+    }
+  } else {
+    // Bare path (authored directly in shared MDX) → localize from scratch.
+    localizedHref = rewriteUrl(href, { lang, version }, config);
+  }
+}
+---
+
+<a href={localizedHref} {...rest}><slot /></a>

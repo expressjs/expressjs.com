@@ -1,0 +1,188 @@
+{
+  "home": {
+    "welcome": "ようこそ",
+    "workInProgress": "これは進行中のホームページです。",
+    "reviewDesignSystem": {
+      "prefix": "レビュー：",
+      "link": "デザインシステム基礎",
+      "suffix": "すべてのトークン、プリミティブ、パターンを調べるデモページ。"
+    }
+  },
+  "search": {
+    "placeholder": "入力を開始...",
+    "ariaLabel": "検索を開始する"
+  },
+  "theme": {
+    "toggle": "テーマの切り替え",
+    "switchToLight": "ライトモードに切り替える",
+    "switchToDark": "ダークモードに切り替える"
+  },
+  "version": {
+    "selectLabel": "API バージョンを選択"
+  },
+  "language": {
+    "selectLabel": "言語を選択"
+  },
+  "nav": {
+    "mainMenu": "メインメニュー",
+    "toggleMenu": "切り替えメニュー",
+    "home": "ホーム",
+    "breadcrumb": "パンくずリスト",
+    "mainNavigation": "メインナビゲーション",
+    "selectVersion": "ドキュメントのバージョンを選択"
+  },
+  "menu": {
+    "main": {
+      "docs": "ドキュメント",
+      "api": "API",
+      "resources": "リソース",
+      "blog": "ブログ",
+      "support": "サポート"
+    },
+    "sections": {
+      "gettingStarted": "はじめに",
+      "guide": "ガイド",
+      "migration": "移行ガイド",
+      "advanced": "高度なトピック",
+      "express": "express()",
+      "application": "アプリケーション",
+      "request": "リクエスト",
+      "response": "回答",
+      "router": "Router",
+      "middleware": "ミドルウェア"
+    },
+    "items": {
+      "installing": "インストール中",
+      "helloWorld": "Hello world",
+      "expressGenerator": "Express generator",
+      "basicRouting": "基本ルーティング",
+      "staticFiles": "静的ファイルを提供中",
+      "examples": "例",
+      "faq": "FAQ",
+      "routing": "ルーティング",
+      "writingMiddleware": "ミドルウェアの書き込み",
+      "usingMiddleware": "ミドルウェアの使用",
+      "usingTemplateEngines": "テンプレートエンジンの使用",
+      "errorHandling": "エラー処理",
+      "debugging": "デバッグ",
+      "behindProxies": "プロキシの背後にある",
+      "databaseIntegration": "データベースの統合",
+      "overridingExpressApi": "Express API のオーバーライド",
+      "migratingTo4": "Express 4に移動中",
+      "migratingTo5": "Express 5に移動中",
+      "buildingTemplateEngines": "ビルディングテンプレートエンジン",
+      "bestPracticePerformance": "パフォーマンスのベストプラクティス",
+      "bestPracticeSecurity": "セキュリティのベストプラクティス",
+      "healthcheckGracefulShutdown": "ヘルスチェックと優雅な停止",
+      "securityUpdates": "セキュリティの更新",
+      "overview": "概要",
+      "properties": "プロパティー",
+      "methods": "メソッド",
+      "events": "イベント",
+      "types": "ビルトイン",
+      "community": "コミュニティ",
+      "glossary": "Glossary",
+      "contributing": "コントリビューション",
+      "utils": "ユーティリティ",
+      "changelog": "更新履歴",
+      "middleware": "ミドルウェア"
+    },
+    "aria": {
+      "docs": "ドキュメント",
+      "api": "APIリファレンス",
+      "resources": "リソース",
+      "blog": "ブログ",
+      "support": "サポート",
+      "installing": "Express のインストール",
+      "helloWorld": "Hello world example",
+      "expressGenerator": "Express generator",
+      "routing": "ルーティングガイド",
+      "writingMiddleware": "ミドルウェアガイドを書く",
+      "usingMiddleware": "ミドルウェアガイドの使用",
+      "usingTemplateEngines": "テンプレートエンジンガイドの使用",
+      "errorHandling": "ガイドの処理中にエラー",
+      "debugging": "Expressのデバッグ",
+      "behindProxies": "プロキシの背後にあるエクスプレス",
+      "databaseIntegration": "データベース統合ガイド",
+      "overridingExpressApi": "Express API ガイドをオーバーライド",
+      "application": "アプリケーションの概要",
+      "request": "要求の概要",
+      "response": "応答の概要",
+      "router": "ルーターの概要",
+      "middleware": "ミドルウェアのリソース",
+      "community": "コミュニティリソース",
+      "glossary": "用語集",
+      "contributing": "貢献ガイド",
+      "utils": "ユーティリティ",
+      "changelog": "エクスプレスの更新履歴"
+    }
+  },
+  "doc": {
+    "previousPage": "前",
+    "nextPage": "次へ",
+    "pageNavigation": "Page navigation"
+  },
+  "page": {
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "このページを翻訳"
+  },
+  "announcement": {
+    "readMore": "もっと読む",
+    "checkLatestBlog": "最新のブログをご覧ください"
+  },
+  "post": {
+    "share": "共有",
+    "shareOnX": "X上で共有",
+    "shareOnBluesky": "Blueskyで共有",
+    "shareOnLinkedIn": "LinkedInで共有",
+    "shareOnSlack": "Slack で共有",
+    "shareOnTelegram": "Telegramで共有",
+    "shareOnWhatsApp": "WhatsAppで共有",
+    "rssFeed": "RSS フィード",
+    "copyLink": "リンクをコピー",
+    "linkCopied": "リンクをコピーしました！",
+    "toc": "このページ",
+    "more": "エクスプレスからもっと見る",
+    "writeBanner": "投稿を書くことに興味がありますか？ \n 私たちのガイドラインをチェックして始めましょう。",
+    "writeGuidelines": "ガイドラインを読む"
+  },
+  "toc": {
+    "overview": "概要"
+  },
+  "features": {
+    "title": "複雑性より明快です。すべての開発者にとって。",
+    "performance": {
+      "title": "パフォーマンス",
+      "body": "Express は基本的な Web アプリケーション機能の薄い層を提供しますが、Node.js の機能を不明瞭にすることはありません。"
+    },
+    "api": {
+      "title": "API",
+      "body": "無数のHTTPユーティリティメソッドとミドルウェアを自由に使えば、堅牢なAPIを簡単かつ迅速に作成できます。"
+    },
+    "middleware": {
+      "title": "ミドルウェア",
+      "body": "Expressは軽量で柔軟なルーティングフレームワークで、最小限のコア機能を備え、Expressミドルウェアモジュールを使用して拡張します。"
+    },
+    "webapplication": {
+      "title": "Webアプリケーション",
+      "body": "Express は最小限かつ柔軟な Node.js の Web アプリケーションフレームワークで、Web およびモバイル アプリケーションに堅牢な一連の機能を提供します。"
+    }
+  },
+  "error404": {
+    "title": "404 - ページが見つかりません",
+    "description": "お探しのページが見つかりませんでした。",
+    "heading": "ページが見つかりません",
+    "message": "お探しのページは存在しないか、移動されています。",
+    "goHome": "ホームへ移動"
+  },
+  "common": {
+    "download": "ダウンロード"
+  },
+  "hero": {
+    "tagline": "Node.jsの高速、非公開、最小限のWebフレームワーク",
+    "getStarted": "はじめよう",
+    "kawaiiLogoAlt": "Express.js kawaiiのロゴ",
+    "videoPause": "背景ビデオを一時停止",
+    "videoPlay": "背景ビデオを再生"
+  }
+}
