@@ -1,0 +1,107 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - main
+  pull_request_review:
+    types: [submitted]
+  push:
+    branches:
+      - main
+
+# Cancel in progress workflows
+# in the scenario where we already had a run going for that PR/branch/tag but then triggered a new run
+concurrency:
+  group: '${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run tests
+        shell: bash
+        run: npm run check
+
+      - name: Run unit tests
+        shell: bash
+        run: npm run test:unit
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
+
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Build Astro site
+        uses: withastro/action@b7d53628f8b666036b0238aadb0b984a2a489f26 # v6
+        with:
+          path: .
+          package-manager: npm
+          out-dir: dist
+
+      - name: Upload build artifact for linkChecker
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: site-dist
+          path: dist/
+          if-no-files-found: error
+
+  linkChecker:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Download build artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: site-dist
+          path: dist/
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
+        with:
+          args: |
+            --root-dir $PWD/dist
+            --exclude-path dist/llms.txt
+            --exclude-path dist/llms/
+            --exclude-private
+            --exclude-loopback
+            --remap "https://expressjs\.com\/((?:[^\/]+\/)*[^\/\.]+)\/?$ file://$PWD/dist/\$1/index.html"
+            --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
+            dist/
+          fail: true

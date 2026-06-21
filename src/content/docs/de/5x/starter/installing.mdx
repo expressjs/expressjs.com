@@ -1,0 +1,41 @@
+---
+title: Installiere
+description: Erfahren Sie, wie Sie Express.js in Ihrer Node.js-Umgebung installieren, einschließlich der Einrichtung Ihres Projektverzeichnisses und der Verwaltung von Abhängigkeiten mit npm.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Bevor Sie beginnen, stellen Sie sicher, dass Sie [Node.js](https://nodejs.org/) 18 oder höher installiert haben. Erstellen Sie dann ein Verzeichnis für Ihre Anwendung und navigieren Sie hinein.
+
+```bash
+mkdir myapp
+cd myapp
+```
+
+Benutze den Befehl `npm init` um eine `package.json` Datei für deine Anwendung zu erstellen.
+Für weitere Informationen darüber, wie `package.json` funktioniert, siehe [Spezifikationen für npm's package.json handling](https://docs.npmjs.com/files/package.json).
+
+```bash
+npm init
+```
+
+Dieser Befehl fragt Sie nach einer Reihe von Dingen wie dem Namen und der Version Ihrer Anwendung.
+Im Moment können Sie einfach RETURN drücken, um die Standardwerte für die meisten von ihnen zu akzeptieren, mit der folgenden Ausnahme:
+
+```
+entry point: (index.js)
+```
+
+Geben Sie `app.js` ein, oder was auch immer der Name der Hauptdatei sein soll. Wenn Sie `index.js` wollen, drücken Sie RETURN um den empfohlenen Dateinamen zu akzeptieren.
+
+Installieren Sie jetzt Express im `myapp` Verzeichnis und speichern Sie es in der Abhängigkeitsliste. Zum Beispiel:
+
+```bash
+npm install express
+```
+
+Um Express vorübergehend zu installieren und nicht zur Abhängigkeitsliste hinzufügen:
+
+```bash
+npm install express --no-save
+```

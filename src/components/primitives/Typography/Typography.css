@@ -1,0 +1,75 @@
+/**
+ * Typography Component Styles
+ */
+
+@layer primitives {
+  /* ============================================
+       COLORS
+       ============================================ */
+
+  .text--color-primary {
+    color: var(--color-text-primary);
+  }
+
+  .text--color-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text--color-tertiary {
+    color: var(--color-text-tertiary);
+  }
+
+  .text--color-inverse {
+    color: var(--color-text-inverse);
+  }
+
+  .text--color-mute {
+    color: var(--color-text-mute);
+  }
+
+  .text--color-success {
+    color: var(--color-text-success);
+  }
+
+  .text--color-warning {
+    color: var(--color-text-warning);
+  }
+
+  .text--color-error {
+    color: var(--color-text-error);
+  }
+
+  .text--color-inherit {
+    color: inherit;
+  }
+
+  /* ============================================
+       WEIGHTS (Overrides)
+       ============================================ */
+  .text--weight-light {
+    font-weight: var(--font-weight-light);
+  }
+
+  .text--weight-normal {
+    font-weight: var(--font-weight-normal);
+  }
+
+  .text--weight-medium {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text--weight-semibold {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text--weight-bold {
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* ============================================
+       SPACING
+       ============================================ */
+  .text--no-v-margin {
+    margin-block: 0;
+  }
+}

@@ -1,0 +1,49 @@
+@layer patterns {
+  .banner {
+    width: 100%;
+    padding: var(--space-4) 0;
+    border-bottom: var(--border-width-1) solid;
+    position: relative;
+  }
+
+  .banner--info {
+    background-color: var(--color-bg-info);
+    border-color: var(--color-border-info);
+    color: var(--color-text-info);
+  }
+
+  .banner--warning {
+    background-color: var(--color-bg-warning);
+    border-color: var(--color-border-warning);
+    color: var(--color-text-warning);
+  }
+
+  .banner__icon {
+    margin: 0;
+  }
+
+  .banner__dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-1);
+    color: inherit;
+    border-radius: var(--radius-base);
+    flex-shrink: 0;
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+
+    &:hover {
+      background-color: light-dark(oklch(0% 0 0 / 0.08), oklch(100% 0 0 / 0.08));
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+}

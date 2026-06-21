@@ -1,0 +1,375 @@
+---
+title: Routage
+description: Apprenez à définir et utiliser des routes dans les applications Express.js, y compris les méthodes de trajet, les chemins de trajet, les paramètres et l'utilisation du routeur pour le routage modulaire.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+_Routing_ indique comment les terminaux (URIs) d'une application répondent aux requêtes du client.
+Pour une introduction au routage, voir [Routage de base](/starter/basic-routing).
+
+Vous définissez le routage à l'aide des méthodes de l'objet Express `app` qui correspondent aux méthodes HTTP;
+par exemple, `app. et()` pour gérer les requêtes GET et `app.post` pour gérer les requêtes POST. Pour une liste complète,
+voir [app.METHOD](/api/application#appmethodpath-callback--callback-). Vous pouvez également utiliser [app.all()](/api/application#appallpath-callback--callback-) pour gérer toutes les méthodes HTTP et [app. se()](/api/application#appusepath-callback--callback) à
+spécifient le middleware comme fonction de callback (Voir [Utilisation du middleware](/guide/using-middleware) pour plus de détails).
+
+Ces méthodes de routage spécifient une fonction de rappel (parfois appelée "fonctions de gestionnaire") appelée lorsque l'application reçoit une requête vers la route spécifiée (endpoint) et la méthode HTTP. En d'autres termes, l'application "écoute" les requêtes qui correspondent à la(les) route(s) spécifiée(s) et à la(les) méthode(s), et quand il détecte une correspondance, il appelle la fonction de rappel spécifiée.
+
+En fait, les méthodes de routage peuvent avoir plus d'une fonction de rappel en tant qu'arguments.
+Avec plusieurs fonctions de rappel, il est important de fournir `next` comme argument à la fonction de callback puis appeler `next()` dans le corps de la fonction pour distribuer le contrôle
+au prochain rappel.
+
+Le code suivant est un exemple de route très basique.
+
+```js
+const express = require('express');
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+## Méthodes de la route
+
+Une méthode de route est dérivée d'une des méthodes HTTP, et est attachée à une instance de la classe `express`.
+
+Le code suivant est un exemple de routes qui sont définies pour le `GET` et les méthodes `POST` à la racine de l'application.
+
+```js
+// GET method route
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req, res) => {
+  res.send('POST request to the homepage');
+});
+```
+
+Express supporte les méthodes qui correspondent à toutes les méthodes de requête HTTP : `get`, `post`, et ainsi de suite.
+Pour une liste complète, voir [app.METHOD](/api/application#appmethodpath-callback--callback-).
+
+Il y a une méthode de routage spéciale, `app.all()`, utilisée pour charger les fonctions du middleware à un chemin pour _toutes_ les méthodes de requête HTTP. Par exemple, le gestionnaire suivant est exécuté pour les requêtes vers la route `"/secret"` si vous utilisez `GET`, `POST`, `PUT`, `DELETE`, ou toute autre méthode de requête HTTP supportée dans le module [http](https://nodejs.org/api/http.html#http_http_methods).
+
+```js
+app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+## Chemins de la route
+
+Les chemins de la route, en combinaison avec une méthode de requête, définissent les points de terminaison à partir desquels les requêtes peuvent être faites. Les chemins de route peuvent être des chaînes de caractères ou des expressions régulières.
+
+<Alert type="Infos">
+
+Express utilise [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 pour correspondre aux chemins de route ; consultez la documentation path-to-regexp pour toutes les possibilités dans la définition des chemins de route.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) est un outil pratique pour tester les routes Express de base, bien qu'il ne supporte pas la recherche de patterns.
+
+</Alert>
+
+### Chemins de chaîne
+
+Les chemins de chaîne correspondent exactement aux requêtes. Les points (`.`) et les traits d'union (`-`) sont interprétés littéralement.
+
+<Alert type="warning">Les chaînes de requête ne font pas partie du chemin de la route.</Alert>
+
+```js
+app.get('/', (req, res) => {
+  res.send('root');
+});
+
+app.get('/about', (req, res) => {
+  res.send('about');
+});
+
+app.get('/random.text', (req, res) => {
+  res.send('random.text');
+});
+```
+
+### Cartes jokers
+
+Les jokers correspondent à n'importe quel chemin après un préfixe. Ils doivent avoir un nom, tout comme les paramètres de trajet, et sont capturés sous la forme de tableaux de segments de chemins.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+Pour correspondre également au chemin de la racine, enveloppez le joker entre accolades :
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Segments optionnels
+
+Utilisez des accolades pour définir des segments optionnels dans un chemin d'itinéraire. Lorsque le segment n'est pas présent, le paramètre est omis de `req.params`.
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+<Alert type="Alerte">
+
+Les caractères `?`, `+`, `*`, `[]`et `()` sont réservés et ne peuvent pas être utilisés comme caractères littéraux dans les chemins de route. Utilisez `\` pour les échapper si nécessaire.
+
+</Alert>
+
+### Expressions régulières
+
+Vous pouvez également utiliser des expressions régulières comme chemins de route. Ceci est utile lorsque vous avez besoin d'une logique de recherche plus complexe.
+
+```js
+// Matches any path containing "a"
+app.get(/a/, (req, res) => {
+  res.send('/a/');
+});
+
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
+app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/');
+});
+```
+
+## Paramètres de la route
+
+Les paramètres de la route sont des segments d'URL nommés qui sont utilisés pour capturer les valeurs spécifiées à leur position dans l'URL. Les valeurs capturées sont remplies dans l'objet `req.params`, avec le nom du paramètre route spécifié dans le chemin comme leurs clés respectives.
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+Pour définir des routes avec des paramètres d'itinéraire, il suffit de spécifier les paramètres de l'itinéraire dans le chemin de la route comme indiqué ci-dessous.
+
+```js
+app.get('/users/:userId/books/:bookId', (req, res) => {
+  res.send(req.params);
+});
+```
+
+<Alert type="Alerte">
+
+Le nom des paramètres de route doit être composé de "mots caractères" ([A-Za-z0-9_]).
+
+</Alert>
+
+Puisque le trait d'union (`-`) et le point (`.`) sont interprétés littéralement, ils peuvent être utilisés avec des paramètres d'itinéraire à des fins utiles.
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+<Alert type="Alerte">
+
+Les caractères Regexp ne sont pas pris en charge dans les chemins de route. Utilisez un tableau de chemins ou d'expressions régulières à la place.
+Voir la [syntaxe correspondante à la route des chemins](/en/guide/migrating-5#path-syntax) pour plus d'informations.
+
+</Alert>
+
+## Gestionnaires de routes
+
+Vous pouvez fournir plusieurs fonctions de rappel qui se comportent comme [middleware](/guide/using-middleware) pour traiter une requête. La seule exception est que ces callbacks peuvent appeler `next('route')` pour contourner les rappels de route restants. Vous pouvez utiliser ce mécanisme pour imposer des conditions préalables sur une route, passent ensuite le contrôle aux routes suivantes s'il n'y a pas de raison de poursuivre l'itinéraire courant.
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
+Dans cet exemple :
+
+- `GET /user/5` → géré par la première route → envoie "Utilisateur 5"
+- `GET /user/0` → première route appelle `next('route')`, passe à la prochaine route correspondant à `/user/:id`
+
+Les gestionnaires de routes peuvent être sous la forme d'une fonction, d'un tableau de fonctions, ou de combinaisons des deux, comme indiqué dans les exemples suivants.
+
+Une seule fonction de rappel peut gérer une route. Par exemple :
+
+```js
+app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+Plus d'une fonction de rappel peut gérer une route (assurez-vous de spécifier l'objet `next`). Par exemple :
+
+```js
+app.get(
+  '/example/b',
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
+Un tableau de fonctions de rappel peut gérer une route. Par exemple :
+
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+Une combinaison de fonctions indépendantes et de tableaux de fonctions peut gérer une route. Par exemple :
+
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
+## Méthodes de réponse
+
+Les méthodes de l'objet de réponse (`res`) dans la table suivante peuvent envoyer une réponse au client et terminer le cycle de réponse de la requête. Si aucune de ces méthodes n'est appelée à partir d'un gestionnaire d'itinéraire, la requête du client sera suspendue.
+
+| Méthode                                                                | Libellé                                                                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Demander au téléchargement un fichier.                                                            |
+| [res.end()](/api/response#resenddata-encoding-callback)                | Terminer le processus de réponse.                                                                 |
+| [res.json()](/api/response#resjsonbody)                                | Envoyer une réponse JSON.                                                                         |
+| [res.jsonp()](/api/response#resjsonpbody)                              | Envoyer une réponse JSON avec le support JSONP.                                                   |
+| [res.redirect()](/api/response#resredirectstatus-path)                 | Rediriger une requête.                                                                            |
+| [res.render()](/api/response#resrenderview--locals--callback)          | Afficher un modèle de vue.                                                                        |
+| [res.send()](/api/response#ressendbody)                                | Envoyer une réponse de différents types.                                                          |
+| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Envoyer un fichier en tant que flux octet.                                                        |
+| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Définit le code de statut de la réponse et envoie sa représentation en tant que corps de réponse. |
+
+## app.route()
+
+Vous pouvez créer des gestionnaires de routes chaînables pour un chemin en utilisant `app.route()`.
+Parce que le chemin est spécifié à un seul endroit, la création de routes modulaires est utile, tout comme la réduction de la redondance et des fautes de frappe. Pour plus d'informations sur les routes, voir : [Documentation de Router()](/api/router).
+
+Voici un exemple de gestionnaires de routes enchaînés qui sont définis en utilisant `app.route()`.
+
+```js
+app
+  .route('/book')
+  .get((req, res) => {
+    res.send('Get a random book');
+  })
+  .post((req, res) => {
+    res.send('Add a book');
+  })
+  .put((req, res) => {
+    res.send('Update the book');
+  });
+```
+
+## Routeur
+
+Utilisez la classe `express.Router` pour créer des gestionnaires de route modulaires et montables. Une instance `Router` est un système complet de middleware et de routage ; pour cette raison, elle est souvent appelée "mini-app".
+
+L'exemple suivant crée un routeur en tant que module, charge une fonction middleware dedans, définit quelques routes, et monte le module routeur sur un chemin dans l'application principale.
+
+Créez un fichier de routeur nommé `birds.js` dans le répertoire de l'application, avec le contenu suivant :
+
+```js
+const express = require('express');
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+module.exports = router;
+```
+
+Ensuite, chargez le module routeur dans l'application :
+
+```js
+const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+L'application sera maintenant en mesure de traiter les demandes vers `/birds` et `/birds/about`, ainsi que d'appeler la fonction middleware `timeLog` qui est spécifique à la route.
+
+Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. Pour le rendre accessible, vous devrez passer l'option `mergeParams` au constructeur de routeur [reference](/api/application#appusepath-callback--callback).
+
+```js
+const router = express.Router({ mergeParams: true });
+```

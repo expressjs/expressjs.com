@@ -1,0 +1,395 @@
+---
+title: ルーティング
+description: Express.jsアプリケーションでルートを定義して使用する方法を学びます。ルートメソッド、ルートパス、パラメータ、モジュラールーティングにルーターを使用する方法を学びます。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+_Routing_ とは、アプリケーションのエンドポイント(URI)がクライアントリクエストに対してどのように応答するかを指します。
+For an introduction to routing, see [Basic routing](/starter/basic-routing).
+
+HTTPメソッドに対応するExpress `app` オブジェクトのメソッドを使用してルーティングを定義します。
+のように、`app。 POST リクエストを処理する GET リクエストと `app.post\` を処理します。 完全なリストについては、
+[app.METHOD](/api/application#appmethodpath-callback--callback-) を参照してください。 [app.all()](/api/application#appallpath-callback--callback-)を使用して、すべてのHTTPメソッドと[app]を処理することもできます。 se()](/api/application#appusepath-callback--callback) to
+コールバック関数としてミドルウェアを指定する (詳細は [Using middleware](/guide/using-middleware) を参照)。
+
+これらのルーティングメソッドは、アプリケーションが指定されたルート (エンドポイント) と HTTP メソッドへのリクエストを受け取ったときに呼び出されるコールバック関数 ("handler functions" と呼ばれることもあります) を指定します。 言い換えれば、アプリケーションは指定されたルートとメソッドに一致するリクエストを「リッスン」します。 マッチを検出すると、指定されたコールバック関数を呼び出します。
+
+実際、ルーティングメソッドは引数として複数のコールバック関数を持つことができます。
+複数のコールバック関数を使用。 コールバック関数に `next` を引数として渡し、関数の本体内で `next()` を呼び出して、次のコールバックに
+を渡すことが重要です。
+
+以下のコードは、非常に基本的なルートの例です。
+
+```js
+const express = require('express');
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+## ルートメソッド
+
+routeメソッドはHTTPメソッドのいずれかから派生し、`express` クラスのインスタンスに追加されます。
+
+以下のコードは、`GET` と `POST` メソッドを定義したルートの例です。
+
+```js
+// GET method route
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req, res) => {
+  res.send('POST request to the homepage');
+});
+```
+
+Expressは、すべてのHTTPリクエストメソッドに対応するメソッドをサポートしています: `get`、`post`など。
+完全なリストについては、 [app.METHOD](/api/application#appmethodpath-callback--callback-) を参照してください。
+
+特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。
+
+```js
+app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+## ルートパス
+
+ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列、文字列パターン、または正規表現であることができます。
+
+<Alert type="情報">
+
+Express はルートパスに一致する [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) を使用します。ルートパスの定義におけるすべての可能性については、path-to-regexp ドキュメントを参照してください。
+[Express Playground Router](https://bjohansebas.github.io/playground-router/)は、パターンマッチングをサポートしていませんが、基本的なExpressルートをテストするための便利なツールです。
+
+</Alert>
+
+### 文字列に基づく経路パス
+
+<Alert type="warning">クエリ文字列はルートパスの一部ではありません。</Alert>
+
+このルートパスはルートルートのリクエストと一致します。
+
+```js
+app.get('/', (req, res) => {
+  res.send('root');
+});
+```
+
+このルートパスは `/about` へのリクエストと一致します。
+
+```js
+app.get('/about', (req, res) => {
+  res.send('about');
+});
+```
+
+このルートパスは `/random.text` へのリクエストと一致します。
+
+```js
+app.get('/random.text', (req, res) => {
+  res.send('random.text');
+});
+```
+
+### 文字列パターンに基づく経路パス
+
+このルートパスは `acd` と `abcd` に一致します。
+
+```js
+app.get('/ab?cd', (req, res) => {
+  res.send('ab?cd');
+});
+```
+
+このルートパスは `abcd`、`abbcd`、`abbcd`などにマッチします。
+
+```js
+app.get('/ab+cd', (req, res) => {
+  res.send('ab+cd');
+});
+```
+
+このルートパスは `abcd`、`abxcd`、`abrandoMcd`、`ab123cd`などにマッチします。
+
+```js
+app.get('/ab*cd', (req, res) => {
+  res.send('ab*cd');
+});
+```
+
+このルートパスは `/abe` と `/abcde` に一致します。
+
+```js
+app.get('/ab(cd)?e', (req, res) => {
+  res.send('ab(cd)?e');
+});
+```
+
+### 正規表現に基づく経路パス
+
+<Alert type="アラート">
+
+`$`のような正規表現文字は、`\`でエスケープする必要があります。
+
+</Alert>
+
+このルートパスは "a" と一致します。
+
+```js
+app.get(/a/, (req, res) => {
+  res.send('/a/');
+});
+```
+
+このルートは`蝶々`と`トンボ`にマッチしますが、`蝶々`、`トンボフライマン`などにはマッチしません。
+
+```js
+app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/');
+});
+```
+
+## ルートパラメータ
+
+ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 取得した値は `req.params` オブジェクト内に入力され、パス内でそれぞれのキーとして指定されたrouteパラメータの名前が入力されます。
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+ルートパラメータを使用してルートを定義するには、以下のようにルートのパスにルートパラメータを指定します。
+
+```js
+app.get('/users/:userId/books/:bookId', (req, res) => {
+  res.send(req.params);
+});
+```
+
+<Alert type="アラート">
+
+ルートパラメータの名前は、"単語文字" ([A-Za-z0-9_] )で構成されている必要があります。
+
+</Alert>
+
+ハイフン(`-`)とドット(`.`)は文字通り解釈されるので、ルートパラメータとともに便利な目的で使うことができます。
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+route (ルート)パラメータにマッチする正確な文字列をより詳細に制御するには、括弧(`()`)で正規表現を追加します。
+
+```
+Route path: /user/:userId(\d+)
+Request URL: http://localhost:3000/user/42
+req.params: {"userId": "42"}
+```
+
+<Alert type="警告">
+
+正規表現は通常文字列の一部であるため、 `\`
+文字を追加して、`\d+`などのバックスラッシュをエスケープしてください。
+
+</Alert>
+
+<Alert type="警告">
+The <a href="https://github.com/expressjs/express/issues/2495">`*` character in regular expressions is not interpreted in the usual way</a>. 回避策として、`*` の代わりに `{0,}` を使用します。
+</Alert>
+
+## Route handlers
+
+リクエストを処理するために、 [middleware](/guide/using-middleware) のように動作する複数のコールバック関数を提供できます。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
+この例では:
+
+- `GET /user/5` → 最初のルートで処理 → "User 5" を送信
+- `GET /user/0` → 最初のroute ('route')`を呼び出し、次に一致する `/user/:id\` route (ルート) をスキップします。
+
+ルートハンドラは、次の例に示すように、関数、関数の配列、または両方の組み合わせの形式で使用できます。
+
+単一のコールバック関数はルートを処理できます。 例:
+
+```js
+app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+複数のコールバック関数がルートを処理できます (`next` オブジェクトを指定してください)。 例:
+
+```js
+app.get(
+  '/example/b',
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
+コールバック関数の配列はルートを処理できます。 例:
+
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+独立した関数と関数の配列の組み合わせは、ルートを処理することができます。 例:
+
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
+## レスポンスメソッド
+
+次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。
+
+| 方法                                                                   | 説明                                                                               |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownloadpath--filename--options--fn) | ダウンロードするファイルを指示します。                                             |
+| [res.end()](/api/response#resenddata-encoding-callback)                | 応答プロセスを終了します。                                                         |
+| [res.json()](/api/response#resjsonbody)                                | JSON 応答を送信します。                                                            |
+| [res.jsonp()](/api/response#resjsonpbody)                              | JSONP サポートを使用して JSON 応答を送信します。                                   |
+| [res.redirect()](/api/response#resredirectstatus-path)                 | リダイレクトします。                                                               |
+| [res.render()](/api/response#resrenderview--locals--callback)          | ビューテンプレートをレンダリングします。                                           |
+| [res.send()](/api/response#ressendbody)                                | さまざまなタイプの応答を送信します。                                               |
+| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | ファイルをオクテットストリームとして送信する。                                     |
+| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | レスポンスステータスコードを設定し、文字列表現をレスポンスボディとして送信します。 |
+
+## app.route()
+
+`app.route()` を使用すると、ルートパスに対してチェーン可能なルートハンドラを作成できます。
+パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/api/router)。
+
+以下は、`app.route()`を使用して定義されたルートハンドラの例です。
+
+```js
+app
+  .route('/book')
+  .get((req, res) => {
+    res.send('Get a random book');
+  })
+  .post((req, res) => {
+    res.send('Add a book');
+  })
+  .put((req, res) => {
+    res.send('Update the book');
+  });
+```
+
+## express.Router
+
+`express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。
+
+次の例では、ルータをモジュールとして作成し、ミドルウェア関数をロードします。 いくつかのルートを定義し、メインアプリのパスにルータモジュールをマウントします。
+
+appディレクトリに`birds.js`という名前のルーターファイルを作成します。以下の内容を使用します。
+
+```js
+const express = require('express');
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+module.exports = router;
+```
+
+次に、アプリにルーターモジュールをロードします。
+
+```js
+const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+アプリは `/birds` と `/birds/about` へのリクエストを処理できるようになりました。 同様に、ルート固有の「timeLog」ミドルウェア関数を呼び出します。
+
+ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/api/application#appusepath-callback--callback) に渡す必要があります。
+
+```js
+const router = express.Router({ mergeParams: true });
+```

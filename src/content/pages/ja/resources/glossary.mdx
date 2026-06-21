@@ -1,0 +1,61 @@
+---
+title: Glossary
+description: Express.js、Node.js、ミドルウェア、ルーティング、その他の重要な概念に関連する包括的な用語集で、Expressを効果的に理解し使用するのに役立ちます。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+## アプリケーション
+
+一般に、特定の目的のために操作を実行するように設計された1つまたは複数のプログラム。 Express のコンテキストでは、Node.js プラットフォームで実行される Express API を使用するプログラムがあります。 [app object](/api#express) も参照しているかもしれません。
+
+## API
+
+アプリケーションプログラミングインターフェイス。 略語が最初に使用されたときにスペルアウトします。
+
+## エクスプレス
+
+Node.jsアプリケーション用の高速で、意見が異なる、ミニマリストなWebフレームワーク。 一般的には「Express」は「Express.js」よりも好まれますが、後者は許容されます。
+
+## libuv
+
+非同期I/Oに焦点を当てたマルチプラットフォームサポートライブラリ。主にNode.jsで使用するために開発されました。
+
+## middleware
+
+最後のリクエストハンドラの前に Express ルーティング層によって呼び出される関数 生の要求と最終目的のルートの間に座っています ミドルウェアに関する用語のいくつかの細かい点:
+
+- `var foo = require('middleware')` は Node.js モジュールの _requiring_ または _using_ と呼ばれます。 `var mw = foo()`という文は通常、ミドルウェアを返します。
+- `app.use(mw)`は、ミドルウェアをグローバルな処理スタックに追加することを呼びます。
+- `app.get('/foo', mw, function (req, res) { ... })` は、ミドルウェアを "GET /foo" 処理の stack\_ に追加すると呼ばれます。
+
+## Node.js
+
+スケーラブルなネットワークアプリケーションの構築に使用されるソフトウェアプラットフォーム。 Node.jsはJavaScriptをスクリプト言語として使用し、ノンブロッキングI/Oとシングルスレッドイベントループにより高いスループットを実現します。 [nodejs.org](https://nodejs.org/en/) を参照してください。 **使用上の注意**: 最初は、"Node.js"以降は"Node"です。
+
+## オープンソースのオープンソース
+
+形容詞として使われる場合、ハイフネートなど。例: "これはオープンソースソフトウェアです。 [Wikipediaのオープンソースソフトウェア](http://en.wikipedia.org/wiki/Open-source_software)を参照してください。
+
+<Alert type="情報">
+
+この用語をハイフネーションしないことは一般的ですが、
+の標準的な英語規則を用いて複合形容詞をハイフネーションします。
+
+</Alert>
+
+## リクエスト
+
+HTTP リクエスト。 クライアントは、レスポンスを返すサーバーに HTTP リクエストメッセージを送信します。 リクエストは、GET、POST など、いくつかの [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) のうちの 1 つを使用する必要があります。
+
+## 応答
+
+HTTPレスポンス。 サーバーはクライアントに HTTP 応答メッセージを返します。 レスポンスには、リクエストに関する完了ステータス情報が含まれており、メッセージ本文に要求されたコンテンツが含まれている場合もあります。
+
+## route
+
+リソースを識別する URL の一部です。 例えば、`http://foo.com/products/id`では、"/products/id"がルートです。
+
+## ルーター:
+
+API リファレンスの [router](/api#router) を参照してください。

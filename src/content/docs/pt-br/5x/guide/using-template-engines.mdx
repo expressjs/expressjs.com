@@ -1,0 +1,63 @@
+---
+title: Usando mecanismos de template com o Express
+description: Descubra como integrar e usar mecanismos de modelos como Pug, Handlebars, e EJS com Express.js para renderizar páginas HTML dinâmicas de forma eficiente.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Um _motor de template_ permite que você use arquivos de template estáticos na sua aplicação. At runtime, the template engine replaces
+variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
+Esta abordagem torna mais fácil projetar uma página HTML.
+
+O [gerador de aplicação Expressa](/starter/generator) usa [Pug](https://pugjs.org/api/getting-started.html) como seu padrão, mas também apoia [Handlebars](https://www.npmjs.com/package/handlebars), e [EJS](https://www.npmjs.com/package/ejs), entre outros.
+
+Para renderizar arquivos de template, defina as seguintes [propriedades de configuração da aplicação](/4x/api#app.set), no `app.js` padrão criado pelo gerador:
+
+- `views`, o diretório onde se localizam os arquivos de template. Ex: `app.set('views', './views')`.
+  Isto é padrão para o diretório `views` no diretório raiz do aplicativo.
+- `ver engenho`, o mecanismo de modelos a ser usado. Por exemplo, para usar o motor de template Pug: `app.set('engenharia de visualização', 'pug')`.
+
+Então instale o correspondente mecanismo de template do npm pacote; por exemplo, para instalar o Pug:
+
+```bash
+$ npm install pug --save
+```
+
+<Alert type="alerta">
+Mecanismos de template compatíveis com o código, como Pug exporta uma função chamada `__express(filePath, opções, callback)`,
+que `res.render()` chama para renderizar o código de template.
+
+Alguns motores de modelos não seguem esta convenção. A biblioteca [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
+segue esta convenção mapeando todos os mecanismos de modelo populares de Node.js e, portanto, funciona perfeitamente dentro do Express.
+
+</Alert>
+
+Depois que o motor de visualização estiver definido, você não precisa especificar o motor ou carregar o módulo de mecanismo de modelo no seu aplicativo;
+Expresso carrega o módulo internamente, por exemplo:
+
+```js
+app.set('view engine', 'pug');
+```
+
+Em seguida, crie um arquivo de template Pug chamado `index.pug` no diretório `views`, com o seguinte conteúdo:
+
+```pug
+html
+  head
+    title= title
+  body
+    h1= message
+```
+
+Crie uma rota para renderizar o arquivo `index.pug`. Se a propriedade `view engine` não estiver definida,
+você deve especificar a extensão do arquivo `view`. Caso contrário, você pode omitir.
+
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
+Quando você faz uma solicitação à página inicial, o arquivo `index.pug` será processado como HTML.
+
+O cache do motor de exibição não armazena o conteúdo da saída do modelo, apenas o modelo subjacente em si. A visualização ainda é renderizada novamente com todas as requisições, mesmo que o cache esteja ativo.

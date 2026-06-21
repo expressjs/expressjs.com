@@ -1,0 +1,84 @@
+---
+title: 'A New Look for Express'
+tags: ['announcements']
+authors:
+  - name: Sebastian Beltran
+    github: bjohansebas
+description: Discover the redesigned Express.js website and our brand-new logo, built from the ground up with Astro.
+---
+
+Express has been one of the most important frameworks in the Node.js ecosystem for over a decade. Millions of developers have built their first API, their first web app, or even their first startup with Express. Yet, while the framework kept evolving, the website remained largely the same for years.
+
+In 2024, the Express project went through a [major reboot](/blog/2025-01-09-rewind-2024-triumphs-and-2025-vision). A new team, a fresh vision for the framework, and a clear path forward. That momentum inspired me to start contributing to Express with a simple goal: improve the documentation experience. Good documentation helps everyone, from beginners building their first server to experienced developers looking for the right API detail, or even those building frameworks on top of Express. In early 2025, that goal started to become a reality when the [redesign of the Express documentation](https://github.com/expressjs/expressjs.com/issues/1787) officially kicked off. What began as a documentation effort eventually grew into something much bigger, a complete redesign of the website and a brand-new logo for Express.
+
+In short: we rebuilt the Express website, improved the documentation experience, and introduced a new logo and visual identity to match where the project is headed.
+
+## A New Website
+
+Rebuilding the Express website was not only a visual refresh. It was also an opportunity to rethink the foundations of how the documentation is organized, generated, and maintained.
+
+![Side-by-side comparison of the current Express homepage and the redesigned version](/images/blog/redesign/before-after.png)
+
+Under the hood, we moved from Jekyll to [Astro](https://astro.build), chosen after a long [community discussion](https://github.com/expressjs/expressjs.com/discussions/2019) weighing tradeoffs and long-term maintenance. It gave us the flexibility we needed for content-heavy pages, strong performance, solid i18n support, and a component model that doesn't lock us into a single UI framework.
+
+### What's New in the Documentation
+
+The redesign was also a chance to bring long-requested improvements to how the documentation works.
+
+- **Improved versioning.** Documentation pages now support multiple versions of Express side by side. You can read the docs for the version you're actually running, and the content stays stable as new versions are released. The previous site didn't make this easy to achieve, which often led to confusion between versions. This is especially helpful now that Express 5 is the latest stable release and many projects are still on Express 4.
+- **AI-powered search.** The new search is built on top of [Orama](https://orama.com) and goes beyond keyword matching. You can ask questions in natural language and get contextual answers drawn directly from the documentation, which makes finding the right API or concept much faster.
+- **`llms.txt` support.** Every section of the documentation is now available through an `llms.txt` endpoint, following the [llms.txt](https://llmstxt.org) convention. This makes it much easier for language models, AI assistants, and other tools to access accurate, up-to-date Express documentation.
+
+### What's Next for the Documentation
+
+Launching the new site is just the start. The next phase of this effort is focused on the documentation itself, closing the gaps that have built up over the years and bringing every Express API up to the standard the framework deserves.
+
+A few of the things ahead:
+
+- **Closing content gaps.** Many guides and API references still need fresh examples, clearer explanations, or rewrites that reflect how Express is used today, especially with Express 5.
+- **Better translations.** The site has solid i18n foundations, but most translations are incomplete or out of date. The goal is to make translating Express docs a simple contribution for any native speaker.
+- **Keeping docs aligned with releases.** New Express versions should ship with documentation that's already ready, not catch up months later.
+
+The new site is designed to make contributing easier than ever. If you spot something that could be better, an unclear explanation, a missing example, or a translation that needs love, please [open an issue or a pull request](https://github.com/expressjs/expressjs.com).
+
+## A New Logo
+
+One of the most visible changes is the brand-new Express logo. This wasn't something we designed in isolation. It came out of a collaborative workshop with the [Orama](https://orama.com) team, where community members and the Express Technical Committee came together to define who Express is today and where it's heading. The entire process was handled publicly, so anyone in the community could participate and share their voice.
+
+Before jumping into the visual identity, we worked together on the foundations that would guide every design decision.
+
+### Vision and Mission
+
+We started by asking ourselves two simple questions: what is Express today, and where do we want it to go? The answers became the vision and mission that now guide every decision, from the framework itself to the documentation and the new visual identity.
+
+![Express vision and mission: Express is a minimal, scalable, and stable web framework for Node.js with a welcoming community that empowers developers of all levels. Our mission is to make it easier for developers to build great software by clearing away the complexity of server-side development in Node.js.](/images/blog/redesign/vision-mission.png)
+
+### Brand Values
+
+With the vision and mission in place, we distilled them into three values that describe how Express shows up for its users. They anchor the new identity and set the tone for everything the project communicates.
+
+![Express brand values: Established, Dependable, and Approachable.](/images/blog/redesign/brand-values.png)
+
+### The Logo
+
+With that foundation in place, the design work was led by [Angela Angelini](https://www.linkedin.com/in/angeliningl/) and [Davide Spaziani](https://www.linkedin.com/in/davidespazianitesta/) from the Orama team. Over several months, multiple logo proposals were shared with the community for feedback. You can still explore all of them in the [original discussion](https://github.com/expressjs/express/discussions/6670).
+
+After gathering feedback from the community, both on the OpenJS Foundation [Slack](https://slack-invite.openjsf.org) and across social media, we landed on the logo and favicon you see today:
+
+![The new Express logo and favicon](/images/blog/redesign/logo-favicon.png)
+
+It represents a fresh chapter for Express while staying true to the minimalism and clarity that have always defined the framework.
+
+## Built by the Community
+
+The redesign was not a solo effort. Dozens of people from across the Express community contributed code, design, reviews, and feedback over more than a year.
+
+The effort was led by [Sebastian Beltran](https://github.com/bjohansebas), with [Francesca Giannino](https://github.com/g-francesca) driving much of the design and UI work across the new site, and [Angela Angelini](https://www.linkedin.com/in/angeliningl/) and [Davide Spaziani](https://www.linkedin.com/in/davidespazianitesta/) leading the brand workshop that shaped the new visual identity.
+
+A huge thank you goes to the [Orama](https://orama.com) team for sponsoring [Francesca Giannino](https://github.com/g-francesca), [Angela Angelini](https://www.linkedin.com/in/angeliningl/), [Michele Riva](https://github.com/micheleriva), and [Davide Spaziani](https://www.linkedin.com/in/davidespazianitesta/), and for the design, feedback, and support they brought to every stage of the project.
+
+From the Express side, the redesign was shaped by many hands: [Ulises Gascón](https://github.com/ulisesgascon), [Rand McKinney](https://github.com/crandmck), [Jon Church](https://github.com/jonchurch), [Shubham Oulkar](https://github.com/ShubhamOulkar), the rest of the [Express Technical Committee](https://github.com/expressjs/express#tc-technical-committee), and everyone who contributed reviews, issues, or comments along the way. The full history, including every PR that made it into the redesign, lives in [the main pull request](https://github.com/expressjs/expressjs.com/pull/2169).
+
+More than a year of work went into this launch. In open source, progress is rarely fast: decisions take discussion, design takes iteration, and reviews take time. But step by step, a community can build something it's proud of, and this is one of those steps.
+
+Thank you to everyone who has written code with Express over the years, to the people who helped build this new site, and to the broader community that keeps the project alive. We can't wait to see what you build next.

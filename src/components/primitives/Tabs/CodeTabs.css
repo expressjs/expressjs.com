@@ -1,0 +1,100 @@
+@layer primitives {
+  .code-tabs {
+    margin: var(--space-8) 0;
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+  }
+
+  .code-tabs .tabs {
+    margin: 0;
+    gap: var(--space-1);
+    padding: 0 var(--space-2);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+  }
+
+  .code-tabs .tabs__tab {
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-radius: 0;
+    border-bottom: var(--border-width-2) solid transparent;
+    margin-bottom: calc(-1 * var(--border-width-1));
+    background-color: transparent;
+    color: var(--color-text-secondary);
+
+    &:hover:not(.tabs__tab--active) {
+      background-color: var(--color-bg-secondary);
+      color: var(--color-text-primary);
+    }
+  }
+
+  .code-tabs .tabs__tab--active {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border-bottom-color: var(--color-text-primary);
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .code-tabs__panel[hidden] {
+    display: none;
+  }
+}
+
+.code-tabs .expressive-code.expressive-code {
+  margin: 0;
+}
+
+.code-tabs .expressive-code.expressive-code .frame {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.code-tabs .expressive-code.expressive-code .frame pre {
+  border: 0;
+  border-radius: 0;
+}
+
+/*
+ * A titled block renders as an expressive-code "editor" frame: a tab bar
+ * (.header) holding a tab-shaped .title. Under our CommonJS/ESM strip that
+ * looks like a second row of tabs. Inside .code-tabs we flatten it into a plain
+ * filename caption sitting on the code surface, so it reads as the file's chrome
+ * rather than another tab.
+ */
+.code-tabs .expressive-code.expressive-code .frame.has-title:not(.is-terminal) {
+  /* EC sizes button-spacing for its tall tab bar; align the copy button to the
+     flattened caption row instead. */
+  --button-spacing: var(--space-1);
+}
+
+.code-tabs .expressive-code.expressive-code .frame.has-title:not(.is-terminal) .header {
+  background: var(--code-background);
+  border-radius: 0;
+  border-bottom: var(--border-width-1) solid rgb(255 255 255 / 0.1);
+  padding-inline: var(--space-4);
+  align-items: center;
+}
+
+.code-tabs .expressive-code.expressive-code .frame.has-title:not(.is-terminal) .header::before {
+  display: none;
+}
+
+.code-tabs .expressive-code.expressive-code .frame.has-title:not(.is-terminal) .title {
+  position: static;
+  margin: 0;
+  padding-block: var(--space-2);
+  padding-inline: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+}
+
+.code-tabs .expressive-code.expressive-code .frame.has-title:not(.is-terminal) .title::after {
+  display: none;
+}

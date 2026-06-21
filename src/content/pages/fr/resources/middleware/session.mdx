@@ -1,0 +1,1001 @@
+---
+title: middleware de session
+description: Schéma de session simple pour Express
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="0.1.0"
+  github="https://github.com/expressjs/session"
+  npm="https://www.npmjs.com/package/session"
+/>
+
+## Installation
+
+Ceci est un module [Node.js](https://nodejs.org/en/) disponible via
+[npm registry](https://www.npmjs.com/). L'installation se fait à l'aide de la commande
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install express-session
+```
+
+## API
+
+```js
+var session = require('express-session');
+```
+
+### session(options)
+
+Créer un middleware de session avec les `options` données.
+
+**Note** Les données de session ne sont _pas_ enregistrées dans le cookie lui-même, juste l'ID de session.
+Les données de session sont stockées côté serveur.
+
+**Note** Since version 1.5.0, the [`cookie-parser` middleware](https://www.npmjs.com/package/cookie-parser)
+no longer needs to be used for this module to work. Ce module lit maintenant directement
+et écrit des cookies sur `req`/`res`. L'utilisation de `cookie-parser` peut entraîner des problèmes
+si le `secret` n'est pas le même entre ce module et `cookie-parser`.
+
+**Avertissement** Le stockage de session côté serveur par défaut, `MemoryStore`, est _utile_
+pas conçu pour un environnement de production. Il fuira de la mémoire dans la plupart des conditions
+, n'échelonne pas au-delà d'un seul processus, et est destiné au débogage et au développement de
+.
+
+Pour une liste de magasins, voir [boutiques compatibles de session](#compatible-session-stores).
+
+#### Options
+
+`express-session` accepte ces propriétés dans l'objet d'options.
+
+##### cookie
+
+Objet Paramètres pour le cookie ID de session. La valeur par défaut est
+`{ path: '/', httpOnly: true, secure: false, maxAge: null }`.
+
+En plus de fournir un objet statique, vous pouvez également passer une fonction de rappel pour générer dynamiquement les options de cookie pour chaque requête. Le callback reçoit l'objet `req` comme argument et doit retourner un objet contenant les paramètres des cookies.
+
+```js
+var app = express();
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: function (req) {
+      var match = req.url.match(/^\/([^/]+)/);
+      return {
+        path: match ? '/' + match[1] : '/',
+        httpOnly: true,
+        secure: req.secure || false,
+        maxAge: 60000,
+      };
+    },
+  })
+);
+```
+
+Les options suivantes peuvent être définies dans cet objet.
+
+##### Domaine du cookie
+
+Spécifie la valeur de l'attribut `Set-Cookie`. Par défaut, aucun domaine
+n'est défini, et la plupart des clients considéreront que le cookie s'applique uniquement au domaine
+actuel.
+
+##### Le cookie expire
+
+Spécifie l'objet `Date` pour être la valeur de l'attribut `Expires` `Set-Cookie`.
+By default, no expiration is set, and most clients will consider this a
+"non-persistent cookie" and will delete it on a condition like exiting a web browser
+application.
+
+**Note** Si les deux `expires` et `maxAge` sont définis dans les options, alors le dernier
+défini dans l'objet est ce qui est utilisé.
+
+**Note** L'option `expires` ne doit pas être définie directement; à la place, utilisez uniquement l'option `maxAge`
+.
+
+##### httpOnly
+
+Spécifie la valeur `boolean` pour l'attribut `HttpOnly` `Set-Cookie`. Quand vrai,
+l'attribut `HttpOnly` est défini, sinon il ne l'est pas. Par défaut, l'attribut `HttpOnly`
+est défini.
+
+**Note** Soyez prudent lorsque vous définissez ceci sur `true`, car les clients conformes n'autoriseront pas
+JavaScript côté client à voir le cookie dans `document.cookie`.
+
+##### maxage des cookies
+
+Spécifie le `nombre` (en millisecondes) à utiliser lors du calcul de l'attribut `Expires`
+`Set-Cookie`. Ceci est fait en prenant l'heure actuelle du serveur et en ajoutant
+`maxAge` millisecondes à la valeur pour calculer une date `Expires`. Par défaut,
+aucun âge maximum n'est défini.
+
+**Note** Si les deux `expires` et `maxAge` sont définis dans les options, alors le dernier
+défini dans l'objet est ce qui est utilisé.
+
+##### Partitionné
+
+Spécifie la valeur `boolean` pour l'attribut [`Partitioned` `Set-Cookie`](https://github.com/expressjs/session/blob/HEAD/rfc-cutler-httpbis-partitioned-cookies)
+. Quand vrai, l'attribut `Partitioned` est défini, sinon ce n'est pas le cas.
+Par défaut, l'attribut `Partitioned` n'est pas défini.
+
+**Note** This is an attribute that has not yet been fully standardized, and may
+change in the future. Cela signifie également que de nombreux clients peuvent ignorer cet attribut jusqu'à ce que
+le comprenne.
+
+Plus d'informations à propos de la proposition peuvent être trouvées dans [la proposition](https://github.com/privacycg/CHIPS).
+
+##### Chemin du cookie
+
+Spécifie la valeur pour le `Path` `Set-Cookie`. Par défaut, cette valeur est définie à `'/'`, qui
+est le chemin racine du domaine.
+
+##### Priorité du cookie
+
+Spécifie la `string` pour être la valeur de l'attribut [`Priority` `Set-Cookie`[rfc-west-cookie-priority-00-4.1].
+
+- `'low'` définira l'attribut `Priority` à `Low`.
+- `'medium'` définira l'attribut `Priority` à `Medium`, la priorité par défaut quand elle n'est pas définie.
+- `'high'` définira l'attribut `Priority` à `High`.
+
+Plus d'informations sur les différents niveaux de priorité peuvent être trouvées dans
+[la spécification][rfc-west-cookie-priority-00-4.1].
+
+**Note** Ceci est un attribut qui n'a pas encore été entièrement normalisé, et peut changer à l'avenir.
+Cela signifie également que de nombreux clients peuvent ignorer cet attribut jusqu'à ce qu'ils le comprennent.
+
+##### Site web du même type
+
+Spécifie le `boolean` ou `string` pour être la valeur de l'attribut `SameSite` `Set-Cookie`.
+Par défaut, c'est `false`.
+
+- `true` définira l'attribut `SameSite` à `Strict` pour stricte même application du site.
+- `false` ne définira pas l'attribut `SameSite`.
+- `'lax'` définira l'attribut `SameSite` à `Lax` pour le lax même application du site.
+- `'none'` définira l'attribut `SameSite` à `None` pour un cookie intersite explicite.
+- `'strict'` définira l'attribut `SameSite` à `Strict` pour stricte même application du site.
+- `'auto'` définira l'attribut `SameSite` à `None` pour les connexions sécurisées et `Lax` pour les connexions non sécurisées.
+
+Plus d'informations sur les différents niveaux d'application peuvent être trouvées dans
+[la spécification][rfc-6265bis-03-4.1.2.7].
+
+**Note** Ceci est un attribut qui n'a pas encore été entièrement normalisé, et peut changer dans
+le futur. Cela signifie également que de nombreux clients peuvent ignorer cet attribut jusqu'à ce qu'ils le comprennent.
+
+**Note** Il y a un [draft spec](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
+qui requiert que l'attribut `Secure` soit défini à `true` lorsque l'attribut `SameSite` a été
+à `'none'`. Certains navigateurs Web ou d'autres clients peuvent adopter cette spécification.
+
+L'option `cookie.sameSite` peut également être définie à la valeur spéciale `'auto'` pour avoir
+ce paramètre correspond automatiquement à la sécurité déterminée de la connexion. Lorsque la connexion
+est sécurisée (HTTPS), l'attribut `SameSite` sera défini à `None` pour activer l'utilisation inter-site.
+Lorsque la connexion n'est pas sécurisée (HTTP), l'attribut `SameSite` sera défini sur `Lax` pour
+une meilleure sécurité tout en maintenant la fonctionnalité. Ceci est utile lorsque le paramètre
+`trust proxy` Express est correctement configuré pour simplifier la configuration de développement vs production, en particulier
+pour les scénarios d'authentification SAML.
+
+##### Sécurisé
+
+Spécifie la valeur `boolean` pour l'attribut `Secure` `Set-Cookie`. Quand vrai,
+l'attribut `Secure` est défini, sinon il ne l'est pas. Par défaut, l'attribut `Secure`
+n'est pas défini.
+
+**Note** be careful when setting this to `true`, as compliant clients will not send
+the cookie back to the server in the future if the browser does not have an HTTPS
+connection.
+
+Veuillez noter que `secure: true` est une option **recommandée** . However, it requires
+an https-enabled website, i.e., HTTPS is necessary for secure cookies. Si `secure`
+est défini, et que vous accédez à votre site via HTTP, le cookie ne sera pas défini. Si vous
+avez vos node.js derrière un proxy et utilisez `secure: true`, vous devez définir
+"trust proxy" en express:
+
+```js
+var app = express();
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
+```
+
+Pour l'utilisation de cookies sécurisés en production, mais permettant des tests en développement,
+le suivant est un exemple d'activation de cette configuration basée sur `NODE_ENV` en express:
+
+```js
+var app = express();
+var sess = {
+  secret: 'keyboard cat',
+  cookie: {},
+};
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1); // trust first proxy
+  sess.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sess));
+```
+
+L'option `cookie.secure` peut également être définie à la valeur spéciale `'auto'` pour avoir
+ce paramètre correspond automatiquement à la sécurité déterminée de la connexion. Be
+careful when using this setting if the site is available both as HTTP and HTTPS,
+as once the cookie is set on HTTPS, it will no longer be visible over HTTP. Cette
+est utile lorsque le paramètre Express `"trust proxy"` est correctement configuré pour simplifier
+le développement vs la configuration de production.
+
+##### genid
+
+Fonction à appeler pour générer un nouvel identifiant de session. Fournir une fonction qui retourne
+une chaîne qui sera utilisée comme identifiant de session. La fonction est donnée `req` en tant que premier argument
+si vous voulez utiliser une valeur attachée à `req` lors de la génération de
+l'ID.
+
+La valeur par défaut est une fonction qui utilise la bibliothèque `uid-safe` pour générer des IDs.
+
+**REMARQUE** Faites attention à générer des identifiants uniques afin que vos sessions ne soient pas en conflit.
+
+```js
+app.use(
+  session({
+    genid: function (req) {
+      return genuuid(); // use UUIDs for session IDs
+    },
+    secret: 'keyboard cat',
+  })
+);
+```
+
+##### Nom
+
+Le nom du cookie d'identification de session à définir dans la réponse (et à partir de la requête
+).
+
+La valeur par défaut est `'connect.sid'`.
+
+**Note** if you have multiple apps running on the same hostname (this is just
+the name, i.e. `localhost` or `127.0.0.1`; different schemes and ports do not
+name a different hostname), then you need to separate the session cookies from
+each other. La méthode la plus simple est de simplement définir différents `nom`s par application.
+
+##### Proxy
+
+Faire confiance au proxy inversé lors du réglage des cookies sécurisés (via l'en-tête "X-Forwarded-Proto"
+).
+
+La valeur par défaut est `undefined`.
+
+- `true` L'en-tête "X-Forwarded-Proto" sera utilisé.
+- `false` Tous les en-têtes sont ignorés et la connexion est considérée comme sécurisée seulement
+  s'il y a une connexion TLS/SSL directe.
+- `undefined` Utilise le paramètre "trust proxy" de express
+
+##### réactiver
+
+Force la sauvegarde de la session dans la boutique de session, même si la session
+n'a jamais été modifiée pendant la requête. Depending on your store this may be
+necessary, but it can also create race conditions where a client makes two
+parallel requests to your server and changes made to the session in one
+request may get overwritten when the other request ends, even if it made no
+changes (this behavior also depends on what store you're using).
+
+La valeur par défaut est `true`, mais l'utilisation de la valeur par défaut a été dépréciée,
+comme valeur par défaut va changer dans le futur. Veuillez rechercher ce paramètre
+et choisir ce qui convient à votre cas d'utilisation. Généralement, vous voudrez
+`false`.
+
+Comment savoir si cela est nécessaire pour mon magasin? La meilleure façon de savoir est de
+vérifier avec votre boutique si elle implémente la méthode `touch`. Si c'est le cas, alors
+vous pouvez définir `resave: false` en toute sécurité. Si elle n'implémente pas la méthode `touch`
+et que votre boutique définit une date d'expiration sur les sessions stockées, alors vous
+probablement besoin de `resave: true`.
+
+##### roulant
+
+Forcer le cookie d'identification de session à être défini sur chaque réponse. L'expiration
+est réinitialisée à l'original [`maxAge`](#cookiemaxage), réinitialisant le compte à rebours
+d'expiration.
+
+La valeur par défaut est `false`.
+
+Avec cette activation, le cookie d'identification de session expirera dans
+[`maxAge`](#cookiemaxage) depuis que la dernière réponse a été envoyée au lieu de
+[`maxAge`](#cookiemaxage) depuis que la session a été modifiée par le serveur.
+
+Ceci est généralement utilisé en conjonction avec des courts, valeurs de longueur de session
+[`maxAge`](#cookiemaxage) pour fournir un délai d'attente rapide pour les données de session
+avec un potentiel réduit en ce qui concerne les interactions de serveur en cours.
+
+**Note** Lorsque cette option est définie à `true` mais l'option `saveUninitialized` est
+réglé sur `false`, le cookie ne sera pas défini sur une réponse avec une session
+non initialisée. This option only modifies the behavior when an existing session was
+loaded for the request.
+
+##### Enregistrer non initialisé
+
+Force une session qui est "non initialisée" à être enregistrée dans la boutique. A session is
+uninitialized when it is new but not modified. Choisir `false` est utile pour
+implémentant des sessions de connexion, réduisant l'utilisation du stockage du serveur, ou respectant les lois
+qui requièrent l'autorisation avant de définir un cookie. Le choix de `false` aidera également
+dans les conditions de course où un client fait plusieurs requêtes parallèles
+sans session.
+
+La valeur par défaut est `true`, mais l'utilisation de la valeur par défaut a été dépréciée, car la valeur par défaut
+changera dans le futur. Veuillez rechercher ce paramètre et
+choisir ce qui convient à votre cas d'utilisation.
+
+**Note** if you are using Session in conjunction with PassportJS, Passport
+will add an empty Passport object to the session for use after a user is
+authenticated, which will be treated as a modification to the session, causing
+it to be saved. _Ceci a été corrigé dans PassportJS 0.3.0_
+
+##### secret
+
+**Option obligatoire**
+
+C'est le secret utilisé pour signer le cookie d'identification de session. Le secret peut être n'importe quel type
+de valeur qui est supporté par Node.js `crypto.createHmac` (comme une chaîne de caractères ou un `Buffer`
+). Cela peut être soit un seul secret, soit un tableau de plusieurs secrets. Si
+un tableau de secrets est fourni, seul le premier élément sera utilisé pour signer le cookie
+ID de session, alors que tous les éléments seront considérés lors de la vérification de la signature
+dans les requêtes. Le secret lui-même ne devrait pas être facilement analysé par un humain et
+serait mieux un jeu de caractères aléatoire. Une meilleure pratique peut inclure :
+
+- L'utilisation de variables d'environnement pour stocker le secret, en s'assurant que le secret lui-même
+  n'existe pas dans votre dépôt.
+- Mises à jour périodiques du secret, tout en s'assurant que le secret précédent est dans le tableau
+  .
+
+Utiliser un secret qui ne peut pas être deviné réduira la possibilité de détourner une session en
+seulement en devinant l'ID de session (comme déterminé par l'option `genid`).
+
+La modification de la valeur secrète invalidera toutes les sessions existantes. Afin de faire pivoter
+le secret sans invalider les sessions, fournir un tableau de secrets, avec le nouveau secret
+comme premier élément du tableau, et y compris les secrets précédents comme les éléments
+suivants.
+
+**Note** HMAC-256 est utilisé pour signer l'ID de session. For this reason, the secret should
+contain at least 32 bytes of entropy.
+
+##### boutique
+
+L'instance de la boutique de session est par défaut une nouvelle instance `MemoryStore`.
+
+##### annuler
+
+Contrôlez le résultat de la suppression de `req.session` (via `delete`, en définissant `null`,
+etc.).
+
+La valeur par défaut est `'keep'`.
+
+- `'détruire'` La session sera détruite (supprimée) à la fin de la réponse.
+- `'keep'` La session dans la boutique sera conservée, mais les modifications apportées pendant
+  la requête sont ignorées et non sauvegardées.
+
+### session
+
+Pour stocker ou accéder aux données de session, il suffit d'utiliser la propriété de requête `req. ession`,
+qui est (généralement) sérialisé en JSON par le magasin, donc les objets imbriqués
+sont généralement bien. Par exemple ci-dessous est un compteur de vue spécifique à l'utilisateur :
+
+```js
+// Use the session middleware
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 } }));
+
+// Access the session as req.session
+app.get('/', function (req, res, next) {
+  if (req.session.views) {
+    req.session.views++;
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<p>views: ' + req.session.views + '</p>');
+    res.write('<p>expires in: ' + req.session.cookie.maxAge / 1000 + 's</p>');
+    res.end();
+  } else {
+    req.session.views = 1;
+    res.end('welcome to the session demo. refresh!');
+  }
+});
+```
+
+#### Session.regenerate(callback)
+
+Pour régénérer la session, il suffit d'appeler la méthode. Une fois terminé,
+une nouvelle instance SID et `Session` sera initialisée à `req.session`
+et le `callback` sera appelé.
+
+```js
+req.session.regenerate(function (err) {
+  // will have a new session here
+});
+```
+
+#### Session.destroy(callback)
+
+Détruit la session et supprimera la propriété `req.session`.
+Une fois terminé, le `callback` sera appelé.
+
+```js
+req.session.destroy(function (err) {
+  // cannot access session here
+});
+```
+
+#### Session.reload(callback)
+
+Recharge les données de session depuis la boutique et re-remplit l'objet
+`req.session`. Une fois terminé, le `callback` sera appelé.
+
+```js
+req.session.reload(function (err) {
+  // session updated
+});
+```
+
+#### Session.save(callback)
+
+Enregistrer la session dans la boutique, remplacer le contenu de la boutique par le contenu
+en mémoire (bien qu'une boutique puisse faire autre chose --consultez la documentation
+de la boutique pour connaître le comportement exact).
+
+Cette méthode est automatiquement appelée à la fin de la réponse HTTP si les données de la session
+ont été modifiées (bien que ce comportement puisse être modifié avec diverses options
+dans le constructeur du middleware). À cause de cela, typiquement cette méthode
+n'a pas besoin d'être appelée.
+
+Il y a certains cas où il est utile d'appeler cette méthode, par exemple, les redirections
+, les requêtes de longue durée ou dans WebSockets.
+
+```js
+req.session.save(function (err) {
+  // session saved
+});
+```
+
+#### Session.touch()
+
+Met à jour la propriété `.maxAge`. Généralement, c'est
+pas nécessaire pour appeler, car le middleware de session le fait pour vous.
+
+### ID de la session
+
+Chaque session a un ID unique qui lui est associé. Cette propriété est un alias
+de [`req.sessionID`](#reqsessionid-1) et ne peut pas être modifiée.
+Il a été ajouté pour rendre l'ID de session accessible depuis l'objet `session`
+.
+
+### cookie
+
+Chaque session a un objet unique de cookie l'accompagnant. This allows
+you to alter the session cookie per visitor. Par exemple, nous pouvons
+définir `req.session.cookie.expires` à `false` pour permettre au cookie
+de rester pour seulement la durée de l'agent utilisateur.
+
+#### Cookie.maxAge
+
+Alternativement `req.session.cookie.maxAge` retournera le temps
+restant en millisecondes, que nous pouvons également réaffecter une nouvelle valeur
+pour ajuster la propriété `.expires` de manière appropriée. Les
+suivants sont essentiellement équivalents
+
+```js
+var hour = 3600000;
+req.session.cookie.expires = new Date(Date.now() + hour);
+req.session.cookie.maxAge = hour;
+```
+
+Par exemple lorsque `maxAge` est défini à `60000` (une minute), et 30 secondes
+s'est écoulé, il retournera `30000` jusqu'à ce que la requête actuelle soit terminée,
+à quel moment `req. ession.touch()` est appelé à réinitialiser
+`req.session.cookie.maxAge` à sa valeur originale.
+
+```js
+req.session.cookie.maxAge; // => 30000
+```
+
+#### Nombre maximum de cookies
+
+La propriété `req.session.cookie.originalMaxAge` retourne la
+`maxAge` originale (time-to-live), en millisecondes, du cookie de session.
+
+### ID de session
+
+Pour obtenir l'ID de la session chargée, accédez à la propriété de requête
+`req.sessionID`. Ceci est simplement une valeur en lecture seule lorsque la session
+est chargée/créée.
+
+## Implémentation de la boutique de session
+
+Chaque boutique de session _doit_ être un `EventEmitter` et implémenter des méthodes
+spécifiques. Les méthodes suivantes sont la liste de **requis**, **recommandé**,
+et **optionnel**.
+
+- Les méthodes requises sont celles que ce module va toujours appeler sur la boutique.
+- Les méthodes recommandées sont celles que ce module appellera sur la boutique si
+  est disponible.
+- Les méthodes optionnelles sont celles que ce module n'appelle pas du tout, mais aide
+  à présenter des magasins uniformes aux utilisateurs.
+
+Pour un exemple d'implémentation, consultez le dépôt [connect-redis](http://github.com/visionmedia/connect-redis).
+
+### store.all(callback)
+
+**Optionnel**
+
+Cette méthode optionnelle est utilisée pour obtenir toutes les sessions dans le magasin en tant que tableau. Le
+`callback` doit être appelé comme `callback(error, sessions)`.
+
+### store.destroy(sid, callback)
+
+**Requis**
+
+Cette méthode requise est utilisée pour détruire/supprimer une session de la boutique donnée à
+un ID de session (`sid`). Le `callback` doit être appelé comme `callback(error)` une fois
+la session est détruite.
+
+### store.clear(callback)
+
+**Optionnel**
+
+Cette méthode optionnelle est utilisée pour supprimer toutes les sessions de la boutique. Le
+`callback` doit être appelé comme `callback(error)` une fois que le magasin est effacé.
+
+### store.length(callback)
+
+**Optionnel**
+
+Cette méthode optionnelle est utilisée pour obtenir le nombre de sessions dans la boutique.
+Le `callback` doit être appelé comme `callback(error, len)`.
+
+### store.get(sid, callback)
+
+**Requis**
+
+Cette méthode requise est utilisée pour obtenir une session de la boutique avec un ID de session
+(`sid`). Le `callback` doit être appelé comme `callback(error, session)`.
+
+L'argument `session` devrait être une session si trouvée, sinon `null` ou
+`undefined` si la session n'a pas été trouvée (et il n'y a pas d'erreur). Un cas spécial
+est fait lorsque `error.code === 'ENOENT'` agit comme `callback(null, null)`.
+
+### store.set(sid, session, callback)
+
+**Requis**
+
+Cette méthode requise est utilisée pour mettre à jour une session dans le magasin avec un identifiant de session
+(`sid`) et un objet session (`session`). Le callback devrait être
+appelé comme `callback(error)` une fois que la session a été définie dans la boutique.
+
+### store.touch(sid, session, callback)
+
+**Recommandé**
+
+Cette méthode recommandée est utilisée pour "toucher" une session donnée avec un identifiant de session
+(`sid`) et un objet session (`session`). Le `callback` devrait être
+appelé comme `callback(error)` une fois que la session a été touchée.
+
+Ceci est principalement utilisé lorsque le magasin supprimera automatiquement les sessions inactives
+et que cette méthode est utilisée pour signaler à la boutique la session donnée est active,
+réinitialisation potentielle de la minuterie inactive.
+
+## Magasins de sessions compatibles
+
+Les modules suivants implémentent une boutique de session compatible avec ce module
+. Veuillez faire une PR pour ajouter des modules supplémentaires :)
+
+[![Ω][aerospike-session-store-image] aerospike-session-store][aerospike-session-store-url] Un magasin de session utilisant [Aerospike](http://www.aerospike.com/).
+
+[URL de la boutique de session aerospike]: https://www.npmjs.com/package/aerospike-session-store
+
+[![Ω][better-sqlite3-session-store-image] meilleur-sqlite3-session-store][better-sqlite3-session-store-url] Un magasin de session basé sur [better-sqlite3](https://github.com/JoshuaWise/better-sqlite3).
+
+[meilleur-sqlite3-session-store-url]: https://www.npmjs.com/package/better-sqlite3-session-store
+
+[![Ω][cassandra-store-image] cassandra-store][cassandra-store-url] Un magasin de session basé sur Apache Cassandra.
+
+[cassandra-store-url]: https://www.npmjs.com/package/cassandra-store
+
+[![Ω][cluster-store-image] cluster-store][cluster-store-url] Un wrapper pour utiliser des magasins en cours / embarqués\* tels que SQLite (via knex), leveldb, fichiers, ou mémoire - avec le cluster de noeuds (souhaitable pour le Raspberry Pi 2
+et d'autres périphériques embarqués multi-cœurs).
+
+[cluster-store-url]: https://www.npmjs.com/package/cluster-store
+
+[![Ω][connect-arango-image] connect-arango][connect-arango-url] Un magasin de sessions basé sur ArangoDB.
+
+[connect-arango-url]: https://www.npmjs.com/package/connect-arango
+
+[![Ω][connect-azuretables-image] connect-azuretables][connect-azuretables-url] Une boutique de sessions basée sur la [table Azre](https://azure.microsoft.com/en-gb/services/storage/tables/).
+
+[connect-azuretables-url]: https://www.npmjs.com/package/connect-azuretables
+
+[![Ω][connect-cloudant-store-image] connect-cloudant-store][connect-cloudant-store-url] Une boutique de session basée sur [IBM Cloudant](https://cloudant.com/).
+
+[connect-cloudant-store-url]: https://www.npmjs.com/package/connect-cloudant-store
+
+[![Ω][connect-cosmosdb-image] connect-cosmosdb][connect-cosmosdb-url] Une boutique de session basée sur [Cosmos DB](https://azure.microsoft.com/en-us/products/cosmos-db/)azur.
+
+[connect-cosmosdb-url]: https://www.npmjs.com/package/connect-cosmosdb
+
+[![Aujourd'hui][connect-couchbase-image] connect-couchbase][connect-couchbase-url] A [couchbase](http://www.couchbase.com/) basé sur la session.
+
+[adresse-adresse-du-couchbase-connexion]: https://www.npmjs.com/package/connect-couchbase
+
+[![Ω][connect-datacache-image] connect-datacache][connect-datacache-url] Une boutique de session basée sur [IBM Bluemix Data Cache](http://www.ibm.com/cloud-computing/bluemix/).
+
+[connect-datacache-url]: https://www.npmjs.com/package/connect-datacache
+
+[![Ω][@google-cloud/connect-datastore-image] @google-cloud/connect-datastore][@google-cloud/connect-datastore-url] A [Google Cloud Datastore](https://cloud.google.com/datastore/docs/concepts/overview)-based session store.
+
+[@google-cloud/connect-datastore-url]: https://www.npmjs.com/package/@google-cloud/connect-datastore
+
+[![Ω][connect-db2-image] connect-db2][connect-db2-url] Un magasin de session IBM basé sur DB2 construit en utilisant le module [ibm_db](https://www.npmjs.com/package/ibm_db).
+
+[connect-db2-url]: https://www.npmjs.com/package/connect-db2
+
+[![Ω][connect-dynamodb-image] connect-dynamodb][connect-dynamodb-url] Un magasin de sessions basé sur DynamoDB.
+
+[connect-dynamodb-url]: https://www.npmjs.com/package/connect-dynamodb
+
+[![Ω][@google-cloud/connect-firestore-image] @google-cloud/connect-firestore][@google-cloud/connect-firestore-url] A [Google Cloud Firestore](https://cloud.google.com/firestore/docs/overview)-based session store.
+
+[@google-cloud/connect-firestore-url]: https://www.npmjs.com/package/@google-cloud/connect-firestore
+
+[![Ω][connect-hazelcast-image] connect-hazelcast][connect-hazelcast-url] boutique de sessions Hazelcast pour Connect and Express.
+
+[connecter-de-casse-hazelcast-url]: https://www.npmjs.com/package/connect-hazelcast
+
+[![Ω][connect-loki-image] connect-loki][connect-loki-url] Une boutique de session basée sur Loki.js.
+
+[connect-loki-url]: https://www.npmjs.com/package/connect-loki
+
+[![Ω][connect-lowdb-image] connect-lowdb][connect-lowdb-url] Un magasin de sessions à base de basses bases.
+
+[connect-lowdb-url]: https://www.npmjs.com/package/connect-lowdb
+
+[![Ω][connect-memcached-image] connect-memcached][connect-memcached-url] Un magasin de sessions basé sur memcached.
+
+[urlconnect-memcached-url]: https://www.npmjs.com/package/connect-memcached
+
+[![Ω][connect-memjs-image] connect-memjs][connect-memjs-url] Un magasin de sessions basé sur memcached en utilisant
+[memjs](https://www.npmjs.com/package/memjs) comme client memcached.
+
+[connect-memjs-url]: https://www.npmjs.com/package/connect-memjs
+
+[![Ω][connect-ml-image] connect-ml][connect-ml-url] Une boutique de session basée sur le serveur MarkLogic .
+
+[connect-ml-url]: https://www.npmjs.com/package/connect-ml
+
+[![Ω][connect-monetdb-image] connect-monetdb][connect-monetdb-url] Un magasin de sessions basé sur MonetDB.
+
+[connect-monetdb-url]: https://www.npmjs.com/package/connect-monetdb
+
+[![Ω][connect-mongo-image] connect-mongo][connect-mongo-url] Une boutique de sessions basée sur la MongoDB.
+
+[connect-mongo-url]: https://www.npmjs.com/package/connect-mongo
+
+[![Ω][connect-mongodb-session-image] connect-mongodb-session][connect-mongodb-session-url] Léger magasin de session basé sur MongoDB construit et maintenu par MongoDB.
+
+[connect-mongodb-url de session]: https://www.npmjs.com/package/connect-mongodb-session
+
+[![Ω][connect-mssql-v2-image] connect-mssql-v2][connect-mssql-v2-url] Une boutique de session basée sur Microsoft SQL Server basée sur [connect-mssql](https://www.npmjs.com/package/connect-mssql).
+
+[connect-mssql-v2-url]: https://www.npmjs.com/package/connect-mssql-v2
+
+[![Ω][connect-neo4j-image] connect-neo4j][connect-neo4j-url] Une boutique de session basée sur [Neo4j](https://neo4j.com).
+
+[connect-neo4j-url]: https://www.npmjs.com/package/connect-neo4j
+
+[![Ω][connect-ottoman-image] connect-ottoman][connect-ottoman-url] A [couchbase ottoman](http://www.couchbase.com/)basé sur la boutique de session.
+
+[connecte-ottoman-url]: https://www.npmjs.com/package/connect-ottoman
+
+[![Ω][connect-pg-simple-image] connect-pg-simple][connect-pg-simple-url] Une boutique de session basée sur PostgreSQL.
+
+[connect-pg-simple-url]: https://www.npmjs.com/package/connect-pg-simple
+
+[![Ω][connect-redis-image] connect-redis][connect-redis-url] Un magasin de session basé sur Redis.
+
+[connect-redis-url]: https://www.npmjs.com/package/connect-redis
+
+[![Ω][connect-session-firebase-image] connect-session-firebase][connect-session-firebase-url] Une boutique de session basée sur la [Base de données en temps réel Fire](https://firebase.google.com/docs/database/)
+
+[connect-session-firebase-url]: https://www.npmjs.com/package/connect-session-firebase
+
+[![Ω][connect-session-knex-image] connect-session-knex][connect-session-knex-url] Une boutique de session utilisant
+[Knex.js](http://knexjs.org/), qui est un constructeur de requêtes SQL pour PostgreSQL, MySQL, MariaDB, SQLite3 et Oracle.
+
+[connecte-session-url-knex-url]: https://www.npmjs.com/package/connect-session-knex
+
+[![Ω][connect-session-sequelize-image] connect-session-sequelize][connect-session-sequelize-url] Un magasin de session utilisant
+[Sequelize.js](https://sequelize.org/), qui est un nœud. s / io.js ORM pour PostgreSQL, MySQL, SQLite et MSSQL.
+
+[connect-session-sequelize-url]: https://www.npmjs.com/package/connect-session-sequelize
+
+[![Ω][connect-sqlite3-image] connect-sqlite3][connect-sqlite3-url] A [SQLite3](https://github.com/mapbox/node-sqlite3) boutique de session modélisée après la boutique `connect-redis` de TJ.
+
+[connect-sqlite3-url]: https://www.npmjs.com/package/connect-sqlite3
+
+[![Aujourd'hui][connect-typeorm-image] connect-typeorm][connect-typeorm-url] A [TypeORM](https://github.com/typeorm/typeorm) basé sur la boutique de session.
+
+[connect-typeorm-url]: https://www.npmjs.com/package/connect-typeorm
+
+[![Ω][couchdb-expression-image] couchdb-expression][couchdb-expression-url] Une boutique de session basée sur [CouchDB](https://couchdb.apache.org/).
+
+[url_expression-couchdb-url]: https://www.npmjs.com/package/couchdb-expression
+
+[![Ω][dynamodb-store-image] dynamodb-store][dynamodb-store-url] Un magasin de sessions basé sur DynamoDB.
+
+[dynamodb-store-url]: https://www.npmjs.com/package/dynamodb-store
+
+[![Ω][express-etcd-image] express-etcd][express-etcd-url] Une boutique de session basée sur [etcd](https://github.com/stianeikeland/node-etcd).
+
+[express-etcd-url]: https://www.npmjs.com/package/express-etcd
+
+[![Ω][express-mysql-session-image] express-mysql-session][express-mysql-session-url] Un magasin de session utilisant le module
+[MySQL](https://www.mysql.com/) via le module [node-mysql](https://github.com/felixge/node-mysql).
+
+[express-mysql-session-url]: https://www.npmjs.com/package/express-mysql-session
+
+[![Ω][express-nedb-session-image] express-nedb-session][express-nedb-session-url] Un magasin de sessions basé sur NeDB.
+
+[express-nedb-session-url]: https://www.npmjs.com/package/express-nedb-session
+
+[![Ω][express-oracle-session-image] express-oracle-session][express-oracle-session-url] Un magasin de session utilisant le module
+[oracle](https://www.oracle.com/) natif via le module [node-oracledb](https://www.npmjs.com/package/oracledb).
+
+[express-oracle-session-url]: https://www.npmjs.com/package/express-oracle-session
+
+[![★][express-session-cache-manager-image] express-session-cache-manager][express-session-cache-manager-url]
+A store that implements [cache-manager](https://www.npmjs.com/package/cache-manager), which supports
+a [variety of storage types](https://www.npmjs.com/package/cache-manager#store-engines).
+
+[express-session-cache-url du gestionnaire de cache]: https://www.npmjs.com/package/express-session-cache-manager
+
+[![Ω][express-session-etcd3-image] express-session-etcd3][express-session-etcd3-url] Une boutique de session basée sur [etcd3](https://github.com/mixer/etcd3).
+
+[express-session-etcd3-url]: https://www.npmjs.com/package/express-session-etcd3
+
+[![Aujourd'hui][express-session-level-image] express-session-level][express-session-level-url] A [LevelDB](https://github.com/Level/levelup) basé sur la boutique de session.
+
+[express-session-url de niveau]: https://www.npmjs.com/package/express-session-level
+
+[![★][express-session-rsdb-image] express-session-rsdb][express-session-rsdb-url] Session store based on Rocket-Store: A very simple, super fast and yet powerful, flat file database.
+
+[express-session-rsdb-url]: https://www.npmjs.com/package/express-session-rsdb
+
+[![Ω][express-sessions-image] express-sessions][express-sessions-url] Une boutique de session soutenant à la fois MongoDB et Redis.
+
+[URL des sessions expresses]: https://www.npmjs.com/package/express-sessions
+
+[![Aujourd'hui][firestore-store-image] boutique de pompiers][firestore-store-url] Une boutique de session basée sur [Firestore](https://github.com/hendrysadrak/firestore-store).
+
+[firestore-store-url]: https://www.npmjs.com/package/firestore-store
+
+[![Aujourd'hui][fortune-session-image] session de fortune][fortune-session-url] A [Fortune.js](https://github.com/fortunejs/fortune)
+boutique de session. Supporte tous les backends supportés par Fortune (MongoDB, Redis, Postgres, NeDB).
+
+[adresse-adresse-session-fortune]: https://www.npmjs.com/package/fortune-session
+
+[![Ω][hazelcast-store-image] hazelcast-store][hazelcast-store-url] A Un magasin de session basé sur Hazelcast construit sur le [client du noeud Hazelcast](https://www.npmjs.com/package/hazelcast-client).
+
+[hazelcast-store-url]: https://www.npmjs.com/package/hazelcast-store
+
+[![Ω][level-session-store-image] level-session-store][level-session-store-url] A LevelDB-based session store.
+
+[level-session-url-store-url]: https://www.npmjs.com/package/level-session-store
+
+[![Ω][lowdb-session-store-image] lowdb-session-store][lowdb-session-store-url] A [lowdb](https://www.npmjs.com/package/lowdb) basé sur la boutique de session.
+
+[URL de la session lowdb]: https://www.npmjs.com/package/lowdb-session-store
+
+[![Ω][medea-session-store-image] medea-session-store][medea-session-store-url] Un magasin de session basé sur la Médea.
+
+[Url du magasin medea-session]: https://www.npmjs.com/package/medea-session-store
+
+[![Ω][memorystore-image] memorystore][memorystore-url] Une boutique de sessions de mémoire faite pour la production.
+
+[memorystore-url]: https://www.npmjs.com/package/memorystore
+
+[![Ω][mssql-session-store-image] mssql-session-store][mssql-session-store-url] Une boutique de sessions basée sur SQL Server.
+
+[url de la session mssql-store-url]: https://www.npmjs.com/package/mssql-session-store
+
+[![Ω][nedb-session-store-image] nedb-session-store][nedb-session-store-url] Un magasin de sessions NeDB alternatif (soit en mémoire ou file-persisted).
+
+[url de la session nedb-store-url]: https://www.npmjs.com/package/nedb-session-store
+
+[![Ω][@quixo3/prisma-session-store-image] @quixo3/prisma-session-store][@quixo3/prisma-session-store-url] A session store for the [Cadre Prisma](https://www.prisma.io).
+
+[@quixo3/url-prisma-session-store-url]: https://www.npmjs.com/package/@quixo3/prisma-session-store
+
+[![Ω][restsession-image] restsession][restsession-url] Magasin de sessions utilisant une API RESTful
+
+[Url de repos]: https://www.npmjs.com/package/restsession
+
+[![Ω][sequelstore-connect-image] sequelstore-connect][sequelstore-connect-url] Un magasin de session utilisant [Sequelize.js](https://sequelize.org/).
+
+[sequelstore-connexion-url]: https://www.npmjs.com/package/sequelstore-connect
+
+[![Ω][session-file-store-image] session-file-store][session-file-store-url] Une boutique de sessions basée sur un système de fichiers.
+
+[URL de la boutique du fichier de session]: https://www.npmjs.com/package/session-file-store
+
+[![Ω][session-pouchdb-store-image] session-pochdb-store][session-pouchdb-store-url] Boutique de session pour PouchDB / CouchDB. Accepte l'instance PouchDB intégrée, personnalisée ou distante et la synchronisation en temps réel.
+
+[URL de la boutique de la session]: https://www.npmjs.com/package/session-pouchdb-store
+
+[![Ω][@databasunker/session-store-image] @databasunker/session-store][@databasunker/session-store-url] A A A A A [Databunker](https://databunker.org/)based encrypted session store.
+
+[@databasunker/session-store-url]: https://www.npmjs.com/package/@databasunker/session-store
+
+[![Ω][sessionstore-image] sessionstore][sessionstore-url] Une boutique de session qui fonctionne avec diverses bases de données.
+
+[Url de la sessionstore]: https://www.npmjs.com/package/sessionstore
+
+[![Ω][tch-nedb-session-image] tch-nedb-session][tch-nedb-session-url] Un magasin de sessions système de fichiers basé sur NeDB.
+
+[url tch-nedb-session-url]: https://www.npmjs.com/package/tch-nedb-session
+
+## Exemples
+
+### Compteur de vue
+
+Un exemple simple en utilisant `express-session` pour stocker des vues de page pour un utilisateur.
+
+```js
+var express = require('express');
+var parseurl = require('parseurl');
+var session = require('express-session');
+
+var app = express();
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+app.use(function (req, res, next) {
+  if (!req.session.views) {
+    req.session.views = {};
+  }
+
+  // get the url pathname
+  var pathname = parseurl(req).pathname;
+
+  // count the views
+  req.session.views[pathname] = (req.session.views[pathname] || 0) + 1;
+
+  next();
+});
+
+app.get('/foo', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/foo'] + ' times');
+});
+
+app.get('/bar', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/bar'] + ' times');
+});
+
+app.listen(3000);
+```
+
+### Connexion de l'utilisateur
+
+Un exemple simple en utilisant `express-session` pour garder un utilisateur connecté en session.
+
+```js
+var escapeHtml = require('escape-html');
+var express = require('express');
+var session = require('express-session');
+
+var app = express();
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// middleware to test if authenticated
+function isAuthenticated(req, res, next) {
+  if (req.session.user) next();
+  else next('route');
+}
+
+app.get('/', isAuthenticated, function (req, res) {
+  // this is only called when there is an authentication user due to isAuthenticated
+  res.send('hello, ' + escapeHtml(req.session.user) + '!' + ' <a href="/logout">Logout</a>');
+});
+
+app.get('/', function (req, res) {
+  res.send(
+    '<form action="/login" method="post">' +
+      'Username: <input name="user"><br />' +
+      'Password: <input name="pass" type="password"><br />' +
+      '<input type="submit" text="Login"></form>'
+  );
+});
+
+app.post('/login', express.urlencoded({ extended: false }), function (req, res) {
+  // login logic to validate req.body.user and req.body.pass
+  // would be implemented here. for this example any combo works
+
+  // regenerate the session, which is good practice to help
+  // guard against forms of session fixation
+  req.session.regenerate(function (err) {
+    if (err) next(err);
+
+    // store user information in session, typically a user id
+    req.session.user = req.body.user;
+
+    // save the session before redirection to ensure page
+    // load does not happen before session is saved
+    req.session.save(function (err) {
+      if (err) return next(err);
+      res.redirect('/');
+    });
+  });
+});
+
+app.get('/logout', function (req, res, next) {
+  // logout logic
+
+  // clear the user from the session object and save.
+  // this will ensure that re-using the old session id
+  // does not have a logged in user
+  req.session.user = null;
+  req.session.save(function (err) {
+    if (err) next(err);
+
+    // regenerate the session, which is good practice to help
+    // guard against forms of session fixation
+    req.session.regenerate(function (err) {
+      if (err) next(err);
+      res.redirect('/');
+    });
+  });
+});
+
+app.listen(3000);
+```
+
+## Débogage
+
+This module uses the [debug](https://www.npmjs.com/package/debug) module
+internally to log information about session operations.
+
+Pour voir tous les journaux internes, définissez la variable d'environnement `DEBUG` à
+`express-session` lors du lancement de votre application (`npm start`, dans cet exemple) :
+
+```sh
+$ DEBUG=express-session npm start
+```
+
+Sous Windows, utilisez la commande correspondante ;
+
+```sh
+> set DEBUG=express-session & npm start
+```
+
+## Licence
+
+[MIT](https://github.com/expressjs/session/blob/HEAD/LICENSE)
+
+[rfc-6265bis-03-4.1.2.7]: https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.2.7
+[rfc-cutler-httpbis-partitioned-cookies]: https://tools.ietf.org/html/draft-cutler-httpbis-partitioned-cookies/
+[rfc-west-cookie-priority-00-4.1]: https://tools.ietf.org/html/draft-west-cookie-priority-00#section-4.1
+[url du nœud]: https://nodejs.org/fr/download
+[npm-url]: https://npmjs.org/package/express-session

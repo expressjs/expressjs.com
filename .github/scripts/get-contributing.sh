@@ -1,92 +1,92 @@
 #!/bin/bash
 
-# This script replaces the contents of a section with the contents from the annotated source address or local file paths inside the DEST file.
+# This script replaces the contents of a section with the contents from the
+# annotated source address (SRC comments) inside the DEST file.
+# SRC comments use the format: {/* SRC: org/repo path/to/file */}
 
-# read contents of file into memory
-DEST="../../en/resources/contributing.md"
+DEST="../../src/content/pages/en/resources/contributing.mdx"
 
-# track the header level 
+# Shared content transformations
+transform_content() {
+  local content="$1"
+  local level="$2"
+
+  # Keep only from first ## onward (skip title/badges)
+  content=$(echo "$content" | sed -En '/^##|^[^#]/,$p')
+
+  # Downgrade headings based on parent level
+  content=$(echo "$content" | sed 's/^#/&'"${level:1}"'/g')
+
+  # Convert GitHub callouts to Alert components
+  content=$(echo "$content" | perl -0777 -pe '
+    s/> \[!(IMPORTANT|NOTE|TIP|CAUTION|WARNING)\]\s*\n((?:>.*\n)*)/
+      my $type = lc($1);
+      my %map = (important => "info", note => "info", tip => "info", caution => "warning", warning => "warning");
+      my $alert = $map{$type} || "info";
+      my $body = $2;
+      $body =~ s|^> ?||gm;
+      "<Alert type=\"$alert\">\n\n${body}\n<\/Alert>\n"
+    /ge')
+
+  # Convert HTML comments to MDX comments
+  content=$(echo "$content" | sed -E 's/<!--(.*)-->/\{\/\*\1\*\/\}/g')
+
+  # Convert self-closing HTML tags for MDX compatibility
+  content=$(echo "$content" | sed -E 's/<(br|hr|img)([^/]*[^/])?\s*>/<\1\2 \/>/gi')
+
+  echo "$content"
+}
+
 level=''
-# tracks src for curl calls
 src=''
-# tracks file paths for local file reads
-local=''
-  while IFS= read -r line; do
-  # REMOVE PREVIOUS CONTENT SECTION
-  # if src or local tags are not empty
-  if [[ -n "$src" || -n "$local" ]]; then
-    #  if current line not a horitzontal rule hr
-    if  [[ "$line" != "----"* ]]; then
-    #  if line == level -- level is num of ##
-      if [[ "$line" == "$level"'#'*  ||
-      # line not a header line
-      "$line" != '#'* ]]; then
-        # skip line and rewrite over old content
-          continue
+
+while IFS= read -r line; do
+  # Skip lines from previous SRC section (will be replaced)
+  if [[ -n "$src" ]]; then
+    if [[ "$line" != "----"* ]]; then
+      if [[ "$line" == "$level"'#'* || "$line" != '#'* ]]; then
+        continue
       fi
     fi
   fi
 
- # PRINT TO PAGE SECTION
   src=''
-  local=''
-  # if line is a header
+
+  # Track heading level
   if [[ "$line" == '#'* ]]; then
-  # if header has (#id-of-link) or {#id-on-page} patterns
     if [[ $line =~ (\(\#.*\))\. || "$line" =~ \{\#.*\} ]]; then
-      # isolate the matching part of line 
       match=${BASH_REMATCH[0]}
-      # remove match - leaving rest
       rest=${line//${match}}
-      # remove any # symbols from start 
       title_rest=${rest##*\#}
-      # slice rest of line to get only level
       level="${rest:0:$((${#rest} - ${#title_rest}))}"
     else
-    # any other headers -- these before SRC/LOCAL pages anchors
-      header=${line##*\#} 
+      header=${line##*\#}
       level="${line:0:$((${#line} - ${#header}))}"
     fi
-  # if line is SRC anchor in read file 
-  elif [[ "$line" == '<!-- SRC:'* ]]; then
-    # remove the first 10 chars
-    src=${line:10}
-    # % remove from end until after white space -- leaves src details
-    src=${src% *}
-  # if line is LOCAL anchor in read file 
-  elif [[ "$line" == '<!-- LOCAL:'* ]]; then
-    # remove the first 12 chars
-    local=${line:12}
-    # % remove from end until after white space -- leave local details
-    local=${local% *}
-    # leave only path to file
-    local=${local#* }
-  fi 
-  # prints line to the page 
+  # Detect SRC comment (MDX format)
+  elif [[ "$line" == '{/* SRC:'* ]]; then
+    src=${line:9}
+    src=${src%% \*/*}
+  fi
+
   echo "$line"
- 
-  if [[ -n "$local" ]]; then
-  # cat file -- outputs full contents of file at local path 
-    cat "$local" | \
-    # remove the top 1# headers from cat'd file
-      sed -En '/^##|^[^#]/,$p' | \
-    # remove GH MD specific tags start w '[!NOTE\] + the following line
-      sed -E '/^>\[!NOTE\]*/{N;d;}' | \
-    # change GH specific MD IMPORTANT tags -> change into plain MD
-      sed -E 's/> \[!IMPORTANT\]/> **IMPORTANT:** /g'
-      echo
-  elif [[ -n "$src" ]]; then  
+
+  if [[ -n "$src" ]]; then
     echo
     path=${src#* }
     repo=${src% *}
-    curl -s "https://raw.githubusercontent.com/${repo}/master/${path}" | \
-      # if line is ## or not #
-      sed -En '/^##|^[^#]/,$p' | \
-      # add additional # every header 
-      sed 's/^#/&'"${level:1}"'/g' | \
-      # format GH links when match
-      sed -E 's/(\[[^]]*\])\(([^):#]*)\)/\1(https:\/\/github.com\/'"$(sed 's/\//\\\//g' <<< "$repo")"'\/blob\/master\/\2)/g'
+
+    echo "fetching $repo/$path..." >&2
+    RAW=$(curl -s "https://raw.githubusercontent.com/${repo}/HEAD/${path}")
+
+    # Convert relative links to absolute GitHub URLs
+    BASEURL="https://github.com/${repo}/blob/HEAD"
+    RAW=$(echo "$RAW" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
+
+    TRANSFORMED=$(transform_content "$RAW" "$level")
+    echo "$TRANSFORMED"
     echo
   fi
-  # read in dest file then write back to file
 done <<<"$(< $DEST)" > $DEST
+
+echo "Updated $DEST"

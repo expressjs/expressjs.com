@@ -1,0 +1,76 @@
+---
+// English redirects for every content collection.
+//
+// The site serves all content under `/[lang]/…`, so a bare path with no locale
+// prefix (an old inbound link, or what's left after Cloudflare strips `.html`)
+// has no page of its own. This catch-all enumerates the same collections the
+// real routes use via `getCollection`, so the slugs always match the generated
+// pages, and redirects each one to its `/en/` home.
+//
+// The redirect HTML is rendered by hand (rather than `Astro.redirect`) so the
+// meta refresh fires instantly (`0;`) — Astro's static `Astro.redirect` helper
+// hardcodes a 2-second delay, which is a poor redirect experience.
+import { getCollection } from 'astro:content';
+import { DEFAULT_VERSION } from '@config/versions';
+
+export async function getStaticPaths() {
+  const [docs, pages, api, blog] = await Promise.all([
+    getCollection('docs'),
+    getCollection('pages'),
+    getCollection('api'),
+    getCollection('blog'),
+  ]);
+
+  /** @type {Set<string>} */
+  const slugs = new Set();
+
+  /** @param {string} slug */
+  const add = (slug) => {
+    if (!slug) return;
+    slugs.add(slug);
+    // Pages served at the default version are also available unversioned,
+    // e.g. `5x/starter/installing` → `starter/installing`.
+    if (slug.startsWith(`${DEFAULT_VERSION}/`)) {
+      slugs.add(slug.slice(DEFAULT_VERSION.length + 1));
+    }
+  };
+
+  // `docs` (versioned guides/starter/…) and `pages` (resources, support, …)
+  // both embed the language as the first id segment; only English is canonical.
+  for (const entry of [...docs, ...pages]) {
+    const [lang, ...rest] = entry.id.split('/');
+    if (lang !== 'en') continue;
+    add(rest.join('/'));
+  }
+
+  // `api` is a shared collection with `<version>/<rest>` ids and no language.
+  for (const entry of api) {
+    add(entry.id);
+  }
+
+  // `blog` is served under `/[lang]/blog/<slug>`.
+  for (const entry of blog) {
+    slugs.add(`blog/${entry.id}`);
+  }
+  slugs.add('blog');
+
+  return [...slugs].map((path) => ({ params: { path } }));
+}
+
+const target = `/en/${Astro.params.path}`;
+const canonical = new URL(target, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to {target}</title>
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <a href={target}>Redirecting to <code>{target}</code></a>
+  </body>
+</html>

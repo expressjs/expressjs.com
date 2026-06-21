@@ -1,0 +1,312 @@
+---
+title: エラー処理
+description: Express.jsが同期コードと非同期コードのエラーを処理する方法を理解し、アプリケーション用のカスタムエラー処理ミドルウェアを実装する方法を学びます。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+*Error Handling*は、
+が同期と非同期の両方で発生するエラーをExpress がキャッチして処理する方法を指します。 Expressにはデフォルトのエラー
+ハンドラが付属しているので、始めるために自分で書く必要はありません。
+
+## キャッチエラー
+
+Express がルートハンドラと
+ミドルウェアの実行中に発生するすべてのエラーをキャッチすることが重要です。
+
+ルートハンドラとミドルウェア
+内の同期コードで発生するエラーは追加の作業を必要としません。 同期コードがエラーをスローする場合、Expressは
+キャッチして処理します。 例:
+
+```js
+app.get('/', (req, res) => {
+  throw new Error('BROKEN'); // Express will catch this on its own.
+});
+```
+
+For errors returned from asynchronous functions invoked by route handlers
+and middleware, you must pass them to the `next()` function, where Express will
+catch and process them. 例:
+
+```js
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err); // Pass errors to Express.
+    } else {
+      res.send(data);
+    }
+  });
+});
+```
+
+Express 5以降、Promise
+を返すルートハンドラとミドルウェアは、エラーの拒否またはスロー時に自動的に`next(value)`を呼び出します。
+例:
+
+```js
+app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+If `getUserById` throws an error or rejects, `next` will be called with either
+the thrown error or the rejected value. 拒否された値が指定されていない場合、 `next`
+はExpress ルータが提供するデフォルトの Error オブジェクトで呼び出されます。
+
+`next()`関数に何かを渡した場合（`'route'`を除く）。
+Expressは現在のリクエストをエラーとみなし、
+残っている非エラー処理ルーティングとミドルウェア関数をスキップします。
+
+シーケンス内のコールバックがデータを提供しない場合、エラーのみを提供する場合は、次のように
+このコードを簡素化できます:
+
+```js
+app.get('/', [
+  function (req, res, next) {
+    fs.writeFile('/inaccessible-path', 'data', next);
+  },
+  function (req, res) {
+    res.send('OK');
+  },
+]);
+```
+
+In the above example, `next` is provided as the callback for `fs.writeFile`,
+which is called with or without errors. エラーがなければ、2番目の
+ハンドラが実行されます。そうでなければ、Expressはエラーをキャッチして処理します。
+
+route handler または
+ミドルウェアによって呼び出された非同期コードで発生するエラーをキャッチし、処理のために Express に渡す必要があります。 例:
+
+```js
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+上の例では、
+非同期コードのエラーをキャッチし、Expressに渡すために`try...catch`ブロックを使用しています。 `try...catch`
+ブロックが省略された場合、Expressは同期
+ハンドラコードの一部ではないため、エラーをキャッチしません。
+
+プロミスを返す関数
+を使うと、`try...catch` のオーバーヘッドを避けることができます。 例:
+
+```js
+app.get('/', (req, res, next) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
+Since promises automatically catch both synchronous errors and rejected promises,
+you can simply provide `next` as the final catch handler and Express will catch errors,
+because the catch handler is given the error as the first argument.
+
+また、非同期コードを些細なものに減らすことで、同期エラー
+のキャッチに依存するハンドラのチェーンを使用することもできます。 例:
+
+```js
+app.get('/', [
+  function (req, res, next) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data;
+      next(err);
+    });
+  },
+  function (req, res) {
+    res.locals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
+```
+
+上の例では、`readFile`
+呼び出しからいくつかの些細な文があります。 `readFile` でエラーが発生した場合、エラーは Express に渡されます。 それ以外の場合は、
+チェーン内の次のハンドラ
+で同期エラー処理の世界にすばやく戻ります。 そして、上記の例はデータを処理しようとします。 これが失敗した場合、
+同期エラーハンドラはそれをキャッチします。 `readFile`コールバックの
+内でこの処理を行った場合、アプリケーションが終了する可能性があり、Expressエラー
+ハンドラは実行されません。
+
+どちらの方法を使っても、Expressエラーハンドラを呼び出し、
+アプリケーションを存続させたい場合は Express がエラーを受け取ることを確認する必要があります。
+
+## デフォルトのエラーハンドラです
+
+Expressには、アプリで発生する可能性のあるエラーを処理する内蔵のエラーハンドラが付属しています。 このデフォルトのエラー処理ミドルウェア関数は、ミドルウェア関数スタックの末尾に追加されます。
+
+If you pass an error to `next()` and you do not handle it in a custom error
+handler, it will be handled by the built-in error handler; the error will be
+written to the client with the stack trace. スタックトレースは本番環境に
+含まれていません。
+
+<Alert type="情報">
+
+プロダクションモードでアプリを実行するには、環境変数 `NODE_ENV` を `production` に設定します。
+
+</Alert>
+
+エラーが書き込まれると、次の情報が
+応答に追加されます:
+
+- `res.statusCode` は `err.status` (または `err.statusCode`)から設定されます。
+  の場合、この値が4xxまたは5xxの範囲外の場合、500に設定されます。
+- `res.statusMessage` はステータスコードに従って設定されます。
+- 本文は、プロダクション
+  環境ではステータスコードメッセージのHTMLになります。そうでなければ、`err.stack`になります。
+- `err.headers` オブジェクトで指定されたヘッダー。
+
+If you call `next()` with an error after you have started writing the
+response (for example, if you encounter an error while streaming the
+response to the client), the Express default error handler closes the
+connection and fails the request.
+
+So when you add a custom error handler, you must delegate to
+the default Express error handler, when the headers
+have already been sent to the client:
+
+```js
+function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+デフォルトのエラーハンドラは、コード内でエラー
+を複数回呼び出して`next()`を呼び出すとトリガされることに注意してください。 カスタムエラー処理ミドルウェアが導入されたとしてもです
+
+Other error handling middleware can be found at [Express middleware](/resources/middleware).
+
+## エラーハンドラの書き込み
+
+Define error-handling middleware functions in the same way as other middleware functions,
+except error-handling functions have four arguments instead of three:
+`(err, req, res, next)`. 例:
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+エラー処理ミドルウェアは、他の `app.use()`とルート呼び出しの後に最後に定義します。例:
+
+```js
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+ミドルウェア関数内からのレスポンスは、HTMLエラーページ、シンプルなメッセージ、JSON文字列など、あらゆる形式で使用できます。
+
+For organizational (and higher-level framework) purposes, you can define
+several error-handling middleware functions, much as you would with
+regular middleware functions. 例えば、`XHR`とそれ以外のリクエストに対してエラーハンドラ
+を定義するには、次のようにします。
+
+```js
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+この例では、一般的な`logErrors`はリクエストと
+エラー情報を`stderr`に書き込むことができます。
+
+```js
+function logErrors(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
+}
+```
+
+この例でも、`clientErrorHandler`は以下のように定義されています。この場合、エラーは明示的に次のエラーに渡されます。
+
+エラー処理関数で「next」を呼び出さない場合、レスポンスの書き込み(および終了)を行う責任があることに注意してください。 そうでなければ、これらのリクエストは「ハング」し、ガベージコレクションの対象になりません。
+
+```js
+function clientErrorHandler(err, req, res, next) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' });
+  } else {
+    next(err);
+  }
+}
+```
+
+"catch-all" `errorHandler` 関数を以下のように実装します(例えば：
+
+```js
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+複数のコールバック関数を持つルートハンドラがある場合は、`route` パラメータを使用して次のルートハンドラにスキップできます。 例:
+
+```js
+app.get(
+  '/a_route_behind_paywall',
+  (req, res, next) => {
+    if (!req.user.hasPaid) {
+      // continue handling this request
+      next('route');
+    } else {
+      next();
+    }
+  },
+  (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err);
+      res.json(doc);
+    });
+  }
+);
+```
+
+この例では、 `getPaidContent` ハンドラはスキップされますが、 `/a_route_background_paywall` の `app` に残っているハンドラは引き続き実行されます。
+
+<Alert type="情報">
+
+`next()`と`next(err)`への呼び出しは、現在のハンドラが完了している状態を示します。
+`next(err)`は、上記のように
+に設定されているものを除いて、チェーン内の残りのハンドラをすべてスキップします。
+
+</Alert>

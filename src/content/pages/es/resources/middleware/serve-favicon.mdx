@@ -1,0 +1,136 @@
+---
+title: servidor-favicon middleware
+description: Favicon sirviendo middleware con caché
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.5.1"
+  github="https://github.com/expressjs/serve-favicon"
+  npm="https://www.npmjs.com/package/serve-favicon"
+/>
+
+Middleware Node.js para servir un favicon.
+
+Un favicon es un sistema visual que el software del cliente, como los navegadores, utilizan para identificar
+un sitio. Para un ejemplo y más información, por favor visita
+[el artículo de Wikipedia sobre favicons](https://en.wikipedia.org/wiki/Favicon).
+
+¿Por qué usar este módulo?
+
+- Los agentes de usuario solicitan `favicon. co` frecuente e indiscriminado, por lo que
+  puede querer excluir estas solicitudes de sus registros usando este middleware
+  antes de su middleware logger.
+- This module caches the icon in memory to improve performance by skipping
+  disk access.
+- This module provides an `ETag` based on the contents of the icon, rather
+  than file system properties.
+- Este módulo servirá con el `Content-Type` más compatible.
+
+**Nota** Este módulo es exclusivamente para servir el "favicón por defecto, implícito",
+que es `GET /favicon.ico`. Para iconos adicionales específicos del proveedor que requieren un marcado
+HTML, se requiere un middleware adicional para servir los archivos relevantes, por ejemplo
+[serve-static](https://npmjs.org/package/serve-static).
+
+## Instalar
+
+Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
+[npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install serve-favicon
+```
+
+## API
+
+### favicon(ruta, opciones)
+
+Crea un nuevo middleware para servir un favicon del `path` dado a un archivo favicon.
+`path` también puede ser un `Buffer` del icono a servir.
+
+#### Opciones
+
+Serve favicon acepta estas propiedades en el objeto de opciones.
+
+##### maxAge
+
+La directiva `cache-control` `max-age` en `ms`, por defecto a 1 año. This can
+also be a string accepted by the [ms](https://www.npmjs.org/package/ms#readme)
+module.
+
+## Ejemplos
+
+Normalmente este middleware llegará muy temprano en tu pila (tal vez primero)
+para evitar procesar cualquier otro middleware si ya sabemos que la solicitud es para
+`/favicon. co`.
+
+### expreso
+
+```javascript
+var express = require('express');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+var app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Add your routes here, etc.
+
+app.listen(3000);
+```
+
+### conectar
+
+```javascript
+var connect = require('connect');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+var app = connect();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Add your middleware here, etc.
+
+app.listen(3000);
+```
+
+### servidor http vainilla
+
+Este middleware puede ser usado en cualquier lugar, incluso fuera de expresión/conexión. Se toma
+`req`, `res`, y `callback`.
+
+```javascript
+var http = require('http');
+var favicon = require('serve-favicon');
+var finalhandler = require('finalhandler');
+var path = require('path');
+
+var _favicon = favicon(path.join(__dirname, 'public', 'favicon.ico'));
+
+var server = http.createServer(function onRequest(req, res) {
+  var done = finalhandler(req, res);
+
+  _favicon(req, res, function onNext(err) {
+    if (err) return done(err);
+
+    // continue to process the request here, etc.
+
+    res.statusCode = 404;
+    res.end('oops');
+  });
+});
+
+server.listen(3000);
+```
+
+## Licencia
+
+[MIT](https://github.com/expressjs/serve-favicon/blob/HEAD/LICENSE)
+
+[descarga-url]: https://npmjs.org/package/serve-favicon
+[npm-url]: https://npmjs.org/package/serve-favicon
+[insignia osf-scorecard-scorecard-]: https://api.scorecard.dev/projects/github.com/expressjs/serve-favicon/badge
+[visualizador-escorecard-ossf]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/serve-favicon

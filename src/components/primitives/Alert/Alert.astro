@@ -1,0 +1,63 @@
+---
+/**
+ * Alert Primitive Component
+ *
+ * Contextual callout block with an icon, title, and description.
+ * Three severity levels map to distinct color schemes and icons.
+ *
+ * @example
+ * <Alert type="info" title="Note">
+ *   Useful background information for the reader.
+ * </Alert>
+ *
+ * <Alert type="alert" title="Caution">
+ *   Something that may cause unexpected behaviour if ignored.
+ * </Alert>
+ *
+ * <Alert type="warning" title="Warning">
+ *   A risk of data loss or breaking change.
+ * </Alert>
+ */
+
+import './Alert.css';
+import type { HTMLAttributes } from 'astro/types';
+import type { AlertProps } from './types';
+import { Icon } from 'astro-icon/components';
+import { Body, Flex } from '@components/primitives';
+
+type Props = AlertProps & HTMLAttributes<'div'>;
+
+const { type = 'info', title, class: className, ...rest } = Astro.props;
+
+const defaultTitles: Record<string, string> = {
+  info: 'Note',
+  alert: 'Caution',
+  warning: 'Warning',
+};
+
+const resolvedTitle = title ?? defaultTitles[type];
+---
+
+<div class:list={['alert', `alert--${type}`, className]} role="note" {...rest}>
+  <Flex align="center" gap="2">
+    {
+      type === 'info' && (
+        <Icon name="fluent:info-16-regular" class="alert__icon" size="18" aria-hidden="true" />
+      )
+    }
+    {
+      type === 'alert' && (
+        <Icon name="fluent:alert-16-regular" class="alert__icon" size="18" aria-hidden="true" />
+      )
+    }
+    {
+      type === 'warning' && (
+        <Icon name="fluent:warning-16-regular" class="alert__icon" size="18" aria-hidden="true" />
+      )
+    }
+    <Body as="h3" vMargin={false} weight="bold">{resolvedTitle}</Body>
+  </Flex>
+  <div class="alert__description">
+    <slot />
+  </div>
+</div>

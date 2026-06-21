@@ -1,0 +1,508 @@
+---
+title: middleware parser corpo
+description: Analisando o Node.js corpo do middleware
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.2.2"
+  github="https://github.com/expressjs/body-parser"
+  npm="https://www.npmjs.com/package/body-parser"
+/>
+
+Análise do Node.js corpo de middleware.
+
+Analise os corpos recebidos em um middleware antes dos seus manipuladores, disponível
+sob a propriedade `req.body`.
+
+**Nota** Como `perguntar. a forma do ody `é baseada na entrada controlada pelo usuário, todas as propriedades e valores
+neste objeto não são confiáveis e devem ser validados
+antes de confiabilidade. Por exemplo, `req.body.foo. oString()` pode falhar em múltiplas formas
+como, por exemplo, a propriedade `foo` pode não estar presente ou não ser uma string,
+e `toString` não podem ser uma função e, em vez disso, uma string ou outra entrada do usuário.
+
+[Aprenda sobre a anatomia de uma transação HTTP no Node.js](https://nodejs.org/en/learn/http/anatomy-of-an-http-transaction).
+
+_Isso não lida com organismos multipartes_, devido à sua natureza complexa e tipicamente
+grande. Para organismos de várias partes, você pode estar interessado nos seguintes módulos
+:
+
+- [busboy](https://www.npmjs.com/package/busboy#readme) e
+  [connect-busboy](https://www.npmjs.com/package/connect-busboy#readme)
+- [multiparty](https://www.npmjs.com/package/multiparty#readme) e
+  [connect-multiparty](https://www.npmjs.com/package/connect-multiparty#readme)
+- [formidable](https://www.npmjs.com/package/formidable#readme)
+- [multer](https://www.npmjs.com/package/multer#readme)
+
+Este módulo fornece os seguintes analisadores:
+
+- [Analisador JSON de corpo](#bodyparserjsonoptions)
+- [Analisador de corpo primo](#bodyparserrawoptions)
+- [Text body parser](#bodyparsertextoptions)
+- [Analisador de forma codificado em URL](#bodyparserurlencodedoptions)
+
+Outros analisadores de corpo que você pode interessar:
+
+- [body](https://www.npmjs.com/package/body#readme)
+- [co-body](https://www.npmjs.com/package/co-body#readme)
+
+## Instalação
+
+```sh
+$ npm install body-parser
+```
+
+## API
+
+```js
+// Import all parsers
+const bodyParser = require('body-parser');
+
+// Or import individual parsers directly
+const json = require('body-parser/json');
+const urlencoded = require('body-parser/urlencoded');
+const raw = require('body-parser/raw');
+const text = require('body-parser/text');
+```
+
+O objeto `bodyParser` expõe várias fábricas para criar intermediários. Todos os
+middlewares irão preencher a propriedade `req.body` com o corpo analisado quando
+o cabeçalho de solicitação `Content-Type` corresponde à opção `type`.
+
+Os vários erros retornados por este módulo estão descritos na
+[seção de erro](#errors).
+
+### bodyParser.json([options])
+
+Retorna um middleware que só analisa `json` e só olha para solicitações onde
+o cabeçalho `Content-Type` corresponde à opção `type`. Este analisador aceita qualquer codificação
+Unicode do corpo e suporta a inflação automática de codificações `gzip`,
+`br` (brotli) e `deflate`.
+
+Um novo objeto `body` contendo os dados analisados é preenchido no objeto `request`
+após o middleware (ou seja, `req.body`).
+
+#### Opções
+
+The `json` function takes an optional `options` object that may contain any of
+the following keys:
+
+##### padrãoCharset
+
+Especifique o conjunto de caracteres padrão para o conteúdo de json se o conjunto de caracteres não for
+especificado no cabeçalho `Content-Type` da solicitação. Padrão para 'utf-8'.
+
+##### inflar
+
+Quando definido como `true`, os corpos (comprimidos) serão inflacionados; quando
+`false`, os corpos desbotados forem rejeitados. O padrão é 'true'.
+
+##### limite
+
+Controla o tamanho máximo do corpo da requisição. Se este é um número, o valor
+especifica o número de bytes; se é uma string, o valor é passado para a biblioteca
+[bytes](https://www.npmjs.com/package/bytes) para análise. O padrão
+para `'100kb'`.
+
+> É recomendado não configurar um limite muito alto e usar o valor padrão sempre que possível. Permitir que cargas maiores aumenta o uso de memória por causa dos recursos necessários para decodificação e transformações, e também pode levar a tempos de resposta mais longos à medida que mais dados são processados. Por "muito alto", queremos dizer valores acima do padrão, por exemplo, pagamentos de 5 MB ou mais já podem começar a introduzir esses riscos. Com os limites padrão, estas questões não ocorrem.
+
+##### reviver
+
+A opção `reviver` é passada diretamente para `JSON.parse` como o segundo argumento
+. Você pode encontrar mais informações sobre este argumento
+[na documentação MDN sobre JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Example.3A_Using_the_reviver_parameter).
+
+##### estrito
+
+Quando definido como `true`, só vai aceitar matrizes e objetos; quando `false`
+vai aceitar qualquer coisa que `JSON.parse` aceita. O padrão é 'true'.
+
+##### Tipo
+
+The `type` option is used to determine what media type the middleware will
+parse. Esta opção pode ser uma string, um array de frases ou uma função. Se não é uma função
+, A opção `type` é passada diretamente para a biblioteca
+[type-is](https://www.npmjs.com/package/type-is#readme) e isto pode ser
+um nome de extensão (como `json`), um tipo de mime (como `application/json`), ou
+um tipo de mime com um caractere curinga (como `*/*` ou `*/json`). Se uma função, a opção `type`
+for chamada como `fn(req)` e a solicitação for analisada se ela retornar um valor real
+. O padrão é `application/json`.
+
+##### verificar
+
+A opção `verificar`, se fornecida, é chamada como `verificar(req, res, buf, codificação)`,
+onde `buf` é um `Buffer` do corpo da solicitação bruta e `encoding` é a codificação
+da solicitação. A análise pode ser abortada lançando um erro.
+
+### bodyParser.raw([options])
+
+Retorna um middleware que analisa todos os corpos como um `Buffer` e só olha para
+solicitações onde o cabeçalho `Content-Type` corresponde à opção `type`. Este analisador
+suporta inflação automática de codificações `gzip`, `br` (brotli) e `deflate`
+.
+
+Um novo objeto `body` contendo os dados analisados é preenchido no objeto `request`
+após o middleware (ou seja, `req.body`). Este será um objeto `Buffer`
+do corpo.
+
+#### Opções
+
+The `raw` function takes an optional `options` object that may contain any of
+the following keys:
+
+##### inflar
+
+Quando definido como `true`, os corpos (comprimidos) serão inflacionados; quando
+`false`, os corpos desbotados forem rejeitados. O padrão é 'true'.
+
+##### limite
+
+Controla o tamanho máximo do corpo da requisição. Se este é um número, o valor
+especifica o número de bytes; se é uma string, o valor é passado para a biblioteca
+[bytes](https://www.npmjs.com/package/bytes) para análise. O padrão
+para `'100kb'`.
+
+> É recomendado não configurar um limite muito alto e usar o valor padrão sempre que possível. Permitir que cargas maiores aumenta o uso de memória por causa dos recursos necessários para decodificação e transformações, e também pode levar a tempos de resposta mais longos à medida que mais dados são processados. Por "muito alto", queremos dizer valores acima do padrão, por exemplo, pagamentos de 5 MB ou mais já podem começar a introduzir esses riscos. Com os limites padrão, estas questões não ocorrem.
+
+##### Tipo
+
+The `type` option is used to determine what media type the middleware will
+parse. Esta opção pode ser uma string, um array de frases ou uma função.
+Se não é uma função, A opção `type` é passada diretamente para a biblioteca
+[type-is](https://www.npmjs.com/package/type-is#readme) e este
+pode ser um nome de extensão (como `bin`), um tipo MIME (como
+`application/octet-stream`), ou um tipo MIME com um curinga (como `*/*` ou
+`application/*`). Se uma função, a opção `type` for chamada como `fn(req)`
+e a solicitação for analisada se ela retornar um valor verdadeiro. O padrão é
+`application/octet-stream`.
+
+##### verificar
+
+A opção `verificar`, se fornecida, é chamada como `verificar(req, res, buf, codificação)`,
+onde `buf` é um `Buffer` do corpo da solicitação bruta e `encoding` é a codificação
+da solicitação. A análise pode ser abortada lançando um erro.
+
+### bodyParser.text([options])
+
+Retorna um middleware que analisa todos os corpos como uma seqüência de caracteres e só olha para
+solicitações onde o cabeçalho `Content-Type` corresponde à opção `type`. Este analisador
+suporta inflação automática de codificações `gzip`, `br` (brotli) e `deflate`
+.
+
+Uma nova string `body` contendo os dados analisados é preenchida no objeto `request`
+após o middleware (ou seja, `req.body`). Será uma sequência de caracteres do corpo
+.
+
+#### Opções
+
+The `text` function takes an optional `options` object that may contain any of
+the following keys:
+
+##### padrãoCharset
+
+Especifique o conjunto de caracteres padrão para o conteúdo de texto se o conjunto de caracteres não for
+especificado no cabeçalho `Content-Type` da solicitação. Padrão para 'utf-8'.
+
+##### inflar
+
+Quando definido como `true`, os corpos (comprimidos) serão inflacionados; quando
+`false`, os corpos desbotados forem rejeitados. O padrão é 'true'.
+
+##### limite
+
+Controla o tamanho máximo do corpo da requisição. Se este é um número, o valor
+especifica o número de bytes; se é uma string, o valor é passado para a biblioteca
+[bytes](https://www.npmjs.com/package/bytes) para análise. O padrão
+para `'100kb'`.
+
+> É recomendado não configurar um limite muito alto e usar o valor padrão sempre que possível. Permitir que cargas maiores aumenta o uso de memória por causa dos recursos necessários para decodificação e transformações, e também pode levar a tempos de resposta mais longos à medida que mais dados são processados. Por "muito alto", queremos dizer valores acima do padrão, por exemplo, pagamentos de 5 MB ou mais já podem começar a introduzir esses riscos. Com os limites padrão, estas questões não ocorrem.
+
+##### Tipo
+
+The `type` option is used to determine what media type the middleware will
+parse. Esta opção pode ser uma string, um array de frases ou uma função. Se não for
+uma função, A opção `type` é passada diretamente para a biblioteca
+[type-is](https://www.npmjs.com/package/type-is#readme) e isto pode ser
+um nome de extensão (como `txt`), um tipo MIME (como `text/plain`), ou um mime
+com um curinga (como `*/*` ou `text/*`). Se uma função, a opção `type`
+é chamada como `fn(req)` e a solicitação é analisada se ela retorna um valor verdadeiro de
+. O padrão é 'texto/plain'.
+
+##### verificar
+
+A opção `verificar`, se fornecida, é chamada como `verificar(req, res, buf, codificação)`,
+onde `buf` é um `Buffer` do corpo da solicitação bruta e `encoding` é a codificação
+da solicitação. A análise pode ser abortada lançando um erro.
+
+### bodyParser.urlencoded([options])
+
+Retorna o middleware que só analisa os corpos `urlencoded` e só olha para
+solicitações onde o cabeçalho `Content-Type` corresponde à opção `type`. Este analisador
+aceita apenas codificações UTF-8 e ISO-8859-1 do corpo e suporta
+inflação automática de codificações `gzip`, `br` (brotli) e `deflate`.
+
+Um novo objeto `body` contendo os dados analisados é preenchido no objeto `request`
+após o middleware (ou seja, `req.body`). Este objeto conterá
+pares de chave-valor, onde o valor pode ser uma string ou array (quando 'estendido' é
+'false'), ou qualquer tipo (quando 'estendido' é 'true').
+
+#### Opções
+
+A função `urlencoded` recebe um objeto `options` opcional que pode conter
+qualquer uma das seguintes chaves:
+
+##### estendido
+
+The "extended" syntax allows for rich objects and arrays to be encoded into the
+URL-encoded format, allowing for a JSON-like experience with URL-encoded. Para
+mais informações, por favor veja as configurações rápidas
+biblioteca.
+
+O padrão é 'false'.
+
+##### inflar
+
+Quando definido como `true`, os corpos (comprimidos) serão inflacionados; quando
+`false`, os corpos desbotados forem rejeitados. O padrão é 'true'.
+
+##### limite
+
+Controla o tamanho máximo do corpo da requisição. Se este é um número, o valor
+especifica o número de bytes; se é uma string, o valor é passado para a biblioteca
+[bytes](https://www.npmjs.com/package/bytes) para análise. O padrão
+para `'100kb'`.
+
+> É recomendado não configurar um limite muito alto e usar o valor padrão sempre que possível. Permitir que cargas maiores aumenta o uso de memória por causa dos recursos necessários para decodificação e transformações, e também pode levar a tempos de resposta mais longos à medida que mais dados são processados. Por "muito alto", queremos dizer valores acima do padrão, por exemplo, pagamentos de 5 MB ou mais já podem começar a introduzir esses riscos. Com os limites padrão, estas questões não ocorrem.
+
+##### limiteParâmetro
+
+A opção `parameterLimit` controla o número máximo de parâmetros que
+são permitidos nos dados codificados pela URL. Se um pedido contém mais parâmetros
+do que esse valor, um 413 será devolvido ao cliente. O padrão é `1000`.
+
+##### Tipo
+
+The `type` option is used to determine what media type the middleware will
+parse. Esta opção pode ser uma string, um array de frases ou uma função. Se não for
+uma função, A opção `type` é passada diretamente para a biblioteca
+[type-is](https://www.npmjs.com/package/type-is#readme) e isto pode ser
+um nome de extensão (como `urlencoded`), um tipo de mime (como
+`application/x-www-form-urlencoded`), ou um tipo de mime com um curinga (como
+`*/x-www-form-urlencoded`). Se uma função, a opção `tipo` for chamada como
+`fn(req)` e a solicitação for analisada se ela retornar um valor verdadeiro. O padrão
+é `application/x-www-form-urlencoded`.
+
+##### verificar
+
+A opção `verificar`, se fornecida, é chamada como `verificar(req, res, buf, codificação)`,
+onde `buf` é um `Buffer` do corpo da solicitação bruta e `encoding` é a codificação
+da solicitação. A análise pode ser abortada lançando um erro.
+
+##### padrãoCharset
+
+O conjunto de caracteres padrão para analisar como, se não for especificado no tipo de conteúdo. Deve ser
+`utf-8` ou `iso-8859-1`. Padrão para 'utf-8'.
+
+##### charsetSentinel
+
+Se deseja deixar o valor do parâmetro `utf8` ter precedência como seletor de conjunto de caracteres
+. It requires the form to contain a parameter named `utf8` with a value
+of `✓`. O padrão é 'false'.
+
+##### interpretaçõesNuméricas
+
+Se deve decodificar entidades numéricas como `&#9786;` ao analisar um formulário iso-8859-1
+. O padrão é 'false'.
+
+##### profundidade
+
+A opção `profunde` é usada para configurar a profundidade máxima da biblioteca `qs` quando `extended` é `true`. Isso permite que você limite a quantidade de chaves que são analisadas e podem ser úteis para evitar certos tipos de abusos. O padrão é `32`. Recomenda-se manter este valor o mais baixo possível.
+
+## Erros
+
+Os middlewares fornecidos por este módulo criam erros usando o módulo
+[`http-errors`](https://www.npmjs.com/package/http-errors). Os erros
+normalmente terão uma propriedade `status`/`statusCode` que contém o código de resposta
+HTTP sugerido, uma propriedade `expose` para determinar se a propriedade `message`
+deve ser exibida para o cliente, uma propriedade `type` para determinar o tipo de erro
+sem corresponder à `message`, e uma propriedade `body` contendo
+o corpo de leitura, se disponível.
+
+Os seguintes são os erros comuns criados, embora qualquer erro possa vir
+por vários motivos.
+
+### codificação de conteúdo não suportada
+
+Este erro ocorrerá quando a solicitação tiver um cabeçalho `Content-Encoding` que
+continha uma codificação, mas a opção "inflação" foi definida como `false`. A propriedade
+`status` está definida como `415`, a propriedade `type` está definida como
+`'encoding. nsupported'`, e a propriedade `charset` será definida para
+codificação que não é suportada.
+
+### falha ao analisar entidade
+
+This error will occur when the request contained an entity that could not be
+parsed by the middleware. A propriedade `status` está definida como `400`, a propriedade `type`
+está definida como `'entity.parse. ailed'`, e a propriedade `body` está definida para
+o valor da entidade que falhou no analisamento.
+
+### verificação da entidade falhou
+
+Este erro ocorrerá quando a solicitação contiver uma entidade que não pôde ser
+falha na verificação pela opção 'verificação' definida. A propriedade `status` está
+definida como `403`, a propriedade `type` está definida como `'entity.verify. ailed'`, e a propriedade
+`body` está definida para o valor da entidade que falhou na verificação.
+
+### solicitação cancelada
+
+Este erro ocorrerá quando a solicitação é abortada pelo cliente antes de ler
+o corpo concluiu. A propriedade `recebido` será definida como o número de
+bytes recebidos antes da solicitação ser cancelada e a propriedade `expected` é
+definida como o número de bytes esperados. A propriedade `status` está definida como `400`
+e `type` está definida como `'request.aborted'`.
+
+### solicitar entidade muito grande
+
+Este erro ocorrerá quando o tamanho do corpo da solicitação for maior que o "limite"
+opção. A propriedade `limite` será definida para o limite de bytes e a propriedade `comprimento`
+será definida para o comprimento do corpo da requisição. A propriedade `status` é
+definida como `413` e a propriedade `type` está definida como `'entity.too.large'`.
+
+### tamanho da solicitação não corresponde ao tamanho do conteúdo
+
+This error will occur when the request's length did not match the length from
+the `Content-Length` header. Isso normalmente ocorre quando a solicitação é malformada,
+normalmente quando o cabeçalho `Content-Length` foi calculado com base nos caracteres
+em vez de bytes. A propriedade `status` está definida como `400` e a propriedade `type`
+está definida como `'request.size.invalid'`.
+
+### codificação de fluxo não deve ser definida
+
+Este erro ocorrerá quando algo chamado o método `req.setEncoding` anterior a
+a este middleware. Este módulo opera somente diretamente em bytes e você não pode
+chamar `req.setEncoding` ao usar este módulo. A propriedade `status` está definida como
+`500` e a propriedade `type` está definida para `'stream.encoding.set'`.
+
+### transmissão não está legível
+
+Este erro ocorrerá quando a solicitação não estiver mais legível quando este middleware
+tentar lê-lo. Isso normalmente significa algo diferente de um middleware de
+este módulo leu o corpo da solicitação e o middleware também foi configurado para
+ler o mesmo pedido. A propriedade `status` é definida como `500` e `type`
+é definida como `'stream.not.readable'`.
+
+### parâmetros demais
+
+Este erro ocorrerá quando o conteúdo da solicitação exceder o
+`parameterLimit` configurado para o analisador `urlencoded`. A propriedade `status` é definida como
+`413` e a propriedade `type` é definida como `'parameters.too.many'`.
+
+### charset "BOGUS" não suportado
+
+Este erro ocorrerá quando a solicitação teve um parâmetro de conjunto de caracteres no cabeçalho
+`Content-Type`, mas o módulo `iconv-lite` não suporta OU o analisador
+não suporta. O conjunto de caracteres está contido na mensagem e
+como na propriedade `charset`. A propriedade `status` está definida como `415`, a propriedade
+`type` está definida como `'charset. nsupported'`, e a propriedade `charset`
+está definida para o conjunto de caracteres que não é suportado.
+
+### codificação de conteúdo "bogus" não suportada
+
+Este erro ocorrerá quando a solicitação tiver um cabeçalho `Content-Encoding` que
+continha uma codificação não suportada. A codificação está contida na mensagem
+bem como na propriedade `encoding`. A propriedade `status` está definida como `415`,
+a propriedade `type` está definida como `'encoding. nsupported'`, e a propriedade `encoding`
+é definida para a codificação que não é suportada.
+
+### A entrada excedeu a profundidade
+
+Este erro ocorre ao usar `bodyParser.urlencoded` com a propriedade `extended` definida como `true` e a entrada excede a opção `depth` configurada. A propriedade `status` está definida para `400`. É recomendado rever a opção de profundidade e avaliar se ela requer um valor mais alto. Quando a opção 'profundeza' estiver definida como '32' (valor padrão), o erro não será lançado.
+
+## Exemplos
+
+### Expresso/Conectar genérico de nível superior
+
+Este exemplo demonstra adicionar um analisador JSON genérico e codificado em URLs como um intermediário de nível superior
+, que analisará os corpos de todas as solicitações de entrada.
+Esta é a configuração mais simples.
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded());
+
+// parse application/json
+app.use(bodyParser.json());
+
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.write('you posted:\n');
+  res.end(String(JSON.stringify(req.body, null, 2)));
+});
+```
+
+### Expressar rota específica
+
+Este exemplo demonstra adicionar analisadores corporais especificamente às rotas que
+precisam delas. Em geral, esta é a maneira mais recomendada de usar o analisador corporal com
+Express.
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// create application/json parser
+const jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+const urlencodedParser = bodyParser.urlencoded();
+
+// POST /login gets urlencoded bodies
+app.post('/login', urlencodedParser, function (req, res) {
+  if (!req.body || !req.body.username) res.sendStatus(400);
+  res.send('welcome, ' + req.body.username);
+});
+
+// POST /api/users gets JSON bodies
+app.post('/api/users', jsonParser, function (req, res) {
+  if (!req.body) res.sendStatus(400);
+  // create user in req.body
+});
+```
+
+### Alterar o tipo aceito para analisadores
+
+Todos os analisadores aceitam uma opção `type` que permite mudar o `Content-Type`
+que o middleware analisará.
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }));
+
+// parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }));
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }));
+```
+
+## Tipo:
+
+[MIT](https://github.com/expressjs/body-parser/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.com/package/body-parser
+[medalha ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
+[visualizador ossf-scorecard]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser

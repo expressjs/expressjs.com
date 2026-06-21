@@ -1,0 +1,184 @@
+---
+title: method-override middleware
+description: Ignora i verbi HTTP
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="3.0.0"
+  github="https://github.com/expressjs/method-override"
+  npm="https://www.npmjs.com/package/method-override"
+/>
+
+Consente di utilizzare verbi HTTP come PUT o DELETE in luoghi in cui il client non lo supporta.
+
+## Installa
+
+Questo è un modulo [Node.js](https://nodejs.org/en/) disponibile attraverso la
+[npm registry](https://www.npmjs.com/). L'installazione viene eseguita usando il comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install method-override
+```
+
+## API
+
+**NOTA** È molto importante che questo modulo sia usato **prima** qualsiasi modulo che
+abbia bisogno di conoscere il metodo della richiesta (ad esempio, deve essere usato prima di
+il modulo `csurf`).
+
+### methodOverride(getter, opzioni)
+
+Crea una nuova funzione middleware per sovrascrivere la proprietà `req.method` con un nuovo valore
+. Questo valore verrà estratto dal `getter`.
+
+- `getter` - Il getter da usare per cercare il metodo di richiesta overridden per la richiesta. (predefinito: `X-HTTP-Method-Override`)
+- `options.methods` - I metodi consentiti nella richiesta originale devono essere in per controllare un valore di override metodo. (default: `['POST']`)
+
+Se il metodo trovato è supportato dal core node.js, allora `req. ethod` sarà impostato su
+questo valore, come se fosse stato originariamente quel valore. Il valore `req.method`
+precedente verrà memorizzato in `req.originalMethod`.
+
+#### getter
+
+Questo è il metodo per ottenere il valore di override dalla richiesta. Se viene fornita una funzione,
+il `req` viene passato come primo argomento, il `res` come secondo argomento e il metodo è
+che dovrebbe essere restituito. Se viene fornita una stringa, la stringa viene usata per cercare il metodo
+con le seguenti regole:
+
+- Se la stringa inizia con `X-`, poi viene trattato come il nome di un'intestazione e questa intestazione
+  viene utilizzata per l'override del metodo. Se la richiesta contiene la stessa intestazione più volte, viene utilizzata la prima occorrenza
+  .
+- Tutte le altre stringhe sono trattate come una chiave nella stringa di interrogazione URL.
+
+#### options.methods
+
+Questo permette la specificazione di quali metodi la richiesta _MUST_ sia in modo da controllare per
+il valore di sovrascrivere il metodo. Questo valore predefinito è solo i metodi `POST`, che è l'unico metodo in cui l'override
+dovrebbe arrivare. Più metodi possono essere specificati qui, ma può introdurre problemi di sicurezza
+e causare un comportamento strano quando le richieste di viaggiare attraverso le cache. Questo valore è un array
+di metodi in maiuscolo. `null` può essere specificato per consentire tutti i metodi.
+
+## Esempi
+
+### sovrascrivi usando un'intestazione
+
+Per usare un'intestazione per sovrascrivere il metodo, specificare il nome dell'intestazione
+come argomento stringa alla funzione `methodOverride`. Per fare
+la chiamata, invia una richiesta `POST` a un URL con il metodo sovrascritto
+come valore di quell'intestazione. Questo metodo di utilizzo di un'intestazione sarebbe
+tipicamente usato in combinazione con `XMLHttpRequest` sulle implementazioni
+che non supportano il metodo che stai cercando di usare.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride('X-HTTP-Method-Override'));
+```
+
+Chiamata di esempio con header sovrascrivere usando `XMLHttpRequest`:
+
+{/* eslint-env browser */}
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.onload = onload;
+xhr.open('post', '/resource', true);
+xhr.setRequestHeader('X-HTTP-Method-Override', 'DELETE');
+xhr.send();
+
+function onload() {
+  alert('got response: ' + this.responseText);
+}
+```
+
+### sovrascrivi usando un valore di interrogazione
+
+Per usare un valore di stringa di query per sovrascrivere il metodo, specificare la stringa di query
+come argomento di stringa alla funzione `methodOverride`.
+poi effettuare la chiamata, invia una richiesta `POST` a un URL con il metodo
+sovrascritto come valore di quella chiave di stringa di query. Questo metodo di utilizzo di un valore di query
+sarebbe tipicamente usato in combinazione con semplici elementi HTML
+`\<form>` quando si tenta di supportare i browser legacy, ma comunque utilizzare metodi
+più recenti.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+```
+
+Esempio di chiamata con l'override della query usando HTML `\<form>`:
+
+```html
+<form method="POST" action="/resource?_method=DELETE">
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+### supporto formato multiplo
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with different headers; last one takes precedence
+app.use(methodOverride('X-HTTP-Method')); //          Microsoft
+app.use(methodOverride('X-HTTP-Method-Override')); // Google/GData
+app.use(methodOverride('X-Method-Override')); //      IBM
+```
+
+### logica personalizzata
+
+Puoi implementare qualsiasi tipo di logica personalizzata con una funzione per il `getter`. La seguente
+implementa la logica per cercare in `req.body` che era in `method-override@1`:
+
+```js
+const bodyParser = require('body-parser');
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// NOTE: when using req.body, you must fully parse the request body
+//       before you call methodOverride() in your middleware stack,
+//       otherwise req.body will not be populated.
+app.use(bodyParser.urlencoded());
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      const method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
+```
+
+Esempio di chiamata con l'override della query usando HTML `\<form>`:
+
+```html
+{/* enctype must be set to the type you will parse before methodOverride() */}
+<form method="POST" action="/resource" enctype="application/x-www-form-urlencoded">
+  <input type="hidden" name="_method" value="DELETE" />
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+## Licenza
+
+[MIT](https://github.com/expressjs/method-override/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/method-override
+[travis-url]: https://travis-ci.org/expressjs/method-override
+[downloads-url]: https://npmjs.org/package/method-override

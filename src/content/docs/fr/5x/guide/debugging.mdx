@@ -1,0 +1,124 @@
+---
+title: Débogage Express
+description: Apprenez comment activer et utiliser les journaux de débogage dans les applications Express.js en définissant la variable d'environnement DEBUG pour un dépannage amélioré.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Pour voir tous les journaux internes utilisés dans Express, définissez la variable d'environnement `DEBUG` à
+`express:*` lors du lancement de votre application.
+
+```bash
+$ DEBUG=express:* node index.js
+```
+
+Sous Windows, utilisez la commande correspondante.
+
+```bash
+> $env:DEBUG = "express:*"; node index.js
+```
+
+L'exécution de cette commande sur l'application par défaut générée par le [générateur express](/starter/generator) affiche la sortie suivante:
+
+```bash
+$ DEBUG=express:* node ./bin/www
+  express:router:route new / +0ms
+  express:router:layer new / +1ms
+  express:router:route get / +1ms
+  express:router:layer new / +0ms
+  express:router:route new / +1ms
+  express:router:layer new / +0ms
+  express:router:route get / +0ms
+  express:router:layer new / +0ms
+  express:application compile etag weak +1ms
+  express:application compile query parser extended +0ms
+  express:application compile trust proxy false +0ms
+  express:application booting in development mode +1ms
+  express:router use / query +0ms
+  express:router:layer new / +0ms
+  express:router use / expressInit +0ms
+  express:router:layer new / +0ms
+  express:router use / favicon +1ms
+  express:router:layer new / +0ms
+  express:router use / logger +0ms
+  express:router:layer new / +0ms
+  express:router use / jsonParser +0ms
+  express:router:layer new / +1ms
+  express:router use / urlencodedParser +0ms
+  express:router:layer new / +0ms
+  express:router use / cookieParser +0ms
+  express:router:layer new / +0ms
+  express:router use / stylus +90ms
+  express:router:layer new / +0ms
+  express:router use / serveStatic +0ms
+  express:router:layer new / +0ms
+  express:router use / router +0ms
+  express:router:layer new / +1ms
+  express:router use /users router +0ms
+  express:router:layer new /users +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
+  express:router:layer new / +0ms
+```
+
+Lorsqu'une demande est faite à l'application, vous verrez les journaux spécifiés dans le code Express:
+
+```bash
+  express:router dispatching GET / +4h
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
+  express:router dispatching GET / +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
+
+Pour voir les logs uniquement à partir de l'implémentation du routeur, définissez la valeur de `DEBUG` à `express:router`. De même, pour ne voir que les logs de l'implémentation de l'application, définissez la valeur de `DEBUG` à `express:application`, et ainsi de suite.
+
+## Applications générées par `express`
+
+Une application générée par la commande `express` utilise le module `debug` et son espace de noms de débogage est limité au nom de l'application.
+
+Par exemple, si vous avez généré l'application avec `$ express sample-app`, vous pouvez activer les instructions de débogage avec la commande suivante :
+
+```bash
+$ DEBUG=sample-app:* node ./bin/www
+```
+
+Vous pouvez spécifier plus d'un espace de noms de débogage en assignant une liste de noms séparés par des virgules :
+
+```bash
+$ DEBUG=http,mail,express:* node index.js
+```
+
+## Options avancées
+
+Lors de l'exécution de Node.js, vous pouvez définir quelques variables d'environnement qui changeront le comportement du journal de débogage :
+
+| Nom                 | Objectif                                                         |
+| ------------------- | ---------------------------------------------------------------- |
+| `DEBUG`             | Active/désactive les espaces de noms de débogage spécifiques.    |
+| `DEBUG_COLORS`      | Utiliser ou non les couleurs dans la sortie de débogage.         |
+| `DEBUG_DEPTH`       | Profondeur de l'inspection des objets.                           |
+| `DEBUG_FD`          | Descripteur de fichier vers lequel écrire la sortie de débogage. |
+| `DEBUG_SHOW_HIDDEN` | Affiche les propriétés masquées sur les objets inspectés.        |
+
+<Alert type="Infos">
+
+Les variables d'environnement commençant par `DEBUG_` finissent par être converties en un objet d'options
+qui est utilisé avec les formats `%o`/`%O`. Voir la documentation Node.js pour
+[`util.inspect()`](https://nodejs.org/api/util.html#utilinspectobject-options) pour la liste complète
+.
+
+</Alert>

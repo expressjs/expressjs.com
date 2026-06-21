@@ -1,0 +1,441 @@
+---
+title: Request
+description: Learn about the Request object for Express 3.x, including its properties and methods.
+---
+
+The `req` object is an enhanced version of Node's own request object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpincomingmessage).
+
+## Properties
+
+The `req` object contains a number of properties that provide information about the HTTP request, such as headers, query parameters, and more.
+
+### req.accepted
+
+Return an array of Accepted media types ordered from highest quality to lowest.
+
+```json
+[
+  { "value": "application/json", "quality": 1, "type": "application", "subtype": "json" },
+  { "value": "text/html", "quality": 0.5, "type": "text", "subtype": "html" }
+]
+```
+
+### req.acceptedCharsets
+
+Return an array of Accepted charsets ordered from highest quality to lowest.
+
+```
+Accept-Charset: iso-8859-5;q=.2, unicode-1-1;q=0.8
+// => ['unicode-1-1', 'iso-8859-5']
+```
+
+### req.acceptedLanguages
+
+Return an array of Accepted languages ordered from highest quality to lowest.
+
+```
+Accept-Language: en;q=.5, en-us
+// => ['en-us', 'en']
+```
+
+### req.body
+
+This property is an object containing the parsed request body. This feature
+is provided by the `bodyParser()` middleware, though other body
+parsing middleware may follow this convention as well. This property
+defaults to `{}` when `bodyParser()` is used.
+
+```js title="index.js"
+// POST user[name]=tobi&user[email]=tobi@learnboost.com
+console.log(req.body.user.name);
+// => "tobi"
+
+console.log(req.body.user.email);
+// => "tobi@learnboost.com"
+
+// POST { "name": "tobi" }
+console.log(req.body.name);
+// => "tobi"
+```
+
+### req.cookies
+
+This object requires the `cookieParser()` middleware for use.
+It contains cookies sent by the user-agent. If no cookies are sent, it
+defaults to `{}`.
+
+```js title="index.js"
+// Cookie: name=tj
+console.log(req.cookies.name);
+// => "tj"
+```
+
+### req.files
+
+This property is an object of the files uploaded. This feature
+is provided by the `bodyParser()` middleware, though other body
+parsing middleware may follow this convention as well. This property
+defaults to `{}` when `bodyParser()` is used.
+
+For example if a <strong>file</strong> field was named "image",
+and a file was uploaded, `req.files.image` would contain
+the following `File` object:
+
+```json
+{ size: 74643,
+  path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
+  name: 'edge.png',
+  type: 'image/png',
+  hash: false,
+  lastModifiedDate: Thu Aug 09 2012 20:07:51 GMT-0700 (PDT),
+  _writeStream:
+   { path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
+     fd: 13,
+     writable: false,
+     flags: 'w',
+     encoding: 'binary',
+     mode: 438,
+     bytesWritten: 74643,
+     busy: false,
+     _queue: [],
+     _open: [Function],
+     drainable: true },
+  length: [Getter],
+  filename: [Getter],
+  mime: [Getter] }
+```
+
+The `bodyParser()` middleware utilizes the
+
+<a href="https://github.com/felixge/node-formidable">node-formidable</a>
+module internally, and accepts the same options. An example of this is the `keepExtensions`
+formidable option, defaulting to <strong>false</strong>
+which in this case gives you the filename "/tmp/8ef9c52abe857867fd0a4e9a819d1876" void of the ".png"
+extension. To enable this, and others you may pass them to `bodyParser()`:
+
+```js
+app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/my/files' }));
+```
+
+### req.fresh
+
+Check if the request is fresh - aka Last-Modified and/or the ETag still match,
+indicating that the resource is "fresh".
+
+```js
+console.dir(req.fresh);
+// => true
+```
+
+### req.host
+
+Returns the hostname from the "Host" header field (void of port number).
+
+```js
+// Host: "example.com:3000"
+console.dir(req.host);
+// => 'example.com'
+```
+
+### req.ip
+
+Return the remote address, or when "trust proxy"
+is enabled - the upstream address.
+
+```js
+console.dir(req.ip);
+// => '127.0.0.1'
+```
+
+### req.ips
+
+When "trust proxy" is `true`, parse
+the "X-Forwarded-For" ip address list
+and return an array, otherwise an empty
+array is returned.
+
+For example if the value were "client, proxy1, proxy2"
+you would receive the array `["client", "proxy1", "proxy2"]`
+where "proxy2" is the furthest down-stream.
+
+### req.originalUrl
+
+This property is much like `req.url`, however it retains
+the original request url, allowing you to rewrite `req.url`
+freely for internal routing purposes. For example the "mounting" feature
+of [app.use()](/api/application/#appusepath-function) will rewrite `req.url` to
+strip the mount point.
+
+```js
+// GET /search?q=something
+console.log(req.originalUrl);
+// => "/search?q=something"
+```
+
+### req.params
+
+This property is an array containing properties mapped to the named route "parameters".
+For example if you have the route `/user/:name`, then the "name" property
+is available to you as `req.params.name`. This object defaults to `{}`.
+
+```js
+// GET /user/tj
+console.dir(req.params.name);
+// => 'tj'
+```
+
+When a regular expression is used for the route definition, capture groups
+are provided in the array using `req.params[N]`, where `N`
+is the nth capture group. This rule is applied to unnamed wild-card matches
+with string routes such as `/file/*`:
+
+```js
+// GET /file/javascripts/jquery.js
+console.dir(req.params[0]);
+// => 'javascripts/jquery.js'
+```
+
+### req.path
+
+Returns the request URL pathname.
+
+```js
+// example.com/users?sort=desc
+console.dir(req.path);
+// => '/users'
+```
+
+### req.protocol
+
+Return the protocol string "http" or "https"
+when requested with TLS. When the "trust proxy"
+setting is enabled the "X-Forwarded-Proto" header
+field will be trusted. If you're running behind
+a reverse proxy that supplies https for you this
+may be enabled.
+
+```js
+console.dir(req.protocol);
+// => 'http'
+```
+
+### req.query
+
+This property is an object containing the parsed query-string,
+defaulting to `{}`.
+
+```js
+// GET /search?q=tobi+ferret
+console.dir(req.query.q);
+// => 'tobi ferret'
+
+// GET /shoes?order=desc&shoe[color]=blue&shoe[type]=converse
+console.dir(req.query.order);
+// => 'desc'
+
+console.dir(req.query.shoe.color);
+// => 'blue'
+
+console.dir(req.query.shoe.type);
+// => 'converse'
+```
+
+### req.res
+
+This property holds a reference to the [response object](/api/response/)
+that relates to this request object.
+
+### req.route
+
+The currently matched `Route` containing
+several properties such as the route's original path
+string, the regexp generated, and so on.
+
+```js
+app.get('/user/:id?', function (req, res) {
+  console.dir(req.route);
+});
+```
+
+Example output from the previous snippet:
+
+```json
+{ path: '/user/:id?',
+  method: 'get',
+  callbacks: [ [Function] ],
+  keys: [ { name: 'id', optional: true } ],
+  regexp: /^\/user(?:\/([^\/]+?))?\/?$/i,
+  params: [ id: '12' ] }
+```
+
+### req.secure
+
+Check if a TLS connection is established. This is a short-hand for:
+
+```js
+console.dir(req.protocol === 'https');
+// => true
+```
+
+### req.signedCookies
+
+This object requires the `cookieParser(secret)` middleware for use.
+It contains signed cookies sent by the user-agent, unsigned and ready for use.
+Signed cookies reside in a different object to show developer intent; otherwise,
+a malicious attack could be placed on `req.cookie` values (which are easy to spoof).
+Note that signing a cookie does not make it "hidden" or encrypted; this simply
+prevents tampering (because the secret used to sign is private). If no signed
+cookies are sent, it defaults to `{}`.
+
+```js
+// Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
+console.dir(req.signedCookies.user);
+// => 'tobi'
+```
+
+### req.stale
+
+Check if the request is stale - aka Last-Modified and/or the ETag do not match,
+indicating that the resource is "stale".
+
+```js
+console.dir(req.stale);
+// => true
+```
+
+### req.subdomains
+
+Return subdomains as an array.
+
+```js
+// Host: "tobi.ferrets.example.com"
+console.dir(req.subdomains);
+// => ['ferrets', 'tobi']
+```
+
+### req.xhr
+
+Check if the request was issued with the "X-Requested-With"
+header field set to "XMLHttpRequest" (jQuery etc).
+
+```js
+console.dir(req.xhr);
+// => true
+```
+
+## Methods
+
+The `req` object also contains a number of methods that can be used to perform various tasks related to the HTTP request, such as checking the content type, retrieving header values, and more.
+
+### req.accepts(types)
+
+Check if the given `types` are acceptable, returning
+the best match when true, otherwise `undefined` - in which
+case you should respond with 406 "Not Acceptable".
+
+The `type` value may be a single mime type string
+such as "application/json", the extension name
+such as "json", a comma-delimited list or an array. When a list
+or array is given the best match, if any is returned.
+
+```js title="index.js"
+// Accept: text/html
+req.accepts('html');
+// => "html"
+
+// Accept: text/*, application/json
+req.accepts('html');
+// => "html"
+req.accepts('text/html');
+// => "text/html"
+req.accepts('json, text');
+// => "json"
+req.accepts('application/json');
+// => "application/json"
+
+// Accept: text/*, application/json
+req.accepts('image/png');
+req.accepts('png');
+// => undefined
+
+// Accept: text/*;q=.5, application/json
+req.accepts(['html', 'json']);
+req.accepts('html, json');
+// => "json"
+```
+
+### req.acceptsCharset(charset)
+
+Check if the given `charset` are acceptable.
+
+### req.acceptsLanguage(lang)
+
+Check if the given `lang` are acceptable.
+
+### req.get(field)
+
+Get the case-insensitive request header `field`. The "Referrer" and "Referer" fields are interchangeable.
+
+```js
+req.get('Content-Type');
+// => "text/plain"
+
+req.get('content-type');
+// => "text/plain"
+
+req.get('Something');
+// => undefined
+```
+
+Aliased as `req.header(field)`.
+
+### req.is(type)
+
+Check if the incoming request contains the "Content-Type"
+header field, and it matches the give mime `type`.
+
+```js
+// With Content-Type: text/html; charset=utf-8
+req.is('html');
+req.is('text/html');
+req.is('text/*');
+// => true
+
+// When Content-Type is application/json
+req.is('json');
+req.is('application/json');
+req.is('application/*');
+// => true
+
+req.is('html');
+// => false
+```
+
+### req.param(name)
+
+Return the value of param `name` when present.
+
+```js
+// ?name=tobi
+req.param('name');
+// => "tobi"
+
+// POST name=tobi
+req.param('name');
+// => "tobi"
+
+// /user/tobi for /user/:name
+req.param('name');
+// => "tobi"
+```
+
+Lookup is performed in the following order:
+
+- `req.params`
+- `req.body`
+- `req.query`
+
+Direct access to `req.body`, `req.params`,
+and `req.query` should be favoured for clarity - unless
+you truly accept input from each object.

@@ -1,0 +1,7 @@
+@layer primitives {
+  .card {
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+  }
+}

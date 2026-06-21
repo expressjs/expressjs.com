@@ -1,0 +1,585 @@
+---
+title: Actualizar a Express v5
+description: Una guía completa para migrar sus aplicaciones Express.js de la versión 4 a 5, detallando los cambios de ruptura, métodos obsoletos y nuevas mejoras.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express 5 no es muy diferente de Express 4; aunque mantiene la misma API básica, todavía hay cambios que rompen la compatibilidad con la versión anterior. Por lo tanto, una aplicación construida con Express 4 podría no funcionar si la actualiza para usar Express 5.
+
+## Instalación
+
+Para instalar esta versión, necesitas tener una **versión 18 o superior de Node.js**. Luego, ejecuta el siguiente comando en el directorio de tu aplicación:
+
+```sh
+npm install "express@5"
+```
+
+Luego puede ejecutar sus pruebas automatizadas para ver qué falla, y arreglar problemas de acuerdo a las actualizaciones que se listan a continuación. Después de gestionar los fallos de prueba, ejecuta tu aplicación para ver qué errores ocurren. Descubrirá de inmediato si la aplicación utiliza cualquier método o propiedades que no sean compatibles.
+
+## Códigos Express 5
+
+Para ayudarle a migrar su servidor exprés, hemos creado un conjunto de códigos que te ayudarán a actualizar automáticamente tu código a la última versión de Express.
+
+Ejecutar el siguiente comando para ejecutar todos los codemods disponibles:
+
+```sh
+npx codemod@latest @expressjs/v5-migration-recipe
+```
+
+Si quieres ejecutar un código específico, puedes ejecutar el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/name-of-the-codemod
+```
+
+Puedes encontrar la lista de códigos disponibles [here](https://codemod.link/express).
+
+## Métodos y propiedades eliminados
+
+Si utiliza cualquiera de estos métodos o propiedades en su aplicación, se bloqueará. Por lo tanto, necesitarás cambiar tu aplicación después de actualizar a la versión 5.
+
+### app.del()
+
+Express 5 ya no soporta la función `app.del()`. Si utiliza esta función, se arroja un error. Para registrar rutas HTTP DELETE, utilice la función `app.delete()` en su lugar.
+
+Inicialmente, `del` fue usado en lugar de `delete`, porque `delete` es una palabra clave reservada en JavaScript. Sin embargo, a partir de ECMAScript 6, `delete` y otras palabras clave reservadas pueden utilizarse legalmente como nombres de propiedad.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/route-del-to-delete
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+-app.del('/user/:id', (req, res) => {
++app.delete('/user/:id', (req, res) => {
+   res.send(`DELETE /user/${req.params.id}`);
+ });
+```
+
+### app.param(fn)
+
+La firma `app.param(fn)` fue usada para modificar el comportamiento de la función `app.param(name, fn)`. Ha sido obsoleto desde v4.11.0, y Express 5 ya no lo soporta en absoluto.
+
+### Nombres de métodos pluralizados
+
+Los siguientes nombres de métodos han sido pluralizados. En Express 4, el uso de los métodos antiguos resultó en una advertencia de desaprobación. Express 5 ya no los soporta:
+
+`req.acceptsCharset()` es reemplazado por `req.acceptsCharsets()`.
+
+`req.acceptsEncoding()` es reemplazado por `req.acceptsEncodings()`.
+
+`req.acceptsLanguage()` es reemplazado por `req.acceptsLanguages()`.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/pluralize-method-names
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.all('/', (req, res) => {
+-  req.acceptsCharset('utf-8');
+-  req.acceptsEncoding('br');
+-  req.acceptsLanguage('en');
++  req.acceptsCharsets('utf-8');
++  req.acceptsEncodings('br');
++  req.acceptsLanguages('en');
+
+   // ...
+ });
+```
+
+### Posible coma (:) en el nombre de app.param(nombre, fn)
+
+Un personaje con dos puntos (:) en el nombre de la aplicación `. aram(name, fn)` función es un remanente de Express 3, y por el bien de la compatibilidad hacia atrás, Express 4 lo soportó con un aviso de desaprobación. Express 5 lo ignorará silenciosamente y usará el parámetro de nombre sin prefijarlo con dos puntos.
+
+Esto no debería afectar tu código si sigues la documentación Express 4 de [app.param](/4x/api#app.param), ya que no hace mención alguna de los dos puntos principales.
+
+### req.param(nombre)
+
+Se ha eliminado este método potencialmente confuso y peligroso de recuperar datos de formularios. Ahora necesitará buscar específicamente el nombre del parámetro enviado en el objeto `req.params`, `req.body`, o `req.query`.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/explicit-request-params
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.post('/user', (req, res) => {
+-  const id = req.param('id');
+-  const body = req.param('body');
+-  const query = req.param('query');
++  const id = req.params.id;
++  const body = req.body;
++  const query = req.query;
+
+   // ...
+ });
+```
+
+### res.json(obj, estado)
+
+Express 5 ya no soporta la firma `res.json(obj, status)`. En su lugar, establece el estado y luego lo encadena al método `res.json()` de esta manera: `res.status(status).json(obj)`.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.post('/user', (req, res) => {
+-  res.json({ name: 'Ruben' }, 201);
++  res.status(201).json({ name: 'Ruben' });
+ });
+```
+
+### res.jsonp(obj, status)
+
+Express 5 ya no soporta la firma `res.jsonp(obj, status)`. En su lugar, establece el estado y luego lo encadena al método `res.jsonp()` de esta manera: `res.status(status).jsonp(obj)`.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.post('/user', (req, res) => {
+-  res.jsonp({ name: 'Ruben' }, 201);
++  res.status(201).jsonp({ name: 'Ruben' });
+ });
+```
+
+### res.redirect(url, status)
+
+Express 5 ya no soporta la firma `res.redirect(url, status)`. En su lugar, utilice la siguiente firma: `res.redirect(status, url)`.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/redirect-arg-order
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.redirect('/users', 301);
++  res.redirect(301, '/users');
+ });
+```
+
+### res.redirect('back') y res.location('back')
+
+Express 5 ya no soporta la cadena mágica `back` en los métodos `res.redirect()` y `res.location()`. En su lugar, utilice el valor `req.get('Referrer') || '/'` para redirigir de vuelta a la página anterior. En Express 4, los métodos `res.redirect('back')` y `res.location('back')` fueron obsoletos.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/back-redirect-deprecated
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.redirect('back');
++  res.redirect(req.get('Referrer') || '/');
+ });
+```
+
+### res.send(cuerpo, estado)
+
+Express 5 ya no soporta la firma `res.send(obj, status)`. En su lugar, establece el estado y luego lo encadena al método `res.send()` de esta manera: `res.status(status).send(obj)`.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.send({ name: 'Ruben' }, 200);
++  res.status(200).send({ name: 'Ruben' });
+ });
+```
+
+### res.send(status)
+
+Express 5 ya no soporta la firma `res.send(status)`, donde `status` es un número. En su lugar, use el `res. función endStatus(statusCode)`, que establece el código de estado de la cabecera de respuesta HTTP y envía la versión de texto del código: "No encontrado", "Error interno del servidor", y así sucesivamente.
+Si necesita enviar un número usando el `res. función end()`, cita el número para convertirlo en una cadena, para que Express no lo interprete como un intento de usar la antigua firma no soportada.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/status-send-order
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.send(200);
++  res.sendStatus(200);
+ });
+```
+
+### res.sendfile()
+
+La función `res.sendfile()` ha sido reemplazada por una versión `res.sendFile()` con casilla de camellos en Express 5.
+
+#### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+```sh
+npx codemod@latest @expressjs/camelcase-sendfile
+```
+
+O puedes actualizar tu código manualmente:
+
+```diff
+ app.get('/user', (req, res) => {
+-  res.sendfile('/path/to/file');
++  res.sendFile('/path/to/file');
+ });
+```
+
+### opciones res.sendFile()
+
+Las opciones `hidden` y `from` para `res.sendFile()` ya no son compatibles. En su lugar, usa `dotfiles` y `root`.
+
+#### Cómo actualizar
+
+```diff
+ app.get('/files/:name', (req, res) => {
+-  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
++  res.sendFile(req.params.name, { dotfiles: 'allow', root: '/uploads' });
+ });
+```
+
+### opciones express.static()
+
+Las opciones `hidden` y `from` para `express.static()` ya no están soportadas. En su lugar, usa `dotfiles` y `root`. Ten en cuenta que `from` nunca fue documentado en la API pero fue aceptado como un alias para `root`. El valor por defecto de `dotfiles` ahora es `"ignore"`.
+
+#### Cómo actualizar
+
+```diff
+ const express = require('express');
+ const app = express();
+
+-app.use(express.static('public', { hidden: true }));
++app.use(express.static('public', { dotfiles: 'allow' }));
+```
+
+### router.param(fn)
+
+La firma `router.param(fn)` fue usada para modificar el comportamiento de la función `router.param(name, fn)`. Ha sido obsoleto desde v4.11.0, y Express 5 ya no lo soporta en absoluto.
+
+### express.static.mime
+
+En Express 5, `mime` ya no es una propiedad exportada del campo `static`.
+Usa el [`mime-types` paquete](https://github.com/jshttp/mime-types) para trabajar con valores de tipo MIME.
+
+#### Cómo actualizar
+
+```diff
+-express.static.mime.lookup('json');
++const mime = require('mime-types');
++mime.lookup('json');
+```
+
+### Cambios de tipo MIME
+
+Varios tipos de MIME han cambiado debido a actualizaciones en [`mime-db`](https://github.com/jshttp/mime-db). Estos cambios sólo afectan a `express.static()` y `res.sendFile()`. Para una lista completa de cambios, vea el [`mime-db` changelog](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md).
+
+Express 4 utiliza la versión `mime-db` **1.52.0**, mientras que Express 5 utiliza versiones más recientes que reflejan las actualizaciones a las especificaciones de tipo IANA y otras MIME. El cambio más notable es que los archivos JavaScript (`.js`) ahora se sirven como `text/javascript` en lugar de `application/javascript`.
+
+En Express 5, los cambios a los tipos MIME de las actualizaciones `mime-db` no se consideran como romper los cambios, así que tenga cuidado al actualizar sus dependencias ya que los tipos MIME pueden cambiar entre versiones menores o parches.
+
+### express:router debug logs
+
+La lógica de manejo del enrutador ahora es realizada por una dependencia separada ([`router`](https://github.com/pillarjs/router)) mantenida por el equipo Express, por lo que los registros de depuración se han movido a un espacio de nombres diferente. Antes de Express 5.1, estos registros de depuración no existían. Para obtenerlos, actualiza a una versión reciente de Express 5 o actualiza el paquete `router` en tu `package-lock.json`:
+
+| v4                          | v5                                  |
+| --------------------------- | ----------------------------------- |
+| `express:router`            | `router`                            |
+| `express:router:layer`      | `router:layer`                      |
+| `express:router:route`      | `router:route`                      |
+| `express:*` (incluye todos) | `express:*` + `router` + `router:*` |
+
+#### Cómo actualizar
+
+```diff
+-DEBUG=express:* node index.js
++DEBUG=express:*,router,router:* node index.js
+```
+
+## Cambiado
+
+Estas APIs todavía existen, pero su comportamiento ha cambiado. Revise estos cambios para asegurarse de que su aplicación funciona como se esperaba.
+
+### Ruta de ruta que coincide con sintaxis
+
+Ruta de ruta que coincide con la sintaxis es cuando se proporciona una cadena como el primer parámetro a las APIs `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, y `router.use()`. Se han realizado los siguientes cambios en cómo la cadena de ruta se corresponde con una solicitud entrante:
+
+- El comodín `*` debe tener un nombre, coincidiendo con el comportamiento de los parámetros `:`, use `/*splat` en lugar de `/*`
+
+  ```diff
+  -app.get('/*', async (req, res) => {
+  +app.get('/*splat', async (req, res) => {
+     res.send('ok');
+   });
+  ```
+
+  <Alert type="info">
+
+  `*splat` coincide con cualquier ruta sin la ruta raíz. Si necesita coincidir con la ruta de la raíz también `/`, puede usar `/{*splat}`, envolviendo el comodín entre llaves.
+
+  ```js
+  app.get('/{*splat}', async (req, res) => {
+    res.send('ok');
+  });
+  ```
+
+  </Alert>
+
+- El carácter opcional `?` ya no es compatible, utilice llaves en su lugar.
+
+  ```diff
+  -app.get('/:file.:ext?', async (req, res) => {
+  +app.get('/:file{.:ext}', async (req, res) => {
+     res.send('ok');
+   });
+  ```
+
+- Los caracteres de expresión regular no son compatibles. Por ejemplo:
+
+  ```diff
+  -app.get('/[discussion|page]/:slug', async (req, res) => {
+  +app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
+     res.status(200).send('ok');
+   });
+  ```
+
+- Algunos caracteres han sido reservados para evitar confusión durante la actualización (`()[]?+!`), use `\` para escapar de ellos.
+
+- Los nombres de parámetros ahora soportan identificadores JavaScript válidos, o citan como `:"this"`.
+
+### Las promesas rechazadas manejadas por middleware y manejadores
+
+Solicitar middleware y manejadores que devuelven promesas rechazadas ahora son manejados reenviando el valor rechazado como un `Error` al middleware que maneja errores. Esto significa que usar 'async' funciones como middleware y manejadores son más fáciles que nunca. Cuando se arroja un error en una función `async` o una promesa rechazada es `await`ed dentro de una función asíncrona, esos errores se pasarán al gestor de errores como si llamara a `next(err)`.
+
+Detalles de cómo Express maneja los errores se cubren en la [documentación de manejo de errores](/guide/error-handling).
+
+#### Cómo actualizar
+
+Ahora puedes usar `async/await` directamente sin captar errores manualmente. Si `getUserById` arroja un error o rechaza, `next` será llamado automáticamente con el valor rechazado.
+
+```diff
+-app.get('/user/:id', (req, res, next) => {
+-  getUserById(req.params.id)
+-    .then((user) => res.send(user))
+-    .catch(next);
+-});
++app.get('/user/:id', async (req, res) => {
++  const user = await getUserById(req.params.id);
++  res.send(user);
++});
+```
+
+### express.urlencoded
+
+El método `express.urlencoded` hace que la opción `extended` sea `false` por defecto.
+
+#### Cómo actualizar
+
+Si tu aplicación se basa en el comportamiento `extended`, explícitamente establecerlo a `true`:
+
+```diff
+-app.use(express.urlencoded());
++app.use(express.urlencoded({ extended: true }));
+```
+
+### express.static dotfiles
+
+La opción `dotfiles` de `express.static` de middleware ahora es `"ignore"`. En Express 4, los archivos de puntos fueron servidos por defecto. Como resultado, archivos dentro de un directorio que comienza con un punto (`.`), como `. ell-known`, ya no será accesible y devolverá un error **404 No encontrado**. Esto puede romper la funcionalidad que depende de servir directorios de puntos, como Android App Links y Apple Universal Links.
+
+#### Cómo actualizar
+
+Serve directorios de puntos específicos usando explícitamente `dotfiles: opción "allow"`. Esto le permite servir de forma segura sólo los directorios de puntos deseados mientras mantiene el comportamiento seguro por defecto para otros ficheros de puntos.
+
+```diff
++app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
+ app.use(express.static('public'));
+```
+
+### app.listen
+
+En Express 5, el método `app.listen` invocará la función callback proporcionada por el usuario (si se proporciona) cuando el servidor reciba un evento de error. En Express 4, esos errores se lanzarían. This change shifts error handling responsibility to the callback function in Express 5. Si hay un error, se pasará al callback como argumento.
+Por ejemplo:
+
+```js ins={2-4}
+const server = app.listen(8080, '0.0.0.0', (error) => {
+  if (error) {
+    throw error; // e.g. EADDRINUSE
+  }
+  console.log(`Listening on ${JSON.stringify(server.address())}`);
+});
+```
+
+### app.router
+
+El objeto `app.router`, que fue eliminado en Express 4, ha regresado en Express 5. En la nueva versión, este objeto es sólo una referencia al router base Express, a diferencia de en Express 3, donde una aplicación tuvo que cargarla explícitamente.
+
+### req.body
+
+La propiedad `req.body` devuelve `undefined` cuando el cuerpo no ha sido analizado. En Express 4, devuelve `{}` por defecto.
+
+```js del={4} ins={6}
+app.post('/user', (req, res) => {
+  console.dir(req.body);
+  // Express 4
+  // => {}
+  // Express 5
+  // => undefined
+});
+```
+
+### req.host
+
+En Express 4, la función `req.host` borró incorrectamente del número de puerto si estaba presente. En Express 5, el número de puerto se mantiene.
+
+### req.params
+
+El objeto `req.params` ahora tiene un **prototipo nulo** al usar rutas de cadenas. Sin embargo, si la ruta se define con una expresión regular, `req.params` sigue siendo un objeto estándar con un prototipo normal. Además, hay dos cambios de comportamiento importantes:
+
+**Los parámetros comodín ahora son arrays:**
+
+Los comodines (por ejemplo, `/*splat`) capturan segmentos de ruta como una matriz en lugar de una sola cadena.
+
+```js
+app.get('/*splat', (req, res) => {
+  // GET /foo/bar
+  console.dir(req.params);
+  // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
+});
+```
+
+**Parámetros no coincidentes son omitidos:**
+
+En Express 4, los comodines no coinciden eran cadenas vacías (`''`) y los parámetros opcionales `:` (usando `?`) tenían una clave con valor `undefined`. En Express 5, los parámetros no coincidentes se omiten completamente de `req.params`.
+
+```diff
+-// v4: unmatched wildcard is empty string
+-app.get('/*', (req, res) => {
+-  // GET /
+-  console.dir(req.params);
+-  // => { '0': '' }
+-});
+-
+-// v4: unmatched optional param is undefined
+-app.get('/:file.:ext?', (req, res) => {
+-  // GET /image
+-  console.dir(req.params);
+-  // => { file: 'image', ext: undefined }
+-});
+-
++// v5: unmatched optional param is omitted
++app.get('/:file{.:ext}', (req, res) => {
++  // GET /image
++  console.dir(req.params);
++  // => [Object: null prototype] { file: 'image' }
++});
+```
+
+### req.query
+
+La propiedad `req.query` ya no es una propiedad escribible y en su lugar es un getter. El analizador de consultas por defecto ha sido cambiado de "extendido" a "simple".
+
+```js del={3}
+app.get('/search', (req, res) => {
+  // This is no longer possible in Express 5
+  req.query.page = 1;
+});
+```
+
+### res.clearCookie
+
+El método `res.clearCookie` ignora las opciones `maxAge` y `expires` proporcionadas por el usuario.
+
+```diff
+ app.get('/logout', (req, res) => {
+-  res.clearCookie('session', { maxAge: 0, expires: new Date(0) });
++  res.clearCookie('session');
+ });
+```
+
+### res.estado
+
+El método `res.status` sólo acepta enteros en el rango de `100` a `999`, siguiendo el comportamiento definido por Node. , y devuelve un error cuando el código de estado no es un entero.
+
+```js del={2}
+app.get('/user', (req, res) => {
+  res.status(99); // Throws an error
+  res.status(200); // OK
+});
+```
+
+### res.variar
+
+El `res.vary` arroja un error cuando falta el argumento `field`. En Express 4, si el argumento fue omitido, dio una advertencia en la consola.
+
+```js del={2}
+app.get('/user', (req, res) => {
+  res.vary(); // Throws an error
+  res.vary('Accept'); // OK
+});
+```
+
+## Mejoras
+
+Estos cambios no requieren ningún paso de migración, pero vale la pena saber sobre cuando se actualiza.
+
+### res.render()
+
+Este método ahora fuerza el comportamiento asíncrono para todos los motores de vista, evitando errores causados por motores de vista que tenían una implementación sincrónica y que violaban la interfaz recomendada.
+
+### Soporte de codificación Brotli
+
+Middleware como `express.json()`, `express.urlencoded()`, `express.text()`, y `express.raw()` ahora soportan Brotli (`Content-Encoding: br`) descompresión para cuerpos de solicitud entrantes, además de `gzip` y `deflate`.

@@ -1,0 +1,161 @@
+---
+import '@styles/main.css';
+import { Flex, FlexItem } from '@components/primitives';
+import { Footer, Sidebar } from '@/components/patterns';
+import { Header } from '@/components/patterns';
+import { getLangFromUrl, replaceLanguageInPath } from '@/i18n/utils';
+import { languages } from '@/i18n/locales';
+
+interface Props {
+  title?: string;
+  description?: string;
+  authors?: { name: string; github?: string }[];
+  image?: string;
+}
+
+const {
+  title,
+  description = 'Fast, unopinionated, minimalist web framework for Node.js',
+  authors,
+  image,
+} = Astro.props;
+
+const pageTitle = title
+  ? `${title} · Express.js`
+  : 'Express.js · Node.js web application framework';
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
+
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const segments = pathname.split('/').filter(Boolean);
+const langSegment = segments[0] || 'en';
+const restSegments = segments.slice(1);
+const isApi =
+  restSegments[0] === 'api' || (restSegments[1] === 'api' && /^\dx$/.test(restSegments[0] ?? ''));
+const isBlogOrApi = restSegments[0] === 'blog' || isApi;
+// Build the OG image URL:
+// - Home pages (no rest segments) use a per-language image: /og/home-{lang}.png
+// - Blog and API pages strip the lang prefix since their content is not translated: /og/blog-{slug}.png
+// - Docs and other pages include the lang prefix for i18n support: /og/{lang}-{slug}.png
+const ogSlug =
+  restSegments.length === 0 ? '' : isBlogOrApi ? restSegments.join('-') : segments.join('-');
+const imageUrl = image
+  ? new URL(image, Astro.site || Astro.url.origin)
+  : new URL(`/og/${ogSlug || `home-${langSegment}`}.png`, Astro.site || Astro.url.origin);
+
+const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang} dir={languages[lang].direction}>
+  <head>
+    <script is:inline>
+      (function () {
+        // Theme
+        const storedTheme = localStorage.getItem('theme');
+        const theme =
+          storedTheme === 'dark' || storedTheme === 'light'
+            ? storedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        // Dismissed banners
+        const styles = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('banner-dismissed-') && localStorage.getItem(key) === 'true') {
+            styles.push('#banner-' + key.replace('banner-dismissed-', '') + '{display:none}');
+          }
+        }
+        if (styles.length) {
+          const el = document.createElement('style');
+          el.textContent = styles.join('');
+          document.head.appendChild(el);
+        }
+      })();
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    {
+      Object.keys(languages).map((altLang) => (
+        <link
+          rel="alternate"
+          hreflang={altLang}
+          href={
+            new URL(
+              replaceLanguageInPath(Astro.url.pathname, altLang),
+              Astro.site || Astro.url.origin
+            )
+          }
+        />
+      ))
+    }
+
+    <title>{pageTitle}</title>
+
+    <style is:inline>
+      @layer orama, base, primitives, patterns;
+    </style>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={authors?.length ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Express.js" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    {authors?.map((author) => <meta property="article:author" content={author.name} />)}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@UseExpressJS" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:domain" content="expressjs.com" />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <link rel="sitemap" href={new URL('/sitemap-index.xml', Astro.site || Astro.url.origin)} />
+    <!-- Robots meta tag for Google Search. Enables a large image preview in Google search results,
+      most pertinently in Chrome’s “Discover” view on mobile. See:
+      https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#max-image-preview
+    -->
+    <meta
+      name="robots"
+      content={isNetlify ? 'noindex, nofollow' : 'max-image-preview:large, index, follow'}
+    />
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="The Express.js blog" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="/vulnerabilities.xml"
+      title="Express.js Security Feed"
+    />
+  </head>
+  <body>
+    <Header />
+    <Flex class="layout-wrapper">
+      <Sidebar />
+      <FlexItem grow class="layout-content">
+        <Flex direction="column" class="h-full">
+          <main id="main-content" tabindex="-1">
+            <slot />
+          </main>
+          <Footer />
+        </Flex>
+      </FlexItem>
+    </Flex>
+  </body>
+</html>

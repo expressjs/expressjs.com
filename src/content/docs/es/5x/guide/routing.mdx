@@ -1,0 +1,375 @@
+---
+title: Ruta
+description: Aprenda cómo definir y usar rutas en aplicaciones Express.js, incluyendo métodos de ruta, rutas de ruta, parámetros, y usando Router para rutas modulares.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+_Routing_ se refiere a cómo responden los extremos (URIs) de una aplicación a las peticiones del cliente.
+Para una introducción al enrutamiento, consulte [Enrutamiento básico](/starter/basic-routing).
+
+Define enrutamiento usando métodos del objeto Express `app` que corresponden a métodos HTTP;
+por ejemplo, `app. et()` para manejar solicitudes GET y `app.post` para manejar solicitudes POST. Para una lista completa,
+vea [app.METHOD](/api/application#appmethodpath-callback--callback-). También puedes usar [app.all()](/api/application#appallpath-callback--callback-) para manejar todos los métodos HTTP y [app. se()](/api/application#appusepath-callback--callback) a
+especificar middleware como función de callback (Ver [Usando middleware](/guide/using-middleware) para más detalles).
+
+Estos métodos de enrutamiento especifican una función de callback (a veces llamada "funciones manejadoras") llamada cuando la aplicación recibe una petición a la ruta especificada (endpoint) y el método HTTP. En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada.
+
+De hecho, los métodos de enrutamiento pueden tener más de una función de callback como argumentos.
+Con múltiples funciones de callback, es importante proporcionar `next` como un argumento a la función de callback y luego llamar `next()` dentro del cuerpo de la función para desactivar el control
+al siguiente callback.
+
+El siguiente código es un ejemplo de una ruta muy básica.
+
+```js
+const express = require('express');
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+## Métodos de ruta
+
+Un método de ruta se deriva de uno de los métodos HTTP y se adjunta a una instancia de la clase `express`.
+
+El siguiente código es un ejemplo de rutas definidas para los métodos `GET` y `POST` a la raíz de la aplicación.
+
+```js
+// GET method route
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req, res) => {
+  res.send('POST request to the homepage');
+});
+```
+
+Express soporta métodos que corresponden a todos los métodos de petición HTTP: `get`, `post`, y así sucesivamente.
+Para una lista completa, vea [app.METHOD](/api/application#appmethodpath-callback--callback-).
+
+Hay un método especial de enrutamiento, `app.all()`, usado para cargar funciones de middleware en una ruta para _all_ métodos de petición HTTP. Por ejemplo, el siguiente manejador se ejecuta para peticiones a la ruta `"/secret"` ya sea usando `GET`, `POST`, `PUT`, `DELETE`, o cualquier otro método de solicitud HTTP soportado en el [módulo http](https://nodejs.org/api/http.html#http_http_methods).
+
+```js
+app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+## Rutas de ruta
+
+Las rutas de ruta, en combinación con un método de solicitud, definen los extremos en los que se pueden realizar las solicitudes. Las rutas de ruta pueden ser cadenas o expresiones regulares.
+
+<Alert type="info">
+
+Express utiliza [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 para coincidir con las rutas de ruta; vea la documentación de ruta a regexp para todas las posibilidades de definir rutas de ruta.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) es una herramienta práctica para probar rutas Expresas básicas, aunque no soporta coincidencia de patrones.
+
+</Alert>
+
+### Rutas de cadena
+
+Las rutas de cadena coinciden exactamente con las peticiones. El punto (`.`) y los guiones (`-`) se interpretan literalmente.
+
+<Alert type="warning">Las cadenas de consulta no son parte de la ruta de la ruta.</Alert>
+
+```js
+app.get('/', (req, res) => {
+  res.send('root');
+});
+
+app.get('/about', (req, res) => {
+  res.send('about');
+});
+
+app.get('/random.text', (req, res) => {
+  res.send('random.text');
+});
+```
+
+### Comodines
+
+Los comodines coinciden con cualquier ruta después de un prefijo. Deben tener un nombre, al igual que los parámetros de la ruta, y son capturados como matrices de segmentos de ruta.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+Para coincidir también con la ruta de la raíz, envuelve el comodín entre llaves:
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Segmentos opcionales
+
+Use llaves para definir segmentos opcionales en una ruta de ruta. Cuando el segmento no está presente, el parámetro se omite de `req.params`.
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+<Alert type="alerta">
+
+Los caracteres `?`, `+`, `*`, `[]`, y `()` están reservados y no pueden usarse como caracteres literales en rutas de ruta. Usa `\` para escapar de ellos si es necesario.
+
+</Alert>
+
+### Expresiones regulares
+
+También puede utilizar expresiones regulares como rutas de ruta. Esto es útil cuando se necesita una lógica de emparejamiento más compleja.
+
+```js
+// Matches any path containing "a"
+app.get(/a/, (req, res) => {
+  res.send('/a/');
+});
+
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
+app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/');
+});
+```
+
+## Parámetros de ruta
+
+Los parámetros de ruta se llaman segmentos de URL que se utilizan para capturar los valores especificados en su posición en la URL. Los valores capturados son poblados en el objeto `req.params`, con el nombre del parámetro de ruta especificado en la ruta como sus claves respectivas.
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+Para definir rutas con parámetros de ruta, simplemente especifique los parámetros de ruta en la ruta como se muestra a continuación.
+
+```js
+app.get('/users/:userId/books/:bookId', (req, res) => {
+  res.send(req.params);
+});
+```
+
+<Alert type="alerta">
+
+El nombre de los parámetros de la ruta debe estar compuesto de "caracteres de palabra" ([A-Za-z0-9_]).
+
+</Alert>
+
+Dado que los guiones (`-`) y el punto (`.`) se interpretan literalmente, pueden ser utilizados junto con parámetros de ruta para propósitos útiles.
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+<Alert type="alerta">
+
+Los caracteres de expresión regular no están soportados en las rutas de ruta. Utilice un array de rutas o expresiones regulares en su lugar.
+Vea la [sintaxis de coincidencia de ruta de ruta](/guide/migrating-5#path-syntax) para más información.
+
+</Alert>
+
+## Manejadores de rutas
+
+Puedes proporcionar múltiples funciones de callback que se comportan como [middleware](/guide/using-middleware) para gestionar una solicitud. La única excepción es que estos callbacks podrían invocar a `next('route')` para evitar las llamadas restantes de ruta. Se puede utilizar este mecanismo para imponer condiciones previas a una ruta, luego pasar el control a las rutas posteriores si no hay razón para proceder con la ruta actual.
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
+En este ejemplo:
+
+- `GET /user/5` → manejado por primera ruta → envía "Usuario 5"
+- `GET /user/0` → primera ruta llama a `next('ruta')`, saltando a la siguiente ruta `/user/:id`
+
+Los manejadores de rutas pueden ser en forma de una función, un array de funciones o combinaciones de ambos, como se muestra en los siguientes ejemplos.
+
+Una única función de callback puede manejar una ruta. Por ejemplo:
+
+```js
+app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+Más de una función de callback puede manejar una ruta (asegúrese de especificar el objeto `siguiente`). Por ejemplo:
+
+```js
+app.get(
+  '/example/b',
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
+Una matriz de funciones de callback puede manejar una ruta. Por ejemplo:
+
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+Una combinación de funciones independientes y arreglos de funciones puede manejar una ruta. Por ejemplo:
+
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req, res, next) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
+## Métodos de respuesta
+
+Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden enviar una respuesta al cliente y terminar el ciclo de solicitud y respuesta. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.
+
+| Método                                                                 | Descripción                                                                                                 |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Solicitar un archivo para ser descargado.                                                                   |
+| [res.end()](/api/response#resenddata-encoding-callback)                | Terminar el proceso de respuesta.                                                                           |
+| [res.json()](/api/response#resjsonbody)                                | Enviar una respuesta JSON.                                                                                  |
+| [res.jsonp()](/api/response#resjsonpbody)                              | Envía una respuesta JSON con soporte JSONP.                                                                 |
+| [res.redirect()](/api/response#resredirectstatus-path)                 | Redirigir una solicitud.                                                                                    |
+| [res.render()](/api/response#resrenderview--locals--callback)          | Procesar una plantilla de vista.                                                                            |
+| [res.send()](/api/response#ressendbody)                                | Enviar una respuesta de varios tipos.                                                                       |
+| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Enviar un archivo como un flujo de octet.                                                                   |
+| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Establece el código de estado de respuesta y envía su representación de cadena como el cuerpo de respuesta. |
+
+## app.route()
+
+Puede crear manejadores de rutas encadenables para una ruta usando `app.route()`.
+Debido a que la ruta se especifica en una única ubicación, la creación de rutas modulares es útil, al igual que la reducción de redundancia y tipografías. Para más información sobre rutas, vea: [documentación Router() ](/api/router).
+
+Aquí hay un ejemplo de manejadores encadenados de rutas que se definen usando `app.route()`.
+
+```js
+app
+  .route('/book')
+  .get((req, res) => {
+    res.send('Get a random book');
+  })
+  .post((req, res) => {
+    res.send('Add a book');
+  })
+  .put((req, res) => {
+    res.send('Update the book');
+  });
+```
+
+## express.Router
+
+Utilice la clase `express.Router` para crear manejadores modulares de rutas. Una instancia de `Router` es un sistema completo de middleware y enrutamiento; por esta razón, a menudo se le denomina "mini-app".
+
+El siguiente ejemplo crea un router como módulo, carga una función de middleware en él, define algunas rutas y monta el módulo del router en una ruta de la aplicación principal.
+
+Crea un archivo de enrutador llamado `birds.js` en el directorio de la aplicación, con el siguiente contenido:
+
+```js
+const express = require('express');
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+module.exports = router;
+```
+
+Luego, cargue el módulo de enrutador en la aplicación:
+
+```js
+const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+La aplicación ahora será capaz de manejar solicitudes a `/birds` y `/birds/about`, así como llamar a la función de middleware `timeLog` que es específica de la ruta.
+
+Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. Para hacerlo accesible, necesitarás pasar la opción `mergeParams` al constructor de Router [reference](/api/application#appusepath-callback--callback).
+
+```js
+const router = express.Router({ mergeParams: true });
+```
