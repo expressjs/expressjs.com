@@ -1,6 +1,6 @@
 # Project dictionary for cspell — domain terms, library/product names,
 # contributor handles, and identifiers used in code examples.
-# Regenerate candidates with: npx cspell --words-only --unique "**/*.{md,mdx,astro,ts,tsx,js,mjs,css}"
+# Regenerate candidates with: npx cspell --words-only --unique "**/*.{md,mdx}"
 abbbbbcd
 abbbcd
 abbcd
@@ -9,13 +9,9 @@ Almeida
 Angelini
 Arcd
 azser
-basicauth
 behaviour
 Beltran
 bjohansebas
-bodyparser
-bsky
-bunx
 Burellier
 butterflyman
 Charsets
@@ -24,9 +20,6 @@ CITGM
 Clickjacking
 codemod
 Codemods
-Comeau's
-cookieparser
-cookiesession
 couchnode
 crandmck
 Davide
@@ -40,7 +33,6 @@ Embrey
 Español
 expressjs
 expressjscom
-expressstaticroot
 extensionless
 extnames
 Filip
@@ -51,13 +43,11 @@ frontmatter
 gami
 Gascón
 Giannino
-glsl
 Hage
 haml
 Harband
 hashtest
 healthcheck
-herodevs
 hkeys
 hrefs
 hset
@@ -69,23 +59,19 @@ jongleberry
 jshtml
 jshttp
 Kamil
-kawaii
+Kawaii
 Keygrip
-Konichiwa
 Konnichiwa
 kreee
-kshr
 letmein
 linklocal
 llms
-mdxjs
 mkactivity
 mkcol
 mountpath
 myapp
 mydb
 mymiddleware
-navbars
 Neue
 niftylettuce
 nmap
@@ -93,7 +79,6 @@ NOFILE
 nogroup
 OKLCH
 Ooops
-openjs
 oracledb
 Orama
 OSSF
@@ -104,11 +89,9 @@ plantae
 portno
 Português
 Prunus
-rehype
 rememberme
 Riva
 SAWARATSUKI
-screencasts
 sder
 secr
 sendfile
@@ -119,25 +102,16 @@ Spaziani
 SPDY
 sqlmap
 sslyze
-Stylesheet
-tabbar
-tabbars
-textareas
 tobi
-Topbar
 triaging
 Ulises
 uniquelocal
 Unnebäck
 unpipe
-Unrecognised
 usersdb
 uwotm
 vash
 viewdirectory
-viewports
-webapplication
 Wordmark
 xyza
 Yaapa
-zindex

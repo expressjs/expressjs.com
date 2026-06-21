@@ -18,7 +18,7 @@
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "spell": "cspell --no-progress \"**/*.{md,mdx,astro,ts,tsx,js,mjs,css}\"",
+    "spell": "cspell --no-progress \"**/*.{md,mdx}\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run format:check && npm run lint && npm run spell",
@@ -90,7 +90,7 @@
     "*.{json,md,css,mjs}": [
       "prettier --write"
     ],
-    "*.{md,mdx,astro,ts,tsx,js,mjs,css}": [
+    "*.{md,mdx}": [
       "cspell --no-progress --no-must-find-files"
     ]
   }
