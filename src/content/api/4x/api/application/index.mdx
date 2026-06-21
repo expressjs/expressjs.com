@@ -1061,7 +1061,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
     <Param name="env" type="String" default='process.env.NODE_ENV (NODE_ENV environment variable) or "development" if NODE_ENV is not set.'>
       Environment mode. Be sure to set to "production" in a production environment; see [Production best practices: performance and reliability](/advanced/best-practice-performance#things-to-do-in-your-environment--setup).
     </Param>
-    <Param name="etag" type="Varied" default="weak">
+    <Param name="etag" type="Boolean | String | Function" default="weak">
       Set the ETag response header. For possible values, see the `etag` options table below. [More about the HTTP ETag header](https://en.wikipedia.org/wiki/HTTP_ETag).
     </Param>
     <Param name="jsonp callback name" type="String" default='"callback"'>
@@ -1070,13 +1070,13 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
     <Param name="json escape" type="Boolean" default="N/A (undefined)">
       Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this is to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML. **NOTE**: Sub-apps will inherit the value of this setting.
     </Param>
-    <Param name="json replacer" type="Varied" default="N/A (undefined)">
+    <Param name="json replacer" type="Function | Array" default="N/A (undefined)">
       The ['replacer' argument used by `JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#the_replacer_parameter). **NOTE**: Sub-apps will inherit the value of this setting.
     </Param>
-    <Param name="json spaces" type="Varied" default="N/A (undefined)">
+    <Param name="json spaces" type="Number | String" default="N/A (undefined)">
       The ['space' argument used by `JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#the_space_parameter). This is typically set to the number of spaces to use to indent prettified JSON. **NOTE**: Sub-apps will inherit the value of this setting.
     </Param>
-    <Param name="query parser" type="Varied" default='"extended"'>
+    <Param name="query parser" type="Boolean | String | Function" default='"extended"'>
       Disable query parsing by setting the value to `false`, or set the query parser to use either "simple" or "extended" or a custom query string parsing function. The simple query parser is based on Node's native query parser, [querystring](https://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.com/package/qs). A custom query string parsing function will receive the complete query string, and must return an object of query keys and their values.
     </Param>
     <Param name="strict routing" type="Boolean" default="N/A (undefined)">
@@ -1085,7 +1085,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
     <Param name="subdomain offset" type="Number" default="2">
       The number of dot-separated parts of the host to remove to access subdomain.
     </Param>
-    <Param name="trust proxy" type="Varied" default="false (disabled)">
+    <Param name="trust proxy" type="Boolean | String | Number | Function | Array" default="false (disabled)">
       Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then contains an array of IP addresses the client is connected through. To enable it, use the values described in the trust proxy options table below. The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation. **NOTE**: Sub-apps _will_ inherit the value of this setting, even though it has a default value.
     </Param>
     <Param name="views" type="String or Array" default="process.cwd() + '/views'">
