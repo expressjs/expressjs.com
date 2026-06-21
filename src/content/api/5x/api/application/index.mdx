@@ -502,7 +502,8 @@ app.get('/', (req, res) => {
       The path of a UNIX socket to listen on, as an alternative to host and port.
     </Param>
     <Param name="callback" type="Function" optional>
-      A function to call once the server is listening.
+      A function called once the server is listening. If the server emits an `error` event (for
+      example `EADDRINUSE`), the error is passed to this callback as its argument.
     </Param>
   </Fragment>
 </Signature>
@@ -520,6 +521,22 @@ const app = express();
 
 app.listen(3000); // bind and listen on a TCP port
 app.listen('/tmp/sock'); // or listen on a UNIX socket
+```
+
+<Alert type="info">
+
+When the server emits an `error` event (such as `EADDRINUSE`), the error is passed to the provided
+`callback`. Handle it inside the callback:
+
+</Alert>
+
+```js
+const server = app.listen(8080, '0.0.0.0', (error) => {
+  if (error) {
+    throw error; // e.g. EADDRINUSE
+  }
+  console.log(`Listening on ${JSON.stringify(server.address())}`);
+});
 ```
 
 The `app` returned by `express()` is in fact a JavaScript
