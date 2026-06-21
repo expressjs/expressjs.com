@@ -94,7 +94,7 @@ Or you can update your code manually:
 
 A leading colon character (:) in the name for the `app.param(name, fn)` function is a remnant of Express 3, and for the sake of backwards compatibility, Express 4 supported it with a deprecation notice. Express 5 will silently ignore it and use the name parameter without prefixing it with a colon.
 
-This should not affect your code if you follow the Express 4 documentation of [app.param](/4x/api/application/#appparamname-callback), as it makes no mention of the leading colon.
+This should not affect your code if you follow the Express 4 documentation of [app.param](/4x/api/application/#appparam), as it makes no mention of the leading colon.
 
 ### req.param(name)
 
@@ -421,6 +421,25 @@ Serve specific dot-directories explicitly using the `dotfiles: "allow"` option. 
 ```diff
 +app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
  app.use(express.static('public'));
+```
+
+### router.param() with an array of names
+
+`router.param(name, fn)` no longer accepts an array for `name`. In Express 4 an array was accepted silently; in Express 5, passing anything other than a string throws `TypeError: argument name must be a string`. (Note that `app.param()` still accepts an array of names.)
+
+#### How to update
+
+Register each parameter name with its own `router.param()` call:
+
+```diff
+-router.param(['id', 'page'], (req, res, next, value) => {
+-  // ...
+-});
++const loadParam = (req, res, next, value) => {
++  // ...
++};
++router.param('id', loadParam);
++router.param('page', loadParam);
 ```
 
 ### app.listen
