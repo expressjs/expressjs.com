@@ -423,6 +423,25 @@ Serve specific dot-directories explicitly using the `dotfiles: "allow"` option. 
  app.use(express.static('public'));
 ```
 
+### router.param() with an array of names
+
+`router.param(name, fn)` no longer accepts an array for `name`. In Express 4 an array was accepted silently; in Express 5, passing anything other than a string throws `TypeError: argument name must be a string`. (Note that `app.param()` still accepts an array of names.)
+
+#### How to update
+
+Register each parameter name with its own `router.param()` call:
+
+```diff
+-router.param(['id', 'page'], (req, res, next, value) => {
+-  // ...
+-});
++const loadParam = (req, res, next, value) => {
++  // ...
++};
++router.param('id', loadParam);
++router.param('page', loadParam);
+```
+
 ### app.listen
 
 In Express 5, the `app.listen` method will invoke the user-provided callback function (if provided) when the server receives an error event. In Express 4, such errors would be thrown. This change shifts error-handling responsibility to the callback function in Express 5. If there is an error, it will be passed to the callback as an argument.
