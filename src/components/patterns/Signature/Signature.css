@@ -1,11 +1,8 @@
 @layer patterns {
-  /* ============================================
-     Type token — shared by returns and params
-     ============================================ */
   .type-tag {
     display: inline-block;
     padding: var(--space-0-5) var(--space-2);
-    /* A crisp "chip" using palette tokens — good contrast in light and dark. */
+
     border: var(--border-width-1) solid var(--color-border-secondary);
     border-radius: var(--radius-sm);
     background-color: var(--color-bg-secondary);
@@ -16,10 +13,6 @@
     line-height: var(--line-height-tight);
   }
 
-  /* ============================================
-     Signature — a single box holding the
-     arguments and the return value / type
-     ============================================ */
   .signature {
     margin: var(--space-6) 0;
     border: var(--border-width-1) solid var(--color-border-secondary);
@@ -38,8 +31,6 @@
     font-weight: var(--font-weight-semibold);
   }
 
-  /* Footer: Type / Returns / Added in, grouped in one strip that follows the
-     theme (light gray in light mode, ~#222 in dark mode). */
   .signature__footer {
     display: flex;
     flex-direction: column;
@@ -49,7 +40,6 @@
     background-color: var(--color-bg-tertiary);
   }
 
-  /* When the box only has the footer (e.g. a property), there is no divider. */
   .signature__footer:first-child {
     border-top: 0;
   }
@@ -68,19 +58,11 @@
     font-weight: var(--font-weight-medium);
   }
 
-  /* ============================================
-     Params — one shared two-column grid so the
-     names and descriptions line up across every
-     row, like a single table inside the box:
-     the name on the left, the type / default /
-     description on the right.
-     ============================================ */
   .signature__params {
     display: grid;
     grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
   }
 
-  /* Each Param spreads its two cells straight into the shared grid. */
   .param {
     display: contents;
   }
@@ -91,13 +73,11 @@
     border-top: var(--border-width-1) solid var(--color-border-secondary);
   }
 
-  /* No divider above the first row. */
   .param:first-child > .param__head,
   .param:first-child > .param__body {
     border-top: 0;
   }
 
-  /* Stack the name over the description on narrow viewports. */
   @media (max-width: 40rem) {
     .signature__params {
       display: block;
@@ -139,13 +119,11 @@
     font-family: var(--font-family-mono);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
-    /* Let long option names wrap inside the name column instead of overflowing. */
+
     max-width: 100%;
     overflow-wrap: anywhere;
   }
 
-  /* Meta: labelled "Type:" / "Default:" / "Added in:" pairs, flowing inline
-     at the top of the description column (wrapping when there is no room). */
   .param__meta {
     display: flex;
     flex-wrap: wrap;
@@ -173,7 +151,6 @@
   .param__desc {
     color: var(--color-text-secondary);
 
-    /* Collapse the outer margins of content rendered from the MDX slot. */
     & > :first-child {
       margin-top: 0;
     }
@@ -183,14 +160,10 @@
     }
   }
 
-  /* Space the description from the meta row only when both are present. */
   .param__meta + .param__desc {
     margin-top: var(--space-3);
   }
 
-  /* An object's properties: the same two-column grid, wrapped in its own
-     complete border so it is clear they belong to the param above and are not
-     top-level arguments. */
   .param__children {
     margin-top: var(--space-3);
     border: var(--border-width-1) solid var(--color-border-secondary);
