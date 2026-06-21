@@ -101,7 +101,7 @@ made to `/hello/jp`, `req.baseUrl` is "/hello".
 
 Contains key-value pairs of data submitted in the request body.
 By default, it is `undefined`, and is populated when you use body-parsing middleware such
-as [`express.json()`](/api/express/#expressjsonoptions) or [`express.urlencoded()`](/api/express/#expressurlencodedoptions).
+as [`express.json()`](/api/express/#expressjson) or [`express.urlencoded()`](/api/express/#expressurlencoded).
 
 <Alert type="warning">
 
@@ -222,7 +222,7 @@ module](https://nodejs.org/api/http.html#http_message_url).
 
 This property is much like `req.url`; however, it retains the original request URL,
 allowing you to rewrite `req.url` freely for internal routing purposes. For example,
-the "mounting" feature of [app.use()](/api/application/#appusepath-callback--callback) will rewrite `req.url` to strip the mount point.
+the "mounting" feature of [app.use()](/api/application/#appuse) will rewrite `req.url` to strip the mount point.
 
 ```js
 // GET /search?q=something
@@ -263,7 +263,7 @@ console.dir(req.params[0]);
 
 Named capturing groups in regular expressions behave like named route parameters. For example the group from `/^\/file\/(?<path>.*)$/` expression is available as `req.params.path`.
 
-If you need to make changes to a key in `req.params`, use the [app.param](/api/application/#appparamname-callback) handler. Changes are applicable only to [parameters](/guide/routing/#route-parameters) already defined in the route path.
+If you need to make changes to a key in `req.params`, use the [app.param](/api/application/#appparam) handler. Changes are applicable only to [parameters](/guide/routing/#route-parameters) already defined in the route path.
 
 Any changes made to the `req.params` object in a middleware or route handler will be reset.
 
@@ -286,7 +286,7 @@ console.dir(req.path);
 <Alert type="info">
 
 When called from a middleware, the mount point is not included in `req.path`. See
-[app.use()](/api/application/#appusepath-callback--callback) for more details.
+[app.use()](/api/application/#appuse) for more details.
 
 </Alert>
 
@@ -410,7 +410,7 @@ console.dir(req.subdomains);
 
 The application property `subdomain offset`, which defaults to 2, is used for determining the
 beginning of the subdomain segments. To change this behavior, change its value
-using [app.set](/api/application/#appsetname-value).
+using [app.set](/api/application/#appset).
 
 ### req.xhr
 
