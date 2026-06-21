@@ -81,10 +81,28 @@ may not be a function and instead a string or other user-input.
 
 <Signature returns="Function" since="v4.17.0">
   <Fragment slot="attributes">
-    <Param name="inflate" type="Boolean" default="true">Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are rejected.</Param>
-    <Param name="limit" type="Number | String" default='"100kb"'>Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the [bytes](https://www.npmjs.com/package/bytes) library for parsing.</Param>
-    <Param name="type" type="String | String[] | Function" default='"application/octet-stream"'>This is used to determine what media type the middleware will parse. This option can be a string, array of strings, or a function. If not a function, `type` option is passed directly to the [type-is](https://www.npmjs.com/package/type-is#readme) library and this can be an extension name (like `bin`), a mime type (like `application/octet-stream`), or a mime type with a wildcard (like `*/*` or `application/*`). If a function, the `type` option is called as `fn(req)` and the request is parsed if it returns a truthy value.</Param>
-    <Param name="verify" type="Function" default="undefined">This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing can be aborted by throwing an error.</Param>
+    <Param name="inflate" type="Boolean" default="true">
+      Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are
+      rejected.
+    </Param>
+    <Param name="limit" type="Number | String" default='"100kb"'>
+      Controls the maximum request body size. If this is a number, then the value specifies the
+      number of bytes; if it is a string, the value is passed to the
+      [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+    </Param>
+    <Param name="type" type="String | String[] | Function" default='"application/octet-stream"'>
+      This is used to determine what media type the middleware will parse. This option can be a
+      string, array of strings, or a function. If not a function, `type` option is passed directly
+      to the [type-is](https://www.npmjs.com/package/type-is#readme) library and this can be an
+      extension name (like `bin`), a mime type (like `application/octet-stream`), or a mime type
+      with a wildcard (like `*/*` or `application/*`). If a function, the `type` option is called as
+      `fn(req)` and the request is parsed if it returns a truthy value.
+    </Param>
+    <Param name="verify" type="Function" default="undefined">
+      This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a
+      `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing
+      can be aborted by throwing an error.
+    </Param>
   </Fragment>
 </Signature>
 
@@ -115,9 +133,17 @@ Testing that `req.body` is a `Buffer` before calling buffer methods is recommend
 
 <Signature returns="Router">
   <Fragment slot="attributes">
-    <Param name="caseSensitive" type="Boolean" default="false">Enable case sensitivity. Disabled by default, treating `/Foo` and `/foo` as the same.</Param>
-    <Param name="mergeParams" type="Boolean" default="false" since="v4.5.0+">Preserve the `req.params` values from the parent router. If the parent and the child have conflicting param names, the child's value take precedence.</Param>
-    <Param name="strict" type="Boolean" default="false">Enable strict routing. Disabled by default, `/foo` and `/foo/` are treated the same by the router.</Param>
+    <Param name="caseSensitive" type="Boolean" default="false">
+      Enable case sensitivity. Disabled by default, treating `/Foo` and `/foo` as the same.
+    </Param>
+    <Param name="mergeParams" type="Boolean" default="false" since="v4.5.0+">
+      Preserve the `req.params` values from the parent router. If the parent and the child have
+      conflicting param names, the child's value take precedence.
+    </Param>
+    <Param name="strict" type="Boolean" default="false">
+      Enable strict routing. Disabled by default, `/foo` and `/foo/` are treated the same by the
+      router.
+    </Param>
   </Fragment>
 </Signature>
 
@@ -140,58 +166,59 @@ For more information, see [Router](/api/router/).
       The root directory from which to serve static assets.
     </Param>
     <Param name="options" type="Object" optional>
-      Configures how files are served; its properties are described below.
-    </Param>
-  </Fragment>
-</Signature>
+      Configures how files are served; it accepts the properties below. See also the [example
+      below](#example-of-expressstatic).
 
-The `options` object accepts the following properties. See also the [example below](#example-of-expressstatic).
+      <Fragment slot="properties">
+        <Param name="dotfiles" type="String" default="undefined">
+          Determines how dotfiles (files or directories that begin with a dot ".") are treated. See
+          [dotfiles](#dotfiles) below.
+        </Param>
+        <Param name="etag" type="Boolean" default="true">
+          Enable or disable etag generation. NOTE: `express.static` always sends weak ETags.
+        </Param>
+        <Param name="extensions" type="String[] | Boolean" default="false">
+          Sets file extension fallbacks: If a file is not found, search for files with the specified
+          extensions and serve the first one found. Example: `['html', 'htm']`.
+        </Param>
+        <Param name="fallthrough" type="Boolean" default="true">
+          Let client errors fall-through as unhandled requests, otherwise forward a client error.
+          See [fallthrough](#fallthrough) below.
+        </Param>
+        <Param name="immutable" type="Boolean" default="false">
+          Enable or disable the `immutable` directive in the `Cache-Control` response header. If
+          enabled, the `maxAge` option should also be specified to enable caching. The `immutable`
+          directive will prevent supported clients from making conditional requests during the life
+          of the `maxAge` option to check if the file has changed.
+        </Param>
+        <Param name="index" type="String | Boolean" default='"index.html"'>
+          Sends the specified directory index file. Set to `false` to disable directory indexing.
+        </Param>
+        <Param name="lastModified" type="Boolean" default="true">
+          Set the `Last-Modified` header to the last modified date of the file on the OS.
+        </Param>
+        <Param name="maxAge" type="Number" default="0">
+          Set the max-age property of the Cache-Control header in milliseconds or a string in [ms
+          format](https://www.npmjs.com/package/ms).
+        </Param>
+        <Param name="redirect" type="Boolean" default="true">
+          Redirect to trailing "/" when the pathname is a directory.
+        </Param>
+        <Param name="setHeaders" type="Function">
+          Function for setting HTTP headers to serve with the file. See [setHeaders](#setheaders)
+          below.
+        </Param>
+        <Param name="acceptRanges" type="Boolean" default="true">
+          Enable or disable accepting ranged requests. Disabling this will not send the
+          `Accept-Ranges` header and will ignore the contents of the Range request header.
+        </Param>
+        <Param name="cacheControl" type="Boolean" default="true">
+          Enable or disable setting the `Cache-Control` response header. Disabling this will ignore
+          the immutable and maxAge options.
+        </Param>
+      </Fragment>
+    </Param>
 
-<Signature attributesTitle="Options">
-  <Fragment slot="attributes">
-    <Param name="dotfiles" type="String" default="undefined">
-      Determines how dotfiles (files or directories that begin with a dot ".") are treated. See [dotfiles](#dotfiles) below.
-    </Param>
-    <Param name="etag" type="Boolean" default="true">
-      Enable or disable etag generation. NOTE: `express.static` always sends weak ETags.
-    </Param>
-    <Param name="extensions" type="String[] | Boolean" default="false">
-      Sets file extension fallbacks: If a file is not found, search for files with the specified
-      extensions and serve the first one found. Example: `['html', 'htm']`.
-    </Param>
-    <Param name="fallthrough" type="Boolean" default="true">
-      Let client errors fall-through as unhandled requests, otherwise forward a client error. See [fallthrough](#fallthrough) below.
-    </Param>
-    <Param name="immutable" type="Boolean" default="false">
-      Enable or disable the `immutable` directive in the `Cache-Control` response header. If
-      enabled, the `maxAge` option should also be specified to enable caching. The `immutable`
-      directive will prevent supported clients from making conditional requests during the life of
-      the `maxAge` option to check if the file has changed.
-    </Param>
-    <Param name="index" type="String | Boolean" default='"index.html"'>
-      Sends the specified directory index file. Set to `false` to disable directory indexing.
-    </Param>
-    <Param name="lastModified" type="Boolean" default="true">
-      Set the `Last-Modified` header to the last modified date of the file on the OS.
-    </Param>
-    <Param name="maxAge" type="Number" default="0">
-      Set the max-age property of the Cache-Control header in milliseconds or a string in [ms
-      format](https://www.npmjs.com/package/ms).
-    </Param>
-    <Param name="redirect" type="Boolean" default="true">
-      Redirect to trailing "/" when the pathname is a directory.
-    </Param>
-    <Param name="setHeaders" type="Function">
-      Function for setting HTTP headers to serve with the file. See [setHeaders](#setheaders) below.
-    </Param>
-    <Param name="acceptRanges" type="Boolean" default="true">
-      Enable or disable accepting ranged requests. Disabling this will not send the `Accept-Ranges`
-      header and will ignore the contents of the Range request header.
-    </Param>
-    <Param name="cacheControl" type="Boolean" default="true">
-      Enable or disable setting the `Cache-Control` response header. Disabling this will ignore the
-      immutable and maxAge options.
-    </Param>
   </Fragment>
 </Signature>
 
@@ -276,11 +303,32 @@ app.use(express.static('public', options));
 
 <Signature returns="Function" since="v4.17.0">
   <Fragment slot="attributes">
-    <Param name="defaultCharset" type="String" default='"utf-8"'>Specify the default character set for the text content if the charset is not specified in the `Content-Type` header of the request.</Param>
-    <Param name="inflate" type="Boolean" default="true">Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are rejected.</Param>
-    <Param name="limit" type="Number | String" default='"100kb"'>Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the [bytes](https://www.npmjs.com/package/bytes) library for parsing.</Param>
-    <Param name="type" type="String | String[] | Function" default='"text/plain"'>This is used to determine what media type the middleware will parse. This option can be a string, array of strings, or a function. If not a function, `type` option is passed directly to the [type-is](https://www.npmjs.com/package/type-is#readme) library and this can be an extension name (like `txt`), a mime type (like `text/plain`), or a mime type with a wildcard (like `*/*` or `text/*`). If a function, the `type` option is called as `fn(req)` and the request is parsed if it returns a truthy value.</Param>
-    <Param name="verify" type="Function" default="undefined">This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing can be aborted by throwing an error.</Param>
+    <Param name="defaultCharset" type="String" default='"utf-8"'>
+      Specify the default character set for the text content if the charset is not specified in the
+      `Content-Type` header of the request.
+    </Param>
+    <Param name="inflate" type="Boolean" default="true">
+      Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are
+      rejected.
+    </Param>
+    <Param name="limit" type="Number | String" default='"100kb"'>
+      Controls the maximum request body size. If this is a number, then the value specifies the
+      number of bytes; if it is a string, the value is passed to the
+      [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+    </Param>
+    <Param name="type" type="String | String[] | Function" default='"text/plain"'>
+      This is used to determine what media type the middleware will parse. This option can be a
+      string, array of strings, or a function. If not a function, `type` option is passed directly
+      to the [type-is](https://www.npmjs.com/package/type-is#readme) library and this can be an
+      extension name (like `txt`), a mime type (like `text/plain`), or a mime type with a wildcard
+      (like `*/*` or `text/*`). If a function, the `type` option is called as `fn(req)` and the
+      request is parsed if it returns a truthy value.
+    </Param>
+    <Param name="verify" type="Function" default="undefined">
+      This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a
+      `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing
+      can be aborted by throwing an error.
+    </Param>
   </Fragment>
 </Signature>
 
@@ -311,13 +359,48 @@ Testing that `req.body` is a string before calling string methods is recommended
 
 <Signature returns="Function" since="v4.16.0">
   <Fragment slot="attributes">
-    <Param name="extended" type="Boolean" default="true">This option allows to choose between parsing the URL-encoded data with the `querystring` library (when `false`) or the `qs` library (when `true`). The "extended" syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded. For more information, please [see the qs library](https://www.npmjs.com/package/qs#readme).</Param>
-    <Param name="inflate" type="Boolean" default="true">Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are rejected.</Param>
-    <Param name="limit" type="Number | String" default='"100kb"'>Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the [bytes](https://www.npmjs.com/package/bytes) library for parsing.</Param>
-    <Param name="parameterLimit" type="Number" default="1000">This option controls the maximum number of parameters that are allowed in the URL-encoded data. If a request contains more parameters than this value, an error will be raised.</Param>
-    <Param name="type" type="String | String[] | Function" default='"application/x-www-form-urlencoded"'>This is used to determine what media type the middleware will parse. This option can be a string, array of strings, or a function. If not a function, `type` option is passed directly to the [type-is](https://www.npmjs.com/package/type-is#readme) library and this can be an extension name (like `urlencoded`), a mime type (like `application/x-www-form-urlencoded`), or a mime type with a wildcard (like `*/x-www-form-urlencoded`). If a function, the `type` option is called as `fn(req)` and the request is parsed if it returns a truthy value.</Param>
-    <Param name="verify" type="Function" default="undefined">This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing can be aborted by throwing an error.</Param>
-    <Param name="depth" type="Number" default="32" since="v4.20.0">Configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible.</Param>
+    <Param name="extended" type="Boolean" default="true">
+      This option allows to choose between parsing the URL-encoded data with the `querystring`
+      library (when `false`) or the `qs` library (when `true`). The "extended" syntax allows for
+      rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like
+      experience with URL-encoded. For more information, please [see the qs
+      library](https://www.npmjs.com/package/qs#readme).
+    </Param>
+    <Param name="inflate" type="Boolean" default="true">
+      Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are
+      rejected.
+    </Param>
+    <Param name="limit" type="Number | String" default='"100kb"'>
+      Controls the maximum request body size. If this is a number, then the value specifies the
+      number of bytes; if it is a string, the value is passed to the
+      [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+    </Param>
+    <Param name="parameterLimit" type="Number" default="1000">
+      This option controls the maximum number of parameters that are allowed in the URL-encoded
+      data. If a request contains more parameters than this value, an error will be raised.
+    </Param>
+    <Param
+      name="type"
+      type="String | String[] | Function"
+      default='"application/x-www-form-urlencoded"'
+    >
+      This is used to determine what media type the middleware will parse. This option can be a
+      string, array of strings, or a function. If not a function, `type` option is passed directly
+      to the [type-is](https://www.npmjs.com/package/type-is#readme) library and this can be an
+      extension name (like `urlencoded`), a mime type (like `application/x-www-form-urlencoded`), or
+      a mime type with a wildcard (like `*/x-www-form-urlencoded`). If a function, the `type` option
+      is called as `fn(req)` and the request is parsed if it returns a truthy value.
+    </Param>
+    <Param name="verify" type="Function" default="undefined">
+      This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a
+      `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing
+      can be aborted by throwing an error.
+    </Param>
+    <Param name="depth" type="Number" default="32" since="v4.20.0">
+      Configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to
+      limit the amount of keys that are parsed and can be useful to prevent certain types of abuse.
+      Defaults to `32`. It is recommended to keep this value as low as possible.
+    </Param>
   </Fragment>
 </Signature>
 

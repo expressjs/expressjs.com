@@ -44,7 +44,9 @@ const hasFooter = Boolean(type) || hasReturns || Boolean(since);
     hasAttributes && (
       <div class="signature__attributes">
         <h4 class="signature__attributes-title">{attributesTitle}</h4>
-        <slot name="attributes" />
+        <div class="signature__params">
+          <slot name="attributes" />
+        </div>
       </div>
     )
   }

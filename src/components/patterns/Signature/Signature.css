@@ -69,49 +69,88 @@
   }
 
   /* ============================================
-     Param — a row inside the box
+     Params — one shared two-column grid so the
+     names and descriptions line up across every
+     row, like a single table inside the box:
+     the name on the left, the type / default /
+     description on the right.
      ============================================ */
-  .param {
-    padding: var(--space-3) var(--space-4);
+  .signature__params {
+    display: grid;
+    grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
   }
 
-  .param + .param {
+  /* Each Param spreads its two cells straight into the shared grid. */
+  .param {
+    display: contents;
+  }
+
+  .param__head,
+  .param__body {
+    padding: var(--space-3) var(--space-4);
     border-top: var(--border-width-1) solid var(--color-border-secondary);
+  }
+
+  /* No divider above the first row. */
+  .param:first-child > .param__head,
+  .param:first-child > .param__body {
+    border-top: 0;
+  }
+
+  /* Stack the name over the description on narrow viewports. */
+  @media (max-width: 40rem) {
+    .signature__params {
+      display: block;
+    }
+
+    .param {
+      display: block;
+      border-top: var(--border-width-1) solid var(--color-border-secondary);
+    }
+
+    .param:first-child {
+      border-top: 0;
+    }
+
+    .param__head,
+    .param__body {
+      border-top: 0;
+    }
+
+    .param__head {
+      padding-bottom: var(--space-2);
+    }
+
+    .param__body {
+      padding-top: 0;
+    }
   }
 
   .param__head {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-3);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
   }
 
   .param__name {
+    display: inline-block;
     color: var(--color-text-primary);
     font-family: var(--font-family-mono);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
+    /* Let long option names wrap inside the name column instead of overflowing. */
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
-  .param__flag {
-    padding: 0 var(--space-2);
-    border-radius: var(--radius-full);
-    background-color: light-dark(var(--amber-100), var(--amber-900));
-    color: light-dark(var(--amber-800), var(--amber-200));
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  /* Meta: labelled "Type:" / "Default:" / "Added in:" pairs, one per line
-     (label inline with its value). */
+  /* Meta: labelled "Type:" / "Default:" / "Added in:" pairs, flowing inline
+     at the top of the description column (wrapping when there is no room). */
   .param__meta {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
-    margin-top: var(--space-2);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
   }
 
   .param__meta-item {
@@ -132,7 +171,6 @@
   }
 
   .param__desc {
-    margin-top: var(--space-5);
     color: var(--color-text-secondary);
 
     /* Collapse the outer margins of content rendered from the MDX slot. */
@@ -143,5 +181,20 @@
     & > :last-child {
       margin-bottom: 0;
     }
+  }
+
+  /* Space the description from the meta row only when both are present. */
+  .param__meta + .param__desc {
+    margin-top: var(--space-3);
+  }
+
+  /* An object's properties: the same two-column grid, wrapped in its own
+     complete border so it is clear they belong to the param above and are not
+     top-level arguments. */
+  .param__children {
+    margin-top: var(--space-3);
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
   }
 }
