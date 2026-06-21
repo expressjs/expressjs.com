@@ -113,9 +113,7 @@ test('preserves other meta tokens while stripping tab="..."', () => {
 });
 
 test('preserves a title="..." filename on cjs/mjs panels while normalizing lang', () => {
-  const tabs = findTabs(
-    run([code('cjs', 'title="index.cjs"'), code('mjs', 'title="index.mjs"')])
-  );
+  const tabs = findTabs(run([code('cjs', 'title="index.cjs"'), code('mjs', 'title="index.mjs"')]));
   assert.deepEqual(panelLangs(tabs), ['js', 'js']);
   assert.equal(tabs.children[0].children[0].meta, 'title="index.cjs"');
   assert.equal(tabs.children[1].children[0].meta, 'title="index.mjs"');

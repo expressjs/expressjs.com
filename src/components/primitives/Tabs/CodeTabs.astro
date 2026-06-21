@@ -41,9 +41,7 @@ const items = tabs
   const STORAGE_KEY = 'expressjs:code-variant';
 
   function activateByLabel(group: HTMLElement, label: string): boolean {
-    const buttons = Array.from(
-      group.querySelectorAll<HTMLButtonElement>('.tabs [role="tab"]')
-    );
+    const buttons = Array.from(group.querySelectorAll<HTMLButtonElement>('.tabs [role="tab"]'));
     const target = buttons.find((b) => b.textContent?.trim() === label);
     if (!target) return false;
 
@@ -86,9 +84,7 @@ const items = tabs
     groups.forEach((group) => {
       group.addEventListener('tabs-change', (e) => {
         const value = (e as CustomEvent).detail.value as string;
-        const button = group.querySelector<HTMLElement>(
-          `.tabs [data-tabs-value="${value}"]`
-        );
+        const button = group.querySelector<HTMLElement>(`.tabs [data-tabs-value="${value}"]`);
         const label = button?.textContent?.trim();
         if (!label) return;
 
