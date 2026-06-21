@@ -1,0 +1,111 @@
+---
+/**
+ * CodeTabs Component
+ *
+ * Shows the same snippet in several variants (e.g. CommonJS / ESM) behind a
+ * tab strip. Authored indirectly via fenced code blocks tagged with
+ * `tab="<label>"`; the `remark-code-tabs` plugin groups them and renders this
+ * component, passing the labels as a comma-separated `tabs` string and the code
+ * blocks as `code-tabs__panel` divs (all but the first hidden) in the default
+ * slot.
+ *
+ * Selecting a variant syncs every CodeTabs group on the page (matched by label)
+ * and persists the choice in localStorage, so a reader who picks ESM once sees
+ * ESM everywhere on subsequent visits.
+ *
+ * Reuses the `Tabs` primitive for the strip (keyboard nav + `tabs-change`).
+ *
+ * @see ../../../plugins/remark-code-tabs.mjs
+ */
+import Tabs from './Tabs.astro';
+import './CodeTabs.css';
+
+interface Props {
+  tabs: string;
+}
+
+const { tabs } = Astro.props;
+const items = tabs
+  .split(',')
+  .map((label) => label.trim())
+  .filter(Boolean)
+  .map((label, i) => ({ label, value: `t${i}` }));
+---
+
+<div class="code-tabs">
+  <Tabs tabs={items} />
+  <slot />
+</div>
+
+<script>
+  const STORAGE_KEY = 'expressjs:code-variant';
+
+  function activateByLabel(group: HTMLElement, label: string): boolean {
+    const buttons = Array.from(
+      group.querySelectorAll<HTMLButtonElement>('.tabs [role="tab"]')
+    );
+    const target = buttons.find((b) => b.textContent?.trim() === label);
+    if (!target) return false;
+
+    const value = target.dataset.tabsValue;
+    buttons.forEach((b) => {
+      const active = b === target;
+      b.setAttribute('aria-selected', String(active));
+      b.setAttribute('tabindex', active ? '0' : '-1');
+      b.classList.toggle('tabs__tab--active', active);
+    });
+    group.querySelectorAll<HTMLElement>('[data-tabs-panel]').forEach((panel) => {
+      panel.hidden = panel.dataset.tabsPanel !== value;
+    });
+    return true;
+  }
+
+  function syncAll(label: string, except?: HTMLElement) {
+    document.querySelectorAll<HTMLElement>('.code-tabs').forEach((group) => {
+      if (group !== except) activateByLabel(group, label);
+    });
+  }
+
+  function initCodeTabs() {
+    const groups = document.querySelectorAll<HTMLElement>('.code-tabs');
+    if (!groups.length) return;
+
+    // Apply a previously persisted choice on load.
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      // localStorage unavailable (private mode, etc.) — ignore.
+    }
+    if (saved) {
+      groups.forEach((group) => activateByLabel(group, saved));
+    }
+
+    // The Tabs primitive already updates the originating strip and emits
+    // `tabs-change`; we only need to drive panels + cross-group sync here.
+    groups.forEach((group) => {
+      group.addEventListener('tabs-change', (e) => {
+        const value = (e as CustomEvent).detail.value as string;
+        const button = group.querySelector<HTMLElement>(
+          `.tabs [data-tabs-value="${value}"]`
+        );
+        const label = button?.textContent?.trim();
+        if (!label) return;
+
+        group.querySelectorAll<HTMLElement>('[data-tabs-panel]').forEach((panel) => {
+          panel.hidden = panel.dataset.tabsPanel !== value;
+        });
+        syncAll(label, group);
+
+        try {
+          localStorage.setItem(STORAGE_KEY, label);
+        } catch {
+          // ignore
+        }
+      });
+    });
+  }
+
+  initCodeTabs();
+  document.addEventListener('astro:page-load', initCodeTabs);
+</script>
