@@ -44,7 +44,7 @@ The Express application object can be referred from the [request object](/api/re
 <Signature type="Object" />
 
 The `app.locals` object has properties that are local variables within the application,
-and will be available in templates rendered with [res.render](/api/response/#resrenderview--locals--callback).
+and will be available in templates rendered with [res.render](/api/response/#resrender).
 
 <Alert type="warning">
 
@@ -881,7 +881,7 @@ app.put('/', (req, res) => {
 </Signature>
 
 Returns the rendered HTML of a view via the `callback` function. It accepts an optional parameter
-that is an object containing local variables for the view. It is like [res.render()](/api/response/#resrenderview--locals--callback),
+that is an object containing local variables for the view. It is like [res.render()](/api/response/#resrender),
 except it cannot send the rendered view to the client on its own.
 
 <Alert type="info">

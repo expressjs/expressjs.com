@@ -4,6 +4,8 @@ description: The res object represents the HTTP response that an Express app sen
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import Signature from '@components/patterns/Signature/Signature.astro';
+import Param from '@components/patterns/Signature/Param.astro';
 
 The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
 
@@ -34,11 +36,15 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 
 ### res.app
 
+<Signature type="Application" />
+
 This property holds a reference to the instance of the Express application that is using the middleware.
 
 `res.app` is identical to the [req.app](/api/request/#reqapp) property in the request object.
 
 ### res.headersSent
+
+<Signature type="Boolean" />
 
 Boolean property that indicates if the app sent HTTP headers for the response.
 
@@ -52,7 +58,9 @@ app.get('/', function (req, res) {
 
 ### res.locals
 
-Use this property to set variables accessible in templates rendered with [res.render](#resrenderview--locals--callback).
+<Signature type="Object" />
+
+Use this property to set variables accessible in templates rendered with [res.render](#resrender).
 The variables set on `res.locals` are available within a single request-response cycle, and will not
 be shared between requests.
 
@@ -82,12 +90,25 @@ app.use(function (req, res, next) {
 
 ### res.req
 
+<Signature type="Request" />
+
 This property holds a reference to the [request object](/api/request/)
 that relates to this response object.
 
 ## Methods
 
-### res.append(field [, value])
+### res.append()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The name of the HTTP response header to append to.
+    </Param>
+    <Param name="value" type="String | String[]" optional>
+      The value(s) to append to the header.
+    </Param>
+  </Fragment>
+</Signature>
 
 <Alert type="info">`res.append()` is supported by Express v4.11.0+</Alert>
 Appends the specified `value` to the HTTP response header `field`. If the header is not already set,
@@ -105,7 +126,16 @@ res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
 res.append('Warning', '199 Miscellaneous warning');
 ```
 
-### res.attachment([filename])
+### res.attachment()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="filename" type="String" optional>
+      The file name used to set the `Content-Disposition` "filename=" parameter and the
+      `Content-Type` (from its extension).
+    </Param>
+  </Fragment>
+</Signature>
 
 Sets the HTTP response `Content-Disposition` header field to "attachment". If a `filename` is given,
 then it sets the Content-Type based on the extension name via `res.type()`,
@@ -120,11 +150,23 @@ res.attachment('path/to/logo.png');
 // Content-Type: image/png
 ```
 
-### res.clearCookie(name [, options])
+### res.clearCookie()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="name" type="String">
+      The name of the cookie to clear.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Cookie options, which should match those given to [res.cookie()](#rescookie) (excluding
+      `expires` and `maxAge`).
+    </Param>
+  </Fragment>
+</Signature>
 
 Clears the cookie with the specified `name` by sending a `Set-Cookie` header that sets its expiration date in the past.
 This instructs the client that the cookie has expired and is no longer valid. For more information
-about available `options`, see [res.cookie()](#rescookiename-value--options).
+about available `options`, see [res.cookie()](#rescookie).
 
 <Alert type="warning">
 
@@ -138,7 +180,7 @@ Express v4.20.0.
 <Alert type="alert">
 
 Web browsers and other compliant clients will only clear the cookie if the given `options` is
-identical to those given to [res.cookie()](#rescookiename-value--options), excluding `expires` and `maxAge`.
+identical to those given to [res.cookie()](#rescookie), excluding `expires` and `maxAge`.
 
 </Alert>
 
@@ -147,29 +189,60 @@ res.cookie('name', 'tobi', { path: '/admin' });
 res.clearCookie('name', { path: '/admin' });
 ```
 
-### res.cookie(name, value [, options])
+### res.cookie()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="name" type="String">
+      The name of the cookie.
+    </Param>
+    <Param name="value" type="String | Object">
+      The cookie value; an object is serialized as JSON.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options for the `Set-Cookie` header.
+
+      <Fragment slot="properties">
+        <Param name="domain" type="String">
+          Domain name for the cookie. Defaults to the domain name of the app.
+        </Param>
+        <Param name="encode" type="Function">
+          A synchronous function used for cookie value encoding. Defaults to `encodeURIComponent`.
+        </Param>
+        <Param name="expires" type="Date">
+          Expiry date of the cookie in GMT. If not specified or set to `0`, creates a session cookie.
+        </Param>
+        <Param name="httpOnly" type="Boolean">
+          Flags the cookie to be accessible only by the web server.
+        </Param>
+        <Param name="maxAge" type="Number">
+          Convenient option for setting the expiry time relative to the current time in milliseconds.
+        </Param>
+        <Param name="path" type="String" default='"/"'>
+          Path for the cookie. Defaults to "/".
+        </Param>
+        <Param name="partitioned" type="Boolean">
+          Indicates that the cookie should be stored using partitioned storage. See [CHIPS](https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Third-party_cookies/Partitioned_cookies) for more details.
+        </Param>
+        <Param name="priority" type="String">
+          Value of the "Priority" **Set-Cookie** attribute.
+        </Param>
+        <Param name="secure" type="Boolean">
+          Marks the cookie to be used with HTTPS only.
+        </Param>
+        <Param name="signed" type="Boolean">
+          Indicates if the cookie should be signed.
+        </Param>
+        <Param name="sameSite" type="Boolean | String">
+          Value of the "SameSite" **Set-Cookie** attribute.
+        </Param>
+      </Fragment>
+    </Param>
+
+  </Fragment>
+</Signature>
 
 Sets cookie `name` to `value`. The `value` parameter may be a string or object converted to JSON.
-
-The `options` parameter is an object that can have the following properties.
-
-<div class="table-scroller" markdown="1">
-
-| Property      | Type              | Description                                                                                                                                                                                                                                             |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `domain`      | String            | Domain name for the cookie. Defaults to the domain name of the app.                                                                                                                                                                                     |
-| `encode`      | Function          | A synchronous function used for cookie value encoding. Defaults to `encodeURIComponent`.                                                                                                                                                                |
-| `expires`     | Date              | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.                                                                                                                                                               |
-| `httpOnly`    | Boolean           | Flags the cookie to be accessible only by the web server.                                                                                                                                                                                               |
-| `maxAge`      | Number            | Convenient option for setting the expiry time relative to the current time in milliseconds.                                                                                                                                                             |
-| `path`        | String            | Path for the cookie. Defaults to "/".                                                                                                                                                                                                                   |
-| `partitioned` | Boolean           | Indicates that the cookie should be stored using partitioned storage. See [Cookies Having Independent Partitioned State (CHIPS)](https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Third-party_cookies/Partitioned_cookies) for more details. |
-| `priority`    | String            | Value of the "Priority" **Set-Cookie** attribute.                                                                                                                                                                                                       |
-| `secure`      | Boolean           | Marks the cookie to be used with HTTPS only.                                                                                                                                                                                                            |
-| `signed`      | Boolean           | Indicates if the cookie should be signed.                                                                                                                                                                                                               |
-| `sameSite`    | Boolean or String | Value of the "SameSite" **Set-Cookie** attribute. More information at [https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00#section-4.1.1](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00#section-4.1.1).             |
-
-</div>
 
 <Alert type="alert">
 
@@ -240,7 +313,52 @@ res.cookie('name', 'tobi', { signed: true });
 
 Later you may access this value through the [req.signedCookie](/api/request/#reqsignedcookies) object.
 
-### res.download(path [, filename] [, options] [, fn])
+### res.download()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The path to the file to transfer. If relative, it is resolved against the current working directory or the `root` option.
+    </Param>
+    <Param name="filename" type="String" optional>
+      The file name for the `Content-Disposition` "filename=" parameter; overrides the name derived from `path`.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options forwarded to [res.sendFile()](#ressendfile).
+
+      <Fragment slot="properties">
+        <Param name="maxAge" type="Number | String" default="0">
+          Sets the max-age property of the `Cache-Control` header in milliseconds, or a string in [ms format](https://www.npmjs.com/package/ms).
+        </Param>
+        <Param name="root" type="String">
+          Root directory for relative file names.
+        </Param>
+        <Param name="lastModified" type="Boolean" default="true">
+          Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
+        </Param>
+        <Param name="headers" type="Object">
+          Object containing HTTP headers to serve with the file.
+        </Param>
+        <Param name="dotfiles" type="String" default='"ignore"'>
+          Option for serving dotfiles. Possible values are `"allow"`, `"deny"`, and `"ignore"`.
+        </Param>
+        <Param name="acceptRanges" type="Boolean" default="true">
+          Enable or disable accepting ranged requests.
+        </Param>
+        <Param name="cacheControl" type="Boolean" default="true">
+          Enable or disable setting the `Cache-Control` response header.
+        </Param>
+        <Param name="immutable" type="Boolean" default="false">
+          Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching.
+        </Param>
+      </Fragment>
+    </Param>
+    <Param name="fn" type="Function" optional>
+      Callback `fn(err)` invoked when the transfer completes or an error occurs.
+    </Param>
+
+  </Fragment>
+</Signature>
 
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
 By default, the `Content-Disposition` header "filename=" parameter is derived from the `path` argument, but can be overridden with the `filename` parameter.
@@ -257,24 +375,7 @@ When the `root` option is provided, Express will validate that the relative path
 
 </Alert>
 
-The following table provides details on the `options` parameter.
-
 <Alert type="info">The optional `options` argument is supported by Express v4.16.0 onwards.</Alert>
-
-<div class="table-scroller" markdown="1">
-
-| Property       | Description                                                                                                                                                                                                                                                                                                                        | Default  | Availability |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
-| `maxAge`       | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.com/package/ms)                                                                                                                                                                                               | 0        | 4.16+        |
-| `root`         | Root directory for relative filenames.                                                                                                                                                                                                                                                                                             |          | 4.18+        |
-| `lastModified` | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.                                                                                                                                                                                                                        | Enabled  | 4.16+        |
-| `headers`      | Object containing HTTP headers to serve with the file. The header `Content-Disposition` will be overridden by the `filename` argument.                                                                                                                                                                                             |          | 4.16+        |
-| `dotfiles`     | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".                                                                                                                                                                                                                                                        | "ignore" | 4.16+        |
-| `acceptRanges` | Enable or disable accepting ranged requests.                                                                                                                                                                                                                                                                                       | `true`   | 4.16+        |
-| `cacheControl` | Enable or disable setting `Cache-Control` response header.                                                                                                                                                                                                                                                                         | `true`   | 4.16+        |
-| `immutable`    | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false`  | 4.16+        |
-
-</div>
 
 The method invokes the callback function `fn(err)` when the transfer is complete
 or when an error occurs. If the callback function is specified and an error occurs,
@@ -296,18 +397,41 @@ res.download('/report-12345.pdf', 'report.pdf', function (err) {
 });
 ```
 
-### res.end([data[, encoding]][, callback])
+### res.end()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="data" type="String | Buffer" optional>
+      Data to write before ending the response.
+    </Param>
+    <Param name="encoding" type="String" optional>
+      The encoding for `data` when it is a string.
+    </Param>
+    <Param name="callback" type="Function" optional>
+      Called once the response has finished.
+    </Param>
+  </Fragment>
+</Signature>
 
 Ends the response process. This method actually comes from Node core, specifically the [response.end() method of http.ServerResponse](https://nodejs.org/api/http.html#responseenddata-encoding-callback).
 
-Use to quickly end the response without any data. If you need to respond with data, instead use methods such as [res.send()](#ressendbody) and [res.json()](#resjsonbody).
+Use to quickly end the response without any data. If you need to respond with data, instead use methods such as [res.send()](#ressend) and [res.json()](#resjson).
 
 ```js
 res.end();
 res.status(404).end();
 ```
 
-### res.format(object)
+### res.format()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="object" type="Object">
+      An object whose keys are MIME types (or extension names) mapped to handler functions,
+      optionally with a `default` handler.
+    </Param>
+  </Fragment>
+</Signature>
 
 Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
 It uses [req.accepts()](/api/request/#reqaccepts) to select a handler for the request, based on the acceptable
@@ -360,7 +484,15 @@ res.format({
 });
 ```
 
-### res.get(field)
+### res.get()
+
+<Signature returns="String">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The name of the response header to read (case-insensitive).
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns the HTTP response header specified by `field`.
 The match is case-insensitive.
@@ -370,7 +502,16 @@ res.get('Content-Type');
 // => "text/plain"
 ```
 
-### res.json([body])
+### res.json()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="body" type="any" optional>
+      The value to send as JSON. Can be any JSON type: object, array, string, Boolean, number, or
+      null.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a
 JSON string using [JSON.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
@@ -384,7 +525,15 @@ res.json({ user: 'tobi' });
 res.status(500).json({ error: 'message' });
 ```
 
-### res.jsonp([body])
+### res.jsonp()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="body" type="any" optional>
+      The value to send as a JSONP response. Can be any JSON type.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sends a JSON response with JSONP support. This method is identical to `res.json()`,
 except that it opts-in to JSONP callback support.
@@ -418,7 +567,15 @@ res.status(500).jsonp({ error: 'message' });
 // => foo({ "error": "message" })
 ```
 
-### res.links(links)
+### res.links()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="links" type="Record<String, String>">
+      An object whose properties (such as `next` and `last`) populate the `Link` response header.
+    </Param>
+  </Fragment>
+</Signature>
 
 Joins the `links` provided as properties of the parameter to populate the response's
 `Link` HTTP header field.
@@ -439,7 +596,15 @@ Link: <http://api.example.com/users?page=2>; rel="next",
       <http://api.example.com/users?page=5>; rel="last"
 ```
 
-### res.location(path)
+### res.location()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The URL to set in the `Location` header.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sets the response `Location` HTTP header to the specified `path` parameter.
 
@@ -469,7 +634,18 @@ or the referring URL, and the URL specified in the `Location` header; and redire
 
 </Alert>
 
-### res.redirect([status,] path)
+### res.redirect()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="status" type="Number" optional>
+      The HTTP status code to use. Defaults to `302` (Found).
+    </Param>
+    <Param name="path" type="String">
+      The URL to redirect to.
+    </Param>
+  </Fragment>
+</Signature>
 
 Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer
 that corresponds to an [HTTP status code](https://www.rfc-editor.org/rfc/rfc9110#name-status-codes) .
@@ -534,7 +710,21 @@ res.redirect('back');
 See also [Security best practices: Prevent open redirect
 vulnerabilities](/advanced/best-practice-security/#prevent-open-redirects).
 
-### res.render(view [, locals] [, callback])
+### res.render()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="view" type="String">
+      The file path of the view to render (absolute or relative to the `views` setting).
+    </Param>
+    <Param name="locals" type="Object" optional>
+      An object whose properties define local variables for the view.
+    </Param>
+    <Param name="callback" type="Function" optional>
+      Called as `callback(err, html)`. When provided, the rendered HTML is not sent automatically.
+    </Param>
+  </Fragment>
+</Signature>
 
 Renders a `view` and sends the rendered HTML string to the client.
 Optional parameters:
@@ -584,7 +774,15 @@ res.render('user', { name: 'Tobi' }, function (err, html) {
 });
 ```
 
-### res.send([body])
+### res.send()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="body" type="String | Buffer | Object | Array | Boolean" optional>
+      The response body. Strings are sent as HTML; objects and arrays as JSON; Buffers as binary.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sends the HTTP response.
 
@@ -624,7 +822,49 @@ res.send({ user: 'tobi' });
 res.send([1, 2, 3]);
 ```
 
-### res.sendFile(path [, options] [, fn])
+### res.sendFile()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The path to the file to transfer. Must be absolute unless the `root` option is set.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options for serving the file.
+
+      <Fragment slot="properties">
+        <Param name="maxAge" type="Number | String" default="0">
+          Sets the max-age property of the `Cache-Control` header in milliseconds, or a string in [ms format](https://www.npmjs.com/package/ms).
+        </Param>
+        <Param name="root" type="String">
+          Root directory for relative file names.
+        </Param>
+        <Param name="lastModified" type="Boolean" default="true">
+          Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
+        </Param>
+        <Param name="headers" type="Object">
+          Object containing HTTP headers to serve with the file.
+        </Param>
+        <Param name="dotfiles" type="String" default='"ignore"'>
+          Option for serving dotfiles. Possible values are `"allow"`, `"deny"`, and `"ignore"`.
+        </Param>
+        <Param name="acceptRanges" type="Boolean" default="true">
+          Enable or disable accepting ranged requests.
+        </Param>
+        <Param name="cacheControl" type="Boolean" default="true">
+          Enable or disable setting the `Cache-Control` response header.
+        </Param>
+        <Param name="immutable" type="Boolean" default="false">
+          Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching.
+        </Param>
+      </Fragment>
+    </Param>
+    <Param name="fn" type="Function" optional>
+      Callback `fn(err)` invoked when the transfer completes or an error occurs.
+    </Param>
+
+  </Fragment>
+</Signature>
 
 <Alert type="info">`res.sendFile()` is supported by Express v4.8.0 onwards.</Alert>
 
@@ -642,23 +882,6 @@ including containing `..`. Express will validate that the relative path provided
 resolve within the given `root` option.
 
 </Alert>
-
-The following table provides details on the `options` parameter.
-
-<div class="table-scroller" markdown="1">
-
-| Property       | Description                                                                                                                                                                                                                                                                                                                        | Default  | Availability |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
-| `maxAge`       | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.com/package/ms)                                                                                                                                                                                               | 0        |              |
-| `root`         | Root directory for relative filenames.                                                                                                                                                                                                                                                                                             |          |              |
-| `lastModified` | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.                                                                                                                                                                                                                        | Enabled  | 4.9.0+       |
-| `headers`      | Object containing HTTP headers to serve with the file.                                                                                                                                                                                                                                                                             |          |              |
-| `dotfiles`     | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".                                                                                                                                                                                                                                                        | "ignore" | &nbsp;       |
-| `acceptRanges` | Enable or disable accepting ranged requests.                                                                                                                                                                                                                                                                                       | `true`   | 4.14+        |
-| `cacheControl` | Enable or disable setting `Cache-Control` response header.                                                                                                                                                                                                                                                                         | `true`   | 4.14+        |
-| `immutable`    | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false`  | 4.16+        |
-
-</div>
 
 The method invokes the callback function `fn(err)` when the transfer is complete
 or when an error occurs. If the callback function is specified and an error occurs,
@@ -709,7 +932,15 @@ app.get('/user/:uid/photos/:file', function (req, res) {
 
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).
 
-### res.sendStatus(statusCode)
+### res.sendStatus()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="statusCode" type="Number">
+      The HTTP status code to set; its registered status message becomes the response body.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sets the response HTTP status code to `statusCode` and sends the registered status message as the text response body. If an unknown status code is specified, the response body will just be the code number.
 
@@ -727,7 +958,18 @@ version being used.
 
 [More about HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 
-### res.set(field [, value])
+### res.set()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="field" type="String | Object">
+      The header name, or an object of header name/value pairs to set multiple headers at once.
+    </Param>
+    <Param name="value" type="String | String[]" optional>
+      The header value (when `field` is a string).
+    </Param>
+  </Fragment>
+</Signature>
 
 Sets the response's HTTP header `field` to `value`.
 To set multiple fields at once, pass an object as the parameter.
@@ -744,7 +986,15 @@ res.set({
 
 Aliased as `res.header(field [, value])`.
 
-### res.status(code)
+### res.status()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="code" type="Number">
+      The HTTP status code for the response.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sets the HTTP status for the response.
 It is a chainable alias of Node's [response.statusCode](https://nodejs.org/api/http.html#http_response_statuscode).
@@ -755,7 +1005,16 @@ res.status(400).send('Bad Request');
 res.status(404).sendFile('/absolute/path/to/404.png');
 ```
 
-### res.type(type)
+### res.type()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="type" type="String">
+      The MIME type, or a file extension that is looked up to a MIME type. If it contains `/`, it is
+      used as-is.
+    </Param>
+  </Fragment>
+</Signature>
 
 Sets the `Content-Type` HTTP header to the MIME type as determined by the specified `type`. If `type` contains the "/" character, then it sets the `Content-Type` to the exact value of `type`, otherwise it is assumed to be a file extension and the MIME type is looked up in a mapping using the `express.static.mime.lookup()` method.
 
@@ -774,7 +1033,15 @@ res.type('png');
 
 Aliased as `res.contentType(type)`.
 
-### res.vary(field)
+### res.vary()
+
+<Signature returns="Response">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The header field name to add to the `Vary` response header.
+    </Param>
+  </Fragment>
+</Signature>
 
 Adds the field to the `Vary` response header, if it is not there already.
 
