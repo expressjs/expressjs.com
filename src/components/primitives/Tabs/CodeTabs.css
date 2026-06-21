@@ -1,18 +1,16 @@
 @layer primitives {
   .code-tabs {
     margin: var(--space-8) 0;
-    border: var(--border-width-1) solid var(--color-border-primary);
+    border: var(--border-width-1) solid var(--color-border-secondary);
     border-radius: var(--radius-base);
     overflow: hidden;
   }
 
-  /* Header tab strip — underline tabs like PackageManagerCommand, but attached
-     directly to the code (no gap) and acting as the card's header row. */
   .code-tabs .tabs {
     margin: 0;
     gap: var(--space-1);
     padding: 0 var(--space-2);
-    border-bottom: var(--border-width-1) solid var(--color-border-primary);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
   }
 
   .code-tabs .tabs__tab {
@@ -20,13 +18,12 @@
     border: 0;
     border-radius: 0;
     border-bottom: var(--border-width-2) solid transparent;
-    /* Pull the active underline down onto the strip's bottom border. */
     margin-bottom: calc(-1 * var(--border-width-1));
     background-color: transparent;
     color: var(--color-text-secondary);
 
     &:hover:not(.tabs__tab--active) {
-      background-color: transparent;
+      background-color: var(--color-bg-secondary);
       color: var(--color-text-primary);
     }
   }
@@ -46,11 +43,6 @@
   }
 }
 
-/* Expressive Code draws its own border, radius and vertical margin on the
-   frame. Flatten them so the outer `.code-tabs` card provides the single border
-   and the code sits flush under the tab strip. These rules sit OUTSIDE @layer
-   and use doubled-class specificity to beat expressive-code's unlayered styles,
-   matching the convention in src/styles/base/_expressive-code.css. */
 .code-tabs .expressive-code.expressive-code {
   margin: 0;
 }

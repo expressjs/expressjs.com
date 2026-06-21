@@ -3,13 +3,30 @@
  * `tab="<label>"` meta into a single `<CodeTabs>` element, so the same snippet
  * can be shown in multiple variants (e.g. CommonJS / ESM) behind a tab strip.
  *
- * Authoring:
+ * Authoring — tag blocks explicitly with `tab="..."`:
  *
  *   ```js tab="CommonJS"
  *   const express = require('express')
  *   ```
  *
  *   ```js tab="ESM"
+ *   import express from 'express'
+ *   ```
+ *
+ * …or use `cjs` / `mjs` / `ts` fences. A run that includes `cjs`/`mjs` becomes a
+ * CommonJS / ESM / TypeScript tab strip (`cjs`/`mjs` are rewritten to `js` for
+ * highlighting). `ts` only joins such a run — on its own it never groups, so
+ * unrelated TypeScript snippets stay separate:
+ *
+ *   ```cjs
+ *   const express = require('express')
+ *   ```
+ *
+ *   ```mjs
+ *   import express from 'express'
+ *   ```
+ *
+ *   ```ts
  *   import express from 'express'
  *   ```
  *
@@ -28,8 +45,52 @@
  */
 
 const TAB_RE = /\btab="([^"]+)"/;
+// Fence languages that imply a tab label on their own, so these dialect fences
+// group into tabs without an explicit `tab="..."` meta. Each maps to a tab
+// label plus the language expressive-code should actually highlight as.
+const LANG_TABS = {
+  cjs: { label: 'CommonJS', lang: 'js' },
+  mjs: { label: 'ESM', lang: 'js' },
+  ts: { label: 'TypeScript', lang: 'ts' },
+};
+// Langs that, on their own, justify forming a tab group. `ts` is a normal
+// standalone language too, so it only joins a group led by one of these (or a
+// `tab="..."` block) — that way two unrelated `ts` snippets never merge.
+const TRIGGER_LANGS = new Set(['cjs', 'mjs']);
 const COMPONENT_NAME = 'CodeTabs';
 const COMPONENT_SOURCE = '@components/primitives/Tabs/CodeTabs.astro';
+
+/** A code block's tab label, from a `tab="..."` meta or a dialect lang. */
+function tabLabelOf(node) {
+  const match = (node.meta || '').match(TAB_RE);
+  if (match) return match[1];
+  return LANG_TABS[node.lang]?.label ?? null;
+}
+
+function isTabBlock(node) {
+  return node?.type === 'code' && tabLabelOf(node) !== null;
+}
+
+/** A block that, on its own, justifies grouping a run into tabs. */
+function isTrigger(node) {
+  return node?.type === 'code' && (TAB_RE.test(node.meta || '') || TRIGGER_LANGS.has(node.lang));
+}
+
+/**
+ * Returns the tab label and normalizes the node so expressive-code sees a plain
+ * block: strips the `tab="..."` meta, and rewrites `cjs`/`mjs` to `js` for
+ * highlighting.
+ */
+function consumeTabBlock(node) {
+  const meta = node.meta || '';
+  if (TAB_RE.test(meta)) {
+    node.meta = meta.replace(TAB_RE, '').trim() || null;
+    return meta.match(TAB_RE)[1];
+  }
+  const { label, lang } = LANG_TABS[node.lang];
+  node.lang = lang;
+  return label;
+}
 
 /** Builds a plain string (or boolean) MDX JSX attribute. */
 function jsxAttr(name, value) {
@@ -99,32 +160,28 @@ function groupChildren(children) {
   let grouped = false;
 
   for (let i = 0; i < children.length; i++) {
-    const node = children[i];
-    if (node.type !== 'code' || !TAB_RE.test(node.meta || '')) continue;
+    if (!isTabBlock(children[i])) continue;
 
-    // Collect the contiguous run of `code` blocks carrying a `tab="..."` meta.
+    // Collect the contiguous run of tab-tagged `code` blocks (`tab="..."` or cjs/mjs).
     const run = [];
     let j = i;
-    while (children[j]?.type === 'code' && TAB_RE.test(children[j].meta || '')) {
+    while (isTabBlock(children[j])) {
       run.push(children[j]);
       j++;
     }
 
-    // A lone tagged block is not a tab group; just clean its meta and move on.
-    if (run.length < 2) {
-      node.meta = (node.meta || '').replace(TAB_RE, '').trim() || null;
-      continue;
+    // Only a run of 2+ blocks with an unambiguous trigger (cjs/mjs or `tab="..."`)
+    // becomes tabs. A run of only `ts` blocks is left alone so unrelated
+    // TypeScript snippets never merge.
+    if (run.length >= 2 && run.some(isTrigger)) {
+      const labels = run.map(consumeTabBlock);
+      children.splice(i, run.length, buildCodeTabs(labels, run));
+      grouped = true;
+      // `i` now points at the new wrapper; the loop's i++ skips past it.
+    } else {
+      run.forEach(consumeTabBlock);
+      i = j - 1; // skip past the whole run
     }
-
-    const labels = run.map((code) => {
-      const label = code.meta.match(TAB_RE)[1];
-      code.meta = code.meta.replace(TAB_RE, '').trim() || null;
-      return label;
-    });
-
-    children.splice(i, run.length, buildCodeTabs(labels, run));
-    grouped = true;
-    // `i` now points at the new wrapper; the loop's i++ skips past it.
   }
 
   return grouped;
