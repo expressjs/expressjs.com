@@ -178,10 +178,10 @@ function fn(req, res, next) {
   next('router');
 }
 router.get('/foo', fn, (req, res, next) => {
-  console.log('I dont come here');
+  console.log("I don't come here");
 });
 router.get('/foo', (req, res, next) => {
-  console.log('I dont come here');
+  console.log("I don't come here");
 });
 app.get('/foo', (req, res) => {
   console.log(' I come here too');

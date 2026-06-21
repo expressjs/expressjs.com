@@ -9,7 +9,7 @@
     }
   ],
   "dictionaries": ["project-words"],
-  "ignoreRegExpList": ["/@[-\\w]+/g", "/GHSA-[a-z0-9-]+/gi", "/CVE-[0-9-]+/g"],
+  "ignoreRegExpList": ["/@[-\\w]+/g", "/GHSA-[a-z0-9-]+/gi", "/CVE-[0-9-]+/g", "/\\]\\([^)]*\\)/g"],
   "ignorePaths": [
     "node_modules/**",
     "dist/**",
@@ -23,6 +23,7 @@
     ".lycheeignore",
     "project-words.txt",
     "src/content/{pages,docs}/{de,es,fr,it,ja,ko,pt-br,zh-cn,zh-tw}/**",
+    "src/i18n/ui/{de,es,fr,it,ja,ko,pt-br,zh-cn,zh-tw}.json",
     "**/resources/middleware/**"
   ]
 }
