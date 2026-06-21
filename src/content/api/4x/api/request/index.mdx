@@ -5,6 +5,7 @@ description: The req object represents the HTTP request and has properties for t
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
+import Param from '@components/patterns/Signature/Param.astro';
 
 The `req` object represents the HTTP request and has properties for the
 request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention,
@@ -68,6 +69,8 @@ module.exports = function (req, res) {
 
 ### req.baseUrl
 
+<Signature type="String" />
+
 The URL path on which a router instance was mounted.
 
 The `req.baseUrl` property is similar to the [mountpath](/api/application/#appmountpath) property of the `app` object,
@@ -98,6 +101,8 @@ When a request is made to `/greet/jp`, `req.baseUrl` is "/greet". When a request
 made to `/hello/jp`, `req.baseUrl` is "/hello".
 
 ### req.body
+
+<Signature type="Object" />
 
 Contains key-value pairs of data submitted in the request body.
 By default, it is `undefined`, and is populated when you use body-parsing middleware such
@@ -130,6 +135,8 @@ app.post('/profile', function (req, res, next) {
 
 ### req.cookies
 
+<Signature type="Object" />
+
 When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property is an object that
 contains cookies sent by the request. If the request contains no cookies, it defaults to `{}`.
 
@@ -145,6 +152,8 @@ For more information, issues, or concerns, see [cookie-parser](https://github.co
 
 ### req.fresh
 
+<Signature type="Boolean" />
+
 When the response is still "fresh" in the client's cache `true` is returned, otherwise `false` is returned to indicate that the client cache is now stale and the full response should be sent.
 
 When a client sends the `Cache-Control: no-cache` request header to indicate an end-to-end reload request, this module will return `false` to make handling these requests transparent.
@@ -158,6 +167,8 @@ console.dir(req.fresh);
 ```
 
 ### req.hostname
+
+<Signature type="String" />
 
 Contains the hostname derived from the `Host` HTTP header.
 
@@ -185,6 +196,8 @@ console.dir(req.hostname);
 
 ### req.ip
 
+<Signature type="String" />
+
 Contains the remote IP address of the request.
 
 When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
@@ -198,6 +211,8 @@ console.dir(req.ip);
 
 ### req.ips
 
+<Signature type="String[]" />
+
 When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
 this property contains an array of IP addresses
 specified in the `X-Forwarded-For` request header. Otherwise, it contains an
@@ -208,10 +223,14 @@ For example, if `X-Forwarded-For` is `client, proxy1, proxy2`, `req.ips` would b
 
 ### req.method
 
+<Signature type="String" />
+
 Contains a string corresponding to the HTTP method of the request:
 `GET`, `POST`, `PUT`, and so on.
 
 ### req.originalUrl
+
+<Signature type="String" />
 
 <Alert type="alert">
 
@@ -245,6 +264,8 @@ app.use('/admin', function (req, res, next) {
 
 ### req.params
 
+<Signature type="Object" />
+
 This property is an object containing properties mapped to the [named route "parameters"](/guide/routing/#route-parameters). For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `{}`.
 
 ```js
@@ -275,6 +296,8 @@ Express automatically decodes the values in `req.params` (using `decodeURICompon
 
 ### req.path
 
+<Signature type="String" />
+
 Contains the path part of the request URL.
 
 ```js
@@ -292,6 +315,8 @@ When called from a middleware, the mount point is not included in `req.path`. Se
 
 ### req.protocol
 
+<Signature type="String" />
+
 Contains the request protocol string: either `http` or (for TLS requests) `https`.
 
 When the [`trust proxy` setting](/api/application/#options-for-trust-proxy-setting) does not evaluate to `false`,
@@ -304,6 +329,8 @@ console.dir(req.protocol);
 ```
 
 ### req.query
+
+<Signature type="Object" />
 
 This property is an object containing a property for each query string parameter in the route.
 When [query parser](/api/application/#application-settings) is set to disabled, it is an empty object `{}`, otherwise it is the result of the configured query parser.
@@ -332,12 +359,16 @@ Check out the [query parser application setting](/api/application/#application-s
 
 ### req.res
 
+<Signature type="Response" />
+
 This property holds a reference to the [response object](/api/response)
 that relates to this request object.
 
 ### req.route
 
-Contains the currently-matched route, a string. For example:
+<Signature type="Route" />
+
+Contains the currently-matched route (a `Route` object). For example:
 
 ```js
 app.get('/user/:id?', function userIdHandler(req, res) {
@@ -363,6 +394,8 @@ Example output from the previous snippet:
 
 ### req.secure
 
+<Signature type="Boolean" />
+
 A Boolean property that is true if a TLS connection is established. Equivalent to:
 
 ```js
@@ -371,6 +404,8 @@ console.dir(req.protocol === 'https');
 ```
 
 ### req.signedCookies
+
+<Signature type="Object" />
 
 When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property
 contains signed cookies sent by the request, unsigned and ready for use. Signed cookies reside
@@ -390,6 +425,8 @@ For more information, issues, or concerns, see [cookie-parser](https://github.co
 
 ### req.stale
 
+<Signature type="Boolean" />
+
 Indicates whether the request is "stale," and is the opposite of `req.fresh`.
 For more information, see [req.fresh](#reqfresh).
 
@@ -399,6 +436,8 @@ console.dir(req.stale);
 ```
 
 ### req.subdomains
+
+<Signature type="String[]" />
 
 An array of subdomains in the domain name of the request.
 
@@ -414,6 +453,8 @@ using [app.set](/api/application/#appset).
 
 ### req.xhr
 
+<Signature type="Boolean" />
+
 A Boolean property that is `true` if the request's `X-Requested-With` header field is
 "XMLHttpRequest", indicating that the request was issued by a client library such as jQuery.
 
@@ -426,7 +467,16 @@ console.dir(req.xhr);
 
 The `req` object also contains a number of methods that can be used to perform various tasks related to the HTTP request, such as checking the content type, retrieving header values, and more.
 
-### req.accepts(types)
+### req.accepts()
+
+<Signature returns="String | false">
+  <Fragment slot="attributes">
+    <Param name="types" type="String | String[]">
+      The content type(s) to check: a MIME type (such as `application/json`), an extension name
+      (such as `json`), a comma-delimited list, or an array.
+    </Param>
+  </Fragment>
+</Signature>
 
 Checks if the specified content types are acceptable, based on the request's `Accept` HTTP header field.
 The method returns the best match, or if none of the specified content types is acceptable, returns
@@ -463,7 +513,15 @@ req.accepts(['html', 'json']);
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
-### req.acceptsCharsets(charset [, ...])
+### req.acceptsCharsets()
+
+<Signature returns="String | false">
+  <Fragment slot="attributes">
+    <Param name="charset" type="String | String[]">
+      One or more character sets to test against the request's `Accept-Charset` header.
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns the first accepted charset of the specified character sets,
 based on the request's `Accept-Charset` HTTP header field.
@@ -471,7 +529,15 @@ If none of the specified charsets is accepted, returns `false`.
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
-### req.acceptsEncodings(encoding [, ...])
+### req.acceptsEncodings()
+
+<Signature returns="String | false">
+  <Fragment slot="attributes">
+    <Param name="encoding" type="String | String[]">
+      One or more encodings to test against the request's `Accept-Encoding` header.
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns the first accepted encoding of the specified encodings,
 based on the request's `Accept-Encoding` HTTP header field.
@@ -479,7 +545,16 @@ If none of the specified encodings is accepted, returns `false`.
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
-### req.acceptsLanguages([lang, ...])
+### req.acceptsLanguages()
+
+<Signature returns="String | String[] | false">
+  <Fragment slot="attributes">
+    <Param name="lang" type="String | String[]" optional>
+      One or more languages to test against the request's `Accept-Language` header. If omitted, all
+      accepted languages are returned as an array.
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns the first accepted language of the specified languages,
 based on the request's `Accept-Language` HTTP header field.
@@ -495,7 +570,16 @@ Express (4.x) source: [request.js line 179](https://github.com/expressjs/express
 
 Accepts (1.3) source: [index.js line 195](https://github.com/jshttp/accepts/blob/f69c19e459bd501e59fb0b1a40b7471bb578113a/index.js#L195)
 
-### req.get(field)
+### req.get()
+
+<Signature returns="String | undefined">
+  <Fragment slot="attributes">
+    <Param name="field" type="String">
+      The name of the HTTP request header to read (case-insensitive). `Referrer` and `Referer` are
+      interchangeable.
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns the specified HTTP request header field (case-insensitive match).
 The `Referrer` and `Referer` fields are interchangeable.
@@ -513,7 +597,15 @@ req.get('Something');
 
 Aliased as `req.header(field)`.
 
-### req.is(type)
+### req.is()
+
+<Signature returns="String | false | null">
+  <Fragment slot="attributes">
+    <Param name="type" type="String | String[]">
+      The MIME type(s) or extension name(s) to match against the request's `Content-Type` header.
+    </Param>
+  </Fragment>
+</Signature>
 
 Returns the matching content type if the incoming request's "Content-Type" HTTP header field
 matches the MIME type specified by the `type` parameter. If the request has no body, returns `null`.
@@ -556,7 +648,19 @@ req.is('xml', 'yaml');
 
 For more information, or if you have issues or concerns, see [type-is](https://github.com/expressjs/type-is).
 
-### req.param(name [, defaultValue])
+### req.param()
+
+<Signature returns="any">
+  <Fragment slot="attributes">
+    <Param name="name" type="String">
+      The name of the parameter to look up, searched in `req.params`, then `req.body`, then
+      `req.query`.
+    </Param>
+    <Param name="defaultValue" type="any" optional>
+      A value to return when the parameter is not found in any of the request objects.
+    </Param>
+  </Fragment>
+</Signature>
 
 <Alert type="warning">
 
@@ -595,21 +699,28 @@ Body-parsing middleware must be loaded for `req.param()` to work predictably. Re
 
 </Alert>
 
-### req.range(size[, options])
+### req.range()
+
+<Signature returns="Array | Number">
+  <Fragment slot="attributes">
+    <Param name="size" type="Number">
+      The maximum size of the resource.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options for parsing the `Range` header.
+
+      <Fragment slot="properties">
+        <Param name="combine" type="Boolean" default="false">
+          Specify if overlapping and adjacent ranges should be combined. When `true`, ranges are
+          combined and returned as if they were specified that way in the header.
+        </Param>
+      </Fragment>
+    </Param>
+
+  </Fragment>
+</Signature>
 
 `Range` header parser.
-
-The `size` parameter is the maximum size of the resource.
-
-The `options` parameter is an object that can have the following properties.
-
-<div class="table-scroller" markdown="1">
-
-| Property  | Type    | Description                                                                                                                                                                           |
-| --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `combine` | Boolean | Specify if overlapping & adjacent ranges should be combined, defaults to `false`. When `true`, ranges will be combined and returned as if they were specified that way in the header. |
-
-</div>
 
 An array of ranges will be returned or negative numbers indicating an error parsing.
 

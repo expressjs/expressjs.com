@@ -310,7 +310,7 @@ res.status(404).end();
 ### res.format(object)
 
 Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
-It uses [req.accepts()](/api/request/#reqacceptstypes) to select a handler for the request, based on the acceptable
+It uses [req.accepts()](/api/request/#reqaccepts) to select a handler for the request, based on the acceptable
 types ordered by their quality values. If the header is not specified, the first callback is invoked.
 When no match is found, the server responds with 406 "Not Acceptable", or invokes the `default` callback.
 
