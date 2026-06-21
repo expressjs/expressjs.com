@@ -10,9 +10,21 @@ import Param from '@components/patterns/Signature/Param.astro';
 The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:
 
-```js
+```cjs title="index.cjs"
 var express = require('express');
 var app = express();
+
+app.get('/', function (req, res) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
 
 app.get('/', function (req, res) {
   res.send('hello world');
@@ -89,8 +101,22 @@ A sub-app is an instance of `express` that may be used for handling the request 
 
 </Alert>
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+
+const app = express(); // the main app
+const admin = express(); // the sub app
+
+admin.get('/', (req, res) => {
+  console.log(admin.mountpath); // /admin
+  res.send('Admin Homepage');
+});
+
+app.use('/admin', admin); // mount the sub app
+```
+
+```mjs title="index.mjs"
+import express from 'express';
 
 const app = express(); // the main app
 const admin = express(); // the sub app
@@ -133,8 +159,21 @@ app.use(['/adm{*splat}n', '/manager'], admin); // load the 'admin' router on '/a
 
 The application's in-built instance of router. This is created lazily, on first access.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+const router = app.router;
+
+router.get('/', (req, res) => {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 const router = app.router;
 
@@ -421,8 +460,15 @@ Some template engines do not follow this convention. The
 [consolidate.js](https://github.com/tj/consolidate.js) library maps Node template engines to follow this convention,
 so they work seamlessly with Express.
 
-```js
+```cjs title="index.cjs"
 const engines = require('consolidate');
+app.engine('haml', engines.haml);
+app.engine('html', engines.hogan);
+```
+
+```mjs title="index.mjs"
+import engines from 'consolidate';
+
 app.engine('haml', engines.haml);
 app.engine('html', engines.hogan);
 ```
@@ -515,8 +561,17 @@ identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http
 If port is omitted or is 0, the operating system will assign an arbitrary unused
 port, which is useful for cases like automated tasks (tests, etc.).
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+app.listen(3000); // bind and listen on a TCP port
+app.listen('/tmp/sock'); // or listen on a UNIX socket
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 app.listen(3000); // bind and listen on a TCP port
@@ -545,10 +600,21 @@ to handle requests. This makes it easy to provide both HTTP and HTTPS versions o
 your app with the same code base, as the app does not inherit from these
 (it is simply a callback):
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const https = require('https');
 const http = require('http');
+const app = express();
+
+http.createServer(app).listen(80);
+https.createServer(options, app).listen(443);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import https from 'https';
+import http from 'http';
+
 const app = express();
 
 http.createServer(app).listen(80);
@@ -798,7 +864,7 @@ and this matches too
 
 Returns the canonical path of the app, a string.
 
-```js
+```js title="index.js"
 const app = express();
 const blog = express();
 const blogAdmin = express();
