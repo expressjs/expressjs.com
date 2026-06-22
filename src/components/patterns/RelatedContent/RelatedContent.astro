@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import './RelatedContent.css';
 import { H2 } from '@/components/primitives';
 import { PostCard } from '@/components/patterns';
+import { formatPubDate } from '@/utils/rss';
 
 interface Props {
   posts: CollectionEntry<'blog'>[];
@@ -20,11 +21,7 @@ const { posts, lang, title } = Astro.props;
       <div class="related-content__grid">
         {posts.map((p) => {
           const pFilename = p.id.split('/').pop() ?? p.id;
-          const pDate = new Date(pFilename.substring(0, 10)).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-          });
+          const pDate = formatPubDate(p, { month: 'long', day: 'numeric', year: 'numeric' });
           const pAuthors = (p.data.authors ?? []).map((a) => ({
             src: a.github ? `https://github.com/${a.github}.png` : '',
             name: a.name ?? '',

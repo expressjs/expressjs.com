@@ -12,6 +12,7 @@ import { Banner } from '@components/patterns';
 import { BodyMd } from '@components/primitives';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { getPubDate, sortByPubDateDesc } from '@/utils/rss';
 import announcement from '@/config/announcement.json';
 
 type BannerVariant = 'info' | 'warning';
@@ -22,26 +23,15 @@ const useCustom = !!announcement.title;
 
 function getLatestBlog() {
   return getCollection('blog').then((posts) => {
-    const sorted = posts
-      .filter((post) => post.id !== 'write-post')
-      .sort((a, b) => {
-        const aFile = a.id.split('/').pop() ?? '';
-        const bFile = b.id.split('/').pop() ?? '';
-        return bFile.localeCompare(aFile);
-      });
+    const sorted = sortByPubDateDesc(posts.filter((post) => post.id !== 'write-post'));
     return sorted[0] ?? null;
   });
 }
 
 const latestPost = !useCustom ? await getLatestBlog() : null;
 
-function getPostDate(id: string) {
-  const filename = id.split('/').pop() ?? id;
-  return filename.substring(0, 10);
-}
-
 const blogSlug = latestPost ? latestPost.id.split('/').pop() : '';
-const blogDate = latestPost ? getPostDate(latestPost.id) : '';
+const blogDate = latestPost ? (getPubDate(latestPost)?.toISOString().substring(0, 10) ?? '') : '';
 const blogTitle = latestPost?.data.title ?? '';
 const blogDescription = latestPost?.data.description ?? '';
 const blogVariant: BannerVariant = latestPost?.data.tags?.includes('security') ? 'warning' : 'info';

@@ -20,7 +20,7 @@ If you have an idea for a blog post, follow these steps to propose it and potent
 
 1.  **Create a new file**
 
-    Create a new file in the `src/content/blog` directory named using following the format: `YYYY-MM-DD-title.md`.
+    Create a new file in the `src/content/blog` directory named using following the format: `YYYY-MM-DD-title.md`. The date prefix is used as the publication date unless you set a `date` field in the front matter (see below).
 
 1.  **Add the required front matter**
 
@@ -30,6 +30,7 @@ If you have an idea for a blog post, follow these steps to propose it and potent
     ---
     title: <your-title>
     description: <description-of-your-post>
+    date: YYYY-MM-DD
     tags: ['tag1', 'tag2']
     authors:
       - name: <your-name>
@@ -39,6 +40,8 @@ If you have an idea for a blog post, follow these steps to propose it and potent
     ```
 
     The `github` property of an author is optional. Including your username only (not your full profile URL) will ensure that your blog post links out to it.
+
+    The `date` property is optional. When set, it determines the post's publication date (used for ordering, display, and feeds); otherwise the `YYYY-MM-DD` prefix in the filename is used.
 
     The `cover` property is optional. If omitted, an Open Graph image will be automatically generated from the post title. If you want a custom cover image, place it in the `public` directory and reference its path (e.g. `/images/my-cover.jpg`).
 
