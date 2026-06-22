@@ -204,7 +204,6 @@ For more information, see [Router](/api/router/).
 The `mount` event is fired on a sub-app, when it is mounted on a parent app. The parent app is passed to the callback function.
 
 <Alert type="info">
-**NOTE**
 
 Sub-apps will:
 
@@ -1197,7 +1196,11 @@ app.set('trust proxy', (ip) => {
 
 #### Options for `etag` setting
 
-**NOTE**: These settings apply only to dynamic files, not static files. The `express.static` middleware ignores these settings.
+<Alert type="info">
+
+These settings apply only to dynamic files, not static files. The `express.static` middleware ignores these settings.
+
+</Alert>
 
 The ETag functionality is implemented using the [etag](https://www.npmjs.com/package/etag) package. For more information, see its documentation.
 
@@ -1263,7 +1266,6 @@ app.use((req, res, next) => {
 ```
 
 <Alert type="info">
-**NOTE**
 
 Sub-apps will:
 

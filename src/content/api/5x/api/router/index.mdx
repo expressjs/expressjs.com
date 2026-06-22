@@ -487,10 +487,16 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 The `router.use()` method also supports named parameters so that your mount points
 for other routers can benefit from preloading using named parameters.
 
-**NOTE**: Although these middleware functions are added via a particular router, _when_
+<Alert type="info">
+
+Although these middleware functions are added via a particular router, _when_
 they run is defined by the path they are attached to (not the router). Therefore,
 middleware added via one router may run for other routers if its routes
-match. For example, this code shows two different routers mounted on the same path:
+match.
+
+</Alert>
+
+For example, this code shows two different routers mounted on the same path:
 
 ```js
 const authRouter = express.Router();

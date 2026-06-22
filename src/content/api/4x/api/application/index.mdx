@@ -1254,7 +1254,11 @@ app.set('trust proxy', function (ip) {
 
 #### Options for `etag` setting
 
-**NOTE**: These settings apply only to dynamic files, not static files. The `express.static` middleware ignores these settings.
+<Alert type="info">
+
+These settings apply only to dynamic files, not static files. The `express.static` middleware ignores these settings.
+
+</Alert>
 
 The ETag functionality is implemented using the [etag](https://www.npmjs.com/package/etag) package. For more information, see its documentation.
 
@@ -1320,7 +1324,6 @@ app.use(function (req, res, next) {
 ```
 
 <Alert type="info">
-**NOTE**
 
 Sub-apps will:
 
