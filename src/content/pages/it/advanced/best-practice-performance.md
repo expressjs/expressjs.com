@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Per un sito web ad alto traffico in produzione, il modo migliore per mettere in atto la compressione è implementarla a un livello di proxy inverso (vedere [Usa un proxy inverso](#use-a-reverse-proxy)). In tal caso, non è necessario utilizzare middleware di compressione. Per maggiori dettagli sull'attivazione della compressione gzip in Nginx, vedere [Modulo ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) nella documentazione Nginx.
+Per un sito web ad alto traffico in produzione, il modo migliore per mettere in atto la compressione è implementarla a un livello di proxy inverso (vedere [Usa un proxy inverso](#use-a-reverse-proxy)). In tal caso, non è necessario utilizzare middleware di compressione. Per maggiori dettagli sull'attivazione della compressione gzip in Nginx, vedere [Modulo ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) nella documentazione Nginx.
 
 ### Non utilizzare funzioni sincrone
 
@@ -49,11 +49,11 @@ Le funzioni e i metodi sincroni legano il processo di esecuzione fino al loro ri
 
 Sebbene Node e molti moduli forniscano versioni sincrone e asincrone delle loro funzioni, utilizzare sempre la versione asincrona in produzione. L'unico momento in cui una funzione sincrona può essere giustificata è all'avvio iniziale.
 
-Puoi usare il flag da riga di comando `--trace-sync-io` per stampare un avviso e uno stack trace ogni volta che la tua applicazione utilizza un'API sincrona. Naturalmente, non si desidera utilizzare questo in produzione, ma piuttosto per garantire che il codice è pronto per la produzione. Vedi la [documentazione delle opzioni a riga di comando del nodo](https://nodejs.org/api/cli#cli_trace_sync_io) per maggiori informazioni.
+Puoi usare il flag da riga di comando `--trace-sync-io` per stampare un avviso e uno stack trace ogni volta che la tua applicazione utilizza un'API sincrona. Naturalmente, non si desidera utilizzare questo in produzione, ma piuttosto per garantire che il codice è pronto per la produzione. Vedi la [documentazione delle opzioni a riga di comando del nodo](https://nodejs.org/api/cli.html#trace-sync-io) per maggiori informazioni.
 
 ### Effettuare la registrazione correttamente
 
-In generale, ci sono due motivi per la registrazione dalla tua app: Per il debug e per la registrazione delle attività delle app (essenzialmente, tutto il resto). Usare `console.log()` o `console.error()` per stampare i messaggi di log sul terminale è una pratica comune nello sviluppo. Ma [queste funzioni sono sincrone](https://nodejs.org/api/console#console) quando la destinazione è un terminale o un file, in modo che non siano adatti per la produzione, a meno che non convogliate l'uscita ad un altro programma.
+In generale, ci sono due motivi per la registrazione dalla tua app: Per il debug e per la registrazione delle attività delle app (essenzialmente, tutto il resto). Usare `console.log()` o `console.error()` per stampare i messaggi di log sul terminale è una pratica comune nello sviluppo. Ma [queste funzioni sono sincrone](https://nodejs.org/api/console.html#console) quando la destinazione è un terminale o un file, in modo che non siano adatti per la produzione, a meno che non convogliate l'uscita ad un altro programma.
 
 #### Per il debug
 
@@ -134,9 +134,9 @@ La migliore pratica è quella di gestire gli errori il più vicino possibile al 
 
 Una cosa che dovresti _non_ fare è ascoltare per l'evento `uncaughtException`, emessa quando una bolla di eccezione ritorna fino al ciclo evento. L'aggiunta di un ascoltatore di eventi per `uncaughtException` cambierà il comportamento predefinito del processo che sta incontrando un'eccezione; il processo continuerà a funzionare nonostante l'eccezione. Questo potrebbe sembrare un buon modo per impedire che la tua app si blocchi, ma continuare ad eseguire l'app dopo un'eccezione non catturata è una pratica pericolosa e non è raccomandato, perché lo stato del processo diventa inaffidabile e imprevedibile.
 
-Inoltre, l'utilizzo di `uncaughtException` è ufficialmente riconosciuto come [crude](https://nodejs.org/api/process#process_event_uncaughtexception). Quindi ascoltare `uncaughtException` è solo una cattiva idea. Questo è il motivo per cui consigliamo cose come più processi e supervisori: crash e riavvio è spesso il modo più affidabile per recuperare da un errore.
+Inoltre, l'utilizzo di `uncaughtException` è ufficialmente riconosciuto come [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Quindi ascoltare `uncaughtException` è solo una cattiva idea. Questo è il motivo per cui consigliamo cose come più processi e supervisori: crash e riavvio è spesso il modo più affidabile per recuperare da un errore.
 
-Inoltre non consigliamo di utilizzare [domains](https://nodejs.org/api/domain). Generalmente non risolve il problema ed è un modulo deprecato.
+Inoltre non consigliamo di utilizzare [domains](https://nodejs.org/api/domain.html). Generalmente non risolve il problema ed è un modulo deprecato.
 
 ## Cose da fare nel tuo ambiente / configurazione
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Per ulteriori informazioni sul sistema, vedere [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
+Per ulteriori informazioni sul sistema, vedere [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Esegui la tua app in un cluster
 
@@ -254,7 +254,7 @@ Nelle applicazioni raggruppate, i processi di lavoro possono bloccarsi individua
 
 #### Uso del modulo cluster Node
 
-Il cluster è reso possibile con il [modulo cluster di Node](https://nodejs.org/api/cluster). Ciò consente a un processo master di generare processi di lavoro e distribuire le connessioni in entrata tra i lavoratori.
+Il cluster è reso possibile con il [modulo cluster di Node](https://nodejs.org/api/cluster.html). Ciò consente a un processo master di generare processi di lavoro e distribuire le connessioni in entrata tra i lavoratori.
 
 #### Uso PM2
 
@@ -294,7 +294,7 @@ Usa un server di cache come [Varnish](https://www.varnish-cache.org/) o [Nginx](
 
 Non importa quanto sia ottimizzata un'app, una singola istanza può gestire solo una quantità limitata di carico e traffico. Un modo per scalare un'app è quello di eseguire più istanze di esso e distribuire il traffico tramite un balancer. La configurazione di un bilanciatore di carico può migliorare le prestazioni e la velocità della tua app e permetterle di scalare più di quanto sia possibile con una singola istanza.
 
-Un bilanciatore di carico è di solito un proxy inverso che orchestra il traffico da e verso più istanze di applicazione e server. Puoi configurare facilmente un bilanciatore di carico per la tua app utilizzando [Nginx](https://nginx.org/en/docs/http/load_balancing) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Un bilanciatore di carico è di solito un proxy inverso che orchestra il traffico da e verso più istanze di applicazione e server. Puoi configurare facilmente un bilanciatore di carico per la tua app utilizzando [Nginx](https://nginx.org/en/docs/http/load_balancing.html) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Con il bilanciamento del carico, potrebbe essere necessario assicurarsi che le richieste associate a un particolare ID di sessione si connettano al processo che le ha originate. Questo è conosciuto come _session affinity_, o _sticky sessions_, e può essere affrontato dal suggerimento di cui sopra per utilizzare un archivio dati come Redis per i dati di sessione (a seconda della tua applicazione). Per una discussione, vedere [Utilizzo di nodi multipli](https://socket.io/docs/v4/using-multiple-nodes/).
 

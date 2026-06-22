@@ -7,6 +7,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 import { useTranslations } from '@/i18n/utils';
+import { DEFAULT_VERSION } from '@/config/versions';
 import SidebarItemsList from './SidebarItemsList.astro';
 import {
   shouldOmitSection,
@@ -38,9 +39,9 @@ const {
   currentPath,
   basePath = '',
   versioned = [],
-  version = '5x',
+  version = DEFAULT_VERSION,
   versions = [],
-  defaultVersion = '5x',
+  defaultVersion = DEFAULT_VERSION,
   parentId = 'root',
 } = Astro.props;
 

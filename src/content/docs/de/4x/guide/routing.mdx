@@ -6,12 +6,12 @@ description: Lernen Sie, wie Sie Routen in Express.js Anwendungen definieren und
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 _Routing_ bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kundenanfragen reagieren.
-Für eine Einführung in das Routing siehe [Basic routing](/en/4x/starter/basic-routing).
+Für eine Einführung in das Routing siehe [Basic routing](/starter/basic-routing).
 
 Du definierst Routing, indem du Methoden des Express `app` Objekts verwendest, die den HTTP-Methoden entsprechen;
 zum Beispiel, `app. et()` um GET-Anfragen und `app.post` zu behandeln, um POST-Anfragen zu bearbeiten. Für eine vollständige Liste
-siehe [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-). Du kannst auch [app.all()](/en/4x/api/application#appallpath-callback--callback-) verwenden, um alle HTTP-Methoden und [app. se()](/en/4x/api/application#appusepath-callback--callback) bis
-Middleware als Callback-Funktion angeben (siehe [Middleware](/en/4x/guide/using-middleware) für Details).
+siehe [app.METHOD](/api/application#appmethodpath-callback--callback-). Du kannst auch [app.all()](/api/application#appallpath-callback--callback-) verwenden, um alle HTTP-Methoden und [app. se()](/api/application#appusepath-callback--callback) bis
+Middleware als Callback-Funktion angeben (siehe [Middleware](/guide/using-middleware) für Details).
 
 Diese Routing-Methoden geben eine Callback-Funktion (manchmal auch "handler functions") an, die aufgerufen wird, wenn die Anwendung eine Anfrage an die angegebene Route (Endpunkt) und die HTTP-Methode erhält. Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf.
 
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express unterstützt Methoden, die allen HTTP-Anfragemethoden entsprechen: `get`, `post` und so weiter.
-Für eine vollständige Liste siehe [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-).
+Für eine vollständige Liste siehe [app.METHOD](/api/application#appmethodpath-callback--callback-).
 
 Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für _all_ HTTP-Requestmethoden zu laden. Zum Beispiel wird der folgende Handler für Anfragen an die Route `"/secret"` ausgeführt, ob `GET` verwendet wird, `POST`, `PUT`, `DELETE`, oder jede andere HTTP-Anfragemethode, die im [http module]unterstützt wird (https://nodejs.org/api/http.html#http_http_methods).
 
@@ -217,7 +217,7 @@ Das Zeichen <a href="https://github.com/expressjs/express/issues/2495">`*` in re
 
 ## Routenhandler
 
-Du kannst mehrere Callback-Funktionen bereitstellen, die sich wie [middleware](/en/guide/using-middleware) verhalten um eine Anfrage zu bearbeiten. Die einzige Ausnahme ist, dass diese Callbacks `next('route')` aufrufen könnten, um die restlichen Rufnummern zu umgehen. Sie können diesen Mechanismus nutzen, um Vorbedingungen auf einer Route aufzuerlegen, dann die Kontrolle an die nachfolgenden Routen übergeben, wenn es keinen Grund gibt, mit der aktuellen Route fortzufahren.
+Du kannst mehrere Callback-Funktionen bereitstellen, die sich wie [middleware](/guide/using-middleware) verhalten um eine Anfrage zu bearbeiten. Die einzige Ausnahme ist, dass diese Callbacks `next('route')` aufrufen könnten, um die restlichen Rufnummern zu umgehen. Sie können diesen Mechanismus nutzen, um Vorbedingungen auf einer Route aufzuerlegen, dann die Kontrolle an die nachfolgenden Routen übergeben, wenn es keinen Grund gibt, mit der aktuellen Route fortzufahren.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -312,22 +312,22 @@ app.get(
 
 Die Methoden auf dem Antwortobjekt (`res`) in der folgenden Tabelle können eine Antwort an den Client senden und den Request-Antwort-Zyklus beenden. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.
 
-| Methode                                                                      | Beschreibung                                                                                              |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [res.download()](/en/4x/api/response#resdownloadpath--filename--options--fn) | Fordern Sie eine Datei zum Download an.                                                                   |
-| [res.end()](/en/4x/api/response#resenddata-encoding-callback)                | Beenden Sie den Antwort-Prozess.                                                                          |
-| [res.json()](/en/4x/api/response#resjsonbody)                                | Sende eine JSON-Antwort.                                                                                  |
-| [res.jsonp()](/en/4x/api/response#resjsonpbody)                              | Senden Sie eine JSON-Antwort mit JSONP-Unterstützung.                                                     |
-| [res.redirect()](/en/4x/api/response#resredirectstatus-path)                 | Anfrage umleiten.                                                                                         |
-| [res.render()](/en/4x/api/response#resrenderview--locals--callback)          | Ansichtsvorlage ausblenden.                                                                               |
-| [res.send()](/en/4x/api/response#ressendbody)                                | Senden Sie eine Antwort von verschiedenen Typen.                                                          |
-| [res.sendFile()](/en/4x/api/response#ressendfilepath--options--fn)           | Senden Sie eine Datei als octet-Stream.                                                                   |
-| [res.sendStatus()](/en/4x/api/response#ressendstatusstatuscode)              | Legen Sie den Antwort-Statuscode fest und senden Sie seine Zeichenfolge Repräsentation als Antwortkörper. |
+| Methode                                                                | Beschreibung                                                                                              |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Fordern Sie eine Datei zum Download an.                                                                   |
+| [res.end()](/api/response#resenddata-encoding-callback)                | Beenden Sie den Antwort-Prozess.                                                                          |
+| [res.json()](/api/response#resjsonbody)                                | Sende eine JSON-Antwort.                                                                                  |
+| [res.jsonp()](/api/response#resjsonpbody)                              | Senden Sie eine JSON-Antwort mit JSONP-Unterstützung.                                                     |
+| [res.redirect()](/api/response#resredirectstatus-path)                 | Anfrage umleiten.                                                                                         |
+| [res.render()](/api/response#resrenderview--locals--callback)          | Ansichtsvorlage ausblenden.                                                                               |
+| [res.send()](/api/response#ressendbody)                                | Senden Sie eine Antwort von verschiedenen Typen.                                                          |
+| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Senden Sie eine Datei als octet-Stream.                                                                   |
+| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Legen Sie den Antwort-Statuscode fest und senden Sie seine Zeichenfolge Repräsentation als Antwortkörper. |
 
 ## app.route()
 
 Sie können verkettende Routenhandler für einen Routenpfad erstellen, indem Sie `app.route()` verwenden.
-Da der Weg an einem einzigen Ort angegeben wird, ist die Schaffung modularer Routen hilfreich, ebenso wie die Reduzierung von Redundanz und Typos. Weitere Informationen über Routen finden Sie unter [Router() documentation](/en/4x/api/router).
+Da der Weg an einem einzigen Ort angegeben wird, ist die Schaffung modularer Routen hilfreich, ebenso wie die Reduzierung von Redundanz und Typos. Weitere Informationen über Routen finden Sie unter [Router() documentation](/api/router).
 
 Hier ist ein Beispiel für verkettete Routenhandler, die mit `app.route()` definiert werden.
 
@@ -388,7 +388,7 @@ app.use('/birds', birds);
 
 Die App wird nun in der Lage sein, Anfragen an `/birds` und `/birds/about` zu bearbeiten, aufrufen sowie die Middleware-Funktion `timeLog` aufrufen, die spezifisch für die Route ist.
 
-Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. Um es zugänglich zu machen, müssen Sie die Option "mergeParams" an den Router-Konstruktor [reference](/en/4x/api/application#appusepath-callback--callback) übergeben.
+Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. Um es zugänglich zu machen, müssen Sie die Option "mergeParams" an den Router-Konstruktor [reference](/api/application#appusepath-callback--callback) übergeben.
 
 ```js
 const router = express.Router({ mergeParams: true });

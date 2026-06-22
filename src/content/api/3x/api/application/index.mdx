@@ -60,7 +60,7 @@ console.log(app.locals.name);
 // => if name's variable is used in a template, a ReferenceError will be returned.
 ```
 
-The full list of native named properties can be found in many specifications. The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript specification</a> introduced original properties, some of which still recognized by modern engines, and the <a href="http://www.ecma-international.org/ecma-262/5.1/">EcmaScript specification</a> then built on it and normalized the set of properties, adding new ones and removing deprecated ones. Check out properties for Functions and Objects if interested.
+The full list of native named properties can be found in many specifications. The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript specification</a> introduced original properties, some of which still recognized by modern engines, and the <a href="https://262.ecma-international.org/5.1/">EcmaScript specification</a> then built on it and normalized the set of properties, adding new ones and removing deprecated ones. Check out properties for Functions and Objects if interested.
 
 By default Express exposes only a single app-level local variable, `settings`.
 
@@ -75,7 +75,7 @@ The `app.routes` object houses all of the routes defined mapped
 by the associated HTTP verb. This object may be used for introspection capabilities,
 for example Express uses this internally not only for routing but to provide default
 
-<string>OPTIONS</string> behaviour unless `app.options()` is used. Your application or framework may
+<string>OPTIONS</string> behavior unless `app.options()` is used. Your application or framework may
 also remove routes by simply by removing them from this object.
 
 The output of `console.log(app.routes)`:
@@ -345,13 +345,13 @@ app.engine('html', require('ejs').renderFile);
 In this case EJS provides a `.renderFile()` method with
 the same signature that Express expects: `(path, options, callback)`,
 though note that it aliases this method as `ejs.__express` internally
-so if you're using ".ejs" extensions you dont need to do anything.
+so if you're using ".ejs" extensions you don't need to do anything.
 
 Some template engines do not follow this convention, the
 
 <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
 library was created to map all of node's popular template engines to follow this convention, thus
-allowing them to work seemlessly within Express.
+allowing them to work seamlessly within Express.
 
 ```js
 var engines = require('consolidate');
@@ -443,7 +443,7 @@ with the route matched.
 
 The following snippet illustrates the most simple route definition possible. Express
 translates the path strings to regular expressions, used internally to match incoming requests.
-Query strings are <em>not</em> considered when peforming these matches, for example "GET /"
+Query strings are <em>not</em> considered when performing these matches, for example "GET /"
 would match the following route, as would "GET /?name=tobi".
 
 ```js
@@ -540,7 +540,7 @@ app.render('email', { name: 'Tobi' }, function (err, html) {
 ### app.listen()
 
 Bind and listen for connections on the given host and port,
-this method is identical to node's <a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server#listen()</a>.
+this method is identical to node's <a href="https://nodejs.org/api/http.html#serverlisten">http.Server#listen()</a>.
 
 ```js
 var express = require('express');

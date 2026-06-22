@@ -86,18 +86,17 @@ Abilitare il `trust proxy` avrà il seguente impatto:
 
 <ul>
   <li markdown="1">
-    Il valore di [req.hostname](/en/api#req.hostname) è derivato dal valore impostato
-    nell'intestazione `X-Forwarded-Host`, che può essere impostato dal cliente o dal proxy.
+    Il valore di [req.hostname](/api#req.hostname) è derivato dal valore impostato nell'intestazione
+    `X-Forwarded-Host`, che può essere impostato dal cliente o dal proxy.
   </li>
   <li markdown="1">
     `X-Forwarded-Proto` può essere impostato dal proxy inverso per dire all'app se si tratta di `↓ `
     o `http` o anche di un nome non valido. Questo valore è riflesso da
-    [req.protocol](/en/api#req.protocol).
+    [req.protocol](/api#req.protocol).
   </li>
   <li markdown="1">
-    I valori [req.ip](/en/api#req.ip) e [req.ips](/en/api#req.ips) sono popolati in base
-    all'indirizzo del socket e all'intestazione `X-Forwarded-For`, a partire dal primo indirizzo non
-    fidato.
+    I valori [req.ip](/api#req.ip) e [req.ips](/api#req.ips) sono popolati in base all'indirizzo del
+    socket e all'intestazione `X-Forwarded-For`, a partire dal primo indirizzo non fidato.
   </li>
 </ul>
 

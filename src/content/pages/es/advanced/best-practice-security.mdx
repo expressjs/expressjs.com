@@ -36,15 +36,15 @@ Las mejores prácticas de seguridad para aplicaciones Express en producción inc
 
 ## No utilizar versiones obsoletas o vulnerables de Express
 
-Las exprés 2.x y 3.x ya no están mantenidas. No se solucionarán problemas de seguridad y rendimiento en estas versiones. ¡No los utilices! Si no has movido a la versión 4, sigue la [guía de migración](/en/guide/migrating-4) o considera [Opciones de Soporte Comercial](/en/support#commercial-support-options).
+Las exprés 2.x y 3.x ya no están mantenidas. No se solucionarán problemas de seguridad y rendimiento en estas versiones. ¡No los utilices! Si no has movido a la versión 4, sigue la [guía de migración](/guide/migrating-4) o considera [Opciones de Soporte Comercial](/support#commercial-support-options).
 
-También asegúrese de que no está usando ninguna de las versiones Express vulnerables listadas en la [página de actualizaciones de seguridad](/en/advanced/security-updates). Si lo está, actualice a una de las versiones estables, preferiblemente la más reciente.
+También asegúrese de que no está usando ninguna de las versiones Express vulnerables listadas en la [página de actualizaciones de seguridad](/advanced/security-updates). Si lo está, actualice a una de las versiones estables, preferiblemente la más reciente.
 
 ## Usar TLS
 
 Si tu aplicación trata o transmite datos confidenciales, usa [Seguridad de la capa de transporte](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) para asegurar la conexión y los datos. Esta tecnología encripta los datos antes de que sean enviados desde el cliente al servidor, evitando así algunos hacks comunes (y fáciles). Aunque las solicitudes Ajax y POST pueden no ser visiblemente obvias y parecen "ocultas" en los navegadores, su tráfico de red es vulnerable a [sniffing de paquetes](https://en.wikipedia.org/wiki/Packet_analyzer) y [ataques man-in-the-midds](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Puede estar familiarizado con el cifrado de la capa de conector seguro (SSL). [TLS es simplemente la siguiente progresión de SSL](<%3Chttps://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx%3E>). En otras palabras, si estaba usando SSL antes, considere actualizar a TLS. En general, recomendamos Nginx para manejar TLS. Para una buena referencia para configurar TLS en Nginx (y otros servidores), vea [Configuraciones Recomendadas del servidor (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Puede estar familiarizado con el cifrado de la capa de conector seguro (SSL). [TLS es simplemente la siguiente progresión de SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). En otras palabras, si estaba usando SSL antes, considere actualizar a TLS. En general, recomendamos Nginx para manejar TLS. Para una buena referencia para configurar TLS en Nginx (y otros servidores), vea [Configuraciones Recomendadas del servidor (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Además, una útil herramienta para obtener un certificado TLS gratis es [Vamos a cifrar](https://letsencrypt.org/about/), un gratuito, automatizado, y autoridad certificadora abierta (CA) proporcionada por el [Grupo de Investigación sobre Seguridad de Internet (ISRG)](https://www.abetterinternet.org/).
 
@@ -55,7 +55,7 @@ En última instancia, la responsabilidad de validar y manejar correctamente los 
 
 ### Evitar redirecciones abiertas
 
-Un ejemplo de entrada de usuario potencialmente peligrosa es una _open redirect_, donde una aplicación acepta una URL como entrada de usuario (a menudo en la consulta de URL, por ejemplo `? rl=https://ejemplo. om`) y usa `res.redirect` para establecer la cabecera `location` y
+Un ejemplo de entrada de usuario potencialmente peligrosa es una _open redirect_, donde una aplicación acepta una URL como entrada de usuario (a menudo en la consulta de URL, por ejemplo `?url=https://example.com`) y usa `res.redirect` para establecer la cabecera `location` y
 devuelve un estado de 3xx.
 
 Una aplicación debe validar que soporta redirección a la URL entrante para evitar enviar usuarios a enlaces maliciosos como sitios web de phishing, entre otros riesgos.
@@ -139,9 +139,9 @@ determine an app is running Express.
 
 Express también envía sus propios mensajes de respuesta con formato "404 No encontrados" y de error de formato
 . Estos pueden ser cambiados por
-[agregando tu propio gestor de error](/en/starter/faq#how-do-i-handle-404-responses)
+[agregando tu propio gestor de error](/starter/faq#how-do-i-handle-404-responses)
 y
-[escribiendo tu propio gestor de error](/en/guide/error-handling#writing-error-handlers):
+[escribiendo tu propio gestor de error](/guide/error-handling#writing-error-handlers):
 
 ```js
 // last app.use calls right before app.listen():

@@ -106,4 +106,10 @@ const breadcrumbs = buildBreadcrumbs(Astro.url.pathname, t);
       overflow-y: auto;
     }
   }
+
+  @media (--xs-only) {
+    #overview {
+      margin-top: var(--space-6);
+    }
+  }
 </style>

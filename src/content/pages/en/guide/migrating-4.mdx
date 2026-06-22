@@ -4,39 +4,23 @@ description: A guide to migrating your Express.js applications from version 3 to
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express 4 is a breaking change from Express 3. That means an existing Express 3 app will _not_ work if you update the Express version in its dependencies.
 
 This article covers:
 
-<ul class="doclist">
-  <li>
-    <a href="#changes">Changes in Express 4</a>.
-  </li>
-  <li>
-    <a href="#example-migration">An example</a> of migrating an Express 3 app to Express 4.
-  </li>
-  <li>
-    <a href="#app-gen">Upgrading to the Express 4 app generator</a>.
-  </li>
-</ul>
+- [Changes in Express 4](#changes-in-express-4).
+- [An example](#example-app-migration) of migrating an Express 3 app to Express 4.
+- [Upgrading to the Express 4 app generator](#upgrading-to-the-express-4-app-generator).
 
 ## Changes in Express 4
 
 There are several significant changes in Express 4:
 
-<ul class="doclist">
-  <li>
-    <a href="#core-changes">Changes to Express core and middleware system.</a> The dependencies on
-    Connect and built-in middleware were removed, so you must add middleware yourself.
-  </li>
-  <li>
-    <a href="#routing">Changes to the routing system.</a>
-  </li>
-  <li>
-    <a href="#other-changes">Various other changes.</a>
-  </li>
-</ul>
+- [Changes to Express core and middleware system.](#changes-to-express-core-and-middleware-system) The dependencies on Connect and built-in middleware were removed, so you must add middleware yourself.
+- [Changes to the routing system.](#the-routing-system)
+- [Various other changes.](#other-changes)
 
 See also:
 
@@ -221,7 +205,7 @@ new features to help organize your routes:
 
 The new `app.route()` method enables you to create chainable route handlers
 for a route path. Because the path is specified in a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more
-information about routes, see [`Router()` documentation](/en/4x/api#router).
+information about routes, see [`Router()` documentation](/4x/api/router/).
 
 Here is an example of chained route handlers that are defined by using the `app.route()` function.
 
@@ -252,7 +236,7 @@ it, defines some routes, and mounts it on a path on the main app.
 For example, create a router file named `birds.js` in the app directory,
 with the following content:
 
-```js
+```cjs title="birds.cjs"
 var express = require('express');
 var router = express.Router();
 
@@ -273,10 +257,40 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware specific to this router
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+});
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 Then, load the router module in the app:
 
-```js
+```cjs title="index.cjs"
 var birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -375,7 +389,7 @@ The files of interest are `app.js` and `package.json`.
 
 Consider an Express v.3 application with the following `app.js` file:
 
-```js
+```cjs title="index.cjs"
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -383,6 +397,40 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.methodOverride());
+app.use(express.session({ secret: 'your secret here' }));
+app.use(express.bodyParser());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler());
+}
+
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import routes from './routes';
+import user from './routes/user';
+import http from 'http';
+import path from 'path';
+
+const app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -435,9 +483,7 @@ Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Pug to their respective latest
 version with the following command:
 
-```bash
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-```
+<PackageManagerCommand command="npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save" />
 
 Make the following changes to `app.js`:
 
@@ -487,7 +533,7 @@ Running the above `npm` command will update `package.json` as follows:
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. The `app.js` file will look like this:
 
-```js
+```cjs title="index.cjs"
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -537,6 +583,55 @@ server.listen(app.get('port'), () => {
 });
 ```
 
+```mjs title="index.mjs"
+import http from 'http';
+import express from 'express';
+import routes from './routes';
+import user from './routes/user';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import methodOverride from 'method-override';
+import session from 'express-session';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+import errorHandler from 'errorhandler';
+
+const app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
+app.use(logger('dev'));
+app.use(methodOverride());
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'uwotm8',
+  })
+);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
+}
+
+const server = http.createServer(app);
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+```
+
 <Alert type="info">
 Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), loading it is not required, and the app can be simply started this way:
 
@@ -572,18 +667,14 @@ the Express 3 app generator and then install the new
 If you already have the Express 3 app generator installed on your system,
 you must uninstall it:
 
-```bash
-$ npm uninstall -g express
-```
+<PackageManagerCommand command="npm uninstall -g express" />
 
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
 
 Now install the new generator:
 
-```bash
-$ npm install -g express-generator
-```
+<PackageManagerCommand command="npm install -g express-generator" />
 
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
@@ -597,7 +688,7 @@ Command options and use largely remain the same, with the following exceptions:
 
 - Removed the `--sessions` option.
 - Removed the `--jshtml` option.
-- Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
+- Added the `--hogan` option to support [Hogan.js](https://twitter.github.io/hogan.js/).
 
 ### Example
 

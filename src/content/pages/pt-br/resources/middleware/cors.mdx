@@ -232,7 +232,7 @@ app.listen(80, function () {
 - `origin`: Configura o cabeçalho CORS **Access-Control-Allow-Origin**. Valores possíveis:
   - `Boolean` - defina `origin` como `true` para refletir a [origem da solicitação](https://datatracker.ietf.org/doc/html/draft-abarth-origin-09), conforme definido por `req.header('Origin')`, ou defina-o como `false` para desabilitar CORS.
   - `String` - defina `origin` para uma origem específica. Por exemplo, se você definir isso para
-    - Será permitido "http://example.com"\` somente requisições de "http://example.com" .
+    - `"http://example.com"` somente requisições de "http://example.com" serão permitidas.
     - `"*"` para todos os domínios serem permitidos.
   - `RegExp` - define `origin` para um padrão de expressão regular que será usado para testar a origem da solicitação. Se for uma correspondência, a origem do pedido será refletida. Por exemplo, o padrão `/example\.com$/` irá refletir qualquer solicitação que esteja vindo de uma origem que termina com "example.com".
   - `Array` - defina `origin` para uma matriz de origens válidas. Cada origem pode ser uma `String` ou um `RegExp`. Por exemplo, `["http://example1.com", /\.example2\.com$/]` aceitará qualquer solicitação de "http://example1.com" ou de um subdomínio de "example2.com".

@@ -10,7 +10,7 @@ Este tema entra claramente en el mundo de los "devops", que abarca tanto el desa
 - Cosas que hacer en tu código (la parte del desarrollador):
   - [Usar compresión gzip](#use-gzip-compression)
   - [No usar funciones sincrónicas](#dont-use-synchronous-functions)
-  - [Registrar correctamente] (#do-logging-correctly)
+  - [Registrar correctamente](#do-logging-correctly)
   - [Manejar excepciones correctamente](#handle-exceptions-properly)
 - Cosas que hacer en tu entorno / configuración (parte de la opción):
   - [Establecer NODE_ENV a "producción"](#set-node_env-to-production)
@@ -26,7 +26,7 @@ Aquí hay algunas cosas que puedes hacer en tu código para mejorar el rendimien
 
 - [Usar compresión gzip](#use-gzip-compression)
 - [No usar funciones sincrónicas](#dont-use-synchronous-functions)
-- [Registrar correctamente] (#do-logging-correctly)
+- [Registrar correctamente](#do-logging-correctly)
 - [Manejar excepciones correctamente](#handle-exceptions-properly)
 
 ### Usar compresión gzip
@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Para un sitio web de alto tráfico en producción, la mejor manera de poner compresión en su lugar es implementarla en un nivel proxy inverso (ver [Usar un proxy inverso](#use-a-reverse-proxy)). En ese caso, no necesita usar middleware de compresión. Para más detalles sobre habilitar compresión gzip en Nginx, vea [Módulo ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) en la documentación de Nginx.
+Para un sitio web de alto tráfico en producción, la mejor manera de poner compresión en su lugar es implementarla en un nivel proxy inverso (ver [Usar un proxy inverso](#use-a-reverse-proxy)). En ese caso, no necesita usar middleware de compresión. Para más detalles sobre habilitar compresión gzip en Nginx, vea [Módulo ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) en la documentación de Nginx.
 
 ### No utilizar funciones sincrónicas
 
@@ -49,11 +49,11 @@ Las funciones y métodos sincrónicos emiten el proceso de ejecución hasta que 
 
 Aunque Node y muchos módulos proporcionan versiones sincrónicas y asíncronas de sus funciones, siempre utiliza la versión asíncrona en producción. La única vez que una función sincrónica puede ser justificada es al inicio inicial.
 
-Puedes usar la bandera de línea de comandos `--trace-sync-io` para imprimir una advertencia y un stack trace cada vez que tu aplicación usa una API sincrónica. Por supuesto, no querrías usar esto en la producción, sino más bien asegurar que tu código esté listo para la producción. Vea la [documentación de opciones de línea de comandos de nodo](https://nodejs.org/api/cli#cli_trace_sync_io) para más información.
+Puedes usar la bandera de línea de comandos `--trace-sync-io` para imprimir una advertencia y un stack trace cada vez que tu aplicación usa una API sincrónica. Por supuesto, no querrías usar esto en la producción, sino más bien asegurar que tu código esté listo para la producción. Vea la [documentación de opciones de línea de comandos de nodo](https://nodejs.org/api/cli.html#trace-sync-io) para más información.
 
 ### Hacer el registro correctamente
 
-En general, hay dos razones para registrarse desde tu aplicación: para depurar y para registrar la actividad de la aplicación (esencialmente, todo lo demás). Usar `console.log()` o `console.error()` para imprimir mensajes de registro en la terminal es práctica común en desarrollo. Pero [estas funciones son sincrónicas](https://nodejs.org/api/console#console) cuando el destino es un terminal o un archivo, por lo que no son aptos para la producción, a menos que usted pipe la salida a otro programa.
+En general, hay dos razones para registrarse desde tu aplicación: para depurar y para registrar la actividad de la aplicación (esencialmente, todo lo demás). Usar `console.log()` o `console.error()` para imprimir mensajes de registro en la terminal es práctica común en desarrollo. Pero [estas funciones son sincrónicas](https://nodejs.org/api/console.html#console) cuando el destino es un terminal o un archivo, por lo que no son aptos para la producción, a menos que usted pipe la salida a otro programa.
 
 #### Para depuración
 
@@ -134,9 +134,9 @@ La mejor práctica es manejar los errores lo más cerca posible del sitio. Así 
 
 Una cosa que debes _no_ hacer es escuchar el evento `uncaughtException`, emitido cuando una excepción emite todo el camino de regreso al bucle del evento. Añadir un detector de eventos para `uncaughtException` cambiará el comportamiento predeterminado del proceso que se encuentra con una excepción; el proceso continuará funcionando a pesar de la excepción. Esto puede sonar como una buena manera de evitar que tu aplicación falle, pero seguir ejecutando la aplicación después de una excepción no capturada es una práctica peligrosa y no se recomienda, porque el estado del proceso se vuelve poco fiable e impredecible.
 
-Además, usar `uncaughtException` es oficialmente reconocido como [crude](https://nodejs.org/api/process#process_event_uncaughtexception). Así que escuchar `uncaughtException` es sólo una mala idea. Por eso recomendamos cosas como múltiples procesos y supervisores: fallar y reiniciar es a menudo la manera más confiable de recuperarse de un error.
+Además, usar `uncaughtException` es oficialmente reconocido como [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Así que escuchar `uncaughtException` es sólo una mala idea. Por eso recomendamos cosas como múltiples procesos y supervisores: fallar y reiniciar es a menudo la manera más confiable de recuperarse de un error.
 
-Tampoco recomendamos usar [domains](https://nodejs.org/api/domain). Generalmente no resuelve el problema y es un módulo obsoleto.
+Tampoco recomendamos usar [domains](https://nodejs.org/api/domain.html). Generalmente no resuelve el problema y es un módulo obsoleto.
 
 ## Cosas que hacer en tu entorno / configuración
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Para más información sobre el sistema, vea la [referencia del sistema (página de manu)] (http://www.freedesktop.org/software/systemd/man/systemd.unit).
+Para más información sobre el sistema, vea la [referencia del sistema (página de manu)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Ejecutar tu aplicación en un clúster
 
@@ -254,7 +254,7 @@ En las aplicaciones agrupadas, los procesos del worker pueden fallar individualm
 
 #### Usando el módulo de cluster del nodo
 
-Clustering es posible con el [módulo de cluster]de Node (https://nodejs.org/api/cluster). Esto permite que un proceso maestro genere procesos de trabajador y distribuya conexiones entrantes entre los trabajadores.
+Clustering es posible con el [módulo de cluster]de Node (https://nodejs.org/api/cluster.html). Esto permite que un proceso maestro genere procesos de trabajador y distribuya conexiones entrantes entre los trabajadores.
 
 #### Usando PM2
 
@@ -294,7 +294,7 @@ Usa un servidor de caché como [Varnish](https://www.varnish-cache.org/) o [Ngin
 
 No importa cuán optimizada sea una aplicación, una sola instancia puede manejar sólo una cantidad limitada de carga y tráfico. Una forma de escalar una aplicación es ejecutar múltiples instancias de ella y distribuir el tráfico a través de un equilibrador de carga. Configurar un balanceador de carga puede mejorar el rendimiento y la velocidad de tu aplicación, y permitirla escalar más de lo posible con una sola instancia.
 
-Un balanceador de carga es generalmente un proxy inverso que orchestriza tráfico hacia y desde múltiples instancias y servidores de la aplicación. Puedes configurar fácilmente un equilibrador de carga para tu aplicación usando [Nginx](https://nginx.org/en/docs/http/load_balancing) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Un balanceador de carga es generalmente un proxy inverso que orchestriza tráfico hacia y desde múltiples instancias y servidores de la aplicación. Puedes configurar fácilmente un equilibrador de carga para tu aplicación usando [Nginx](https://nginx.org/en/docs/http/load_balancing.html) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Con el saldo de carga, puede que tenga que asegurarse de que las peticiones que están asociadas con un ID de sesión particular se conectan al proceso que las originó. Esto se conoce como _session affinity_, o _sticky sessions_, y puede ser abordado por la sugerencia anterior de utilizar un almacén de datos como Redis para datos de sesión (dependiendo de su aplicación). Para una discusión, vea [Usando múltiples nodos](https://socket.io/docs/v4/using-multiple-nodes/).
 

@@ -36,15 +36,15 @@ Security best practices for Express applications in production include:
 
 ## Don't use deprecated or vulnerable versions of Express
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](/en/guide/migrating-4) or consider [Commercial Support Options](/en/support#commercial-support-options).
+Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/en/advanced/security-updates). If you are, update to one of the stable releases, preferably the latest.
+Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/advanced/security-updates). If you are, update to one of the stable releases, preferably the latest.
 
 ## Use TLS
 
 If your app deals with or transmits sensitive data, use [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) to secure the connection and the data. This technology encrypts data before it is sent from the client to the server, thus preventing some common (and easy) hacks. Although Ajax and POST requests might not be visibly obvious and seem "hidden" in browsers, their network traffic is vulnerable to [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) and [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply the next progression of SSL](<%3Chttps://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx%3E>). In other words, if you were using SSL before, consider upgrading to TLS. In general, we recommend Nginx to handle TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply the next progression of SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). In other words, if you were using SSL before, consider upgrading to TLS. In general, we recommend Nginx to handle TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -139,9 +139,9 @@ determine an app is running Express.
 
 Express also sends its own formatted "404 Not Found" messages and formatter error
 response messages. These can be changed by
-[adding your own not found handler](/en/starter/faq#how-do-i-handle-404-responses)
+[adding your own not found handler](/starter/faq#how-do-i-handle-404-responses)
 and
-[writing your own error handler](/en/guide/error-handling#writing-error-handlers):
+[writing your own error handler](/guide/error-handling#writing-error-handlers):
 
 ```js
 // last app.use calls right before app.listen():

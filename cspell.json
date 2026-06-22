@@ -1,0 +1,29 @@
+{
+  "version": "0.2",
+  "language": "en,en-US",
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./project-words.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["project-words"],
+  "ignoreRegExpList": ["/@[-\\w]+/g", "/GHSA-[a-z0-9-]+/gi", "/CVE-[0-9-]+/g", "/\\]\\([^)]*\\)/g"],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    ".astro/**",
+    "package-lock.json",
+    "public/**",
+    "**/*.svg",
+    "**/*.min.*",
+    "LICENSE.md",
+    "CNAME",
+    ".lycheeignore",
+    "project-words.txt",
+    "src/content/{pages,docs}/{de,es,fr,it,ja,ko,pt-br,zh-cn,zh-tw}/**",
+    "src/i18n/ui/{de,es,fr,it,ja,ko,pt-br,zh-cn,zh-tw}.json",
+    "**/resources/middleware/**"
+  ]
+}

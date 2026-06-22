@@ -86,7 +86,7 @@ Das Aktivieren von `trust proxy` hat folgende Auswirkungen:
 
 <ul>
   <li markdown="1">
-    Der Wert von [req.hostname](/en/api#req.hostname) wird vom Wert abgeleitet, der im
+    Der Wert von [req.hostname](/api#req.hostname) wird vom Wert abgeleitet, der im
     `X-Forwarded-Host` Header gesetzt wurde , die vom Client oder vom Proxy gesetzt werden kann.
   </li>
   <li markdown="1">
@@ -95,7 +95,7 @@ Das Aktivieren von `trust proxy` hat folgende Auswirkungen:
     (/en/api#req.protocol).
   </li>
   <li markdown="1">
-    Die Werte [req.ip](/en/api#req.ip) und [req.ips](/en/api#req.ips) werden auf der Basis der
+    Die Werte [req.ip](/api#req.ip) und [req.ips](/api#req.ips) werden auf der Basis der
     Socket-Adresse und des `X-Forwarded-For` Headers gefüllt beginnend an der ersten nicht
     vertrauenswürdigen Adresse.
   </li>

@@ -39,7 +39,7 @@ export function shouldIncludeInFeed(id: string): boolean {
 }
 
 export function getLinkedTitleContent(title: string, id: string, site: URL): string {
-  const link = new URL(`/blog/${id}/`, site).href;
+  const link = new URL(`/en/blog/${id}/`, site).href;
 
   return `<a href="${link}">${title}</a>`;
 }

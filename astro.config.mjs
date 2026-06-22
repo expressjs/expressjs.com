@@ -11,6 +11,9 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import redirects from './src/config/redirect.js';
 import { accessibleTablesIntegration } from './src/plugins/rehype-accessible-tables.mjs';
+import remarkRewriteLocalizedLinks from './src/plugins/remark-rewrite-localized-links.mjs';
+import remarkCodeTabs from './src/plugins/remark-code-tabs.mjs';
+import rehypeRewriteLocalizedLinks from './src/plugins/rehype-rewrite-localized-links.mjs';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
@@ -22,7 +25,12 @@ export default defineConfig({
   redirects,
   site,
   markdown: {
+    // Link localization (Markdown links + raw HTML/JSX `<a href>`). Configuration —
+    // localized sections, versioned sections, default version, and the "global" pages
+    // exception — lives in the plugin defaults; no options needed here.
+    remarkPlugins: [remarkRewriteLocalizedLinks, remarkCodeTabs],
     rehypePlugins: [
+      rehypeRewriteLocalizedLinks,
       rehypeSlug,
       [
         rehypeAutolinkHeadings,

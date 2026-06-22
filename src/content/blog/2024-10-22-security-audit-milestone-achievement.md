@@ -38,7 +38,7 @@ For full details on the audit results, you can access the [official audit report
 
 At Express, security is a top priority, and we believe in the importance of transparency when it comes to vulnerabilities and their resolution. This audit not only highlights our proactive approach but also reinforces our ongoing commitment to building a secure web framework for all.
 
-We strongly recommend all users update to the latest versions of the affected packages to benefit from the recent security fixes. For more information on the patches and how to upgrade, please refer to our [September 2024 Security Release announcement](/en/blog/2024-09-29-security-releases).
+We strongly recommend all users update to the latest versions of the affected packages to benefit from the recent security fixes. For more information on the patches and how to upgrade, please refer to our [September 2024 Security Release announcement](/blog/2024-09-29-security-releases).
 
 ## A Word of Thanks
 

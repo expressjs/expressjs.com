@@ -7,7 +7,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express はルーティングおよびミドルウェアの Web フレームワークで、独自の最小限の機能を持っています。Express アプリケーションは、基本的にはミドルウェア関数の一連の呼び出しです。
 
-_Middleware_ 関数は、[request object](/en/5x/api#req) (`req`) にアクセスできる関数です。 [response object](/en/5x/api#res) (`res`) と、アプリケーションのリクエストレスポンスサイクルの次のミドルウェア関数。 次のミドルウェア関数は通常`next`という名前の変数で表されます。
+_Middleware_ 関数は、[request object](/api#req) (`req`) にアクセスできる関数です。 [response object](/api#res) (`res`) と、アプリケーションのリクエストレスポンスサイクルの次のミドルウェア関数。 次のミドルウェア関数は通常`next`という名前の変数で表されます。
 
 ミドルウェア機能は以下のタスクを実行できます。
 
@@ -31,7 +31,7 @@ Express アプリケーションでは、次のタイプのミドルウェアを
 
 ## アプリケーションレベルのミドルウェア
 
-`app.use()` と `app()` を使用して、アプリケーションレベルのミドルウェアを [app object](/en/5x/api#app) のインスタンスにバインドします。 ETHOD()関数。`METHOD`はミドルウェア関数が小文字で処理するHTTPメソッドです(GET、PUT、POSTなど)。
+`app.use()` と `app()` を使用して、アプリケーションレベルのミドルウェアを [app object](/api#app) のインスタンスにバインドします。 ETHOD()関数。`METHOD`はミドルウェア関数が小文字で処理するHTTPメソッドです(GET、PUT、POSTなど)。
 
 この例では、マウントパスのないミドルウェア関数を示します。 この関数はアプリがリクエストを受け取るたびに実行されます。
 
@@ -262,7 +262,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-エラー処理ミドルウェアの詳細については、[Error handling](/en/guide/error-handling)を参照してください。
+エラー処理ミドルウェアの詳細については、[Error handling](/guide/error-handling)を参照してください。
 
 ## 組み込みのミドルウェア
 
@@ -271,9 +271,9 @@ functions that were previously included with Express are now in separate modules
 
 Express には次のミドルウェア関数が組み込まれています。
 
-- [express.static](/en/5x/api#express.static) は、HTML ファイル、画像などの静的なアセットを提供します。
-- [express.json](/en/5x/api#express.json) は、JSON ペイロードで受信したリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
-- [express.urlencoded](/en/5x/api#express.urlencoded) は、URLエンコードされたペイロードで受信するリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
+- [express.static](/api#express.static) は、HTML ファイル、画像などの静的なアセットを提供します。
+- [express.json](/api#express.json) は、JSON ペイロードで受信したリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
+- [express.urlencoded](/api#express.urlencoded) は、URLエンコードされたペイロードで受信するリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
 
 ## サードパーティのミドルウェア
 
@@ -296,4 +296,4 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 ```
 
-Expressで一般的に使用されるサードパーティミドルウェア関数の部分的なリストについては、[サードパーティミドルウェア](../resources/middleware)を参照してください。
+Expressで一般的に使用されるサードパーティミドルウェア関数の部分的なリストについては、[サードパーティミドルウェア](/resources/middleware)を参照してください。
