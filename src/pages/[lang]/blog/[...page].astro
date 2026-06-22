@@ -7,19 +7,14 @@ import type { TabItem } from '@components/primitives';
 import { PostCard, PageHead, Pagination } from '@components/patterns';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { PaginateFunction } from 'astro';
+import { formatPubDate, sortByPubDateDesc } from '@/utils/rss';
 
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
   const PAGE_SIZE = 6;
   const allPosts = await getCollection('blog');
 
   return Object.keys(languages).flatMap((lang) => {
-    const langPosts = allPosts
-      .filter((post) => post.id !== 'write-post')
-      .sort((a, b) => {
-        const aFile = a.id.split('/').pop() ?? '';
-        const bFile = b.id.split('/').pop() ?? '';
-        return bFile.localeCompare(aFile);
-      });
+    const langPosts = sortByPubDateDesc(allPosts.filter((post) => post.id !== 'write-post'));
 
     const allTags = [...new Set(langPosts.flatMap((p) => p.data.tags ?? []))];
 
@@ -34,15 +29,6 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction 
 const { page, allTags, langPosts, pageSize } = Astro.props;
 const { lang } = Astro.params;
 const pagePosts = page.data as CollectionEntry<'blog'>[];
-
-function getDate(id: string) {
-  const filename = id.split('/').pop() ?? id;
-  return new Date(filename.substring(0, 10)).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
-}
 
 function formatTagLabel(tag: string) {
   const spaced = tag.replace(/-/g, ' ');
@@ -63,7 +49,7 @@ function getPostProps(post: CollectionEntry<'blog'>) {
       src: a.github ? `https://github.com/${a.github}.png` : '',
       name: a.name ?? '',
     })),
-    avatarCaption: getDate(post.id),
+    avatarCaption: formatPubDate(post, { month: 'short', day: 'numeric', year: 'numeric' }),
   };
 }
 
