@@ -5,7 +5,7 @@ import { Container, H1, H2, Body, Button, Flex } from '@components/primitives';
 ---
 
 <Layout title="404 - Page Not Found" description="The page you are looking for could not be found.">
-  <Container>
+  <Container class="not-found">
     <div>
       <H1>404</H1>
       <H2>Page Not Found</H2>
@@ -25,3 +25,9 @@ import { Container, H1, H2, Body, Button, Flex } from '@components/primitives';
     </div>
   </Container>
 </Layout>
+
+<style>
+  .not-found {
+    margin-block-start: var(--space-24);
+  }
+</style>
