@@ -247,12 +247,31 @@ empty array. This header can be set by the client or by the proxy.
 For example, if `X-Forwarded-For` is `client, proxy1, proxy2`, `req.ips` would be
 `["client", "proxy1", "proxy2"]`, where `proxy2` is the furthest downstream.
 
+```js
+// normal request, or `trust proxy` disabled (the default)
+console.dir(req.ips);
+// => []
+
+// app.set('trust proxy', true) and
+// request header `X-Forwarded-For: client, proxy1, proxy2`
+console.dir(req.ips);
+// => ['client', 'proxy1', 'proxy2']
+```
+
 ### req.method
 
 <Signature type="String" />
 
 Contains a string corresponding to the HTTP method of the request:
 `GET`, `POST`, `PUT`, and so on.
+
+```js
+app.use(function (req, res, next) {
+  console.dir(req.method);
+  // => 'GET'
+  next();
+});
+```
 
 ### req.originalUrl
 
@@ -399,6 +418,14 @@ Check out the [query parser application setting](/api/application/#application-s
 
 This property holds a reference to the [response object](/api/response)
 that relates to this request object.
+
+```js
+app.get('/', function (req, res) {
+  console.dir(req.res === res);
+  // => true
+  res.send('OK');
+});
+```
 
 ### req.route
 
@@ -563,6 +590,15 @@ Returns the first accepted charset of the specified character sets,
 based on the request's `Accept-Charset` HTTP header field.
 If none of the specified charsets is accepted, returns `false`.
 
+```js
+// Accept-Charset: utf-8, iso-8859-1;q=0.5
+req.acceptsCharsets('utf-8', 'iso-8859-1');
+// => 'utf-8'
+
+req.acceptsCharsets('us-ascii');
+// => false
+```
+
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
 ### req.acceptsEncodings()
@@ -578,6 +614,15 @@ For more information, or if you have issues or concerns, see [accepts](https://g
 Returns the first accepted encoding of the specified encodings,
 based on the request's `Accept-Encoding` HTTP header field.
 If none of the specified encodings is accepted, returns `false`.
+
+```js
+// Accept-Encoding: gzip, deflate
+req.acceptsEncodings('gzip', 'deflate');
+// => 'gzip'
+
+req.acceptsEncodings('br');
+// => false
+```
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
@@ -599,6 +644,15 @@ If none of the specified languages is accepted, returns `false`.
 If no `lang` argument is given, then `req.acceptsLanguages()`
 returns all languages from the HTTP `Accept-Language` header
 as an `Array`.
+
+```js
+// Accept-Language: en;q=0.8, es
+req.acceptsLanguages('en', 'es');
+// => 'es'
+
+req.acceptsLanguages();
+// => ['es', 'en']
+```
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 

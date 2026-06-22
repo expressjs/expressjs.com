@@ -96,6 +96,33 @@ may not be a function and instead a string or other user-input.
 
 </Alert>
 
+```cjs title="index.cjs" ins={5}
+const express = require('express');
+const app = express();
+
+// parse requests with a Content-Type of application/json
+app.use(express.json());
+
+app.post('/profile', (req, res) => {
+  console.dir(req.body);
+  res.json(req.body);
+});
+```
+
+```mjs title="index.mjs" ins={6}
+import express from 'express';
+
+const app = express();
+
+// parse requests with a Content-Type of application/json
+app.use(express.json());
+
+app.post('/profile', (req, res) => {
+  console.dir(req.body);
+  res.json(req.body);
+});
+```
+
 ### express.raw()
 
 <Signature returns="Function">
@@ -155,6 +182,33 @@ Testing that `req.body` is a `Buffer` before calling buffer methods is recommend
 
 </Alert>
 
+```cjs title="index.cjs" ins={5}
+const express = require('express');
+const app = express();
+
+// parse requests with a Content-Type of application/octet-stream into a Buffer
+app.use(express.raw());
+
+app.post('/upload', (req, res) => {
+  console.dir(Buffer.isBuffer(req.body)); // => true
+  res.send(`received ${req.body.length} bytes`);
+});
+```
+
+```mjs title="index.mjs" ins={6}
+import express from 'express';
+
+const app = express();
+
+// parse requests with a Content-Type of application/octet-stream into a Buffer
+app.use(express.raw());
+
+app.post('/upload', (req, res) => {
+  console.dir(Buffer.isBuffer(req.body)); // => true
+  res.send(`received ${req.body.length} bytes`);
+});
+```
+
 ### express.Router()
 
 <Signature returns="Router">
@@ -201,7 +255,13 @@ For more information, see [Router](/api/router/).
           [dotfiles](#dotfiles) below.
         </Param>
         <Param name="etag" type="Boolean" default="true">
-          Enable or disable etag generation. NOTE: `express.static` always sends weak ETags.
+          Enable or disable etag generation.
+
+          <Alert type="info">
+
+          `express.static` always sends weak ETags.
+
+          </Alert>
         </Param>
         <Param name="extensions" type="String[] | Boolean" default="false">
           Sets file extension fallbacks: If a file is not found, search for files with the specified
@@ -253,7 +313,7 @@ It serves static files and is based on [serve-static](/resources/middleware/serv
 
 <Alert type="info">
 
-NOTE: For best results, [use a reverse
+For best results, [use a reverse
 proxy](/advanced/best-practice-performance#use-a-reverse-proxy) cache to improve performance of
 serving static assets.
 
@@ -308,7 +368,30 @@ Arguments:
 
 Here is an example of using the `express.static` middleware function with an elaborate options object:
 
-```js
+```cjs title="index.cjs" ins={16}
+const express = require('express');
+const app = express();
+
+const options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders(res, path, stat) {
+    res.set('x-timestamp', Date.now());
+  },
+};
+
+app.use(express.static('public', options));
+```
+
+```mjs title="index.mjs" ins={17}
+import express from 'express';
+
+const app = express();
+
 const options = {
   dotfiles: 'ignore',
   etag: false,
@@ -386,6 +469,33 @@ multiple ways, for example stacking multiple parsers `req.body` may be from a di
 Testing that `req.body` is a string before calling string methods is recommended.
 
 </Alert>
+
+```cjs title="index.cjs" ins={5}
+const express = require('express');
+const app = express();
+
+// parse requests with a Content-Type of text/plain into a string
+app.use(express.text());
+
+app.post('/', (req, res) => {
+  console.dir(typeof req.body); // => 'string'
+  res.send(req.body);
+});
+```
+
+```mjs title="index.mjs" ins={6}
+import express from 'express';
+
+const app = express();
+
+// parse requests with a Content-Type of text/plain into a string
+app.use(express.text());
+
+app.post('/', (req, res) => {
+  console.dir(typeof req.body); // => 'string'
+  res.send(req.body);
+});
+```
 
 ### express.urlencoded()
 
@@ -474,3 +584,30 @@ fail in multiple ways, for example `foo` may not be there or may not be a string
 may not be a function and instead a string or other user-input.
 
 </Alert>
+
+```cjs title="index.cjs" ins={5}
+const express = require('express');
+const app = express();
+
+// parse requests with a Content-Type of application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/profile', (req, res) => {
+  console.dir(req.body);
+  res.json(req.body);
+});
+```
+
+```mjs title="index.mjs" ins={6}
+import express from 'express';
+
+const app = express();
+
+// parse requests with a Content-Type of application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/profile', (req, res) => {
+  console.dir(req.body);
+  res.json(req.body);
+});
+```

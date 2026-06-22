@@ -65,6 +65,33 @@ app.use('/calendar', router);
   </Fragment>
 </Signature>
 
+Creates a new router object.
+
+```cjs title="index.cjs" ins={2}
+const express = require('express');
+const router = express.Router({ caseSensitive: true, strict: true });
+
+router.get('/events', (req, res) => {
+  res.send('events');
+});
+
+// mount the router on an app
+app.use('/calendar', router);
+```
+
+```mjs title="index.mjs" ins={3}
+import express from 'express';
+
+const router = express.Router({ caseSensitive: true, strict: true });
+
+router.get('/events', (req, res) => {
+  res.send('events');
+});
+
+// mount the router on an app
+app.use('/calendar', router);
+```
+
 ### router.all()
 
 <Signature returns="Router">
@@ -460,10 +487,16 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 The `router.use()` method also supports named parameters so that your mount points
 for other routers can benefit from preloading using named parameters.
 
-**NOTE**: Although these middleware functions are added via a particular router, _when_
+<Alert type="info">
+
+Although these middleware functions are added via a particular router, _when_
 they run is defined by the path they are attached to (not the router). Therefore,
 middleware added via one router may run for other routers if its routes
-match. For example, this code shows two different routers mounted on the same path:
+match.
+
+</Alert>
+
+For example, this code shows two different routers mounted on the same path:
 
 ```js
 const authRouter = express.Router();
