@@ -1084,7 +1084,9 @@ app.get('title'); // "My Site"
 
 The following table lists application settings.
 
-Note that sub-apps will:
+<Alert type="info">
+
+Sub-apps will:
 
 - Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 - Inherit the value of settings with no default value; these are explicitly noted in the table below.
@@ -1092,10 +1094,18 @@ Note that sub-apps will:
 Exceptions: Sub-apps will inherit the value of `trust proxy` even though it has a default value (for backward-compatibility);
 Sub-apps will not inherit the value of `view cache` in production (when `NODE_ENV` is "production").
 
+</Alert>
+
 <Signature attributesTitle="Settings">
   <Fragment slot="attributes">
     <Param name="case sensitive routing" type="Boolean" default="N/A (undefined)">
-      Enable case sensitivity. When enabled, "/Foo" and "/foo" are different routes. When disabled, "/Foo" and "/foo" are treated the same. **NOTE**: Sub-apps will inherit the value of this setting.
+      Enable case sensitivity. When enabled, "/Foo" and "/foo" are different routes. When disabled, "/Foo" and "/foo" are treated the same.
+
+      <Alert type="info">
+
+      Sub-apps will inherit the value of this setting.
+
+      </Alert>
     </Param>
     <Param name="env" type="String" default='process.env.NODE_ENV (NODE_ENV environment variable) or "development" if NODE_ENV is not set.'>
       Environment mode. Be sure to set to "production" in a production environment; see [Production best practices: performance and reliability](/advanced/best-practice-performance#things-to-do-in-your-environment--setup).
@@ -1107,38 +1117,89 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
       Specifies the default JSONP callback name.
     </Param>
     <Param name="json escape" type="Boolean" default="N/A (undefined)">
-      Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this is to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML. **NOTE**: Sub-apps will inherit the value of this setting.
+      Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this is to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML.
+
+      <Alert type="info">
+
+      Sub-apps will inherit the value of this setting.
+
+      </Alert>
     </Param>
     <Param name="json replacer" type="Function | Array" default="N/A (undefined)">
-      The ['replacer' argument used by `JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#the_replacer_parameter). **NOTE**: Sub-apps will inherit the value of this setting.
+      The ['replacer' argument used by `JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#the_replacer_parameter).
+
+      <Alert type="info">
+
+      Sub-apps will inherit the value of this setting.
+
+      </Alert>
     </Param>
     <Param name="json spaces" type="Number | String" default="N/A (undefined)">
-      The ['space' argument used by `JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#the_space_parameter). This is typically set to the number of spaces to use to indent prettified JSON. **NOTE**: Sub-apps will inherit the value of this setting.
+      The ['space' argument used by `JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#the_space_parameter). This is typically set to the number of spaces to use to indent prettified JSON.
+
+      <Alert type="info">
+
+      Sub-apps will inherit the value of this setting.
+
+      </Alert>
     </Param>
     <Param name="query parser" type="Boolean | String | Function" default='"simple"'>
       Disable query parsing by setting the value to `false`, or set the query parser to use either "simple" or "extended" or a custom query string parsing function. The simple query parser is based on Node's native query parser, [querystring](https://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.com/package/qs). A custom query string parsing function will receive the complete query string, and must return an object of query keys and their values.
     </Param>
     <Param name="strict routing" type="Boolean" default="N/A (undefined)">
-      Enable strict routing. When enabled, the router treats "/foo" and "/foo/" as different. Otherwise, the router treats "/foo" and "/foo/" as the same. **NOTE**: Sub-apps will inherit the value of this setting.
+      Enable strict routing. When enabled, the router treats "/foo" and "/foo/" as different. Otherwise, the router treats "/foo" and "/foo/" as the same.
+
+      <Alert type="info">
+
+      Sub-apps will inherit the value of this setting.
+
+      </Alert>
     </Param>
     <Param name="subdomain offset" type="Number" default="2">
       The number of dot-separated parts of the host to remove to access subdomain.
     </Param>
     <Param name="trust proxy" type="Boolean | String | Number | Function | Array" default="false (disabled)">
-      Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then contains an array of IP addresses the client is connected through. To enable it, use the values described in the trust proxy options table below. The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation. **NOTE**: Sub-apps _will_ inherit the value of this setting, even though it has a default value.
+      Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client.
+
+      <Alert type="info">
+
+      `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.
+
+      </Alert>
+
+      When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then contains an array of IP addresses the client is connected through. To enable it, use the values described in the trust proxy options table below. The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
+
+      <Alert type="info">
+
+      Sub-apps _will_ inherit the value of this setting, even though it has a default value.
+
+      </Alert>
     </Param>
-    <Param name="views" type="String or Array" default="process.cwd() + '/views'">
+    <Param name="views" type="String | Array" default="process.cwd() + '/views'">
       A directory or an array of directories for the application's views. If an array, the views are looked up in the order they occur in the array.
     </Param>
     <Param name="view cache" type="Boolean" default="true in production, otherwise undefined.">
-      Enables view template compilation caching. **NOTE**: Sub-apps will not inherit the value of this setting in production (when `NODE_ENV` is "production").
+      Enables view template compilation caching.
+
+      <Alert type="info">
+
+      Sub-apps will not inherit the value of this setting in production (when `NODE_ENV` is "production").
+
+      </Alert>
     </Param>
     <Param name="view engine" type="String" default="N/A (undefined)">
-      The default engine extension to use when omitted. **NOTE**: Sub-apps will inherit the value of this setting.
+      The default engine extension to use when omitted.
+
+      <Alert type="info">
+
+      Sub-apps will inherit the value of this setting.
+
+      </Alert>
     </Param>
     <Param name="x-powered-by" type="Boolean" default="true">
       Enables the "X-Powered-By: Express" HTTP header.
     </Param>
+
   </Fragment>
 </Signature>
 

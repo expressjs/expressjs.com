@@ -248,7 +248,13 @@ For more information, see [Router](/api/router/).
           [dotfiles](#dotfiles) below.
         </Param>
         <Param name="etag" type="Boolean" default="true">
-          Enable or disable etag generation. NOTE: `express.static` always sends weak ETags.
+          Enable or disable etag generation.
+
+          <Alert type="info">
+
+          `express.static` always sends weak ETags.
+
+          </Alert>
         </Param>
         <Param name="extensions" type="String[] | Boolean" default="false">
           Sets file extension fallbacks: If a file is not found, search for files with the specified
