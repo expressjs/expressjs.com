@@ -4,6 +4,7 @@ description: Erfahren Sie, wie Sie Express.js in Ihrer Node.js-Umgebung installi
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Bevor Sie beginnen, stellen Sie sicher, dass Sie [Node.js](https://nodejs.org/) 0.10 oder höher installiert haben. Erstellen Sie dann ein Verzeichnis für Ihre Anwendung und navigieren Sie hinein.
 
@@ -15,9 +16,7 @@ cd myapp
 Benutze den Befehl `npm init` um eine `package.json` Datei für deine Anwendung zu erstellen.
 Für weitere Informationen darüber, wie `package.json` funktioniert, siehe [Spezifikationen für npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
-```bash
-npm init
-```
+<PackageManagerCommand command="npm init" />
 
 Dieser Befehl fragt Sie nach einer Reihe von Dingen wie dem Namen und der Version Ihrer Anwendung.
 Im Moment können Sie einfach RETURN drücken, um die Standardwerte für die meisten von ihnen zu akzeptieren, mit der folgenden Ausnahme:
@@ -30,15 +29,11 @@ Geben Sie `app.js` ein, oder was auch immer der Name der Hauptdatei sein soll. W
 
 Installieren Sie jetzt Express im `myapp` Verzeichnis und speichern Sie es in der Abhängigkeitsliste. Zum Beispiel:
 
-```bash
-npm install express
-```
+<PackageManagerCommand command="npm install express" />
 
 Um Express vorübergehend zu installieren und nicht zur Abhängigkeitsliste hinzufügen:
 
-```bash
-npm install express --no-save
-```
+<PackageManagerCommand command="npm install express --no-save" />
 
 <Alert type="info">
 

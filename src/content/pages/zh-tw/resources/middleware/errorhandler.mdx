@@ -5,6 +5,7 @@ description: Development-only error handler middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.5.2"
@@ -36,9 +37,7 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install errorhandler
-```
+<PackageManagerCommand command="npm install errorhandler" />
 
 ## API
 

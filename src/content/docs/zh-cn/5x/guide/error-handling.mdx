@@ -164,9 +164,25 @@ app.use((err, req, res, next) => {
 
 你需要在其他 `app.use()` 调用和路由之后，最后定义错误处理中间件；例如：
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({
@@ -184,9 +200,25 @@ app.use((err, req, res, next) => {
 
 出于组织结构（以及高级框架）的目的，你可以定义多个错误处理中间件函数，这与你使用常规中间件函数的方式非常相似。 例如，为使用 `XHR` 发起的请求和未使用 `XHR` 发起的请求分别定义错误处理程序：
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({

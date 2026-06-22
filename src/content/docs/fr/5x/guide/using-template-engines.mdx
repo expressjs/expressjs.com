@@ -4,6 +4,7 @@ description: Découvrez comment intégrer et utiliser des moteurs de gabarits te
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Un _moteur de modèle_ vous permet d'utiliser des fichiers de modèles statiques dans votre application. Lors de l'exécution, le moteur de gabarit remplace les variables
 dans un fichier de gabarit par des valeurs réelles, et transforme le modèle en un fichier HTML envoyé au client.
@@ -11,7 +12,7 @@ Cette approche facilite la conception d'une page HTML.
 
 Le [générateur d'application Express](/starter/generator) utilise [Pug](https://pugjs.org/api/getting-started.html) par défaut, mais il supporte aussi [Handlebars](https://www.npmjs.com/package/handlebars), et [EJS](https://www.npmjs.com/package/ejs), entre autres.
 
-Pour afficher les fichiers de gabarit, définissez les [propriétés de réglage de l'application](/api#app.set), dans le `app.js` par défaut créé par le générateur:
+To render template files, set the following [application setting properties](/api/application/#appset), in the default `app.js` created by the generator:
 
 - `views`, le répertoire où se trouvent les fichiers de modèle. Ex. : `app.set('vues', './views')`.
   Par défaut, le répertoire `views` se trouve à la racine de l'application.
@@ -19,9 +20,7 @@ Pour afficher les fichiers de gabarit, définissez les [propriétés de réglage
 
 Ensuite, installez le paquet npm correspondant au moteur de gabarits ; par exemple pour installer Pug:
 
-```bash
-$ npm install pug --save
-```
+<PackageManagerCommand command="npm install pug --save" />
 
 <Alert type="Alerte">
 Les moteurs de gabarits conformes à la norme Express tels que Pug exportent une fonction nommée `__express(filePath, options, callback)`,

@@ -4,6 +4,7 @@ description: Scopri le migliori pratiche di sicurezza fondamentali per le app Ex
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Il termine _"produzione"_ si riferisce allo stadio del ciclo di vita del software quando un'applicazione o API è generalmente disponibile per i suoi utenti finali o consumatori. Al contrario, nella fase di _"sviluppo"_ stai ancora scrivendo attivamente e testando il codice, e l'applicazione non è aperta ad accesso esterno. Gli ambienti di sistema corrispondenti sono conosciuti rispettivamente come ambienti _production_ e _development_.
 
@@ -42,7 +43,7 @@ Assicurati inoltre di non utilizzare nessuna delle versioni Express vulnerabili 
 
 Se la tua app si occupa o trasmette dati sensibili, usa [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) per proteggere la connessione e i dati. Questa tecnologia crittografa i dati prima che vengano inviati dal client al server, impedendo così alcuni hack comuni (e facili). Anche se le richieste Ajax e POST potrebbero non essere visibilmente evidenti e sembrano "nascoste" nei browser, il loro traffico di rete è vulnerabile a [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) e [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Potresti avere familiarità con la crittografia Secure Socket Layer (SSL). In generale, si consiglia Nginx per gestire TLS. In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. Per un buon riferimento per configurare TLS su Nginx (e altri server), vedere [Configurazioni server consigliate (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Potresti avere familiarità con la crittografia Secure Socket Layer (SSL). In generale, si consiglia Nginx per gestire TLS. In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. In altre parole, se si utilizza SSL prima, considerare l'aggiornamento a TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
 
 Inoltre, uno strumento utile per ottenere un certificato TLS gratuito è [Let's Encrypt](https://letsencrypt.org/about/), un gratuito, automatizzato, e autorità di certificazione aperta (CA) fornite dal [Gruppo di ricerca sulla sicurezza Internet (ISRG)](https://www.abetterinternet.org/).
 
@@ -97,16 +98,24 @@ Ogni intestazione può essere configurata o disabilitata. Per saperne di più su
 
 Installare Elmo come qualsiasi altro modulo:
 
-```bash
-$ npm install helmet
-```
+<PackageManagerCommand command="npm install helmet" />
 
 Quindi per usarlo nel tuo codice:
 
-```js
+```cjs title="index.cjs"
 // ...
 
 const helmet = require('helmet');
+app.use(helmet());
+
+// ...
+```
+
+```mjs title="index.mjs"
+import helmet from 'helmet';
+
+// ...
+
 app.use(helmet());
 
 // ...
@@ -175,8 +184,20 @@ Utilizzando il nome predefinito del cookie di sessione puoi aprire la tua app ag
 
 Per evitare questo problema, usa i nomi generici dei cookie, ad esempio usando il middleware [express-session](https://www.npmjs.com/package/express-session):
 
-```js
+```cjs title="index.cjs"
 const session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'express-session';
+
 app.set('trust proxy', 1); // trust first proxy
 app.use(
   session({
@@ -198,9 +219,31 @@ Impostare le seguenti opzioni di cookie per migliorare la sicurezza:
 
 Ecco un esempio che usa [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('cookie-session');
 const express = require('express');
+const app = express();
+
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
+    },
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'cookie-session';
+import express from 'express';
+
 const app = express();
 
 const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour

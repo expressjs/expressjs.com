@@ -5,6 +5,7 @@ description: Node.js CORS middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.8.6"
@@ -39,9 +40,7 @@ Questo è un modulo [Node.js](https://nodejs.org/en/) disponibile attraverso la
 [npm registry](https://www.npmjs.com/). L'installazione viene eseguita usando il comando
 [`npm install`](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
-```sh
-$ npm install cors
-```
+<PackageManagerCommand command="npm install cors" />
 
 ## Utilizzo
 

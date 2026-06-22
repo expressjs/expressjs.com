@@ -28,8 +28,20 @@ _Middleware_ functions are functions that have access to the [request object](/a
 本文的后续部分将为该应用定义并添加三个中间件函数：
 一个名为 `myLogger`，用于打印简单的日志信息；一个名为 `requestTime`，用于显示 HTTP 请求的时间戳；还有一个名为 `validateCookies`，用于验证传入的 Cookie。
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -59,8 +71,27 @@ const myLogger = function (req, res, next) {
 加载中间件函数时，需调用 `app.use()` 并传入该中间件函数。
 例如，以下代码在根路径（/）路由之前加载 `myLogger` 中间件函数。
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+const myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 const myLogger = function (req, res, next) {
@@ -98,8 +129,29 @@ const requestTime = function (req, res, next) {
 
 该应用现在使用了 `requestTime` 中间件函数。 此外，根路径路由的回调函数使用了中间件函数挂载到`req`（请求对象）上的属性。
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 const requestTime = function (req, res, next) {
@@ -138,10 +190,34 @@ async function cookieValidator(cookies) {
 
 此处我们使用 [`cookie-parser`](/en/resources/middleware/cookie-parser) 中间件从 `req` 对象中解析传入的 Cookie，并将其传给 `cookieValidator` 函数。 `validateCookies` 中间件会返回一个 Promise，该 Promise 被拒绝时将自动触发我们的错误处理程序。
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cookieValidator = require('./cookieValidator');
+
+const app = express();
+
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cookieValidator from './cookieValidator';
 
 const app = express();
 
@@ -176,9 +252,7 @@ For more information about Express middleware, see: [Using Express middleware](/
 
 如果需要让你的中间件具备可配置性，可导出一个接收选项对象或其他参数的函数，该函数会根据输入参数返回对应的中间件实现。
 
-文件：`my-middleware.js`
-
-```js
+```cjs title="my-middleware.cjs"
 module.exports = function (options) {
   return function (req, res, next) {
     // Implement the middleware function based on the options object
@@ -187,10 +261,25 @@ module.exports = function (options) {
 };
 ```
 
+```mjs title="my-middleware.mjs"
+export default function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+}
+```
+
 该中间件现在可如下所示使用。
 
-```js
-const mw = require('./my-middleware.js');
+```cjs title="index.cjs"
+const mw = require('./my-middleware.cjs');
+
+app.use(mw({ option1: '1', option2: '2' }));
+```
+
+```mjs title="index.mjs"
+import mw from './my-middleware.mjs';
 
 app.use(mw({ option1: '1', option2: '2' }));
 ```

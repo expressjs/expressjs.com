@@ -5,6 +5,7 @@ description: Servir archivos estáticos
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.2.1"
@@ -18,9 +19,7 @@ Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
 [npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install serve-static
-```
+<PackageManagerCommand command="npm install serve-static" />
 
 ## API
 

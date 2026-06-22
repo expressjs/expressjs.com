@@ -4,6 +4,7 @@ description: Um guia para migrar seus aplicativos Express.js da versão 3 para 4
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Expresso 4 é uma mudança quebrada do Express 3. Isso significa que um aplicativo Expresso 3 não funcionará se você atualizar a versão Expresso em suas dependências.
 
@@ -235,7 +236,7 @@ ele, define algumas rotas e o conecta em um caminho no aplicativo principal.
 Por exemplo, crie um arquivo de roteador chamado `birds.js` no diretório de aplicativos,
 com o seguinte conteúdo:
 
-```js
+```cjs title="birds.cjs"
 var express = require('express');
 var router = express.Router();
 
@@ -256,10 +257,40 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware specific to this router
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+});
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 Em seguida, carregue o módulo do roteador no aplicativo:
 
-```js
+```cjs title="index.cjs"
 var birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -281,9 +312,7 @@ A tabela a seguir lista outras pequenas mas importantes mudanças no Express 4:
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>
-      Express 4 requer Node.js 0.10.x ou posterior e tem abandonado o suporte para Node.js 0.8.
-    </td>
+    <td>Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.</td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
@@ -360,7 +389,7 @@ Os arquivos de interesse são `app.js` e `package.json`.
 
 Considere um aplicativo Express v.3 com o seguinte arquivo `app.js`:
 
-```js
+```cjs title="index.cjs"
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -368,6 +397,40 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.methodOverride());
+app.use(express.session({ secret: 'your secret here' }));
+app.use(express.bodyParser());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler());
+}
+
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import routes from './routes';
+import user from './routes/user';
+import http from 'http';
+import path from 'path';
+
+const app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -420,9 +483,7 @@ Inicie o processo de migração instalando o middleware necessário para o aplic
 Express 4 e atualize o Express e o Pug para sua respectiva versão
 mais recente com o seguinte comando:
 
-```bash
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-```
+<PackageManagerCommand command="npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save" />
 
 Faça as seguintes alterações no `app.js`:
 
@@ -472,7 +533,7 @@ Executar o comando `npm` acima atualizará o `package.json` da seguinte forma:
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. O arquivo `app.js` será parecido com este:
 
-```js
+```cjs title="index.cjs"
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -522,6 +583,55 @@ server.listen(app.get('port'), () => {
 });
 ```
 
+```mjs title="index.mjs"
+import http from 'http';
+import express from 'express';
+import routes from './routes';
+import user from './routes/user';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import methodOverride from 'method-override';
+import session from 'express-session';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+import errorHandler from 'errorhandler';
+
+const app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
+app.use(logger('dev'));
+app.use(methodOverride());
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'uwotm8',
+  })
+);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
+}
+
+const server = http.createServer(app);
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+```
+
 <Alert type="informações">
 A menos que você precise trabalhar diretamente com o módulo 'http' (socket.io/SPDY/HTTPS), carregá-lo não é necessário, e o aplicativo pode ser simplesmente iniciado dessa forma:
 
@@ -557,18 +667,14 @@ o gerador de aplicativo Express 3 e então instalar o novo gerador
 Se você já tiver o gerador de aplicativo Express 3 instalado em seu sistema,
 você deve desinstalá-lo:
 
-```bash
-$ npm uninstall -g express
-```
+<PackageManagerCommand command="npm uninstall -g express" />
 
 Dependendo de como seus privilégios de arquivo e diretório são configurados,
 talvez você precise executar este comando com `sudo`.
 
 Agora instale o novo gerador:
 
-```bash
-$ npm install -g express-generator
-```
+<PackageManagerCommand command="npm install -g express-generator" />
 
 Dependendo de como seus privilégios de arquivo e diretório são configurados,
 talvez você precise executar este comando com `sudo`.

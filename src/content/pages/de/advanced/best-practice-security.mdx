@@ -4,6 +4,7 @@ description: Entdecken Sie wichtige Sicherheits-Best Practices für Express-Apps
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Der Begriff _"production"_ bezieht sich auf die Stufe im Software-Lebenszyklus, wenn eine Anwendung oder API allgemein für Endbenutzer oder Verbraucher verfügbar ist. Im Gegensatz dazu, in der _"development"_ Bühne, Sie immer noch aktiv schreiben und Test-Code, und die Anwendung ist nicht offen für externen Zugriff. Die entsprechenden Systemumgebungen werden als _production_ bzw. _development_ Umgebungen bezeichnet.
 
@@ -42,7 +43,7 @@ Vergewissern Sie sich auch, dass Sie keine der verwundbaren Express-Versionen au
 
 Wenn Ihre App sensible Daten behandelt oder übermittelt, verwenden Sie [Transport-Layer-Sicherheit](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) um die Verbindung und die Daten zu sichern. Diese Technologie verschlüsselt Daten, bevor sie vom Client an den Server gesendet werden, und verhindert so einige häufige (und einfache) Hacks. Obwohl Ajax und POST Anfragen möglicherweise nicht sichtbar sind und im Browser "versteckt" zu sein scheinen, ihr Netzwerkverkehr ist anfällig für [Paket-Sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) und [Man-in-the-middle-Angriffe](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Sie können mit der Verschlüsselung Secure Socket Layer (SSL) vertraut sein. Im Allgemeinen empfehlen wir Nginx mit TLS umzugehen. Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Für eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) siehe [Empfohlene Server-Konfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Sie können mit der Verschlüsselung Secure Socket Layer (SSL) vertraut sein. Im Allgemeinen empfehlen wir Nginx mit TLS umzugehen. Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. Mit anderen Worten: Wenn Sie SSL zuvor verwendet haben, sollten Sie ein Upgrade auf TLS in Betracht ziehen. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
 
 Ein praktisches Werkzeug, um ein kostenloses TLS-Zertifikat zu erhalten, ist [Let's Encrypt](https://letsencrypt.org/about/), ein kostenloses und automatisiertes TLS-Zertifikat und offene Zertifizierungsstelle (CA) zur Verfügung gestellt von der [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -97,16 +98,24 @@ Jeder Header kann konfiguriert oder deaktiviert werden. Um mehr darüber zu erfa
 
 Helm wie jedes andere Modul installieren:
 
-```bash
-$ npm install helmet
-```
+<PackageManagerCommand command="npm install helmet" />
 
 Dann verwenden Sie es in Ihrem Code:
 
-```js
+```cjs title="index.cjs"
 // ...
 
 const helmet = require('helmet');
+app.use(helmet());
+
+// ...
+```
+
+```mjs title="index.mjs"
+import helmet from 'helmet';
+
+// ...
+
 app.use(helmet());
 
 // ...
@@ -175,8 +184,20 @@ Die Verwendung des Standard-Sitzungs-Cookie-Namens kann Ihre App für Angriffe �
 
 Um dieses Problem zu vermeiden, verwenden Sie generische Cookie-Namen; zum Beispiel [express-session](https://www.npmjs.com/package/express-session) Middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'express-session';
+
 app.set('trust proxy', 1); // trust first proxy
 app.use(
   session({
@@ -198,9 +219,31 @@ Legen Sie die folgenden Cookie-Optionen fest, um die Sicherheit zu verbessern:
 
 Hier ist ein Beispiel mit [cookie-session](https://www.npmjs.com/package/cookie-session) Middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('cookie-session');
 const express = require('express');
+const app = express();
+
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
+    },
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'cookie-session';
+import express from 'express';
+
 const app = express();
 
 const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
@@ -242,7 +285,7 @@ $ npm audit
 
 Wenn du sicherer bleiben möchtest, bedenke [Snyk](https://snyk.io/).
 
-Snyk bietet sowohl ein [Kommandozeilenwerkzeug](https://www.npmjs.com/package/snyk) als auch eine [Github-Integration](https://snyk.io/docs/github), die Ihre Anwendung auf [Snyk's Open-Source-Verwundbarkeitsdatenbank](https://snyk.io/vuln/) auf bekannte Verwundbarkeiten in Ihren Abhängigkeiten überprüft. Installieren Sie das CLI wie folgt: Installieren Sie das CLI wie folgt:
+Snyk bietet sowohl ein [Kommandozeilenwerkzeug](https://www.npmjs.com/package/snyk) als auch eine [Github-Integration](https://snyk.io/docs/github), die Ihre Anwendung auf [Snyk's Open-Source-Verwundbarkeitsdatenbank](https://snyk.io/vuln/) auf bekannte Verwundbarkeiten in Ihren Abhängigkeiten überprüft. Installieren Sie das CLI wie folgt: Install the CLI as follows:
 
 ```bash
 $ npm install -g snyk

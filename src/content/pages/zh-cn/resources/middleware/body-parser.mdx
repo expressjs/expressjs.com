@@ -5,9 +5,10 @@ description: Node.js 请求体解析中间件
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.2"
+  version="2.3.0"
   github="https://github.com/expressjs/body-parser"
   npm="https://www.npmjs.com/package/body-parser"
 />
@@ -43,9 +44,7 @@ Node.js 请求体解析中间件
 
 ## 安装
 
-```sh
-$ npm install body-parser
-```
+<PackageManagerCommand command="npm install body-parser" />
 
 ## API
 

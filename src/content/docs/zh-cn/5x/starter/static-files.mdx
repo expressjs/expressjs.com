@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 `root` 参数用于指定托管静态资源的根目录。
-For more information on the `options` argument, see [express.static](/api#express.static).
+For more information on the `options` argument, see [express.static](/api/express/#expressstatic).
 
 例如，使用以下代码来托管 `public` 目录中的图片、CSS 文件和 JavaScript 文件：
 
@@ -55,7 +55,7 @@ serving static assets.
 
 </Alert>
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api#app.use) for the static directory, as shown below:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -73,8 +73,14 @@ http://localhost:3000/static/hello.html
 
 但是，你提供给 `express.static` 函数的路径是相对于你启动 `node` 进程的目录而言的。 如果你从其他目录启动 Express 应用，使用你要托管的目录的绝对路径会更安全：
 
-```js
+```cjs title="index.cjs"
 const path = require('path');
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```mjs title="index.mjs"
+import path from 'path';
+
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 

@@ -5,9 +5,10 @@ description: Node.js body parsing middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.2"
+  version="2.3.0"
   github="https://github.com/expressjs/body-parser"
   npm="https://www.npmjs.com/package/body-parser"
 />
@@ -50,9 +51,7 @@ and `toString` may not be a function and instead a string or other user input.
 
 ## インストール
 
-```sh
-$ npm install body-parser
-```
+<PackageManagerCommand command="npm install body-parser" />
 
 ## API
 

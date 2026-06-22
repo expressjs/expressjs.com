@@ -5,6 +5,7 @@ description: Node.js middleware di compressione
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.8.1"
@@ -28,9 +29,7 @@ Questo è un modulo [Node.js](https://nodejs.org/en/) disponibile attraverso la
 [npm registry](https://www.npmjs.com/). L'installazione viene eseguita usando il comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```bash
-$ npm install compression
-```
+<PackageManagerCommand command="npm install compression" />
 
 ## API
 

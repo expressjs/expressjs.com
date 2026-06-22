@@ -9,11 +9,11 @@ _Routing_ si riferisce a come gli endpoint di un'applicazione (URI) rispondono a
 Per un'introduzione al routing, vedere [Instradamento di base](/starter/basic-routing).
 
 Definisci il routing usando metodi dell'oggetto `app` Express che corrispondono ai metodi HTTP;
-per esempio, `app. et()` per gestire le richieste GET e `app.post` per gestire le richieste POST. Per una lista completa,
-vedi [app.METHOD](/api/application#appmethodpath-callback--callback-). Puoi anche usare [app.all()](/api/application#appallpath-callback--callback-) per gestire tutti i metodi HTTP e [app. se()](/api/application#appusepath-callback--callback) to
-specify middleware as the callback function (Vedi [Using middleware](/guide/using-middleware) for details).
+per esempio, `app. et()` per gestire le richieste GET e `app.post` per gestire le richieste POST. For a full list,
+see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-Questi metodi di routing specificano una funzione di callback (a volte chiamata "funzioni di handler") chiamata quando l'applicazione riceve una richiesta al percorso specificato (endpoint) e il metodo HTTP. In altre parole, l'applicazione "ascolta" per le richieste che corrispondono ai percorsi e ai metodi specificati, e quando rileva una corrispondenza, chiama la funzione di callback specificata.
+These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. In altre parole, l'applicazione "ascolta" per le richieste che corrispondono ai percorsi e ai metodi specificati, e quando rileva una corrispondenza, chiama la funzione di callback specificata.
 
 Infatti, i metodi di routing possono avere più di una funzione di callback come argomenti.
 Con funzioni di callback multiple, è importante fornire `next` come argomento alla funzione di callback e poi chiamare `next()` all'interno del corpo della funzione per consegnare il controllo
@@ -21,8 +21,19 @@ al prossimo callback.
 
 Il seguente codice è un esempio di un percorso molto basilare.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
@@ -50,7 +61,7 @@ app.post('/', (req, res) => {
 ```
 
 Express supporta metodi che corrispondono a tutti i metodi di richiesta HTTP: `get`, `post`, e così via.
-Per un elenco completo, vedere [app.METHOD](/api/application#appmethodpath-callback--callback-).
+For a full list, see [app.METHOD](/api/application#appmethod).
 
 C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. Ad esempio, il seguente gestore viene eseguito per le richieste al percorso `"/secret"` se si utilizza `GET`, `POST`, `PUT`, `DELETE`, o qualsiasi altro metodo di richiesta HTTP supportato nel [modulo http](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -312,17 +323,17 @@ app.get(
 
 I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.
 
-| Metodo                                                                 | Descrizione                                                                                                        |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Avverte un file da scaricare.                                                                                      |
-| [res.end()](/api/response#resenddata-encoding-callback)                | Termina il processo di risposta.                                                                                   |
-| [res.json()](/api/response#resjsonbody)                                | Invia una risposta JSON.                                                                                           |
-| [res.jsonp()](/api/response#resjsonpbody)                              | Invia una risposta JSON con il supporto JSONP.                                                                     |
-| [res.redirect()](/api/response#resredirectstatus-path)                 | Reindirizza una richiesta.                                                                                         |
-| [res.render()](/api/response#resrenderview--locals--callback)          | Render un modello di visualizzazione.                                                                              |
-| [res.send()](/api/response#ressendbody)                                | Invia una risposta di vari tipi.                                                                                   |
-| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Invia un file come un flusso di otte.                                                                              |
-| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Imposta il codice di stato della risposta e invia la sua rappresentazione della stringa come corpo della risposta. |
+| Metodo                                          | Descrizione                                                                                                        |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [res.download()](/api/response#resdownload)     | Avverte un file da scaricare.                                                                                      |
+| [res.end()](/api/response#resend)               | Termina il processo di risposta.                                                                                   |
+| [res.json()](/api/response#resjson)             | Invia una risposta JSON.                                                                                           |
+| [res.jsonp()](/api/response#resjsonp)           | Invia una risposta JSON con il supporto JSONP.                                                                     |
+| [res.redirect()](/api/response#resredirect)     | Reindirizza una richiesta.                                                                                         |
+| [res.render()](/api/response#resrender)         | Render un modello di visualizzazione.                                                                              |
+| [res.send()](/api/response#ressend)             | Invia una risposta di vari tipi.                                                                                   |
+| [res.sendFile()](/api/response#ressendfile)     | Invia un file come un flusso di otte.                                                                              |
+| [res.sendStatus()](/api/response#ressendstatus) | Imposta il codice di stato della risposta e invia la sua rappresentazione della stringa come corpo della risposta. |
 
 ## app.route()
 
@@ -353,7 +364,7 @@ L'esempio seguente crea un router come modulo, carica una funzione middleware in
 
 Crea un file router chiamato `birds.js` nella directory delle app, con il seguente contenuto:
 
-```js
+```cjs title="birds.cjs"
 const express = require('express');
 const router = express.Router();
 
@@ -376,10 +387,42 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 Quindi, caricare il modulo router nell'app:
 
-```js
+```cjs title="index.cjs"
 const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -388,7 +431,7 @@ app.use('/birds', birds);
 
 L'app sarà ora in grado di gestire le richieste di `/birds` e `/birds/about`, oltre a chiamare la funzione middleware `timeLog` che è specifica per il percorso.
 
-Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. Per renderlo accessibile, dovrai passare l'opzione `mergeParams` al costruttore Router [reference](/api/application#appusepath-callback--callback).
+Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
 
 ```js
 const router = express.Router({ mergeParams: true });

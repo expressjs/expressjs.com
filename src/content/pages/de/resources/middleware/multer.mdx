@@ -5,9 +5,10 @@ description: Middleware für den Umgang mit Multipart/Formulardaten
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.1.1"
+  version="2.2.0"
   github="https://github.com/express js/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -36,9 +37,7 @@ Diese README ist auch in anderen Sprachen verfügbar:
 
 ## Installation
 
-```sh
-$ npm install multer
-```
+<PackageManagerCommand command="npm install multer" />
 
 ## Auslastung
 
@@ -284,15 +283,16 @@ Ein Objekt, das die Größengrenzen der folgenden optionalen Eigenschaften angib
 
 Die folgenden Ganzzahlwerte sind verfügbar:
 
-| Schlüssel       | Beschreibung                                                                                         | Standard      |
-| --------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
-| "fieldNameSize" | Max. Feldnamensgröße                                                                                 | 100 Bytes     |
-| "fieldGröße"    | Maximale Feldwertgröße (in Bytes)                                                                    | 1MB           |
-| `Felder`        | Maximale Anzahl von Nicht-Dateifeldern                                                               | Unendlichkeit |
-| Dateigröße      | Für mehrteilige Formulare ist die maximale Dateigröße (in Bytes)                                     | Unendlichkeit |
-| `Dateien`       | Für mehrteilige Formulare ist die maximale Anzahl von Dateifeldern                                   | Unendlichkeit |
-| "Teile"         | Für mehrteilige Formulare ist die maximale Anzahl von Teilen (Felder + Dateien)                      | Unendlichkeit |
-| "headerPairs"   | Bei mehrteiligen Formularen ist die maximale Anzahl der Kopfzeilen-Schlüssel=>Werte-Paare zum Parsen | 2000          |
+| Schlüssel           | Beschreibung                                                                                         | Standard      |
+| ------------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
+| "fieldNameSize"     | Max. Feldnamensgröße                                                                                 | 100 Bytes     |
+| "fieldGröße"        | Maximale Feldwertgröße (in Bytes)                                                                    | 1MB           |
+| `Felder`            | Maximale Anzahl von Nicht-Dateifeldern                                                               | Unendlichkeit |
+| Dateigröße          | Für mehrteilige Formulare ist die maximale Dateigröße (in Bytes)                                     | Unendlichkeit |
+| `Dateien`           | Für mehrteilige Formulare ist die maximale Anzahl von Dateifeldern                                   | Unendlichkeit |
+| "Teile"             | Für mehrteilige Formulare ist die maximale Anzahl von Teilen (Felder + Dateien)                      | Unendlichkeit |
+| "headerPairs"       | Bei mehrteiligen Formularen ist die maximale Anzahl der Kopfzeilen-Schlüssel=>Werte-Paare zum Parsen | 2000          |
+| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)                           | Unendlichkeit |
 
 Die Angabe der Grenzwerte kann dazu beitragen, Ihre Website vor Denial of Service (DoS) Attacken zu schützen.
 
@@ -316,6 +316,15 @@ function fileFilter(req, file, cb) {
   cb(new Error("I don't have a clue!"));
 }
 ```
+
+## Security
+
+Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
+
+- `fileSize` -- set to the maximum expected file size for your use case
+- `files` -- set to the maximum number of files per request
+- `fields` -- set to the maximum number of text fields per request
+- `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
 
 ## Fehlerbehandlung
 

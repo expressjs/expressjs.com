@@ -5,6 +5,7 @@ description: Meio de sessão de cookies
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.1.1"
@@ -44,9 +45,7 @@ Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
 [registro do npm](https://www.npmjs.com/). A instalação é feita usando o comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install cookie-session
-```
+<PackageManagerCommand command="npm install cookie-session" />
 
 ## API
 

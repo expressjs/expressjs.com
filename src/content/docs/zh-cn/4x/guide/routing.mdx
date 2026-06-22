@@ -10,18 +10,29 @@ For an introduction to routing, see [Basic routing](/starter/basic-routing).
 
 你可以使用 Express `app` 对象中与 HTTP 方法对应的方法来定义路由；
 例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 For a full list,
-see [app.METHOD](/api/application#appmethodpath-callback--callback-). You can also use [app.all()](/api/application#appallpath-callback--callback-) to handle all HTTP methods and [app.use()](/api/application#appusepath-callback--callback) to
+see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-这些路由方法会指定一个**回调函数**（有时称为“处理函数”），当应用程序收到指向指定路由（端点）和 HTTP 方法的请求时，该函数就会被调用。 换句话说，应用程序会“监听”匹配指定路由和方法的请求，当检测到匹配时，就会调用指定的回调函数。
+These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. 换句话说，应用程序会“监听”匹配指定路由和方法的请求，当检测到匹配时，就会调用指定的回调函数。
 
 事实上，路由方法可以接受多个回调函数作为参数。
 对于多个回调函数，务必在回调函数中传入`next`作为参数，然后在函数体内调用`next()`，将控制权传递给下一个回调函数。
 
 以下代码是一个非常基础的路由示例。
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
@@ -49,7 +60,7 @@ app.post('/', (req, res) => {
 ```
 
 Express 支持对应于所有 HTTP 请求方法的方法：get、post 等。
-For a full list, see [app.METHOD](/api/application#appmethodpath-callback--callback-).
+For a full list, see [app.METHOD](/api/application#appmethod).
 
 有一种特殊的路由方法 **app.all()**，用于为某一路径加载所有 HTTP 请求方法通用的中间件函数。 例如，无论使用 `GET`、`POST`、`PUT`、`DELETE` 还是 [http 模块](https://nodejs.org/api/http.html#http_http_methods)。
 
@@ -311,17 +322,17 @@ app.get(
 
 下表中的响应对象（`res`）方法可向客户端发送响应，并终止请求-响应循环。 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。
 
-| Method                                                                 | 描述                                                 |
-| ---------------------------------------------------------------------- | ---------------------------------------------------- |
-| [res.download()](/api/response#resdownloadpath--filename--options--fn) | 提示客户端下载一个文件。                             |
-| [res.end()](/api/response#resenddata-encoding-callback)                | 结束响应流程。                                       |
-| [res.json()](/api/response#resjsonbody)                                | 发送 JSON 响应。                                     |
-| [res.jsonp()](/api/response#resjsonpbody)                              | 发送支持 JSONP 的 JSON 响应。                        |
-| [res.redirect()](/api/response#resredirectstatus-path)                 | 重定向请求。                                         |
-| [res.render()](/api/response#resrenderview--locals--callback)          | 渲染视图模板。                                       |
-| [res.send()](/api/response#ressendbody)                                | 发送多种类型的响应。                                 |
-| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | 以八位字节流的形式发送文件。                         |
-| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | 设置响应状态码，并将其字符串表示形式作为响应体发送。 |
+| Method                                          | 描述                                                 |
+| ----------------------------------------------- | ---------------------------------------------------- |
+| [res.download()](/api/response#resdownload)     | 提示客户端下载一个文件。                             |
+| [res.end()](/api/response#resend)               | 结束响应流程。                                       |
+| [res.json()](/api/response#resjson)             | 发送 JSON 响应。                                     |
+| [res.jsonp()](/api/response#resjsonp)           | 发送支持 JSONP 的 JSON 响应。                        |
+| [res.redirect()](/api/response#resredirect)     | 重定向请求。                                         |
+| [res.render()](/api/response#resrender)         | 渲染视图模板。                                       |
+| [res.send()](/api/response#ressend)             | 发送多种类型的响应。                                 |
+| [res.sendFile()](/api/response#ressendfile)     | 以八位字节流的形式发送文件。                         |
+| [res.sendStatus()](/api/response#ressendstatus) | 设置响应状态码，并将其字符串表示形式作为响应体发送。 |
 
 ## app.route()
 
@@ -352,7 +363,7 @@ app
 
 在应用目录中创建一个名为 `birds.js` 的路由文件，内容如下：
 
-```js
+```cjs title="birds.cjs"
 const express = require('express');
 const router = express.Router();
 
@@ -375,10 +386,42 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 然后，在应用程序中加载路由模块：
 
-```js
+```cjs title="index.cjs"
 const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -387,7 +430,7 @@ app.use('/birds', birds);
 
 应用现在将能够处理指向 `/birds` 和 `/birds/about` 的请求，同时会调用该路由专用的 `timeLog` 中间件函数。
 
-但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appusepath-callback--callback).
+但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
 
 ```js
 const router = express.Router({ mergeParams: true });

@@ -5,6 +5,7 @@ description: Richiesta HTTP middleware logger per Node.js
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.11.0"
@@ -22,9 +23,7 @@ Questo è un modulo [Node.js](https://nodejs.org/en/) disponibile attraverso la
 [npm registry](https://www.npmjs.com/). L'installazione viene eseguita usando il comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install morgan
-```
+<PackageManagerCommand command="npm install morgan" />
 
 ## API
 
@@ -201,15 +200,15 @@ Se non viene fornito alcun formato, allora il valore predefinito è `web`.
 
 La versione HTTP della richiesta.
 
-##### :method
+#####
 
 Il metodo HTTP della richiesta.
 
-##### :pid
+#####
 
 L'ID di processo del processo Node.js che gestisce la richiesta.
 
-##### :referrer
+#####
 
 L'intestazione Referrer della richiesta. Questo userà l'intestazione standard errata Referer se esiste, altrimenti Referrer.
 
@@ -239,7 +238,7 @@ sono scritte, in millisecondi.
 L'argomento `digits` è un numero che specifica il numero di cifre da
 includere sul numero, default di `3`, che fornisce precisione microsecondo.
 
-##### :status
+#####
 
 Il codice di stato della risposta.
 
@@ -255,7 +254,7 @@ ha finito di essere scritta alla connessione, in millisecondi.
 L'argomento `digits` è un numero che specifica il numero di cifre da
 includere sul numero, default di `3`, che fornisce precisione microsecondo.
 
-##### :url
+#####
 
 L'URL della richiesta. Questo userà `req.originalUrl` se esiste, altrimenti `req.url`.
 

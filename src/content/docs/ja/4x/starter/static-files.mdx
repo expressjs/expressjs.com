@@ -14,8 +14,7 @@ express.static(root, [options]);
 ```
 
 `root` 引数は、静的アセットを提供するルートディレクトリを指定します。
-`root` 引数は、静的アセットを提供するルートディレクトリを指定します。
-引数 `options` の詳細については、 [express.static](/api#express.static) を参照してください。
+For more information on the `options` argument, see [express.static](/api/express/#expressstatic).
 
 例えば、`public`という名前のディレクトリに画像、CSSファイル、JavaScriptファイルを表示するには、次のコードを使用します。
 
@@ -57,7 +56,7 @@ serving static assets.
 
 </Alert>
 
-\`expressで提供されるファイルに対して、仮想パスプレフィックス(ファイルシステム内にパスが実際に存在しない場所)を作成します。 以下に示すように、staticディレクトリの[mount path](/api#app.use)を指定します。
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -75,8 +74,14 @@ http://localhost:3000/static/hello.html
 
 しかし、`express.static`関数に与えるパスは、`node`プロセスを起動したディレクトリからの相対パスです。 expressアプリを別のディレクトリから実行する場合、提供したいディレクトリの絶対パスを使用する方が安全です: expressアプリを別のディレクトリから実行する場合、提供したいディレクトリの絶対パスを使用する方が安全です:
 
-```js
+```cjs title="index.cjs"
 const path = require('path');
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```mjs title="index.mjs"
+import path from 'path';
+
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 

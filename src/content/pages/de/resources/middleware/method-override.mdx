@@ -5,6 +5,7 @@ description: HTTP-Verben überschreiben
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="3.0.0"
@@ -20,9 +21,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 [npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
 [`npm install` Befehl](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install method-override
-```
+<PackageManagerCommand command="npm install method-override" />
 
 ## API
 

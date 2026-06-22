@@ -5,9 +5,10 @@ description: Middleware per la gestione di dati multipart/form-data
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.1.1"
+  version="2.2.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -36,9 +37,7 @@ Questo README è disponibile anche in altre lingue:
 
 ## Installazione
 
-```sh
-$ npm install multer
-```
+<PackageManagerCommand command="npm install multer" />
 
 ## Utilizzo
 
@@ -283,15 +282,16 @@ Un oggetto che specifica i limiti di dimensione delle seguenti proprietà opzion
 
 Sono disponibili i seguenti valori interi:
 
-| Chiave          | Descrizione                                                                                 | Predefinito |
-| --------------- | ------------------------------------------------------------------------------------------- | ----------- |
-| `fieldNameSize` | Dimensione massima nome campo                                                               | 100 byte    |
-| `fieldSize`     | Dimensione massima del campo (in byte)                                                      | 1MB         |
-| `fields`        | Numero massimo di campi non file                                                            | Infinito    |
-| `fileSize`      | Per forme multiple, la dimensione massima del file (in byte)                                | Infinito    |
-| `files`         | Per forme multiple, il numero massimo di campi di file                                      | Infinito    |
-| `parts`         | Per forme multiple, il numero massimo di parti (campi + file)                               | Infinito    |
-| `headerPairs`   | Per forme multiparti, il numero massimo di chiavi intestazione=>valore coppie da analizzare | 2000        |
+| Chiave              | Descrizione                                                                                 | Predefinito |
+| ------------------- | ------------------------------------------------------------------------------------------- | ----------- |
+| `fieldNameSize`     | Dimensione massima nome campo                                                               | 100 byte    |
+| `fieldSize`         | Dimensione massima del campo (in byte)                                                      | 1MB         |
+| `fields`            | Numero massimo di campi non file                                                            | Infinito    |
+| `fileSize`          | Per forme multiple, la dimensione massima del file (in byte)                                | Infinito    |
+| `files`             | Per forme multiple, il numero massimo di campi di file                                      | Infinito    |
+| `parts`             | Per forme multiple, il numero massimo di parti (campi + file)                               | Infinito    |
+| `headerPairs`       | Per forme multiparti, il numero massimo di chiavi intestazione=>valore coppie da analizzare | 2000        |
+| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)                  | Infinito    |
 
 Specificare i limiti può aiutare a proteggere il vostro sito dagli attacchi di negazione del servizio (DoS).
 
@@ -315,6 +315,15 @@ function fileFilter(req, file, cb) {
   cb(new Error("I don't have a clue!"));
 }
 ```
+
+## Security
+
+Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
+
+- `fileSize` -- set to the maximum expected file size for your use case
+- `files` -- set to the maximum number of files per request
+- `fields` -- set to the maximum number of text fields per request
+- `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
 
 ## Gestione errori
 

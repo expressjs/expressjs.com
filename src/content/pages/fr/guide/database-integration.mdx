@@ -4,6 +4,7 @@ description: Découvrez comment intégrer différentes bases de données avec le
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Ajouter la possibilité de connecter des bases de données à des applications Express est juste une question de charger un pilote Node.js approprié pour la base de données dans votre application. Ce document explique brièvement comment ajouter et utiliser certains des modules Node.js les plus populaires pour les systèmes de base de données dans votre application Express :
 
@@ -34,14 +35,23 @@ Ces pilotes de bases de données sont parmi les nombreux qui sont disponibles. P
 
 ### Installation
 
-```bash
-$ npm install cassandra-driver
-```
+<PackageManagerCommand command="npm install cassandra-driver" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const cassandra = require('cassandra-driver');
+const client = new cassandra.Client({ contactPoints: ['localhost'] });
+
+client.execute('select key from system.local', (err, result) => {
+  if (err) throw err;
+  console.log(result.rows[0]);
+});
+```
+
+```mjs title="index.mjs"
+import cassandra from 'cassandra-driver';
+
 const client = new cassandra.Client({ contactPoints: ['localhost'] });
 
 client.execute('select key from system.local', (err, result) => {
@@ -52,18 +62,42 @@ client.execute('select key from system.local', (err, result) => {
 
 ## Couchbase
 
-**Module** : [couchnode](https://github.com/couchbase/couchnode)
+**Module**: [couchnode](https://github.com/couchbase/couchnode)
 
 ### Installation
 
-```bash
-$ npm install couchbase
-```
+<PackageManagerCommand command="npm install couchbase" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const couchbase = require('couchbase');
+const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
+
+// add a document to a bucket
+bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(result);
+  }
+});
+
+// get all documents with shoe size 13
+const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1';
+const query = N1qlQuery.fromString(n1ql);
+bucket.query(query, [13], (err, result) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(result);
+  }
+});
+```
+
+```mjs title="index.mjs"
+import couchbase from 'couchbase';
+
 const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
 
 // add a document to a bucket
@@ -89,17 +123,15 @@ bucket.query(query, [13], (err, result) => {
 
 ## CouchDB
 
-**Module** : [nano](https://github.com/dscape/nano)
+**Module**: [nano](https://github.com/dscape/nano)
 
 ### Installation
 
-```bash
-$ npm install nano
-```
+<PackageManagerCommand command="npm install nano" />
 
 ### Exemple
 
-```js
+```js title="index.js"
 const nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 const books = nano.db.use('books');
@@ -125,18 +157,32 @@ books.list((err, body) => {
 
 ## LevelDB
 
-**Module** : [levelup](https://github.com/rvagg/node-levelup)
+**Module**: [levelup](https://github.com/rvagg/node-levelup)
 
 ### Installation
 
-```bash
-$ npm install level levelup leveldown
-```
+<PackageManagerCommand command="npm install level levelup leveldown" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const levelup = require('levelup');
+const db = levelup('./mydb');
+
+db.put('name', 'LevelUP', (err) => {
+  if (err) return console.log('Ooops!', err);
+
+  db.get('name', (err, value) => {
+    if (err) return console.log('Ooops!', err);
+
+    console.log(`name=${value}`);
+  });
+});
+```
+
+```mjs title="index.mjs"
+import levelup from 'levelup';
+
 const db = levelup('./mydb');
 
 db.put('name', 'LevelUP', (err) => {
@@ -152,18 +198,37 @@ db.put('name', 'LevelUP', (err) => {
 
 ## MySQL
 
-**Module** : [mysql](https://github.com/felixge/node-mysql/)
+**Module**: [mysql](https://github.com/felixge/node-mysql/)
 
 ### Installation
 
-```bash
-$ npm install mysql
-```
+<PackageManagerCommand command="npm install mysql" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'dbuser',
+  password: 's3kreee7',
+  database: 'my_db',
+});
+
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
+  if (err) throw err;
+
+  console.log('The solution is: ', rows[0].solution);
+});
+
+connection.end();
+```
+
+```mjs title="index.mjs"
+import mysql from 'mysql';
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'dbuser',
@@ -184,17 +249,15 @@ connection.end();
 
 ## MongoDB
 
-**Module** : [mongodb](https://github.com/mongodb/node-mongodb-native)
+**Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 
 ### Installation
 
-```bash
-$ npm install mongodb
-```
+<PackageManagerCommand command="npm install mongodb" />
 
-### Exemple (v2.\*)
+### Example (v2.\*)
 
-```js
+```js title="index.js"
 const MongoClient = require('mongodb').MongoClient;
 
 MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
@@ -210,9 +273,9 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 });
 ```
 
-### Exemple (v3.\*)
+### Example (v3.\*)
 
-```js
+```js title="index.js"
 const MongoClient = require('mongodb').MongoClient;
 
 MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
@@ -230,22 +293,39 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
 });
 ```
 
-Si vous voulez un pilote de modèle objet pour MongoDB, regardez [Mongoose](https://github.com/LearnBoost/mongoose).
+If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
 
 ## Neo4j
 
-**Module** : [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
+**Module**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
 
 ### Installation
 
-```bash
-$ npm install neo4j-driver
-```
+<PackageManagerCommand command="npm install neo4j-driver" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const neo4j = require('neo4j-driver');
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'));
+
+const session = driver.session();
+
+session.readTransaction((tx) => {
+  return tx
+    .run('MATCH (n) RETURN count(n) AS count')
+    .then((res) => {
+      console.log(res.records[0].get('count'));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+```
+
+```mjs title="index.mjs"
+import neo4j from 'neo4j-driver';
+
 const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'));
 
 const session = driver.session();
@@ -264,20 +344,49 @@ session.readTransaction((tx) => {
 
 ## Oracle
 
-**Module** : [oracledb](https://github.com/oracle/node-oracledb)
+**Module**: [oracledb](https://github.com/oracle/node-oracledb)
 
 ### Installation
 
-REMARQUE : [Voir les conditions préalables à l'installation] (https://github.com/oracle/node-oracledb#-installation).
+NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
-```bash
-$ npm install oracledb
-```
+<PackageManagerCommand command="npm install oracledb" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const oracledb = require('oracledb');
+const config = {
+  user: '<your db user>',
+  password: '<your db password>',
+  connectString: 'localhost:1521/orcl',
+};
+
+async function getEmployee(empId) {
+  let conn;
+
+  try {
+    conn = await oracledb.getConnection(config);
+
+    const result = await conn.execute('select * from employees where employee_id = :id', [empId]);
+
+    console.log(result.rows[0]);
+  } catch (err) {
+    console.log('Ouch!', err);
+  } finally {
+    if (conn) {
+      // conn assignment worked, need to close
+      await conn.close();
+    }
+  }
+}
+
+getEmployee(101);
+```
+
+```mjs title="index.mjs"
+import oracledb from 'oracledb';
+
 const config = {
   user: '<your db user>',
   password: '<your db password>',
@@ -308,17 +417,15 @@ getEmployee(101);
 
 ## PostgreSQL
 
-**Module** : [pg-promise](https://github.com/vitaly-t/pg-promise)
+**Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 
 ### Installation
 
-```bash
-$ npm install pg-promise
-```
+<PackageManagerCommand command="npm install pg-promise" />
 
 ### Exemple
 
-```js
+```js title="index.js"
 const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://username:password@host:port/database');
 
@@ -333,17 +440,15 @@ db.one('SELECT $1 AS value', 123)
 
 ## Redis
 
-**Module** : [redis](https://github.com/mranney/node_redis)
+**Module**: [redis](https://github.com/mranney/node_redis)
 
 ### Installation
 
-```bash
-$ npm install redis
-```
+<PackageManagerCommand command="npm install redis" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const redis = require('redis');
 const client = redis.createClient();
 
@@ -366,19 +471,41 @@ client.hkeys('hash key', (err, replies) => {
 });
 ```
 
-## Serveur SQL
+```mjs title="index.mjs"
+import redis from 'redis';
 
-**Module** : [tedious](https://github.com/tediousjs/tedious)
+const client = redis.createClient();
+
+client.on('error', (err) => {
+  console.log(`Error ${err}`);
+});
+
+client.set('string key', 'string val', redis.print);
+client.hset('hash key', 'hashtest 1', 'some value', redis.print);
+client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
+
+client.hkeys('hash key', (err, replies) => {
+  console.log(`${replies.length} replies:`);
+
+  replies.forEach((reply, i) => {
+    console.log(`    ${i}: ${reply}`);
+  });
+
+  client.quit();
+});
+```
+
+## SQL Server
+
+**Module**: [tedious](https://github.com/tediousjs/tedious)
 
 ### Installation
 
-```bash
-$ npm install tedious
-```
+<PackageManagerCommand command="npm install tedious" />
 
 ### Exemple
 
-```js
+```js title="index.js"
 const Connection = require('tedious').Connection;
 const Request = require('tedious').Request;
 
@@ -429,17 +556,15 @@ function executeStatement() {
 
 ## SQLite
 
-**Module** : [sqlite3](https://github.com/mapbox/node-sqlite3)
+**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 
 ### Installation
 
-```bash
-$ npm install sqlite3
-```
+<PackageManagerCommand command="npm install sqlite3" />
 
 ### Exemple
 
-```js
+```js title="index.js"
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 
@@ -463,18 +588,46 @@ db.close();
 
 ## Elasticsearch
 
-**Module** : [elasticsearch](https://github.com/elastic/elasticsearch-js)
+**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 
 ### Installation
 
-```bash
-$ npm install elasticsearch
-```
+<PackageManagerCommand command="npm install elasticsearch" />
 
 ### Exemple
 
-```js
+```cjs title="index.cjs"
 const elasticsearch = require('elasticsearch');
+const client = elasticsearch.Client({
+  host: 'localhost:9200',
+});
+
+client
+  .search({
+    index: 'books',
+    type: 'book',
+    body: {
+      query: {
+        multi_match: {
+          query: 'express js',
+          fields: ['title', 'description'],
+        },
+      },
+    },
+  })
+  .then(
+    (response) => {
+      const hits = response.hits.hits;
+    },
+    (error) => {
+      console.trace(error.message);
+    }
+  );
+```
+
+```mjs title="index.mjs"
+import elasticsearch from 'elasticsearch';
+
 const client = elasticsearch.Client({
   host: 'localhost:9200',
 });

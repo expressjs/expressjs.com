@@ -206,9 +206,25 @@ app.use((err, req, res, next) => {
 
 Você define o middleware de erro duramente, depois de outro `app.use()` e roteia chamadas; por exemplo:
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({
@@ -229,9 +245,25 @@ várias funções de middleware com manipulação de erros, tanto quanto você p
 regulares. Por exemplo, para definir um manipulador de erro
 para solicitações feitas usando `XHR` e aqueles sem:
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({
@@ -278,7 +310,7 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
-Se você tiver um gerenciador de rotas com múltiplas funções de retorno de chamada, você pode usar o parâmetro `rota` para pular para o próximo manipulador de rota. Por exemplo:
+If you have a route handler with multiple callback functions, you can use the `route` parameter to skip to the next route handler. Por exemplo:
 
 ```js
 app.get(

@@ -4,6 +4,7 @@ description: Apprenez à utiliser les middleware dans les applications Express.j
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express est un framework web de routage et de middleware qui possède des fonctionnalités minimales : Une application Express est essentiellement une série d'appels de fonctions de middleware.
 
@@ -35,8 +36,19 @@ Lier le middleware au niveau de l'application à une instance de l'objet [app ob
 
 Cet exemple montre une fonction middleware sans chemin de montage. La fonction est exécutée chaque fois que l'application reçoit une requête.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -167,8 +179,58 @@ Charger le middleware au niveau du routeur en utilisant les fonctions `router.us
 
 L'exemple suivant réplique le système middleware qui est affiché ci-dessus pour le middleware au niveau de l'application, en utilisant le middleware au niveau du routeur:
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+const router = express.Router();
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
+  '/user/:id',
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
+  },
+  (req, res, next) => {
+    // render a regular page
+    res.render('regular');
+  }
+);
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
+  res.render('special');
+});
+
+// mount the router on the app
+app.use('/', router);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 const router = express.Router();
 
@@ -221,8 +283,30 @@ pour passer le contrôle hors de l'instance du routeur.
 
 Cet exemple montre une sous-pile middleware qui gère les requêtes GET vers le chemin `/user/:id`.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+const router = express.Router();
+
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!');
+});
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
+  res.sendStatus(401);
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 const router = express.Router();
 
@@ -271,9 +355,9 @@ qui étaient précédemment incluses avec Express sont maintenant dans des modul
 
 Express a les fonctions internes suivantes :
 
-- [express.static](/api#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/api#express.json) analyse les requêtes entrantes avec des charges utiles JSON. **NOTE : Disponible avec Express 4.16.0+**
-- [express.urlencoded](/api#express.urlencoded) analyse les requêtes entrantes avec des charges utiles encodées en URL. **NOTE : Disponible avec Express 4.16.0+**
+- [express.static](/api/express/#expressstatic) serves static assets such as HTML files, images, and so on.
+- [express.json](/api/express/#expressjson) parses incoming requests with JSON payloads. **NOTE : Disponible avec Express 4.16.0+**
+- [express.urlencoded](/api/express/#expressurlencoded) parses incoming requests with URL-encoded payloads. **NOTE : Disponible avec Express 4.16.0+**
 
 ## middleware de tierce partie
 
@@ -283,14 +367,22 @@ Installez le module Node.js pour la fonctionnalité requise, puis chargez-le dan
 
 L'exemple suivant illustre l'installation et le chargement de la fonction middleware d'analyse de cookies `cookie-parser`.
 
-```bash
-$ npm install cookie-parser
-```
+<PackageManagerCommand command="npm install cookie-parser" />
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
+
+// load the cookie-parsing middleware
+app.use(cookieParser());
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import cookieParser from 'cookie-parser';
+
+const app = express();
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
