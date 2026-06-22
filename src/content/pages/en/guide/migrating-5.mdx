@@ -176,6 +176,11 @@ Or you can update your code manually:
 -  res.redirect('/users', 302);
 +  res.redirect(302, '/users');
  });
+
+ // A redirect that relies on the default 302 status is unaffected
+ app.get('/admin', (req, res) => {
+   res.redirect('/dashboard');
+ });
 ```
 
 ### res.redirect('back') and res.location('back')
