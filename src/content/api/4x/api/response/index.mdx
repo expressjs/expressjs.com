@@ -42,6 +42,15 @@ This property holds a reference to the instance of the Express application that 
 
 `res.app` is identical to the [req.app](/api/request/#reqapp) property in the request object.
 
+```js
+app.get('/', function (req, res) {
+  console.dir(res.app.get('view engine'));
+  console.dir(res.app === req.app);
+  // => true
+  res.send('OK');
+});
+```
+
 ### res.headersSent
 
 <Signature type="Boolean" />
@@ -94,6 +103,14 @@ app.use(function (req, res, next) {
 
 This property holds a reference to the [request object](/api/request/)
 that relates to this response object.
+
+```js
+app.get('/', function (req, res) {
+  console.dir(res.req === req);
+  // => true
+  res.send('OK');
+});
+```
 
 ## Methods
 

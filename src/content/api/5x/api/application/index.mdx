@@ -753,6 +753,21 @@ However, the other methods listed above work in exactly the same way.
 
 To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example, `app['m-search']('/', function ...`.
 
+```js ins={10}
+app.get('/', (req, res) => {
+  res.send('GET request to homepage');
+});
+
+app.post('/', (req, res) => {
+  res.send('POST request to homepage');
+});
+
+// methods that are invalid JavaScript variable names use bracket notation
+app['m-search']('/', (req, res) => {
+  res.send('M-SEARCH request to homepage');
+});
+```
+
 <Alert type="info">
 
 The `app.get()` function is automatically called for the HTTP `HEAD` method in addition to the

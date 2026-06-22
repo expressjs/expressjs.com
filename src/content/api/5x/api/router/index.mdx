@@ -65,6 +65,33 @@ app.use('/calendar', router);
   </Fragment>
 </Signature>
 
+Creates a new router object.
+
+```cjs title="index.cjs" ins={2}
+const express = require('express');
+const router = express.Router({ caseSensitive: true, strict: true });
+
+router.get('/events', (req, res) => {
+  res.send('events');
+});
+
+// mount the router on an app
+app.use('/calendar', router);
+```
+
+```mjs title="index.mjs" ins={3}
+import express from 'express';
+
+const router = express.Router({ caseSensitive: true, strict: true });
+
+router.get('/events', (req, res) => {
+  res.send('events');
+});
+
+// mount the router on an app
+app.use('/calendar', router);
+```
+
 ### router.all()
 
 <Signature returns="Router">
