@@ -56,6 +56,45 @@ Regular markdown content here.
 
 > Component imports must be placed **after** the frontmatter block and **before** the content where they are used. Do not place imports inside the frontmatter (`---`) block.
 
+## Code Tabs
+
+Show the same snippet as CommonJS / ESM / TypeScript variants behind a tab strip. Tag each fenced code block with a dialect language and the tabs are built for you — consecutive tagged blocks are grouped into a single `CodeTabs`, and its import is injected automatically (no manual import needed).
+
+| Fence | Tab label  | Highlighted as |
+| ----- | ---------- | -------------- |
+| `cjs` | CommonJS   | JavaScript     |
+| `mjs` | ESM        | JavaScript     |
+| `ts`  | TypeScript | TypeScript     |
+
+````mdx
+```cjs
+const express = require('express');
+const app = express();
+```
+
+```mjs
+import express from 'express';
+const app = express();
+```
+
+```ts
+import express, { Express } from 'express';
+const app: Express = express();
+```
+````
+
+For labels other than these dialects, tag the blocks with `tab="..."` instead:
+
+````mdx
+```js tab="npm"
+npm install express
+```
+
+```js tab="pnpm"
+pnpm add express
+```
+````
+
 ## API Reference
 
 The API reference lives in its own collection at `src/content/api/`, organized by version. Unlike `docs`, the API collection is not language-scoped — it is only available in English.

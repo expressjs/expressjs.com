@@ -13,14 +13,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "spell": "cspell --no-progress \"**/*.{md,mdx}\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run format:check && npm run lint",
+    "check": "npm run format:check && npm run lint && npm run spell",
     "fix": "npm run format && npm run lint:fix",
     "prepare": "husky",
     "lint-staged": "lint-staged",
@@ -28,6 +29,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/mdx": "^6.0.1",
     "@astrojs/react": "^5.0.6",
     "@astrojs/rss": "^4.0.18",
@@ -64,6 +66,7 @@
     "@types/node": "^25.3.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "cspell": "^10.0.1",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
@@ -85,8 +88,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md,css}": [
+    "*.{json,md,css,mjs}": [
       "prettier --write"
+    ],
+    "*.{md,mdx}": [
+      "cspell --no-progress --no-must-find-files"
     ]
   }
 }

@@ -94,7 +94,7 @@ Or you can update your code manually:
 
 A leading colon character (:) in the name for the `app.param(name, fn)` function is a remnant of Express 3, and for the sake of backwards compatibility, Express 4 supported it with a deprecation notice. Express 5 will silently ignore it and use the name parameter without prefixing it with a colon.
 
-This should not affect your code if you follow the Express 4 documentation of [app.param](/4x/api/application/#appparamname-callback), as it makes no mention of the leading colon.
+This should not affect your code if you follow the Express 4 documentation of [app.param](/4x/api/application/#appparam), as it makes no mention of the leading colon.
 
 ### req.param(name)
 
@@ -173,8 +173,13 @@ Or you can update your code manually:
 
 ```diff
  app.get('/user', (req, res) => {
--  res.redirect('/users', 301);
-+  res.redirect(301, '/users');
+-  res.redirect('/users', 302);
++  res.redirect(302, '/users');
+ });
+
+ // A redirect that relies on the default 302 status is unaffected
+ app.get('/admin', (req, res) => {
+   res.redirect('/dashboard');
  });
 ```
 
@@ -259,6 +264,10 @@ Or you can update your code manually:
 
 The `hidden` and `from` options for `res.sendFile()` are no longer supported. Use `dotfiles` and `root` instead.
 
+The `dotfiles` option applies to hidden directories in the path as well as hidden files. For example, a file served from an absolute path like `/var/www/app/.cache/index.html` now requires `dotfiles: 'allow'`, even though `index.html` is not a dotfile. In Express 4 a hidden directory in the path was served by default; Express 5 returns `404` unless you opt in.
+
+This check only applies to the part of the path that `send` evaluates. When you pass a `root`, only the portion relative to `root` is checked, so a hidden directory inside `root` is unaffected.
+
 #### How to update
 
 ```diff
@@ -268,17 +277,42 @@ The `hidden` and `from` options for `res.sendFile()` are no longer supported. Us
  });
 ```
 
+If you serve an absolute path that contains a hidden directory, opt in with `dotfiles: 'allow'` or use `root` so the hidden segment is not part of the evaluated path:
+
+```diff
+ app.get('/build', (req, res) => {
+-  res.sendFile('/var/www/app/.cache/index.html');
++  res.sendFile('/var/www/app/.cache/index.html', { dotfiles: 'allow' });
++  // or: res.sendFile('index.html', { root: '/var/www/app/.cache' });
+ });
+```
+
 ### express.static() options
 
 The `hidden` and `from` options for `express.static()` are no longer supported. Use `dotfiles` and `root` instead. Note that `from` was never documented in the API but was accepted as an alias for `root`. The default value of `dotfiles` is now `"ignore"`.
 
+The `dotfiles` check now also applies to hidden **directories** in the request path, not just hidden files. A request like `GET /.well-known/acme-challenge/...` that was served by default in Express 4 now returns `404` unless you set `dotfiles: 'allow'`. This only affects the part of the path relative to the configured `root`; a hidden directory in `root` itself is unaffected.
+
 #### How to update
+
+You can automatically update your code by running the following command:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/static-dotfiles" />
+
+Or you can update your code manually:
 
 ```diff
  const express = require('express');
  const app = express();
 
 -app.use(express.static('public', { hidden: true }));
++app.use(express.static('public', { dotfiles: 'allow' }));
+```
+
+If you rely on serving a hidden directory such as `.well-known` (for example, ACME/Let's Encrypt challenges), opt in explicitly. This is needed even if you never used the `hidden` option:
+
+```diff
+-app.use(express.static('public'));
 +app.use(express.static('public', { dotfiles: 'allow' }));
 ```
 
@@ -421,6 +455,25 @@ Serve specific dot-directories explicitly using the `dotfiles: "allow"` option. 
 ```diff
 +app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
  app.use(express.static('public'));
+```
+
+### router.param() with an array of names
+
+`router.param(name, fn)` no longer accepts an array for `name`. In Express 4 an array was accepted silently; in Express 5, passing anything other than a string throws `TypeError: argument name must be a string`. (Note that `app.param()` still accepts an array of names.)
+
+#### How to update
+
+Register each parameter name with its own `router.param()` call:
+
+```diff
+-router.param(['id', 'page'], (req, res, next, value) => {
+-  // ...
+-});
++const loadParam = (req, res, next, value) => {
++  // ...
++};
++router.param('id', loadParam);
++router.param('page', loadParam);
 ```
 
 ### app.listen

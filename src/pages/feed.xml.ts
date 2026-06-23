@@ -4,15 +4,15 @@ import type { APIRoute } from 'astro';
 import {
   getLinkedTitleContent,
   getAuthorsCustomData,
-  getPubDateFromId,
+  getPubDate,
   shouldIncludeInFeed,
-  sortByIdDateDesc,
+  sortByPubDateDesc,
 } from '@/utils/rss';
 
 export const GET: APIRoute = async (context) => {
   const site = context.site as URL;
   const blog = await getCollection('blog');
-  const sortedBlog = sortByIdDateDesc(blog.filter((post) => shouldIncludeInFeed(post.id)));
+  const sortedBlog = sortByPubDateDesc(blog.filter((post) => shouldIncludeInFeed(post.id)));
 
   return rss({
     title: 'The Express.js Blog',
@@ -21,7 +21,7 @@ export const GET: APIRoute = async (context) => {
     items: sortedBlog.map((post) => ({
       link: `/en/blog/${post.id}/`,
       title: post.data.title,
-      pubDate: getPubDateFromId(post.id),
+      pubDate: getPubDate(post),
       description: post.data.description,
       content: getLinkedTitleContent(post.data.title, post.id, site),
       categories: post.data.tags,

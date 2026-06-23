@@ -33,9 +33,18 @@ Here are some things you can do in your code to improve your application's perfo
 
 Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
 
-```js
+```cjs title="index.cjs"
 const compression = require('compression');
 const express = require('express');
+const app = express();
+
+app.use(compression());
+```
+
+```mjs title="index.mjs"
+import compression from 'compression';
+import express from 'express';
+
 const app = express();
 
 app.use(compression());

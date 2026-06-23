@@ -3,4 +3,4 @@ Contact: mailto:express-security@lists.openjsf.org
 # Our security policy
 Policy: https://github.com/expressjs/express/security/policy
 # Expires this policy
-Expires: 2026-07-20T00:00:00Z
+Expires: 2026-12-19T00:00:00Z
