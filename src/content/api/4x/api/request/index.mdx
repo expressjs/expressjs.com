@@ -6,6 +6,7 @@ description: The req object represents the HTTP request and has properties for t
 import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 The `req` object represents the HTTP request and has properties for the
 request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention,
@@ -217,6 +218,22 @@ more than once.
 ```js
 // Host: "example.com:3000"
 console.dir(req.hostname);
+// => 'example.com'
+```
+
+### req.host
+
+<Signature type="String" deprecated="v4.5.0" />
+
+<Alert type="alert">
+
+`req.host` is a deprecated alias of [`req.hostname`](#reqhostname) and returns the same value — the hostname with the port number stripped off. It has emitted a deprecation warning since Express v4.5.0. Use `req.hostname` instead.
+
+</Alert>
+
+```js
+// Host: "example.com:3000"
+console.dir(req.host);
 // => 'example.com'
 ```
 
@@ -601,6 +618,26 @@ req.acceptsCharsets('us-ascii');
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
+### req.acceptsCharset()
+
+<Signature returns="String | false" deprecated="v4.5.0">
+  <Fragment slot="attributes">
+    <Param name="charset" type="String | String[]">
+      One or more character sets to test against the request's `Accept-Charset` header.
+    </Param>
+  </Fragment>
+</Signature>
+
+<Alert type="alert">
+
+`req.acceptsCharset()` is the singular alias of [`req.acceptsCharsets()`](#reqacceptscharsets) and behaves identically. It has emitted a deprecation warning since Express v4.5.0. Use `req.acceptsCharsets()` instead.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/pluralize-method-names" />
+
+</Alert>
+
 ### req.acceptsEncodings()
 
 <Signature returns="String | false">
@@ -625,6 +662,26 @@ req.acceptsEncodings('br');
 ```
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
+
+### req.acceptsEncoding()
+
+<Signature returns="String | false" deprecated="v4.5.0">
+  <Fragment slot="attributes">
+    <Param name="encoding" type="String | String[]">
+      One or more encodings to test against the request's `Accept-Encoding` header.
+    </Param>
+  </Fragment>
+</Signature>
+
+<Alert type="alert">
+
+`req.acceptsEncoding()` is the singular alias of [`req.acceptsEncodings()`](#reqacceptsencodings) and behaves identically. It has emitted a deprecation warning since Express v4.5.0. Use `req.acceptsEncodings()` instead.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/pluralize-method-names" />
+
+</Alert>
 
 ### req.acceptsLanguages()
 
@@ -655,6 +712,27 @@ req.acceptsLanguages();
 ```
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
+
+### req.acceptsLanguage()
+
+<Signature returns="String | String[] | false" deprecated="v4.5.0">
+  <Fragment slot="attributes">
+    <Param name="lang" type="String | String[]" optional>
+      One or more languages to test against the request's `Accept-Language` header. If omitted, all
+      accepted languages are returned as an array.
+    </Param>
+  </Fragment>
+</Signature>
+
+<Alert type="alert">
+
+`req.acceptsLanguage()` is the singular alias of [`req.acceptsLanguages()`](#reqacceptslanguages) and behaves identically. It has emitted a deprecation warning since Express v4.5.0. Use `req.acceptsLanguages()` instead.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/pluralize-method-names" />
+
+</Alert>
 
 Express (4.x) source: [request.js line 179](https://github.com/expressjs/express/blob/4.x/lib/request.js#L179)
 
@@ -752,7 +830,7 @@ For more information, or if you have issues or concerns, see [type-is](https://g
   </Fragment>
 </Signature>
 
-<Alert type="warning">
+<Alert type="alert">
 
 Deprecated. Use either `req.params`, `req.body` or `req.query`, as applicable.
 

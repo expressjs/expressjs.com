@@ -40,9 +40,11 @@ interface Props {
   optional?: boolean;
   /** Version the parameter was added in, e.g. `"v4.20.0"`. */
   since?: string;
+  /** Version the parameter was deprecated in, e.g. `"v4.11.0"`. */
+  deprecated?: string;
 }
 
-const { name, type, default: defaultValue, optional = false, since } = Astro.props;
+const { name, type, default: defaultValue, optional = false, since, deprecated } = Astro.props;
 
 const hasProperties = Astro.slots.has('properties');
 
@@ -57,7 +59,7 @@ const displayType = optional && type ? `${type} | undefined` : type;
 
   <div class="param__body">
     {
-      (displayType || defaultValue !== undefined || since) && (
+      (displayType || defaultValue !== undefined || since || deprecated) && (
         <div class="param__meta">
           {displayType && (
             <span class="param__meta-item">
@@ -75,6 +77,12 @@ const displayType = optional && type ? `${type} | undefined` : type;
             <span class="param__meta-item">
               <span class="param__label">Added in:</span>
               <code class="param__value">{since}</code>
+            </span>
+          )}
+          {deprecated && (
+            <span class="param__meta-item param__meta-item--deprecated">
+              <span class="param__label">Deprecated in:</span>
+              <code class="param__value">{deprecated}</code>
             </span>
           )}
         </div>

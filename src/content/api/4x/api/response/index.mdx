@@ -6,6 +6,7 @@ description: The res object represents the HTTP response that an Express app sen
 import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
 
@@ -116,7 +117,7 @@ app.get('/', function (req, res) {
 
 ### res.append()
 
-<Signature returns="Response">
+<Signature returns="Response" since="v4.11.0">
   <Fragment slot="attributes">
     <Param name="field" type="String">
       The name of the HTTP response header to append to.
@@ -127,7 +128,6 @@ app.get('/', function (req, res) {
   </Fragment>
 </Signature>
 
-<Alert type="info">`res.append()` is supported by Express v4.11.0+</Alert>
 Appends the specified `value` to the HTTP response header `field`. If the header is not already set,
 it creates the header with the specified value. The `value` parameter can be a string or an array.
 
@@ -185,7 +185,7 @@ Clears the cookie with the specified `name` by sending a `Set-Cookie` header tha
 This instructs the client that the cookie has expired and is no longer valid. For more information
 about available `options`, see [res.cookie()](#rescookie).
 
-<Alert type="warning">
+<Alert type="alert">
 
 If the `maxAge` or `expires` options are set, the cookie may not be cleared depending on the time
 values provided, as Express does not ignore these options. It is therefore recommended to omit
@@ -340,7 +340,7 @@ Later you may access this value through the [req.signedCookie](/api/request/#req
     <Param name="filename" type="String" optional>
       The file name for the `Content-Disposition` "filename=" parameter; overrides the name derived from `path`.
     </Param>
-    <Param name="options" type="Object" optional>
+    <Param name="options" type="Object" optional since="v4.16.0">
       Options forwarded to [res.sendFile()](#ressendfile).
 
       <Fragment slot="properties">
@@ -391,8 +391,6 @@ When the `root` option is provided, Express will validate that the relative path
 `path` will resolve within the given `root` option.
 
 </Alert>
-
-<Alert type="info">The optional `options` argument is supported by Express v4.16.0 onwards.</Alert>
 
 The method invokes the callback function `fn(err)` when the transfer is complete
 or when an error occurs. If the callback function is specified and an error occurs,
@@ -527,6 +525,10 @@ res.get('Content-Type');
       The value to send as JSON. Can be any JSON type: object, array, string, Boolean, number, or
       null.
     </Param>
+    <Param name="status" type="Number" optional deprecated="v4.2.0">
+      The HTTP status code, accepted as a positional argument by the old `res.json(obj, status)` and
+      `res.json(status, obj)` signatures. Use [res.status()](#resstatus) instead.
+    </Param>
   </Fragment>
 </Signature>
 
@@ -542,12 +544,26 @@ res.json({ user: 'tobi' });
 res.status(500).json({ error: 'message' });
 ```
 
+<Alert type="alert">
+
+The signature `res.json(obj, status)` has been deprecated since Express v4.2.0 (and the reversed `res.json(status, obj)` since v4.7.0). Set the status separately and chain the call instead: `res.status(status).json(obj)`.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
+
+</Alert>
+
 ### res.jsonp()
 
 <Signature returns="Response">
   <Fragment slot="attributes">
     <Param name="body" type="any" optional>
       The value to send as a JSONP response. Can be any JSON type.
+    </Param>
+    <Param name="status" type="Number" optional deprecated="v4.2.0">
+      The HTTP status code, accepted as a positional argument by the old `res.jsonp(obj, status)`
+      and `res.jsonp(status, obj)` signatures. Use [res.status()](#resstatus) instead.
     </Param>
   </Fragment>
 </Signature>
@@ -583,6 +599,16 @@ app.set('jsonp callback name', 'cb');
 res.status(500).jsonp({ error: 'message' });
 // => foo({ "error": "message" })
 ```
+
+<Alert type="alert">
+
+The signature `res.jsonp(obj, status)` has been deprecated since Express v4.2.0 (and the reversed `res.jsonp(status, obj)` since v4.7.0). Set the status separately and chain the call instead: `res.status(status).jsonp(obj)`.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
+
+</Alert>
 
 ### res.links()
 
@@ -631,7 +657,7 @@ res.location('http://example.com');
 res.location('back');
 ```
 
-<Alert type="info">
+<Alert type="alert">
 
 `'back'` was deprecated in 4.21.0, use `req.get('Referrer') || '/'` as an argument instead.
 
@@ -674,6 +700,16 @@ res.redirect('http://example.com');
 res.redirect(301, 'http://example.com');
 res.redirect('../login');
 ```
+
+<Alert type="alert">
+
+The reversed signature `res.redirect(path, status)` (status as the second argument) has been deprecated since Express v4.6.0. Use `res.redirect(status, path)` instead.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/redirect-arg-order" />
+
+</Alert>
 
 Redirects can be a fully-qualified URL for redirecting to a different site:
 
@@ -718,7 +754,7 @@ defaulting to `/` when the referer is missing.
 res.redirect('back');
 ```
 
-<Alert type="info">
+<Alert type="alert">
 
 `back` redirect was deprecated in 4.21.0, use `req.get('Referrer') || '/'` as an argument instead.
 
@@ -798,6 +834,11 @@ res.render('user', { name: 'Tobi' }, function (err, html) {
     <Param name="body" type="String | Buffer | Object | Array | Boolean" optional>
       The response body. Strings are sent as HTML; objects and arrays as JSON; Buffers as binary.
     </Param>
+    <Param name="status" type="Number" optional deprecated="v4.5.0">
+      The HTTP status code, accepted as a positional argument by the old `res.send(body, status)`,
+      `res.send(status, body)`, and `res.send(status)` signatures. Use [res.status()](#resstatus) or
+      [res.sendStatus()](#ressendstatus) instead.
+    </Param>
   </Fragment>
 </Signature>
 
@@ -839,9 +880,19 @@ res.send({ user: 'tobi' });
 res.send([1, 2, 3]);
 ```
 
+<Alert type="alert">
+
+The signatures `res.send(body, status)` and `res.send(status)` have been deprecated since Express v4.5.0 (the reversed `res.send(status, body)` since v4.7.0). To set the status, chain the call: `res.status(status).send(body)`. To send only a status code, use [`res.sendStatus()`](#ressendstatus). If you need to send a number as the body, convert it to a string first (for example, `res.send(String(123))`) so it is not interpreted as a status code.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
+
+</Alert>
+
 ### res.sendFile()
 
-<Signature>
+<Signature since="v4.8.0">
   <Fragment slot="attributes">
     <Param name="path" type="String">
       The path to the file to transfer. Must be absolute unless the `root` option is set.
@@ -882,8 +933,6 @@ res.send([1, 2, 3]);
 
   </Fragment>
 </Signature>
-
-<Alert type="info">`res.sendFile()` is supported by Express v4.8.0 onwards.</Alert>
 
 Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
 based on the filename's extension. Unless the `root` option is set in
@@ -948,6 +997,36 @@ app.get('/user/:uid/photos/:file', function (req, res) {
 ```
 
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).
+
+### res.sendfile()
+
+<Signature deprecated="v4.8.0">
+  <Fragment slot="attributes">
+    <Param name="path" type="String">
+      The path to the file to transfer.
+    </Param>
+    <Param name="options" type="Object" optional>
+      Options for serving the file. In addition to the options accepted by
+      [`res.sendFile()`](#ressendfile), the legacy `hidden` and `from` options are supported (use
+      `dotfiles` and `root` instead).
+    </Param>
+    <Param name="fn" type="Function" optional>
+      Callback `fn(err)` invoked when the transfer completes or an error occurs.
+    </Param>
+  </Fragment>
+</Signature>
+
+<Alert type="alert">
+
+`res.sendfile()` (lower-cased) is the legacy version of [`res.sendFile()`](#ressendfile) and behaves identically. The camel-cased `res.sendFile()` was introduced in Express v4.8.0, and `res.sendfile()` has emitted a deprecation warning since that release. Use `res.sendFile()` instead.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/camelcase-sendfile" />
+
+</Alert>
+
+Transfers the file at the given `path`. This is the legacy, lower-cased version of [`res.sendFile()`](#ressendfile) and behaves the same way. Prefer `res.sendFile()` in new code.
 
 ### res.sendStatus()
 

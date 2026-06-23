@@ -6,6 +6,7 @@ description: Learn about the properties of the Express application object.
 import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:
@@ -292,6 +293,29 @@ app.delete('/', function (req, res) {
   res.send('DELETE request to homepage');
 });
 ```
+
+### app.del()
+
+<Signature deprecated="v4.2.0">
+  <Fragment slot="attributes">
+    <Param name="path" type="String | RegExp | Array">
+      The path for which the middleware function is invoked; same as [app.delete()](#appdelete).
+    </Param>
+    <Param name="callback" type="Function | Function[]">
+      Callback functions; same as [app.delete()](#appdelete).
+    </Param>
+  </Fragment>
+</Signature>
+
+<Alert type="alert">
+
+`app.del()` is the alias of [`app.delete()`](#appdelete), originally introduced because `delete` was a reserved word in older JavaScript engines. It has emitted a deprecation warning since Express v4.2.0. Use `app.delete()` instead.
+
+You can update your code automatically with the following codemod:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/route-del-to-delete" />
+
+</Alert>
 
 ### app.disable()
 
@@ -817,7 +841,7 @@ although this matches
 and this matches too
 ```
 
-<Alert type="warning">
+<Alert type="alert">
 
 The following section describes `app.param(callback)`, which is deprecated as of v4.11.0.
 

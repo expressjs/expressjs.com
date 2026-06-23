@@ -58,6 +58,16 @@
     font-weight: var(--font-weight-medium);
   }
 
+  .type-tag--deprecated {
+    border-color: var(--color-border-error);
+    background-color: var(--color-bg-error);
+    color: var(--color-text-error);
+  }
+
+  .signature__line--deprecated .signature__line-label {
+    color: var(--color-text-error);
+  }
+
   .signature__params {
     display: grid;
     grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
@@ -146,6 +156,11 @@
   .param__value {
     font-family: var(--font-family-mono);
     color: var(--color-text-primary);
+  }
+
+  .param__meta-item--deprecated .param__label,
+  .param__meta-item--deprecated .param__value {
+    color: var(--color-text-error);
   }
 
   .param__desc {
