@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
@@ -28,17 +29,19 @@ export default defineConfig({
     // Link localization (Markdown links + raw HTML/JSX `<a href>`). Configuration —
     // localized sections, versioned sections, default version, and the "global" pages
     // exception — lives in the plugin defaults; no options needed here.
-    remarkPlugins: [remarkRewriteLocalizedLinks, remarkCodeTabs],
-    rehypePlugins: [
-      rehypeRewriteLocalizedLinks,
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'wrap',
-        },
+    processor: unified({
+      remarkPlugins: [remarkRewriteLocalizedLinks, remarkCodeTabs],
+      rehypePlugins: [
+        rehypeRewriteLocalizedLinks,
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'wrap',
+          },
+        ],
       ],
-    ],
+    }),
   },
   vite: {
     plugins: [
