@@ -17,6 +17,8 @@
  * </Signature>
  *
  * <Signature type="Boolean" since="v4.5.0" />
+ *
+ * <Signature returns="Response" since="v4.2.0" deprecated="v4.11.0" />
  */
 import './Signature.css';
 
@@ -27,16 +29,18 @@ interface Props {
   type?: string;
   /** Version the member was added in, e.g. `"v4.16.0"`. */
   since?: string;
+  /** Version the member was deprecated in, e.g. `"v4.11.0"`. */
+  deprecated?: string;
   /** Heading text for the arguments section. */
   attributesTitle?: string;
 }
 
-const { returns, type, since, attributesTitle = 'Arguments' } = Astro.props;
+const { returns, type, since, deprecated, attributesTitle = 'Arguments' } = Astro.props;
 
 const hasReturnsSlot = Astro.slots.has('returns');
 const hasReturns = hasReturnsSlot || Boolean(returns);
 const hasAttributes = Astro.slots.has('attributes');
-const hasFooter = Boolean(type) || hasReturns || Boolean(since);
+const hasFooter = Boolean(type) || hasReturns || Boolean(since) || Boolean(deprecated);
 ---
 
 <section class="signature">
@@ -73,6 +77,12 @@ const hasFooter = Boolean(type) || hasReturns || Boolean(since);
           <p class="signature__line">
             <span class="signature__line-label">Added in:</span>
             <code class="type-tag">{since}</code>
+          </p>
+        )}
+        {deprecated && (
+          <p class="signature__line signature__line--deprecated">
+            <span class="signature__line-label">Deprecated in:</span>
+            <code class="type-tag type-tag--deprecated">{deprecated}</code>
           </p>
         )}
       </div>
