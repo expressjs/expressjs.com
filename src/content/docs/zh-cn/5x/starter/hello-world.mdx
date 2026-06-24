@@ -1,16 +1,14 @@
 ---
-title: Hello world example
-description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
+title: Hello World 示例
+description: 通过构建一个简单的"Hello World"应用来开始使用 Express.js，为初学者演示基本的设置和服务器创建。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 <Alert type="info">
 
-Embedded below is essentially the simplest Express app you can create. It is a single file app
-&mdash; _not_ what you'd get if you use the [Express generator](/starter/generator), which
-creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and
-sub-directories for various purposes.
+下面嵌入的是你能创建的最简单的 Express 应用。它是一个单文件应用
+&mdash; _不同于_ 使用 [Express 生成器](/starter/generator) 得到的结果，后者会创建一个完整应用的脚手架，包含众多 JavaScript 文件、Jade 模板以及用于各种目的的子目录。
 
 </Alert>
 
@@ -28,27 +26,24 @@ app.listen(port, () => {
 });
 ```
 
-This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
-to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+这个应用启动了一个服务器并监听 3000 端口的连接。对于根 URL（`/`）或_路由_的请求，应用会响应"Hello World!"。对于其他任何路径，它将响应 **404 Not Found**。
 
-## Running Locally
+## 本地运行
 
-First create a directory named `myapp`, change to it and run `npm init`. Then, install `express` as a dependency, as per the [installation guide](/starter/installing).
+首先创建一个名为 `myapp` 的目录，进入该目录并运行 `npm init`。然后，按照[安装指南](/starter/installing)安装 `express` 作为依赖。
 
-In the `myapp` directory, create a file named `app.js` and copy the code from the example above.
+在 `myapp` 目录中，创建一个名为 `app.js` 的文件并复制上面的示例代码。
 
 <Alert type="alert">
 
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can
-invoke `req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express
-involved.
+`req`（请求）和 `res`（响应）与 Node 提供的对象完全相同，因此你可以调用 `req.pipe()`、`req.on('data', callback)` 以及任何其他在没有 Express 参与时你会做的操作。
 
 </Alert>
 
-Run the app with the following command:
+使用以下命令运行应用：
 
 ```bash
 $ node app.js
 ```
 
-Then, load `http://localhost:3000/` in a browser to see the output.
+然后，在浏览器中加载 `http://localhost:3000/` 查看输出。
