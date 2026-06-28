@@ -994,6 +994,12 @@ Client and intermediary support is still limited — verify that your target env
 
 </Alert>
 
+<Alert type="warning">
+
+QUERY support requires **Node.js >= 21.7.2** and it is stable on Node.js >= 22.
+
+</Alert>
+
 The HTTP QUERY method ([RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html)) is designed for
 queries whose input is too large or too sensitive to encode in the URL. Unlike `GET`, a QUERY
 request carries a body containing the query input. Unlike `POST`, it is explicitly **safe and
