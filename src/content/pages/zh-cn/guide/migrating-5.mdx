@@ -270,6 +270,12 @@ This check only applies to the part of the path that `send` evaluates. When you 
 
 #### 如何更新
 
+你可以通过运行以下命令自动更新你的代码：
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/sendfile-options" />
+
+或者您可以手动更新您的代码：
+
 ```diff
  app.get('/files/:name', (req, res) => {
 -  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
@@ -326,6 +332,12 @@ If you rely on serving a hidden directory such as `.well-known` (for example, AC
 请使用 [`mime-types` 包](https://github.com/jshttp/mime-types) 处理 MIME 类型值。
 
 #### 如何更新
+
+你可以通过运行以下命令自动更新你的代码：
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/static-mime" />
+
+或者您可以手动更新您的代码：
 
 ```diff
 -express.static.mime.lookup('json');

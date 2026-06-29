@@ -270,6 +270,12 @@ This check only applies to the part of the path that `send` evaluates. When you 
 
 #### 更新方法
 
+次のコマンドを実行することで、コードを自動的に更新できます。
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/sendfile-options" />
+
+または、手動でコードを更新できます。
+
 ```diff
  app.get('/files/:name', (req, res) => {
 -  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
@@ -327,6 +333,12 @@ MIME タイプの値を扱うには、[`mime-types` package](https://github.com/
 MIME タイプの値を扱うには、[`mime-types` package](https://github.com/jshttp/mime-types) を使用します。
 
 #### 更新方法
+
+次のコマンドを実行することで、コードを自動的に更新できます。
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/static-mime" />
+
+または、手動でコードを更新できます。
 
 ```diff
 -express.static.mime.lookup('json');

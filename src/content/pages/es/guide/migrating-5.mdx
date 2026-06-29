@@ -270,6 +270,12 @@ This check only applies to the part of the path that `send` evaluates. When you 
 
 #### Cómo actualizar
 
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/sendfile-options" />
+
+O puedes actualizar tu código manualmente:
+
 ```diff
  app.get('/files/:name', (req, res) => {
 -  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
@@ -326,6 +332,12 @@ En Express 5, `mime` ya no es una propiedad exportada del campo `static`.
 Usa el [`mime-types` paquete](https://github.com/jshttp/mime-types) para trabajar con valores de tipo MIME.
 
 #### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/static-mime" />
+
+O puedes actualizar tu código manualmente:
 
 ```diff
 -express.static.mime.lookup('json');
