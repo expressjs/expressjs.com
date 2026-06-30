@@ -1,0 +1,147 @@
+---
+/**
+ * Package Manager Command
+ *
+ * Renders a single authored `npm`/`npx` command as a tabbed code block that
+ * lets readers switch between npm, Yarn, pnpm and Bun. The equivalent commands
+ * are derived at build time from the npm command (see `convertPackageManagerCommand`).
+ *
+ * The selected manager is shared across every instance on the page and
+ * persisted to `localStorage`, so choosing one tool updates the whole page.
+ *
+ * @example
+ * <PackageManagerCommand command="npm install express" />
+ */
+import './PackageManagerCommand.css';
+import { Code } from 'astro-expressive-code/components';
+import Button from '@components/primitives/Button/Button.astro';
+import {
+  PACKAGE_MANAGERS,
+  PACKAGE_MANAGER_LABELS,
+  convertPackageManagerCommand,
+} from '@/utils/package-manager';
+
+interface Props {
+  /** An `npm` or `npx` command to translate, e.g. `"npm install express"`. */
+  command: string;
+}
+
+const { command } = Astro.props;
+const commands = convertPackageManagerCommand(command);
+// Only show managers that have an equivalent command (e.g. `--no-save` has no
+// Yarn/pnpm equivalent, so those tabs are omitted for that command).
+const managers = PACKAGE_MANAGERS.filter((pm) => commands[pm] !== null);
+const defaultManager = managers[0];
+---
+
+<div class="pm-command" data-pm-command>
+  <div class="pm-command__tabs" role="tablist" aria-label="Package manager">
+    {
+      managers.map((pm) => (
+        <Button
+          ghost
+          size="sm"
+          variant="secondary"
+          type="button"
+          role="tab"
+          class:list={['pm-command__tab', pm === defaultManager && 'pm-command__tab--active']}
+          aria-selected={pm === defaultManager ? 'true' : 'false'}
+          tabindex={pm === defaultManager ? 0 : -1}
+          data-pm={pm}
+        >
+          {PACKAGE_MANAGER_LABELS[pm]}
+        </Button>
+      ))
+    }
+  </div>
+
+  <div class="pm-command__panels">
+    {
+      managers.map((pm) => (
+        <div class="pm-command__panel" data-pm-panel={pm} hidden={pm !== defaultManager}>
+          <Code code={commands[pm]!} lang="bash" />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'expressjs:package-manager';
+  const MANAGERS = ['npm', 'yarn', 'pnpm', 'bun'];
+
+  function applyManager(pm: string) {
+    document.querySelectorAll<HTMLElement>('[data-pm-command]').forEach((root) => {
+      const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-pm-panel]'));
+      // A block may not offer every manager (e.g. `--no-save` has no Yarn/pnpm
+      // equivalent); fall back to its first tab when the selection is missing.
+      const available = panels.map((panel) => panel.dataset.pmPanel);
+      const effective = available.includes(pm) ? pm : available[0];
+
+      root.querySelectorAll<HTMLButtonElement>('[data-pm]').forEach((tab) => {
+        const active = tab.dataset.pm === effective;
+        tab.classList.toggle('pm-command__tab--active', active);
+        tab.setAttribute('aria-selected', String(active));
+        tab.setAttribute('tabindex', active ? '0' : '-1');
+      });
+      panels.forEach((panel) => {
+        panel.toggleAttribute('hidden', panel.dataset.pmPanel !== effective);
+      });
+    });
+  }
+
+  function selectManager(pm: string) {
+    if (!MANAGERS.includes(pm)) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, pm);
+    } catch {
+      /* localStorage may be unavailable (private mode); selection still applies */
+    }
+    applyManager(pm);
+  }
+
+  function restoreManager() {
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+    if (stored && MANAGERS.includes(stored)) applyManager(stored);
+  }
+
+  document.addEventListener('click', (event) => {
+    const tab = (event.target as HTMLElement).closest<HTMLButtonElement>(
+      '[data-pm-command] [data-pm]'
+    );
+    if (tab?.dataset.pm) selectManager(tab.dataset.pm);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    const tab = (event.target as HTMLElement).closest<HTMLButtonElement>(
+      '[data-pm-command] [data-pm]'
+    );
+    if (!tab) return;
+
+    const tablist = tab.closest('[role="tablist"]');
+    if (!tablist) return;
+
+    const tabs = Array.from(tablist.querySelectorAll<HTMLButtonElement>('[data-pm]'));
+    const index = tabs.indexOf(tab);
+    let target: number | null = null;
+
+    if (event.key === 'ArrowRight') target = (index + 1) % tabs.length;
+    else if (event.key === 'ArrowLeft') target = (index - 1 + tabs.length) % tabs.length;
+    else if (event.key === 'Home') target = 0;
+    else if (event.key === 'End') target = tabs.length - 1;
+
+    if (target === null) return;
+    event.preventDefault();
+    const next = tabs[target];
+    next?.focus();
+    if (next?.dataset.pm) selectManager(next.dataset.pm);
+  });
+
+  restoreManager();
+  document.addEventListener('astro:page-load', restoreManager);
+</script>

@@ -4,15 +4,15 @@ import type { APIRoute } from 'astro';
 import {
   getLinkedTitleContent,
   getAuthorsCustomData,
-  getPubDateFromId,
+  getPubDate,
   shouldIncludeInFeed,
-  sortByIdDateDesc,
+  sortByPubDateDesc,
 } from '@/utils/rss';
 
 export const GET: APIRoute = async (context) => {
   const site = context.site as URL;
   const blog = await getCollection('blog');
-  const securityPosts = sortByIdDateDesc(
+  const securityPosts = sortByPubDateDesc(
     blog.filter(
       (post) => shouldIncludeInFeed(post.id) && (post.data.tags ?? []).includes('security')
     )
@@ -23,9 +23,9 @@ export const GET: APIRoute = async (context) => {
     description: 'Posts tagged as security from the Express.js blog.',
     site: site.href,
     items: securityPosts.map((post) => ({
-      link: `/blog/${post.id}/`,
+      link: `/en/blog/${post.id}/`,
       title: post.data.title,
-      pubDate: getPubDateFromId(post.id),
+      pubDate: getPubDate(post),
       description: post.data.description,
       content: getLinkedTitleContent(post.data.title, post.id, site),
       categories: post.data.tags,

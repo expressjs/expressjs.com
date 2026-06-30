@@ -5,7 +5,7 @@ description: Scopri come scrivere funzioni middleware personalizzate per le appl
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Le funzioni _Middleware_ sono funzioni che hanno accesso al [request object](/en/5x/api#req) (`req`), il [response object](/en/5x/api#res) (`res`), e la funzione `next` nel ciclo request-response dell'applicazione. La funzione `next` è una funzione nel router Express che, quando invocato, esegue il middleware con successo al middleware corrente.
+Le funzioni _Middleware_ sono funzioni che hanno accesso al [request object](/5x/api#req) (`req`), il [response object](/5x/api#res) (`res`), e la funzione `next` nel ciclo request-response dell'applicazione. La funzione `next` è una funzione nel router Express che, quando invocato, esegue il middleware con successo al middleware corrente.
 
 Le funzioni Middleware possono eseguire le seguenti attività:
 
@@ -40,11 +40,11 @@ Metodo <div class="callout" id="callout1">HTTP per il quale si applica la funzio
 </div>
 
 <div class="callout" id="callout5">
-  Argomento HTTP <a href="/en/5x/api#res">risposta</a> alla funzione middleware, chiamato "res"
-  dalla convenzione .
+  Argomento HTTP <a href="/5x/api#res">risposta</a> alla funzione middleware, chiamato "res" dalla
+  convenzione .
 </div>
 
-<div class="callout" id="callout6">HTTP <a href="/en/5x/api#req">richiede l'argomento</a> alla funzione middleware, chiamata "req" per convenzione.</div>
+<div class="callout" id="callout6">HTTP <a href="/5x/api#req">richiede l'argomento</a> alla funzione middleware, chiamata "req" per convenzione.</div>
 </td>
 </tr>
 </table>
@@ -173,7 +173,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Qui utilizziamo il middleware [`cookie-parser`](/en/resources/middleware/cookie-parser) per analizzare i cookie in arrivo fuori dall'oggetto `req` e passarli alla nostra funzione `cookieValidator`. Il middleware `validateCookies` restituisce una Promessa che al momento del rifiuto attiverà automaticamente il nostro gestore di errori.
+Qui utilizziamo il middleware [`cookie-parser`](/resources/middleware/cookie-parser) per analizzare i cookie in arrivo fuori dall'oggetto `req` e passarli alla nostra funzione `cookieValidator`. Il middleware `validateCookies` restituisce una Promessa che al momento del rifiuto attiverà automaticamente il nostro gestore di errori.
 
 ```js
 const express = require('express');
@@ -211,7 +211,7 @@ come un errore e salterà tutte le rimanenti funzioni di routing e middleware
 
 Poiché hai accesso all'oggetto richiesta, all'oggetto risposta, alla funzione middleware successiva nello stack, e all'intero Node. s API, le possibilità con funzioni middleware sono infinite.
 
-Per ulteriori informazioni su middleware Express, consultare: [Using Express middleware](/en/guide/using-middleware).
+Per ulteriori informazioni su middleware Express, consultare: [Using Express middleware](/guide/using-middleware).
 
 ## Middleware configurabile
 

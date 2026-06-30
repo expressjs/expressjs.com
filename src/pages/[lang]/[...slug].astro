@@ -7,11 +7,11 @@ import { getAdjacentPages } from '@utils/content';
 import { docsMenu } from '@/config/menu/docs';
 import { apiMenu } from '@/config/menu/api';
 import { resourcesMenu } from '@/config/menu/resources';
+import { DEFAULT_VERSION, VERSION_PREFIXES } from '@/config/versions';
+import LocalizedLink from '@components/patterns/LocalizedLink/LocalizedLink.astro';
 import type { LanguageCode } from '@i18n/locales';
 
 export async function getStaticPaths() {
-  const DEFAULT_VERSION = '5x';
-  const VERSION_PREFIXES = ['5x', '4x', '3x'];
   const DEFAULT_LANG = 'en';
 
   const pages = await getCollection('docs');
@@ -205,6 +205,10 @@ const { prev, next } = getAdjacentPages(
 const editUrl = isTranslation
   ? `https://github.com/expressjs/expressjs.com/blob/main/docs/i18n.md`
   : `https://github.com/expressjs/expressjs.com/edit/main/${page.filePath}`;
+
+// Shared collections (api/blog) are compiled once, so their in-content links are
+// baked to the default language. Re-localize them per render-language.
+const isSharedCollection = page.collection === 'api' || page.collection === 'blog';
 ---
 
 <DocLayout
@@ -216,5 +220,5 @@ const editUrl = isTranslation
   prev={prev}
   next={next}
 >
-  <Content />
+  {isSharedCollection ? <Content components={{ a: LocalizedLink }} /> : <Content />}
 </DocLayout>

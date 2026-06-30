@@ -133,7 +133,7 @@ test.describe('Homepage Content', () => {
   test('should display the installation command', async ({ page }) => {
     const installCode = page.getByTestId('install-command');
     await expect(installCode).toBeVisible();
-    await expect(installCode).toContainText(/npm install express --save/i);
+    await expect(installCode).toContainText(/npm install express/i);
   });
 
   test('should have a working "Get Started" call to action', async ({ page }) => {

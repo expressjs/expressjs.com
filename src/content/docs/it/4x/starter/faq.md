@@ -42,7 +42,7 @@ Per normalizzare i modelli di interfacce motore e caching, vedere il progetto
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 per il supporto. Motori modello non elencati potrebbero ancora supportare la firma Express.
 
-Per ulteriori informazioni, vedere [Utilizzo di modelli di motori con Express](/en/guide/using-template-engines).
+Per ulteriori informazioni, vedere [Utilizzo di modelli di motori con Express](/guide/using-template-engines).
 
 ## Come posso gestire 404 risposte?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Per ulteriori informazioni, vedere [Gestione degli errori](/en/guide/error-handling).
+Per ulteriori informazioni, vedere [Gestione degli errori](/guide/error-handling).
 
 ## Come faccio a rendere semplice HTML?
 
@@ -86,5 +86,5 @@ Se stai servendo molti asset da una directory, usa la funzione middleware `expre
 
 ## Quale versione di Node.js richiede Express?
 
-- [Express 4.x](/en/4x/api) richiede Node.js 0.10 o superiore.
-- [Express 5.x](/en/5x/api) richiede Node.js 18 o superiore.
+- [Express 4.x](/api) richiede Node.js 0.10 o superiore.
+- [Express 5.x](/5x/api) richiede Node.js 18 o superiore.

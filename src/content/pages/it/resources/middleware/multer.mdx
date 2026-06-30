@@ -320,7 +320,7 @@ function fileFilter(req, file, cb) {
 ## Gestione errori
 
 Quando si incontra un errore, Multer delegherà l'errore a Express. Puoi visualizzare
-una bella pagina di errore usando [lo standard express way](http://expressjs.com/guide/error-handling.html).
+una bella pagina di errore usando [lo standard express way](/guide/error-handling).
 
 Se si desidera catturare errori specificamente da Multer, è possibile chiamare la funzione middleware
 da soli. Inoltre, se si desidera catturare solo [gli errori Multer](https://github.com/expressjs/multer/blob/main/lib/multer-error.js), puoi usare la classe `MulterError` che è collegata all'oggetto `multer` stesso (e. . `err instanceof multer.MulterError`).

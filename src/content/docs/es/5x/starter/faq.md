@@ -42,7 +42,7 @@ Para normalizar las interfaces del motor de plantillas y la caché, consulte el 
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 para obtener soporte. Los motores de plantillas no listados pueden seguir soportando la firma Express.
 
-Para obtener más información, consulte [Usar motores de plantilla con Express](/en/guide/using-template-engines).
+Para obtener más información, consulte [Usar motores de plantilla con Express](/guide/using-template-engines).
 
 ## ¿Cómo puedo manejar las respuestas 404?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Para más información, vea [Gestión de errores] (/en/guide/error-handling).
+Para más información, vea [Gestión de errores](/en/guide/error-handling).
 
 ## ¿Cómo renderizo HTML plano?
 
@@ -86,5 +86,5 @@ Si está sirviendo muchos activos de un directorio, utilice la función de middl
 
 ## ¿Qué versión de Node.js requiere Express?
 
-- [Express 4.x](/en/4x/api) requiere 0.10 o superior de Node.js.
-- [Express 5.x](/en/5x/api) requiere Node.js 18 o superior.
+- [Express 4.x](/4x/api) requiere 0.10 o superior de Node.js.
+- [Express 5.x](/api) requiere Node.js 18 o superior.

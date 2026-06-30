@@ -12,6 +12,7 @@ import {
   WriteBanner,
   RelatedContent,
 } from '@/components/patterns';
+import { formatPubDate, sortByPubDateDesc } from '@/utils/rss';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -40,20 +41,12 @@ const authorsList = (authors ?? []).map((a) => ({
   src: a.github ? `https://github.com/${a.github}.png` : '',
   name: a.name ?? '',
 }));
-const dateSource = filename.substring(0, 10);
-const parsedDate = new Date(dateSource);
-const date = Number.isNaN(parsedDate.getTime())
-  ? undefined
-  : parsedDate.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
+const date = formatPubDate(post, { month: 'long', day: 'numeric', year: 'numeric' });
 const labels = tags ?? [];
 
-const allPosts = (await getCollection('blog'))
-  .filter((p) => p.id !== post.id && p.id !== 'write-post')
-  .sort((a, b) => b.id.localeCompare(a.id));
+const allPosts = sortByPubDateDesc(
+  (await getCollection('blog')).filter((p) => p.id !== post.id && p.id !== 'write-post')
+);
 
 const currentTags = new Set(tags ?? []);
 const tagged = allPosts.filter((p) => p.data.tags?.some((tag) => currentTags.has(tag)));

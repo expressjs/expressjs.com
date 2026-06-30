@@ -5,7 +5,7 @@ description: Express.jsアプリケーション用にカスタムミドルウェ
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Middleware_ 関数は、[request object](/en/5x/api#req) (`req`) にアクセスできる関数です。 [response object](/en/5x/api#res) (`res`)とアプリケーションのリクエストレスポンスサイクルの中の `next` 関数。 `next` 関数はExpressルータ内の関数で、呼び出されたときに現在のミドルウェアを継承してミドルウェアを実行します。
+_Middleware_ 関数は、[request object](/api#req) (`req`) にアクセスできる関数です。 [response object](/api#res) (`res`)とアプリケーションのリクエストレスポンスサイクルの中の `next` 関数。 `next` 関数はExpressルータ内の関数で、呼び出されたときに現在のミドルウェアを継承してミドルウェアを実行します。
 
 ミドルウェア機能は以下のタスクを実行できます。
 
@@ -143,7 +143,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-ここでは、[`cookie-parser`](/en/resources/middleware/cookie-parser) ミドルウェアを使用して、`req`オブジェクトから入ってくるCookieを解析し、それを私たちの`cookieValidator`関数に渡します。 `validateCookies`ミドルウェアは、拒否時に自動的にエラーハンドラをトリガーするPromiseを返します。
+ここでは、[`cookie-parser`](/resources/middleware/cookie-parser) ミドルウェアを使用して、`req`オブジェクトから入ってくるCookieを解析し、それを私たちの`cookieValidator`関数に渡します。 `validateCookies`ミドルウェアは、拒否時に自動的にエラーハンドラをトリガーするPromiseを返します。
 
 ```js
 const express = require('express');
@@ -181,7 +181,7 @@ functions.
 
 リクエストオブジェクト、レスポンスオブジェクト、スタック内の次のミドルウェア関数、そしてノード全体にアクセスできるためです。 s API、ミドルウェア関数の可能性は無限大です。
 
-Express ミドルウェアの詳細については、[Express ミドルウェアを使用する](/en/guide/using-middleware)を参照してください。
+Express ミドルウェアの詳細については、[Express ミドルウェアを使用する](/guide/using-middleware)を参照してください。
 
 ## 設定可能なミドルウェア
 

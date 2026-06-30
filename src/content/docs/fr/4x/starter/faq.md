@@ -42,7 +42,7 @@ Pour normaliser les interfaces du moteur de gabarits et la mise en cache, consul
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 pour plus de support. Les moteurs de gabarits non listés peuvent toujours supporter la signature Express.
 
-Pour plus d'informations, voir [Utilisation de moteurs de gabarits avec Express](/en/guide/using-template-engines).
+Pour plus d'informations, voir [Utilisation de moteurs de gabarits avec Express](/guide/using-template-engines).
 
 ## Comment gérer 404 réponses?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Pour plus d'informations, voir [Gestion des erreurs] (/en/guide/error-handling).
+Pour plus d'informations, voir [Gestion des erreurs](/en/guide/error-handling).
 
 ## Comment rendre le HTML simple ?
 
@@ -86,5 +86,5 @@ middleware.
 
 ## Quelle version de Node.js est requise ?
 
-- [Express 4.x](/en/4x/api) nécessite Node.js 0.10 ou supérieur.
-- [Express 5.x](/en/5x/api) nécessite Node.js 18 ou plus.
+- [Express 4.x](/api) nécessite Node.js 0.10 ou supérieur.
+- [Express 5.x](/5x/api) nécessite Node.js 18 ou plus.

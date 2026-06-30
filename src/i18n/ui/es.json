@@ -179,7 +179,7 @@
     "download": "Descargar"
   },
   "hero": {
-    "tagline": "Marco web para Node.js rápido, sin opinión y minimalista",
+    "tagline": "El framework web rápido, minimalista y sin imposiciones para Node.js",
     "getStarted": "Empezar",
     "kawaiiLogoAlt": "Logo de Express.js kawaii",
     "videoPause": "Pausar vídeo de fondo",

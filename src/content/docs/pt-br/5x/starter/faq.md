@@ -42,7 +42,7 @@ Para normalizar interfaces do motor de modelos e cache de cache, veja o projeto
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 para suporte. Motores de modelos não listados ainda podem suportar a assinatura Express.
 
-Para obter mais informações, consulte [Usando mecanismos de modelo com Express](/en/guide/using-template-engines).
+Para obter mais informações, consulte [Usando mecanismos de modelo com Express](/guide/using-template-engines).
 
 ## Como lidamos com 404 respostas?
 
@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Para obter mais informações, consulte [Manipulação de erro](/en/guide/error-handling).
+Para obter mais informações, consulte [Manipulação de erro](/guide/error-handling).
 
 ## Como faço para tornar HTML simples?
 
@@ -86,5 +86,5 @@ middleware.
 
 ## Qual versão do Node.js requer o Expresso?
 
-- [Expresso 4.x](/en/4x/api) requer Node.js 0.10 ou superior.
-- [Express 5.x](/en/5x/api) requer Node.js 18 ou superior.
+- [Expresso 4.x](/4x/api) requer Node.js 0.10 ou superior.
+- [Express 5.x](/api) requer Node.js 18 ou superior.

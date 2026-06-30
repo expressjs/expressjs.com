@@ -77,10 +77,15 @@
     gap: var(--space-0-5);
     border-top: var(--border-width-1) solid var(--color-border-mute);
 
+    max-height: calc(100dvh - var(--space-44));
+    overflow-y: auto;
+
     @media (--md-up) {
       padding: 0;
       border-top: none;
       border-left: var(--border-width-1) solid var(--color-border-mute);
+      max-height: none;
+      overflow: visible;
     }
   }
 

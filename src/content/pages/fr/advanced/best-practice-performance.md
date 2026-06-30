@@ -11,7 +11,7 @@ Ce sujet tombe clairement dans le monde des « dévalises », englobant tant le 
   - [Utiliser la compression gzip](#use-gzip-compression)
   - [Ne pas utiliser de fonctions synchrones](#dont-use-synchronous-functions)
   - [Faire la journalisation correctement](#do-logging-correctly)
-  - [Gérer les exceptions correctement] (#handle-exceptions-properly)
+  - [Gérer les exceptions correctement](#handle-exceptions-properly)
 - Choses à faire dans votre environnement / configuration (partie Ops) :
   - [Définir NODE_ENV comme "production"](#set-node_env-to-production)
   - (#ensure-your-app-automatically-restarts)
@@ -27,7 +27,7 @@ Voici quelques choses que vous pouvez faire dans votre code pour améliorer les 
 - [Utiliser la compression gzip](#use-gzip-compression)
 - [Ne pas utiliser de fonctions synchrones](#dont-use-synchronous-functions)
 - [Faire la journalisation correctement](#do-logging-correctly)
-- [Gérer les exceptions correctement] (#handle-exceptions-properly)
+- [Gérer les exceptions correctement](#handle-exceptions-properly)
 
 ### Utiliser la compression gzip
 
@@ -41,7 +41,7 @@ const app = express();
 app.use(compression());
 ```
 
-Pour un site internet à fort trafic en production, la meilleure façon de mettre en place une compression est de l'implémenter à un niveau de proxy inverse (voir [Utiliser un proxy inverse](#use-a-reverse-proxy)). Dans ce cas, vous n'avez pas besoin d'utiliser le middleware de compression. Pour plus de détails sur l'activation de la compression gzip dans Nginx, voir [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) dans la documentation Nginx.
+Pour un site internet à fort trafic en production, la meilleure façon de mettre en place une compression est de l'implémenter à un niveau de proxy inverse (voir [Utiliser un proxy inverse](#use-a-reverse-proxy)). Dans ce cas, vous n'avez pas besoin d'utiliser le middleware de compression. Pour plus de détails sur l'activation de la compression gzip dans Nginx, voir [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) dans la documentation Nginx.
 
 ### Ne pas utiliser les fonctions synchrones
 
@@ -49,11 +49,11 @@ Les fonctions et méthodes synchrones lient le processus d'exécution jusqu'à c
 
 Bien que Node et de nombreux modules fournissent des versions synchrones et asynchrones de leurs fonctions, utilisez toujours la version asynchrone en production. Le seul moment où une fonction synchrone peut être justifiée est au démarrage initial.
 
-Vous pouvez utiliser le flag en ligne de commande `--trace-sync-io` pour afficher une alerte et une trace de pile chaque fois que votre application utilise une API synchrone. Bien sûr, vous ne voudriez pas utiliser cela en production, mais plutôt vous assurer que votre code est prêt pour la production. Voir la [documentation des options de la ligne de commande node](https://nodejs.org/api/cli#cli_trace_sync_io) pour plus d'informations.
+Vous pouvez utiliser le flag en ligne de commande `--trace-sync-io` pour afficher une alerte et une trace de pile chaque fois que votre application utilise une API synchrone. Bien sûr, vous ne voudriez pas utiliser cela en production, mais plutôt vous assurer que votre code est prêt pour la production. Voir la [documentation des options de la ligne de commande node](https://nodejs.org/api/cli.html#trace-sync-io) pour plus d'informations.
 
 ### Faire la journalisation correctement
 
-En général, il y a deux raisons de se connecter depuis votre application : pour le débogage et pour l'activité des applications de journalisation (essentiellement tout le reste). Utiliser `console.log()` ou `console.error()` pour imprimer les messages de log vers le terminal est pratique courante dans le développement. Mais [ces fonctions sont synchronisées] (https://nodejs.org/api/console#console) lorsque la destination est un terminal ou un fichier, elles ne sont donc pas adaptées à la production, à moins que vous ne conduisiez la sortie vers un autre programme.
+En général, il y a deux raisons de se connecter depuis votre application : pour le débogage et pour l'activité des applications de journalisation (essentiellement tout le reste). Utiliser `console.log()` ou `console.error()` pour imprimer les messages de log vers le terminal est pratique courante dans le développement. Mais [ces fonctions sont synchronisées](https://nodejs.org/api/console.html#console) lorsque la destination est un terminal ou un fichier, elles ne sont donc pas adaptées à la production, à moins que vous ne conduisiez la sortie vers un autre programme.
 
 #### Pour le débogage
 
@@ -65,7 +65,7 @@ Si vous connectez l'activité de l'application (par exemple, suivre le trafic ou
 
 ### Gérer correctement les exceptions
 
-Les applications de nœud plantent lorsqu'elles rencontrent une exception non prise. Ne pas gérer les exceptions et prendre les actions appropriées fera planter votre application Express et se déconnectera. Si vous suivez les conseils de [Assurez-vous que votre application redémarre automatiquement] (#ensure-your-app-automatically-restarts) ci-dessous, votre application se remettra d'un crash. Heureusement, les applications Express ont généralement un temps de démarrage court. Néanmoins, vous voulez éviter de planter en premier lieu, et pour ce faire, vous devez gérer les exceptions correctement.
+Les applications de nœud plantent lorsqu'elles rencontrent une exception non prise. Ne pas gérer les exceptions et prendre les actions appropriées fera planter votre application Express et se déconnectera. Si vous suivez les conseils de [Assurez-vous que votre application redémarre automatiquement](#ensure-your-app-automatically-restarts) ci-dessous, votre application se remettra d'un crash. Heureusement, les applications Express ont généralement un temps de démarrage court. Néanmoins, vous voulez éviter de planter en premier lieu, et pour ce faire, vous devez gérer les exceptions correctement.
 
 Pour vous assurer de gérer toutes les exceptions, utilisez les techniques suivantes :
 
@@ -134,9 +134,9 @@ La meilleure pratique est de gérer les erreurs le plus près possible du site. 
 
 Une chose que vous ne devriez pas _faire_ est d'écouter l'évènement `uncatghtException` émise lorsqu'une exception bulle tout le retour à la boucle d'événement. Ajouter un event listener pour `uncatghtException` changera le comportement par défaut du processus qui rencontre une exception ; le processus continuera à fonctionner malgré l'exception. Cela peut sembler un bon moyen d'empêcher votre application de planter, mais continuer à exécuter l'application après une exception non capturée est une pratique dangereuse et n'est pas recommandé, parce que l'état du processus devient peu fiable et imprévisible.
 
-De plus, l'utilisation de `uncaughtException` est officiellement reconnue comme [crude](https://nodejs.org/api/process#process_event_uncaughtexception). Donc l'écoute de `uncatghtException` est juste une mauvaise idée. C'est pourquoi nous recommandons des choses comme des processus multiples et des superviseurs : plantage et redémarrage est souvent le moyen le plus fiable de se remettre d'une erreur.
+De plus, l'utilisation de `uncaughtException` est officiellement reconnue comme [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Donc l'écoute de `uncatghtException` est juste une mauvaise idée. C'est pourquoi nous recommandons des choses comme des processus multiples et des superviseurs : plantage et redémarrage est souvent le moyen le plus fiable de se remettre d'une erreur.
 
-Nous ne recommandons pas non plus d'utiliser [domains](https://nodejs.org/api/domain). Il ne résout généralement pas le problème et est un module obsolète.
+Nous ne recommandons pas non plus d'utiliser [domains](https://nodejs.org/api/domain.html). Il ne résout généralement pas le problème et est un module obsolète.
 
 ## Choses à faire dans votre environnement / configuration
 
@@ -240,7 +240,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Pour plus d'informations sur le système, voir [systemd reference (man page)] (http://www.freedesktop.org/software/systemd/man/systemd.unit).
+Pour plus d'informations sur le système, voir [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
 ### Exécutez votre application dans un cluster
 
@@ -254,11 +254,11 @@ Dans les applications groupées, les processus de travail peuvent planter indivi
 
 #### Utilisation du module de cluster de Node
 
-Le groupement est rendu possible avec le [module de clustage] (https://nodejs.org/api/cluster). Cela permet à un processus maître de faire apparaître des processus de travail et de distribuer des connexions entrantes entre les travailleurs.
+Le groupement est rendu possible avec le [module de clustage](https://nodejs.org/api/cluster.html). Cela permet à un processus maître de faire apparaître des processus de travail et de distribuer des connexions entrantes entre les travailleurs.
 
 #### Utilisation du PM2
 
-Si vous déployez votre application avec PM2, alors vous pouvez profiter de la grappe de serveurs _sans_ pour modifier le code de votre application. Vous devez d'abord vous assurer que votre [application est sans états] (https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) signifiant qu'aucune donnée locale n'est stockée dans le processus (comme les sessions, les connexions websocket et les autres).
+Si vous déployez votre application avec PM2, alors vous pouvez profiter de la grappe de serveurs _sans_ pour modifier le code de votre application. Vous devez d'abord vous assurer que votre [application est sans états](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) signifiant qu'aucune donnée locale n'est stockée dans le processus (comme les sessions, les connexions websocket et les autres).
 
 Lorsque vous exécutez une application avec PM2, vous pouvez activer le **mode de cluster** pour l'exécuter dans une grappe avec un certain nombre d'instances de votre choix, comme le nombre de processeurs disponibles sur la machine. Vous pouvez modifier manuellement le nombre de processus dans le cluster en utilisant l'outil en ligne de commande `pm2` sans arrêter l'application.
 
@@ -294,7 +294,7 @@ Utilisez un serveur de cache comme [Varnish](https://www.varnish-cache.org/) ou 
 
 Quelle que soit l'optimisation d'une application, une seule instance ne peut gérer qu'une quantité limitée de charge et de trafic. Une façon de mettre à l'échelle une application est d'exécuter plusieurs instances et de distribuer le trafic via un répartiteur de charge. La mise en place d'un répartiteur de charge peut améliorer les performances et la vitesse de votre application et l'activer pour augmenter la taille de votre système par une seule instance.
 
-Un répartiteur de charge est généralement un mandataire inversé qui orchestre le trafic entre et à partir de plusieurs instances et serveurs d'applications. Vous pouvez facilement configurer un répartiteur de charge pour votre application en utilisant [Nginx](https://nginx.org/en/docs/http/load_balancing) ou [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Un répartiteur de charge est généralement un mandataire inversé qui orchestre le trafic entre et à partir de plusieurs instances et serveurs d'applications. Vous pouvez facilement configurer un répartiteur de charge pour votre application en utilisant [Nginx](https://nginx.org/en/docs/http/load_balancing.html) ou [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Avec l'équilibrage de charge, vous devrez peut-être vous assurer que les requêtes qui sont associées à un ID de session particulier se connectent au processus qui les a originés. C'est connu sous le nom _affinity_, ou _sticky sessions_, et peut être adressé par la suggestion ci-dessus d'utiliser un stockage de données tel que Redis pour les données de session (selon votre application). Pour une discussion, voir [Utilisation de plusieurs nœuds](https://socket.io/docs/v4/using-multiple-nodes/).
 

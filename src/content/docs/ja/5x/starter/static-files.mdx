@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 `root` 引数は、静的アセットを提供するルートディレクトリを指定します。
-引数 `options` の詳細については、 [express.static](/en/5x/api#express.static) を参照してください。
+引数 `options` の詳細については、 [express.static](/api#express.static) を参照してください。
 
 例えば、`public`という名前のディレクトリに画像、CSSファイル、JavaScriptファイルを表示するには、次のコードを使用します。
 
@@ -56,7 +56,7 @@ serving static assets.
 
 </Alert>
 
-\`expressで提供されるファイルに対して、仮想パスプレフィックス(ファイルシステム内にパスが実際に存在しない場所)を作成します。 以下に示すように、staticディレクトリの[mount path](/en/5x/api#app.use)を指定します。
+\`expressで提供されるファイルに対して、仮想パスプレフィックス(ファイルシステム内にパスが実際に存在しない場所)を作成します。 以下に示すように、staticディレクトリの[mount path](/api#app.use)を指定します。
 
 ```js
 app.use('/static', express.static('public'));
@@ -79,4 +79,4 @@ const path = require('path');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
-`serve-static` 関数とそのオプションの詳細については、 [serve-static](/en/resources/middleware/serve-static) を参照してください。
+`serve-static` 関数とそのオプションの詳細については、 [serve-static](/resources/middleware/serve-static) を参照してください。
