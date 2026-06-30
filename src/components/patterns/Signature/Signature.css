@@ -68,6 +68,16 @@
     color: var(--color-text-error);
   }
 
+  .type-tag--runtime {
+    border-color: var(--color-border-warning);
+    background-color: var(--color-bg-warning);
+    color: var(--color-text-warning);
+  }
+
+  .signature__line--runtime .signature__line-label {
+    color: var(--color-text-warning);
+  }
+
   .signature__params {
     display: grid;
     grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);

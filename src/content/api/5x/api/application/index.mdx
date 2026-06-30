@@ -668,86 +668,37 @@ PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 
 Express supports the following routing methods corresponding to the HTTP methods of the same names:
 
-<div class="methods-columns">
-  <ul>
-    <li>
-      <code>checkout</code>
-    </li>
-    <li>
-      <code>copy</code>
-    </li>
-    <li>
-      <code>delete</code>
-    </li>
-    <li>
-      <code>get</code>
-    </li>
-    <li>
-      <code>head</code>
-    </li>
-    <li>
-      <code>lock</code>
-    </li>
-    <li>
-      <code>merge</code>
-    </li>
-    <li>
-      <code>mkactivity</code>
-    </li>
-  </ul>
-  <ul>
-    <li>
-      <code>mkcol</code>
-    </li>
-    <li>
-      <code>move</code>
-    </li>
-    <li>
-      <code>m-search</code>
-    </li>
-    <li>
-      <code>notify</code>
-    </li>
-    <li>
-      <code>options</code>
-    </li>
-    <li>
-      <code>patch</code>
-    </li>
-    <li>
-      <code>post</code>
-    </li>
-  </ul>
-  <ul>
-    <li>
-      <code>purge</code>
-    </li>
-    <li>
-      <code>put</code>
-    </li>
-    <li>
-      <code>report</code>
-    </li>
-    <li>
-      <code>search</code>
-    </li>
-    <li>
-      <code>subscribe</code>
-    </li>
-    <li>
-      <code>trace</code>
-    </li>
-    <li>
-      <code>unlock</code>
-    </li>
-    <li>
-      <code>unsubscribe</code>
-    </li>
-  </ul>
+<div class="columns-2">
+
+- `checkout`
+- `copy`
+- [`delete`](#appdelete)
+- [`get`](#appget)
+- `head`
+- `lock`
+- `merge`
+- `mkactivity`
+- `mkcol`
+- `move`
+- `m-search`
+- `notify`
+- `options`
+- `patch`
+- [`post`](#apppost)
+- `purge`
+- [`put`](#appput)
+- [`query`](#appquery)
+- `report`
+- `search`
+- `subscribe`
+- `trace`
+- `unlock`
+- `unsubscribe`
+
 </div>
 
 The API documentation has explicit entries only for the most popular HTTP methods `app.get()`,
-`app.post()`, `app.put()`, and `app.delete()`.
+`app.post()`, `app.put()`, `app.delete()`, and `app.query()`.
 However, the other methods listed above work in exactly the same way.
 
 To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example, `app['m-search']('/', function ...`.
@@ -958,6 +909,65 @@ Routes HTTP PUT requests to the specified path with the specified callback funct
 ```js
 app.put('/', (req, res) => {
   res.send('PUT request to homepage');
+});
+```
+
+### app.query()
+
+<Signature runtime={{ 'Node.js': '>=20.19.3 <21 || >=22.2.0' }}>
+  <Fragment slot="attributes">
+    <Param name="path" type="String | RegExp | Array">
+      The path for which the middleware function is invoked; can be any of: a string representing a
+      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
+      of any of the above. For examples, see [Path examples](#path-examples).
+    </Param>
+    <Param name="callback" type="Function | Function[]">
+      Callback functions; can be: a middleware function, a series of middleware functions (separated
+      by commas), an array of middleware functions, or a combination of all of the above. You can
+      provide multiple callback functions that behave just like middleware, except that these
+      callbacks can invoke `next('route')` to bypass the remaining route callback(s). You can use
+      this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if
+      there is no reason to proceed with the current route. Since [router](/api/router/) and
+      [app](/api/application/) implement the middleware interface, you can use them as you would any
+      other middleware function. For examples, see [Middleware callback function
+      examples](#middleware-callback-function-examples).
+    </Param>
+  </Fragment>
+</Signature>
+
+Routes HTTP QUERY requests to the specified path with the specified callback functions.
+For more information, see the [routing guide](/guide/routing/).
+
+<Alert type="alert">
+
+The HTTP QUERY method was standardized on June 15, 2026 as [RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html).
+Client and intermediary support is still limited. Verify that your target environments support the QUERY verb before relying on it in production.
+
+</Alert>
+
+The HTTP QUERY method ([RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html)) is designed for
+queries whose input is too large or too sensitive to encode in the URL. Unlike `GET`, a QUERY
+request carries a body containing the query input. Unlike `POST`, it is explicitly **safe and
+idempotent**, intermediaries and caches can retry it automatically, and the response is cacheable
+(with the request body included in the cache key).
+
+Use `app.query()` when query parameters would exceed URL length limits, contain sensitive data that
+should not appear in server logs or browser history, or are too complex to express cleanly as a URL
+query string, such as deeply nested filters or structured criteria.
+
+Because the query input travels in the request body, `req.body` is `undefined` until you mount a
+body-parsing middleware such as [`express.json()`](/api/express/#expressjson) or
+[`express.urlencoded()`](/api/express/#expressurlencoded) that matches the request's `Content-Type`.
+
+#### Example
+
+```js title="index.js"
+app.use(express.json()); // populate req.body for application/json payloads
+
+app.query('/search', (req, res) => {
+  // complex filter criteria arrive in req.body, not the URL
+  const results = db.search(req.body);
+  res.json(results);
 });
 ```
 
