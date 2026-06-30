@@ -50,7 +50,8 @@ const runtimeEntries = runtime ? Object.entries(runtime) : [];
 const hasReturnsSlot = Astro.slots.has('returns');
 const hasReturns = hasReturnsSlot || Boolean(returns);
 const hasAttributes = Astro.slots.has('attributes');
-const hasFooter = Boolean(type) || hasReturns || Boolean(since) || runtimeEntries.length > 0 || Boolean(deprecated);
+const hasFooter =
+  Boolean(type) || hasReturns || Boolean(since) || runtimeEntries.length > 0 || Boolean(deprecated);
 ---
 
 <section class="signature">
