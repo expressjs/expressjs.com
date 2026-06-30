@@ -1,0 +1,65 @@
+---
+title: June 2026 Security Releases
+description: Security releases for multer and morgan have been published. We recommend that all users upgrade as soon as possible.
+tags: ['security']
+authors:
+  - name: Ulises Gascon
+    github: UlisesGascon
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+The Express team has released [multer](https://www.npmjs.com/package/multer) 2.2.0 and [morgan](https://www.npmjs.com/package/morgan) 1.11.0, addressing three vulnerabilities across multipart parsing and access logging.
+
+<Alert type="warning">
+
+We recommend upgrading to the latest versions of multer and morgan to secure your applications. If you have a `package-lock.json`, you can update the dependencies by running:
+
+```sh
+npm update multer morgan
+```
+
+</Alert>
+
+The following vulnerabilities have been addressed:
+
+- [CVE-2026-5079 in multer middleware (High)](#cve-2026-5079-in-multer-middleware-high)
+- [CVE-2026-5078 in morgan middleware (Medium)](#cve-2026-5078-in-morgan-middleware-medium)
+- [CVE-2026-5038 in multer middleware (Medium)](#cve-2026-5038-in-multer-middleware-medium)
+
+## CVE-2026-5079 in multer middleware (High)
+
+**[multer](https://www.npmjs.com/package/multer) versions `>= 1.0.0, < 2.2.0` and `>= 3.0.0-alpha.1, < 3.0.0-alpha.2` are vulnerable to denial of service via deeply nested field names in multipart form data**
+
+Multer uses the `append-field` dependency to parse bracket notation in field names such as `a[b][c]`. There is no limit on nesting depth, so an attacker can send a multipart form with field names that force allocation of deeply nested objects. With sufficient nesting, request handling consumes excessive memory and CPU, causing denial of service. The vulnerability affects all consumers that pass user-controlled multipart forms through multer's parser.
+
+**Affected versions**: `>= 1.0.0, < 2.2.0` and `>= 3.0.0-alpha.1, < 3.0.0-alpha.2`\
+**Patched version**: `>= 2.2.0` (stable line) and `>= 3.0.0-alpha.2` (alpha line)
+
+For more details, see [GHSA-72gw-mp4g-v24j](https://github.com/expressjs/multer/security/advisories/GHSA-72gw-mp4g-v24j).
+
+## CVE-2026-5078 in morgan middleware (Medium)
+
+**[morgan](https://www.npmjs.com/package/morgan) versions `>= 1.2.0, <= 1.10.1` are vulnerable to log forging via unsanitized control characters in the `:remote-user` token**
+
+Morgan's `:remote-user` token writes the Basic auth username from the `Authorization` header to the log stream without neutralizing control characters. A crafted `Authorization: Basic` header containing CR/LF characters can inject forged log lines, corrupting the one-request-per-line structure of access logs. The built-in `combined`, `common`, `default`, and `short` formats are affected, as well as any custom format that includes `:remote-user`.
+
+**Affected versions**: `>= 1.2.0, <= 1.10.1`
+**Patched version**: `>= 1.11.0`
+
+For more details, see [GHSA-4vj7-5mj6-jm8m](https://github.com/expressjs/morgan/security/advisories/GHSA-4vj7-5mj6-jm8m).
+
+## CVE-2026-5038 in multer middleware (Medium)
+
+**[multer](https://www.npmjs.com/package/multer) versions `>= 2.0.0-alpha.1, < 2.2.0` and `>= 3.0.0-alpha.1, < 3.0.0-alpha.2` are vulnerable to denial of service via incomplete cleanup of aborted uploads**
+
+When multer's `diskStorage` engine is used, aborted or malformed multipart uploads leave orphaned partial files on disk. The cleanup path does not run on every error condition, so an attacker can fill the upload directory by repeatedly opening and dropping connections mid-upload. Over time this exhausts disk space, causing denial of service on the host.
+
+**Affected versions**: `>= 2.0.0-alpha.1, < 2.2.0` and `>= 3.0.0-alpha.1, < 3.0.0-alpha.2`
+**Patched version**: `>= 2.2.0` (stable line) and `>= 3.0.0-alpha.2` (alpha line)
+
+For more details, see [GHSA-3p4h-7m6x-2hcm](https://github.com/expressjs/multer/security/advisories/GHSA-3p4h-7m6x-2hcm).
+
+---
+
+We recommend upgrading to the latest versions of multer and morgan to secure your applications.
