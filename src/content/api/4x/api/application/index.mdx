@@ -695,6 +695,9 @@ Express supports the following routing methods corresponding to the HTTP methods
       <code>put</code>
     </li>
     <li>
+      <code>query</code>
+    </li>
+    <li>
       <code>report</code>
     </li>
     <li>
@@ -748,6 +751,64 @@ the specified path for _all_ HTTP request methods.
 For more information, see [app.all](#appall).
 
 For more information on routing, see the [routing guide](/guide/routing/).
+
+### app.query()
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="path" type="String | RegExp | Array">
+      The path for which the middleware function is invoked; can be any of: a string representing a
+      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
+      of any of the above. For examples, see [Path examples](#path-examples).
+    </Param>
+    <Param name="callback" type="Function | Function[]">
+      Callback functions; can be: a middleware function, a series of middleware functions (separated
+      by commas), an array of middleware functions, or a combination of all of the above. You can
+      provide multiple callback functions that behave just like middleware, except that these
+      callbacks can invoke `next('route')` to bypass the remaining route callback(s). You can use
+      this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if
+      there is no reason to proceed with the current route. Since [router](/api/router/) and
+      [app](/api/application/) implement the middleware interface, you can use them as you would any
+      other middleware function. For examples, see [Middleware callback function
+      examples](#middleware-callback-function-examples).
+    </Param>
+  </Fragment>
+</Signature>
+
+Routes HTTP QUERY requests to the specified path with the specified callback functions.
+For more information, see the [routing guide](/guide/routing/).
+
+<Alert type="alert">
+
+The HTTP QUERY method was standardized on June 15, 2026 as [RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html).
+Client and intermediary support is still limited — verify that your target environments support the QUERY verb before relying on it in production.
+
+</Alert>
+
+<Alert type="warning">
+
+QUERY support requires **Node.js >= 21.7.2** and it is stable on Node.js >= 22.
+
+</Alert>
+
+The HTTP QUERY method ([RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html)) is designed for
+queries whose input is too large or too sensitive to encode in the URL. Unlike `GET`, a QUERY
+request carries a body containing the query input. Unlike `POST`, it is explicitly **safe and
+idempotent**, intermediaries and caches can retry it automatically, and the response is cacheable
+(with the request body included in the cache key).
+
+Use `app.query()` when query parameters would exceed URL length limits, contain sensitive data that
+should not appear in server logs or browser history, or require a structured body format such as JSON.
+
+#### Example
+
+```js
+app.query('/search', (req, res) => {
+  // complex filter criteria arrive in req.body, not the URL
+  const results = db.search(req.body);
+  res.json(results);
+});
+```
 
 ### app.param()
 
