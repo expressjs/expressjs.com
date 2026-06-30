@@ -726,7 +726,7 @@ Express supports the following routing methods corresponding to the HTTP methods
       <a href="#appput"><code>put</code></a>
     </li>
     <li>
-      <a href="#appquery"><code>query</code></a> (Node.js &gt;= 22.0.0)
+      <a href="#appquery"><code>query</code></a>
     </li>
     <li>
       <code>report</code>
@@ -966,7 +966,7 @@ app.put('/', (req, res) => {
 
 ### app.query()
 
-<Signature runtime={{ "Node.js": ">= 22.0.0" }}>
+<Signature runtime={{ "Node.js": ">=20.19.3 <21 || >=22.2.0" }}>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
       The path for which the middleware function is invoked; can be any of: a string representing a
