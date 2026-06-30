@@ -5,9 +5,10 @@ description: Middleware para manipular dados multipartes/form-data
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.1.1"
+  version="2.2.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -21,24 +22,22 @@ sobre [busboy](https://github.com/mscdex/busboy) para uma eficiência máxima.
 
 Este README também está disponível em outros idiomas:
 
-|                                                                                       |                |
-| ------------------------------------------------------------------------------------- | -------------- |
-| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)             | Arábico        |
-| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)         | chinês         |
-| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)            | francês        |
-| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)              | coreano        |
-| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md)        | Português (BR) |
-| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md)        | Russo          |
-| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)             | espanhol       |
-| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)         | Uzbek          |
-| [Visualizar... t Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md) | Vietnamese     |
-| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)              | Turco          |
+|                                                                                |                |
+| ------------------------------------------------------------------------------ | -------------- |
+| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)      | Arábico        |
+| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)  | chinês         |
+| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)     | francês        |
+| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)       | coreano        |
+| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md) | Português (BR) |
+| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md) | Russo          |
+| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)      | espanhol       |
+| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)  | Uzbek          |
+| t Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md)         | Vietnamese     |
+| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)       | Turco          |
 
 ## Instalação
 
-```sh
-$ npm install multer
-```
+<PackageManagerCommand command="npm install multer" />
 
 ## Utilização
 
@@ -284,15 +283,16 @@ Um objeto especificando os limites de tamanho das seguintes propriedades opciona
 
 Os seguintes valores de números inteiros estão disponíveis:
 
-| Chave            | Descrição:                                                                                          | Padrão    |
-| ---------------- | --------------------------------------------------------------------------------------------------- | --------- |
-| `fieldNameSize`  | Tamanho máximo do nome do campo                                                                     | 100 bytes |
-| `tamanhoDoCampo` | Tamanho máximo do campo (em bytes)                                                                  | 1MB       |
-| 'campos'         | Número máximo de campos não-arquivo                                                                 | Infinito  |
-| `tamanhoArquivo` | Para formas multipartes, o tamanho máximo do arquivo (em bytes)                                     | Infinito  |
-| `arquivos`       | Para formulários multipartes, o número máximo de campos de arquivo                                  | Infinito  |
-| peças\`          | Para formulários multipartes, o número máximo de peças (campos + arquivos)                          | Infinito  |
-| `headerPairs`    | Para formas de múltiplas partes, o número máximo de pares chave de cabeçalho=>valores para analisar | 2000      |
+| Chave               | Descrição:                                                                                          | Padrão    |
+| ------------------- | --------------------------------------------------------------------------------------------------- | --------- |
+| `fieldNameSize`     | Tamanho máximo do nome do campo                                                                     | 100 bytes |
+| `tamanhoDoCampo`    | Tamanho máximo do campo (em bytes)                                                                  | 1MB       |
+| 'campos'            | Número máximo de campos não-arquivo                                                                 | Infinito  |
+| `tamanhoArquivo`    | Para formas multipartes, o tamanho máximo do arquivo (em bytes)                                     | Infinito  |
+| `arquivos`          | Para formulários multipartes, o número máximo de campos de arquivo                                  | Infinito  |
+| peças\`             | Para formulários multipartes, o número máximo de peças (campos + arquivos)                          | Infinito  |
+| `headerPairs`       | Para formas de múltiplas partes, o número máximo de pares chave de cabeçalho=>valores para analisar | 2000      |
+| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)                          | Infinito  |
 
 Especificar os limites pode ajudar a proteger seu site contra ataques de negação de serviço (DoS).
 
@@ -316,6 +316,15 @@ function fileFilter(req, file, cb) {
   cb(new Error("I don't have a clue!"));
 }
 ```
+
+## Security
+
+Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
+
+- `fileSize` -- set to the maximum expected file size for your use case
+- `files` -- set to the maximum number of files per request
+- `fields` -- set to the maximum number of text fields per request
+- `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
 
 ## Manipulação de erros
 

@@ -5,11 +5,12 @@ description: Middleware semplice sessione per Express
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="0.1.0"
+  version="1.19.0"
   github="https://github.com/expressjs/session"
-  npm="https://www.npmjs.com/package/session"
+  npm="https://www.npmjs.com/package/express-session"
 />
 
 ## Installazione
@@ -18,9 +19,7 @@ Questo è un modulo [Node.js](https://nodejs.org/en/) disponibile attraverso la
 [npm registry](https://www.npmjs.com/). L'installazione viene eseguita usando il comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install express-session
-```
+<PackageManagerCommand command="npm install express-session" />
 
 ## API
 
@@ -124,9 +123,7 @@ Specifica il valore `boolean` per l'attributo [`Partitioned` `Set-Cookie`](https
 . Quando veritiero, l'attributo `Partitioned` è impostato, altrimenti non lo è.
 Per impostazione predefinita, l'attributo `Partitioned` non è impostato.
 
-**Nota** Questo è un attributo che non è stato ancora completamente standardizzato e che potrebbe
-cambiare in futuro. Questo significa anche che molti client possono ignorare questo attributo fino a quando
-lo capiscono.
+**Nota** Questo è un attributo che non è stato ancora completamente standardizzato e che potrebbe cambiare in futuro. Questo significa anche che molti clienti possono ignorare questo attributo fino a quando non lo capiscono.
 
 Per maggiori informazioni su [la proposta](https://github.com/privacycg/CHIPS).
 
@@ -146,8 +143,10 @@ Specifica che la `string` sia il valore per l'attributo `Set-Cookie`][rfc-west-c
 Ulteriori informazioni sui diversi livelli di priorità sono disponibili in
 [la specifica][rfc-west-cookie-priority-00-4.1].
 
-**Nota** Questo è un attributo che non è stato ancora completamente standardizzato e che potrebbe cambiare in futuro.
-Questo significa anche che molti clienti possono ignorare questo attributo fino a quando non lo capiscono.
+**Nota** Questo è un attributo che non è stato ancora completamente standardizzato e che potrebbe
+cambiare in futuro.
+Questo significa anche che molti client possono ignorare questo attributo fino a quando
+lo capiscono.
 
 ##### cookie.sameSite
 
@@ -165,7 +164,8 @@ Ulteriori informazioni sui diversi livelli di esecuzione sono disponibili in
 [la specifica][rfc-6265bis-03-4.1.2.7].
 
 **Nota** Questo è un attributo che non è stato ancora completamente standardizzato e che potrebbe cambiare in
-il futuro. Questo significa anche che molti clienti possono ignorare questo attributo fino a quando non lo capiscono.
+il futuro. Questo significa anche che molti client possono ignorare questo attributo fino a quando
+lo capiscono.
 
 **Note** There is a [draft spec](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
 that requires that the `Secure` attribute be set to `true` when the `SameSite` attribute has been

@@ -4,6 +4,7 @@ description: Entdecken Sie, wie Sie Template-Engines wie Pug, Handlebars und EJS
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Eine _template engine_ ermöglicht es Ihnen, statische Template-Dateien in Ihrer Anwendung zu verwenden. Zur Laufzeit ersetzt die Template-Engine
 Variablen in einer Template-Datei mit aktuellen Werten und verwandelt die Vorlage in eine HTML-Datei, die an den Client gesendet wird.
@@ -11,7 +12,7 @@ Dieser Ansatz erleichtert die Gestaltung einer HTML-Seite.
 
 Der [Express-Anwendungsgenerator](/starter/generator) verwendet [Pug](https://pugjs.org/api/getting-started.html) als Standardwert, aber es unterstützt auch [Handlebars](https://www.npmjs.com/package/handlebars), und [EJS](https://www.npmjs.com/package/ejs), unter anderem.
 
-Um Template-Dateien zu rendern, setzen Sie folgende [Anwendungs-Einstellungen-Eigenschaften](/4x/api#app.set), in der Standardeinstellung `app.js`, die vom Generator erstellt wurde:
+To render template files, set the following [application setting properties](/api/application/#appset), in the default `app.js` created by the generator:
 
 - `views`, das Verzeichnis, in dem sich die Template-Dateien befinden. Eg: `app.set('views', './views')`.
   Dies ist standardmäßig im Verzeichnis `views` im Root-Verzeichnis der Anwendung.
@@ -19,9 +20,7 @@ Um Template-Dateien zu rendern, setzen Sie folgende [Anwendungs-Einstellungen-Ei
 
 Installieren Sie dann das entsprechende Template Engine npm Paket; zum Beispiel um Pug:
 
-```bash
-$ npm install pug --save
-```
+<PackageManagerCommand command="npm install pug --save" />
 
 <Alert type="warnung">
 Express-konforme Template-Engines wie MUG exportieren eine Funktion namens `__express(filePath, options, callback)`,

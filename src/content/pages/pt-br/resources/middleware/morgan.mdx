@@ -5,9 +5,10 @@ description: Requisição de logger middleware HTTP para Node.js
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.10.1"
+  version="1.11.0"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
@@ -22,9 +23,7 @@ Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
 [registro do npm](https://www.npmjs.com/). A instalação é feita usando o comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install morgan
-```
+<PackageManagerCommand command="npm install morgan" />
 
 ## API
 
@@ -201,15 +200,15 @@ Se nenhum formato é dado, então o padrão é `web`.
 
 A versão HTTP da solicitação.
 
-##### :method
+#####
 
 O método HTTP do pedido.
 
-##### :pid
+#####
 
 O ID do processo do Node.js lidando com a solicitação.
 
-##### :referrer
+#####
 
 O cabeçalho do Referrer da solicitação. Isto usará o cabeçalho Referer de ortografia incorreta se existir, caso contrário será Referente.
 
@@ -239,7 +238,7 @@ de resposta são escritos, em milissegundos.
 O argumento `dígitos` é um número que especifica o número de dígitos a
 incluir no número, por padrão até `3`, que fornece precisão de microsegundos.
 
-##### :status
+#####
 
 O código de status da resposta.
 
@@ -255,7 +254,7 @@ terminou de ser escrita para a conexão, em milissegundos.
 O argumento `dígitos` é um número que especifica o número de dígitos a
 incluir no número, por padrão até `3`, que fornece precisão de microsegundos.
 
-##### :url
+#####
 
 A URL da solicitação. Isto usará `req.originalUrl` se existir, caso contrário `req.url`.
 

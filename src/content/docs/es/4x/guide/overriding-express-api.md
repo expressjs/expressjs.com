@@ -14,7 +14,7 @@ Alterar los prototipos globales afectará a todas las aplicaciones cargadas Expr
 
 Puede anular la firma y el comportamiento de los métodos existentes con los suyos, asignando una función personalizada.
 
-A continuación se muestra un ejemplo de anular el comportamiento de [res.sendStatus](/api#res.sendStatus).
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {

@@ -5,11 +5,12 @@ description: Schéma de session simple pour Express
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="0.1.0"
+  version="1.19.0"
   github="https://github.com/expressjs/session"
-  npm="https://www.npmjs.com/package/session"
+  npm="https://www.npmjs.com/package/express-session"
 />
 
 ## Installation
@@ -18,9 +19,7 @@ Ceci est un module [Node.js](https://nodejs.org/en/) disponible via
 [npm registry](https://www.npmjs.com/). L'installation se fait à l'aide de la commande
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install express-session
-```
+<PackageManagerCommand command="npm install express-session" />
 
 ## API
 
@@ -146,7 +145,8 @@ Spécifie la `string` pour être la valeur de l'attribut [`Priority` `Set-Cookie
 Plus d'informations sur les différents niveaux de priorité peuvent être trouvées dans
 [la spécification][rfc-west-cookie-priority-00-4.1].
 
-**Note** Ceci est un attribut qui n'a pas encore été entièrement normalisé, et peut changer à l'avenir.
+**Note** Ceci est un attribut qui n'a pas encore été entièrement normalisé, et peut changer dans
+le futur.
 Cela signifie également que de nombreux clients peuvent ignorer cet attribut jusqu'à ce qu'ils le comprennent.
 
 ##### Site web du même type
@@ -164,8 +164,7 @@ Par défaut, c'est `false`.
 Plus d'informations sur les différents niveaux d'application peuvent être trouvées dans
 [la spécification][rfc-6265bis-03-4.1.2.7].
 
-**Note** Ceci est un attribut qui n'a pas encore été entièrement normalisé, et peut changer dans
-le futur. Cela signifie également que de nombreux clients peuvent ignorer cet attribut jusqu'à ce qu'ils le comprennent.
+**Note** Ceci est un attribut qui n'a pas encore été entièrement normalisé, et peut changer à l'avenir. Cela signifie également que de nombreux clients peuvent ignorer cet attribut jusqu'à ce qu'ils le comprennent.
 
 **Note** Il y a un [draft spec](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
 qui requiert que l'attribut `Secure` soit défini à `true` lorsque l'attribut `SameSite` a été

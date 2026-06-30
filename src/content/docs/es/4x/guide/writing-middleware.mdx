@@ -5,7 +5,7 @@ description: Aprenda cómo escribir funciones personalizadas de middleware para 
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Las funciones _Middleware_ son funciones que tienen acceso al [objeto de solicitud](/5x/api#req) (`req`), el [objeto de respuesta](/5x/api#res) (`res`), y la función `next` en el ciclo de solicitud y respuesta de la aplicación. La función `siguiente` es una función en el router Express que, cuando se invoca, ejecuta el middleware sucediendo al middleware actual.
+Además, la función de callback de la ruta raíz utiliza la propiedad que la función middleware añade a `req` (el objeto de la solicitud). La aplicación ahora utiliza la función de middleware `requestTime`.
 
 Las funciones de Middleware pueden realizar las siguientes tareas:
 
@@ -40,11 +40,10 @@ La siguiente figura muestra los elementos de una llamada a una función de middl
 </div>
 
 <div class="callout" id="callout5">
-  HTTP <a href="/5x/api#res">argumento</a> de respuesta a la función de middleware, llamada "res"
-  por convención .
+  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
 </div>
 
-<div class="callout" id="callout6">HTTP <a href="/5x/api#req">solicita un argumento</a> a la función de middleware, llamado "req" por convención.</div>
+<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
 </td>
 </tr>
 </table>
@@ -59,8 +58,20 @@ El resto de este artículo definirá y añadirá tres funciones de middleware a 
 una llamada `myLogger` que imprime un simple mensaje de registro, uno llamado `requestTime` que
 muestra la marca de tiempo de la petición HTTP, y uno llamado `validateCookies` que valida las cookies entrantes.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -95,8 +106,27 @@ pero por convención siempre se llama "siguiente". Para evitar la confusión, ut
 Para cargar la función middleware, llama a `app.use()`, especificando la función middleware.
 Por ejemplo, el siguiente código carga la función middleware `myLogger` antes de la ruta a la ruta raíz (/).
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+const myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 const myLogger = function (req, res, next) {
@@ -133,10 +163,31 @@ const requestTime = function (req, res, next) {
 };
 ```
 
-La aplicación ahora utiliza la función de middleware `requestTime`. Además, la función de callback de la ruta raíz utiliza la propiedad que la función middleware añade a `req` (el objeto de la solicitud).
+The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 const requestTime = function (req, res, next) {
@@ -173,12 +224,36 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Aquí usamos el [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analizar las cookies entrantes del objeto `req` y pasarlas a nuestra función `cookieValidator`. El middleware `validateCookies` devuelve una Promesa que al rechazar activará automáticamente nuestro gestor de errores.
+El middleware `validateCookies` devuelve una Promesa que al rechazar activará automáticamente nuestro gestor de errores. Aquí usamos el [`cookie-parser`](/resources/middleware/cookie-parser) middleware para analizar las cookies entrantes del objeto `req` y pasarlas a nuestra función `cookieValidator`.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cookieValidator = require('./cookieValidator');
+
+const app = express();
+
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cookieValidator from './cookieValidator';
 
 const app = express();
 
@@ -217,9 +292,7 @@ Para más información sobre middleware exprés, vea: [Usando middleware exprés
 
 Si necesita que su middleware sea configurable, exporte una función que acepte un objeto de opciones u otros parámetros, , que luego devuelve la implementación de middleware basada en los parámetros de entrada.
 
-Archivo: `my-middleware.js`
-
-```js
+```cjs title="my-middleware.cjs"
 module.exports = function (options) {
   return function (req, res, next) {
     // Implement the middleware function based on the options object
@@ -228,10 +301,25 @@ module.exports = function (options) {
 };
 ```
 
+```mjs title="my-middleware.mjs"
+export default function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+}
+```
+
 El middleware ahora puede ser usado como se muestra a continuación.
 
-```js
-const mw = require('./my-middleware.js');
+```cjs title="index.cjs"
+const mw = require('./my-middleware.cjs');
+
+app.use(mw({ option1: '1', option2: '2' }));
+```
+
+```mjs title="index.mjs"
+import mw from './my-middleware.mjs';
 
 app.use(mw({ option1: '1', option2: '2' }));
 ```

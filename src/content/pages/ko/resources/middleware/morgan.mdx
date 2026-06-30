@@ -5,9 +5,10 @@ description: HTTP request logger middleware for Node.js
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.10.1"
+  version="1.11.0"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
@@ -22,9 +23,7 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install morgan
-```
+<PackageManagerCommand command="npm install morgan" />
 
 ## API
 
@@ -201,15 +200,15 @@ If no format is given, then the default is `web`.
 
 The HTTP version of the request.
 
-##### :method
+#####
 
 The HTTP method of the request.
 
-##### :pid
+#####
 
 The process ID of the Node.js process handling the request.
 
-##### :referrer
+#####
 
 The Referrer header of the request. This will use the standard mis-spelled Referer header if exists, otherwise Referrer.
 
@@ -239,7 +238,7 @@ headers are written, in milliseconds.
 The `digits` argument is a number that specifies the number of digits to
 include on the number, defaulting to `3`, which provides microsecond precision.
 
-##### :status
+#####
 
 The status code of the response.
 
@@ -255,7 +254,7 @@ has finished being written out to the connection, in milliseconds.
 The `digits` argument is a number that specifies the number of digits to
 include on the number, defaulting to `3`, which provides microsecond precision.
 
-##### :url
+#####
 
 The URL of the request. This will use `req.originalUrl` if exists, otherwise `req.url`.
 

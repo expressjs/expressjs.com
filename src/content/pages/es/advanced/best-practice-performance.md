@@ -10,7 +10,7 @@ Este tema entra claramente en el mundo de los "devops", que abarca tanto el desa
 - Cosas que hacer en tu código (la parte del desarrollador):
   - [Usar compresión gzip](#use-gzip-compression)
   - [No usar funciones sincrónicas](#dont-use-synchronous-functions)
-  - [Registrar correctamente](#do-logging-correctly)
+  - [Registrar correctamente] (#do-logging-correctly)
   - [Manejar excepciones correctamente](#handle-exceptions-properly)
 - Cosas que hacer en tu entorno / configuración (parte de la opción):
   - [Establecer NODE_ENV a "producción"](#set-node_env-to-production)
@@ -26,14 +26,14 @@ Aquí hay algunas cosas que puedes hacer en tu código para mejorar el rendimien
 
 - [Usar compresión gzip](#use-gzip-compression)
 - [No usar funciones sincrónicas](#dont-use-synchronous-functions)
-- [Registrar correctamente](#do-logging-correctly)
+- [Registrar correctamente] (#do-logging-correctly)
 - [Manejar excepciones correctamente](#handle-exceptions-properly)
 
 ### Usar compresión gzip
 
 La compresión Gzip puede disminuir en gran medida el tamaño del cuerpo de respuesta y por lo tanto aumentar la velocidad de una aplicación web. Utilice el Middleware [compression](https://www.npmjs.com/package/compression) para compresión gzip en su aplicación Express. Por ejemplo:
 
-```js
+```cjs title="index.cjs"
 const compression = require('compression');
 const express = require('express');
 const app = express();
@@ -41,49 +41,58 @@ const app = express();
 app.use(compression());
 ```
 
-Para un sitio web de alto tráfico en producción, la mejor manera de poner compresión en su lugar es implementarla en un nivel proxy inverso (ver [Usar un proxy inverso](#use-a-reverse-proxy)). En ese caso, no necesita usar middleware de compresión. Para más detalles sobre habilitar compresión gzip en Nginx, vea [Módulo ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) en la documentación de Nginx.
+```mjs title="index.mjs"
+import compression from 'compression';
+import express from 'express';
 
-### No utilizar funciones sincrónicas
+const app = express();
 
-Las funciones y métodos sincrónicos emiten el proceso de ejecución hasta que regresen. Una sola llamada a una función sincrónica puede regresar en unos pocos microsegundos o milisegundos, Sin embargo, en sitios web de alto tráfico, estas llamadas añaden y reducen el rendimiento de la aplicación. Evite su uso en la producción.
+app.use(compression());
+```
 
-Aunque Node y muchos módulos proporcionan versiones sincrónicas y asíncronas de sus funciones, siempre utiliza la versión asíncrona en producción. La única vez que una función sincrónica puede ser justificada es al inicio inicial.
+For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
-Puedes usar la bandera de línea de comandos `--trace-sync-io` para imprimir una advertencia y un stack trace cada vez que tu aplicación usa una API sincrónica. Por supuesto, no querrías usar esto en la producción, sino más bien asegurar que tu código esté listo para la producción. Vea la [documentación de opciones de línea de comandos de nodo](https://nodejs.org/api/cli.html#trace-sync-io) para más información.
+### Don't use synchronous functions
 
-### Hacer el registro correctamente
+Synchronous functions and methods tie up the executing process until they return. A single call to a synchronous function might return in a few microseconds or milliseconds, however in high-traffic websites, these calls add up and reduce the performance of the app. Avoid their use in production.
 
-En general, hay dos razones para registrarse desde tu aplicación: para depurar y para registrar la actividad de la aplicación (esencialmente, todo lo demás). Usar `console.log()` o `console.error()` para imprimir mensajes de registro en la terminal es práctica común en desarrollo. Pero [estas funciones son sincrónicas](https://nodejs.org/api/console.html#console) cuando el destino es un terminal o un archivo, por lo que no son aptos para la producción, a menos que usted pipe la salida a otro programa.
+Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in production. The only time when a synchronous function can be justified is upon initial startup.
 
-#### Para depuración
+You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
 
-Si está registrando para fines de depuración, entonces en lugar de usar `console.log()`, utilice un módulo especial de depuración como [debug](https://www.npmjs.com/package/debug). Este módulo le permite usar la variable de entorno DEBUG para controlar qué mensajes de depuración se envían a `console.error()`, si los hay. Para mantener tu aplicación puramente asincrónica, todavía quieres pipe `console.error()` a otro programa. Pero entonces, no vas a depurar en la producción, ¿verdad?
+### Do logging correctly
 
-#### Para actividad de la aplicación
+In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.error()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
-Si estás registrando actividad de la aplicación (por ejemplo, rastreando tráfico o llamadas de API), en lugar de usar `console. og()`, utiliza una biblioteca de registro como [Pino](https://www.npmjs.com/package/pino), que es la opción más rápida y eficiente disponible.
+#### For debugging
 
-### Manejar excepciones correctamente
+If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module enables you to use the DEBUG environment variable to control what debug messages are sent to `console.error()`, if any. To keep your app purely asynchronous, you'd still want to pipe `console.error()` to another program. But then, you're not really going to debug in production, are you?
 
-Las aplicaciones del nodo fallan cuando se encuentran con una excepción no capturada. No manejar excepciones y tomar las acciones apropiadas hará que su aplicación Express se bloquee y se desconecte. Si sigues los consejos de [Asegúrate de que tu aplicación se reinicie automáticamente](#ensure-your-app-automatically-restarts) a continuación, tu aplicación se recuperará de un cuelgue. Afortunadamente, las aplicaciones Express típicamente tienen un corto tiempo de inicio. Sin embargo, usted quiere evitar el bloqueo en primer lugar, y para hacerlo, necesita manejar las excepciones adecuadamente.
+#### For app activity
 
-Para asegurar que maneja todas las excepciones, utilice las siguientes técnicas:
+If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Pino](https://www.npmjs.com/package/pino), which is the fastest and most efficient option available.
 
-- [Usar try-catch](#use-try-catch)
-- [Usar promesas](#use-promises)
+### Handle exceptions properly
 
-Antes de sumergirte en estos temas, deberías tener una comprensión básica del manejo de errores de Node/Express: usando callbacks de primer error, y propagando errores en middleware. Node utiliza una convención de "error de primer callback" para devolver errores de funciones asíncronas, donde el primer parámetro de la función callback es el objeto de error, seguido de los datos de resultado en los parámetros posteriores. Para indicar ningún error, pase nulo como el primer parámetro. La función callback debe seguir la convención de devolución de llamada de primer error para manejar el error de forma significativa. Y en Express, la mejor práctica es usar la función next() para propagar errores a través de la cadena middleware.
+Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
 
-Para más información sobre los fundamentos del manejo de errores, vea:
+To ensure you handle all exceptions, use the following techniques:
 
-- [Manejo de Error en Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
+- [Use try-catch](#use-try-catch)
+- [Use promises](#use-promises)
 
-#### Usar try-catch
+Before diving into these topics, you should have a basic understanding of Node/Express error handling: using error-first callbacks, and propagating errors in middleware. Node uses an "error-first callback" convention for returning errors from asynchronous functions, where the first parameter to the callback function is the error object, followed by result data in succeeding parameters. To indicate no error, pass null as the first parameter. The callback function must correspondingly follow the error-first callback convention to meaningfully handle the error. And in Express, the best practice is to use the next() function to propagate errors through the middleware chain.
 
-Try-catch es una construcción de lenguaje JavaScript que se puede utilizar para capturar excepciones en código sincrónico. Use try-catch, por ejemplo, para manejar errores de análisis JSON como se muestra a continuación.
+For more on the fundamentals of error handling, see:
 
-He aquí un ejemplo del uso de try-catch para manejar una posible excepción de bloqueo de procesos.
-Esta función middleware acepta un parámetro de campo de consulta llamado "params" que es un objeto JSON.
+- [Error Handling in Node.js](https://web.archive.org/web/20210619211351/https://www.joyent.com/node-js/production/design/errors)
+
+#### Use try-catch
+
+Try-catch is a JavaScript language construct that you can use to catch exceptions in synchronous code. Use try-catch, for example, to handle JSON parsing errors as shown below.
+
+Here is an example of using try-catch to handle a potential process-crashing exception.
+This middleware function accepts a query field parameter named "params" that is a JSON object.
 
 ```js
 app.get('/search', (req, res) => {
@@ -100,11 +109,11 @@ app.get('/search', (req, res) => {
 });
 ```
 
-Sin embargo, try-catch funciona sólo para código sincrónico. Debido a que la plataforma de Node es principalmente asíncrona (especialmente en un entorno de producción), la captura de pruebas no capturará muchas excepciones.
+However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
 
-#### Utilizar promesas
+#### Use promises
 
-Cuando se arroja un error en una función `async` o se espera una promesa rechazada dentro de una función `async`, esos errores se pasarán al gestor de errores como si llamara a `next(err)`
+When an error is thrown in an `async` function or a rejected promise is awaited inside an `async` function, those errors will be passed to the error handler as if calling `next(err)`
 
 ```js
 app.get('/', async (req, res, next) => {
@@ -118,7 +127,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-También, puede utilizar funciones asíncronas para su middleware, y el router manejará errores si la promesa falla, por ejemplo:
+Also, you can use asynchronous functions for your middleware, and the router will handle errors if the promise fails, for example:
 
 ```js
 app.use(async (req, res, next) => {
@@ -128,19 +137,19 @@ app.use(async (req, res, next) => {
 });
 ```
 
-La mejor práctica es manejar los errores lo más cerca posible del sitio. Así que mientras esto se maneja ahora en el router, es mejor capturar el error en el middleware y manejarlo sin depender de middleware separado para manejar errores.
+Best practice is to handle errors as close to the site as possible. So while this is now handled in the router, it’s best to catch the error in the middleware and handle it without relying on separate error-handling middleware.
 
-#### Qué no hacer
+#### What not to do
 
-Una cosa que debes _no_ hacer es escuchar el evento `uncaughtException`, emitido cuando una excepción emite todo el camino de regreso al bucle del evento. Añadir un detector de eventos para `uncaughtException` cambiará el comportamiento predeterminado del proceso que se encuentra con una excepción; el proceso continuará funcionando a pesar de la excepción. Esto puede sonar como una buena manera de evitar que tu aplicación falle, pero seguir ejecutando la aplicación después de una excepción no capturada es una práctica peligrosa y no se recomienda, porque el estado del proceso se vuelve poco fiable e impredecible.
+One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
 
-Además, usar `uncaughtException` es oficialmente reconocido como [crude](https://nodejs.org/api/process.html#event-uncaughtexception). Así que escuchar `uncaughtException` es sólo una mala idea. Por eso recomendamos cosas como múltiples procesos y supervisores: fallar y reiniciar es a menudo la manera más confiable de recuperarse de un error.
+Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#event-uncaughtexception). So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
 
-Tampoco recomendamos usar [domains](https://nodejs.org/api/domain.html). Generalmente no resuelve el problema y es un módulo obsoleto.
+We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
 
-## Cosas que hacer en tu entorno / configuración
+## Things to do in your environment / setup
 
-Aquí hay algunas cosas que puedes hacer en el entorno de tu sistema para mejorar el rendimiento de tu aplicación:
+Here are some things you can do in your system environment to improve your app's performance:
 
 - [Establecer NODE_ENV a "producción"](#set-node_env-to-production)
 - [Asegúrate de que tu aplicación se reinicie automáticamente](#ensure-your-app-automatically-restarts)
@@ -149,66 +158,66 @@ Aquí hay algunas cosas que puedes hacer en el entorno de tu sistema para mejora
 - [Usa un balanceador de carga](#use-a-load-balancer)
 - [Usa un proxy inverso](#use-a-reverse-proxy)
 
-### Establecer NODE_ENV a "producción"
+### Set NODE_ENV to "production"
 
-La variable de entorno NODE_ENV especifica el entorno en el que se está ejecutando una aplicación (normalmente, desarrollo o producción). Una de las cosas más sencillas que puedes hacer para mejorar el rendimiento es establecer NODE_ENV en `production`.
+The NODE_ENV environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set NODE_ENV to `production`.
 
-Establecer NODE_ENV a "producción" hace Expresión:
+Setting NODE_ENV to "production" makes Express:
 
-- Plantillas de vista de caché.
-- Caché de archivos CSS generados a partir de extensiones CSS.
-- Generar mensajes de error menos detallados.
+- Cache view templates.
+- Cache CSS files generated from CSS extensions.
+- Generate less verbose error messages.
 
-¡[Las pruebas indican](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) que hacer esto puede mejorar el rendimiento de la aplicación en un factor de tres!
+[Tests indicate](https://web.archive.org/web/20250814011110/https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
-Si necesita escribir código específico del entorno, puede comprobar el valor de NODE_ENV con `process.env.NODE_ENV`. Tenga en cuenta que comprobar el valor de cualquier variable de entorno incurre en una penalidad de rendimiento, y por lo tanto debe hacerse de forma esparcida.
+If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
 
-En desarrollo, normalmente estableces variables de entorno en tu shell interactivo, por ejemplo usando `export` o tu archivo `.bash_profile`. Pero en general, no debería hacer esto en un servidor de producción; en cambio, utilice el sistema de inicio de su sistema operativo (systemd). La siguiente sección proporciona más detalles sobre el uso de tu sistema de inicio en general pero configurar `NODE_ENV` es tan importante para el rendimiento (y fácil de hacer), que está resaltado aquí.
+In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general, you shouldn't do that on a production server; instead, use your OS's init system (systemd). The next section provides more details about using your init system in general, but setting `NODE_ENV` is so important for performance (and easy to do), that it's highlighted here.
 
-Con el sistema, utilice la directiva 'Entorno de Entorno' en su archivo de unidad. Por ejemplo:
+With systemd, use the `Environment` directive in your unit file. Por ejemplo:
 
 ```sh
 
 Environment=NODE_ENV=production
 ```
 
-Para obtener más información, consulte [Usar variables de entorno en unidades del sistema](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
+For more information, see [Using Environment Variables In systemd Units](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
 
-### Asegúrate de que tu aplicación se reinicie automáticamente
+### Ensure your app automatically restarts
 
-En la producción, usted no quiere que su aplicación esté fuera de línea, nunca. Esto significa que necesita asegurarse de que se reinicie si la aplicación se bloquea y si el servidor mismo falla. Aunque usted espera que ninguno de estos eventos ocurra, realísticamente usted debe dar cuenta de ambos eventos por:
+In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
 
-- Usar un gestor de procesos para reiniciar la aplicación (y Node) cuando se bloquea.
-- Usando el sistema de inicio proporcionado por su sistema operativo para reiniciar el gestor de procesos cuando el sistema operativo se bloquea. También es posible usar el sistema init sin un gestor de procesos.
+- Using a process manager to restart the app (and Node) when it crashes.
+- Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
 
-Las aplicaciones de nodos se estrellan si se encuentran con una excepción no capturada. Lo más importante que tienes que hacer es asegurar que tu aplicación está bien probada y gestiona todas las excepciones (ver [excepciones de manejo correctamente](#handle-exceptions-properly) para más detalles). Pero como seguro de fallos, ponga en marcha un mecanismo para asegurar que si tu aplicación se bloquea y cuando se bloquee, se reiniciará automáticamente.
+Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#handle-exceptions-properly) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
 
-#### Usar un gestor de procesos
+#### Use a process manager
 
-En desarrollo, ha iniciado su aplicación simplemente desde la línea de comandos con `node server.js` o algo similar. Pero hacer esto en la producción es una receta para el desastre. Si la aplicación falla, estará desconectada hasta que la reinicie. Para asegurar que su aplicación se reinicie si se bloquea, utilice un gestor de procesos. Un gestor de procesos es un "contenedor" para aplicaciones que facilita el despliegue, proporciona alta disponibilidad y le permite gestionar la aplicación en tiempo de ejecución.
+In development, you started your app simply from the command line with `node server.js` or something similar. But doing this in production is a recipe for disaster. If the app crashes, it will be offline until you restart it. To ensure your app restarts if it crashes, use a process manager. A process manager is a "container" for applications that facilitates deployment, provides high availability, and enables you to manage the application at runtime.
 
-Además de reiniciar su aplicación cuando falla, un gestor de procesos puede habilitarlo:
+In addition to restarting your app when it crashes, a process manager can enable you to:
 
-- Obtener información sobre el rendimiento y el consumo de recursos en tiempo de ejecución.
-- Modificar ajustes dinámicamente para mejorar el rendimiento.
-- Clasificación de controles (pm2).
+- Gain insights into runtime performance and resource consumption.
+- Modify settings dynamically to improve performance.
+- Control clustering (pm2).
 
-Históricamente, era popular usar un gestor de procesos Node.js como [PM2](https://github.com/Unitech/pm2). Vea su documentación si desea hacer esto. Sin embargo, recomendamos usar su sistema de inicio para la gestión de procesos.
+Historically, it was popular to use a Node.js process manager like [PM2](https://github.com/Unitech/pm2). See their documentation if you wish to do this. However, we recommend using your init system for process management.
 
-#### Usar un sistema de inicio
+#### Use an init system
 
-La siguiente capa de fiabilidad es asegurar que la aplicación se reinicie cuando el servidor se reinicie. Los sistemas pueden seguir bajando por diversas razones. Para asegurarse de que su aplicación se reinicie si el servidor se bloquea, utilice el sistema init incorporado en su sistema operativo. El sistema principal de inicio en uso hoy es [systemd](https://wiki.debian.org/systemd).
+The next layer of reliability is to ensure that your app restarts when the server restarts. Systems can still go down for a variety of reasons. To ensure that your app restarts if the server crashes, use the init system built into your OS. The main init system in use today is [systemd](https://wiki.debian.org/systemd).
 
-Hay dos formas de usar sistemas de inicio con su aplicación Express:
+There are two ways to use init systems with your Express app:
 
-- Ejecute su aplicación en un gestor de procesos, e instale el gestor de procesos como un servicio con el sistema init. El gestor de procesos reiniciará la aplicación cuando la aplicación se bloquee, y el sistema de inicio reiniciará el gestor de procesos cuando el sistema operativo se reinicie. Este es el enfoque recomendado.
-- Ejecute su aplicación (y Node) directamente con el sistema init. Esto es algo más simple, pero no obtiene las ventajas adicionales de usar un gestor de procesos.
+- Run your app in a process manager, and install the process manager as a service with the init system. The process manager will restart your app when the app crashes, and the init system will restart the process manager when the OS restarts. This is the recommended approach.
+- Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
 
 ##### Systemd
 
-Systemd es un gestor de servicios y sistemas Linux. La mayoría de las distribuciones de Linux más importantes han adoptado el sistema de inicio como su sistema predeterminado.
+Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
 
-Un archivo de configuración de servicio systemd se llama _unit file_, con un nombre de archivo que termina en `.service`. Aquí hay un archivo de unidad de ejemplo para administrar directamente una aplicación de Node. Reemplaza los valores encerrados en `<angle brackets>` para tu sistema y aplicación:
+A systemd service configuration file is called a _unit file_, with a filename ending in `.service`. Here's an example unit file to manage a Node app directly. Replace the values enclosed in `<angle brackets>` for your system and app:
 
 ```sh
 [Unit]
@@ -240,29 +249,29 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Para más información sobre el sistema, vea la [referencia del sistema (página de manu)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
+For more information on systemd, see the [systemd reference (man page)](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html).
 
-### Ejecutar tu aplicación en un clúster
+### Run your app in a cluster
 
-En un sistema multinúcleo, puede aumentar el rendimiento de una aplicación Node muchas veces lanzando un clúster de procesos. Un clúster ejecuta múltiples instancias de la aplicación, idealmente una instancia en cada núcleo de CPU, distribuyendo así la carga y las tareas entre las instancias.
+In a multi-core system, you can increase the performance of a Node app by many times by launching a cluster of processes. A cluster runs multiple instances of the app, ideally one instance on each CPU core, thereby distributing the load and tasks among the instances.
 
-![Balanceo entre las instancias de la aplicación usando la API del clúster](/images/clustering.png)
+![Balancing between application instances using the cluster API](/images/clustering.png)
 
-IMPORTANTE: Dado que las instancias de la aplicación se ejecutan como procesos separados, no comparten el mismo espacio de memoria. Es decir, los objetos son locales a cada instancia de la aplicación. Por lo tanto, no puede mantener el estado en el código de la aplicación. Sin embargo, puede utilizar un datastore en memoria como [Redis](http://redis.io/) para almacenar datos y estado relacionados con la sesión. Esta advertencia se aplica esencialmente a todas las formas de escalado horizontal, ya sea en racimo con múltiples procesos o múltiples servidores físicos.
+IMPORTANT: Since the app instances run as separate processes, they do not share the same memory space. That is, objects are local to each instance of the app. Therefore, you cannot maintain state in the application code. However, you can use an in-memory datastore like [Redis](https://redis.io/) to store session-related data and state. This caveat applies to essentially all forms of horizontal scaling, whether clustering with multiple processes or multiple physical servers.
 
-En las aplicaciones agrupadas, los procesos del worker pueden fallar individualmente sin afectar al resto de los procesos. Aparte de las ventajas de rendimiento, el aislamiento de fallos es otra razón para ejecutar un cluster de procesos de aplicaciones. Cada vez que un proceso worker se bloquea, siempre asegúrese de registrar el evento y generar un nuevo proceso usando cluster.fork().
+In clustered apps, worker processes can crash individually without affecting the rest of the processes. Apart from performance advantages, failure isolation is another reason to run a cluster of app processes. Whenever a worker process crashes, always make sure to log the event and spawn a new process using cluster.fork().
 
-#### Usando el módulo de cluster del nodo
+#### Using Node's cluster module
 
-Clustering es posible con el [módulo de cluster]de Node (https://nodejs.org/api/cluster.html). Esto permite que un proceso maestro genere procesos de trabajador y distribuya conexiones entrantes entre los trabajadores.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). This enables a master process to spawn worker processes and distribute incoming connections among the workers.
 
-#### Usando PM2
+#### Using PM2
 
-Si implementa su aplicación con PM2, puede aprovechar el clustering _without_ modificando su código de aplicación. Deberías asegurarte de que tu [aplicación está sin estado](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) primero, lo que significa que no hay datos locales almacenados en el proceso (como sesiones, conexiones websocket y similares).
+If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code. You should ensure your [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
 
-Cuando ejecutas una aplicación con PM2, puedes habilitar el **modo clúster** para ejecutarla en un clúster con varias instancias de tu elección, como el número de CPUs disponibles en la máquina. Puede cambiar manualmente el número de procesos en el clúster usando la herramienta de línea de comandos `pm2` sin detener la aplicación.
+When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
 
-Para activar el modo cluster, inicia tu aplicación así:
+To enable cluster mode, start your application like so:
 
 ```bash
 
@@ -271,9 +280,9 @@ $ pm2 start npm --name my-app -i 4 -- start
 $ pm2 start npm --name my-app -i max -- start
 ```
 
-Esto también se puede configurar dentro de un archivo de proceso PM2 (`ecosystem.config. s` o similar) estableciendo `exec_mode` a `cluster` y `instancias` al número de workers a comenzar.
+This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
 
-Una vez ejecutada, la aplicación puede escalarse así:
+Once running, the application can be scaled like so:
 
 ```bash
 
@@ -282,24 +291,24 @@ $ pm2 scale my-app +3
 $ pm2 scale my-app 2
 ```
 
-Para más información sobre el clustering con PM2, vea [Modo Cluster](https://pm2.keymetrics.io/docs/usage/cluster-mode/) en la documentación de PM2.
+For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
 
-### Resultados de la solicitud de caché
+### Cache request results
 
-Otra estrategia para mejorar el rendimiento en la producción es almacenar en caché el resultado de las solicitudes, para que tu aplicación no repita la operación para servir la misma petición repetidamente.
+Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
 
-Usa un servidor de caché como [Varnish](https://www.varnish-cache.org/) o [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (ver también [Caching Nginx](https://serversforhackers.com/nginx-caching/)) para mejorar enormemente la velocidad y el rendimiento de tu aplicación.
+Use a caching server like [Varnish](https://www.varnish.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/c/nginx-caching)) to greatly improve the speed and performance of your app.
 
-### Usar un balanceador de carga
+### Use a load balancer
 
-No importa cuán optimizada sea una aplicación, una sola instancia puede manejar sólo una cantidad limitada de carga y tráfico. Una forma de escalar una aplicación es ejecutar múltiples instancias de ella y distribuir el tráfico a través de un equilibrador de carga. Configurar un balanceador de carga puede mejorar el rendimiento y la velocidad de tu aplicación, y permitirla escalar más de lo posible con una sola instancia.
+No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance and speed, and enable it to scale more than is possible with a single instance.
 
-Un balanceador de carga es generalmente un proxy inverso que orchestriza tráfico hacia y desde múltiples instancias y servidores de la aplicación. Puedes configurar fácilmente un equilibrador de carga para tu aplicación usando [Nginx](https://nginx.org/en/docs/http/load_balancing.html) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
-Con el saldo de carga, puede que tenga que asegurarse de que las peticiones que están asociadas con un ID de sesión particular se conectan al proceso que las originó. Esto se conoce como _session affinity_, o _sticky sessions_, y puede ser abordado por la sugerencia anterior de utilizar un almacén de datos como Redis para datos de sesión (dependiendo de su aplicación). Para una discusión, vea [Usando múltiples nodos](https://socket.io/docs/v4/using-multiple-nodes/).
+With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](https://socket.io/docs/v4/using-multiple-nodes/).
 
-### Usar un proxy inverso
+### Use a reverse proxy
 
-Un proxy inverso se sienta frente a una aplicación web y realiza operaciones de soporte en las peticiones, además de dirigir peticiones a la aplicación. Puede manejar páginas de errores, compresión, caché, servir archivos y equilibrar la carga entre otras cosas.
+A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
 
-La entrega de tareas que no requieren conocimiento del estado de la aplicación a un proxy inverso libera Express para realizar tareas especializadas de la aplicación. Por esta razón, se recomienda ejecutar Express detrás de un proxy inverso como [Nginx](https://www.nginx.org/) o [HAProxy](https://www.haproxy.org/) en producción.
+Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.

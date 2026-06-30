@@ -1,20 +1,17 @@
 ---
-title: Hello world example
-description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
+title: Hello world 示例
+description: 通过构建一个简单的“Hello World”应用来入门 Express.js，展示基础的配置和服务器创建过程，适合初学者学习。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 <Alert type="info">
 
-Embedded below is essentially the simplest Express app you can create. It is a single file app
-&mdash; _not_ what you'd get if you use the [Express generator](/starter/generator), which
-creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and
-sub-directories for various purposes.
+下面展示的是一个本质上最简单的 Express 应用。 这是一个单文件应用&mdash;而不是使用 [Express 生成器](/en/starter/generator) 所生成的项目结构，后者会创建一个完整应用的脚手架，包含多个 JavaScript 文件、Jade 模板，以及用于不同用途的子目录。
 
 </Alert>
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -28,27 +25,39 @@ app.listen(port, () => {
 });
 ```
 
-This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
-to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+```mjs title="index.mjs"
+import express from 'express';
 
-## Running Locally
+const app = express();
+const port = 3000;
 
-First create a directory named `myapp`, change to it and run `npm init`. Then, install `express` as a dependency, as per the [installation guide](/starter/installing).
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
-In the `myapp` directory, create a file named `app.js` and copy the code from the example above.
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+```
+
+该应用启动一个服务器，并在 3000 端口监听连接请求。 当请求根 URL（`/`）或“ _route_”时，该应用会返回“Hello World!”。 对于其他所有路径，它都会返回 **404 Not Found**。
+
+## 本地运行
+
+首先创建一个名为 `myapp` 的目录，进入该目录并运行 `npm init`。 Then, install `express` as a dependency, as per the [installation guide](/starter/installing).
+
+在 `myapp` 目录中创建一个名为 `app.js` 的文件，并复制上方示例中的代码。
 
 <Alert type="alert">
 
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can
-invoke `req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express
-involved.
+`req`（请求）和 `res`（响应）就是 Node 本身提供的同一对象，因此你可以调用 `req.pipe()`、`req.on('data', callback)`，以及在不使用 Express 时会用到的任何其他方法。
 
 </Alert>
 
-Run the app with the following command:
+使用以下命令运行应用：
 
 ```bash
 $ node app.js
 ```
 
-Then, load `http://localhost:3000/` in a browser to see the output.
+然后，在浏览器中打开 `http://localhost:3000/` 查看输出结果。

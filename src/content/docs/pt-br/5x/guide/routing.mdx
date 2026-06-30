@@ -9,11 +9,11 @@ _Routing_ refere-se a como os endpoints de um aplicativo (URIs) respondem às so
 Para uma introdução ao roteamento, veja [Roteamento básico](/starter/basic-routing).
 
 Você define roteamento usando métodos do objeto Express `app` que correspondem aos métodos HTTP;
-por exemplo, `app. et()` para lidar com solicitações GET e `app.post` para lidar com solicitações POST. Para obter uma lista completa,
-ver [app.METHOD](/api/application#appmethodpath-callback--callback-). Você também pode usar o [app.all()](/api/application#appallpath-callback--callback-) para lidar com todos os métodos HTTP e [app. se()](/api/application#appusepath-callback--callback) para
-especifique middleware como função de retorno de chamada (Veja [Usando middleware](/guide/using-middleware) para detalhes).
+por exemplo, `app. et()` para lidar com solicitações GET e `app.post` para lidar com solicitações POST. For a full list,
+see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-Esses métodos de roteamento especificam uma função de callback (às vezes chamada de "funções de manipulador") chamada quando a aplicação recebe uma solicitação para a rota especificada (endpoint) e método HTTP. Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado.
+These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado.
 
 Na verdade, os métodos de roteamento podem ter mais de uma função de callback como argumentos.
 Com múltiplas funções de callback, é importante fornecer `next` como um argumento para a função de callback e então chamar `next()` dentro do corpo da função para liberar o controle
@@ -21,8 +21,19 @@ para a próxima callback.
 
 O código a seguir é um exemplo de uma rota muito básica.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
@@ -50,7 +61,7 @@ app.post('/', (req, res) => {
 ```
 
 Expresso suporta métodos que correspondem a todos os métodos de requisição HTTP: `get`, `post`, e assim por diante.
-Para uma lista completa, consulte [app.METHOD](/api/application#appmethodpath-callback--callback-).
+For a full list, see [app.METHOD](/api/application#appmethod).
 
 Há um método de roteamento especial, `app.all()`, usado para carregar funções de middleware em um caminho para os métodos de requisição HTTP. Por exemplo, o seguinte manipulador é executado para solicitações para a rota `"/secre"` usando `GET`, `POST`, `PUT`, `DELETE`, ou qualquer outro método de solicitação HTTP suportado no [módulo http](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -92,7 +103,7 @@ app.get('/random.text', (req, res) => {
 });
 ```
 
-### Caracteres curinga
+### Wildcards
 
 Caracteres curinga correspondem a qualquer caminho após um prefixo. Eles devem ter um nome, assim como os parâmetros de rota, e são capturados como matrizes dos segmentos de caminho.
 
@@ -292,17 +303,17 @@ app.get(
 
 Os métodos no objeto de resposta ('res') na tabela a seguir podem enviar uma resposta para o cliente e encerrar o ciclo de resposta de solicitação. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.
 
-| Método                                                                 | Descrição:                                                                                          |
-| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Solicite que um arquivo seja baixado.                                                               |
-| [res.end()](/api/response#resenddata-encoding-callback)                | Encerrar o processo de resposta.                                                                    |
-| [res.json()](/api/response#resjsonbody)                                | Enviar uma resposta JSON.                                                                           |
-| [res.jsonp()](/api/response#resjsonpbody)                              | Envie uma resposta JSON com suporte a JSONP.                                                        |
-| [res.redirect()](/api/response#resredirectstatus-path)                 | Redirecionar uma requisição.                                                                        |
-| [res.render()](/api/response#resrenderview--locals--callback)          | Renderizar um modelo de visão.                                                                      |
-| [res.send()](/api/response#ressendbody)                                | Envie uma resposta de vários tipos.                                                                 |
-| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Envia um arquivo como uma transmissão octet.                                                        |
-| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Defina o código de status da resposta e envie sua representação de string como o corpo da resposta. |
+| Método                                          | Descrição:                                                                                          |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownload)     | Solicite que um arquivo seja baixado.                                                               |
+| [res.end()](/api/response#resend)               | Encerrar o processo de resposta.                                                                    |
+| [res.json()](/api/response#resjson)             | Enviar uma resposta JSON.                                                                           |
+| [res.jsonp()](/api/response#resjsonp)           | Envie uma resposta JSON com suporte a JSONP.                                                        |
+| [res.redirect()](/api/response#resredirect)     | Redirecionar uma requisição.                                                                        |
+| [res.render()](/api/response#resrender)         | Renderizar um modelo de visão.                                                                      |
+| [res.send()](/api/response#ressend)             | Envie uma resposta de vários tipos.                                                                 |
+| [res.sendFile()](/api/response#ressendfile)     | Envia um arquivo como uma transmissão octet.                                                        |
+| [res.sendStatus()](/api/response#ressendstatus) | Defina o código de status da resposta e envie sua representação de string como o corpo da resposta. |
 
 ## app.route()
 
@@ -325,7 +336,7 @@ app
   });
 ```
 
-## expressão.Roteador
+## express.Router
 
 Use a classe 'express.Router' para criar módulo, manipuladores de rotas montáveis. Uma instância `Router` é um sistema completo de middleware e roteamento; por este motivo, é muitas vezes referido como um "mini-app".
 
@@ -333,7 +344,7 @@ O exemplo a seguir cria um roteador como um módulo, carrega uma função middle
 
 Crie um arquivo de roteador chamado `birds.js` no diretório de aplicativos, com o seguinte conteúdo:
 
-```js
+```cjs title="birds.cjs"
 const express = require('express');
 const router = express.Router();
 
@@ -356,10 +367,42 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 Em seguida, carregue o módulo do roteador no aplicativo:
 
-```js
+```cjs title="index.cjs"
 const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -368,7 +411,7 @@ app.use('/birds', birds);
 
 O aplicativo agora poderá lidar com pedidos para `/birds` e `/birds/about`, Além de chamar a função middleware `timeLog` que é específica da rota.
 
-Mas se a rota pai `/birds` tiver parâmetros de caminho, ela não será acessível por padrão nas sub-rotas. Para torná-lo acessível, você precisará passar a opção `mergeParams` para o construtor do roteador [reference](/api/application#appusepath-callback--callback).
+Mas se a rota pai `/birds` tiver parâmetros de caminho, ela não será acessível por padrão nas sub-rotas. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
 
 ```js
 const router = express.Router({ mergeParams: true });

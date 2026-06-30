@@ -5,6 +5,7 @@ description: Node.js CORS middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.8.6"
@@ -12,7 +13,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
   npm="https://www.npmjs.com/package/cors"
 />
 
-CORS ist eine [Node.js](https://nodejs.org/en/) Middleware für [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect), die [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) Antwort-Kopfzeilen setzt. Diese Header geben Browsern an, welche Herkunft Antworten von Ihrem Server lesen kann.
+CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](/)/[Connect](https://github.com/senchalabs/connect) that sets [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) response headers. Diese Header geben Browsern an, welche Herkunft Antworten von Ihrem Server lesen kann.
 
 <Alert type="info">
 
@@ -39,9 +40,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 [npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
 [`npm install` Befehl](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
-```sh
-$ npm install cors
-```
+<PackageManagerCommand command="npm install cors" />
 
 ## Auslastung
 

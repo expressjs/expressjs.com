@@ -207,9 +207,25 @@ app.use((err, req, res, next) => {
 
 Vous définissez le middleware en dernier lieu, après d'autres appels `app.use()` et routage des appels; par exemple:
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({
@@ -230,9 +246,25 @@ plusieurs fonctions de gestion des erreurs du middleware, tout comme vous le fer
 régulières du middleware. Par exemple, pour définir un gestionnaire d'erreurs
 pour les requêtes faites en utilisant `XHR` et ceux sans :
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({

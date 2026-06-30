@@ -5,9 +5,10 @@ description: Le middleware de l'enregistreur de requêtes HTTP pour Node.js
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.10.1"
+  version="1.11.0"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
@@ -22,9 +23,7 @@ Ceci est un module [Node.js](https://nodejs.org/en/) disponible via
 [npm registry](https://www.npmjs.com/). L'installation se fait à l'aide de la commande
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install morgan
-```
+<PackageManagerCommand command="npm install morgan" />
 
 ## API
 
@@ -201,15 +200,15 @@ Si aucun format n'est donné, alors la valeur par défaut est `web`.
 
 La version HTTP de la requête.
 
-##### :method
+#####
 
 La méthode HTTP de la requête.
 
-##### :pid
+#####
 
 L'ID de processus du processus Node.js gérant la requête.
 
-##### :referrer
+#####
 
 L'en-tête Référent de la requête. Cela utilisera l'en-tête standard de Referer mal orthographié s'il existe, sinon Referrer.
 
@@ -239,7 +238,7 @@ sont écrits, en millisecondes.
 L'argument `digits` est un nombre qui spécifie le nombre de chiffres à
 inclus sur le nombre, par défaut à `3`, qui fournit une précision de microseconde.
 
-##### :status
+#####
 
 Le code de statut de la réponse.
 
@@ -255,7 +254,7 @@ a fini d'être écrite à la connexion, en millisecondes.
 L'argument `digits` est un nombre qui spécifie le nombre de chiffres à
 inclus sur le nombre, par défaut à `3`, qui fournit une précision de microseconde.
 
-##### :url
+#####
 
 L'URL de la requête. Cela utilisera `req.originalUrl` si existe, sinon `req.url`.
 

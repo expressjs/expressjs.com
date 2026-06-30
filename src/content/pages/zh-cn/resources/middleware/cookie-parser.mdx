@@ -5,6 +5,7 @@ description: Parse HTTP request cookies
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.4.7"
@@ -17,11 +18,9 @@ cookie names. Optionally you may enable signed cookie support by passing a
 `secret` string, which assigns `req.secret` so it may be used by other
 middleware.
 
-## Installation
+## 安装
 
-```sh
-$ npm install cookie-parser
-```
+<PackageManagerCommand command="npm install cookie-parser" />
 
 ## API
 
@@ -90,7 +89,7 @@ The `secret` argument can be an array or string. If a string is provided, this
 is used as the secret. If an array is provided, an attempt will be made to
 unsign the cookie with each secret in order.
 
-## Example
+## 示例
 
 ```js
 var express = require('express');

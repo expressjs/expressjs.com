@@ -1,19 +1,19 @@
 ---
-title: Security updates
-description: Review the latest security updates and patches for Express.js, including detailed vulnerability lists for different versions to help maintain a secure application.
+title: 安全更新
+description: 查看 Express.js 最新安全更新与补丁，包含各版本详细漏洞清单，助力维护应用安全。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 <Alert type="alert">
 
-Node.js vulnerabilities directly affect Express. Therefore, keep a watch on Node.js
+Node.js 漏洞会直接影响 Express。 Therefore, keep a watch on Node.js
 vulnerabilities and make sure you are using the latest
 stable version of Node.js.
 
 </Alert>
 
-The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
+下方清单列举了在对应版本更新中已修复的 Express 漏洞。
 
 <Alert type="info">
 
@@ -25,63 +25,63 @@ Policies and Procedures.
 ## 4.x
 
 - 4.21.2
-  - The dependency `path-to-regexp` has been updated to address a [vulnerability](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-rhx6-c78j-4q9w).
+  - 依赖包 `path-to-regexp` 已完成升级，用于修复一处[安全漏洞](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-rhx6-c78j-4q9w)。
 - 4.21.1
-  - The dependency `cookie` has been updated to address a [vulnerability](https://github.com/jshttp/cookie/security/advisories/GHSA-pxg6-pf52-xh8x), This may affect your application if you use `res.cookie`.
+  - 依赖包 `cookie` 已升级以修复一处[漏洞](https://github.com/jshttp/cookie/security/advisories/GHSA-pxg6-pf52-xh8x)，若项目使用 `res.cookie`，你的应用可能受此漏洞影响。
 - 4.20.0
   - Fixed XSS vulnerability in `res.redirect` ([advisory](https://github.com/expressjs/express/security/advisories/GHSA-qw6h-vgh9-j6wx), [CVE-2024-43796](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-43796)).
-  - The dependency `serve-static` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-cm22-4g7w-348p).
-  - The dependency `send` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-m6fv-jmcg-4jfg).
-  - The dependency `path-to-regexp` has been updated to address a [vulnerability](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-9wv6-86v2-598j).
-  - The dependency `body-parser` has been updated to addres a [vulnerability](https://github.com/advisories/GHSA-qwcr-r2fm-qrc7), This may affect your application if you had url enconding activated.
+  - 依赖包 `serve-static` 已升级以修复一处[安全漏洞](https://github.com/advisories/GHSA-cm22-4g7w-348p)。
+  - 依赖包 `send` 已升级以修复一处[安全漏洞](https://github.com/advisories/GHSA-m6fv-jmcg-4jfg)。
+  - 依赖包 `path-to-regexp` 已升级以修复一处[安全漏洞](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-9wv6-86v2-598j)。
+  - 依赖包 `body-parser` 已升级以修复一处[安全漏洞](https://github.com/advisories/GHSA-qwcr-r2fm-qrc7)，若你启用了 URL 编码，你的应用可能会受此影响。
 - 4.19.0, 4.19.1
   - Fixed open redirect vulnerability in `res.location` and `res.redirect` ([advisory](https://github.com/expressjs/express/security/advisories/GHSA-rv95-896h-c2vc), [CVE-2024-29041](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-29041)).
 - 4.17.3
-  - The dependency `qs` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-hrpp-h998-j3pp). This may affect your application if the following APIs are used: `req.query`, `req.body`, `req.param`.
+  - 依赖`qs`已更新以修复一处[安全漏洞](https://github.com/advisories/GHSA-hrpp-h998-j3pp)。 若使用了下述 API：`req.query`、`req.body`、`req.param`，该问题可能对你的应用造成影响。
 - 4.16.0
-  - The dependency `forwarded` has been updated to address a [vulnerability](https://npmjs.com/advisories/527). This may affect your application if the following APIs are used: `req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`.
+  - The dependency `forwarded` has been updated to address a [vulnerability](https://npmjs.com/advisories/527). 如果使用了下列API，这可能会影响您的应用程序：`req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`。
   - The dependency `mime` has been updated to address a [vulnerability](https://npmjs.com/advisories/535), but this issue does not impact Express.
-  - The dependency `send` has been updated to provide a protection against a [Node.js 8.5.0 vulnerability](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). This only impacts running Express on the specific Node.js version 8.5.0.
+  - 依赖`send`已完成更新，用于防范[Node.js 8.5.0相关漏洞](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/)。 该问题仅会在 Node.js 8.5.0 特定版本中运行 Express 时产生影响。
 - 4.15.5
   - The dependency `debug` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:debug:20170905), but this issue does not impact Express.
-  - The dependency `fresh` has been updated to address a [vulnerability](https://npmjs.com/advisories/526). This will affect your application if the following APIs are used: `express.static`, `req.fresh`, `res.json`, `res.jsonp`, `res.send`, `res.sendfile` `res.sendFile`, `res.sendStatus`.
+  - The dependency `fresh` has been updated to address a [vulnerability](https://npmjs.com/advisories/526). 若你的应用使用了以下 API，则会受到影响：`express.static`、`req.fresh`、`res.json`、`res.jsonp`、`res.send`、`res.sendfile`、`res.sendFile`、`res.sendStatus`。
 - 4.15.3
-  - The dependency `ms` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:ms:20170412). This may affect your application if untrusted string input is passed to the `maxAge` option in the following APIs: `express.static`, `res.sendfile`, and `res.sendFile`.
+  - The dependency `ms` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:ms:20170412). 如果将不可信的字符串输入传递给以下 API 中的 `maxAge` 选项，你的应用可能会受到影响：`express.static`、`res.sendfile` 和 `res.sendFile`。
 - 4.15.2
-  - The dependency `qs` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:qs:20170213), but this issue does not impact Express. Updating to 4.15.2 is a good practice, but not required to address the vulnerability.
+  - The dependency `qs` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:qs:20170213), but this issue does not impact Express. 更新至 4.15.2 是良好实践，但修复该漏洞并非必须执行此操作。
 - 4.11.1
-  - Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
+  - 修复了 `express.static`、`res.sendfile` 和 `res.sendFile` 中的根路径泄露漏洞。
 - 4.10.7
   - Fixed open redirect vulnerability in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
 - 4.8.8
   - Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
 - 4.8.4
-  - Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
+  - Node.js 0.10 在特定情况下可能会发生文件描述符（`fd`）泄漏，从而影响 `express.static` 和 `res.sendfile`。 恶意请求可能导致文件描述符（`fd`）泄漏，最终引发`EMFILE`错误并造成服务器无响应。
 - 4.8.0
-  - Sparse arrays that have extremely high indexes in the query string could cause the process to run out of memory and crash the server.
-  - Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+  - 查询字符串中包含极高索引的稀疏数组，可能导致进程内存耗尽并使服务器崩溃。
+  - 深度嵌套的查询字符串对象会导致进程阻塞，使服务器暂时无法响应。
 
 ## 3.x
 
-<Alert type="warning">
-**Express 3.x IS END-OF-LIFE AND NO LONGER MAINTAINED**
+<Alert type="警告">
+**Express 3.x 已终止生命周期，不再提供维护支持**
 
-Known and unknown security and performance issues in 3.x have not been addressed since the last update (1 August, 2015). It is highly recommended to use the latest version of Express.
+3.x 版本自2015年8月1日最后一次更新后，已知及潜在的安全、性能漏洞均不再修复。 强烈建议使用最新版本的 Express。
 
 If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/support#commercial-support-options).
 
 </Alert>
 
 - 3.19.1
-  - Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
+  - 修复了 `express.static`、`res.sendfile` 和 `res.sendFile` 中的根路径泄露漏洞。
 - 3.19.0
   - Fixed open redirect vulnerability in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
 - 3.16.10
-  - Fixed directory traversal vulnerabilities in `express.static`.
+  - 在 `expres.static` 中固定的目录遍历脆弱性。
 - 3.16.6
-  - Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
+  - Node.js 0.10 在特定情况下可能会发生文件描述符（`fd`）泄漏，从而影响 `express.static` 和 `res.sendfile`。 恶意请求可能导致文件描述符（`fd`）泄漏，最终引发`EMFILE`错误并造成服务器无响应。
 - 3.16.0
-  - Sparse arrays that have extremely high indexes in query string could cause the process to run out of memory and crash the server.
-  - Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+  - 查询字符串中包含极高索引的稀疏数组，会导致进程内存耗尽并使服务器崩溃。
+  - 深度嵌套的查询字符串对象会导致进程阻塞，使服务器暂时无法响应。
 - 3.3.0
-  - The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
+  - 尝试使用不支持的方法重写时返回的 404 响应，曾存在跨站脚本攻击漏洞。

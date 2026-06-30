@@ -1,22 +1,17 @@
 ---
-title: Error Handling
-description: Understand how Express.js handles errors in synchronous and asynchronous code, and learn to implement custom error handling middleware for your applications.
+title: 错误处理
+description: 了解 Express.js 如何处理同步和异步代码中的错误，并学习为你的应用实现自定义错误处理中间件。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Error Handling_ refers to how Express catches and processes errors that
-occur both synchronously and asynchronously. Express comes with a default error
-handler so you don't need to write your own to get started.
+错误处理是指 Express 如何捕获并处理同步代码与异步代码中发生的错误。 Express 自带默认错误处理器，因此你在开发初期无需自行编写。
 
-## Catching Errors
+## 错误捕获
 
-It's important to ensure that Express catches all errors that occur while
-running route handlers and middleware.
+确保 Express 能够捕获路由处理器和中间件运行时发生的所有错误，这一点至关重要。
 
-Errors that occur in synchronous code inside route handlers and middleware
-require no extra work. If synchronous code throws an error, then Express will
-catch and process it. For example:
+路由处理函数与中间件内同步代码产生的错误无需额外处理。 倘若同步代码抛出错误，Express 会捕获并处理该错误。 举个例子：
 
 ```js
 app.get('/', (req, res) => {
@@ -24,9 +19,7 @@ app.get('/', (req, res) => {
 });
 ```
 
-For errors returned from asynchronous functions invoked by route handlers
-and middleware, you must pass them to the `next()` function, where Express will
-catch and process them. For example:
+对于路由处理函数和中间件调用的异步函数所返回的错误，你必须将它们传递给 `next()` 函数，Express 会在该函数中捕获并处理这些错误。 举个例子：
 
 ```js
 app.get('/', (req, res, next) => {
@@ -40,9 +33,8 @@ app.get('/', (req, res, next) => {
 });
 ```
 
-Starting with Express 5, route handlers and middleware that return a Promise
-will call `next(value)` automatically when they reject or throw an error.
-For example:
+从 Express 5 开始，返回 Promise 的路由处理程序和中间件在拒绝（reject）或抛出错误时，将自动调用 `next(value)`。
+举个例子：
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
@@ -51,16 +43,11 @@ app.get('/user/:id', async (req, res, next) => {
 });
 ```
 
-If `getUserById` throws an error or rejects, `next` will be called with either
-the thrown error or the rejected value. If no rejected value is provided, `next`
-will be called with a default Error object provided by the Express router.
+如果 `getUserById` 抛出错误或被拒绝（reject），`next` 将会使用抛出的错误或被拒绝的值来调用。 如果未提供拒绝值，则会使用 Express 路由内置的默认错误对象调用 `next`。
 
-If you pass anything to the `next()` function (except the string `'route'`),
-Express regards the current request as being an error and will skip any
-remaining non-error handling routing and middleware functions.
+如果向 `next()` 传入任意参数（字符串 `'route'` 除外），Express 会将当前请求视作出错，并跳过后续所有非错误处理的路由与中间件函数。
 
-If the callback in a sequence provides no data, only errors, you can simplify
-this code as follows:
+如果序列中的回调函数不返回数据、仅返回错误，你可以将代码简化如下：
 
 ```js
 app.get('/', [
@@ -73,12 +60,9 @@ app.get('/', [
 ]);
 ```
 
-In the above example, `next` is provided as the callback for `fs.writeFile`,
-which is called with or without errors. If there is no error, the second
-handler is executed, otherwise Express catches and processes the error.
+在上述示例中，`next` 被作为 `fs.writeFile` 的回调函数传入，无论是否存在错误都会被调用。 若无错误，则执行第二个处理函数；否则 Express 会捕获并处理该错误。
 
-You must catch errors that occur in asynchronous code invoked by route handlers or
-middleware and pass them to Express for processing. For example:
+你必须捕获在路由处理程序或中间件中调用的异步代码里发生的错误，并将它们传递给 Express 进行处理。 举个例子：
 
 ```js
 app.get('/', (req, res, next) => {
@@ -92,13 +76,9 @@ app.get('/', (req, res, next) => {
 });
 ```
 
-The above example uses a `try...catch` block to catch errors in the
-asynchronous code and pass them to Express. If the `try...catch`
-block were omitted, Express would not catch the error since it is not part of the synchronous
-handler code.
+上述示例使用 `try...catch` 代码块捕获异步代码中的错误，并将其传递给 Express。 如果省略 `try...catch` 代码块，Express 将无法捕获该错误，因为它不属于同步处理程序代码的一部分。
 
-Use promises to avoid the overhead of the `try...catch` block or when using functions
-that return promises. For example:
+使用 Promise 来避免 `try...catch` 代码块的开销，或在使用返回 Promise 的函数时采用此方式。 举个例子：
 
 ```js
 app.get('/', (req, res, next) => {
@@ -110,12 +90,9 @@ app.get('/', (req, res, next) => {
 });
 ```
 
-Since promises automatically catch both synchronous errors and rejected promises,
-you can simply provide `next` as the final catch handler and Express will catch errors,
-because the catch handler is given the error as the first argument.
+由于 Promise 会自动捕获同步错误和被拒绝的 Promise，你只需将 `next` 作为最终的 catch 处理程序传入即可，Express 会捕获错误，因为 catch 处理程序会将错误作为第一个参数传入。
 
-You could also use a chain of handlers to rely on synchronous error
-catching, by reducing the asynchronous code to something trivial. For example:
+你也可以使用处理程序链，将异步代码简化为简单逻辑，从而依靠同步错误捕获机制。 举个例子：
 
 ```js
 app.get('/', [
@@ -132,50 +109,32 @@ app.get('/', [
 ]);
 ```
 
-The above example has a couple of trivial statements from the `readFile`
-call. If `readFile` causes an error, then it passes the error to Express, otherwise you
-quickly return to the world of synchronous error handling in the next handler
-in the chain. Then, the example above tries to process the data. If this fails, then the
-synchronous error handler will catch it. If you had done this processing inside
-the `readFile` callback, then the application might exit and the Express error
-handlers would not run.
+上述示例包含几条来自 `readFile` 调用的简单语句。 如果 `readFile` 引发错误，则会将错误传递给 Express；否则你将迅速回到处理程序链中下一个处理函数的同步错误处理流程。 然后，上述示例会尝试处理数据。 如果此过程失败，同步错误处理程序将会捕获该错误。 如果你将此处理逻辑写在 `readFile` 回调函数内部，应用程序可能会直接退出，Express 错误处理程序将无法执行。
 
-Whichever method you use, if you want Express error handlers to be called in and the
-application to survive, you must ensure that Express receives the error.
+无论你使用哪种方法，若希望 Express 错误处理程序被调用且应用程序持续运行，必须确保 Express 能够接收到错误。
 
-## The default error handler
+## 默认错误处理程序
 
-Express comes with a built-in error handler that takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
+Express 内置了错误处理程序，可处理应用中可能出现的所有错误。 这个默认的错误处理中间件函数会被添加到中间件函数栈的末尾。
 
-If you pass an error to `next()` and you do not handle it in a custom error
-handler, it will be handled by the built-in error handler; the error will be
-written to the client with the stack trace. The stack trace is not included
-in the production environment.
+如果你将错误传递给 `next()`，但未在自定义错误处理程序中处理它，该错误将由内置错误处理程序处理；错误信息和堆栈追踪信息会被返回给客户端。 生产环境中不会包含堆栈追踪信息。
 
 <Alert type="info">
 
-Set the environment variable `NODE_ENV` to `production`, to run the app in production mode.
+将环境变量 `NODE_ENV` 设置为 `production`，即可在生产模式下运行应用。
 
 </Alert>
 
-When an error is written, the following information is added to the
-response:
+当错误信息被输出时，响应中会附加以下信息：
 
-- The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
-  this value is outside the 4xx or 5xx range, it will be set to 500.
-- The `res.statusMessage` is set according to the status code.
-- The body will be the HTML of the status code message when in production
-  environment, otherwise will be `err.stack`.
-- Any headers specified in an `err.headers` object.
+- `res.statusCode` 会从 `err.status`（或 `err.statusCode`）中获取设置。 如果该值不在 4xx 或 5xx 范围内，则会被设置为 500。
+- `res.statusMessage` 会根据状态码自动设置。
+- 生产环境中，响应主体会展示状态码信息的 HTML 页面；其他环境下则会展示 `err.stack` 堆栈信息。
+- `err.headers` 对象中定义的所有响应头。
 
-If you call `next()` with an error after you have started writing the
-response (for example, if you encounter an error while streaming the
-response to the client), the Express default error handler closes the
-connection and fails the request.
+如果在开始向客户端写入响应数据后调用带错误参数的`next()`（例如向客户端流式返回响应时出错），Express 默认错误处理程序会关闭连接并终止本次请求。
 
-So when you add a custom error handler, you must delegate to
-the default Express error handler, when the headers
-have already been sent to the client:
+因此，当你添加自定义错误处理程序时，若响应头已发送至客户端，必须将错误委托给 Express 默认错误处理程序处理：
 
 ```js
 function errorHandler(err, req, res, next) {
@@ -187,16 +146,14 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
-Note that the default error handler can get triggered if you call `next()` with an error
-in your code more than once, even if custom error handling middleware is in place.
+注意：即便已配置自定义错误处理中间件，若代码中多次传入错误调用`next()`，仍可能触发默认错误处理程序。
 
 Other error handling middleware can be found at [Express middleware](/resources/middleware).
 
-## Writing error handlers
+## 编写错误处理程序
 
-Define error-handling middleware functions in the same way as other middleware functions,
-except error-handling functions have four arguments instead of three:
-`(err, req, res, next)`. For example:
+错误处理中间件函数的定义方式与其他中间件函数基本相同，区别在于错误处理函数包含四个参数而非三个：
+`(err, req, res, next)`。 举个例子：
 
 ```js
 app.use((err, req, res, next) => {
@@ -205,9 +162,9 @@ app.use((err, req, res, next) => {
 });
 ```
 
-You define error-handling middleware last, after other `app.use()` and routes calls; for example:
+你需要在其他 `app.use()` 调用和路由之后，最后定义错误处理中间件；例如：
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
@@ -223,16 +180,45 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Responses from within a middleware function can be in any format, such as an HTML error page, a simple message, or a JSON string.
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
-For organizational (and higher-level framework) purposes, you can define
-several error-handling middleware functions, much as you would with
-regular middleware functions. For example, to define an error-handler
-for requests made by using `XHR` and those without:
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res, next) => {
+  // logic
+});
+```
 
-```js
+中间件函数内的响应可以是任意格式，例如 HTML 错误页面、简单消息或 JSON 字符串。
+
+出于组织结构（以及高级框架）的目的，你可以定义多个错误处理中间件函数，这与你使用常规中间件函数的方式非常相似。 例如，为使用 `XHR` 发起的请求和未使用 `XHR` 发起的请求分别定义错误处理程序：
+
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({
@@ -279,7 +265,7 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
-If you have a route handler with multiple callback functions, you can use the `route` parameter to skip to the next route handler. For example:
+If you have a route handler with multiple callback functions, you can use the `route` parameter to skip to the next route handler. 举个例子：
 
 ```js
 app.get(

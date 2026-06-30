@@ -5,9 +5,10 @@ description: Analisando o Node.js corpo do middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.2"
+  version="2.3.0"
   github="https://github.com/expressjs/body-parser"
   npm="https://www.npmjs.com/package/body-parser"
 />
@@ -50,9 +51,7 @@ Outros analisadores de corpo que você pode interessar:
 
 ## Instalação
 
-```sh
-$ npm install body-parser
-```
+<PackageManagerCommand command="npm install body-parser" />
 
 ## API
 
@@ -111,8 +110,8 @@ para `'100kb'`.
 ##### reviver
 
 A opção `reviver` é passada diretamente para `JSON.parse` como o segundo argumento
-. Você pode encontrar mais informações sobre este argumento
-[na documentação MDN sobre JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Example.3A_Using_the_reviver_parameter).
+. You can find more information on this argument
+[in the MDN documentation about JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#the_reviver_parameter).
 
 ##### estrito
 

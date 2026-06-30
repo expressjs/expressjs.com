@@ -4,10 +4,11 @@ description: Scopri come utilizzare middleware nelle applicazioni Express.js, tr
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express è un framework web routing e middleware che ha funzionalità minime proprie: Un'applicazione Express è essenzialmente una serie di chiamate di funzioni middleware.
 
-Le funzioni _Middleware_ sono funzioni che hanno accesso al [request object](/5x/api#req) (`req`), il [response object](/5x/api#res) (`res`), e la successiva funzione middleware nel ciclo request-response dell'applicazione. La funzione middleware successiva è comunemente indicata da una variabile chiamata `next`.
+Le funzioni _Middleware_ sono funzioni che hanno accesso al [request object](/api#req) (`req`), il [response object](/api#res) (`res`), e la successiva funzione middleware nel ciclo request-response dell'applicazione. La funzione middleware successiva è comunemente indicata da una variabile chiamata `next`.
 
 Le funzioni Middleware possono eseguire le seguenti attività:
 
@@ -31,12 +32,23 @@ Un'applicazione Express può utilizzare i seguenti tipi di middleware:
 
 ## Middleware a livello di applicazione
 
-Associa il middleware di livello applicativo ad un'istanza del [app object](/5x/api#app) usando `app.use()` e `app. ETHOD()` funzioni, dove `METHOD` è il metodo HTTP della richiesta che la funzione middleware gestisca (come GET, PUT, o POST) in minuscolo.
+Associa il middleware di livello applicativo ad un'istanza del [app object](/api#app) usando `app.use()` e `app. ETHOD()` funzioni, dove `METHOD` è il metodo HTTP della richiesta che la funzione middleware gestisca (come GET, PUT, o POST) in minuscolo.
 
 Questo esempio mostra una funzione middleware senza percorso di montaggio. La funzione viene eseguita ogni volta che l'app riceve una richiesta.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -167,8 +179,58 @@ Carica il middleware a livello router usando le funzioni `router.use()` e `route
 
 Il seguente esempio di codice replica il sistema middleware che viene mostrato sopra per il middleware a livello di applicazione, utilizzando il middleware a livello di router:
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+const router = express.Router();
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
+  '/user/:id',
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
+  },
+  (req, res, next) => {
+    // render a regular page
+    res.render('regular');
+  }
+);
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
+  res.render('special');
+});
+
+// mount the router on the app
+app.use('/', router);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 const router = express.Router();
 
@@ -221,8 +283,30 @@ per passare il controllo indietro dall'istanza del router.
 
 Questo esempio mostra un sub-stack middleware che gestisce le richieste GET al percorso `/user/:id`.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
+const app = express();
+const router = express.Router();
+
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!');
+});
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
+  res.sendStatus(401);
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
 const app = express();
 const router = express.Router();
 
@@ -271,9 +355,9 @@ che erano state precedentemente incluse con Express sono ora in moduli separati;
 
 Express ha le seguenti funzioni middleware integrate:
 
-- [express.static](/5x/api#express.static) serve risorse statiche come file HTML, immagini e così via.
-- [express.json](/5x/api#express.json) analizza le richieste in arrivo con i payload JSON. **NOTA: Disponibile con Express 4.16.0+**
-- [express.urlencoded](/5x/api#express.urlencoded) analizza le richieste in arrivo con payload codificati con URL. **NOTA: Disponibile con Express 4.16.0+**
+- [express.static](/api/express/#expressstatic) serves static assets such as HTML files, images, and so on.
+- [express.json](/api/express/#expressjson) parses incoming requests with JSON payloads. **NOTA: Disponibile con Express 4.16.0+**
+- [express.urlencoded](/api/express/#expressurlencoded) parses incoming requests with URL-encoded payloads. **NOTA: Disponibile con Express 4.16.0+**
 
 ## middleware di terze parti
 
@@ -283,14 +367,22 @@ Installare il modulo Node.js per le funzionalità richieste, quindi caricarlo ne
 
 L'esempio seguente illustra l'installazione e il caricamento della funzione middleware di analisi dei cookie `cookie-parser`.
 
-```bash
-$ npm install cookie-parser
-```
+<PackageManagerCommand command="npm install cookie-parser" />
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
+
+// load the cookie-parsing middleware
+app.use(cookieParser());
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import cookieParser from 'cookie-parser';
+
+const app = express();
 
 // load the cookie-parsing middleware
 app.use(cookieParser());

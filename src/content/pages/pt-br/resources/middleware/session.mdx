@@ -5,11 +5,12 @@ description: Sessão simples de middleware para Express
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="0.1.0"
+  version="1.19.0"
   github="https://github.com/expressjs/sessão"
-  npm="https://www.npmjs.com/package/session"
+  npm="https://www.npmjs.com/package/express-session"
 />
 
 ## Instalação
@@ -18,9 +19,7 @@ Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
 [registro do npm](https://www.npmjs.com/). A instalação é feita usando o comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install express-session
-```
+<PackageManagerCommand command="npm install express-session" />
 
 ## API
 
@@ -146,7 +145,8 @@ Specifies the `string` to be the value for the [`Priority` `Set-Cookie` attribut
 Mais informações sobre os diferentes níveis de prioridade podem ser encontradas em
 [a especificação][rfc-west-cookie-priority-00-4.1].
 
-**Nota** Esse é um atributo que ainda não foi totalmente padronizado, e pode mudar no futuro.
+**Nota** Esse é um atributo que ainda não foi totalmente padronizado, e pode mudar em
+futuro.
 Isso também significa que muitos clientes podem ignorar esse atributo até que eles o entendam
 
 ##### cookie.sameSite
@@ -164,8 +164,7 @@ Por padrão, isso é 'falso'.
 Mais informações sobre os diferentes níveis de execução podem ser encontradas em
 [a especificação][rfc-6265bis-03-4.1.2.7].
 
-**Nota** Esse é um atributo que ainda não foi totalmente padronizado, e pode mudar em
-futuro. Isso também significa que muitos clientes podem ignorar esse atributo até que eles o entendam
+**Nota** Esse é um atributo que ainda não foi totalmente padronizado, e pode mudar no futuro. Isso também significa que muitos clientes podem ignorar esse atributo até que eles o entendam
 
 **Nota** Há um [rascunho da especificação](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
 que requer que o atributo `Secure` seja definido como `true` quando o atributo `SameSite` tiver sido

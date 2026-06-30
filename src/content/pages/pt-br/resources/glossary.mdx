@@ -27,7 +27,7 @@ Uma função que é invocada pela camada de roteamento Express antes do manipula
 
 - `var foo = require('middleware')` é chamado de _requiring_ ou _usando_ um módulo Node.js. Então, a instrução `var mw = foo()` normalmente retorna o middleware.
 - `app.use(mw)` é chamado de _adicionando o middleware à pilha de processamento global_.
-- `app.get('/foo', mw, função (req, res) { ... })` é chamado de _adicionando o middleware para a pilha de processamento "GET /foo"_.
+- `app.get('/foo', mw, (req, res) => { /* ... */ })` is called _adding the middleware to the "GET /foo" processing stack_.
 
 ## Node.js
 

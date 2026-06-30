@@ -14,7 +14,7 @@ Modifier les prototypes globaux affectera toutes les applications Express charg�
 
 Vous pouvez remplacer la signature et le comportement des méthodes existantes avec vos propres méthodes en assignant une fonction personnalisée.
 
-Voici un exemple de surcharge du comportement de [res.sendStatus](/api#res.sendStatus).
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {

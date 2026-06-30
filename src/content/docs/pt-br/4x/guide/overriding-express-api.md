@@ -14,7 +14,7 @@ Alterar os protótipos globais afetará todos os aplicativos do Express carregad
 
 Você pode substituir a assinatura e o comportamento dos métodos existentes com o seu próprio, atribuindo uma função personalizada.
 
-A seguir é um exemplo de substituição do comportamento de [res.sendStatus](/api#res.sendStatus).
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {

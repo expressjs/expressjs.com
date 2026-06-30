@@ -1,13 +1,14 @@
 ---
-title: 'Production Best Practices: Security'
-description: Discover crucial security best practices for Express apps in production, including using TLS, input validation, secure cookies, and preventing vulnerabilities.
+title: 生产环境最佳实践：安全防护
+description: 了解Express应用部署至生产环境需遵循的关键安全最佳实践，包含启用TLS、入参校验、安全Cookie配置及漏洞防护相关内容。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-The term _"production"_ refers to the stage in the software lifecycle when an application or API is generally available to its end-users or consumers. In contrast, in the _"development"_ stage, you're still actively writing and testing code, and the application is not open to external access. The corresponding system environments are known as _production_ and _development_ environments, respectively.
+术语\*\*「生产环境」**指软件生命周期中应用或API面向终端用户、调用方正式对外开放的阶段。 与之相对，**「开发环境」**阶段中，开发者仍在编写与测试代码，应用暂不对外开放访问。 对应的系统环境分别称作**生产环境**与**开发环境\*\*。
 
-Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
+开发环境与生产环境通常配置不同，需求差异悬殊。 在开发环境中可行的配置，放到生产环境未必适用。 例如：开发环境下可开启详细错误日志用于调试，但相同配置在生产环境中会带来安全隐患。 开发阶段无需考量扩展性、可靠性与性能，而在生产环境中这些指标至关重要。
 
 <Alert type="info">
 
@@ -16,51 +17,48 @@ Policies and Procedures.
 
 </Alert>
 
-Security best practices for Express applications in production include:
+Express 应用生产环境安全最佳实践包含：
 
-- [Production Best Practices: Security](#production-best-practices-security)
-  - [Overview](#overview)
-  - [Don't use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-  - [Use TLS](#use-tls)
-  - [Do not trust user input](#do-not-trust-user-input)
-    - [Prevent open redirects](#prevent-open-redirects)
-  - [Use Helmet](#use-helmet)
-  - [Reduce fingerprinting](#reduce-fingerprinting)
-  - [Use cookies securely](#use-cookies-securely)
-    - [Don't use the default session cookie name](#dont-use-the-default-session-cookie-name)
-    - [Set cookie security options](#set-cookie-security-options)
-  - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
-  - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
-    - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
-  - [Additional considerations](#additional-considerations)
+- [请勿使用已弃用或存在漏洞的 Express 版本](#请勿使用已弃用或存在漏洞的-express-版本)
+- [启用TLS](#use-tls)
+- [切勿信任用户输入](#切勿信任用户输入)
+  - [防止开放重定向](#防止开放重定向)
+- [使用 Helmet](#use-helmet)
+- [减少指纹信息泄露](#reduce-fingerprinting)
+- [安全使用 Cookie](#use-cookies-securely)
+  - [不使用默认会话 cookie 名称](#dont-use-the-default-session-cookie-name)
+  - [设置 cookie 安全选项](#set-cookie-security-options)
+- [防止使用暴力攻击授权](#prevent-brute-force-attacks-against-authorization)
+- [确保您的依赖是安全的](#ensure-your-dependencies-are-secure)
+  - [避免其他已知漏洞](#avoid-other-known-vulnerabilities)
+- [其他考虑](#additional-considerations)
 
-## Don't use deprecated or vulnerable versions of Express
+## 请勿使用已弃用或存在漏洞的 Express 版本
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
+Express 2.x 与 3.x 版本已不再维护。 这些版本中的安全与性能问题将不再进行修复。 不要使用它们！ If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/advanced/security-updates). If you are, update to one of the stable releases, preferably the latest.
+Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/advanced/security-updates). 如若正在使用，请升级至任一稳定版本，优先选择最新版。
 
-## Use TLS
+## 使用 TLS
 
-If your app deals with or transmits sensitive data, use [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) to secure the connection and the data. This technology encrypts data before it is sent from the client to the server, thus preventing some common (and easy) hacks. Although Ajax and POST requests might not be visibly obvious and seem "hidden" in browsers, their network traffic is vulnerable to [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) and [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+如果您的应用处理或传输敏感数据，请使用 [传输图层安全](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) 来保护连接和数据。 该技术会在客户端向服务器发送数据前对数据进行加密，从而防范部分常见且易实施的攻击。 尽管 AJAX 和 POST 请求在浏览器中不会直观展现、看似处于 “隐藏” 状态，但它们的网络流量容易遭到[抓包分析](https://en.wikipedia.org/wiki/Packet_analyzer)与[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply the next progression of SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). In other words, if you were using SSL before, consider upgrading to TLS. In general, we recommend Nginx to handle TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+你或许熟悉安全套接字层（SSL）加密。 In general, we recommend Nginx to handle TLS. 换言之，若此前使用SSL，建议升级至TLS。 In other words, if you were using SSL before, consider upgrading to TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
 
-Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
+另外，获取免费TLS证书的实用工具是[Let's Encrypt](https://letsencrypt.org/about/)，它是由[互联网安全研究集团（ISRG）](https://www.abetterinternet.org/)提供的免费、自动化的开放证书颁发机构（CA）。
 
-## Do not trust user input
+## 切勿信任用户输入
 
-For web applications, one of the most critical security requirements is proper user input validation and handling. This comes in many forms and we will not cover all of them here.
-Ultimately, the responsibility for validating and correctly handling the types of user input your application accepts is yours.
+对 Web 应用而言，最关键的安全要求之一是对用户输入进行合理的验证与处理。 这类风险形式多样，本文不逐一列举。
+最终，你需要全权负责验证并正确处理应用接收的各类用户输入。
 
-### Prevent open redirects
+### 防止开放重定向
 
-An example of potentially dangerous user input is an _open redirect_, where an application accepts a URL as user input (often in the URL query, for example `?url=https://example.com`) and uses `res.redirect` to set the `location` header and
-return a 3xx status.
+开放重定向是一类存在潜在风险的用户输入：应用接收 URL 格式的用户输入（通常位于 URL 查询参数中，例如 `?url=https://example.com`），并通过 `res.redirect` 设置 `location` 响应头，返回 3xx 状态码实现重定向。
 
-An application must validate that it supports redirecting to the incoming URL to avoid sending users to malicious links such as phishing websites, among other risks.
+应用必须验证自身支持重定向至传入的 URL，避免将用户导向钓鱼网站等恶意链接，防范相关风险。
 
-Here is an example of checking URLs before using `res.redirect` or `res.location`:
+以下是在使用 `res.redirect` 或 `res.location` 之前检查 URL 的示例：
 
 ```js
 app.use((req, res) => {
@@ -77,35 +75,33 @@ app.use((req, res) => {
 
 ## Use Helmet
 
-[Helmet][helmet] can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+[Helmet][helmet] 可通过合理设置 HTTP 请求头，帮助你的应用抵御部分常见的 Web 安全漏洞。
 
-Helmet is a middleware function that sets security-related HTTP response headers. Helmet sets the following headers by default:
+Helmet 是用于设置安全相关 HTTP 响应头的中间件函数。 Helmet 默认设置如下请求头：
 
-- `Content-Security-Policy`: A powerful allow-list of what can happen on your page which mitigates many attacks
-- `Cross-Origin-Opener-Policy`: Helps process-isolate your page
-- `Cross-Origin-Resource-Policy`: Blocks others from loading your resources cross-origin
-- `Origin-Agent-Cluster`: Changes process isolation to be origin-based
+- `Content-Security-Policy`：一套管控页面资源访问的强力白名单，可防范多种攻击
+- `Cross-Origin-Opener-Policy`：协助对页面进行进程隔离
+- `Cross-Origin-Resource-Policy`：阻止其他站点跨域加载你的资源
+- `Origin-Agent-Cluster`：基于源修改进程隔离策略
 - `Referrer-Policy`: Controls the [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) header
-- `Strict-Transport-Security`: Tells browsers to prefer HTTPS
+- `Strict-Transport-Security`：告知浏览器优先使用 HTTPS
 - `X-Content-Type-Options`: Avoids [MIME sniffing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
-- `X-DNS-Prefetch-Control`: Controls DNS prefetching
-- `X-Download-Options`: Forces downloads to be saved (Internet Explorer only)
-- `X-Frame-Options`: Legacy header that mitigates [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking) attacks
-- `X-Permitted-Cross-Domain-Policies`: Controls cross-domain behavior for Adobe products, like Acrobat
-- `X-Powered-By`: Info about the web server. Removed because it could be used in simple attacks
-- `X-XSS-Protection`: Legacy header that tries to mitigate [XSS attacks](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), but makes things worse, so Helmet disables it
+- `X-DNS-Prefetch-Control`：控制 DNS 预取
+- `X-Download-Options`：强制文件以下载形式保存（仅适用于 IE 浏览器）
+- `X-Frameworks`: 减少 [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking) 攻击的遗留标题
+- `X-Permitted-Cross-Domain-Policies`：控制Adobe系列产品（如Acrobat）的跨域行为
+- `X-Powered-By`：有关Web服务器的信息。 因易被用于简易攻击而移除
+- `X-XSS-Protection`：用于缓解[XSS攻击](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting)的旧式请求头，但会带来安全隐患，因此Helmet将其禁用
 
-Each header can be configured or disabled. To read more about it please go to [its documentation website][helmet].
+每个请求头均可配置或禁用。 如需了解更多详情，请访问[其官方文档网站][helmet]。
 
-Install Helmet like any other module:
+像安装其他模块一样安装 Helmet：
 
-```bash
-$ npm install helmet
-```
+<PackageManagerCommand command="npm install helmet" />
 
-Then to use it in your code:
+然后在代码中使用：
 
-```js
+```cjs title="index.cjs"
 // ...
 
 const helmet = require('helmet');
@@ -114,16 +110,23 @@ app.use(helmet());
 // ...
 ```
 
-## Reduce fingerprinting
+```mjs title="index.mjs"
+import helmet from 'helmet';
 
-It can help to provide an extra layer of security to reduce the ability of attackers to determine
-the software that a server uses, known as "fingerprinting." Though not a security issue itself,
-reducing the ability to fingerprint an application improves its overall security posture.
-Server software can be fingerprinted by quirks in how it responds to specific requests, for example in
-the HTTP response headers.
+// ...
 
-By default, Express sends the `X-Powered-By` response header that you can
-disable using the `app.disable()` method:
+app.use(helmet());
+
+// ...
+```
+
+## 减少指纹识别
+
+它有助于提供额外的安全层，降低攻击者识别服务器所使用软件的能力，这种行为被称为“指纹识别”。 尽管其本身并非安全漏洞，
+但降低应用程序的指纹识别能力可提升其整体安全状况。
+服务器软件可通过其响应特定请求的特征进行指纹识别，例如通过HTTP响应头中的特征。
+
+默认情况下，Express 会发送 `X-Powered-By` 响应头，你可以使用 `app.disable()` 方法将其禁用：
 
 ```js
 app.disable('x-powered-by');
@@ -131,14 +134,11 @@ app.disable('x-powered-by');
 
 <Alert type="info">
 
-Disabling the `X-Powered-By header` does not prevent a sophisticated attacker from determining
-that an app is running Express. It may discourage a casual exploit, but there are other ways to
-determine an app is running Express.
+禁用 `X-Powered-By` 响应头并不能阻止老练的攻击者识别出应用正在运行 Express。 这或许能防范随意的漏洞利用，但仍有其他方法可以识别应用正在运行 Express。
 
 </Alert>
 
-Express also sends its own formatted "404 Not Found" messages and formatter error
-response messages. These can be changed by
+Express 还会发送自身格式化的“404 Not Found”信息和错误响应格式化信息。 These can be changed by
 [adding your own not found handler](/starter/faq#how-do-i-handle-404-responses)
 and
 [writing your own error handler](/guide/error-handling#writing-error-handlers):
@@ -158,26 +158,26 @@ app.use((err, req, res, next) => {
 });
 ```
 
-## Use cookies securely
+## 安全使用 cookie
 
-To ensure cookies don't open your app to exploits, don't use the default session cookie name and set cookie security options appropriately.
+为确保Cookie不会让你的应用程序面临攻击风险，请勿使用默认的会话Cookie名称，并合理设置Cookie安全选项。
 
-There are two main middleware cookie session modules:
+主要有两个会话Cookie中间件模块：
 
-- [express-session](https://www.npmjs.com/package/express-session) that replaces `express.session` middleware built-in to Express 3.x.
-- [cookie-session](https://www.npmjs.com/package/cookie-session) that replaces `express.cookieSession` middleware built-in to Express 3.x.
+- [express-session](https://www.npmjs.com/package/express-session)：替代了 Express 3.x 内置的 `express.session` 中间件。
+- [cookie-session](https://www.npmjs.com/package/cookie-session)：替代了 Express 3.x 内置的 `express.cookieSession` 中间件。
 
-The main difference between these two modules is how they save cookie session data. The [express-session](https://www.npmjs.com/package/express-session) middleware stores session data on the server; it only saves the session ID in the cookie itself, not session data. By default, it uses in-memory storage and is not designed for a production environment. In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
+这两个模块的主要区别在于它们存储 Cookie 会话数据的方式。 [express-session](https://www.npmjs.com/package/express-session) 中间件将会话数据存储在服务器端；它仅将会话ID保存到Cookie本身，不存储会话数据。 默认情况下，它使用内存存储，并非为生产环境设计。 In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
 
-In contrast, [cookie-session](https://www.npmjs.com/package/cookie-session) middleware implements cookie-backed storage: it serializes the entire session to the cookie, rather than just a session key. Only use it when session data is relatively small and easily encoded as primitive values (rather than objects). Although browsers are supposed to support at least 4096 bytes per cookie, to ensure you don't exceed the limit, don't exceed a size of 4093 bytes per domain. Also, be aware that the cookie data will be visible to the client, so if there is any reason to keep it secure or obscure, then `express-session` may be a better choice.
+相比之下，[cookie-session](https://www.npmjs.com/package/cookie-session) 中间件实现基于Cookie的存储：它将整个会话序列化后存储到Cookie中，而非仅存储会话密钥。 仅当会话数据相对较小且易于编码为基本类型值（而非对象）时，才使用它。 尽管浏览器应支持每个Cookie至少4096字节，但为确保不超出限制，每个域的Cookie大小请勿超过4093字节。 此外，请注意**Cookie数据对客户端是可见的**，因此如果有任何需要保证数据安全或隐藏的需求，那么 `express-session` 会是更合适的选择。
 
-### Don't use the default session cookie name
+### 不要使用默认的会话Cookie名称
 
-Using the default session cookie name can open your app to attacks. The security issue posed is similar to `X-Powered-By`: a potential attacker can use it to fingerprint the server and target attacks accordingly.
+使用默认会话Cookie名称会使你的应用易遭受攻击。 由此带来的安全隐患与`X-Powered-By`类似：潜在攻击者可借此识别服务器指纹，并针对性发起攻击。
 
-To avoid this problem, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
+若要避免此问题，请使用通用的Cookie名称；例如使用 [express-session](https://www.npmjs.com/package/express-session) 中间件：
 
-```js
+```cjs title="index.cjs"
 const session = require('express-session');
 app.set('trust proxy', 1); // trust first proxy
 app.use(
@@ -188,19 +188,31 @@ app.use(
 );
 ```
 
-### Set cookie security options
+```mjs title="index.mjs"
+import session from 'express-session';
 
-Set the following cookie options to enhance security:
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
+```
 
-- `secure` - Ensures the browser only sends the cookie over HTTPS.
-- `httpOnly` - Ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks.
-- `domain` - indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next.
-- `path` - indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request.
+### 设置 cookie 安全选项
+
+设置下面的 cookie 选项以增强安全性：
+
+- `secure` - 确保浏览器只通过 HTTPS 发送 cookie 。
+- `httpOnly` - 确保 Cookie 仅通过 HTTP(S) 发送，不会被客户端 JavaScript 访问，有助于防范跨站脚本攻击。
+- `domain` - 表示 Cookie 的所属域名；用于将其与请求 URL 所在的服务器域名进行比对。 若匹配，则下一步检查路径属性。
+- `path` - 表示 Cookie 的路径；用于将其与请求路径进行比对。 若域名与路径均匹配，则在请求中发送该 Cookie。
 - `expires` - use to set expiration date for persistent cookies.
 
-Here is an example using [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
+以下是使用 [cookie-session](https://www.npmjs.com/package/cookie-session) 中间件的示例：
 
-```js
+```cjs title="index.cjs"
 const session = require('cookie-session');
 const express = require('express');
 const app = express();
@@ -221,56 +233,78 @@ app.use(
 );
 ```
 
+```mjs title="index.mjs"
+import session from 'cookie-session';
+import express from 'express';
+
+const app = express();
+
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
+    },
+  })
+);
+```
+
 ## Prevent brute-force attacks against authorization
 
-Make sure login endpoints are protected to make private data more secure.
+确保登录接口受到保护，以提升私有数据的安全性。
 
-A simple and powerful technique is to block authorization attempts using two metrics:
+一种简单且有效的技巧是使用两个指标来阻止授权尝试：
 
-1. The number of consecutive failed attempts by the same user name and IP address.
-2. The number of failed attempts from an IP address over some long period of time. For example, block an IP address if it makes 100 failed attempts in one day.
+1. 同一用户名和IP地址连续失败的尝试次数。
+2. 某一IP地址在较长时间段内的失败尝试次数。 例如，如果一个IP地址在一天内失败尝试100次，则阻止该IP地址。
 
-[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package provides tools to make this technique easy and fast. You can find [an example of brute-force protection in the documentation](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
+[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) 包提供了可简便快捷实现该技巧的工具。 你可以在文档中找到[暴力破解防护示例](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
 
-## Ensure your dependencies are secure
+## 确保你的依赖项安全
 
-Using npm to manage your application's dependencies is powerful and convenient. But the packages that you use may contain critical security vulnerabilities that could also affect your application. The security of your app is only as strong as the "weakest link" in your dependencies.
+使用 npm 管理应用依赖项功能强大且便捷。 但你使用的软件包可能包含严重的安全漏洞，这些漏洞同样会影响你的应用。 应用的安全性仅取决于依赖项中**最薄弱的环节**。
 
-Since npm@6, npm automatically reviews every install request. Also, you can use `npm audit` to analyze your dependency tree.
+从 npm@6 版本开始，npm 会自动审查每一次安装请求。 此外，你可以使用 `npm audit` 分析你的依赖树。
 
 ```bash
 $ npm audit
 ```
 
-If you want to stay more secure, consider [Snyk](https://snyk.io/).
+如需进一步提升安全性，可选用 [Snyk](https://snyk.io/)。
 
-Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
+Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. 安装如下CLI：
 
 ```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
-Use this command to test your application for vulnerabilities:
+使用此命令检测你的应用是否存在漏洞：
 
 ```bash
 $ snyk test
 ```
 
-### Avoid other known vulnerabilities
+### 规避其他已知安全漏洞
 
-Keep an eye out for [Node Security Project](https://npmjs.com/advisories) or [Snyk](https://snyk.io/vuln/) advisories that may affect Express or other modules that your app uses. In general, these databases are excellent resources for knowledge and tools about Node security.
+Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. 总体而言，这些数据库是获取 Node 安全相关知识与工具的优质资源。
 
-Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) and take precautions to avoid them.
+最后，Express 应用&mdash;和所有 Web 应用一样&mdash;可能遭受各类基于网页的攻击。 Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) and take precautions to avoid them.
 
-## Additional considerations
+## 其他注意事项
 
-Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/). Refer to that blog post for all the details on these recommendations:
+以下是源自优质文档 [Node.js 安全检查清单](https://blog.risingstack.com/node-js-security-checklist/) 的补充建议。 关于这些建议的所有详细信息，请参阅该博客帖子：
 
-- Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
-- Defend against SQL injection attacks by using parameterized queries or prepared statements.
+- 始终过滤并净化用户输入，防范跨站脚本（XSS）与命令注入攻击。
+- 使用参数化查询或预处理语句防范 SQL 注入攻击。
 - Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
-- Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
+- 使用 [nmap](https://nmap.org/) 和 [sslyze](https://github.com/nabla-c0d3/sslyze) 工具测试 SSL 加密套件、密钥、重协商配置以及证书有效性。
 - Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
 [helmet]: https://helmetjs.github.io/

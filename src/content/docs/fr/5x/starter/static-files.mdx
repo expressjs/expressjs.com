@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 L'argument `root` spécifie le répertoire racine à partir duquel servir les actifs statiques.
-Pour plus d'informations sur l'argument `options`, voir [express.static](/api#express.static).
+For more information on the `options` argument, see [express.static](/api/express/#expressstatic).
 
 Par exemple, utilisez le code suivant pour servir les images, les fichiers CSS et JavaScript dans un répertoire nommé `public`:
 
@@ -56,7 +56,7 @@ servant des actifs statiques.
 
 </Alert>
 
-Pour créer un préfixe de chemin virtuel (où le chemin n'existe pas dans le système de fichiers) pour les fichiers qui sont servis par le fichier `express. fonction tatic`, [spécifiez un chemin de montage](/api#app.use) pour le répertoire statique, comme indiqué ci-dessous:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -74,8 +74,14 @@ http://localhost:3000/static/hello.html
 
 Cependant, le chemin que vous fournissez à la fonction `express.static` est relatif au répertoire depuis lequel vous lancez votre processus `node`. Si vous exécutez l'application express à partir d'un autre répertoire, il est plus sûr d'utiliser le chemin absolu du répertoire que vous voulez servir:
 
-```js
+```cjs title="index.cjs"
 const path = require('path');
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```mjs title="index.mjs"
+import path from 'path';
+
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 

@@ -1,33 +1,27 @@
 ---
-title: body-parser middleware
-description: Node.js body parsing middleware
+title: body-parser 中间件
+description: Node.js 请求体解析中间件
 ---
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.2"
+  version="2.3.0"
   github="https://github.com/expressjs/body-parser"
   npm="https://www.npmjs.com/package/body-parser"
 />
 
-Node.js body parsing middleware.
+Node.js 请求体解析中间件
 
-Parse incoming request bodies in a middleware before your handlers, available
-under the `req.body` property.
+在处理程序之前，通过中间件解析传入的请求体，解析结果可通过 `req.body` 属性访问。
 
-**Note** As `req.body`'s shape is based on user-controlled input, all
-properties and values in this object are untrusted and should be validated
-before trusting. For example, `req.body.foo.toString()` may fail in multiple
-ways, for example the `foo` property may not be there or may not be a string,
-and `toString` may not be a function and instead a string or other user input.
+**注意** 由于 `req.body` 的结构由用户可控的输入决定，因此该对象中的所有属性和值均不可信，在使用前应进行验证。 例如，`req.body.foo.toString()` 可能会以多种方式报错，例如 `foo` 属性可能不存在或不是字符串，且 `toString` 可能并非函数，而是字符串或其他用户输入。
 
-[Learn about the anatomy of an HTTP transaction in Node.js](https://nodejs.org/en/learn/http/anatomy-of-an-http-transaction).
+[了解 Node.js 中 HTTP 请求交互的构成](https://nodejs.org/en/learn/http/anatomy-of-an-http-transaction)
 
-_This does not handle multipart bodies_, due to their complex and typically
-large nature. For multipart bodies, you may be interested in the following
-modules:
+**此中间件不处理多部分（multipart）请求体**，因其结构复杂且通常体积较大。 对于多部分请求体，你可能需要以下模块：
 
 - [busboy](https://www.npmjs.com/package/busboy#readme) and
   [connect-busboy](https://www.npmjs.com/package/connect-busboy#readme)
@@ -36,23 +30,21 @@ modules:
 - [formidable](https://www.npmjs.com/package/formidable#readme)
 - [multer](https://www.npmjs.com/package/multer#readme)
 
-This module provides the following parsers:
+此模块提供以下解析器：
 
 - [JSON body parser](#bodyparserjsonoptions)
 - [Raw body parser](#bodyparserrawoptions)
 - [Text body parser](#bodyparsertextoptions)
 - [URL-encoded form body parser](#bodyparserurlencodedoptions)
 
-Other body parsers you might be interested in:
+你可能感兴趣的其他请求体解析器：
 
 - [body](https://www.npmjs.com/package/body#readme)
 - [co-body](https://www.npmjs.com/package/co-body#readme)
 
-## Installation
+## 安装
 
-```sh
-$ npm install body-parser
-```
+<PackageManagerCommand command="npm install body-parser" />
 
 ## API
 
@@ -67,19 +59,13 @@ const raw = require('body-parser/raw');
 const text = require('body-parser/text');
 ```
 
-The `bodyParser` object exposes various factories to create middlewares. All
-middlewares will populate the `req.body` property with the parsed body when
-the `Content-Type` request header matches the `type` option.
+`bodyParser` 对象提供了多种工厂方法来创建中间件。 所有中间件在请求头`Content-Type`与`type`选项匹配时，都会将解析后的请求体存入`req.body`属性。
 
-The various errors returned by this module are described in the
-[errors section](#errors).
+该模块抛出的各类错误在[错误章节](#errors)中有相关说明。
 
 ### bodyParser.json([options])
 
-Returns middleware that only parses `json` and only looks at requests where
-the `Content-Type` header matches the `type` option. This parser accepts any
-Unicode encoding of the body and supports automatic inflation of `gzip`,
-`br` (brotli) and `deflate` encodings.
+返回仅解析`json`且仅解析请求头`Content-Type`与`type`选项匹配的请求的中间件。 该解析器可识别请求体的任意Unicode编码，并自动解压`gzip`、`br`（brotli）与`deflate`编码的数据。
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`).
@@ -112,7 +98,7 @@ to `'100kb'`.
 
 The `reviver` option is passed directly to `JSON.parse` as the second
 argument. You can find more information on this argument
-[in the MDN documentation about JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Example.3A_Using_the_reviver_parameter).
+[in the MDN documentation about JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#the_reviver_parameter).
 
 ##### strict
 

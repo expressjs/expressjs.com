@@ -1,20 +1,20 @@
 ---
-title: Overriding the Express API
-description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes.
+title: 重写Express API
+description: 了解如何通过原型重写请求和响应对象上的方法与属性，来自定义并扩展 Express.js API。
 ---
 
-The Express API consists of various methods and properties on the request and response objects. These are inherited by prototype. There are two extension points for the Express API:
+Express API 由请求对象和响应对象上的多种方法与属性组成。 这些内容通过原型继承。 Express API 有两个扩展点：
 
-1. The global prototypes at `express.request` and `express.response`.
-2. App-specific prototypes at `app.request` and `app.response`.
+1. `express.request` 和 `express.response` 上的全局原型。
+2. 应用专属原型位于 `app.request` 和 `app.response`。
 
-Altering the global prototypes will affect all loaded Express apps in the same process. If desired, alterations can be made app-specific by only altering the app-specific prototypes after creating a new app.
+修改全局原型会影响同一进程中所有已加载的 Express 应用。 如果需要，你可以在创建新应用后仅修改应用专属原型，从而实现仅针对当前应用的修改。
 
 ## Methods
 
-You can override the signature and behavior of existing methods with your own, by assigning a custom function.
+你可以通过分配自定义函数，使用自己的实现重写现有方法的签名和行为。
 
-Following is an example of overriding the behavior of [res.sendStatus](/api#res.sendStatus).
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {
@@ -23,9 +23,9 @@ app.response.sendStatus = function (statusCode, type, message) {
 };
 ```
 
-The above implementation completely changes the original signature of `res.sendStatus`. It now accepts a status code, encoding type, and the message to be sent to the client.
+上述实现彻底更改了`res.sendStatus`原本的方法签名。 该方法现在可接收状态码、编码类型以及要发送给客户端的消息。
 
-The overridden method may now be used this way:
+重写后的方法现在可以这样使用：
 
 ```js
 res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
@@ -33,16 +33,16 @@ res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
 
 ## Properties
 
-Properties in the Express API are either:
+Express API 中的属性分为两类：
 
-1. Assigned properties (ex: `req.baseUrl`, `req.originalUrl`)
-2. Defined as getters (ex: `req.secure`, `req.ip`)
+1. 赋值属性（例如：`req.baseUrl`、`req.originalUrl`）
+2. 取值器定义属性（例如：`req.secure`、`req.ip`）
 
-Since properties under category 1 are dynamically assigned on the `request` and `response` objects in the context of the current request-response cycle, their behavior cannot be overridden.
+由于第一类属性是在当前请求-响应周期的上下文中动态赋值到`request`和`response`对象上的，因此无法重写其行为。
 
-Properties under category 2 can be overwritten using the Express API extensions API.
+第二类属性可通过 Express API 扩展接口进行重写。
 
-The following code rewrites how the value of `req.ip` is to be derived. Now, it simply returns the value of the `Client-IP` request header.
+以下代码重写了`req.ip`值的获取方式。 现在，它仅返回 `Client-IP` 请求头的值。
 
 ```js
 Object.defineProperty(app.request, 'ip', {
@@ -56,9 +56,9 @@ Object.defineProperty(app.request, 'ip', {
 
 ## Prototype
 
-In order to provide the Express API, the request/response objects passed to Express (via `app(req, res)`, for example) need to inherit from the same prototype chain. By default, this is `http.IncomingRequest.prototype` for the request and `http.ServerResponse.prototype` for the response.
+为了提供 Express API，传递给 Express 的请求/响应对象（例如通过 `app(req, res)`）需要继承自相同的原型链。 默认情况下，请求对象继承自 `http.IncomingRequest.prototype`，响应对象继承自 `http.ServerResponse.prototype`。
 
-Unless necessary, it is recommended that this be done only at the application level, rather than globally. Also, take care that the prototype that is being used matches the functionality as closely as possible to the default prototypes.
+除非必要，否则建议仅在应用层面执行此操作，而非全局层面。 此外，请注意所使用的原型需尽可能与默认原型的功能保持一致。
 
 ```js
 // Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse

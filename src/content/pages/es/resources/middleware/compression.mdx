@@ -5,6 +5,7 @@ description: Middleware de compresión Node.js
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.8.1"
@@ -28,9 +29,7 @@ Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
 [npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```bash
-$ npm install compression
-```
+<PackageManagerCommand command="npm install compression" />
 
 ## API
 
@@ -119,7 +118,7 @@ con respecto al uso.
 
 Tipo: `Objeto`
 
-Esto especifica las opciones para configurar Brotli. Vea [documentación de Node.js](https://nodejs.org/api/zlib.html#class-brotlioptions) para una lista completa de opciones disponibles.
+Esto especifica las opciones para configurar Brotli. Vea [documentación de Node.js] (https://nodejs.org/api/zlib.html#class-brotlioptions) para una lista completa de opciones disponibles.
 
 ##### estrategia
 
@@ -297,7 +296,7 @@ El proyecto Express.js acoge con satisfacción todas las contribuciones construc
 desde código para correcciones de errores y mejoras, hasta adiciones y correcciones a la documentación, ¡pruebas
 adicionales, probando solicitudes y problemas entrantes, y más!
 
-Vea la [Guía de contribución](https://github.com/expressjs/express/blob/master/Contributing.md) para más detalles técnicos sobre contribuir.
+Vea la [Guía de contribución] (https://github.com/expressjs/express/blob/master/Contributing.md) para más detalles técnicos sobre contribuir.
 
 ## Licencia
 

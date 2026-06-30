@@ -4,6 +4,7 @@ description: Scopri come integrare e utilizzare modelli di motori come Pug, Manu
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Un motore _modello_ ti permette di utilizzare file di template statici nella tua applicazione. Al runtime, il modello del motore sostituisce le variabili
 in un modello di file con valori reali, e trasforma il modello in un file HTML inviato al client.
@@ -11,7 +12,7 @@ Questo approccio rende più facile progettare una pagina HTML.
 
 Il [generatore di applicazioni Express](/starter/generator) utilizza [Pug](https://pugjs.org/api/getting-started.html) come predefinito, ma supporta anche [Handlebars](https://www.npmjs.com/package/handlebars), e [EJS](https://www.npmjs.com/package/ejs), tra gli altri.
 
-Per rendere i file dei modelli, imposta le seguenti [proprietà delle impostazioni dell'applicazione](/4x/api#app.set), nel file `app.js` predefinito creato dal generatore:
+To render template files, set the following [application setting properties](/api/application/#appset), in the default `app.js` created by the generator:
 
 - `views`, la directory dove si trovano i file del modello. Eg: `app.set('views', './views')`.
   Questo valore predefinito è la directory `views` nella directory radice dell'applicazione.
@@ -19,9 +20,7 @@ Per rendere i file dei modelli, imposta le seguenti [proprietà delle impostazio
 
 Quindi installare il corrispondente pacchetto npm del motore del modello; per esempio per installare Pug:
 
-```bash
-$ npm install pug --save
-```
+<PackageManagerCommand command="npm install pug --save" />
 
 <Alert type="allerta">
 Motori di modelli conformi ad espresso, come Pug esportano una funzione chiamata `__express(filePath, options, callback)`,

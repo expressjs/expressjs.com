@@ -5,6 +5,7 @@ description: Node.js CORS middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.8.6"
@@ -12,7 +13,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
   npm="https://www.npmjs.com/package/cors"
 />
 
-CORS es un middleware [Node.js](https://nodejs.org/en/) para [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect) que establece cabeceras de respuesta [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS). Estas cabeceras le dicen a los navegadores qué orígenes pueden leer las respuestas de su servidor.
+CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](/)/[Connect](https://github.com/senchalabs/connect) that sets [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) response headers. Estas cabeceras le dicen a los navegadores qué orígenes pueden leer las respuestas de su servidor.
 
 <Alert type="info">
 
@@ -28,7 +29,7 @@ CORS es un middleware [Node.js](https://nodejs.org/en/) para [Express](https://e
   - [Configurando CORS con origen dinámico](#configuring-cors-w-dynamic-origin)
   - [Habilitando CORS Pre-vuelo](#enabling-cors-pre-flight)
   - [Personalizar ajustes CORS dinámicamente por solicitud](#customizing-cors-settings-dynamically-per-request)
-- [Opciones de configuración](#configuration-options)
+- [Opciones de configuración] (#configuration-options)
 - [Misconcepciones comunes](#common-misconceptions)
 - [License](#license)
 - [Autor Original](#original-author)
@@ -39,9 +40,7 @@ Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
 [npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
 [`npm install`](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
-```sh
-$ npm install cors
-```
+<PackageManagerCommand command="npm install cors" />
 
 ## Uso
 
@@ -83,7 +82,7 @@ app.listen(80, function () {
 
 ### Configuring CORS
 
-Vea las [opciones de configuración](#configuration-options) para más detalles.
+Vea las [opciones de configuración] (#configuration-options) para más detalles.
 
 ```javascript
 var express = require('express');
@@ -114,7 +113,7 @@ a la opción `origin`. Esta función será pasada una cadena que sea el origen
 
 El argumento `origin` al callback puede ser cualquier valor permitido para la opción `origin`
 del middleware, excepto una función. Vea la sección
-[opciones de configuración](#configuration-options) para más información sobre todos los tipos de valor
+[opciones de configuración] (#configuration-options) para más información sobre todos los tipos de valor
 posibles.
 
 Esta función está diseñada para permitir la carga dinámica de origen(s) permitidos de

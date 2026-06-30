@@ -4,6 +4,7 @@ description: Una guía completa para migrar sus aplicaciones Express.js de la ve
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express 5 no es muy diferente de Express 4; aunque mantiene la misma API básica, todavía hay cambios que rompen la compatibilidad con la versión anterior. Por lo tanto, una aplicación construida con Express 4 podría no funcionar si la actualiza para usar Express 5.
 
@@ -11,9 +12,7 @@ Express 5 no es muy diferente de Express 4; aunque mantiene la misma API básica
 
 Para instalar esta versión, necesitas tener una **versión 18 o superior de Node.js**. Luego, ejecuta el siguiente comando en el directorio de tu aplicación:
 
-```sh
-npm install "express@5"
-```
+<PackageManagerCommand command="npm install &#x22;express@5&#x22;" />
 
 Luego puede ejecutar sus pruebas automatizadas para ver qué falla, y arreglar problemas de acuerdo a las actualizaciones que se listan a continuación. Después de gestionar los fallos de prueba, ejecuta tu aplicación para ver qué errores ocurren. Descubrirá de inmediato si la aplicación utiliza cualquier método o propiedades que no sean compatibles.
 
@@ -23,15 +22,11 @@ Para ayudarle a migrar su servidor exprés, hemos creado un conjunto de códigos
 
 Ejecutar el siguiente comando para ejecutar todos los codemods disponibles:
 
-```sh
-npx codemod@latest @expressjs/v5-migration-recipe
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/v5-migration-recipe" />
 
 Si quieres ejecutar un código específico, puedes ejecutar el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/name-of-the-codemod
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/name-of-the-codemod" />
 
 Puedes encontrar la lista de códigos disponibles [here](https://codemod.link/express).
 
@@ -49,9 +44,7 @@ Inicialmente, `del` fue usado en lugar de `delete`, porque `delete` es una palab
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/route-del-to-delete
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/route-del-to-delete" />
 
 O puedes actualizar tu código manualmente:
 
@@ -80,9 +73,7 @@ Los siguientes nombres de métodos han sido pluralizados. En Express 4, el uso d
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/pluralize-method-names
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/pluralize-method-names" />
 
 O puedes actualizar tu código manualmente:
 
@@ -103,7 +94,7 @@ O puedes actualizar tu código manualmente:
 
 Un personaje con dos puntos (:) en el nombre de la aplicación `. aram(name, fn)` función es un remanente de Express 3, y por el bien de la compatibilidad hacia atrás, Express 4 lo soportó con un aviso de desaprobación. Express 5 lo ignorará silenciosamente y usará el parámetro de nombre sin prefijarlo con dos puntos.
 
-Esto no debería afectar tu código si sigues la documentación Express 4 de [app.param](/4x/api#app.param), ya que no hace mención alguna de los dos puntos principales.
+This should not affect your code if you follow the Express 4 documentation of [app.param](/4x/api/application/#appparam), as it makes no mention of the leading colon.
 
 ### req.param(nombre)
 
@@ -113,9 +104,7 @@ Se ha eliminado este método potencialmente confuso y peligroso de recuperar dat
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/explicit-request-params
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/explicit-request-params" />
 
 O puedes actualizar tu código manualmente:
 
@@ -140,9 +129,7 @@ Express 5 ya no soporta la firma `res.json(obj, status)`. En su lugar, establece
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 O puedes actualizar tu código manualmente:
 
@@ -161,9 +148,7 @@ Express 5 ya no soporta la firma `res.jsonp(obj, status)`. En su lugar, establec
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 O puedes actualizar tu código manualmente:
 
@@ -182,16 +167,19 @@ Express 5 ya no soporta la firma `res.redirect(url, status)`. En su lugar, utili
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/redirect-arg-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/redirect-arg-order" />
 
 O puedes actualizar tu código manualmente:
 
 ```diff
  app.get('/user', (req, res) => {
--  res.redirect('/users', 301);
-+  res.redirect(301, '/users');
+-  res.redirect('/users', 302);
++  res.redirect(302, '/users');
+ });
+
+ // A redirect that relies on the default 302 status is unaffected
+ app.get('/admin', (req, res) => {
+   res.redirect('/dashboard');
  });
 ```
 
@@ -203,9 +191,7 @@ Express 5 ya no soporta la cadena mágica `back` en los métodos `res.redirect()
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/back-redirect-deprecated
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/back-redirect-deprecated" />
 
 O puedes actualizar tu código manualmente:
 
@@ -224,9 +210,7 @@ Express 5 ya no soporta la firma `res.send(obj, status)`. En su lugar, establece
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 O puedes actualizar tu código manualmente:
 
@@ -246,9 +230,7 @@ Si necesita enviar un número usando el `res. función end()`, cita el número p
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/status-send-order
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/status-send-order" />
 
 O puedes actualizar tu código manualmente:
 
@@ -267,9 +249,7 @@ La función `res.sendfile()` ha sido reemplazada por una versión `res.sendFile(
 
 Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
 
-```sh
-npx codemod@latest @expressjs/camelcase-sendfile
-```
+<PackageManagerCommand command="npx codemod@latest @expressjs/camelcase-sendfile" />
 
 O puedes actualizar tu código manualmente:
 
@@ -284,7 +264,17 @@ O puedes actualizar tu código manualmente:
 
 Las opciones `hidden` y `from` para `res.sendFile()` ya no son compatibles. En su lugar, usa `dotfiles` y `root`.
 
+The `dotfiles` option applies to hidden directories in the path as well as hidden files. For example, a file served from an absolute path like `/var/www/app/.cache/index.html` now requires `dotfiles: 'allow'`, even though `index.html` is not a dotfile. In Express 4 a hidden directory in the path was served by default; Express 5 returns `404` unless you opt in.
+
+This check only applies to the part of the path that `send` evaluates. When you pass a `root`, only the portion relative to `root` is checked, so a hidden directory inside `root` is unaffected.
+
 #### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/sendfile-options" />
+
+O puedes actualizar tu código manualmente:
 
 ```diff
  app.get('/files/:name', (req, res) => {
@@ -293,17 +283,42 @@ Las opciones `hidden` y `from` para `res.sendFile()` ya no son compatibles. En s
  });
 ```
 
+If you serve an absolute path that contains a hidden directory, opt in with `dotfiles: 'allow'` or use `root` so the hidden segment is not part of the evaluated path:
+
+```diff
+ app.get('/build', (req, res) => {
+-  res.sendFile('/var/www/app/.cache/index.html');
++  res.sendFile('/var/www/app/.cache/index.html', { dotfiles: 'allow' });
++  // or: res.sendFile('index.html', { root: '/var/www/app/.cache' });
+ });
+```
+
 ### opciones express.static()
 
 Las opciones `hidden` y `from` para `express.static()` ya no están soportadas. En su lugar, usa `dotfiles` y `root`. Ten en cuenta que `from` nunca fue documentado en la API pero fue aceptado como un alias para `root`. El valor por defecto de `dotfiles` ahora es `"ignore"`.
 
+The `dotfiles` check now also applies to hidden **directories** in the request path, not just hidden files. A request like `GET /.well-known/acme-challenge/...` that was served by default in Express 4 now returns `404` unless you set `dotfiles: 'allow'`. This only affects the part of the path relative to the configured `root`; a hidden directory in `root` itself is unaffected.
+
 #### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/static-dotfiles" />
+
+O puedes actualizar tu código manualmente:
 
 ```diff
  const express = require('express');
  const app = express();
 
 -app.use(express.static('public', { hidden: true }));
++app.use(express.static('public', { dotfiles: 'allow' }));
+```
+
+If you rely on serving a hidden directory such as `.well-known` (for example, ACME/Let's Encrypt challenges), opt in explicitly. This is needed even if you never used the `hidden` option:
+
+```diff
+-app.use(express.static('public'));
 +app.use(express.static('public', { dotfiles: 'allow' }));
 ```
 
@@ -317,6 +332,12 @@ En Express 5, `mime` ya no es una propiedad exportada del campo `static`.
 Usa el [`mime-types` paquete](https://github.com/jshttp/mime-types) para trabajar con valores de tipo MIME.
 
 #### Cómo actualizar
+
+Puedes actualizar automáticamente tu código ejecutando el siguiente comando:
+
+<PackageManagerCommand command="npx codemod@latest @expressjs/static-mime" />
+
+O puedes actualizar tu código manualmente:
 
 ```diff
 -express.static.mime.lookup('json');
@@ -447,6 +468,25 @@ Serve directorios de puntos específicos usando explícitamente `dotfiles: opci�
 ```diff
 +app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
  app.use(express.static('public'));
+```
+
+### router.param() with an array of names
+
+`router.param(name, fn)` no longer accepts an array for `name`. In Express 4 an array was accepted silently; in Express 5, passing anything other than a string throws `TypeError: argument name must be a string`. (Note that `app.param()` still accepts an array of names.)
+
+#### Cómo actualizar
+
+Register each parameter name with its own `router.param()` call:
+
+```diff
+-router.param(['id', 'page'], (req, res, next, value) => {
+-  // ...
+-});
++const loadParam = (req, res, next, value) => {
++  // ...
++};
++router.param('id', loadParam);
++router.param('page', loadParam);
 ```
 
 ### app.listen

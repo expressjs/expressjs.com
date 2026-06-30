@@ -14,7 +14,7 @@ La modifica dei prototipi globali influenzerà tutte le applicazioni Express car
 
 È possibile sovrascrivere la firma e il comportamento dei metodi esistenti con il proprio, assegnando una funzione personalizzata.
 
-Di seguito è riportato un esempio di sovrascrittura del comportamento di [res.sendStatus](/api#res.sendStatus).
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {

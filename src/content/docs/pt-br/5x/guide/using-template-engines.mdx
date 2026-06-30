@@ -4,6 +4,7 @@ description: Descubra como integrar e usar mecanismos de modelos como Pug, Handl
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Um _motor de template_ permite que você use arquivos de template estáticos na sua aplicação. At runtime, the template engine replaces
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
@@ -11,7 +12,7 @@ Esta abordagem torna mais fácil projetar uma página HTML.
 
 O [gerador de aplicação Expressa](/starter/generator) usa [Pug](https://pugjs.org/api/getting-started.html) como seu padrão, mas também apoia [Handlebars](https://www.npmjs.com/package/handlebars), e [EJS](https://www.npmjs.com/package/ejs), entre outros.
 
-Para renderizar arquivos de template, defina as seguintes [propriedades de configuração da aplicação](/4x/api#app.set), no `app.js` padrão criado pelo gerador:
+To render template files, set the following [application setting properties](/api/application/#appset), in the default `app.js` created by the generator:
 
 - `views`, o diretório onde se localizam os arquivos de template. Ex: `app.set('views', './views')`.
   Isto é padrão para o diretório `views` no diretório raiz do aplicativo.
@@ -19,9 +20,7 @@ Para renderizar arquivos de template, defina as seguintes [propriedades de confi
 
 Então instale o correspondente mecanismo de template do npm pacote; por exemplo, para instalar o Pug:
 
-```bash
-$ npm install pug --save
-```
+<PackageManagerCommand command="npm install pug --save" />
 
 <Alert type="alerta">
 Mecanismos de template compatíveis com o código, como Pug exporta uma função chamada `__express(filePath, opções, callback)`,

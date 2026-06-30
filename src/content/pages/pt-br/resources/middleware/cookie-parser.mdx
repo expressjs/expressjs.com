@@ -5,6 +5,7 @@ description: Analisar cookies de solicitação HTTP
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.4.7"
@@ -19,9 +20,7 @@ middleware.
 
 ## Instalação
 
-```sh
-$ npm install cookie-parser
-```
+<PackageManagerCommand command="npm install cookie-parser" />
 
 ## API
 
