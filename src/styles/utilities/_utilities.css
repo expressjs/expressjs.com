@@ -149,6 +149,18 @@
   margin: var(--space-8);
 }
 
+/* Columns — flow a list into two columns. Wrap the list in an element with this class. */
+.columns-2 :is(ul, ol) {
+  column-count: 2;
+  column-gap: var(--space-8);
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+.columns-2 li {
+  break-inside: avoid;
+}
+
 .disable-transitions *,
 .disable-transitions *::before,
 .disable-transitions *::after {
