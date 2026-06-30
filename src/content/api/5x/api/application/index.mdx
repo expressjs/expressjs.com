@@ -677,10 +677,10 @@ Express supports the following routing methods corresponding to the HTTP methods
       <code>copy</code>
     </li>
     <li>
-      <code>delete</code>
+      <a href="#appdelete"><code>delete</code></a>
     </li>
     <li>
-      <code>get</code>
+      <a href="#appget"><code>get</code></a>
     </li>
     <li>
       <code>head</code>
@@ -715,7 +715,7 @@ Express supports the following routing methods corresponding to the HTTP methods
       <code>patch</code>
     </li>
     <li>
-      <code>post</code>
+      <a href="#apppost"><code>post</code></a>
     </li>
   </ul>
   <ul>
@@ -723,10 +723,10 @@ Express supports the following routing methods corresponding to the HTTP methods
       <code>purge</code>
     </li>
     <li>
-      <code>put</code>
+      <a href="#appput"><code>put</code></a>
     </li>
     <li>
-      <code>query</code>
+      <a href="#appquery"><code>query</code></a> (Node.js &gt;= 22.0.0)
     </li>
     <li>
       <code>report</code>
@@ -750,7 +750,7 @@ Express supports the following routing methods corresponding to the HTTP methods
 </div>
 
 The API documentation has explicit entries only for the most popular HTTP methods `app.get()`,
-`app.post()`, `app.put()`, and `app.delete()`.
+`app.post()`, `app.put()`, `app.delete()`, and `app.query()`.
 However, the other methods listed above work in exactly the same way.
 
 To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example, `app['m-search']('/', function ...`.
@@ -993,13 +993,13 @@ For more information, see the [routing guide](/guide/routing/).
 <Alert type="alert">
 
 The HTTP QUERY method was standardized on June 15, 2026 as [RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html).
-Client and intermediary support is still limited — verify that your target environments support the QUERY verb before relying on it in production.
+Client and intermediary support is still limited. Verify that your target environments support the QUERY verb before relying on it in production.
 
 </Alert>
 
 <Alert type="warning">
 
-QUERY support requires **Node.js >= 21.7.2** and it is stable on Node.js >= 22.
+QUERY support requires **Node.js >= 22.0.0**.
 
 </Alert>
 
@@ -1010,11 +1010,18 @@ idempotent**, intermediaries and caches can retry it automatically, and the resp
 (with the request body included in the cache key).
 
 Use `app.query()` when query parameters would exceed URL length limits, contain sensitive data that
-should not appear in server logs or browser history, or require a structured body format such as JSON.
+should not appear in server logs or browser history, or are too complex to express cleanly as a URL
+query string, such as deeply nested filters or structured criteria.
+
+Because the query input travels in the request body, `req.body` is `undefined` until you mount a
+body-parsing middleware such as [`express.json()`](/api/express/#expressjson) or
+[`express.urlencoded()`](/api/express/#expressurlencoded) that matches the request's `Content-Type`.
 
 #### Example
 
-```js
+```js title="index.js"
+app.use(express.json()); // populate req.body for application/json payloads
+
 app.query('/search', (req, res) => {
   // complex filter criteria arrive in req.body, not the URL
   const results = db.search(req.body);
