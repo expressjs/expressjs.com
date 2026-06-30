@@ -162,6 +162,12 @@ The `router.get()` function is automatically called for the HTTP `HEAD` method i
 
 </Alert>
 
+<Alert type="info">
+
+`router.query()` routes HTTP `QUERY` requests, mirroring [`app.query()`](/api/application/#appquery). The `QUERY` method is gated by the runtime and requires Node.js `>=20.19.3 <21 || >=22.2.0`.
+
+</Alert>
+
 You can provide multiple callbacks, and all are treated equally, and behave just
 like middleware, except that these callbacks may invoke `next('route')`
 to bypass the remaining route callback(s). You can use this mechanism to perform
