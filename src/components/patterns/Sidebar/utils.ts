@@ -12,7 +12,7 @@ export type SubmenuData = {
 };
 
 export function normalizePath(path: string): string {
-  return path.replace(/\/$/, '');
+  return path.replace(/(?:\/|\.html)$/, '');
 }
 
 export function isVersioned(versioned: VersionPrefix[] | undefined, version: string): boolean {

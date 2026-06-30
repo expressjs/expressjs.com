@@ -5,7 +5,7 @@
 ^https://github\.com/
 
 # Exclude 404 pages
-dist/(.*/)?404((/index)?\.html|/)$
+dist/(.*/)?404((/index)?\.html|/)?$
 
 # Exclude Open Collective links
 ^https://opencollective\.com/
