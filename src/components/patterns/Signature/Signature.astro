@@ -19,6 +19,8 @@
  * <Signature type="Boolean" since="v4.5.0" />
  *
  * <Signature returns="Response" since="v4.2.0" deprecated="v4.11.0" />
+ *
+ * <Signature runtime={{ "Node.js": ">= 22.0.0" }}>…</Signature>
  */
 import './Signature.css';
 
@@ -27,20 +29,28 @@ interface Props {
   returns?: string;
   /** Type for a property. */
   type?: string;
-  /** Version the member was added in, e.g. `"v4.16.0"`. */
+  /** Package version the member was added in, e.g. `"v4.16.0"`. */
   since?: string;
+  /**
+   * Runtime requirements as a map of engine name to version constraint, e.g.
+   * `{ "Node.js": ">= 22.0.0" }`, for members gated by the runtime rather than an
+   * Express release. Renders one pill per entry.
+   */
+  runtime?: Record<string, string>;
   /** Version the member was deprecated in, e.g. `"v4.11.0"`. */
   deprecated?: string;
   /** Heading text for the arguments section. */
   attributesTitle?: string;
 }
 
-const { returns, type, since, deprecated, attributesTitle = 'Arguments' } = Astro.props;
+const { returns, type, since, runtime, deprecated, attributesTitle = 'Arguments' } = Astro.props;
+
+const runtimeEntries = runtime ? Object.entries(runtime) : [];
 
 const hasReturnsSlot = Astro.slots.has('returns');
 const hasReturns = hasReturnsSlot || Boolean(returns);
 const hasAttributes = Astro.slots.has('attributes');
-const hasFooter = Boolean(type) || hasReturns || Boolean(since) || Boolean(deprecated);
+const hasFooter = Boolean(type) || hasReturns || Boolean(since) || runtimeEntries.length > 0 || Boolean(deprecated);
 ---
 
 <section class="signature">
@@ -77,6 +87,16 @@ const hasFooter = Boolean(type) || hasReturns || Boolean(since) || Boolean(depre
           <p class="signature__line">
             <span class="signature__line-label">Added in:</span>
             <code class="type-tag">{since}</code>
+          </p>
+        )}
+        {runtimeEntries.length > 0 && (
+          <p class="signature__line signature__line--runtime">
+            <span class="signature__line-label">Requires runtime:</span>
+            {runtimeEntries.map(([name, version]) => (
+              <code class="type-tag type-tag--runtime">
+                {name} {version}
+              </code>
+            ))}
           </p>
         )}
         {deprecated && (

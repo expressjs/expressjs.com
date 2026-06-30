@@ -966,7 +966,7 @@ app.put('/', (req, res) => {
 
 ### app.query()
 
-<Signature>
+<Signature runtime={{ "Node.js": ">= 22.0.0" }}>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
       The path for which the middleware function is invoked; can be any of: a string representing a
@@ -994,12 +994,6 @@ For more information, see the [routing guide](/guide/routing/).
 
 The HTTP QUERY method was standardized on June 15, 2026 as [RFC 10008](https://www.rfc-editor.org/rfc/rfc10008.html).
 Client and intermediary support is still limited. Verify that your target environments support the QUERY verb before relying on it in production.
-
-</Alert>
-
-<Alert type="warning">
-
-QUERY support requires **Node.js >= 22.0.0**.
 
 </Alert>
 
