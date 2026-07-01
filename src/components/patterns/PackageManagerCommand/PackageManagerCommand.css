@@ -48,7 +48,7 @@
 
   /* Expressive Code injects its own vertical margins; collapse them so the
      code block sits flush under the tab strip. */
-  .pm-command__panel :global(.expressive-code) {
+  .pm-command__panel .expressive-code {
     margin: 0;
   }
 
