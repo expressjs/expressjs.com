@@ -94,5 +94,9 @@
     "*.{md,mdx}": [
       "cspell --no-progress --no-must-find-files"
     ]
+  },
+  "homepage": "https://github.com/expressjs/expressjs.com",
+  "bugs": {
+    "url": "https://github.com/expressjs/expressjs.com/issues"
   }
 }
