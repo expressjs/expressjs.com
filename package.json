@@ -47,7 +47,7 @@
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "satori": "^0.26.0",
-    "sharp": "^0.35.0",
+    "sharp": "^0.35.2",
     "unist-util-visit": "^5.1.0"
   },
   "packageManager": "npm@11.14.1",
