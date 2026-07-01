@@ -52,6 +52,9 @@ export default defineConfig({
       // bundling only the SVG paths for icons actually used (no full icon set in the bundle).
       Icons({ compiler: 'jsx', jsx: 'react' }),
     ],
+    css: {
+      transformer: 'postcss',
+    },
   },
   integrations: [
     expressiveCode({
