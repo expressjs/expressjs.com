@@ -33,8 +33,11 @@ updates:
           - 'eslint-*'
           - '@eslint/*'
           - 'prettier'
-          - 'typescript-eslint'
           - 'globals'
+      typescript:
+        patterns:
+          - 'typescript'
+          - 'typescript-eslint'
       production:
         dependency-type: production
         exclude-patterns:
@@ -54,4 +57,5 @@ updates:
           - 'prettier'
           - 'prettier-plugin-astro'
           - 'typescript-eslint'
+          - 'typescript'
           - 'globals'
