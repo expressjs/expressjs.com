@@ -86,6 +86,12 @@ const myLogger = function (req: Request, res: Response, next: NextFunction) {
 };
 ```
 
+Here `myLogger` is defined on its own rather than passed directly to `app.use()`, so TypeScript has
+no context to infer its parameters and they are annotated explicitly. You can instead type the whole
+function as `RequestHandler`, which types `req`, `res`, and `next` for you. When the middleware is
+written inline in the `app.use()` call, Express infers those three parameters and no annotations are
+needed.
+
 <Alert type="alert">
 
 Notice the call above to `next()`. Calling this function invokes the next middleware function in
