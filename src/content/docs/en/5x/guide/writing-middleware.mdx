@@ -167,6 +167,30 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
 to the request object.
 
+<Alert type="alert">
+
+Because the middleware adds a property to `req`, extend the request type in TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Declare
+the property (as optional, since a middleware may not run for every request) in a `.d.ts` file that
+is part of your project:
+
+```ts title="types/express.d.ts"
+declare global {
+  namespace Express {
+    interface Request {
+      requestTime?: number;
+    }
+  }
+}
+
+export {};
+```
+
+TypeScript picks up the file automatically, so no `tsconfig.json` change is needed unless you have
+set a custom `include` that does not cover its location.
+
+</Alert>
+
 ```js
 const requestTime = function (req, res, next) {
   req.requestTime = Date.now();
