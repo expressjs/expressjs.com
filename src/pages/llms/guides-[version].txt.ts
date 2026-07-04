@@ -4,7 +4,11 @@ import { getRawMarkdown, buildSection, textResponse } from '@/utils/llms';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
-  const versions = [...new Set(docs.map((d) => d.id.replace('en/', '').split('/')[0]))];
+  const versions = [
+    ...new Set(
+      docs.filter((d) => d.id.startsWith('en/')).map((d) => d.id.replace('en/', '').split('/')[0])
+    ),
+  ];
   return versions.map((version) => ({ params: { version } }));
 }
 
