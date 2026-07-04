@@ -241,11 +241,11 @@ app.use('/admin', admin);
 ```
 
 ```ts
-import express, { type Express, type Request, type Response } from 'express';
+import express, { type Express, type Application, type Request, type Response } from 'express';
 
 const admin: Express = express();
 
-admin.on('mount', function (parent: Express) {
+admin.on('mount', function (parent: Application) {
   console.log('Admin Mounted');
   console.log(parent); // refers to the parent app
 });

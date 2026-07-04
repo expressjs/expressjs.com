@@ -27,7 +27,7 @@ app.set('view engine', 'ntl'); // register the template engine
 
 ```ts
 import fs from 'fs'; // this engine requires the fs module
-app.engine('ntl', (filePath: string, options, callback: (e: any, rendered?: string) => void) => {
+app.engine('ntl', (filePath: string, options: Record<string, any>, callback: (e: any, rendered?: string) => void) => {
   // define the template engine
   fs.readFile(filePath, (err, content) => {
     if (err) return callback(err);
