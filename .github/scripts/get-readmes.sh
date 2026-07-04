@@ -52,6 +52,34 @@ LIST_END
   VERSION=$(echo "$NPM_DATA" | jq -r '.["dist-tags"].latest // empty')
   DESC=$(echo "$NPM_DATA" | jq -r '.description // empty')
 
+  # Build a TypeScript types note for this package:
+  # - If the latest release declares its own types (a "types"/"typings" field),
+  #   it ships types and no separate install is needed.
+  # - Otherwise, if a community-maintained @types/<pkg> package exists on npm,
+  #   recommend installing it as a dev dependency.
+  # This relies on the declared types field; a package that ships a co-located
+  # index.d.ts without that field would not be detected (none currently do).
+  BUNDLED_TYPES=$(echo "$NPM_DATA" | jq -r --arg v "$VERSION" '(.versions[$v].types // .versions[$v].typings) // empty')
+  ATTYPES_VERSION=$(curl -s "https://registry.npmjs.org/@types/$NPM_PKG" | jq -r '.["dist-tags"].latest // empty')
+  DT_URL="https://github.com/DefinitelyTyped/DefinitelyTyped"
+  if [ -n "$BUNDLED_TYPES" ]; then
+    TYPES_ALERT="<Alert type=\"info\">
+
+\`$NPM_PKG\` ships its own TypeScript type definitions, so you do not need to install a separate \`@types\` package.
+
+</Alert>"
+  elif [ -n "$ATTYPES_VERSION" ]; then
+    TYPES_ALERT="<Alert type=\"info\">
+
+\`$NPM_PKG\` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](${DT_URL}) as a development dependency:
+
+<PackageManagerCommand command=\"npm install --save-dev @types/$NPM_PKG\" />
+
+</Alert>"
+  else
+    TYPES_ALERT=""
+  fi
+
   # Preserve existing frontmatter if the file already exists
   FRONTMATTER=""
   if [ -f "$DEST" ]; then
@@ -117,6 +145,14 @@ LIST_END
         "<PackageManagerCommand $attr />";
       }
     }ge')
+
+  # Insert the TypeScript types note right after the install command (the first
+  # `npm install`/`npm i` PackageManagerCommand). Left untouched if none is found.
+  if [ -n "$TYPES_ALERT" ]; then
+    CONTENT=$(TYPES_ALERT="$TYPES_ALERT" perl -0777 -pe '
+      s{(<PackageManagerCommand command="npm (?:install|i)\b[^"]*"\s*/>)}{$1\n\n$ENV{TYPES_ALERT}};
+    ' <<<"$CONTENT")
+  fi
 
   # Convert relative links to absolute GitHub URLs
   BASEURL="https://github.com/$org/$repo/blob/HEAD"
