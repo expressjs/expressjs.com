@@ -9,9 +9,14 @@ export const GET: APIRoute = async ({ site }) => {
   // Extract API versions from the collection (e.g. "5x", "4x", "3x")
   const apiVersions = [...new Set(api.map((d) => d.id.split('/')[0]))].sort().reverse();
 
-  // Extract docs versions (e.g. "5x", "4x")
+  // Extract docs versions (e.g. "5x", "4x") from the English docs only, so that
+  // translated locales (de, fr, zh-tw, ...) are not mistaken for versions.
   const docs = await getCollection('docs');
-  const docsVersions = [...new Set(docs.map((d) => d.id.replace('en/', '').split('/')[0]))]
+  const docsVersions = [
+    ...new Set(
+      docs.filter((d) => d.id.startsWith('en/')).map((d) => d.id.replace('en/', '').split('/')[0])
+    ),
+  ]
     .sort()
     .reverse();
 
