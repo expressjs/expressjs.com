@@ -26,6 +26,13 @@ app.response.sendStatus = function (statusCode, type, message) {
 ```ts
 import { type Response } from 'express';
 
+// Broaden the type of sendStatus so call sites accept the new arguments.
+declare module 'express-serve-static-core' {
+  interface Response {
+    sendStatus(statusCode: number, type: string, message: string): this;
+  }
+}
+
 app.response.sendStatus = function (
   this: Response,
   statusCode: number,
@@ -34,10 +41,12 @@ app.response.sendStatus = function (
 ) {
   // code is intentionally kept simple for demonstration purpose
   return this.contentType(type).status(statusCode).send(message);
-};
+} as Response['sendStatus'];
 ```
 
 The above implementation completely changes the original signature of `res.sendStatus`. It now accepts a status code, encoding type, and the message to be sent to the client.
+
+In TypeScript, augmenting `express-serve-static-core` adds the new overload to the `Response` type so call sites such as `res.sendStatus(404, 'application/json', body)` type-check. The assignment is cast with `as Response['sendStatus']` because replacing a method with a different signature cannot be checked against the original declaration.
 
 The overridden method may now be used this way:
 
