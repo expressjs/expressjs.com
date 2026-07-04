@@ -23,11 +23,29 @@ app.response.sendStatus = function (statusCode, type, message) {
 };
 ```
 
+```ts
+import type { Response } from 'express';
+
+app.response.sendStatus = function (
+  this: Response,
+  statusCode: number,
+  type: string,
+  message: string
+) {
+  // code is intentionally kept simple for demonstration purpose
+  return this.contentType(type).status(statusCode).send(message);
+};
+```
+
 The above implementation completely changes the original signature of `res.sendStatus`. It now accepts a status code, encoding type, and the message to be sent to the client.
 
 The overridden method may now be used this way:
 
 ```js
+res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
+```
+
+```ts
 res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
 ```
 
@@ -54,6 +72,18 @@ Object.defineProperty(app.request, 'ip', {
 });
 ```
 
+```ts
+import type { Request } from 'express';
+
+Object.defineProperty(app.request, 'ip', {
+  configurable: true,
+  enumerable: true,
+  get(this: Request) {
+    return this.get('Client-IP');
+  },
+});
+```
+
 ## Prototype
 
 In order to provide the Express API, the request/response objects passed to Express (via `app(req, res)`, for example) need to inherit from the same prototype chain. By default, this is `http.IncomingRequest.prototype` for the request and `http.ServerResponse.prototype` for the response.
@@ -61,6 +91,13 @@ In order to provide the Express API, the request/response objects passed to Expr
 Unless necessary, it is recommended that this be done only at the application level, rather than globally. Also, take care that the prototype that is being used matches the functionality as closely as possible to the default prototypes.
 
 ```js
+// Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
+// for the given app reference
+Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);
+Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype);
+```
+
+```ts
 // Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
 // for the given app reference
 Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);

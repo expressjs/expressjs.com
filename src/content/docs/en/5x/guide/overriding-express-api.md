@@ -23,6 +23,13 @@ app.response.sendStatus = function (statusCode, type, message) {
 };
 ```
 
+```ts
+app.response.sendStatus = function (statusCode: number, type: string, message: string) {
+  // code is intentionally kept simple for demonstration purpose
+  return this.contentType(type).status(statusCode).send(message);
+};
+```
+
 The above implementation completely changes the original signature of `res.sendStatus`. It now accepts a status code, encoding type, and the message to be sent to the client.
 
 The overridden method may now be used this way:

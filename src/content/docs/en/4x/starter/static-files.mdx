@@ -22,6 +22,10 @@ For example, use the following code to serve images, CSS files, and JavaScript f
 app.use(express.static('public'));
 ```
 
+```ts
+app.use(express.static('public'));
+```
+
 Now, you can load the files that are in the `public` directory:
 
 ```text
@@ -46,6 +50,11 @@ app.use(express.static('public'));
 app.use(express.static('files'));
 ```
 
+```ts
+app.use(express.static('public'));
+app.use(express.static('files'));
+```
+
 Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
 
 <Alert type="info">
@@ -59,6 +68,10 @@ serving static assets.
 To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
+app.use('/static', express.static('public'));
+```
+
+```ts
 app.use('/static', express.static('public'));
 ```
 
@@ -79,7 +92,18 @@ const path = require('path');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+```ts title="index.ts"
+import path from 'path';
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
 ```mjs title="index.mjs"
+import path from 'path';
+
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```ts title="index.ts"
 import path from 'path';
 
 app.use('/static', express.static(path.join(__dirname, 'public')));

@@ -24,6 +24,12 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+app.get('/', (req: Request, res: Response) => {
+  throw new Error('BROKEN'); // Express will catch this on its own.
+});
+```
+
 For errors returned from asynchronous functions invoked by route handlers
 and middleware, you must pass them to the `next()` function, where Express will
 catch and process them. For example:
@@ -40,12 +46,31 @@ app.get('/', (req, res, next) => {
 });
 ```
 
+```ts
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err); // Pass errors to Express.
+    } else {
+      res.send(data);
+    }
+  });
+});
+```
+
 Starting with Express 5, route handlers and middleware that return a Promise
 will call `next(value)` automatically when they reject or throw an error.
 For example:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+```ts
+app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
   const user = await getUserById(req.params.id);
   res.send(user);
 });
@@ -73,6 +98,17 @@ app.get('/', [
 ]);
 ```
 
+```ts
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.writeFile('/inaccessible-path', 'data', next);
+  },
+  function (req: Request, res: Response) {
+    res.send('OK');
+  },
+]);
+```
+
 In the above example, `next` is provided as the callback for `fs.writeFile`,
 which is called with or without errors. If there is no error, the second
 handler is executed, otherwise Express catches and processes the error.
@@ -82,6 +118,18 @@ middleware and pass them to Express for processing. For example:
 
 ```js
 app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+```ts
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   setTimeout(() => {
     try {
       throw new Error('BROKEN');
@@ -110,6 +158,16 @@ app.get('/', (req, res, next) => {
 });
 ```
 
+```ts
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
 Since promises automatically catch both synchronous errors and rejected promises,
 you can simply provide `next` as the final catch handler and Express will catch errors,
 because the catch handler is given the error as the first argument.
@@ -126,6 +184,21 @@ app.get('/', [
     });
   },
   function (req, res) {
+    res.locals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
+```
+
+```ts
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data;
+      next(err);
+    });
+  },
+  function (req: Request, res: Response) {
     res.locals.data = res.locals.data.split(',')[1];
     res.send(res.locals.data);
   },
@@ -187,6 +260,16 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
 Note that the default error handler can get triggered if you call `next()` with an error
 in your code more than once, even if custom error handling middleware is in place.
 
@@ -200,6 +283,13 @@ except error-handling functions have four arguments instead of three:
 
 ```js
 app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -223,6 +313,23 @@ app.use((err, req, res, next) => {
 });
 ```
 
+```ts title="index.ts"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  // logic
+});
+```
+
 ```mjs title="index.mjs"
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
@@ -235,6 +342,23 @@ app.use(
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```ts title="index.ts"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   // logic
 });
 ```
@@ -262,7 +386,39 @@ app.use(clientErrorHandler);
 app.use(errorHandler);
 ```
 
+```ts title="index.ts"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
 ```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+```ts title="index.ts"
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 
@@ -288,6 +444,13 @@ function logErrors(err, req, res, next) {
 }
 ```
 
+```ts
+function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
+  console.error(err.stack);
+  next(err);
+}
+```
+
 Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
 
 Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
@@ -302,10 +465,27 @@ function clientErrorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+function clientErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' });
+  } else {
+    next(err);
+  }
+}
+```
+
 Implement the "catch-all" `errorHandler` function as follows (for example):
 
 ```js
 function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+```ts
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   res.status(500);
   res.render('error', { error: err });
 }
@@ -325,6 +505,26 @@ app.get(
     }
   },
   (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err);
+      res.json(doc);
+    });
+  }
+);
+```
+
+```ts
+app.get(
+  '/a_route_behind_paywall',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user.hasPaid) {
+      // continue handling this request
+      next('route');
+    } else {
+      next();
+    }
+  },
+  (req: Request, res: Response, next: NextFunction) => {
     PaidContent.find((err, doc) => {
       if (err) return next(err);
       res.json(doc);

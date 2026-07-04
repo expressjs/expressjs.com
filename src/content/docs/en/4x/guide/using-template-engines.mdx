@@ -38,6 +38,10 @@ Express loads the module internally, for example:
 app.set('view engine', 'pug');
 ```
 
+```ts
+app.set('view engine', 'pug');
+```
+
 Then, create a Pug template file named `index.pug` in the `views` directory, with the following content:
 
 ```pug
@@ -53,6 +57,14 @@ you must specify the extension of the `view` file. Otherwise, you can omit it.
 
 ```js
 app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 ```

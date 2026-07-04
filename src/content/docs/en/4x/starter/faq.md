@@ -60,6 +60,14 @@ app.use((req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).send("Sorry can't find that!");
+});
+```
+
 Add routes dynamically at runtime on an instance of `express.Router()`
 so the routes are not superseded by a middleware function.
 
@@ -70,6 +78,15 @@ except with four arguments instead of three; specifically with the signature `(e
 
 ```js
 app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });

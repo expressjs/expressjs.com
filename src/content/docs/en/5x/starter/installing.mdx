@@ -1,6 +1,6 @@
 ---
 title: Installing
-description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
+description: Learn how to install Express.js in your Node.js environment, including setting up your project directory, managing dependencies with npm, and configuring TypeScript.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -34,3 +34,67 @@ Now, install Express in the `myapp` directory and save it in the dependencies li
 To install Express temporarily and not add it to the dependencies list:
 
 <PackageManagerCommand command="npm install express --no-save" />
+
+## TypeScript
+
+Express is written in JavaScript and does not bundle its own type definitions. To use it with
+TypeScript, install TypeScript together with the community-maintained types for Express and Node.js
+(from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)) as development
+dependencies:
+
+<PackageManagerCommand command="npm install --save-dev typescript @types/express @types/node" />
+
+<Alert type="warning">
+
+Some middleware does not bundle its own type definitions. If you add an official middleware package
+that TypeScript reports as untyped, also install its types from DefinitelyTyped as a dev dependency,
+for example `@types/cors` alongside `cors`.
+
+</Alert>
+
+Add a `tsconfig.json`. These options mirror how Node.js runs TypeScript and make the compiler reject
+non-erasable syntax (such as `enum`s, namespaces, and parameter properties) that Node cannot strip:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
+```
+
+Write your application in TypeScript, annotating the request and response objects:
+
+```ts title="src/app.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+Run the file directly with Node.js, which strips the TypeScript types and runs the result without a
+build step:
+
+```bash
+node src/app.ts
+```
+
+<Alert type="info">
+
+Running `.ts` files directly requires Node.js >= 22.18.0 (or >= 23.6.0 on the v23 line) and
+TypeScript >= 5.8. Node strips the types but does not type-check them, so run `npx tsc` to type-check
+your project.
+
+</Alert>
