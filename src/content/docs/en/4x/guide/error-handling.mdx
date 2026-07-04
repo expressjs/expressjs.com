@@ -25,6 +25,8 @@ app.get('/', (req, res) => {
 ```
 
 ```ts
+import { type Request, type Response } from 'express';
+
 app.get('/', (req: Request, res: Response) => {
   throw new Error('BROKEN'); // Express will catch this on its own.
 });
@@ -47,6 +49,8 @@ app.get('/', (req, res, next) => {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
@@ -70,6 +74,8 @@ app.get('/user/:id', async (req, res, next) => {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
   const user = await getUserById(req.params.id);
   res.send(user);
@@ -99,6 +105,8 @@ app.get('/', [
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get('/', [
   function (req: Request, res: Response, next: NextFunction) {
     fs.writeFile('/inaccessible-path', 'data', next);
@@ -129,6 +137,8 @@ app.get('/', (req, res, next) => {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   setTimeout(() => {
     try {
@@ -159,6 +169,8 @@ app.get('/', (req, res, next) => {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   Promise.resolve()
     .then(() => {
@@ -191,6 +203,8 @@ app.get('/', [
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get('/', [
   function (req: Request, res: Response, next: NextFunction) {
     fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
@@ -261,6 +275,8 @@ function errorHandler(err, req, res, next) {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   if (res.headersSent) {
     return next(err);
@@ -289,6 +305,8 @@ app.use((err, req, res, next) => {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
@@ -396,6 +414,8 @@ function logErrors(err, req, res, next) {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
   console.error(err.stack);
   next(err);
@@ -417,6 +437,8 @@ function clientErrorHandler(err, req, res, next) {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 function clientErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   if (req.xhr) {
     res.status(500).send({ error: 'Something failed!' });
@@ -436,6 +458,8 @@ function errorHandler(err, req, res, next) {
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   res.status(500);
   res.render('error', { error: err });
@@ -465,6 +489,8 @@ app.get(
 ```
 
 ```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
 app.get(
   '/a_route_behind_paywall',
   (req: Request, res: Response, next: NextFunction) => {
