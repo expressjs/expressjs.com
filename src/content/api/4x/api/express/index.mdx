@@ -19,6 +19,11 @@ import express from 'express';
 const app = express();
 ```
 
+```ts title="index.ts"
+import express, { type Express } from 'express';
+const app: Express = express();
+```
+
 ## Methods
 
 ### express.json()
@@ -116,6 +121,20 @@ app.post('/profile', (req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// parse requests with a Content-Type of application/json
+app.use(express.json());
+
+app.post('/profile', (req: Request, res: Response) => {
+  console.dir(req.body);
+  res.json(req.body);
+});
+```
+
 ### express.raw()
 
 <Signature returns="Function" since="v4.17.0">
@@ -197,6 +216,20 @@ const app = express();
 app.use(express.raw());
 
 app.post('/upload', (req, res) => {
+  console.dir(Buffer.isBuffer(req.body)); // => true
+  res.send(`received ${req.body.length} bytes`);
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// parse requests with a Content-Type of application/octet-stream into a Buffer
+app.use(express.raw());
+
+app.post('/upload', (req: Request, res: Response) => {
   console.dir(Buffer.isBuffer(req.body)); // => true
   res.send(`received ${req.body.length} bytes`);
 });
@@ -401,6 +434,26 @@ const options = {
 app.use(express.static('public', options));
 ```
 
+```ts title="index.ts"
+import express, { type Express } from 'express';
+
+const app: Express = express();
+
+const options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: (res, path, stat) => {
+    res.set('x-timestamp', Date.now());
+  },
+};
+
+app.use(express.static('public', options));
+```
+
 ### express.text()
 
 <Signature returns="Function" since="v4.17.0">
@@ -486,6 +539,20 @@ const app = express();
 app.use(express.text());
 
 app.post('/', (req, res) => {
+  console.dir(typeof req.body); // => 'string'
+  res.send(req.body);
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// parse requests with a Content-Type of text/plain into a string
+app.use(express.text());
+
+app.post('/', (req: Request, res: Response) => {
   console.dir(typeof req.body); // => 'string'
   res.send(req.body);
 });
@@ -590,6 +657,20 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/profile', (req, res) => {
+  console.dir(req.body);
+  res.json(req.body);
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// parse requests with a Content-Type of application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/profile', (req: Request, res: Response) => {
   console.dir(req.body);
   res.json(req.body);
 });
