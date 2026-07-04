@@ -68,6 +68,12 @@ export default defineConfig({
     icon(),
     react(),
     sitemap({
+      // Only the canonical /<locale>/… URLs belong in the sitemap. The catch-all
+      // `[...path].astro` also emits language-less redirect stubs (e.g. `/guide/x`,
+      // and `/` → `/en/`, all `noindex`); drop anything without a locale prefix.
+      // Keep this locale list in sync with `i18n.locales` below.
+      filter: (page) =>
+        /^\/(de|en|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)(\/|$)/.test(new URL(page).pathname),
       i18n: {
         defaultLocale: 'en',
         locales: {
