@@ -58,10 +58,4 @@ app.get('/', (req, res) => {
 });
 ```
 
-```ts
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Hello there!' });
-});
-```
-
 When you make a request to the home page, `index.ntl` will be rendered as HTML.

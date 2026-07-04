@@ -67,18 +67,6 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
-```ts title="index.ts"
-import express, { type Express, type Request, type Response } from 'express';
-
-const app: Express = express();
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
-
-app.listen(3000);
-```
-
 ```mjs title="index.mjs"
 import express from 'express';
 
@@ -149,25 +137,6 @@ const myLogger = function (req, res, next) {
 app.use(myLogger);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(3000);
-```
-
-```ts title="index.ts"
-import express, { type Express, type Request, type Response, type NextFunction } from 'express';
-
-const app: Express = express();
-
-const myLogger = function (req: Request, res: Response, next: NextFunction) {
-  console.log('LOGGED');
-  next();
-};
-
-app.use(myLogger);
-
-app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
@@ -255,27 +224,6 @@ const requestTime = function (req, res, next) {
 app.use(requestTime);
 
 app.get('/', (req, res) => {
-  let responseText = 'Hello World!<br>';
-  responseText += `<small>Requested at: ${req.requestTime}</small>`;
-  res.send(responseText);
-});
-
-app.listen(3000);
-```
-
-```ts title="index.ts"
-import express, { type Express, type Request, type Response, type NextFunction } from 'express';
-
-const app: Express = express();
-
-const requestTime = function (req: Request, res: Response, next: NextFunction) {
-  req.requestTime = Date.now();
-  next();
-};
-
-app.use(requestTime);
-
-app.get('/', (req: Request, res: Response) => {
   let responseText = 'Hello World!<br>';
   responseText += `<small>Requested at: ${req.requestTime}</small>`;
   res.send(responseText);
@@ -380,30 +328,6 @@ app.use((err, req, res, next) => {
 app.listen(3000);
 ```
 
-```ts title="index.ts"
-import express, { type Express, type Request, type Response, type NextFunction } from 'express';
-import cookieParser from 'cookie-parser';
-import cookieValidator from './cookieValidator';
-
-const app: Express = express();
-
-async function validateCookies(req: Request, res: Response, next: NextFunction) {
-  await cookieValidator(req.cookies);
-  next();
-}
-
-app.use(cookieParser());
-
-app.use(validateCookies);
-
-// error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  res.status(400).send(err.message);
-});
-
-app.listen(3000);
-```
-
 ```mjs title="index.mjs"
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -479,17 +403,6 @@ module.exports = function (options) {
 };
 ```
 
-```ts title="my-middleware.ts"
-import { type Request, type Response, type NextFunction } from 'express';
-
-export default function (options) {
-  return function (req: Request, res: Response, next: NextFunction) {
-    // Implement the middleware function based on the options object
-    next();
-  };
-}
-```
-
 ```mjs title="my-middleware.mjs"
 export default function (options) {
   return function (req, res, next) {
@@ -514,12 +427,6 @@ The middleware can now be used as shown below.
 
 ```cjs title="index.cjs"
 const mw = require('./my-middleware.cjs');
-
-app.use(mw({ option1: '1', option2: '2' }));
-```
-
-```ts title="index.ts"
-import mw from './my-middleware';
 
 app.use(mw({ option1: '1', option2: '2' }));
 ```

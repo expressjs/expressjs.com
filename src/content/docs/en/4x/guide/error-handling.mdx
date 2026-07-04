@@ -313,23 +313,6 @@ app.use((err, req, res, next) => {
 });
 ```
 
-```ts title="index.ts"
-import bodyParser from 'body-parser';
-import methodOverride from 'method-override';
-import { type Request, type Response, type NextFunction } from 'express';
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  // logic
-});
-```
-
 ```mjs title="index.mjs"
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
@@ -386,39 +369,7 @@ app.use(clientErrorHandler);
 app.use(errorHandler);
 ```
 
-```ts title="index.ts"
-import bodyParser from 'body-parser';
-import methodOverride from 'method-override';
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
-```
-
 ```mjs title="index.mjs"
-import bodyParser from 'body-parser';
-import methodOverride from 'method-override';
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
-```
-
-```ts title="index.ts"
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 

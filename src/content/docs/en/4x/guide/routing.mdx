@@ -31,21 +31,6 @@ app.get('/', (req, res) => {
 });
 ```
 
-```ts title="index.ts"
-import express, {
-  type Express,
-  type Request,
-  type Response,
-} from 'express';
-
-const app: Express = express();
-
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
-});
-```
-
 ```mjs title="index.mjs"
 import express from 'express';
 
@@ -58,11 +43,7 @@ app.get('/', (req, res) => {
 ```
 
 ```ts title="index.ts"
-import express, {
-  type Express,
-  type Request,
-  type Response,
-} from 'express';
+import express, { type Express, type Request, type Response } from 'express';
 
 const app: Express = express();
 
@@ -382,15 +363,12 @@ app.get('/user/:id', (req, res) => {
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
 
-app.get(
-  '/user/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
-    if (req.params.id === '0') {
-      return next('route');
-    }
-    res.send(`User ${req.params.id}`);
+app.get('/user/:id', (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  if (req.params.id === '0') {
+    return next('route');
   }
-);
+  res.send(`User ${req.params.id}`);
+});
 
 app.get('/user/:id', (req: Request<{ id: string }>, res: Response) => {
   res.send('Special handler for user ID 0');
@@ -626,34 +604,6 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
-```ts title="birds.ts"
-import express, {
-  type Request,
-  type Response,
-  type NextFunction,
-} from 'express';
-
-const router = express.Router();
-
-// middleware that is specific to this router
-const timeLog = (req: Request, res: Response, next: NextFunction) => {
-  console.log('Time: ', Date.now());
-  next();
-};
-router.use(timeLog);
-
-// define the home page route
-router.get('/', (req: Request, res: Response) => {
-  res.send('Birds home page');
-});
-// define the about route
-router.get('/about', (req: Request, res: Response) => {
-  res.send('About birds');
-});
-
-export default router;
-```
-
 ```mjs title="birds.mjs"
 import express from 'express';
 
@@ -679,11 +629,7 @@ export default router;
 ```
 
 ```ts title="birds.ts"
-import express, {
-  type Request,
-  type Response,
-  type NextFunction,
-} from 'express';
+import express, { type Request, type Response, type NextFunction } from 'express';
 
 const router = express.Router();
 
@@ -716,23 +662,7 @@ const birds = require('./birds');
 app.use('/birds', birds);
 ```
 
-```ts title="index.ts"
-import birds from './birds';
-
-// ...
-
-app.use('/birds', birds);
-```
-
 ```mjs title="index.mjs"
-import birds from './birds';
-
-// ...
-
-app.use('/birds', birds);
-```
-
-```ts title="index.ts"
 import birds from './birds';
 
 // ...
@@ -745,9 +675,5 @@ The app will now be able to handle requests to `/birds` and `/birds/about`, as w
 But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
 
 ```js
-const router = express.Router({ mergeParams: true });
-```
-
-```ts
 const router = express.Router({ mergeParams: true });
 ```

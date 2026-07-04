@@ -24,7 +24,7 @@ app.response.sendStatus = function (statusCode, type, message) {
 ```
 
 ```ts
-import type { Response } from 'express';
+import { type Response } from 'express';
 
 app.response.sendStatus = function (
   this: Response,
@@ -42,10 +42,6 @@ The above implementation completely changes the original signature of `res.sendS
 The overridden method may now be used this way:
 
 ```js
-res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
-```
-
-```ts
 res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
 ```
 
@@ -73,7 +69,7 @@ Object.defineProperty(app.request, 'ip', {
 ```
 
 ```ts
-import type { Request } from 'express';
+import { type Request } from 'express';
 
 Object.defineProperty(app.request, 'ip', {
   configurable: true,
@@ -91,13 +87,6 @@ In order to provide the Express API, the request/response objects passed to Expr
 Unless necessary, it is recommended that this be done only at the application level, rather than globally. Also, take care that the prototype that is being used matches the functionality as closely as possible to the default prototypes.
 
 ```js
-// Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
-// for the given app reference
-Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);
-Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype);
-```
-
-```ts
 // Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
 // for the given app reference
 Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);

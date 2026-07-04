@@ -24,7 +24,14 @@ app.response.sendStatus = function (statusCode, type, message) {
 ```
 
 ```ts
-app.response.sendStatus = function (statusCode: number, type: string, message: string) {
+import { type Response } from 'express';
+
+app.response.sendStatus = function (
+  this: Response,
+  statusCode: number,
+  type: string,
+  message: string
+) {
   // code is intentionally kept simple for demonstration purpose
   return this.contentType(type).status(statusCode).send(message);
 };
@@ -56,6 +63,18 @@ Object.defineProperty(app.request, 'ip', {
   configurable: true,
   enumerable: true,
   get() {
+    return this.get('Client-IP');
+  },
+});
+```
+
+```ts
+import { type Request } from 'express';
+
+Object.defineProperty(app.request, 'ip', {
+  configurable: true,
+  enumerable: true,
+  get(this: Request) {
     return this.get('Client-IP');
   },
 });
