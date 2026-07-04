@@ -22,10 +22,26 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', function (req: Request, res: Response) {
+  res.send('user ' + req.params.id);
+});
+```
+
 But you could just as well have:
 
 ```js
 app.get('/user/:id', function (request, response) {
+  response.send('user ' + request.params.id);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', function (request: Request, response: Response) {
   response.send('user ' + request.params.id);
 });
 ```
@@ -52,6 +68,17 @@ app.get('/', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', function (req: Request, res: Response) {
+  console.dir(res.app.get('view engine'));
+  console.dir(res.app === req.app);
+  // => true
+  res.send('OK');
+});
+```
+
 ### res.headersSent
 
 <Signature type="Boolean" />
@@ -60,6 +87,16 @@ Boolean property that indicates if the app sent HTTP headers for the response.
 
 ```js
 app.get('/', function (req, res) {
+  console.dir(res.headersSent); // false
+  res.send('OK');
+  console.dir(res.headersSent); // true
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', function (req: Request, res: Response) {
   console.dir(res.headersSent); // false
   res.send('OK');
   console.dir(res.headersSent); // true
@@ -98,6 +135,17 @@ app.use(function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  // Make `user` and `authenticated` available in templates
+  res.locals.user = req.user;
+  res.locals.authenticated = !req.user.anonymous;
+  next();
+});
+```
+
 ### res.req
 
 <Signature type="Request" />
@@ -107,6 +155,16 @@ that relates to this response object.
 
 ```js
 app.get('/', function (req, res) {
+  console.dir(res.req === req);
+  // => true
+  res.send('OK');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', function (req: Request, res: Response) {
   console.dir(res.req === req);
   // => true
   res.send('OK');
@@ -978,6 +1036,30 @@ app.get('/file/:name', function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/file/:name', function (req: Request, res: Response, next: NextFunction) {
+  const options = {
+    root: path.join(__dirname, 'public'),
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true,
+    },
+  };
+
+  const fileName = req.params.name;
+  res.sendFile(fileName, options, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      console.log('Sent:', fileName);
+    }
+  });
+});
+```
+
 The following example illustrates using
 `res.sendFile` to provide fine-grained support for serving files:
 
@@ -985,6 +1067,23 @@ The following example illustrates using
 app.get('/user/:uid/photos/:file', function (req, res) {
   var uid = req.params.uid;
   var file = req.params.file;
+
+  req.user.mayViewFilesFrom(uid, function (yes) {
+    if (yes) {
+      res.sendFile('/uploads/' + uid + '/' + file);
+    } else {
+      res.status(403).send("Sorry! You can't see that.");
+    }
+  });
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:uid/photos/:file', function (req: Request, res: Response) {
+  const uid = req.params.uid;
+  const file = req.params.file;
 
   req.user.mayViewFilesFrom(uid, function (yes) {
     if (yes) {

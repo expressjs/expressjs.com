@@ -86,6 +86,34 @@ test('ts joins a run led by a cjs/mjs trigger', () => {
   assert.deepEqual(panelLangs(tabs), ['js', 'ts']);
 });
 
+test('groups a plain js + ts pair into JavaScript/TypeScript tabs', () => {
+  const tree = run([
+    code('js', null, "const e = require('express')"),
+    code('ts', null, "import e from 'express'"),
+  ]);
+  const tabs = findTabs(tree);
+  assert.ok(tabs, 'a CodeTabs element is created');
+  assert.equal(labelsOf(tabs), 'JavaScript,TypeScript');
+  assert.deepEqual(panelLangs(tabs), ['js', 'ts']);
+  assert.ok(hasImport(tree));
+});
+
+test('does NOT group two standalone js blocks (js needs a ts to pair with)', () => {
+  const tree = run([code('js', null, 'const a = 1'), code('js', null, 'const b = 2')]);
+  assert.equal(findTabs(tree), undefined);
+  assert.deepEqual(
+    tree.children.map((n) => n.lang),
+    ['js', 'js']
+  );
+});
+
+test('js + ts preserves a title="..." filename on the ts panel', () => {
+  const tabs = findTabs(run([code('js'), code('ts', 'title="index.ts"')]));
+  assert.equal(labelsOf(tabs), 'JavaScript,TypeScript');
+  assert.deepEqual(panelLangs(tabs), ['js', 'ts']);
+  assert.equal(tabs.children[1].children[0].meta, 'title="index.ts"');
+});
+
 test('a lone cjs block is not tabbed but its lang is normalized to js', () => {
   const tree = run([code('cjs', null, "require('x')")]);
   assert.equal(findTabs(tree), undefined);

@@ -13,8 +13,8 @@ Routes and other application-specific logic can live in as many files
 as you wish, in any directory structure you prefer. View the following
 examples for inspiration:
 
-- [Route listings](https://github.com/expressjs/express/blob/v5.2.1/examples/route-separation/index.js#L34-L49)
-- [Route map](https://github.com/expressjs/express/blob/v5.2.1/examples/route-map/index.js#L55-L69)
+- [Route listings](https://github.com/expressjs/express/blob/v4.22.2/examples/route-separation/index.js#L34-L49)
+- [Route map](https://github.com/expressjs/express/blob/v4.22.2/examples/route-map/index.js#L55-L69)
 - [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Also, there are third-party extensions for Express, which simplify some of these patterns:
@@ -60,6 +60,14 @@ app.use((req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).send("Sorry can't find that!");
+});
+```
+
 Add routes dynamically at runtime on an instance of `express.Router()`
 so the routes are not superseded by a middleware function.
 
@@ -70,6 +78,15 @@ except with four arguments instead of three; specifically with the signature `(e
 
 ```js
 app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -86,5 +103,5 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-- [Express 4.x](/4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](/api) requires Node.js 18 or higher.
+- [Express 4.x](/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/5x/api) requires Node.js 18 or higher.

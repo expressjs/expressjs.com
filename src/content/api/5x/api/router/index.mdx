@@ -33,6 +33,22 @@ router.get('/events', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+// invoked for any requests passed to this router
+router.use((req: Request, res: Response, next: NextFunction) => {
+  // .. some logic here .. like any other middleware
+  next();
+});
+
+// will handle any request that ends in /events
+// depends on where the router is "use()'d"
+router.get('/events', (req: Request, res: Response, next: NextFunction) => {
+  // ..
+});
+```
+
 You can then use a router for a particular root URL in this way separating your routes into files or even mini-apps.
 
 ```js
@@ -85,6 +101,19 @@ import express from 'express';
 const router = express.Router({ caseSensitive: true, strict: true });
 
 router.get('/events', (req, res) => {
+  res.send('events');
+});
+
+// mount the router on an app
+app.use('/calendar', router);
+```
+
+```ts title="index.ts"
+import express, { type Request, type Response } from 'express';
+
+const router = express.Router({ caseSensitive: true, strict: true });
+
+router.get('/events', (req: Request, res: Response) => {
   res.send('events');
 });
 
@@ -186,12 +215,30 @@ router.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+router.get('/', (req: Request, res: Response) => {
+  res.send('hello world');
+});
+```
+
 You can also use regular expressions&mdash;useful if you have very specific
 constraints, for example the following would match "GET /commits/71dbb9c" as well
 as "GET /commits/71dbb9c..4c084f9".
 
 ```js
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, (req, res) => {
+  const from = req.params[0];
+  const to = req.params[1] || 'HEAD';
+  res.send(`commit range ${from}..${to}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, (req: Request, res: Response) => {
   const from = req.params[0];
   const to = req.params[1] || 'HEAD';
   res.send(`commit range ${from}..${to}`);
@@ -217,6 +264,25 @@ router.get('/foo', (req, res, next) => {
   console.log("I don't come here");
 });
 app.get('/foo', (req, res) => {
+  console.log(' I come here too');
+  res.end('good');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function fn(req: Request, res: Response, next: NextFunction) {
+  console.log('I come here');
+  next('router');
+}
+router.get('/foo', fn, (req: Request, res: Response, next: NextFunction) => {
+  console.log("I don't come here");
+});
+router.get('/foo', (req: Request, res: Response, next: NextFunction) => {
+  console.log("I don't come here");
+});
+app.get('/foo', (req: Request, res: Response) => {
   console.log(' I come here too');
   res.end('good');
 });
@@ -270,6 +336,24 @@ router.param('user', (req, res, next, id) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+router.param('user', (req: Request, res: Response, next: NextFunction, id: string) => {
+  // try to get the user details from the User model and attach it to the request object
+  User.find(id, (err, user) => {
+    if (err) {
+      next(err);
+    } else if (user) {
+      req.user = user;
+      next();
+    } else {
+      next(new Error('failed to load user'));
+    }
+  });
+});
+```
+
 Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers, nor are they triggered for route parameters inherited from parent routers. Hence, param callbacks defined on `router` will be triggered only by route parameters defined on `router` routes.
 
 A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
@@ -286,6 +370,25 @@ router.get('/user/:id', (req, res, next) => {
 });
 
 router.get('/user/:id', (req, res) => {
+  console.log('and this matches too');
+  res.end();
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+router.param('id', (req: Request, res: Response, next: NextFunction, id: string) => {
+  console.log('CALLED ONLY ONCE');
+  next();
+});
+
+router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  console.log('although this matches');
+  next();
+});
+
+router.get('/user/:id', (req: Request, res: Response) => {
   console.log('and this matches too');
   res.end();
 });
@@ -348,6 +451,44 @@ router
     next(new Error('not implemented'));
   })
   .delete((req, res, next) => {
+    next(new Error('not implemented'));
+  });
+```
+
+```ts title="index.ts"
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const router = express.Router();
+
+router.param('user_id', (req: Request, res: Response, next: NextFunction, id: string) => {
+  // sample user, would actually fetch from DB, etc...
+  req.user = {
+    id,
+    name: 'TJ',
+  };
+  next();
+});
+
+router
+  .route('/users/:user_id')
+  .all((req: Request, res: Response, next: NextFunction) => {
+    // runs for all HTTP verbs first
+    // think of it as route specific middleware!
+    next();
+  })
+  .get((req: Request, res: Response, next: NextFunction) => {
+    res.json(req.user);
+  })
+  .put((req: Request, res: Response, next: NextFunction) => {
+    // just an example of maybe updating the user
+    req.user.name = req.params.name;
+    // save user ... etc
+    res.json(req.user);
+  })
+  .post((req: Request, res: Response, next: NextFunction) => {
+    next(new Error('not implemented'));
+  })
+  .delete((req: Request, res: Response, next: NextFunction) => {
     next(new Error('not implemented'));
   });
 ```
@@ -441,6 +582,35 @@ app.use('/foo', router);
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const app = express();
+const router = express.Router();
+
+// simple logger for this router's requests
+// all requests to this router will first hit this middleware
+router.use((req: Request, res: Response, next: NextFunction) => {
+  console.log('%s %s %s', req.method, req.url, req.path);
+  next();
+});
+
+// this will only be invoked if the path starts with /bar from the mount point
+router.use('/bar', (req: Request, res: Response, next: NextFunction) => {
+  // ... maybe some additional /bar logging ...
+  next();
+});
+
+// always invoked
+router.use((req: Request, res: Response, next: NextFunction) => {
+  res.send('Hello World');
+});
+
+app.use('/foo', router);
+
+app.listen(3000);
+```
+
 The "mount" path is stripped and is _not_ visible to the middleware function.
 The main effect of this feature is that a mounted middleware function may operate without
 code changes regardless of its "prefix" pathname.
@@ -469,6 +639,17 @@ router.use((req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import logger from 'morgan';
+import { type Request, type Response } from 'express';
+
+router.use(logger());
+router.use(express.static(path.join(__dirname, 'public')));
+router.use((req: Request, res: Response) => {
+  res.send('Hello');
+});
+```
+
 Now suppose you wanted to ignore logging requests for static files, but to continue
 logging routes and middleware defined after `logger()`. You would simply move the call to `express.static()` to the top,
 before adding the logger middleware:
@@ -477,6 +658,16 @@ before adding the logger middleware:
 router.use(express.static(path.join(__dirname, 'public')));
 router.use(logger());
 router.use((req, res) => {
+  res.send('Hello');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+router.use(express.static(path.join(__dirname, 'public')));
+router.use(logger());
+router.use((req: Request, res: Response) => {
   res.send('Hello');
 });
 ```
@@ -517,6 +708,29 @@ openRouter.get('/', (req, res, next) => {
   // ... List users ...
 });
 openRouter.get('/:user_id', (req, res, next) => {
+  // ... View user ...
+});
+
+app.use('/users', authRouter);
+app.use('/users', openRouter);
+```
+
+```ts
+import express, { type Request, type Response, type NextFunction } from 'express';
+import { basic } from './authenticate';
+
+const authRouter = express.Router();
+const openRouter = express.Router();
+
+authRouter.use(basic(usersdb));
+
+authRouter.get('/:user_id/edit', (req: Request, res: Response, next: NextFunction) => {
+  // ... Edit user UI ...
+});
+openRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
+  // ... List users ...
+});
+openRouter.get('/:user_id', (req: Request, res: Response, next: NextFunction) => {
   // ... View user ...
 });
 

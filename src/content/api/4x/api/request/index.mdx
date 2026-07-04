@@ -21,10 +21,26 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', function (req: Request, res: Response) {
+  res.send('user ' + req.params.id);
+});
+```
+
 But you could just as well have:
 
 ```js
 app.get('/user/:id', function (request, response) {
+  response.send('user ' + request.params.id);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', function (request: Request, response: Response) {
   response.send('user ' + request.params.id);
 });
 ```
@@ -80,6 +96,14 @@ export default function (req, res) {
 }
 ```
 
+```ts title="mymiddleware.ts"
+import { type Request, type Response } from 'express';
+
+export default function (req: Request, res: Response) {
+  res.send('The views directory is ' + req.app.get('views'));
+}
+```
+
 ### req.baseUrl
 
 <Signature type="String" />
@@ -95,6 +119,19 @@ For example:
 var greet = express.Router();
 
 greet.get('/jp', function (req, res) {
+  console.log(req.baseUrl); // /greet
+  res.send('Konnichiwa!');
+});
+
+app.use('/greet', greet); // load the router on '/greet'
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+const greet = express.Router();
+
+greet.get('/jp', function (req: Request, res: Response) {
   console.log(req.baseUrl); // /greet
   res.send('Konnichiwa!');
 });
@@ -155,6 +192,20 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.post('/profile', function (req, res, next) {
+  console.log(req.body);
+  res.json(req.body);
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.post('/profile', function (req: Request, res: Response, next: NextFunction) {
   console.log(req.body);
   res.json(req.body);
 });
@@ -290,6 +341,16 @@ app.use(function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  console.dir(req.method);
+  // => 'GET'
+  next();
+});
+```
+
 ### req.originalUrl
 
 <Signature type="String" />
@@ -316,6 +377,18 @@ combination of `req.baseUrl` and `req.url`. Consider following example:
 
 ```js
 app.use('/admin', function (req, res, next) {
+  // GET 'http://www.example.com/admin/new?sort=desc'
+  console.dir(req.originalUrl); // '/admin/new?sort=desc'
+  console.dir(req.baseUrl); // '/admin'
+  console.dir(req.path); // '/new'
+  next();
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/admin', function (req: Request, res: Response, next: NextFunction) {
   // GET 'http://www.example.com/admin/new?sort=desc'
   console.dir(req.originalUrl); // '/admin/new?sort=desc'
   console.dir(req.baseUrl); // '/admin'
@@ -427,6 +500,16 @@ app.set('query parser', function (str) {
 });
 ```
 
+```ts title="index.ts"
+import qs from 'qs';
+
+app.set('query parser', function (str: string) {
+  return qs.parse(str, {
+    /* custom options */
+  });
+});
+```
+
 Check out the [query parser application setting](/api/application/#application-settings) documentation for other customization options.
 
 ### req.res
@@ -444,6 +527,16 @@ app.get('/', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', function (req: Request, res: Response) {
+  console.dir(req.res === res);
+  // => true
+  res.send('OK');
+});
+```
+
 ### req.route
 
 <Signature type="Route" />
@@ -452,6 +545,15 @@ Contains the currently-matched route (a `Route` object). For example:
 
 ```js
 app.get('/user/:id?', function userIdHandler(req, res) {
+  console.log(req.route);
+  res.send('GET');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id?', function userIdHandler(req: Request, res: Response) {
   console.log(req.route);
   res.send('GET');
 });

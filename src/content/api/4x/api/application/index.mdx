@@ -34,6 +34,18 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', function (req: Request, res: Response) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
 The `app` object has methods for
 
 - Routing HTTP requests; see for example, [app.METHOD](#appmethod) and [app.param](#appparam).
@@ -130,6 +142,20 @@ admin.get('/', function (req, res) {
 app.use('/admin', admin); // mount the sub app
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express(); // the main app
+const admin: Express = express(); // the sub app
+
+admin.get('/', function (req: Request, res: Response) {
+  console.log(admin.mountpath); // /admin
+  res.send('Admin Homepage');
+});
+
+app.use('/admin', admin); // mount the sub app
+```
+
 It is similar to the [baseUrl](/api/request/#reqbaseurl) property of the `req` object, except `req.baseUrl`
 returns the matched URL path, instead of the matched patterns.
 
@@ -146,6 +172,26 @@ admin.get('/', function (req, res) {
 
 var secret = express();
 secret.get('/', function (req, res) {
+  console.log(secret.mountpath); // /secr*t
+  res.send('Admin Secret');
+});
+
+admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the 'admin' sub app
+app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app
+```
+
+```ts
+import express, { type Express, type Request, type Response } from 'express';
+
+const admin: Express = express();
+
+admin.get('/', function (req: Request, res: Response) {
+  console.dir(admin.mountpath); // [ '/adm*n', '/manager' ]
+  res.send('Admin Homepage');
+});
+
+const secret: Express = express();
+secret.get('/', function (req: Request, res: Response) {
   console.log(secret.mountpath); // /secr*t
   res.send('Admin Secret');
 });
@@ -194,6 +240,23 @@ admin.get('/', function (req, res) {
 app.use('/admin', admin);
 ```
 
+```ts
+import express, { type Express, type Application, type Request, type Response } from 'express';
+
+const admin: Express = express();
+
+admin.on('mount', function (parent: Application) {
+  console.log('Admin Mounted');
+  console.log(parent); // refers to the parent app
+});
+
+admin.get('/', function (req: Request, res: Response) {
+  res.send('Admin Homepage');
+});
+
+app.use('/admin', admin);
+```
+
 ## Methods
 
 ### app.all()
@@ -229,6 +292,15 @@ GET, POST, PUT, DELETE, or any other HTTP request method:
 
 ```js
 app.all('/secret', function (req, res, next) {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.all('/secret', function (req: Request, res: Response, next: NextFunction) {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
@@ -290,6 +362,14 @@ For more information, see the [routing guide](/guide/routing/).
 
 ```js
 app.delete('/', function (req, res) {
+  res.send('DELETE request to homepage');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.delete('/', function (req: Request, res: Response) {
   res.send('DELETE request to homepage');
 });
 ```
@@ -518,6 +598,14 @@ app.get('/', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', function (req: Request, res: Response) {
+  res.send('GET request to homepage');
+});
+```
+
 ### app.listen()
 
 <Signature returns="http.Server">
@@ -564,6 +652,15 @@ app.listen(3000); // bind and listen on a TCP port
 app.listen('/tmp/sock'); // or listen on a UNIX socket
 ```
 
+```ts title="index.ts"
+import express, { type Express } from 'express';
+
+const app: Express = express();
+
+app.listen(3000); // bind and listen on a TCP port
+app.listen('/tmp/sock'); // or listen on a UNIX socket
+```
+
 The `app` returned by `express()` is in fact a JavaScript
 `Function`, designed to be passed to Node's HTTP servers as a callback
 to handle requests. This makes it easy to provide both HTTP and HTTPS versions of
@@ -586,6 +683,17 @@ import https from 'https';
 import http from 'http';
 
 const app = express();
+
+http.createServer(app).listen(80);
+https.createServer(options, app).listen(443);
+```
+
+```ts title="index.ts"
+import express, { type Express } from 'express';
+import https from 'https';
+import http from 'http';
+
+const app: Express = express();
 
 http.createServer(app).listen(80);
 https.createServer(options, app).listen(443);
@@ -687,6 +795,23 @@ app['m-search']('/', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', function (req: Request, res: Response) {
+  res.send('GET request to homepage');
+});
+
+app.post('/', function (req: Request, res: Response) {
+  res.send('POST request to homepage');
+});
+
+// methods that are invalid JavaScript variable names use bracket notation
+app['m-search']('/', function (req: Request, res: Response) {
+  res.send('M-SEARCH request to homepage');
+});
+```
+
 <Alert type="info">
 
 The `app.get()` function is automatically called for the HTTP `HEAD` method in addition to the
@@ -759,6 +884,18 @@ app.query('/search', (req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Request, type Response } from 'express';
+
+app.use(express.json()); // populate req.body for application/json payloads
+
+app.query('/search', (req: Request, res: Response) => {
+  // complex filter criteria arrive in req.body, not the URL
+  const results = db.search(req.body);
+  res.json(results);
+});
+```
+
 ### app.param()
 
 <Signature>
@@ -817,6 +954,25 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.param('id', function (req: Request, res: Response, next: NextFunction, id: string) {
+  console.log('CALLED ONLY ONCE');
+  next();
+});
+
+app.get('/user/:id', function (req: Request, res: Response, next: NextFunction) {
+  console.log('although this matches');
+  next();
+});
+
+app.get('/user/:id', function (req: Request, res: Response) {
+  console.log('and this matches too');
+  res.end();
+});
+```
+
 On `GET /user/42`, the following is printed:
 
 ```
@@ -837,6 +993,28 @@ app.get('/user/:id/:page', function (req, res, next) {
 });
 
 app.get('/user/:id/:page', function (req, res) {
+  console.log('and this matches too');
+  res.end();
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.param(
+  ['id', 'page'],
+  function (req: Request, res: Response, next: NextFunction, value: string) {
+    console.log('CALLED ONLY ONCE with', value);
+    next();
+  }
+);
+
+app.get('/user/:id/:page', function (req: Request, res: Response, next: NextFunction) {
+  console.log('although this matches');
+  next();
+});
+
+app.get('/user/:id/:page', function (req: Request, res: Response) {
   console.log('and this matches too');
   res.end();
 });
@@ -962,6 +1140,25 @@ router.get('[[\s\S]]*', function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+// captures '1-a_6' but not '543-azser-sder'
+router.get('/[0-9]+-[[\w]]*', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+// captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
+router.get('/[0-9]+-[[\S]]*', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+// captures all (equivalent to '.*')
+router.get('[[\s\S]]*', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+```
+
 </Alert>
 
 ### app.path()
@@ -974,6 +1171,21 @@ Returns the canonical path of the app, a string.
 var app = express();
 var blog = express();
 var blogAdmin = express();
+
+app.use('/blog', blog);
+blog.use('/admin', blogAdmin);
+
+console.dir(app.path()); // ''
+console.dir(blog.path()); // '/blog'
+console.dir(blogAdmin.path()); // '/blog/admin'
+```
+
+```ts title="index.ts"
+import express, { type Express } from 'express';
+
+const app: Express = express();
+const blog: Express = express();
+const blogAdmin: Express = express();
 
 app.use('/blog', blog);
 blog.use('/admin', blogAdmin);
@@ -1020,6 +1232,14 @@ app.post('/', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.post('/', function (req: Request, res: Response) {
+  res.send('POST request to homepage');
+});
+```
+
 ### app.put()
 
 <Signature>
@@ -1049,6 +1269,14 @@ Routes HTTP PUT requests to the specified path with the specified callback funct
 
 ```js
 app.put('/', function (req, res) {
+  res.send('PUT request to homepage');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.put('/', function (req: Request, res: Response) {
   res.send('PUT request to homepage');
 });
 ```
@@ -1139,6 +1367,25 @@ app
     res.json({});
   })
   .post(function (req, res, next) {
+    // maybe add a new event...
+  });
+```
+
+```ts
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+app
+  .route('/events')
+  .all(function (req: Request, res: Response, next: NextFunction) {
+    // runs for all HTTP verbs first
+    // think of it as route specific middleware!
+  })
+  .get(function (req: Request, res: Response, next: NextFunction) {
+    res.json({});
+  })
+  .post(function (req: Request, res: Response, next: NextFunction) {
     // maybe add a new event...
   });
 ```
@@ -1418,6 +1665,15 @@ app.use(function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  console.log('Time: %d', Date.now());
+  next();
+});
+```
+
 <Alert type="info">
 
 Sub-apps will:
@@ -1443,6 +1699,20 @@ app.get('/', function (req, res) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+// this middleware will not allow the request to go beyond it
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  res.send('Hello World');
+});
+
+// requests will never reach this route
+app.get('/', function (req: Request, res: Response) {
+  res.send('Welcome');
+});
+```
+
 **Error-handling middleware**
 
 Error-handling middleware always takes _four_ arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](/guide/error-handling).
@@ -1451,6 +1721,15 @@ Define error-handling middleware functions in the same way as other middleware f
 
 ```js
 app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -1469,10 +1748,26 @@ app.use('/abcd', function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/abcd', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+```
+
 **Path Pattern**: This will match paths starting with `/abcd` and `/abd`:
 
 ```js
 app.use('/abc?d', function (req, res, next) {
+  next();
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/abc?d', function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 ```
@@ -1485,10 +1780,26 @@ app.use('/ab+cd', function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/ab+cd', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+```
+
 This will match paths starting with `/abcd`, `/abxcd`, `/abFOOcd`, `/abbArcd`, and so on:
 
 ```js
 app.use('/ab*cd', function (req, res, next) {
+  next();
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/ab*cd', function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 ```
@@ -1501,10 +1812,26 @@ app.use('/a(bc)?d', function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/a(bc)?d', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+```
+
 **Regular Expression**: This will match paths starting with `/abc` and `/xyz`:
 
 ```js
 app.use(/\/abc|\/xyz/, function (req, res, next) {
+  next();
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(/\/abc|\/xyz/, function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 ```
@@ -1515,6 +1842,17 @@ app.use(/\/abc|\/xyz/, function (req, res, next) {
 app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   next();
 });
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(
+  ['/abcd', '/xyza', /\/lmn|\/pqr/],
+  function (req: Request, res: Response, next: NextFunction) {
+    next();
+  }
+);
 ```
 
 #### Middleware callback function examples
@@ -1530,6 +1868,14 @@ app.use(function (req, res, next) {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+```
+
 A router is valid middleware.
 
 ```js
@@ -1540,11 +1886,31 @@ router.get('/', function (req, res, next) {
 app.use(router);
 ```
 
+```ts
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const router = express.Router();
+router.get('/', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+app.use(router);
+```
+
 An Express app is valid middleware.
 
 ```js
 var subApp = express();
 subApp.get('/', function (req, res, next) {
+  next();
+});
+app.use(subApp);
+```
+
+```ts
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const subApp: Express = express();
+subApp.get('/', function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 app.use(subApp);
@@ -1566,6 +1932,22 @@ r2.get('/', function (req, res, next) {
 app.use(r1, r2);
 ```
 
+```ts
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const r1 = express.Router();
+r1.get('/', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+const r2 = express.Router();
+r2.get('/', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+app.use(r1, r2);
+```
+
 **Array**: Use an array to group middleware logically.
 
 ```js
@@ -1576,6 +1958,22 @@ r1.get('/', function (req, res, next) {
 
 var r2 = express.Router();
 r2.get('/', function (req, res, next) {
+  next();
+});
+
+app.use([r1, r2]);
+```
+
+```ts
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const r1 = express.Router();
+r1.get('/', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+const r2 = express.Router();
+r2.get('/', function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 
@@ -1604,6 +2002,34 @@ r2.get('/', function (req, res, next) {
 
 var subApp = express();
 subApp.get('/', function (req, res, next) {
+  next();
+});
+
+app.use(mw1, [mw2, r1, r2], subApp);
+```
+
+```ts
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+function mw1(req: Request, res: Response, next: NextFunction) {
+  next();
+}
+function mw2(req: Request, res: Response, next: NextFunction) {
+  next();
+}
+
+const r1 = express.Router();
+r1.get('/', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+const r2 = express.Router();
+r2.get('/', function (req: Request, res: Response, next: NextFunction) {
+  next();
+});
+
+const subApp: Express = express();
+subApp.get('/', function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 

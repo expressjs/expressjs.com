@@ -33,6 +33,18 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', function (req: Request, res: Response) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
 <Alert type="info">
 
 Express 4.x requires **Node.js 0.10.0 or higher**.

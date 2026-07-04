@@ -13,10 +13,11 @@
  *   import express from 'express'
  *   ```
  *
- * …or use `cjs` / `mjs` / `ts` fences. A run that includes `cjs`/`mjs` becomes a
- * CommonJS / ESM / TypeScript tab strip (`cjs`/`mjs` are rewritten to `js` for
- * highlighting). `ts` only joins such a run — on its own it never groups, so
- * unrelated TypeScript snippets stay separate:
+ * …or use `js` / `cjs` / `mjs` / `ts` fences. A run that includes `cjs`/`mjs`
+ * becomes a CommonJS / ESM / TypeScript tab strip (`cjs`/`mjs` are rewritten to
+ * `js` for highlighting). A plain `js` block immediately followed by a `ts`
+ * block becomes a JavaScript / TypeScript tab strip. On their own, `js` and `ts`
+ * never group, so unrelated snippets stay separate:
  *
  *   ```cjs
  *   const express = require('express')
@@ -49,13 +50,16 @@ const TAB_RE = /\btab="([^"]+)"/;
 // group into tabs without an explicit `tab="..."` meta. Each maps to a tab
 // label plus the language expressive-code should actually highlight as.
 const LANG_TABS = {
+  js: { label: 'JavaScript', lang: 'js' },
   cjs: { label: 'CommonJS', lang: 'js' },
   mjs: { label: 'ESM', lang: 'js' },
   ts: { label: 'TypeScript', lang: 'ts' },
 };
-// Langs that, on their own, justify forming a tab group. `ts` is a normal
-// standalone language too, so it only joins a group led by one of these (or a
-// `tab="..."` block) — that way two unrelated `ts` snippets never merge.
+// Langs that, on their own, justify forming a tab group. `js` and `ts` are
+// normal standalone languages too, so neither triggers a group on its own —
+// that way two unrelated `js` (or two `ts`) snippets never merge. A run only
+// groups via a `cjs`/`mjs`, a `tab="..."` block, or a `js` + `ts` pair (see
+// `hasJsTsPair`).
 const TRIGGER_LANGS = new Set(['cjs', 'mjs']);
 const COMPONENT_NAME = 'CodeTabs';
 const COMPONENT_SOURCE = '@components/primitives/Tabs/CodeTabs.astro';
@@ -74,6 +78,15 @@ function isTabBlock(node) {
 /** A block that, on its own, justifies grouping a run into tabs. */
 function isTrigger(node) {
   return node?.type === 'code' && (TAB_RE.test(node.meta || '') || TRIGGER_LANGS.has(node.lang));
+}
+
+/**
+ * A run that pairs a JavaScript block with a TypeScript one (the plain
+ * `js` + `ts` case). Checked on the original fence langs, before `cjs`/`mjs`
+ * are rewritten to `js`, so a `cjs`/`mjs` run is never mistaken for this.
+ */
+function hasJsTsPair(run) {
+  return run.some((node) => node.lang === 'js') && run.some((node) => node.lang === 'ts');
 }
 
 /**
@@ -173,10 +186,10 @@ function groupChildren(children) {
       j++;
     }
 
-    // Only a run of 2+ blocks with an unambiguous trigger (cjs/mjs or `tab="..."`)
-    // becomes tabs. A run of only `ts` blocks is left alone so unrelated
-    // TypeScript snippets never merge.
-    if (run.length >= 2 && run.some(isTrigger)) {
+    // Only a run of 2+ blocks with an unambiguous trigger (cjs/mjs or
+    // `tab="..."`), or a plain `js` + `ts` pair, becomes tabs. A run of only
+    // `js` (or only `ts`) blocks is left alone so unrelated snippets never merge.
+    if (run.length >= 2 && (run.some(isTrigger) || hasJsTsPair(run))) {
       const labels = run.map(consumeTabBlock);
       children.splice(i, run.length, buildCodeTabs(labels, run));
       grouped = true;

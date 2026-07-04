@@ -20,10 +20,26 @@ app.get('/user/:id', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response) => {
+  res.send(`user ${req.params.id}`);
+});
+```
+
 But you could just as well have:
 
 ```js
 app.get('/user/:id', (request, response) => {
+  response.send(`user ${request.params.id}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', (request: Request, response: Response) => {
   response.send(`user ${request.params.id}`);
 });
 ```
@@ -70,6 +86,14 @@ export default (req, res) => {
 };
 ```
 
+```ts title="mymiddleware.ts"
+import { type Request, type Response } from 'express';
+
+export default (req: Request, res: Response) => {
+  res.send(`The views directory is ${req.app.get('views')}`);
+};
+```
+
 ### req.baseUrl
 
 <Signature type="String" />
@@ -85,6 +109,19 @@ For example:
 const greet = express.Router();
 
 greet.get('/jp', (req, res) => {
+  console.log(req.baseUrl); // /greet
+  res.send('Konnichiwa!');
+});
+
+app.use('/greet', greet); // load the router on '/greet'
+```
+
+```ts
+import express, { type Request, type Response } from 'express';
+
+const greet = express.Router();
+
+greet.get('/jp', (req: Request, res: Response) => {
   console.log(req.baseUrl); // /greet
   res.send('Konnichiwa!');
 });
@@ -145,6 +182,20 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.post('/profile', (req, res, next) => {
+  console.log(req.body);
+  res.json(req.body);
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.post('/profile', (req: Request, res: Response, next: NextFunction) => {
   console.log(req.body);
   res.json(req.body);
 });
@@ -282,6 +333,16 @@ app.use((req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.dir(req.method);
+  // => 'GET'
+  next();
+});
+```
+
 ### req.originalUrl
 
 <Signature type="String" />
@@ -316,6 +377,18 @@ app.use('/admin', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+// GET 'http://www.example.com/admin/new?sort=desc'
+app.use('/admin', (req: Request, res: Response, next: NextFunction) => {
+  console.dir(req.originalUrl); // '/admin/new?sort=desc'
+  console.dir(req.baseUrl); // '/admin'
+  console.dir(req.path); // '/new'
+  next();
+});
+```
+
 ### req.params
 
 <Signature type="Object" />
@@ -340,10 +413,32 @@ app.get('/files/*file', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*file', (req: Request, res: Response) => {
+  console.dir(req.params.file);
+  // GET /files/note.txt
+  // => [ 'note.txt' ]
+  // GET /files/images/image.png
+  // => [ 'images', 'image.png' ]
+});
+```
+
 When you use a regular expression for the route definition, capture groups are provided as integer keys using `req.params[n]`, where `n` is the n<sup>th</sup> capture group.
 
 ```js
 app.use(/^\/file\/(.*)$/, (req, res) => {
+  // GET /file/javascripts/jquery.js
+  console.dir(req.params[0]);
+  // => "javascripts/jquery.js"
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.use(/^\/file\/(.*)$/, (req: Request, res: Response) => {
   // GET /file/javascripts/jquery.js
   console.dir(req.params[0]);
   // => "javascripts/jquery.js"
@@ -433,6 +528,16 @@ app.set('query parser', (str) =>
 );
 ```
 
+```ts title="index.ts"
+import qs from 'qs';
+
+app.set('query parser', (str: string) =>
+  qs.parse(str, {
+    /* custom options */
+  })
+);
+```
+
 Check out the [query parser application setting](/api/application/#application-settings) documentation for other customization options.
 
 ### req.res
@@ -450,6 +555,16 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  console.dir(req.res === res);
+  // => true
+  res.send('OK');
+});
+```
+
 ### req.route
 
 <Signature type="Route" />
@@ -458,6 +573,15 @@ Contains the currently-matched route (a `Route` object). For example:
 
 ```js
 app.get('/user/{:id}', (req, res) => {
+  console.dir(req.route, { depth: null });
+  res.send('GET');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/{:id}', (req: Request, res: Response) => {
   console.dir(req.route, { depth: null });
   res.send('GET');
 });
