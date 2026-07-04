@@ -84,6 +84,14 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(3000);
 ```
 
+You do not need to annotate everything. When you pass a handler directly to a route method or to
+`app.use()`, Express infers the types of `req`, `res`, and `next`, and it infers route parameters
+from the path, so `req.params.id` is a `string` in `app.get('/users/:id', ...)`. Add explicit types
+only where TypeScript has no context to infer from: error-handling middleware, whose
+`(err, req, res, next)` signature is not inferred, and handlers you define separately from the route.
+In those cases, annotate the parameters or type the whole function as `RequestHandler` or
+`ErrorRequestHandler`.
+
 Run the file directly with Node.js, which strips the TypeScript types and runs the result without a
 build step:
 
