@@ -293,15 +293,20 @@ app.get('/users/:userId/books/:bookId', (req, res) => {
 });
 ```
 
+In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
+`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
+Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
+to annotate the parameters when the handler is defined separately from the route, because the type
+checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
+
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get(
-  '/users/:userId/books/:bookId',
-  (req: Request<{ userId: string; bookId: string }>, res: Response) => {
-    res.send(req.params);
-  }
-);
+const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
+  res.send(req.params);
+};
+
+app.get('/users/:userId/books/:bookId', sendParams);
 ```
 
 <Alert type="alert">
