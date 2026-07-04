@@ -3,6 +3,8 @@ title: Overriding the Express API
 description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes.
 ---
 
+import Alert from '@components/primitives/Alert/Alert.astro';
+
 The Express API consists of various methods and properties on the request and response objects. These are inherited by prototype. There are two extension points for the Express API:
 
 1. The global prototypes at `express.request` and `express.response`.
@@ -88,6 +90,71 @@ Object.defineProperty(app.request, 'ip', {
   },
 });
 ```
+
+## Extending the API in TypeScript
+
+The sections above override members that Express already provides. To add your own properties or
+methods to the request or response, describe them to TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html) on the
+`Express` namespace. Put the augmentation in a `.d.ts` file that is part of your project. No
+`tsconfig.json` change is needed unless a custom `include` does not cover its location.
+
+For example, an authentication middleware may attach a `user` to the request, and you might add a
+`sendError` helper to the response:
+
+```ts title="types/express.d.ts"
+interface User {
+  id: string;
+  name: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+    interface Response {
+      sendError(status: number, message: string): this;
+    }
+  }
+}
+
+export {};
+```
+
+The additions are now known throughout the application:
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.user = { id: '1', name: 'Tobi' };
+  next();
+});
+
+app.response.sendError = function (this: Response, status: number, message: string) {
+  return this.status(status).json({ error: message });
+};
+
+app.get('/', (req: Request, res: Response) => {
+  if (!req.user) {
+    res.sendError(401, 'unauthorized');
+    return;
+  }
+  res.send(req.user.name);
+});
+```
+
+<Alert type="alert">
+
+Declare custom request properties as optional (`user?`). The type applies to every request, but
+TypeScript cannot know which middleware ran before a given handler, so a required property would be a
+false guarantee. Check for the value (as with `if (!req.user)` above) before relying on it.
+
+</Alert>
+
+Adding a new method needs no cast, unlike [overriding](#methods) an existing method with a different
+signature, because the method did not previously exist on the type.
 
 ## Prototype
 
