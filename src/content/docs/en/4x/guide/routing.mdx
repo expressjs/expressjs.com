@@ -368,14 +368,14 @@ app.get('/user/:id', (req, res) => {
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
 
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   if (req.params.id === '0') {
     return next('route');
   }
   res.send(`User ${req.params.id}`);
 });
 
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   res.send('Special handler for user ID 0');
 });
 ```

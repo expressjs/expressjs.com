@@ -935,12 +935,12 @@ app.param('id', (req: Request, res: Response, next: NextFunction, id: string) =>
   next();
 });
 
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   console.log('although this matches');
   next();
 });
 
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   console.log('and this matches too');
   res.end();
 });
@@ -979,15 +979,12 @@ app.param(['id', 'page'], (req: Request, res: Response, next: NextFunction, valu
   next();
 });
 
-app.get(
-  '/user/:id/:page',
-  (req: Request<{ id: string; page: string }>, res: Response, next: NextFunction) => {
-    console.log('although this matches');
-    next();
-  }
-);
+app.get('/user/:id/:page', (req: Request, res: Response, next: NextFunction) => {
+  console.log('although this matches');
+  next();
+});
 
-app.get('/user/:id/:page', (req: Request<{ id: string; page: string }>, res: Response) => {
+app.get('/user/:id/:page', (req: Request, res: Response) => {
   console.log('and this matches too');
   res.end();
 });

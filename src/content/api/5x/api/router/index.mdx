@@ -383,12 +383,12 @@ router.param('id', (req: Request, res: Response, next: NextFunction, id: string)
   next();
 });
 
-router.get('/user/:id', (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   console.log('although this matches');
   next();
 });
 
-router.get('/user/:id', (req: Request<{ id: string }>, res: Response) => {
+router.get('/user/:id', (req: Request, res: Response) => {
   console.log('and this matches too');
   res.end();
 });
@@ -724,21 +724,15 @@ const openRouter = express.Router();
 
 authRouter.use(basic(usersdb));
 
-authRouter.get(
-  '/:user_id/edit',
-  (req: Request<{ user_id: string }>, res: Response, next: NextFunction) => {
-    // ... Edit user UI ...
-  }
-);
+authRouter.get('/:user_id/edit', (req: Request, res: Response, next: NextFunction) => {
+  // ... Edit user UI ...
+});
 openRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
   // ... List users ...
 });
-openRouter.get(
-  '/:user_id',
-  (req: Request<{ user_id: string }>, res: Response, next: NextFunction) => {
-    // ... View user ...
-  }
-);
+openRouter.get('/:user_id', (req: Request, res: Response, next: NextFunction) => {
+  // ... View user ...
+});
 
 app.use('/users', authRouter);
 app.use('/users', openRouter);

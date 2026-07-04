@@ -23,7 +23,7 @@ app.get('/user/:id', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   res.send(`user ${req.params.id}`);
 });
 ```
@@ -39,7 +39,7 @@ app.get('/user/:id', (request, response) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:id', (request: Request<{ id: string }>, response: Response) => {
+app.get('/user/:id', (request: Request, response: Response) => {
   response.send(`user ${request.params.id}`);
 });
 ```
@@ -581,7 +581,7 @@ app.get('/user/{:id}', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/{:id}', (req: Request<{ id: string }>, res: Response) => {
+app.get('/user/{:id}', (req: Request, res: Response) => {
   console.dir(req.route, { depth: null });
   res.send('GET');
 });

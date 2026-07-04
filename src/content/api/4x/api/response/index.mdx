@@ -25,7 +25,7 @@ app.get('/user/:id', function (req, res) {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:id', function (req: Request<{ id: string }>, res: Response) {
+app.get('/user/:id', function (req: Request, res: Response) {
   res.send('user ' + req.params.id);
 });
 ```
@@ -41,7 +41,7 @@ app.get('/user/:id', function (request, response) {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:id', function (request: Request<{ id: string }>, response: Response) {
+app.get('/user/:id', function (request: Request, response: Response) {
   response.send('user ' + request.params.id);
 });
 ```
@@ -1039,28 +1039,25 @@ app.get('/file/:name', function (req, res, next) {
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
 
-app.get(
-  '/file/:name',
-  function (req: Request<{ name: string }>, res: Response, next: NextFunction) {
-    const options = {
-      root: path.join(__dirname, 'public'),
-      dotfiles: 'deny',
-      headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true,
-      },
-    };
+app.get('/file/:name', function (req: Request, res: Response, next: NextFunction) {
+  const options = {
+    root: path.join(__dirname, 'public'),
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true,
+    },
+  };
 
-    const fileName = req.params.name;
-    res.sendFile(fileName, options, function (err) {
-      if (err) {
-        next(err);
-      } else {
-        console.log('Sent:', fileName);
-      }
-    });
-  }
-);
+  const fileName = req.params.name;
+  res.sendFile(fileName, options, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      console.log('Sent:', fileName);
+    }
+  });
+});
 ```
 
 The following example illustrates using
@@ -1084,21 +1081,18 @@ app.get('/user/:uid/photos/:file', function (req, res) {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get(
-  '/user/:uid/photos/:file',
-  function (req: Request<{ uid: string; file: string }>, res: Response) {
-    const uid = req.params.uid;
-    const file = req.params.file;
+app.get('/user/:uid/photos/:file', function (req: Request, res: Response) {
+  const uid = req.params.uid;
+  const file = req.params.file;
 
-    req.user.mayViewFilesFrom(uid, function (yes) {
-      if (yes) {
-        res.sendFile('/uploads/' + uid + '/' + file);
-      } else {
-        res.status(403).send("Sorry! You can't see that.");
-      }
-    });
-  }
-);
+  req.user.mayViewFilesFrom(uid, function (yes) {
+    if (yes) {
+      res.sendFile('/uploads/' + uid + '/' + file);
+    } else {
+      res.status(403).send("Sorry! You can't see that.");
+    }
+  });
+});
 ```
 
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).

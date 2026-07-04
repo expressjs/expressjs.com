@@ -163,7 +163,7 @@ import { type Request, type Response, type NextFunction } from 'express';
 
 app.get(
   '/user/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction) => {
     console.log('ID:', req.params.id);
     next();
   },
@@ -173,7 +173,7 @@ app.get(
 );
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   res.send(req.params.id);
 });
 ```
@@ -215,7 +215,7 @@ import { type Request, type Response, type NextFunction } from 'express';
 
 app.get(
   '/user/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction) => {
     // if the user ID is 0, skip to the next route
     if (req.params.id === '0') next('route');
     // otherwise pass the control to the next middleware function in this stack
@@ -412,7 +412,7 @@ router.use(
 // a middleware sub-stack that handles GET requests to the /user/:id path
 router.get(
   '/user/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction) => {
     // if the user ID is 0, skip to the next router
     if (req.params.id === '0') next('route');
     // otherwise pass control to the next middleware function in this stack
@@ -425,7 +425,7 @@ router.get(
 );
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   console.log(req.params.id);
   res.render('special');
 });

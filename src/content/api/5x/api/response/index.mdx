@@ -24,7 +24,7 @@ app.get('/user/:id', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:id', (req: Request<{ id: string }>, res: Response) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   res.send(`user ${req.params.id}`);
 });
 ```
@@ -40,7 +40,7 @@ app.get('/user/:id', (request, response) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:id', (request: Request<{ id: string }>, response: Response) => {
+app.get('/user/:id', (request: Request, response: Response) => {
   response.send(`user ${request.params.id}`);
 });
 ```
@@ -955,7 +955,7 @@ app.get('/file/:name', (req, res, next) => {
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
 
-app.get('/file/:name', (req: Request<{ name: string }>, res: Response, next: NextFunction) => {
+app.get('/file/:name', (req: Request, res: Response, next: NextFunction) => {
   const options = {
     root: path.join(__dirname, 'public'),
     dotfiles: 'deny',
@@ -997,7 +997,7 @@ app.get('/user/:uid/photos/:file', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/:uid/photos/:file', (req: Request<{ uid: string; file: string }>, res: Response) => {
+app.get('/user/:uid/photos/:file', (req: Request, res: Response) => {
   const uid = req.params.uid;
   const file = req.params.file;
 
