@@ -101,11 +101,18 @@ const lang = getLangFromUrl(Astro.url);
     {
       !isBlogOrApi &&
         ['x-default', ...languageCodes].map((altLang) => {
-          let altPath = replaceLanguageInPath(canonicalPath, altLang === 'x-default' ? 'en' : altLang);
+          let altPath = replaceLanguageInPath(
+            canonicalPath,
+            altLang === 'x-default' ? 'en' : altLang
+          );
           // The English homepage is canonically served at `/`, not `/en/`.
           if (altPath === '/en/') altPath = '/';
           return (
-            <link rel="alternate" hreflang={altLang} href={new URL(altPath, Astro.site || Astro.url.origin)} />
+            <link
+              rel="alternate"
+              hreflang={altLang}
+              href={new URL(altPath, Astro.site || Astro.url.origin)}
+            />
           );
         })
     }
