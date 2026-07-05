@@ -5,9 +5,10 @@ description: Node.js 用の HTTP リクエストロガーミドルウェア
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.10.1"
+  version="1.11.0"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
@@ -22,9 +23,15 @@ HTTPリクエストロガーミドルウェア for node.js
 [npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install morgan
-```
+<PackageManagerCommand command="npm install morgan" />
+
+<Alert type="情報">
+
+`morgan` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/morgan" />
+
+</Alert>
 
 ## API
 
@@ -201,15 +208,15 @@ UTCの現在の日付と時刻。 利用可能なフォーマットは次のと�
 
 リクエストの HTTP バージョン。
 
-##### :method
+#####
 
 リクエストの HTTP メソッド。
 
-##### :pid
+#####
 
 Node.js プロセスのプロセス ID がリクエストを処理します。
 
-##### :referrer
+#####
 
 リクエストの Referrer ヘッダー。 これは、標準のスペルの間違いの Referer ヘッダが存在する場合に使用します。そうでなければ、Referrerです。
 
@@ -239,7 +246,7 @@ Node.js プロセスのプロセス ID がリクエストを処理します。
 引数`digit`は、数字に
 を含める桁数を指定する数値で、マイクロ秒の精度を提供する`3`をデフォルト値とします。
 
-##### :status
+#####
 
 レスポンスのステータスコード。
 
@@ -255,7 +262,7 @@ the request), then the status will be empty (displayed as `"-"` in the log).
 引数`digit`は、数字に
 を含める桁数を指定する数値で、マイクロ秒の精度を提供する`3`をデフォルト値とします。
 
-##### :url
+#####
 
 リクエストの URL `req.originalUrl` が存在する場合は使用します。存在しない場合は、 `req.url` を使用します。
 

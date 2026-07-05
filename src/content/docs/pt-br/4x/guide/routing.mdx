@@ -1,6 +1,6 @@
 ---
 title: Roteamento
-description: Aprenda a definir e usar rotas em aplicações Express.js, incluindo métodos de rota, caminhos de rota, parâmetros e usando o roteador para roteamento modular.
+description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, typing requests and responses in TypeScript, and using Router for modular routing.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -9,11 +9,11 @@ _Routing_ refere-se a como os endpoints de um aplicativo (URIs) respondem às so
 Para uma introdução ao roteamento, veja [Roteamento básico](/starter/basic-routing).
 
 Você define roteamento usando métodos do objeto Express `app` que correspondem aos métodos HTTP;
-por exemplo, `app. et()` para lidar com solicitações GET e `app.post` para lidar com solicitações POST. Para obter uma lista completa,
-ver [app.METHOD](/api/application#appmethodpath-callback--callback-). Você também pode usar o [app.all()](/api/application#appallpath-callback--callback-) para lidar com todos os métodos HTTP e [app. se()](/api/application#appusepath-callback--callback) para
-especifique middleware como função de retorno de chamada (Veja [Usando middleware](/guide/using-middleware) para detalhes).
+por exemplo, `app. et()` para lidar com solicitações GET e `app.post` para lidar com solicitações POST. For a full list,
+see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-Esses métodos de roteamento especificam uma função de callback (às vezes chamada de "funções de manipulador") chamada quando a aplicação recebe uma solicitação para a rota especificada (endpoint) e método HTTP. Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado.
+These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado.
 
 Na verdade, os métodos de roteamento podem ter mais de uma função de callback como argumentos.
 Com múltiplas funções de callback, é importante fornecer `next` como um argumento para a função de callback e então chamar `next()` dentro do corpo da função para liberar o controle
@@ -21,12 +21,34 @@ para a próxima callback.
 
 O código a seguir é um exemplo de uma rota muito básica.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req: Request, res: Response) => {
   res.send('hello world');
 });
 ```
@@ -49,13 +71,36 @@ app.post('/', (req, res) => {
 });
 ```
 
-Expresso suporta métodos que correspondem a todos os métodos de requisição HTTP: `get`, `post`, e assim por diante.
-Para uma lista completa, consulte [app.METHOD](/api/application#appmethodpath-callback--callback-).
+```ts
+import { type Request, type Response } from 'express';
 
-Há um método de roteamento especial, `app.all()`, usado para carregar funções de middleware em um caminho para os métodos de requisição HTTP. Por exemplo, o seguinte manipulador é executado para solicitações para a rota `"/secre"` usando `GET`, `POST`, `PUT`, `DELETE`, ou qualquer outro método de solicitação HTTP suportado no [módulo http](https://nodejs.org/api/http.html#http_http_methods).
+// GET method route
+app.get('/', (req: Request, res: Response) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req: Request, res: Response) => {
+  res.send('POST request to the homepage');
+});
+```
+
+Expresso suporta métodos que correspondem a todos os métodos de requisição HTTP: `get`, `post`, e assim por diante.
+For a full list, see [app.METHOD](/api/application#appmethod).
+
+Há um método de roteamento especial, `app.all()`, usado para carregar funções de middleware em um caminho para os métodos de requisição HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
@@ -84,6 +129,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('root');
+});
+```
+
 Esse caminho de rota irá corresponder a solicitações para `/about`.
 
 ```js
@@ -92,10 +145,26 @@ app.get('/about', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/about', (req: Request, res: Response) => {
+  res.send('about');
+});
+```
+
 Este caminho de rota irá corresponder a solicitações para `/random.text`.
 
 ```js
 app.get('/random.text', (req, res) => {
+  res.send('random.text');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/random.text', (req: Request, res: Response) => {
   res.send('random.text');
 });
 ```
@@ -110,10 +179,26 @@ app.get('/ab?cd', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab?cd', (req: Request, res: Response) => {
+  res.send('ab?cd');
+});
+```
+
 Esse caminho de rota corresponderá a `abcd`, `abbcd`, `abbbcd`, e assim por diante.
 
 ```js
 app.get('/ab+cd', (req, res) => {
+  res.send('ab+cd');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab+cd', (req: Request, res: Response) => {
   res.send('ab+cd');
 });
 ```
@@ -126,10 +211,26 @@ app.get('/ab*cd', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab*cd', (req: Request, res: Response) => {
+  res.send('ab*cd');
+});
+```
+
 Esta rota de rota irá corresponder a `/abe` e `/abcde`.
 
 ```js
 app.get('/ab(cd)?e', (req, res) => {
+  res.send('ab(cd)?e');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab(cd)?e', (req: Request, res: Response) => {
   res.send('ab(cd)?e');
 });
 ```
@@ -150,10 +251,26 @@ app.get(/a/, (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get(/a/, (req: Request, res: Response) => {
+  res.send('/a/');
+});
+```
+
 Esse caminho de rota irá coincidir com `borboleta` e `dragonfly`, mas não com `borboleta`, `dragonflyman`, e assim por diante.
 
 ```js
 app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get(/.*fly$/, (req: Request, res: Response) => {
   res.send('/.*fly$/');
 });
 ```
@@ -174,6 +291,22 @@ Para definir rotas com parâmetros de rota, simplesmente especifique os parâmet
 app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params);
 });
+```
+
+In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
+`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
+Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
+to annotate the parameters when the handler is defined separately from the route, because the type
+checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
+
+```ts
+import { type Request, type Response } from 'express';
+
+const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
+  res.send(req.params);
+};
+
+app.get('/users/:userId/books/:bookId', sendParams);
 ```
 
 <Alert type="alerta">
@@ -212,7 +345,7 @@ com uma barra invertida adicional, por exemplo `\d+`.
 </Alert>
 
 <Alert type="advertência">
-O caractere <a href="https://github.com/expressjs/express/issues/2495">`*` em expressões regulares não é interpretado da maneira habitual</a>. Como uma alternativa, use `{0,}` em vez de `*`.
+The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. Como uma alternativa, use `{0,}` em vez de `*`.
 </Alert>
 
 ## Manipuladores de rota
@@ -232,6 +365,21 @@ app.get('/user/:id', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req: Request, res: Response) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
 Neste exemplo:
 
 - `GET /user/5` → tratado pela primeira rota → envia "Usuário 5"
@@ -243,6 +391,14 @@ Uma única função de retorno de chamada pode manipular uma rota. Por exemplo:
 
 ```js
 app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/example/a', (req: Request, res: Response) => {
   res.send('Hello from A!');
 });
 ```
@@ -262,6 +418,21 @@ app.get(
 );
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/example/b',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
 Um array de funções de retorno de chamada pode lidar com uma rota. Por exemplo:
 
 ```js
@@ -276,6 +447,26 @@ const cb1 = function (req, res, next) {
 };
 
 const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req: Request, res: Response) {
   res.send('Hello from C!');
 };
 
@@ -308,21 +499,47 @@ app.get(
 );
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
 ## Métodos de resposta
 
 Os métodos no objeto de resposta ('res') na tabela a seguir podem enviar uma resposta para o cliente e encerrar o ciclo de resposta de solicitação. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.
 
-| Método                                                                 | Descrição:                                                                                          |
-| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [res.download()](/api/response#resdownloadpath--filename--options--fn) | Solicite que um arquivo seja baixado.                                                               |
-| [res.end()](/api/response#resenddata-encoding-callback)                | Encerrar o processo de resposta.                                                                    |
-| [res.json()](/api/response#resjsonbody)                                | Enviar uma resposta JSON.                                                                           |
-| [res.jsonp()](/api/response#resjsonpbody)                              | Envie uma resposta JSON com suporte a JSONP.                                                        |
-| [res.redirect()](/api/response#resredirectstatus-path)                 | Redirecionar uma requisição.                                                                        |
-| [res.render()](/api/response#resrenderview--locals--callback)          | Renderizar um modelo de visão.                                                                      |
-| [res.send()](/api/response#ressendbody)                                | Envie uma resposta de vários tipos.                                                                 |
-| [res.sendFile()](/api/response#ressendfilepath--options--fn)           | Envia um arquivo como uma transmissão octet.                                                        |
-| [res.sendStatus()](/api/response#ressendstatusstatuscode)              | Defina o código de status da resposta e envie sua representação de string como o corpo da resposta. |
+| Método                                          | Descrição:                                                                                          |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownload)     | Solicite que um arquivo seja baixado.                                                               |
+| [res.end()](/api/response#resend)               | Encerrar o processo de resposta.                                                                    |
+| [res.json()](/api/response#resjson)             | Enviar uma resposta JSON.                                                                           |
+| [res.jsonp()](/api/response#resjsonp)           | Envie uma resposta JSON com suporte a JSONP.                                                        |
+| [res.redirect()](/api/response#resredirect)     | Redirecionar uma requisição.                                                                        |
+| [res.render()](/api/response#resrender)         | Renderizar um modelo de visão.                                                                      |
+| [res.send()](/api/response#ressend)             | Envie uma resposta de vários tipos.                                                                 |
+| [res.sendFile()](/api/response#ressendfile)     | Envia um arquivo como uma transmissão octet.                                                        |
+| [res.sendStatus()](/api/response#ressendstatus) | Defina o código de status da resposta e envie sua representação de string como o corpo da resposta. |
 
 ## app.route()
 
@@ -345,7 +562,23 @@ app
   });
 ```
 
-## expressão.Roteador
+```ts
+import { type Request, type Response } from 'express';
+
+app
+  .route('/book')
+  .get((req: Request, res: Response) => {
+    res.send('Get a random book');
+  })
+  .post((req: Request, res: Response) => {
+    res.send('Add a book');
+  })
+  .put((req: Request, res: Response) => {
+    res.send('Update the book');
+  });
+```
+
+## express.Router
 
 Use a classe 'express.Router' para criar módulo, manipuladores de rotas montáveis. Uma instância `Router` é um sistema completo de middleware e roteamento; por este motivo, é muitas vezes referido como um "mini-app".
 
@@ -353,7 +586,7 @@ O exemplo a seguir cria um roteador como um módulo, carrega uma função middle
 
 Crie um arquivo de roteador chamado `birds.js` no diretório de aplicativos, com o seguinte conteúdo:
 
-```js
+```cjs title="birds.cjs"
 const express = require('express');
 const router = express.Router();
 
@@ -376,10 +609,66 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
+```ts title="birds.ts"
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req: Request, res: Response) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req: Request, res: Response) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 Em seguida, carregue o módulo do roteador no aplicativo:
 
-```js
+```cjs title="index.cjs"
 const birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -388,7 +677,7 @@ app.use('/birds', birds);
 
 O aplicativo agora poderá lidar com pedidos para `/birds` e `/birds/about`, Além de chamar a função middleware `timeLog` que é específica da rota.
 
-Mas se a rota pai `/birds` tiver parâmetros de caminho, ela não será acessível por padrão nas sub-rotas. Para torná-lo acessível, você precisará passar a opção `mergeParams` para o construtor do roteador [reference](/api/application#appusepath-callback--callback).
+Mas se a rota pai `/birds` tiver parâmetros de caminho, ela não será acessível por padrão nas sub-rotas. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
 
 ```js
 const router = express.Router({ mergeParams: true });

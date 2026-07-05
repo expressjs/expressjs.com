@@ -4,40 +4,23 @@ description: Un guide pour migrer vos applications Express.js de la version 3 à
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express 4 est un changement ininterrompu de Express 3. Cela signifie qu'une application Express 3 existante ne fonctionnera _pas_ si vous mettez à jour la version Express dans ses dépendances.
 
 Cet article couvre :
 
-<ul class="docliste">
-  <li>
-    <a href="#changes">Changes in Express 4</a>.
-  </li>
-  <li>
-    <a href="#example-migration">An example</a> of migrating an Express 3 app to Express 4.
-  </li>
-  <li>
-    <a href="#app-gen">Mise à niveau vers le générateur d'applications Express 4</a>.
-  </li>
-</ul>
+- [Changes in Express 4](#changes-in-express-4).
+- [An example](#example-app-migration) of migrating an Express 3 app to Express 4.
+- [Upgrading to the Express 4 app generator](#upgrading-to-the-express-4-app-generator).
 
 ## Changements dans Express 4
 
 Il y a plusieurs changements significatifs dans Express 4 :
 
-<ul class="docliste">
-  <li>
-    <a href="#core-changes">Changement de coeur et de système middleware Express.</a> Les
-    dépendances de Connect et les middleware intégrés ont été supprimées, vous devez donc ajouter du
-    middleware vous-même.
-  </li>
-  <li>
-    <a href="#routing">Modifications au système de routage.</a>
-  </li>
-  <li>
-    <a href="#other-changes">Diverses autres modifications.</a>
-  </li>
-</ul>
+- [Changes to Express core and middleware system.](#changes-to-express-core-and-middleware-system) The dependencies on Connect and built-in middleware were removed, so you must add middleware yourself.
+- [Changes to the routing system.](#the-routing-system)
+- [Various other changes.](#other-changes)
 
 Voir aussi:
 
@@ -253,7 +236,7 @@ it, définit certains itinéraires, et le monte sur un chemin sur l'application 
 Par exemple, créez un fichier de routeur nommé `birds.js` dans le répertoire de l'application,
 avec le contenu suivant:
 
-```js
+```cjs title="birds.cjs"
 var express = require('express');
 var router = express.Router();
 
@@ -274,10 +257,40 @@ router.get('/about', (req, res) => {
 module.exports = router;
 ```
 
+```mjs title="birds.mjs"
+import express from 'express';
+
+const router = express.Router();
+
+// middleware specific to this router
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now());
+  next();
+});
+// define the home page route
+router.get('/', (req, res) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
 Ensuite, chargez le module routeur dans l'application :
 
-```js
+```cjs title="index.cjs"
 var birds = require('./birds');
+
+// ...
+
+app.use('/birds', birds);
+```
+
+```mjs title="index.mjs"
+import birds from './birds';
 
 // ...
 
@@ -299,10 +312,7 @@ Le tableau suivant liste d'autres changements mineurs mais importants dans Expre
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>
-      Express 4 nécessite Node.js 0.10.x ou ultérieur et a abandonné la prise en charge de Node.js
-      0.8.x.
-    </td>
+    <td>Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.</td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
@@ -380,7 +390,7 @@ Les fichiers d'intérêt sont `app.js` et `package.json`.
 
 Considérez une application Express v.3 avec le fichier `app.js` suivant :
 
-```js
+```cjs title="index.cjs"
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -388,6 +398,40 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.methodOverride());
+app.use(express.session({ secret: 'your secret here' }));
+app.use(express.bodyParser());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler());
+}
+
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import routes from './routes';
+import user from './routes/user';
+import http from 'http';
+import path from 'path';
+
+const app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -440,9 +484,7 @@ Commencez le processus de migration en installant le middleware requis pour l'ap
 Express 4 et en mettant à jour Express et Pug vers leur dernière version
 respective avec la commande suivante :
 
-```bash
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-```
+<PackageManagerCommand command="npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save" />
 
 Effectuez les modifications suivantes à `app.js`:
 
@@ -492,7 +534,7 @@ Lancer la commande `npm` ci-dessus mettra à jour `package.json` comme suit:
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. Le fichier `app.js` ressemblera à ceci :
 
-```js
+```cjs title="index.cjs"
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -542,6 +584,55 @@ server.listen(app.get('port'), () => {
 });
 ```
 
+```mjs title="index.mjs"
+import http from 'http';
+import express from 'express';
+import routes from './routes';
+import user from './routes/user';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import methodOverride from 'method-override';
+import session from 'express-session';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+import errorHandler from 'errorhandler';
+
+const app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
+app.use(logger('dev'));
+app.use(methodOverride());
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'uwotm8',
+  })
+);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
+}
+
+const server = http.createServer(app);
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+```
+
 <Alert type="Infos">
 Sauf si vous avez besoin de travailler directement avec le module `http` (socket.io/SPDY/HTTPS), le chargement n'est pas nécessaire et l'application peut être simplement démarrée de cette façon :
 
@@ -577,18 +668,14 @@ le générateur d'applications Express 3 puis installer le nouveau
 Si vous avez déjà le générateur d'application Express 3 installé sur votre système,
 vous devez le désinstaller :
 
-```bash
-$ npm uninstall -g express
-```
+<PackageManagerCommand command="npm uninstall -g express" />
 
 Selon la façon dont vos droits de fichier et de répertoire sont configurés,
 vous pourriez avoir besoin d'exécuter cette commande avec `sudo`.
 
 Installez maintenant le nouveau générateur :
 
-```bash
-$ npm install -g express-generator
-```
+<PackageManagerCommand command="npm install -g express-generator" />
 
 Selon la façon dont vos droits de fichier et de répertoire sont configurés,
 vous pourriez avoir besoin d'exécuter cette commande avec `sudo`.
@@ -629,9 +716,9 @@ Si vous regardez le script `npm start` dans le paquet. son`fichier,
 vous remarquerez que la commande qui démarre l'application est`node . bin/www`, qui était `node app.js\`
 dans Express 3.
 
-Parce que le fichier `app.js` qui a été généré par le générateur Express 4
-est maintenant un nœud. , il ne peut plus être démarré indépendamment en tant qu'application
-(sauf si vous modifiez le code). Le module doit être chargé dans un fichier Node.js
+Because the `app.js` file that was generated by the Express 4 generator
+is now a Node.js module, it can no longer be started independently as an app
+(unless you modify the code). Le module doit être chargé dans un fichier Node.js
 et démarré via le fichier Node.js. Le fichier Node.js est `./bin/www`
 dans ce cas.
 

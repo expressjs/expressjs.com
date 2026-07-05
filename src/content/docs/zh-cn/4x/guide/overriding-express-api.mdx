@@ -1,0 +1,170 @@
+---
+title: 重写Express API
+description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes, including extending the API in TypeScript with declaration merging.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express API 由请求对象和响应对象上的多种方法与属性组成。 这些内容通过原型继承。 Express API 有两个扩展点：
+
+1. `express.request` 和 `express.response` 上的全局原型。
+2. 应用专属原型位于 `app.request` 和 `app.response`。
+
+修改全局原型会影响同一进程中所有已加载的 Express 应用。 如果需要，你可以在创建新应用后仅修改应用专属原型，从而实现仅针对当前应用的修改。
+
+## 方法
+
+你可以通过分配自定义函数，使用自己的实现重写现有方法的签名和行为。
+
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
+
+```js
+app.response.sendStatus = function (statusCode, type, message) {
+  // code is intentionally kept simple for demonstration purpose
+  return this.contentType(type).status(statusCode).send(message);
+};
+```
+
+```ts
+import { type Response } from 'express';
+
+// Broaden the type of sendStatus so call sites accept the new arguments.
+declare module 'express-serve-static-core' {
+  interface Response {
+    sendStatus(statusCode: number, type: string, message: string): this;
+  }
+}
+
+app.response.sendStatus = function (
+  this: Response,
+  statusCode: number,
+  type: string,
+  message: string
+) {
+  // code is intentionally kept simple for demonstration purpose
+  return this.contentType(type).status(statusCode).send(message);
+} as Response['sendStatus'];
+```
+
+上述实现彻底更改了`res.sendStatus`原本的方法签名。 该方法现在可接收状态码、编码类型以及要发送给客户端的消息。
+
+In TypeScript, augmenting `express-serve-static-core` adds the new overload to the `Response` type so call sites such as `res.sendStatus(404, 'application/json', body)` type-check. The assignment is cast with `as Response['sendStatus']` because replacing a method with a different signature cannot be checked against the original declaration.
+
+重写后的方法现在可以这样使用：
+
+```js
+res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
+```
+
+## 属性
+
+Express API 中的属性分为两类：
+
+1. 赋值属性（例如：`req.baseUrl`、`req.originalUrl`）
+2. 取值器定义属性（例如：`req.secure`、`req.ip`）
+
+由于第一类属性是在当前请求-响应周期的上下文中动态赋值到`request`和`response`对象上的，因此无法重写其行为。
+
+第二类属性可通过 Express API 扩展接口进行重写。
+
+以下代码重写了`req.ip`值的获取方式。 现在，它仅返回 `Client-IP` 请求头的值。
+
+```js
+Object.defineProperty(app.request, 'ip', {
+  configurable: true,
+  enumerable: true,
+  get() {
+    return this.get('Client-IP');
+  },
+});
+```
+
+```ts
+import { type Request } from 'express';
+
+Object.defineProperty(app.request, 'ip', {
+  configurable: true,
+  enumerable: true,
+  get(this: Request) {
+    return this.get('Client-IP');
+  },
+});
+```
+
+## Extending the API in TypeScript
+
+The sections above override members that Express already provides. To add your own properties or
+methods to the request or response, describe them to TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html) on the
+`Express` namespace. Put the augmentation in a `.d.ts` file that is part of your project. No
+`tsconfig.json` change is needed unless a custom `include` does not cover its location.
+
+For example, an authentication middleware may attach a `user` to the request, and you might add a
+`sendError` helper to the response:
+
+```ts title="types/express.d.ts"
+interface User {
+  id: string;
+  name: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+    interface Response {
+      sendError(status: number, message: string): this;
+    }
+  }
+}
+
+export {};
+```
+
+The additions are now known throughout the application:
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.user = { id: '1', name: 'Tobi' };
+  next();
+});
+
+app.response.sendError = function (this: Response, status: number, message: string) {
+  return this.status(status).json({ error: message });
+};
+
+app.get('/', (req: Request, res: Response) => {
+  if (!req.user) {
+    res.sendError(401, 'unauthorized');
+    return;
+  }
+  res.send(req.user.name);
+});
+```
+
+<Alert type="alert">
+
+Declare custom request properties as optional (`user?`). The type applies to every request, but
+TypeScript cannot know which middleware ran before a given handler, so a required property would be a
+false guarantee. Check for the value (as with `if (!req.user)` above) before relying on it.
+
+</Alert>
+
+Adding a new method needs no cast, unlike [overriding](#methods) an existing method with a different
+signature, because the method did not previously exist on the type.
+
+## Prototype
+
+为了提供 Express API，传递给 Express 的请求/响应对象（例如通过 `app(req, res)`）需要继承自相同的原型链。 默认情况下，请求对象继承自 `http.IncomingRequest.prototype`，响应对象继承自 `http.ServerResponse.prototype`。
+
+除非必要，否则建议仅在应用层面执行此操作，而非全局层面。 此外，请注意所使用的原型需尽可能与默认原型的功能保持一致。
+
+```js
+// Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
+// for the given app reference
+Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);
+Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype);
+```

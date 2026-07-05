@@ -27,7 +27,7 @@ Una funzione che viene invocata dallo strato di routing Express prima del gestor
 
 - `var foo = require('middleware')` si chiama _requiring_ o _using_ un modulo Node.js. Quindi la dichiarazione `var mw = foo()` restituisce tipicamente il middleware.
 - `app.use(mw)` si chiama _aggiungendo il middleware allo stack globale di elaborazione_.
-- `app.get('/foo', mw, function (req, res) { ... })` si chiama \_aggiungendo il middleware allo stack di elaborazione "GET /foo" .
+- `app.get('/foo', mw, (req, res) => { /* ... */ })` is called _adding the middleware to the "GET /foo" processing stack_.
 
 ## Node.js
 

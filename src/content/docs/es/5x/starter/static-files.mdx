@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 El argumento `root` especifica el directorio raíz desde el cual servir activos estáticos.
-Para más información sobre el argumento `options`, vea [express.static](/api#express.static).
+For more information on the `options` argument, see [express.static](/api/express/#expressstatic).
 
 Por ejemplo, utiliza el siguiente código para servir imágenes, archivos CSS y archivos JavaScript en un directorio llamado `public`:
 
@@ -56,7 +56,7 @@ sirviendo activos estáticos.
 
 </Alert>
 
-Para crear un prefijo de ruta virtual (donde la ruta no existe en el sistema de archivos) para archivos que son servidos por el `express. función tatic`, [especificar una ruta de montaje](/api#app.use) para el directorio estático, como se muestra a continuación:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -74,8 +74,14 @@ http://localhost:3000/static/hello.html
 
 Sin embargo, la ruta que proporcionas a la función `express.static` es relativa al directorio desde el cual inicias tu proceso `node`. Si ejecuta la aplicación expresa desde otro directorio, es más seguro utilizar la ruta absoluta del directorio que desea servir:
 
-```js
+```cjs title="index.cjs"
 const path = require('path');
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```mjs title="index.mjs"
+import path from 'path';
+
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 

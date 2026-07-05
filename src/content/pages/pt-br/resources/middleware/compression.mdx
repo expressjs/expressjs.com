@@ -5,6 +5,7 @@ description: Compressão de Node.js middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.8.1"
@@ -28,9 +29,15 @@ Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
 [registro do npm](https://www.npmjs.com/). A instalação é feita usando o comando
 [`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```bash
-$ npm install compression
-```
+<PackageManagerCommand command="npm install compression" />
+
+<Alert type="informações">
+
+`compression` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/compression" />
+
+</Alert>
 
 ## API
 

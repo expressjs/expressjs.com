@@ -5,6 +5,7 @@ description: ディレクトリ一覧を提供する
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="1.9.2"
@@ -20,9 +21,15 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 [npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install serve-index
-```
+<PackageManagerCommand command="npm install serve-index" />
+
+<Alert type="情報">
+
+`serve-index` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/serve-index" />
+
+</Alert>
 
 ## API
 
@@ -37,6 +44,8 @@ var serveIndex = require('serve-index');
 `path`は`req.url`値に基づいています。`/some/dir`
 `path`の`req.url`は`public/some/dir'`になります。 If you are using
 something like `express`, you can change the URL "base" with `app.use` (see
+the express example). If you are using
+something like `express`, you can change the URL "base" with `app.use` (see
 the express example).
 
 #### オプション
@@ -45,7 +54,7 @@ Serve indexはoptionsオブジェクトでこれらのプロパティを受け�
 
 ##### フィルター
 
-このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 The `filter` function
+このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 The `filter` function
 is called for each file, with the signature `filter(filename, index, files, dir)`
 where `filename` is the name of the file, `index` is the array index, `files` is
 the array of files and `dir` is the absolute path the file is located (and thus,
@@ -61,12 +70,12 @@ the directory the listing is for).
 
 ##### stylesheet
 
-CSS スタイルシートへのオプションのパス。 デフォルトはビルトインスタイルシートです。
+CSS スタイルシートへのオプションのパス。 デフォルトはビルトインスタイルシートです。 デフォルトはビルトインスタイルシートです。
 
 ##### テンプレート
 
 HTMLテンプレートまたはHTML
-文字列をレンダリングする関数への任意のパス。 デフォルトはビルトインテンプレートです。
+文字列をレンダリングする関数への任意のパス。 デフォルトはビルトインテンプレートです。 デフォルトはビルトインテンプレートです。
 
 When given a string, the string is used as a file path to load and then the
 following tokens are replaced in templates:
@@ -78,6 +87,7 @@ following tokens are replaced in templates:
 
 関数として与えられた場合、関数は `template(locals, callback)`
 と呼ばれ、`callback(error, htmlString)` を呼び出す必要があります。 以下はローカルで提供される
+です。 以下はローカルで提供される
 です。
 
 - `directory`は表示されているディレクトリです（`/`がルートです）。
@@ -92,7 +102,7 @@ following tokens are replaced in templates:
 
 ##### 表示
 
-表示モード `tiles`と`details`があります。 デフォルトは `tiles` です。
+表示モード `tiles`と`details`があります。 表示モード `tiles`と`details`があります。 デフォルトは `tiles` です。
 
 ## 例
 

@@ -4,6 +4,7 @@ description: Descubra as melhores práticas de segurança cruciais para aplicati
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 O termo _"produção"_ se refere ao estágio no ciclo de vida do software quando uma aplicação ou API está geralmente disponível para seus usuários finais ou consumidores. Em contraste, na etapa "development"\__ , você ainda está escrevendo e testando o código, e o aplicativo não está aberto para acesso externo. Os ambientes de sistema correspondentes são conhecidos como ambientes de \_produção_ e _desenvolvimento_, respectivamente.
 
@@ -18,21 +19,19 @@ Políticas e Procedimentos.
 
 As melhores práticas de segurança para aplicações Expressas na produção incluem:
 
-- [Práticas de Melhor Produção: Segurança](#production-best-practices-security)
-  - [Overview](#overview)
-  - [Não usar versões descontinuadas ou vulneráveis do Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-  - [Usar TLS](#use-tls)
-  - [Não confie na entrada do usuário](#do-not-trust-user-input)
-    - [Impedir redirecionamentos abertos](#prevent-open-redirects)
-  - [Usar capacete](#use-helmet)
-  - [Reduzir impressão digital](#reduce-fingerprinting)
-  - [Usar cookies de forma segura](#use-cookies-securely)
-    - [Não usar o nome padrão de cookie da sessão](#dont-use-the-default-session-cookie-name)
-    - [Definir opções de segurança de cookies](#set-cookie-security-options)
-  - [Impedir ataques brute-force contra a autorização](#prevent-brute-force-attacks-against-authorization)
-  - [Garanta que suas dependências sejam seguras](#ensure-your-dependencies-are-secure)
-    - [Evitar outras vulnerabilidades conhecidas](#avoid-other-known-vulnerabilities)
-  - [Considerações adicionais](#additional-considerations)
+- [Não usar versões descontinuadas ou vulneráveis do Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+- [Usar TLS](#use-tls)
+- [Não confie na entrada do usuário](#do-not-trust-user-input)
+  - [Impedir redirecionamentos abertos](#prevent-open-redirects)
+- [Usar capacete](#use-helmet)
+- [Reduzir impressão digital](#reduce-fingerprinting)
+- [Usar cookies de forma segura](#use-cookies-securely)
+  - [Não usar o nome padrão de cookie da sessão](#dont-use-the-default-session-cookie-name)
+  - [Definir opções de segurança de cookies](#set-cookie-security-options)
+- [Impedir ataques brute-force contra a autorização](#prevent-brute-force-attacks-against-authorization)
+- [Garanta que suas dependências sejam seguras](#ensure-your-dependencies-are-secure)
+  - [Evitar outras vulnerabilidades conhecidas](#avoid-other-known-vulnerabilities)
+- [Considerações adicionais](#additional-considerations)
 
 ## Não usar versões obsoletas ou vulneráveis do Express
 
@@ -44,7 +43,7 @@ Certifique-se também de que você não está usando nenhuma das versões vulner
 
 Se seu aplicativo lida com ou transmite dados confidenciais, use [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) para proteger a conexão e os dados. Esta tecnologia criptografa dados antes de ser enviada do cliente para o servidor, impedindo assim alguns hackers comuns (e fáceis). Embora solicitações do Ajax e POST não sejam óbvias e pareçam "ocultas" nos navegadores, seu tráfego de rede está vulnerável ao [sniffing de pacotes](https://en.wikipedia.org/wiki/Packet_analyzer) e [ataques do meio](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Você deve estar familiarizado com a criptografia Secure Socket Layer (SSL). [TLS é simplesmente a próxima progressão do SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). Em outras palavras, se você estava usando SSL antes, considere atualizar para o TLS. Em geral, recomendamos o Nginx para lidar com TLS. Para uma boa referência para configurar TLS no Nginx (e outros servidores), consulte [Configurações de servidores recomendadas (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Você deve estar familiarizado com a criptografia Secure Socket Layer (SSL). Em geral, recomendamos o Nginx para lidar com TLS. Em outras palavras, se você estava usando SSL antes, considere atualizar para o TLS. Em outras palavras, se você estava usando SSL antes, considere atualizar para o TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
 
 Além disso, uma ferramenta prática para obter um certificado TLS gratuito é [Let's Encrypt](https://letsencrypt.org/about/), uma ferramenta gratuita, automatizada, e abrir autoridade certificadora (CA) fornecida pelo [Grupo de Investigação de Segurança da Internet (ISRG)](https://www.abetterinternet.org/).
 
@@ -99,16 +98,24 @@ Cada cabeçalho pode ser configurado ou desativado. Para ler mais sobre isso, po
 
 Instalar o Capacete como qualquer outro módulo:
 
-```bash
-$ npm install helmet
-```
+<PackageManagerCommand command="npm install helmet" />
 
 Então para usá-lo em seu código:
 
-```js
+```cjs title="index.cjs"
 // ...
 
 const helmet = require('helmet');
+app.use(helmet());
+
+// ...
+```
+
+```mjs title="index.mjs"
+import helmet from 'helmet';
+
+// ...
+
 app.use(helmet());
 
 // ...
@@ -177,8 +184,20 @@ Usar o nome padrão de cookie de sessão pode abrir seu aplicativo para ataques.
 
 Para evitar este problema, use nomes genéricos de cookie, por exemplo, usando [express-session](https://www.npmjs.com/package/express-session) middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'express-session';
+
 app.set('trust proxy', 1); // trust first proxy
 app.use(
   session({
@@ -200,9 +219,31 @@ Defina as seguintes opções de cookies para aumentar a segurança:
 
 Aqui está um exemplo usando [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
 
-```js
+```cjs title="index.cjs"
 const session = require('cookie-session');
 const express = require('express');
+const app = express();
+
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
+    },
+  })
+);
+```
+
+```mjs title="index.mjs"
+import session from 'cookie-session';
+import express from 'express';
+
 const app = express();
 
 const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
@@ -259,7 +300,7 @@ $ snyk test
 
 ### Evitar outras vulnerabilidades conhecidas
 
-Fique de olho nos conselhos [Node Security Project](https://npmjs.com/advisories) ou [Snyk](https://snyk.io/vuln/) que possam afetar os módulos Express ou outros que seu aplicativo usa. Em geral, estas bases de dados são excelentes recursos para o conhecimento e ferramentas sobre a segurança dos Nós.
+Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. Em geral, estas bases de dados são excelentes recursos para o conhecimento e ferramentas sobre a segurança dos Nós.
 
 Finalmente, Aplicativos Expressos&mdash;como qualquer outro aplicativo da web&mdash;podem ser vulneráveis a uma variedade de ataques baseados na web. Familiarize-se com as conhecidas [vulnerabilidades da web](https://www.owasp.org/www-project-top-ten/) e tome precauções para evitá-las.
 

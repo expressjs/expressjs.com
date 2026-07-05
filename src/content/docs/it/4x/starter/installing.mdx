@@ -1,9 +1,10 @@
 ---
 title: Installazione
-description: Scopri come installare Express.js nel tuo ambiente Node.js, inclusa la creazione della directory del progetto e la gestione delle dipendenze con npm.
+description: Learn how to install Express.js in your Node.js environment, including setting up your project directory, managing dependencies with npm, and configuring TypeScript.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Prima di iniziare, assicurati di avere [Node.js](https://nodejs.org/) 0.10 o superiore installato. Quindi, creare una directory per la vostra applicazione e navigare in essa.
 
@@ -15,9 +16,7 @@ cd myapp
 Usa il comando `npm init` per creare un file `package.json` per la tua applicazione.
 Per maggiori informazioni sul funzionamento di `package.json`, vedere [Specifiche della gestione di npm.json](https://docs.npmjs.com/files/package.json).
 
-```bash
-npm init
-```
+<PackageManagerCommand command="npm init" />
 
 Questo comando ti richiede un certo numero di cose, come il nome e la versione della tua applicazione.
 Per ora, puoi semplicemente premere RETURN per accettare i valori predefiniti per la maggior parte di essi, con la seguente eccezione:
@@ -30,15 +29,11 @@ Inserisci `app.js`, o qualsiasi cosa desideri che sia il nome del file principal
 
 Ora, installa Express nella directory `myapp` e salvalo nella lista delle dipendenze. Per esempio:
 
-```bash
-npm install express
-```
+<PackageManagerCommand command="npm install express" />
 
 Per installare Express temporaneamente e non aggiungerlo alla lista delle dipendenze:
 
-```bash
-npm install express --no-save
-```
+<PackageManagerCommand command="npm install express --no-save" />
 
 <Alert type="info">
 
@@ -46,5 +41,78 @@ By default with version npm 5.0+, `npm install` adds the module to the `dependen
 `package.json` file; with earlier versions of npm, you must specify the `--save` option
 explicitly. Poi, dopo aver eseguito `npm install` nella directory dell'app installerà automaticamente i moduli
 nell'elenco delle dipendenze.
+
+</Alert>
+
+## TypeScript
+
+Express is written in JavaScript and does not bundle its own type definitions. To use it with
+TypeScript, install TypeScript together with the community-maintained types for Express and Node.js
+(from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)) as development
+dependencies:
+
+<PackageManagerCommand command="npm install --save-dev typescript @types/express@4 @types/node" />
+
+<Alert type="avviso">
+
+Some middleware does not bundle its own type definitions. If you add an official middleware package
+that TypeScript reports as untyped, also install its types from DefinitelyTyped as a dev dependency,
+for example `@types/cors` alongside `cors`.
+
+</Alert>
+
+Add a `tsconfig.json`. These options mirror how Node.js runs TypeScript and make the compiler reject
+non-erasable syntax (such as `enum`s, namespaces, and parameter properties) that Node cannot strip:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
+```
+
+Write your application in TypeScript, annotating the request and response objects:
+
+```ts title="src/app.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+You do not need to annotate everything. When you pass a handler directly to a route method or to
+`app.use()`, Express infers the types of `req`, `res`, and `next`, and it infers route parameters
+from the path, so `req.params.id` is a `string` in `app.get('/users/:id', ...)`. Add explicit types
+only where TypeScript has no context to infer from: error-handling middleware, whose
+`(err, req, res, next)` signature is not inferred, and handlers you define separately from the route.
+In those cases, annotate the parameters or type the whole function as `RequestHandler` or
+`ErrorRequestHandler`.
+
+Run the file directly with Node.js, which strips the TypeScript types and runs the result without a
+build step:
+
+```bash
+node src/app.ts
+```
+
+<Alert type="info">
+
+Running `.ts` files directly requires Node.js >= 22.18.0 (or >= 23.6.0 on the v23 line) and
+TypeScript >= 5.8. Node strips the types but does not type-check them, so run `npx tsc` to type-check
+your project. For more details, see the Node.js guide on
+[running TypeScript natively](https://nodejs.org/learn/typescript/run-natively).
 
 </Alert>

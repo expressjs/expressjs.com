@@ -5,11 +5,12 @@ description: Express 用のシンプルなセッションミドルウェア
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="0.1.0"
+  version="1.19.0"
   github="https://github.com/expressjs/session"
-  npm="https://www.npmjs.com/package/session"
+  npm="https://www.npmjs.com/package/express-session"
 />
 
 ## インストール
@@ -18,9 +19,15 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 [npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install express-session
-```
+<PackageManagerCommand command="npm install express-session" />
+
+<Alert type="情報">
+
+`express-session` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/express-session" />
+
+</Alert>
 
 ## API
 
@@ -34,14 +41,19 @@ var session = require('express-session');
 
 **注意** セッションデータはクッキー自体に保存されず、セッションIDだけです。
 セッションデータはサーバーサイドに保存されます。
+セッションデータはサーバーサイドに保存されます。
 
 **注意** バージョン1.5.0以降、[`cookie-parser` middleware](https://www.npmjs.com/package/cookie-parser)
 はこのモジュールを動作させるために使用する必要がなくなりました。 このモジュールは
+を直接読み込み、 `req`/`res` に Cookie を書き込みます。 `cookie-parser` を使用すると、このモジュールと `cookie-parser` の間で`secret` が同じでない場合、
+が発生する可能性があります。 このモジュールは
 を直接読み込み、 `req`/`res` に Cookie を書き込みます。 `cookie-parser` を使用すると、このモジュールと `cookie-parser` の間で`secret` が同じでない場合、
 が発生する可能性があります。
 
 **警告** デフォルトのサーバーサイドセッションストレージである`MemoryStore`は、_意図的に_
 本番環境用に設計されていません。 ほとんどの
+条件下でメモリをリークし、単一のプロセスを経過させることはなく、デバッグと
+開発のためのものです。 ほとんどの
 条件下でメモリをリークし、単一のプロセスを経過させることはなく、デバッグと
 開発のためのものです。
 
@@ -56,7 +68,7 @@ var session = require('express-session');
 Settings object for the session ID cookie. デフォルト値は
 `{ path: '/', httpOnly: true, secure: false, maxAge: null }` です。
 
-静的オブジェクトを提供するだけでなく、各リクエストの Cookie オプションを動的に生成するコールバック関数を渡すこともできます。 コールバックは `req` オブジェクトを引数として受け取り、Cookie の設定を含むオブジェクトを返します。
+静的オブジェクトを提供するだけでなく、各リクエストの Cookie オプションを動的に生成するコールバック関数を渡すこともできます。 コールバックは `req` オブジェクトを引数として受け取り、Cookie の設定を含むオブジェクトを返します。 コールバックは `req` オブジェクトを引数として受け取り、Cookie の設定を含むオブジェクトを返します。
 
 ```js
 var app = express();
@@ -82,12 +94,13 @@ app.use(
 
 ##### cookie.domain
 
-`Domain` `Set-Cookie` 属性の値を指定します。 デフォルトでは、ドメイン
+`Domain` `Set-Cookie` 属性の値を指定します。 `Domain` `Set-Cookie` 属性の値を指定します。 デフォルトでは、ドメイン
 は設定されておらず、ほとんどのクライアントは現在の
 ドメインのみに適用するクッキーを考慮します。
 
 ##### cookie.expires
 
+`Expires `Set-Cookie`属性の値にする`Date`オブジェクトを指定します。
 `Expires `Set-Cookie`属性の値にする`Date\`オブジェクトを指定します。
 デフォルトでは、有効期限は設定されていません そして、ほとんどのクライアントはこれを
 "非永続クッキー"と見なし、Webブラウザ
@@ -103,6 +116,8 @@ app.use(
 
 `HttpOnly`Set-Cookie`属性の`boolean`値を指定します。 truthyの場合、
 `HttpOnly` 属性が設定されています。そうでなければ、そうではありません。 デフォルトでは、`HttpOnly\`
+属性が設定されています。 truthyの場合、
+`HttpOnly` 属性が設定されています。そうでなければ、そうではありません。 デフォルトでは、`HttpOnly`
 属性が設定されています。
 
 **Note** be careful when setting this to `true`, as compliant clients will not allow
@@ -113,6 +128,8 @@ client-side JavaScript to see the cookie in `document.cookie`.
 `Expires`
 `Set-Cookie` 属性を計算するときに使用する `number` (ミリ秒単位) を指定します。 これは現在のサーバ時間を要し、`Expires`日付を計算するための値に
 `maxAge`ミリ秒を追加することによって行われます。 デフォルトでは、
+の最大年齢は設定されていません。 これは現在のサーバ時間を要し、`Expires`日付を計算するための値に
+`maxAge`ミリ秒を追加することによって行われます。 デフォルトでは、
 の最大年齢は設定されていません。
 
 **注意** オプションで `expires` と `maxAge` の両方が設定されている場合、オブジェクトで定義された最後の
@@ -122,6 +139,7 @@ client-side JavaScript to see the cookie in `document.cookie`.
 
 [`Partitioned` `Set-Cookie`](https://github.com/expressjs/session/blob/HEAD/rfc-cutler-httpbis-partitioned-cookies)
 属性の `boolean` 値を指定します。 truthyの場合、`Partitioned` 属性が設定されています。そうでなければ、そうではありません。
+デフォルトでは、 `Partitioned` 属性は設定されていません。 truthyの場合、`Partitioned` 属性が設定されています。そうでなければ、そうではありません。
 デフォルトでは、 `Partitioned` 属性は設定されていません。
 
 **Note** This is an attribute that has not yet been fully standardized, and may
@@ -133,6 +151,7 @@ More information about can be found in [the proposal](https://github.com/privacy
 ##### cookie.path
 
 `Path` `Set-Cookie` の値を指定します。 デフォルトでは、これは `'/'` に設定されており、ドメインのルートパスは
+になります。 デフォルトでは、これは `'/'` に設定されており、ドメインのルートパスは
 になります。
 
 ##### cookie.priority
@@ -148,10 +167,12 @@ More information about can be found in [the proposal](https://github.com/privacy
 
 **注意** これは完全に標準化されていない属性であり、将来変更される可能性があります。
 これはまた、多くのクライアントがこの属性を理解するまでこの属性を無視することを意味します。
+これはまた、多くのクライアントがこの属性を理解するまでこの属性を無視することを意味します。
 
 ##### cookie.sameSite
 
 `Set-Cookie`属性の値にする`boolean`または`string`を指定します。
+デフォルトでは `false` です。
 デフォルトでは `false` です。
 
 - `true` は、サイトを厳密に強制するために `SameSite` 属性を `Strict` に設定します。
@@ -174,6 +195,8 @@ set to `'none'`. 一部のウェブブラウザや他のクライアントがこ
 The `cookie.sameSite` option can also be set to the special value `'auto'` to have
 this setting automatically match the determined security of the connection. 接続
 がセキュア(HTTPS)の場合、クロスサイトの使用を可能にするため、`SameSite`属性は`None`に設定されます。
+接続
+がセキュア(HTTPS)の場合、クロスサイトの使用を可能にするため、`SameSite`属性は`None`に設定されます。
 When the connection is not secure (HTTP), the `SameSite` attribute will be set to `Lax` for
 better security while maintaining functionality. これは、Express `"Trust proxy"`
 設定が適切にセットアップされている場合に便利で、開発と本番環境の設定、特に
@@ -182,6 +205,8 @@ SAML認証シナリオを簡素化します。
 ##### cookie.secure
 
 `Set-Cookie` 属性の `boolean` 値を指定します。 truthyの場合、
+`Secure` 属性が設定されています。そうでなければ、そうではありません。 デフォルトでは、`Secure`
+属性は設定されていません。 truthyの場合、
 `Secure` 属性が設定されています。そうでなければ、そうではありません。 デフォルトでは、`Secure`
 属性は設定されていません。
 
@@ -235,7 +260,7 @@ as once the cookie is set on HTTPS, it will no longer be visible over HTTP. こ�
 
 ##### genid
 
-新しいセッション ID を生成するために呼び出す関数。 Provide a function that returns
+新しいセッション ID を生成するために呼び出す関数。 新しいセッション ID を生成するために呼び出す関数。 Provide a function that returns
 a string that will be used as a session ID. The function is given `req` as the
 first argument if you want to use some value attached to `req` when generating
 the ID.
@@ -281,19 +306,22 @@ each other. 最も簡単な方法は、アプリごとに異なる`name`を設�
 
 ##### 保存する
 
-セッション
-がリクエスト中に変更されなかった場合でも、セッションストアに強制的に保存されます。 Depending on your store this may be
-necessary, but it can also create race conditions where a client makes two
-parallel requests to your server and changes made to the session in one
-request may get overwritten when the other request ends, even if it made no
-changes (this behavior also depends on what store you're using).
+ストアに保存される「初期化されていない」セッションを強制します。 A session is
+is uninitialized when it is new but not modified Choosing `false` is useful for
+implementing login sessions, reducing server storage usage, or complying with
+laws that require permission before setting a cookie. Choosing `false` will also
+help with race conditions where a client makes multiple parallel requests
+without a session.
 
-The default value is `true`, but using the default has been deprecated,
-as the default will change in the future. この設定
+デフォルト値は `true` ですが、
+のデフォルトが将来変更されるため、デフォルトを使用することは推奨されません。 この設定を調べて、
+あなたのユースケースに適したものを選択してください。 この設定
 を調べて、使用事例に適したものを選んでください。 通常は、
 `false` を使用します。
 
 これが自分の店で必要かどうかどうかを知るにはどうすればいいですか? 最良の方法は、`touch`メソッドを実装しているかどうか、店舗で
+確認することです。 もしそうであれば、
+は `resave: false` を安全に設定できます。 最良の方法は、`touch`メソッドを実装しているかどうか、店舗で
 確認することです。 もしそうであれば、
 は `resave: false` を安全に設定できます。 If it does not implement the `touch`
 method and your store sets an expiration date on stored sessions, then you
@@ -302,6 +330,8 @@ likely need `resave: true`.
 ##### ローリング
 
 セッション識別子クッキーをすべてのレスポンスに設定します。 有効期限
+は元の[`maxAge`](#cookiemaxage)にリセットされ、有効期限
+カウントダウンをリセットします。 有効期限
 は元の[`maxAge`](#cookiemaxage)にリセットされ、有効期限
 カウントダウンをリセットします。
 
@@ -329,9 +359,10 @@ laws that require permission before setting a cookie. Choosing `false` will also
 help with race conditions where a client makes multiple parallel requests
 without a session.
 
-デフォルト値は `true` ですが、
-のデフォルトが将来変更されるため、デフォルトを使用することは推奨されません。 この設定を調べて、
-あなたのユースケースに適したものを選択してください。
+The default value is `true`, but using the default has been deprecated,
+as the default will change in the future. この設定
+を調べて、使用事例に適したものを選んでください。 通常は、
+`false` を使用します。
 
 **Note** if you are using Session in conjunction with PassportJS, Passport
 will add an empty Passport object to the session for use after a user is
@@ -347,6 +378,11 @@ it to be saved. _PassportJS 0.3.0_ で修正されました
 型にすることができます。 これは単一のシークレット、または複数のシークレットの配列のいずれかになります。 If
 an array of secrets is provided, only the first element will be used to sign the
 session ID cookie, while all the elements will be considered when verifying the
+signature in requests. シークレットは、Node.js の `crypto.createHmac` (文字列や
+`Buffer` のように) でサポートされている値の
+型にすることができます。 これは単一のシークレット、または複数のシークレットの配列のいずれかになります。 If
+an array of secrets is provided, only the first element will be used to sign the
+session ID cookie, while all the elements will be considered when verifying the
 signature in requests. シークレット自体は人間によって簡単に解析されるべきではなく、
 はランダムな文字セットであることが最善です。 ベストプラクティスは以下のとおりです:
 
@@ -358,12 +394,13 @@ signature in requests. シークレット自体は人間によって簡単に解
 推測できないシークレットを使用すると、セッションを
 セッションIDを推測するだけのformat@@1にハイジャックすることができなくなります(`genid` オプションで決定されます)。
 
-シークレットの値を変更すると、既存のすべてのセッションが無効になります。 In order to rotate
+シークレットの値を変更すると、既存のすべてのセッションが無効になります。 シークレットの値を変更すると、既存のすべてのセッションが無効になります。 In order to rotate
 the secret without invalidating sessions, provide an array of secrets, with the new
 secret as first element of the array, and including previous secrets as the later
 elements.
 
 **注意** HMAC-256 はセッションIDに署名するために使用されます。 このため、シークレットは
+に少なくとも 32 バイトのエントロピーを含める必要があります。 このため、シークレットは
 に少なくとも 32 バイトのエントロピーを含める必要があります。
 
 ##### ストア
@@ -385,7 +422,7 @@ elements.
 
 セッションデータを保存またはアクセスするには、requestプロパティ`reqを使用します。 ession`, (一般的に) ストアによって JSON としてシリアライズされている
 ので、入れ子になったオブジェクト
-は通常問題ありません。 例えば、以下はユーザー固有のビューカウンターです。
+は通常問題ありません。 例えば、以下はユーザー固有のビューカウンターです。 例えば、以下はユーザー固有のビューカウンターです。
 
 ```js
 // Use the session middleware
@@ -408,7 +445,7 @@ app.get('/', function (req, res, next) {
 
 #### Session.regenerate(callback)
 
-セッションを再生成するには、単にメソッドを呼び出します。 完了すると、
+セッションを再生成するには、単にメソッドを呼び出します。 セッションを再生成するには、単にメソッドを呼び出します。 完了すると、
 新しいSIDと`Session` インスタンスが`req.session`
 で初期化され、`callback`が呼び出されます。
 
@@ -422,6 +459,7 @@ req.session.regenerate(function (err) {
 
 セッションを破壊し、`req.session` プロパティを解除します。
 完了すると、`callback` が呼び出されます。
+完了すると、`callback` が呼び出されます。
 
 ```js
 req.session.destroy(function (err) {
@@ -432,7 +470,7 @@ req.session.destroy(function (err) {
 #### Session.reload(callback)
 
 ストアからセッションデータをリロードし、
-`req.session` オブジェクトを再入力します。 完了すると、`callback` が呼び出されます。
+`req.session` オブジェクトを再入力します。 完了すると、`callback` が呼び出されます。 完了すると、`callback` が呼び出されます。
 
 ```js
 req.session.reload(function (err) {
@@ -449,6 +487,7 @@ req.session.reload(function (err) {
 このメソッドは、
 セッションデータが変更された場合、HTTPレスポンスの最後に自動的に呼び出されます(ミドルウェアコンストラクタの様々な
 オプションでこの動作を変更することができます)。 このため、通常、このメソッド
+を呼び出す必要はありません。 このため、通常、このメソッド
 を呼び出す必要はありません。
 
 リダイレクト、長寿命リクエスト、WebSocketなど、このメソッドを呼び出すと便利な場合があります。
@@ -466,14 +505,14 @@ req.session.save(function (err) {
 
 ### req.session.id
 
-各セッションには、それに関連付けられた一意のIDがあります。 This property is an
+各セッションには、それに関連付けられた一意のIDがあります。 各セッションには、それに関連付けられた一意のIDがあります。 This property is an
 alias of [`req.sessionID`](#reqsessionid-1) and cannot be modified.
 `session`
 オブジェクトからセッション ID をアクセス可能にするために追加されました。
 
 ### req.session.cookie
 
-各セッションには、それに付随する固有のクッキーオブジェクトがあります。 This allows
+各セッションには、それに付随する固有のクッキーオブジェクトがあります。 各セッションには、それに付随する固有のクッキーオブジェクトがあります。 This allows
 you to alter the session cookie per visitor. 例えば、
 `req.session.cookie.expires` を `false` に設定すると、ユーザーエージェントの期間のみクッキー
 を有効にできます。
@@ -483,6 +522,7 @@ you to alter the session cookie per visitor. 例えば、
 別の方法として、`req.session.cookie.maxAge`はミリ秒単位の残り時間
 を返し、`.expires`プロパティを適切に調整するために新しい値
 を再割り当てることもできます。 以下の
+は本質的に同等です 以下の
 は本質的に同等です
 
 ```js
@@ -509,12 +549,14 @@ req.session.cookie.maxAge; // => 30000
 
 ロードされたセッションの ID を取得するには、request プロパティ
 `req.sessionID` にアクセスします。 これは、セッション
+がロード/作成されたときに読み取り専用の値セットです。 これは、セッション
 がロード/作成されたときに読み取り専用の値セットです。
 
 ## セッションストアの実装
 
-すべてのセッションストア*must*は`EventEmitter`で、特定の
+すべてのセッションスト&#x30A2;_&#x6D;us&#x74;_&#x306F;`EventEmitter`で、特定の
 メソッドを実装します。 以下のメソッドは、**required**、**recommended**、
+、**optional**のリストです。 以下のメソッドは、**required**、**recommended**、
 、**optional**のリストです。
 
 - 必須メソッドは、このモジュールが常にストアで呼び出すメソッドです。
@@ -529,16 +571,15 @@ req.session.cookie.maxAge; // => 30000
 
 **任意**
 
-このオプションのメソッドは、ストア内のすべてのセッションを配列として取得するために使用されます。
-`callback` は `callback(error, sessions)` として呼び出されます。
+This required method is used to get a session from the store give a session
+ID (`sid`). `callback` は `callback(error, session)` と呼ばれます。
 
 ### store.destroy(sid, callback)
 
 **必須**
 
 This required method is used to destroy a session from the store given
-a session ID (`sid`).
-セッションが破棄されると、`callback(error)`として呼び出されます。
+a session ID (`sid`). セッションが破棄されると、`callback(error)`として呼び出されます。
 
 ### store.clear(callback)
 
@@ -546,12 +587,14 @@ a session ID (`sid`).
 
 このオプションの方法は、ストアからすべてのセッションを削除するために使用されます。
 `callback` は店舗がクリアされると`callback(error)`として呼び出されます。
+`callback` は店舗がクリアされると`callback(error)`として呼び出されます。
 
 ### store.length(callback)
 
 **任意**
 
 このオプションのメソッドは、ストア内のすべてのセッション数を取得するために使用されます。
+`callback` は `callback(error, len)` と呼ばれます。
 `callback` は `callback(error, len)` と呼ばれます。
 
 ### store.get(sid, callback)
@@ -563,6 +606,7 @@ ID (`sid`). `callback` は `callback(error, session)` と呼ばれます。
 
 `session` 引数が見つかった場合はセッションを指定します。それ以外の場合は `null` または
 `undefined` セッションが見つからなかった場合は (エラーがなかった場合) 特別な
+の場合は、 `error.code === 'ENOENT'` で `callback(null, null)` のように動作します。 特別な
 の場合は、 `error.code === 'ENOENT'` で `callback(null, null)` のように動作します。
 
 ### store.set(sid, session, callback)
@@ -571,6 +615,7 @@ ID (`sid`). `callback` は `callback(error, session)` と呼ばれます。
 
 この必須メソッドは、
 セッション ID (`sid`) とセッション (`session`) オブジェクトを与えられたストアにセッションをアップサートするために使用されます。 The callback should be
+should be `callback(error)` when the session has been set in the store. The callback should be
 should be `callback(error)` when the session has been set in the store.
 
 ### store.touch(sid, session, callback)
@@ -579,6 +624,7 @@ should be `callback(error)` when the session has been set in the store.
 
 この推奨メソッドは、
 セッション ID (`sid`) とセッション (`session`) オブジェクトを与えられた特定のセッションを「タッチ」するために使用されます。 The `callback` should be
+called as `callback(error)` once the session has been touched. The `callback` should be
 called as `callback(error)` once the session has been touched.
 
 This is primarily used when the store will automatically delete idle sessions
@@ -588,7 +634,7 @@ potentially resetting the idle timer.
 ## 互換性のあるセッションストア
 
 以下のモジュールは、この
-モジュールと互換性のあるセッションストアを実装します。 追加モジュールを追加するために PR を作成してください :)
+モジュールと互換性のあるセッションストアを実装します。 追加モジュールを追加するために PR を作成してください :) 追加モジュールを追加するために PR を作成してください :)
 
 [![★][aerospike-session-store-image] aerospike-session-store][aerospike-session-store-url] A session store using [Aerospike](http://www.aerospike.com/).
 
@@ -828,7 +874,7 @@ based session store. Fortune (ongoDB、Redis、Postgres、NeDB)でサポート�
 
 [session-file-store-url]: https://www.npmjs.com/package/session-file-store
 
-[![★][session-pouchdb-store-image] session-pouchdb-store][session-pouchdb-store-url] PouchDB / CouchDB用セッションストア 埋め込み、カスタム、またはリモートPouchDBインスタンスとリアルタイム同期を受け入れます。
+[![★][session-pouchdb-store-image] session-pouchdb-store][session-pouchdb-store-url] PouchDB / CouchDB用セッションストア 埋め込み、カスタム、またはリモートPouchDBインスタンスとリアルタイム同期を受け入れます。 埋め込み、カスタム、またはリモートPouchDBインスタンスとリアルタイム同期を受け入れます。
 
 [session-pouchdb-store-url]: https://www.npmjs.com/package/session-pouchdb-store
 

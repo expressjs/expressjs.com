@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/api#express.static).
+For more information on the `options` argument, see [express.static](/api/express/#expressstatic).
 
 For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
@@ -56,7 +56,7 @@ serving static assets.
 
 </Alert>
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api#app.use) for the static directory, as shown below:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -74,8 +74,14 @@ http://localhost:3000/static/hello.html
 
 However, the path that you provide to the `express.static` function is relative to the directory from where you launch your `node` process. If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
 
-```js
+```cjs title="index.cjs"
 const path = require('path');
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```mjs title="index.mjs"
+import path from 'path';
+
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 

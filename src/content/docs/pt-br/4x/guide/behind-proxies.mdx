@@ -17,7 +17,7 @@ a combinação da configuração no Express corresponda a como o proxy reverso f
 
 A configuração do aplicativo 'proxy confiável' pode ser definida para um dos valores listados na tabela a seguir.
 
-<table class="Docável" border="1" markdown="1">
+<table class="doclist" border="1" markdown="1">
   <thead><tr><th>Digite</th><th>Valor</th></tr></thead>
   <tbody>
     <tr>
@@ -71,6 +71,14 @@ Execução de confiança personalizada.
 
 ```js
 app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
+  else return false;
+});
+```
+
+```ts
+app.set('trust proxy', (ip: string) => {
   if (ip === '127.0.0.1' || ip === '123.123.123.123')
     return true; // trusted IPs
   else return false;

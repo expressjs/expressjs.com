@@ -4,6 +4,7 @@ description: Aprenda a usar o middleware em aplicativos do Express.js, incluindo
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Express é uma web framework de roteamento e middleware que tem a funcionalidade mínima de sua própria funcionalidade: Um aplicativo Express é essencialmente uma série de chamadas de função middleware.
 
@@ -35,11 +36,33 @@ Vincular aplicativo de nível middleware a uma instância do [objeto de aplicati
 
 Este exemplo mostra uma função middleware sem caminho de montagem. A função é executada toda vez que o aplicativo recebe uma solicitação.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 
 app.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+app.use((req: Request, res: Response, next: NextFunction) => {
   console.log('Time:', Date.now());
   next();
 });
@@ -55,10 +78,27 @@ app.use('/user/:id', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  console.log('Request Type:', req.method);
+  next();
+});
+```
+
 Este exemplo mostra uma rota e sua função de manipulador (sistema de middleware). A função lida com requisições GET para o caminho `/user/:id`.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
+  res.send('USER');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   res.send('USER');
 });
 ```
@@ -74,6 +114,22 @@ app.use(
     next();
   },
   (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
     console.log('Request Type:', req.method);
     next();
   }
@@ -98,6 +154,26 @@ app.get(
 
 // handler for the /user/:id path, which prints the user ID
 app.get('/user/:id', (req, res, next) => {
+  res.send(req.params.id);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('ID:', req.params.id);
+    next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    res.send('User Info');
+  }
+);
+
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   res.send(req.params.id);
 });
 ```
@@ -134,6 +210,29 @@ app.get('/user/:id', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    // if the user ID is 0, skip to the next route
+    if (req.params.id === '0') next('route');
+    // otherwise pass the control to the next middleware function in this stack
+    else next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    // send a regular response
+    res.send('regular');
+  }
+);
+
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  res.send('special');
+});
+```
+
 O Middleware também pode ser declarado em um array para reutilizabilidade.
 
 Este exemplo mostra um array com um sub-stack de middleware que lida com requisições GET para o caminho `/user/:id`
@@ -155,6 +254,25 @@ app.get('/user/:id', logStuff, (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function logOriginalUrl(req: Request, res: Response, next: NextFunction) {
+  console.log('Request URL:', req.originalUrl);
+  next();
+}
+
+function logMethod(req: Request, res: Response, next: NextFunction) {
+  console.log('Request Type:', req.method);
+  next();
+}
+
+const logStuff = [logOriginalUrl, logMethod];
+app.get('/user/:id', logStuff, (req: Request, res: Response, next: NextFunction) => {
+  res.send('User Info');
+});
+```
+
 ## Midddleware nível de roteamento
 
 O middleware de roteador funciona da mesma maneira que o middleware no nível de aplicativo, exceto que está vinculado a uma instância de `express.Router()`.
@@ -163,11 +281,17 @@ O middleware de roteador funciona da mesma maneira que o middleware no nível de
 const router = express.Router();
 ```
 
+```ts
+import express from 'express';
+
+const router = express.Router();
+```
+
 Carregue o middleware no nível de roteador usando as funções `router.use()` e `router.METHOD()`.
 
 O código a seguir replica o sistema middleware que é mostrado acima para o middleware no nível de aplicativos, usando o middleware no nível de roteador:
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 const router = express.Router();
@@ -216,12 +340,112 @@ router.get('/user/:id', (req, res, next) => {
 app.use('/', router);
 ```
 
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+const router = express.Router();
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
+  '/user/:id',
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
+  },
+  (req, res, next) => {
+    // render a regular page
+    res.render('regular');
+  }
+);
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
+  res.render('special');
+});
+
+// mount the router on the app
+app.use('/', router);
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+const router = express.Router();
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req: Request, res: Response, next: NextFunction) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    // render a regular page
+    res.render('regular');
+  }
+);
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.params.id);
+  res.render('special');
+});
+
+// mount the router on the app
+app.use('/', router);
+```
+
 Para ignorar o resto das funções de middleware do roteador, chame `next('router')`
 para passar o controle de volta para fora da instância do roteador.
 
 Este exemplo mostra uma sub-pilha de middleware que lida com requisições GET para o caminho `/user/:id`.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 const router = express.Router();
@@ -238,6 +462,50 @@ router.get('/user/:id', (req, res) => {
 
 // use the router and 401 anything falling through
 app.use('/admin', router, (req, res) => {
+  res.sendStatus(401);
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+const router = express.Router();
+
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!');
+});
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
+  res.sendStatus(401);
+});
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+const router = express.Router();
+
+// predicate the router with a check and bail out when needed
+router.use((req: Request, res: Response, next: NextFunction) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+router.get('/user/:id', (req: Request, res: Response) => {
+  res.send('hello, user!');
+});
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req: Request, res: Response) => {
   res.sendStatus(401);
 });
 ```
@@ -262,6 +530,15 @@ app.use((err, req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
 Para detalhes sobre o middleware, consulte: [Error handling](/guide/error-handling).
 
 ## Midddleware integrado
@@ -271,9 +548,9 @@ funções que foram previamente incluídas com Express estão agora em módulos 
 
 O Express tem as seguintes funções de middleware incorporadas:
 
-- [express.static](/api#express.static) serve como arquivos estáticos, como arquivos HTML, imagens e assim por diante.
-- [express.json](/api#express.json) analisa solicitações recebidas com carga JSON. **NOTA: Disponível com Expresso 4.16.0+**
-- [express.urlencoded](/api#express.urlencoded) analisa solicitações recebidas com payloads codificados por URL. **NOTA: Disponível com Expresso 4.16.0+**
+- [express.static](/api/express/#expressstatic) serves static assets such as HTML files, images, and so on.
+- [express.json](/api/express/#expressjson) parses incoming requests with JSON payloads. **NOTA: Disponível com Expresso 4.16.0+**
+- [express.urlencoded](/api/express/#expressurlencoded) parses incoming requests with URL-encoded payloads. **NOTA: Disponível com Expresso 4.16.0+**
 
 ## Midddleware de terceiros
 
@@ -283,14 +560,32 @@ Instale o módulo Node.js para a funcionalidade requerida e, em seguida, carregu
 
 O exemplo a seguir ilustra a instalação e o carregamento da função middleware de análise de cookie-parser\`.
 
-```bash
-$ npm install cookie-parser
-```
+<PackageManagerCommand command="npm install cookie-parser" />
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
+
+// load the cookie-parsing middleware
+app.use(cookieParser());
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import cookieParser from 'cookie-parser';
+
+const app = express();
+
+// load the cookie-parsing middleware
+app.use(cookieParser());
+```
+
+```ts title="index.ts"
+import express, { type Express } from 'express';
+import cookieParser from 'cookie-parser';
+
+const app: Express = express();
 
 // load the cookie-parsing middleware
 app.use(cookieParser());

@@ -22,7 +22,7 @@ process.on('SIGTERM', () => {
 
 ## Controlli sanitari
 
-Un bilanciatore del carico utilizza controlli sanitari per determinare se un'istanza di applicazione è sana e può accettare le richieste. Ad esempio, [Kubernetes ha due controlli di salute](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+Un bilanciatore del carico utilizza controlli sanitari per determinare se un'istanza di applicazione è sana e può accettare le richieste. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes//):
 
 - `liveness`, che determina quando riavviare un contenitore.
 - `pronte`, che determina quando un contenitore è pronto per iniziare ad accettare il traffico. Quando un baccello non è pronto, viene rimosso dai balanceri di carico di servizio.
