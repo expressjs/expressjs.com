@@ -6,7 +6,7 @@
 import { Body } from '@components/primitives';
 import { Icon } from 'astro-icon/components';
 import type { BreadcrumbItem } from '@utils/content';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getHomePath, getLangFromUrl, useTranslations } from '@/i18n/utils';
 import './Breadcrumbs.css';
 
 interface Props {
@@ -16,6 +16,7 @@ interface Props {
 const { items } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const homeHref = getHomePath(lang);
 ---
 
 <nav aria-label={t('nav.breadcrumb')}>
@@ -24,7 +25,7 @@ const t = useTranslations(lang);
       <Body
         vMargin={false}
         as="a"
-        href={`/${lang}`}
+        href={homeHref}
         class="breadcrumb-link"
         aria-label={t('nav.home')}
       >

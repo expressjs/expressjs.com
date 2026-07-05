@@ -58,7 +58,8 @@ const options = languages.map((lang) => ({
         const currentPath = window.location.pathname;
         const newPath = replaceLanguageInPath(currentPath, code);
 
-        window.location.href = newPath;
+        // The English homepage is canonically served at `/`, not `/en/`.
+        window.location.href = newPath === '/en/' ? '/' : newPath;
       }) as EventListener);
     });
   }

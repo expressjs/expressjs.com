@@ -2,11 +2,11 @@
 import { Hero, Features, AnnouncementBar } from '@components/patterns';
 import { Card, Col } from '@components/primitives';
 import Layout from '@layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { getHomePath, getLangFromUrl, useTranslations } from '@i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const canonicalPathname = lang === 'en' ? '/' : `/${lang}/`;
+const canonicalPathname = getHomePath(lang);
 ---
 
 <Layout canonicalPathname={canonicalPathname}>

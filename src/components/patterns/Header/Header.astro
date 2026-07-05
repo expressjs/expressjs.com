@@ -10,11 +10,11 @@ import { Icon } from 'astro-icon/components';
 import { Flex } from '@/components/primitives';
 import { ThemeSwitcher, SearchBox, LanguageSelect } from '@components/patterns';
 import { languagesArray } from '@/i18n/locales';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getHomePath, getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
-const homeHref = currentLang === 'en' ? '/' : `/${currentLang}/`;
+const homeHref = getHomePath(currentLang);
 ---
 
 <header class="header">
