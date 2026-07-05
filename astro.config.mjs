@@ -11,6 +11,7 @@ import Icons from 'unplugin-icons/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import redirects from './src/config/redirects/index.js';
+import removedPages from './src/config/redirects/removed-pages.json' with { type: 'json' };
 import { accessibleTablesIntegration } from './src/plugins/rehype-accessible-tables.mjs';
 import remarkRewriteLocalizedLinks from './src/plugins/remark-rewrite-localized-links.mjs';
 import remarkCodeTabs from './src/plugins/remark-code-tabs.mjs';
@@ -20,6 +21,10 @@ import rehypeRewriteLocalizedLinks from './src/plugins/rehype-rewrite-localized-
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
 
 const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
+
+// Unlocalized paths of deleted pages. `[...path].astro` emits `noindex` redirect
+// stubs for these in every locale; keep those stubs out of the sitemap.
+const removedPagePaths = new Set(Object.keys(removedPages));
 
 // https://astro.build/config
 export default defineConfig({
@@ -69,11 +74,16 @@ export default defineConfig({
     react(),
     sitemap({
       // Only the canonical /<locale>/… URLs belong in the sitemap. The catch-all
-      // `[...path].astro` also emits language-less redirect stubs (e.g. `/guide/x`,
-      // and `/` → `/en/`, all `noindex`); drop anything without a locale prefix.
+      // `[...path].astro` also emits `noindex` redirect stubs: language-less ones
+      // (e.g. `/guide/x`, `/` → `/en/`) and per-locale ones for deleted pages
+      // (e.g. `/en/resources/middleware/csurf`). Exclude both.
       // Keep this locale list in sync with `i18n.locales` below.
-      filter: (page) =>
-        /^\/(de|en|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)(\/|$)/.test(new URL(page).pathname),
+      filter: (page) => {
+        const { pathname } = new URL(page);
+        if (!/^\/(de|en|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)(\/|$)/.test(pathname)) return false;
+        const unlocalized = pathname.replace(/^\/[a-z-]+/, '').replace(/\/$/, '');
+        return !removedPagePaths.has(unlocalized);
+      },
       i18n: {
         defaultLocale: 'en',
         locales: {
