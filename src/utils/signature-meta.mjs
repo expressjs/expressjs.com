@@ -45,10 +45,16 @@ export const signatureMetaToText = (content) => {
   // `attributesTitle` prop. Matches are visited in document order, so the
   // Signature opening tag is always seen before its slots.
   let attributesTitle = 'Arguments';
-  return content.replace(JSX_META_TAG, (tag, component, attrs, slot) => {
+  return content.replace(JSX_META_TAG, (tag, component, attrs, slot, offset, source) => {
+    // Keep the tag's own indentation, which mirrors the nesting depth in the
+    // source, so replacements stay visually grouped under their section.
+    const lineStart = source.lastIndexOf('\n', offset - 1) + 1;
+    const beforeTag = source.slice(lineStart, offset);
+    const indent = /^[ \t]*$/.test(beforeTag) ? beforeTag : '';
+
     if (slot) {
       const title = slot === 'attributes' ? attributesTitle : slot === 'properties' ? 'Properties' : 'Returns';
-      return `\n\n${title}:\n\n`;
+      return `\n\n${indent}${title}:\n\n`;
     }
 
     const since = getAttr(attrs, 'since');
@@ -64,7 +70,7 @@ export const signatureMetaToText = (content) => {
         since && `added in ${since}`,
         deprecated && `deprecated in ${deprecated}`,
       ].filter(Boolean);
-      return `\n\n${name}${details.length ? ` (${details.join(', ')})` : ''}:\n\n`;
+      return `\n\n${indent}- ${name}${details.length ? ` (${details.join(', ')})` : ''}:\n\n`;
     }
 
     attributesTitle = getAttr(attrs, 'attributesTitle') ?? 'Arguments';
