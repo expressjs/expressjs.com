@@ -79,9 +79,14 @@ while IFS= read -r line; do
     echo "fetching $repo/$path..." >&2
     RAW=$(curl -s "https://raw.githubusercontent.com/${repo}/HEAD/${path}")
 
-    # Convert relative links to absolute GitHub URLs
+    # Convert relative links to absolute GitHub URLs, resolved from the source file's directory
     BASEURL="https://github.com/${repo}/blob/HEAD"
-    RAW=$(echo "$RAW" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
+    if [[ "$path" == */* ]]; then
+      linkprefix="${path%/*}/"
+    else
+      linkprefix=""
+    fi
+    RAW=$(echo "$RAW" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/${linkprefix}\1)|g")
 
     TRANSFORMED=$(transform_content "$RAW" "$level")
     echo "$TRANSFORMED"
