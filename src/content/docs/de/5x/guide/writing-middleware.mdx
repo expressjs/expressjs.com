@@ -29,11 +29,35 @@ Der Rest dieses Artikels definiert und fügt der Anwendung drei Middleware-Funkt
 eine mit dem Namen `myLogger`, die eine einfache Logmeldung ausgibt, einen namens `requestTime`, der
 den Zeitstempel der HTTP-Anfrage anzeigt und einen, der `validateCookies` genannt wird, der eingehende Cookies validiert.
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
@@ -53,6 +77,21 @@ const myLogger = function (req, res, next) {
 };
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const myLogger = function (req: Request, res: Response, next: NextFunction) {
+  console.log('LOGGED');
+  next();
+};
+```
+
+Here `myLogger` is defined on its own rather than passed directly to `app.use()`, so TypeScript has
+no context to infer its parameters and they are annotated explicitly. You can instead type the whole
+function as `RequestHandler`, which types `req`, `res`, and `next` for you. When the middleware is
+written inline in the `app.use()` call, Express infers those three parameters and no annotations are
+needed.
+
 <Alert type="warnung">
 
 Beachten Sie den obigen Aufruf zu `next()`. Beim Aufruf dieser Funktion wird die nächste Middleware-Funktion in
@@ -65,7 +104,7 @@ der App aufgerufen. Die `next()` Funktion ist kein Teil des Knotens. s oder Expr
 Um die Middleware-Funktion zu laden, rufen Sie `app.use()` auf, indem Sie die Middleware-Funktion angeben.
 Zum Beispiel lädt der folgende Code die `myLogger` Middleware-Funktion vor der Route zum Root-Pfad (/).
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 
@@ -77,6 +116,44 @@ const myLogger = function (req, res, next) {
 app.use(myLogger);
 
 app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+
+const myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+const myLogger = function (req: Request, res: Response, next: NextFunction) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
@@ -96,6 +173,32 @@ Die Middleware-Funktion `myLogger` druckt einfach eine Nachricht, übergibt dann
 Als nächstes erstellen wir eine Middleware-Funktion namens "requestTime" und fügen eine Eigenschaft namens `requestTime`
 dem Anfrageobjekt hinzu.
 
+<Alert type="warnung">
+
+Because the middleware adds a property to `req`, extend the request type in TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Declare
+the property (as optional, since a middleware may not run for every request) in a `.d.ts` file that
+is part of your project:
+
+```ts title="types/express.d.ts"
+declare global {
+  namespace Express {
+    interface Request {
+      requestTime?: number;
+    }
+  }
+}
+
+export {};
+```
+
+TypeScript picks up the file automatically, so no `tsconfig.json` change is needed unless you have
+set a custom `include` that does not cover its location. See
+[Extending the API in TypeScript](/guide/overriding-express-api#extending-the-api-in-typescript) for
+adding other custom properties and methods.
+
+</Alert>
+
 ```js
 const requestTime = function (req, res, next) {
   req.requestTime = Date.now();
@@ -103,9 +206,18 @@ const requestTime = function (req, res, next) {
 };
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const requestTime = function (req: Request, res: Response, next: NextFunction) {
+  req.requestTime = Date.now();
+  next();
+};
+```
+
 Die App verwendet nun die „requestTime“-Middleware-Funktion. Auch die Callback-Funktion der Root-Pfadroute verwendet die Eigenschaft, die die Middleware-Funktion zu `req` hinzufügt (das Anfrageobjekt).
 
-```js
+```cjs title="index.cjs"
 const express = require('express');
 const app = express();
 
@@ -117,6 +229,48 @@ const requestTime = function (req, res, next) {
 app.use(requestTime);
 
 app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+const requestTime = function (req: Request, res: Response, next: NextFunction) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req: Request, res: Response) => {
   let responseText = 'Hello World!<br>';
   responseText += `<small>Requested at: ${req.requestTime}</small>`;
   res.send(responseText);
@@ -143,9 +297,19 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Hier verwenden wir die [`cookie-parser`](/resources/middleware/cookie-parser) Middleware, um eingehende Cookies vom `req` Objekt zu analysieren und sie an unsere `cookieValidator` Funktion zu übergeben. Die `validateCookies` Middleware gibt ein Versprechen zurück, das bei Ablehnung automatisch unseren Fehlerhandler auslöst.
+```ts
+async function cookieValidator(cookies: Record<string, string>) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
+  } catch {
+    throw new Error('Invalid cookies');
+  }
+}
+```
 
-```js
+Die `validateCookies` Middleware gibt ein Versprechen zurück, das bei Ablehnung automatisch unseren Fehlerhandler auslöst. Hier verwenden wir die [`cookie-parser`](/resources/middleware/cookie-parser) Middleware, um eingehende Cookies vom `req` Objekt zu analysieren und sie an unsere `cookieValidator` Funktion zu übergeben.
+
+```cjs title="index.cjs"
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cookieValidator = require('./cookieValidator');
@@ -163,6 +327,54 @@ app.use(validateCookies);
 
 // error handler
 app.use((err, req, res, next) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cookieValidator from './cookieValidator';
+
+const app = express();
+
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+import cookieParser from 'cookie-parser';
+import cookieValidator from './cookieValidator';
+
+const app: Express = express();
+
+async function validateCookies(req: Request, res: Response, next: NextFunction) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(400).send(err.message);
 });
 
@@ -187,9 +399,7 @@ Für weitere Informationen über Express Middleware siehe: [Express Middleware](
 
 Wenn Sie Ihre Middleware konfigurieren müssen, exportieren Sie eine Funktion, die ein Optionsobjekt oder andere Parameter akzeptiert, , die dann die Middleware-Implementierung basierend auf den Eingabeparametern zurückgibt.
 
-Datei: `my-middleware.js`
-
-```js
+```cjs title="my-middleware.cjs"
 module.exports = function (options) {
   return function (req, res, next) {
     // Implement the middleware function based on the options object
@@ -198,10 +408,36 @@ module.exports = function (options) {
 };
 ```
 
+```mjs title="my-middleware.mjs"
+export default function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+}
+```
+
+```ts title="my-middleware.ts"
+import { type Request, type Response, type NextFunction } from 'express';
+
+export default function (options: Record<string, unknown>) {
+  return function (req: Request, res: Response, next: NextFunction) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+}
+```
+
 Die Middleware kann nun wie unten gezeigt verwendet werden.
 
-```js
-const mw = require('./my-middleware.js');
+```cjs title="index.cjs"
+const mw = require('./my-middleware.cjs');
+
+app.use(mw({ option1: '1', option2: '2' }));
+```
+
+```mjs title="index.mjs"
+import mw from './my-middleware.mjs';
 
 app.use(mw({ option1: '1', option2: '2' }));
 ```

@@ -27,7 +27,7 @@ Eine Funktion, die von der Express-Routing Layer vor dem letzten Request-Handler
 
 - `var foo = require('middleware')` heißt _requiring_ oder _using_ ein Node.js Modul. Dann gibt die Anweisung `var mw = foo()` typischerweise die Middleware zurück.
 - `app.use(mw)` heißt _adding the middleware to the global processing stack_.
-- `app.get('/foo', mw, function (req, res) { ... })` heißt _adding the middleware to the "GET /foo" processing stack_.
+- `app.get('/foo', mw, (req, res) => { /* ... */ })` is called _adding the middleware to the "GET /foo" processing stack_.
 
 ## Node.js
 
@@ -46,11 +46,11 @@ und hyphenieren ein Compound Adjektiv.
 
 ## anfragen
 
-Eine HTTP-Anfrage. Ein Client sendet eine HTTP-Anfrage an einen Server, der eine Antwort zurückgibt. Die Anfrage muss eine von mehreren [Anfragemethoden](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) wie GET, POST usw. verwenden.
+Eine HTTP-Antwort. Ein Server gibt dem Client eine HTTP-Antwortmeldung zurück. Die Antwort enthält Vollständigkeitsinformationen über die Anfrage und kann auch angeforderte Inhalte in ihrem Nachrichtentext enthalten.
 
 ## antwort
 
-Eine HTTP-Antwort. Ein Server gibt dem Client eine HTTP-Antwortmeldung zurück. Die Antwort enthält Vollständigkeitsinformationen über die Anfrage und kann auch angeforderte Inhalte in ihrem Nachrichtentext enthalten.
+Eine HTTP-Anfrage. Ein Client sendet eine HTTP-Anfrage an einen Server, der eine Antwort zurückgibt. Die Antwort enthält Vollständigkeitsinformationen über die Anfrage und kann auch angeforderte Inhalte in ihrem Nachrichtentext enthalten.
 
 ## routen
 

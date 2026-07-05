@@ -5,14 +5,16 @@ description: multipart/form-dataを扱うためのミドルウェア
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.1.1"
+  version="2.2.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
 
 Multer は `multipart/form-data` を扱うための node.js ミドルウェアで、主にファイルのアップロードに使用されます。
+の上に [busboy](https://github.com/mscdex/busboy)と書かれており、最大限の効率を得ることができます。
 の上に [busboy](https://github.com/mscdex/busboy)と書かれており、最大限の効率を得ることができます。
 
 **注意**: Multer はマルチパートでないフォームを処理しません (`multipart/form-data`)。
@@ -36,13 +38,19 @@ Multer は `multipart/form-data` を扱うための node.js ミドルウェア�
 
 ## インストール
 
-```sh
-$ npm install multer
-```
+<PackageManagerCommand command="npm install multer" />
+
+<Alert type="情報">
+
+`multer` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/multer" />
+
+</Alert>
 
 ## 使用法
 
-Multer は `body` オブジェクトと `file` または `files` オブジェクトを `request` オブジェクトに追加します。 `body` オブジェクトには、フォームのテキストフィールドの値が含まれています。`file` または `files` オブジェクトには、フォームを介してアップロードされたファイルが含まれています。
+Multer は `body` オブジェクトと `file` または `files` オブジェクトを `request` オブジェクトに追加します。 `body` オブジェクトには、フォームのテキストフィールドの値が含まれています。`file` または `files` オブジェクトには、フォームを介してアップロードされたファイルが含まれています。 `body` オブジェクトには、フォームのテキストフィールドの値が含まれています。`file` または `files` オブジェクトには、フォームを介してアップロードされたファイルが含まれています。
 
 基本的な使用例:
 
@@ -99,7 +107,7 @@ app.post('/profile', upload.none(), function (req, res, next) {
 });
 ```
 
-multer が HTML 形式でどのように使用されるかについての例を示します。 `enctype="multipart/form-data"と`name="uploaded_file"\`フィールドの特に注意してください。
+multer が HTML 形式でどのように使用されるかについての例を示します。 multer が HTML 形式でどのように使用されるかについての例を示します。 `enctype="multipart/form-data"と`name="uploaded_file"\`フィールドの特に注意してください。
 
 ```html
 <form action="/stats" enctype="multipart/form-data" method="post">
@@ -111,7 +119,7 @@ multer が HTML 形式でどのように使用されるかについての例を�
 </form>
 ```
 
-次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。 アップロード関数のフォームから `name` フィールドの値を使用することが重要です。 これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。 これらのフィールドが HTML フォームとサーバーで同じでない場合、アップロードに失敗します:
+次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。 アップロード関数のフォームから `name` フィールドの値を使用することが重要です。 これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。 次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。 アップロード関数のフォームから `name` フィールドの値を使用することが重要です。 これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。 これらのフィールドが HTML フォームとサーバーで同じでない場合、アップロードに失敗します:
 
 ```javascript
 const multer = require('multer');
@@ -146,19 +154,21 @@ app.post('/stats', upload.single('uploaded_file'), function (req, res) {
 Multer は options オブジェクトを受け付けます。最も基本的なオブジェクトは `dest`
 プロパティで、Multer はファイルのアップロード先を指定します。
 オプションオブジェクトを省略した場合、ファイルはメモリに保存され、ディスクに書き込まれることはありません。
+オプションオブジェクトを省略した場合、ファイルはメモリに保存され、ディスクに書き込まれることはありません。
 
 デフォルトでは、Multer は名前の衝突を避けるためにファイルの名前を変更します。
+の名前変更機能は、必要に応じてカスタマイズできます。
 の名前変更機能は、必要に応じてカスタマイズできます。
 
 Multer に渡すことができるオプションは以下のとおりです。
 
-| キー                    | 説明                                                                                                                                                  |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dest` または `storage` | ファイルを保存する場所                                                                                                                                |
-| `fileFilter`            | 受け入れられるファイルを制御する関数                                                                                                                  |
-| `limits`                | アップロードしたデータの制限                                                                                                                          |
-| `preservePath`          | ベース名の代わりにファイルの完全なパスを保持します                                                                                                    |
-| `defParamCharset`       | 拡張パラメータではない (明示的な文字セットを含む) 部品ヘッダーパラメータの値(ファイル名など)に使用するデフォルトの文字セット。 デフォルト: `'latin1'` |
+| キー                    | 説明                                                                                                                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dest` または `storage` | ファイルを保存する場所                                                                                                                                                       |
+| `fileFilter`            | 受け入れられるファイルを制御する関数                                                                                                                                         |
+| `limits`                | アップロードしたデータの制限                                                                                                                                                 |
+| `preservePath`          | ベース名の代わりにファイルの完全なパスを保持します                                                                                                                           |
+| `defParamCharset`       | 拡張パラメータではない (明示的な文字セットを含む) 部品ヘッダーパラメータの値(ファイル名など)に使用するデフォルトの文字セット。 デフォルト: `'latin1'` デフォルト: `'latin1'` |
 
 In an average web app, only `dest` might be required, and configured as shown in
 the following example.
@@ -169,25 +179,28 @@ const upload = multer({ dest: 'uploads/' });
 
 アップロードをもっと制御したい場合は、`dest` の代わりに `storage`
 オプションを使用します。 Multer はストレージエンジン `DiskStorage`
+と `MemoryStorage` を搭載しています。より多くのエンジンはサードパーティから入手できます。 Multer はストレージエンジン `DiskStorage`
 と `MemoryStorage` を搭載しています。より多くのエンジンはサードパーティから入手できます。
 
 #### `.single(fieldname)`
 
 `fieldname`という名前のファイルを受け入れます。 単一のファイルは
+を `req.file` に格納します。 単一のファイルは
 を `req.file` に格納します。
 
 #### `.array(fieldname[, maxCount])`
 
 `fieldname`という名前のファイルの配列を受け入れます。 必要に応じて、
-が `maxCount`ファイルよりも大きい場合にエラーが発生します。 ファイルの配列は
+が `maxCount`ファイルよりも大きい場合にエラーが発生します。 ワイヤ上にあるすべてのファイルを受け入れます。 ファイルの配列は
 `req.files` に格納されます。
 
 #### `.fields(fields)`
 
-`fields`で指定されたファイルのミックスを受け入れます。 ファイル
+`fields`で指定されたファイルのミックスを受け入れます。 `fields`で指定されたファイルのミックスを受け入れます。 ファイル
 の配列を持つオブジェクトは`req.files`に保存されます。
 
 `fields`は、`name`とオプションで`maxCount`を持つオブジェクトの配列でなければなりません。
+例
 例
 
 ```javascript
@@ -208,8 +221,10 @@ const upload = multer({ dest: 'uploads/' });
 `req.files` に格納されます。
 
 **警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。
+**警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。
 悪意のあるユーザーが予想していなかったルートに
 ファイルをアップロードできるため、multer をグローバルミドルウェアとして追加しないでください。 アップロードされたファイルを処理しているルート
+でのみこの機能を使用してください。 アップロードされたファイルを処理しているルート
 でのみこの機能を使用してください。
 
 ### `storage`
@@ -233,6 +248,7 @@ const upload = multer({ storage: storage });
 ```
 
 `destination` と `filename` の2つのオプションが利用できます。 これらはどちらも、ファイルをどこに保存するかを決める
+関数です。 これらはどちらも、ファイルをどこに保存するかを決める
 関数です。
 
 `destination` is used to determine within which folder the uploaded files should
@@ -242,11 +258,14 @@ be stored. これは文字列として与えることもできます(例: `'/tmp
 
 **注意:** 関数として
 `destination` を指定するときにディレクトリを作成します。 文字列を渡すとき、multer は
+ディレクトリが作成されていることを確認します。 文字列を渡すとき、multer は
 ディレクトリが作成されていることを確認します。
 
-フォルダ内のファイル名を指定するには、`filename` を使用します。
-If no `filename` is given, each file will be given a random name that doesn't
-include any file extension.
+`destination` is used to determine within which folder the uploaded files should
+be stored.
+これは文字列として与えることもできます(例: `'/tmp/uploads`)。
+`destination` が指定されていない場合は、一時的な
+ファイルのオペレーティングシステムのデフォルトディレクトリが使用されます。
 
 **注意:** Multer はファイル拡張子を追加しません。あなたの関数
 はファイル拡張子の完全なファイル名を返します。
@@ -265,6 +284,7 @@ null を渡す必要がある)を理解するには、
 
 メモリストレージエンジンはファイルを `Buffer` オブジェクトとして保存します。
 にはオプションはありません。
+にはオプションはありません。
 
 ```javascript
 const storage = multer.memoryStorage();
@@ -280,26 +300,27 @@ memory storage is used.
 
 ### `limits`
 
-次のオプションプロパティのサイズ制限を指定するオブジェクト。 Multer はこのオブジェクトを busboy に直接渡し、プロパティの詳細は [busboy's page](https://github.com/mscdex/busboy#busboy-methods) にあります。
+次のオプションプロパティのサイズ制限を指定するオブジェクト。 次のオプションプロパティのサイズ制限を指定するオブジェクト。 Multer はこのオブジェクトを busboy に直接渡し、プロパティの詳細は [busboy's page](https://github.com/mscdex/busboy#busboy-methods) にあります。
 
 次の整数値が使用できます。
 
-| キー            | 説明                                                               | デフォルト |
-| --------------- | ------------------------------------------------------------------ | ---------- |
-| `fieldNameSize` | 最大フィールド名のサイズ                                           | 100 バイト |
-| `fieldSize`     | 最大フィールド値のサイズ (バイト単位)                              | 1MB        |
-| `fields`        | ファイル以外のフィールドの最大数                                   | Infinity   |
-| `fileSize`      | マルチパート形式の場合、最大ファイルサイズ（バイト単位）           | Infinity   |
-| `files`         | 複数形の場合、ファイルフィールドの最大数                           | Infinity   |
-| `parts`         | マルチパートフォームの場合、部品の最大数 (フィールド + ファイル)   | Infinity   |
-| `headerPairs`   | マルチパートフォームの場合、解析する最大ヘッダーキー=>値のペアの数 | 2000       |
+| キー                | 説明                                                                       | デフォルト |
+| ------------------- | -------------------------------------------------------------------------- | ---------- |
+| `fieldNameSize`     | 最大フィールド名のサイズ                                                   | 100 バイト |
+| `fieldSize`         | 最大フィールド値のサイズ (バイト単位)                                      | 1MB        |
+| `fields`            | ファイル以外のフィールドの最大数                                           | Infinity   |
+| `fileSize`          | マルチパート形式の場合、最大ファイルサイズ（バイト単位）                   | Infinity   |
+| `files`             | 複数形の場合、ファイルフィールドの最大数                                   | Infinity   |
+| `parts`             | マルチパートフォームの場合、部品の最大数 (フィールド + ファイル)           | Infinity   |
+| `headerPairs`       | マルチパートフォームの場合、解析する最大ヘッダーキー=>値のペアの数         | 2000       |
+| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels) | Infinity   |
 
 制限を指定することは、サービス妨害(DoS)攻撃からサイトを保護するのに役立ちます。
 
 ### `fileFilter`
 
 どのファイルをアップロードすべきか、どの
-をスキップすべきかを制御する関数に設定します。 関数は次のようになります:
+をスキップすべきかを制御する関数に設定します。 関数は次のようになります: 関数は次のようになります:
 
 ```javascript
 function fileFilter(req, file, cb) {
@@ -317,12 +338,22 @@ function fileFilter(req, file, cb) {
 }
 ```
 
+## Security
+
+Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
+
+- `fileSize` -- set to the maximum expected file size for your use case
+- `files` -- set to the maximum number of files per request
+- `fields` -- set to the maximum number of text fields per request
+- `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
+
 ## エラー処理
 
-エラーが発生した場合、MulterはエラーをExpressに委任します。 You can
+エラーが発生した場合、MulterはエラーをExpressに委任します。 エラーが発生した場合、MulterはエラーをExpressに委任します。 You can
 display a nice error page using [the standard express way](/guide/error-handling).
 
 Multer から特にエラーをキャッチしたい場合は、独自に
+ミドルウェア関数を呼び出すことができます。 Multer から特にエラーをキャッチしたい場合は、独自に
 ミドルウェア関数を呼び出すことができます。 Also, if you want to catch only [the Multer errors](https://github.com/expressjs/multer/blob/main/lib/multer-error.js), you can use the `MulterError` class that is attached to the `multer` object itself (e.g. `err instanceof multer.MulterError`).
 
 ```javascript

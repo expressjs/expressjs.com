@@ -1,0 +1,170 @@
+---
+title: Reemplazar la API Express
+description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes, including extending the API in TypeScript with declaration merging.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+La API Express consiste en varios métodos y propiedades sobre los objetos de solicitud y respuesta. Estos son heredados por prototipo. Hay dos puntos de extensión para la API Express:
+
+1. Los prototipos globales en `express.request` y `express.response`.
+2. prototipos específicos de la aplicación en `app.request` y `app.response`.
+
+Alterar los prototipos globales afectará a todas las aplicaciones cargadas Express en el mismo proceso. Si se desea, las alteraciones pueden hacerse específicas de la aplicación sólo modificando los prototipos específicos de la aplicación después de crear una nueva aplicación.
+
+## Métodos
+
+Puede anular la firma y el comportamiento de los métodos existentes con los suyos, asignando una función personalizada.
+
+Following is an example of overriding the behavior of [res.sendStatus](/api/response/#ressendstatus).
+
+```js
+app.response.sendStatus = function (statusCode, type, message) {
+  // code is intentionally kept simple for demonstration purpose
+  return this.contentType(type).status(statusCode).send(message);
+};
+```
+
+```ts
+import { type Response } from 'express';
+
+// Broaden the type of sendStatus so call sites accept the new arguments.
+declare module 'express-serve-static-core' {
+  interface Response {
+    sendStatus(statusCode: number, type: string, message: string): this;
+  }
+}
+
+app.response.sendStatus = function (
+  this: Response,
+  statusCode: number,
+  type: string,
+  message: string
+) {
+  // code is intentionally kept simple for demonstration purpose
+  return this.contentType(type).status(statusCode).send(message);
+} as Response['sendStatus'];
+```
+
+La implementación anterior cambia completamente la firma original de `res.sendStatus`. Ahora acepta un código de estado, tipo de codificación, y el mensaje que se enviará al cliente.
+
+In TypeScript, augmenting `express-serve-static-core` adds the new overload to the `Response` type so call sites such as `res.sendStatus(404, 'application/json', body)` type-check. The assignment is cast with `as Response['sendStatus']` because replacing a method with a different signature cannot be checked against the original declaration.
+
+El método sobreescrito ahora puede utilizarse de esta manera:
+
+```js
+res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
+```
+
+## Propiedades
+
+Las propiedades en la API Express son tamaño:
+
+1. Propiedades asignadas (ej: `req.baseUrl`, `req.originalUrl`)
+2. Definido como getters (ej: `req.secure`, `req.ip`)
+
+Dado que las propiedades de la categoría 1 se asignan dinámicamente a los objetos `request` y `response` en el contexto del ciclo actual de petición-respuesta, su comportamiento no puede ser anulado.
+
+Las propiedades de la categoría 2 se pueden sobrescribir usando la API Express de extensiones API.
+
+El siguiente código reescribe cómo se derivará el valor de `req.ip`. Ahora, simplemente devuelve el valor de la cabecera de petición `Client-IP`.
+
+```js
+Object.defineProperty(app.request, 'ip', {
+  configurable: true,
+  enumerable: true,
+  get() {
+    return this.get('Client-IP');
+  },
+});
+```
+
+```ts
+import { type Request } from 'express';
+
+Object.defineProperty(app.request, 'ip', {
+  configurable: true,
+  enumerable: true,
+  get(this: Request) {
+    return this.get('Client-IP');
+  },
+});
+```
+
+## Extending the API in TypeScript
+
+The sections above override members that Express already provides. To add your own properties or
+methods to the request or response, describe them to TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html) on the
+`Express` namespace. Put the augmentation in a `.d.ts` file that is part of your project. No
+`tsconfig.json` change is needed unless a custom `include` does not cover its location.
+
+For example, an authentication middleware may attach a `user` to the request, and you might add a
+`sendError` helper to the response:
+
+```ts title="types/express.d.ts"
+interface User {
+  id: string;
+  name: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+    interface Response {
+      sendError(status: number, message: string): this;
+    }
+  }
+}
+
+export {};
+```
+
+The additions are now known throughout the application:
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.user = { id: '1', name: 'Tobi' };
+  next();
+});
+
+app.response.sendError = function (this: Response, status: number, message: string) {
+  return this.status(status).json({ error: message });
+};
+
+app.get('/', (req: Request, res: Response) => {
+  if (!req.user) {
+    res.sendError(401, 'unauthorized');
+    return;
+  }
+  res.send(req.user.name);
+});
+```
+
+<Alert type="alerta">
+
+Declare custom request properties as optional (`user?`). The type applies to every request, but
+TypeScript cannot know which middleware ran before a given handler, so a required property would be a
+false guarantee. Check for the value (as with `if (!req.user)` above) before relying on it.
+
+</Alert>
+
+Adding a new method needs no cast, unlike [overriding](#methods) an existing method with a different
+signature, because the method did not previously exist on the type.
+
+## Prototipo
+
+Para proporcionar la API Express, los objetos de solicitud / respuesta pasados a Express (a través de `app(req, res)`, por ejemplo) necesita heredar de la misma cadena prototipo. Por defecto, esto es `http.IncomingRequest.prototype` para la solicitud y `http.ServerResponse.prototype` para la respuesta.
+
+A menos que sea necesario, se recomienda que esto se haga únicamente a nivel de aplicación, en lugar de a nivel global. Además, tenga cuidado de que el prototipo que se está utilizando coincida con la funcionalidad lo más cerca posible de los prototipos predeterminados.
+
+```js
+// Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
+// for the given app reference
+Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);
+Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype);
+```

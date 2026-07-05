@@ -5,6 +5,7 @@ description: Cookieセッションミドルウェア
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.1.1"
@@ -15,6 +16,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 シンプルなクッキーベースのセッションミドルウェア。
 
 ユーザーセッションは、サーバー上または
+クライアント上での2つの主要な方法で保存できます。 ユーザーセッションは、サーバー上または
 クライアント上での2つの主要な方法で保存できます。 クライアントのセッションデータをクッキーに保存します。
 [express-session](https://www.npmjs.com/package/express-session)
 は、クッキー内にクライアントにセッション識別子のみを格納し、サーバーに
@@ -30,6 +32,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 **注意** このモジュールは Cookie 内のセッションの内容を暗号化しません。改ざんを防ぐために
 署名のみを提供します。 The client will be able to read the session data by
+examining the cookie's value. The client will be able to read the session data by
 examining the cookie's value. シークレットデータは
 暗号化なしで `req.session` に設定するか、代わりにサーバーサイドセッションを使用してください。
 
@@ -44,9 +47,15 @@ to extend the session as your application needs.
 [npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```sh
-$ npm install cookie-session
-```
+<PackageManagerCommand command="npm install cookie-session" />
+
+<Alert type="情報">
+
+`cookie-session` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/cookie-session" />
+
+</Alert>
 
 ## API
 
@@ -71,16 +80,15 @@ app.use(
 
 ### cookieSession(options)
 
-指定されたオプションで新しいcookieセッションミドルウェアを作成します。 This middleware
+指定されたオプションで新しいcookieセッションミドルウェアを作成します。 指定されたオプションで新しいcookieセッションミドルウェアを作成します。 This middleware
 will attach the property `session` to `req`, which provides an object representing
 the loaded session. このセッションは、リクエストで有効なセッションが
 提供されなかった場合、またはリクエストからロードされたセッションのいずれかである。
 
-`req.session`の
-内容が変更された場合、ミドルウェアは自動的に`Set-Cookie`ヘッダーをレスポンスに追加します。 _Note_ that no `Set-Cookie` header will be
-in the response (and thus no session created for a specific user) unless there are
-contents in the session, so be sure to add something to `req.session` as soon as
-you have identifying information to store for the session.
+This module does not send a `Set-Cookie` header if the contents of the session
+have not changed. This means that to extend the expiration of a session in the
+user's browser (in response to user activity, for example) some kind of
+modification to the session needs be made.
 
 #### オプション
 
@@ -94,6 +102,9 @@ Cookieセッションはoptionsオブジェクトでこれらのプロパティ�
 
 Cookie の値の署名と検証に使用するキーのリスト、または設定された
 [`Keygrip`](https://www.npmjs.com/package/keygrip) インスタンス。 Cookieは常に
+`keys[0]`で署名されますが、他のキーは検証に有効です。
+キーの回転を許可します。 `Keygrip` インスタンスが指定されている場合、
+署名のアルゴリズムのように署名パラメータを変更することができます。 Cookieは常に
 `keys[0]`で署名されますが、他のキーは検証に有効です。
 キーの回転を許可します。 `Keygrip` インスタンスが指定されている場合、
 署名のアルゴリズムのように署名パラメータを変更することができます。
@@ -114,10 +125,10 @@ Cookie の値の署名と検証に使用するキーのリスト、または設�
 - `expires`: Cookieの有効期限を示す`Date`オブジェクト（デフォルトではセッション終了時に有効期限が切れます）。
 - `path`: クッキーのパスを示す文字列（デフォルトでは `/`）。
 - `domain`: Cookie のドメインを示す文字列 (デフォルトではありません)。
-- `partitioned`: [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (デフォルトでは `false` )のためにChromeのクッキーを分割するかどうかを示すブール値。 これがtrueの場合、埋め込まれたサイトからのCookieは分割され、作成された同じトップレベルのサイトからのみ読み込み可能になります。
-- `priority`: Cookie の優先度を示す文字列。 これは`'low'`、`'medium'`、または`'high'`に設定できます。
-- `sameSite`: クッキーが「同じサイト」クッキーであるかどうかを示す真偽値または文字列（デフォルトでは`false`）。 これは`'strict'`、`'lax'`、`'none'`、`true`（'strict'にマップされます）に設定できます。
-- `secure`: CookieがHTTPSでのみ送信されるかどうかを示すブール値 (HTTPでは`false`、HTTPSではデフォルトでは`true`)。 `true` と Node に設定されている場合。 sはTLS接続上で直接ではありません。 [set Express behind proxies](/guide/behind-proxies)またはクッキーが正しく設定されていない可能性があります。
+- `partitioned`: [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (デフォルトでは `false` )のためにChromeのクッキーを分割するかどうかを示すブール値。 これがtrueの場合、埋め込まれたサイトからのCookieは分割され、作成された同じトップレベルのサイトからのみ読み込み可能になります。 これがtrueの場合、埋め込まれたサイトからのCookieは分割され、作成された同じトップレベルのサイトからのみ読み込み可能になります。
+- `priority`: Cookie の優先度を示す文字列。 これは`'low'`、`'medium'`、または`'high'`に設定できます。 これは`'low'`、`'medium'`、または`'high'`に設定できます。
+- `sameSite`: クッキーが「同じサイト」クッキーであるかどうかを示す真偽値または文字列（デフォルトでは`false`）。 これは`'strict'`、`'lax'`、`'none'`、`true`（'strict'にマップされます）に設定できます。 これは`'strict'`、`'lax'`、`'none'`、`true`（'strict'にマップされます）に設定できます。
+- `secure`: CookieがHTTPSでのみ送信されるかどうかを示すブール値 (HTTPでは`false`、HTTPSではデフォルトでは`true`)。 `secure`: CookieがHTTPSでのみ送信されるかどうかを示すブール値 (HTTPでは`false`、HTTPSではデフォルトでは`true`)。 `true` と Node に設定されている場合。 sはTLS接続上で直接ではありません。 [set Express behind proxies](/guide/behind-proxies)またはクッキーが正しく設定されていない可能性があります。
 - `httpOnly`: CookieがHTTP(S)経由でのみ送信されるかどうかを示すブール値で、クライアントJavaScript（デフォルトでは`true`）では使用できません。
 - `signed`: Cookie を署名するかどうかを示す boolean (デフォルトでは `true` )。
 - `overwrite`: 以前に同じ名前のクッキーを上書きするかどうかを示す boolean (デフォルトは `true` )。
@@ -140,7 +151,7 @@ Cookie の値の署名と検証に使用するキーのリスト、または設�
 
 ### req.sessionOptions
 
-現在のリクエストのセッションオプションを表します。 これらのオプションはミドルウェア構築時に提供されたものの
+現在のリクエストのセッションオプションを表します。 現在のリクエストのセッションオプションを表します。 これらのオプションはミドルウェア構築時に提供されたものの
 浅いクローンです。
 リクエストごとにクッキー設定の動作を変更するために変更することができます。
 
@@ -154,6 +165,8 @@ req.session = null;
 
 ### セッションを保存中
 
+セッションの内容全体がクライアント側の Cookie に保持されるため、
+セッションは、`Set-Cookie` レスポンスヘッダーにクッキーを書き出すことによって「保存」されます。
 セッションの内容全体がクライアント側の Cookie に保持されるため、
 セッションは、`Set-Cookie` レスポンスヘッダーにクッキーを書き出すことによって「保存」されます。
 This is done automatically if there has been a change made to the session when
@@ -274,8 +287,7 @@ app.use(
 ### クッキーの最大サイズ
 
 Because the entire session object is encoded and stored in a cookie, it is
-possible to exceed the maximum cookie size limits on different browsers.
-[RFC6265 仕様](https://tools.ietf.org/html/rfc6265#section-6.1)
+possible to exceed the maximum cookie size limits on different browsers. [RFC6265 仕様](https://tools.ietf.org/html/rfc6265#section-6.1)
 ブラウザーが **SHOULD** を許可することをお勧めします
 
 > クッキーあたり少なくとも4096バイト（クッキーの名前、値、属性の
@@ -289,11 +301,15 @@ possible to exceed the maximum cookie size limits on different browsers.
 はほとんどの場合、ブラウザはクッキーの保存を拒否します。 これにより、
 ブラウザからのリクエストは、a) セッション
 情報がない、またはb)
+クッキーの制限を超えないように小さい古いセッション情報を使用します。 これにより、
+ブラウザからのリクエストは、a) セッション
+情報がない、またはb)
 クッキーの制限を超えないように小さい古いセッション情報を使用します。
 
 セッションオブジェクトがこれらの制限に達している場合、
 セッション内のデータを、リクエストごとにブラウザから送信するのではなく、
 サーバー上のデータベースからロードするかどうかを検討することをお勧めします。 または、
+[alternative session strategy](https://github.com/expressjs/session#compatible-session-stores) に移動します。 または、
 [alternative session strategy](https://github.com/expressjs/session#compatible-session-stores) に移動します。
 
 ## ライセンス

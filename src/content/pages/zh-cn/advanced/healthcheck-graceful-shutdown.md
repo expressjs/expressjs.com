@@ -1,13 +1,13 @@
 ---
-title: Health Checks and Graceful Shutdown
-description: Learn how to implement health checks and graceful shutdown in Express apps to enhance reliability, manage deployments, and integrate with load balancers like Kubernetes.
+title: 健康检查与优雅关闭
+description: 学习如何在 Express 应用中实现健康检查和优雅关闭，以提升可靠性、管理部署并与 Kubernetes 等负载均衡器集成。
 ---
 
-## Graceful shutdown
+## 优雅关闭
 
-When you deploy a new version of your application, you must replace the previous version. The process manager you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used, including database connections and file locks then exit.
+部署应用新版本时，必须替换旧版本。 你使用的进程管理器会首先向应用发送 SIGTERM 信号，通知应用即将被终止。 应用收到该信号后，应停止接收新请求、完成所有正在处理的请求，释放已使用的资源（包括数据库连接和文件锁），然后退出。
 
-### Example
+### 示例
 
 ```js
 const server = app.listen(port);
@@ -20,9 +20,9 @@ process.on('SIGTERM', () => {
 });
 ```
 
-## Health checks
+## 健康检查
 
-A load balancer uses health checks to determine if an application instance is healthy and can accept requests. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+负载均衡器通过健康检查判定应用实例状态是否正常、能否接收请求。 For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes//):
 
-- `liveness`, that determines when to restart a container.
-- `readiness`, that determines when a container is ready to start accepting traffic. When a pod is not ready, it is removed from the service load balancers.
+- `liveness`（存活检查）：用于判断何时重启容器。
+- `readiness`（就绪检查）：用于判断容器何时准备就绪并开始接收流量。 Pod 未就绪时，会从服务负载均衡器中被剔除。

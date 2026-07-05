@@ -22,7 +22,7 @@ process.on('SIGTERM', () => {
 
 ## 健康チェック
 
-ロードバランサは、ヘルスチェックを使用して、アプリケーションインスタンスが健全かどうかを判断し、リクエストを受け入れることができます。 例えば、[Kubernetes には2つのヘルスチェックがあります](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+ロードバランサは、ヘルスチェックを使用して、アプリケーションインスタンスが健全かどうかを判断し、リクエストを受け入れることができます。 For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes//):
 
 - `liveness` コンテナを再起動するタイミングを決定します。
 - コンテナがいつトラフィックを受け入れる準備ができているかを決める準備が整います。 ポッドの準備ができていない場合は、サービスロードバランサーから取り外されます。

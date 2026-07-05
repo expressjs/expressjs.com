@@ -84,7 +84,7 @@ $ DEBUG=express:* node ./bin/www
   express:view render "/projects/example/views/index.pug" +1ms
 ```
 
-ルータの実装からのみログを見るには、`DEBUG`の値を`express:router`に設定します。 同様に、アプリケーションの実装からのログのみを見るには、`DEBUG`の値を`express:application`などに設定します。
+ルータの実装からのみログを見るには、`DEBUG`の値を`express:router`に設定します。 同様に、アプリケーションの実装からのログのみを見るには、`DEBUG`の値を`express:application`などに設定します。 同様に、アプリケーションの実装からのログのみを見るには、`DEBUG`の値を`express:application`などに設定します。
 
 ## `express` で生成されたアプリケーション
 
@@ -117,8 +117,7 @@ Node.js を介して実行する場合、デバッグログの動作を変更す
 <Alert type="情報">
 
 The environment variables beginning with `DEBUG_` end up being converted into an Options object
-that gets used with `%o`/`%O` formatters.
-[`util.inspect()`](https://nodejs.org/api/util.html#utilinspectobject-options) の完全な
+that gets used with `%o`/`%O` formatters. [`util.inspect()`](https://nodejs.org/api/util.html#utilinspectobject-options) の完全な
 リストについては Node.js のドキュメントを参照してください。
 
 </Alert>

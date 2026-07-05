@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 Das `root` Argument gibt das Wurzelverzeichnis an, von dem aus statische Assets ausgeliefert werden sollen.
-Für weitere Informationen zum Argument `options` siehe [express.static](/api#express.static).
+For more information on the `options` argument, see [express.static](/api/express/#expressstatic).
 
 Verwenden Sie zum Beispiel den folgenden Code, um Bilder, CSS-Dateien und JavaScript-Dateien in einem Verzeichnis mit dem Namen `public` auszugeben:
 
@@ -56,7 +56,7 @@ zu verbessern und statische Assets zu bedienen.
 
 </Alert>
 
-Um einen virtuellen Pfad-Präfix zu erstellen (wo der Pfad existiert eigentlich nicht im Dateisystem) für Dateien, die durch die `express. tatic` Funktion, [einen Mount-Pfad angeben](/api#app.use) für das statische Verzeichnis angeben, wie unten angezeigt:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/api/application/#appuse) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));
@@ -74,8 +74,14 @@ http://localhost:3000/static/hello.html
 
 Der Pfad, den du der `express.static` Funktion zur Verfügung stellst, ist jedoch relativ zu dem Verzeichnis, von dem aus du deinen `node` Prozess startest. Wenn Sie die Express-App aus einem anderen Verzeichnis ausführen, ist es sicherer, den absoluten Pfad des Verzeichnisses zu verwenden, das Sie verwenden möchten:
 
-```js
+```cjs title="index.cjs"
 const path = require('path');
+app.use('/static', express.static(path.join(__dirname, 'public')));
+```
+
+```mjs title="index.mjs"
+import path from 'path';
+
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 

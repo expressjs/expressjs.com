@@ -1,26 +1,26 @@
 ---
-title: Express application generator
-description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
+title: Express 应用生成器
+description: 学习如何使用 Express 应用生成器工具快速创建 Express.js 应用骨架，简化初始化与配置工作。
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Use the application generator tool, `express-generator`, to quickly create an application skeleton.
+使用应用生成器工具 `express-generator` 可以快速创建应用骨架。
 
-You can run the application generator with the `npx` command (available in Node.js 8.2.0).
+你可以使用 `npx` 命令（Node.js 8.2.0 及以上版本可用）运行应用生成器。
 
 ```bash
 $ npx express-generator
 ```
 
-For earlier Node versions, install the application generator as a global npm package and then launch it:
+对于早期的 Node 版本，请将应用生成器作为全局 npm 包安装，然后启动它：
 
 ```bash
 $ npm install -g express-generator
 $ express
 ```
 
-Display the command options with the `-h` option:
+使用 `-h` 选项查看命令选项：
 
 ```bash
 $ express -h
@@ -42,7 +42,7 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+例如，以下命令会创建一个名为 _myapp_ 的 Express 应用。 此应用将创建在当前工作目录下名为 _myapp_ 的文件夹中，并且视图引擎将设置为 <a href="https://pugjs.org/" target="_blank" title="Pug 文档">Pug</a>：
 
 ```bash
 $ express --view=pug myapp
@@ -66,34 +66,34 @@ $ express --view=pug myapp
    create : myapp/bin/www
 ```
 
-Then install dependencies:
+然后安装依赖项：
 
 ```bash
 $ cd myapp
 $ npm install
 ```
 
-On MacOS or Linux, run the app with this command:
+在 macOS 或 Linux 系统上，使用此命令运行应用：
 
 ```bash
 $ DEBUG=myapp:* npm start
 ```
 
-On Windows Command Prompt, use this command:
+在 Windows 命令提示符中，使用此命令：
 
 ```bash
 > set DEBUG=myapp:* & npm start
 ```
 
-On Windows PowerShell, use this command:
+在 Windows PowerShell 中，使用此命令：
 
 ```bash
 PS> $env:DEBUG='myapp:*'; npm start
 ```
 
-Then, load `http://localhost:3000/` in your browser to access the app.
+然后在浏览器中加载 `http://localhost:3000/` 以访问该应用。
 
-The generated app has the following directory structure:
+生成的应用具有以下目录结构：
 
 ```bash
 .
@@ -119,7 +119,7 @@ The generated app has the following directory structure:
 
 <Alert type="info">
 
-The app structure created by the generator is just one of many ways to structure Express apps.
-Feel free to use this structure or modify it to best suit your needs.
+生成器创建的应用结构只是 Express 应用多种结构方案中的一种。
+你可以随意使用此结构，或根据你的需求对其进行修改。
 
 </Alert>

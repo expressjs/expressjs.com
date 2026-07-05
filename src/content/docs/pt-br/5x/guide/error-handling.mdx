@@ -24,6 +24,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  throw new Error('BROKEN'); // Express will catch this on its own.
+});
+```
+
 Para erros retornados de funções assíncronas, invocados pelos manipuladores de rota
 e intermediário, você deve passá-los para a função `next()`, onde o Express irá capturá-los a
 e processá-los. Por exemplo:
@@ -40,12 +48,35 @@ app.get('/', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err); // Pass errors to Express.
+    } else {
+      res.send(data);
+    }
+  });
+});
+```
+
 Começando pelo Express 5, roteadores e intermediários que retornam um Promise
 chamarão `next(value)` automaticamente quando eles rejeitarem ou lançarem um erro.
 Por exemplo:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
   const user = await getUserById(req.params.id);
   res.send(user);
 });
@@ -73,6 +104,19 @@ app.get('/', [
 ]);
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.writeFile('/inaccessible-path', 'data', next);
+  },
+  function (req: Request, res: Response) {
+    res.send('OK');
+  },
+]);
+```
+
 No exemplo acima, `next` é fornecido como o callback para `fs.writeFile`,
 que é chamado com ou sem erros. Se não houver erro, o segundo receptor
 é executado, caso contrário as pegadas do Express e processa o erro.
@@ -92,16 +136,42 @@ app.get('/', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
 O exemplo acima usa um bloco `tentar... catch` para capturar erros no código assíncrono
 e passá-los para o Express. Se o bloco `tentar...catch`
 fosse omitido, Express não pegaria o erro, uma vez que ele não faz parte do código de manipulador
 síncrono.
 
-Use promessas para evitar a sobrecarga do bloco `tentar... capturar` ou ao usar funções
-que retornam promessas. Por exemplo:
+Você também pode usar uma cadeia de manipuladores para confiar em erro síncrono
+de recuperação, reduzindo o código assíncrono a algo trivial. Por exemplo:
 
 ```js
 app.get('/', (req, res, next) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   Promise.resolve()
     .then(() => {
       throw new Error('BROKEN');
@@ -114,8 +184,7 @@ Since promises automatically catch both synchronous errors and rejected promises
 you can simply provide `next` as the final catch handler and Express will catch errors,
 because the catch handler is given the error as the first argument.
 
-Você também pode usar uma cadeia de manipuladores para confiar em erro síncrono
-de recuperação, reduzindo o código assíncrono a algo trivial. Por exemplo:
+Se você tiver um gerenciador de rotas com múltiplas funções de retorno de chamada, você pode usar o parâmetro `rota` para pular para o próximo manipulador de rota. Por exemplo:
 
 ```js
 app.get('/', [
@@ -126,6 +195,23 @@ app.get('/', [
     });
   },
   function (req, res) {
+    res.locals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data;
+      next(err);
+    });
+  },
+  function (req: Request, res: Response) {
     res.locals.data = res.locals.data.split(',')[1];
     res.send(res.locals.data);
   },
@@ -187,6 +273,18 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
 Observe que o manipulador de erro padrão pode ser acionado se você chamar `next()` com um erro
 no seu código mais de uma vez. Mesmo que um erro personalizado de manipulação de middleware esteja no lugar.
 
@@ -205,9 +303,18 @@ app.use((err, req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
 Você define o middleware de erro duramente, depois de outro `app.use()` e roteia chamadas; por exemplo:
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
@@ -223,6 +330,39 @@ app.use((err, req, res, next) => {
 });
 ```
 
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```ts title="index.ts"
+import { type Request, type Response, type NextFunction } from 'express';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  // logic
+});
+```
+
 As respostas de dentro de uma função middleware podem estar em qualquer formato, como uma página de erro HTML, uma mensagem simples ou uma string JSON.
 
 Para fins de estrutura organizacional (e de nível superior), você pode definir
@@ -230,9 +370,25 @@ várias funções de middleware com manipulação de erros, tanto quanto você p
 regulares. Por exemplo, para definir um manipulador de erro
 para solicitações feitas usando `XHR` e aqueles sem:
 
-```js
+```cjs title="index.cjs"
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+```mjs title="index.mjs"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 app.use(
   bodyParser.urlencoded({
@@ -256,12 +412,33 @@ function logErrors(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
+  console.error(err.stack);
+  next(err);
+}
+```
+
 Também neste exemplo, `clientErrorHandler` é definido como segue; neste caso, o erro é explicitamente passado para o próximo.
 
 Observe que quando _não_ estiver chamando "próximo" em uma função de manipulação de erros, você é responsável por escrever (e terminar) a resposta. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
 
 ```js
 function clientErrorHandler(err, req, res, next) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' });
+  } else {
+    next(err);
+  }
+}
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function clientErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   if (req.xhr) {
     res.status(500).send({ error: 'Something failed!' });
   } else {
@@ -279,7 +456,16 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
-Se você tiver um gerenciador de rotas com múltiplas funções de retorno de chamada, você pode usar o parâmetro `rota` para pular para o próximo manipulador de rota. Por exemplo:
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+If you have a route handler with multiple callback functions, you can use the `route` parameter to skip to the next route handler. Por exemplo:
 
 ```js
 app.get(
@@ -293,6 +479,28 @@ app.get(
     }
   },
   (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err);
+      res.json(doc);
+    });
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/a_route_behind_paywall',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user.hasPaid) {
+      // continue handling this request
+      next('route');
+    } else {
+      next();
+    }
+  },
+  (req: Request, res: Response, next: NextFunction) => {
     PaidContent.find((err, doc) => {
       if (err) return next(err);
       res.json(doc);

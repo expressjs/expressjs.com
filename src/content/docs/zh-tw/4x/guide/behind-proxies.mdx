@@ -77,6 +77,14 @@ app.set('trust proxy', (ip) => {
 });
 ```
 
+```ts
+app.set('trust proxy', (ip: string) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
+  else return false;
+});
+```
+
 </td>
     </tr>
   </tbody>

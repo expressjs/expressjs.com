@@ -22,7 +22,7 @@ process.on('SIGTERM', () => {
 
 ## Examens de santé
 
-Un répartiteur de charge utilise des contrôles de santé pour déterminer si une instance de l'application est saine et peut accepter les demandes. Par exemple, [Kubernetes a deux examens de santé](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+Un répartiteur de charge utilise des contrôles de santé pour déterminer si une instance de l'application est saine et peut accepter les demandes. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes//):
 
 - `liveness`, qui détermine quand redémarrer un conteneur.
 - `readiness`, qui détermine quand un conteneur est prêt à accepter le trafic. Lorsqu'un pod n'est pas prêt, il est retiré des répartiteurs de charge du service.

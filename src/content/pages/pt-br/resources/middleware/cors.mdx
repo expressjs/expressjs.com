@@ -5,6 +5,7 @@ description: Node.js CORS middleware
 
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
   version="2.8.6"
@@ -12,7 +13,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
   npm="https://www.npmjs.com/package/cors"
 />
 
-CORS é um [Node.js](https://nodejs.org/en/) middleware para [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect) que define os cabeçalhos de resposta [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS). Estes cabeçalhos indicam aos navegadores que originam as respostas do seu servidor.
+CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](/)/[Connect](https://github.com/senchalabs/connect) that sets [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) response headers. Estes cabeçalhos indicam aos navegadores que originam as respostas do seu servidor.
 
 <Alert type="informações">
 
@@ -39,9 +40,15 @@ Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
 [registro do npm](https://www.npmjs.com/). A instalação é feita usando o comando
 [`npm install`](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
-```sh
-$ npm install cors
-```
+<PackageManagerCommand command="npm install cors" />
+
+<Alert type="informações">
+
+`cors` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/cors" />
+
+</Alert>
 
 ## Utilização
 

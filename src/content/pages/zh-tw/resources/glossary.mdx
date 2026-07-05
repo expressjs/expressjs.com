@@ -27,7 +27,7 @@ A function that is invoked by the Express routing layer before the final request
 
 - `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()` typically returns the middleware.
 - `app.use(mw)` is called _adding the middleware to the global processing stack_.
-- `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+- `app.get('/foo', mw, (req, res) => { /* ... */ })` is called _adding the middleware to the "GET /foo" processing stack_.
 
 ## Node.js
 
