@@ -70,7 +70,11 @@ const html_excluded = {
   '/en/changelog/4x.html': 'https://github.com/expressjs/express/releases',
 };
 for (const [path, target] of Object.entries(api_v2)) {
-  html_excluded[path === '/2x/' ? '/2x/index.html' : `${path}.html`] = target;
+  // Skip `/2x/`, it already emits `dist/2x/index.html`,
+  // which also serves `/2x/index.html`. Adding a `/2x/index.html` route would make Astro
+  // treat that path as a directory too, colliding with the file (EISDIR at build time).
+  if (path === '/2x/') continue;
+  html_excluded[`${path}.html`] = target;
 }
 for (const [path, target] of Object.entries(blog)) {
   // Only the date-based permalinks are skipped by Cloudflare (not e.g. `/blog/posts`).
