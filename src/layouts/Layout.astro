@@ -100,12 +100,15 @@ const lang = getLangFromUrl(Astro.url);
 
     {
       !isBlogOrApi &&
-        languageCodes.map((altLang) => (
+        ['x-default', ...languageCodes].map((altLang) => (
           <link
             rel="alternate"
             hreflang={altLang}
             href={
-              new URL(replaceLanguageInPath(canonicalPath, altLang), Astro.site || Astro.url.origin)
+              new URL(
+                replaceLanguageInPath(canonicalPath, altLang === 'x-default' ? 'en' : altLang),
+                Astro.site || Astro.url.origin
+              )
             }
           />
         ))
