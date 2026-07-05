@@ -132,5 +132,5 @@ jobs:
           title: 'i18n: new crowdin translations'
           body: >
             New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
-          labels: docs
+          labels: i18n
           branch: crowdin/translations
