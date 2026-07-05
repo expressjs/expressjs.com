@@ -6,7 +6,7 @@ import { Body } from '@/components/primitives';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
-import { useTranslations } from '@/i18n/utils';
+import { getHomePath, useTranslations } from '@/i18n/utils';
 import { DEFAULT_VERSION } from '@/config/versions';
 import SidebarItemsList from './SidebarItemsList.astro';
 import {
@@ -78,7 +78,7 @@ const commonItemsListProps = {
   <nav class="sidebar-nav" aria-label={t('nav.mainNavigation')}>
     <ul class="sidebar-nav-list">
       <li class="sidebar-logo-item">
-        <a href={`/${lang}/`} class="logo-link sidebar-nav-item" aria-label={t('nav.home')}>
+        <a href={getHomePath(lang)} class="logo-link sidebar-nav-item" aria-label={t('nav.home')}>
           <Image
             src="/images/logos/express-kawaii.webp"
             alt="Express.js kawaii logo"

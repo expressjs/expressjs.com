@@ -95,6 +95,8 @@ if (fallback) {
 } else {
   target = `/en/${slug}`;
 }
+// The English homepage is canonically served at `/`, not `/en/`.
+if (target === '/en/') target = '/';
 const canonical = new URL(target, Astro.site).href;
 ---
 

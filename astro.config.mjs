@@ -73,13 +73,15 @@ export default defineConfig({
     icon(),
     react(),
     sitemap({
-      // Only the canonical /<locale>/… URLs belong in the sitemap. The catch-all
+      // Only the canonical URLs belong in the sitemap. The catch-all
       // `[...path].astro` also emits `noindex` redirect stubs: language-less ones
-      // (e.g. `/guide/x`, `/` → `/en/`) and per-locale ones for moved pages
+      // (e.g. `/guide/x`) and per-locale ones for moved pages
       // (e.g. `/en/resources/middleware/csurf`). Exclude both.
       // Keep this locale list in sync with `i18n.locales` below.
       filter: (page) => {
         const { pathname } = new URL(page);
+        // The homepage is served at `/` and is the canonical for `/en/`.
+        if (pathname === '/') return true;
         if (!/^\/(de|en|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)(\/|$)/.test(pathname)) return false;
         const unlocalized = pathname.replace(/^\/[a-z-]+/, '').replace(/\/$/, '');
         return !movedPagePaths.has(unlocalized);

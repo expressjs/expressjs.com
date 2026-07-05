@@ -10,10 +10,11 @@ import { Icon } from 'astro-icon/components';
 import { Flex } from '@/components/primitives';
 import { ThemeSwitcher, SearchBox, LanguageSelect } from '@components/patterns';
 import { languagesArray } from '@/i18n/locales';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getHomePath, getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+const homeHref = getHomePath(currentLang);
 ---
 
 <header class="header">
@@ -30,7 +31,7 @@ const t = useTranslations(currentLang);
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
       </button>
-      <a href={`/${currentLang}/`} class="logo-link" aria-label={t('nav.home')}>
+      <a href={homeHref} class="logo-link" aria-label={t('nav.home')}>
         <Image
           src="/images/logos/express-kawaii.webp"
           alt="Express.js kawaii logo"

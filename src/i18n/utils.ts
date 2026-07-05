@@ -23,6 +23,13 @@ export function useTranslations(lang: keyof typeof ui) {
   };
 }
 /**
+ * Homepage path for a language. English is served at the root.
+ */
+export function getHomePath(lang: string): string {
+  return lang === defaultLang ? '/' : `/${lang}/`;
+}
+
+/**
  * Create a regex pattern to match language prefixes in URLs
  */
 export function createLanguagePathRegex(): RegExp {
