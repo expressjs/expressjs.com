@@ -21,6 +21,7 @@ interface Props {
   isTranslation?: boolean;
   prev?: AdjacentPage | null;
   next?: AdjacentPage | null;
+  canonicalPathname?: string;
 }
 
 const {
@@ -31,6 +32,7 @@ const {
   isTranslation = false,
   prev,
   next,
+  canonicalPathname,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -39,7 +41,7 @@ const t = useTranslations(lang);
 const breadcrumbs = buildBreadcrumbs(Astro.url.pathname, t);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} canonicalPathname={canonicalPathname}>
   <Container>
     <PageTopbar breadcrumbs={breadcrumbs}>
       {
