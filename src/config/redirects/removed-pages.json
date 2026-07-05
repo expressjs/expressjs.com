@@ -1,5 +1,7 @@
 {
   "/resources/middleware/connect-rid": "/resources/middleware",
   "/resources/middleware/csurf": "/resources/middleware",
-  "/changelog": "https://github.com/expressjs/express/releases"
+  "/changelog": "https://github.com/expressjs/express/releases",
+  "/faq": "/starter/faq",
+  "/guide": "/guide/routing"
 }
