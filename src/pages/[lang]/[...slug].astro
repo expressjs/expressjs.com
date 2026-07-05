@@ -209,6 +209,14 @@ const editUrl = isTranslation
 // Shared collections (api/blog) are compiled once, so their in-content links are
 // baked to the default language. Re-localize them per render-language.
 const isSharedCollection = page.collection === 'api' || page.collection === 'blog';
+
+// Versioned content served at an unversioned URL is a copy of the default
+// version; its canonical is the versioned URL.
+const contentSlug = page.collection === 'api' ? page.id : page.id.split('/').slice(1).join('/');
+const isVersionedContent = VERSION_PREFIXES.some((v) => contentSlug.startsWith(`${v}/`));
+const servedUnversioned =
+  isVersionedContent && !VERSION_PREFIXES.some((v) => slug.startsWith(`${v}/`));
+const canonicalPathname = servedUnversioned ? `/${lang}/${contentSlug}/` : undefined;
 ---
 
 <DocLayout
@@ -219,6 +227,7 @@ const isSharedCollection = page.collection === 'api' || page.collection === 'blo
   isTranslation={isTranslation}
   prev={prev}
   next={next}
+  canonicalPathname={canonicalPathname}
 >
   {isSharedCollection ? <Content components={{ a: LocalizedLink }} /> : <Content />}
 </DocLayout>

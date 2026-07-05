@@ -11,6 +11,8 @@ interface Props {
   description?: string;
   authors?: { name: string; github?: string }[];
   image?: string;
+  /** Canonical pathname override, for pages served as a copy of another URL. */
+  canonicalPathname?: string;
 }
 
 const {
@@ -18,13 +20,12 @@ const {
   description = 'Fast, unopinionated, minimalist web framework for Node.js',
   authors,
   image,
+  canonicalPathname,
 } = Astro.props;
 
 const pageTitle = title
   ? `${title} · Express.js`
   : 'Express.js · Node.js web application framework';
-
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
 
 const pathname = Astro.url.pathname.replace(/\/$/, '');
 const segments = pathname.split('/').filter(Boolean);
@@ -33,6 +34,14 @@ const restSegments = segments.slice(1);
 const isApi =
   restSegments[0] === 'api' || (restSegments[1] === 'api' && /^\dx$/.test(restSegments[0] ?? ''));
 const isBlogOrApi = restSegments[0] === 'blog' || isApi;
+
+// Blog and API content is not translated, so their canonical is the English
+// page and they emit no hreflang alternates.
+let canonicalPath = canonicalPathname ?? Astro.url.pathname;
+if (isBlogOrApi) {
+  canonicalPath = replaceLanguageInPath(canonicalPath, 'en');
+}
+const canonicalUrl = new URL(canonicalPath, Astro.site || Astro.url.origin);
 // Build the OG image URL:
 // - Home pages (no rest segments) use a per-language image: /og/home-{lang}.png
 // - Blog and API pages strip the lang prefix since their content is not translated: /og/blog-{slug}.png
@@ -90,18 +99,19 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="canonical" href={canonicalUrl} />
 
     {
-      languageCodes.map((altLang) => (
-        <link
-          rel="alternate"
-          hreflang={altLang}
-          href={
-            new URL(
-              replaceLanguageInPath(Astro.url.pathname, altLang),
-              Astro.site || Astro.url.origin
-            )
-          }
-        />
-      ))
+      !isBlogOrApi &&
+        ['x-default', ...languageCodes].map((altLang) => (
+          <link
+            rel="alternate"
+            hreflang={altLang}
+            href={
+              new URL(
+                replaceLanguageInPath(canonicalPath, altLang === 'x-default' ? 'en' : altLang),
+                Astro.site || Astro.url.origin
+              )
+            }
+          />
+        ))
     }
 
     <title>{pageTitle}</title>
