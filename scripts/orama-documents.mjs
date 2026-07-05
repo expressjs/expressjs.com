@@ -4,13 +4,19 @@ import { fileURLToPath, URL } from 'node:url';
 import matter from 'gray-matter';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toString } from 'mdast-util-to-string';
+import { signatureMetaToText } from '../src/utils/signature-meta.mjs';
 
 const CONTENT_DIR = fileURLToPath(new URL('../src/content', import.meta.url));
 
 const stripMdxImports = (content) => content.replace(/^import\s+.*$/gm, '');
 
+// The tag-strip only matches real tags (`<name …>` / `</name>`), so comparison
+// text like `<21 || >=22` survives.
 const mdToText = (content) =>
-  toString(fromMarkdown(stripMdxImports(content))).replace(/<[^>]*>/g, '');
+  toString(fromMarkdown(signatureMetaToText(stripMdxImports(content)))).replace(
+    /<\/?[A-Za-z][^>]*>/g,
+    ''
+  );
 
 // Build the public path segment from a content-relative file path: drop the
 // extension and any trailing `index` so `foo/index.mdx` -> `foo`. This matches

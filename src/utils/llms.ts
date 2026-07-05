@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import matter from 'gray-matter';
+import { JSX_ATTRS, signatureMetaToText } from './signature-meta.mjs';
 
 export interface ContentEntry {
   id: string;
@@ -9,13 +10,15 @@ export interface ContentEntry {
 
 export function stripMdxSyntax(content: string): string {
   return (
-    content
+    signatureMetaToText(
       // Remove import statements
-      .replace(/^import\s+.*$/gm, '')
-      // Remove JSX self-closing tags like <Alert ... />
-      .replace(/<[A-Z]\w*\s*[^>]*\/>/g, '')
+      content.replace(/^import\s+.*$/gm, '')
+    )
+      // Remove JSX self-closing tags like <Alert ... />. `JSX_ATTRS` tolerates `>`
+      // inside quoted or braced attribute values (e.g. runtime version constraints).
+      .replace(new RegExp(`<[A-Z]\\w*${JSX_ATTRS}\\/>`, 'g'), '')
       // Remove JSX opening and closing tags like <Alert> </Alert>
-      .replace(/<\/?[A-Z]\w*[^>]*>/g, '')
+      .replace(new RegExp(`<\\/?[A-Z]\\w*${JSX_ATTRS}>`, 'g'), '')
       // Collapse multiple blank lines
       .replace(/\n{3,}/g, '\n\n')
       .trim()
