@@ -9,7 +9,12 @@
 // first `>`.
 export const JSX_ATTRS = `(?:"[^"]*"|'[^']*'|\\{(?:[^{}]|\\{[^{}]*\\})*\\}|[^>"'{])*`;
 
-const JSX_META_TAG = new RegExp(`<(Signature|Param)\\b(${JSX_ATTRS})\\/?>`, 'g');
+// Also matches the component's slot markers, so their section titles ("Arguments",
+// "Properties", "Returns") survive as text.
+const JSX_META_TAG = new RegExp(
+  `<(Signature|Param)\\b(${JSX_ATTRS})\\/?>|<Fragment\\s+slot=["'](attributes|properties|returns)["']\\s*>`,
+  'g'
+);
 
 /**
  * @param {string} attrs
@@ -35,8 +40,17 @@ const hasFlag = (attrs, name) => new RegExp(`(?:^|\\s)${name}(?=\\s|$)`).test(at
  * @param {string} content
  * @returns {string}
  */
-export const signatureMetaToText = (content) =>
-  content.replace(JSX_META_TAG, (tag, component, attrs) => {
+export const signatureMetaToText = (content) => {
+  // Title for the next `attributes` slot; set by the enclosing Signature's
+  // `attributesTitle` prop. Matches are visited in document order, so the
+  // Signature opening tag is always seen before its slots.
+  let attributesTitle = 'Arguments';
+  return content.replace(JSX_META_TAG, (tag, component, attrs, slot) => {
+    if (slot) {
+      const title = slot === 'attributes' ? attributesTitle : slot === 'properties' ? 'Properties' : 'Returns';
+      return `\n\n${title}:\n\n`;
+    }
+
     const since = getAttr(attrs, 'since');
     const deprecated = getAttr(attrs, 'deprecated');
 
@@ -53,6 +67,7 @@ export const signatureMetaToText = (content) =>
       return `\n\n${name}${details.length ? ` (${details.join(', ')})` : ''}:\n\n`;
     }
 
+    attributesTitle = getAttr(attrs, 'attributesTitle') ?? 'Arguments';
     const runtime = [...attrs.matchAll(/['"]([^'"]+)['"]\s*:\s*['"]([^'"]+)['"]/g)]
       .map(([, engine, constraint]) => `${engine} ${constraint}`)
       .join(', ');
@@ -65,3 +80,4 @@ export const signatureMetaToText = (content) =>
     ].filter(Boolean);
     return lines.length ? `\n\n${lines.join(' ')}\n\n` : tag;
   });
+};

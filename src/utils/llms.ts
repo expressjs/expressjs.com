@@ -19,7 +19,8 @@ export function stripMdxSyntax(content: string): string {
       .replace(new RegExp(`<[A-Z]\\w*${JSX_ATTRS}\\/>`, 'g'), '')
       // Remove JSX opening and closing tags like <Alert> </Alert>
       .replace(new RegExp(`<\\/?[A-Z]\\w*${JSX_ATTRS}>`, 'g'), '')
-      // Collapse multiple blank lines
+      // Clear whitespace-only lines left by removed tags, then collapse blank lines
+      .replace(/^[ \t]+$/gm, '')
       .replace(/\n{3,}/g, '\n\n')
       .trim()
   );

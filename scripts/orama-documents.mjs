@@ -10,13 +10,14 @@ const CONTENT_DIR = fileURLToPath(new URL('../src/content', import.meta.url));
 
 const stripMdxImports = (content) => content.replace(/^import\s+.*$/gm, '');
 
-// The tag-strip only matches real tags (`<name …>` / `</name>`), so comparison
-// text like `<21 || >=22` survives.
+// Strip HTML/JSX tags, then drop any leftover `<` that could still start a tag
+// (e.g. the one `<<a>script>` reconstructs). After the second pass no `<` precedes
+// a letter, so no tag-like content survives, while comparison text such as
+// `<21 || >=22` is preserved.
+const stripTags = (text) => text.replace(/<\/?[A-Za-z][^>]*>/g, '').replace(/<(?=\/?[A-Za-z])/g, '');
+
 const mdToText = (content) =>
-  toString(fromMarkdown(signatureMetaToText(stripMdxImports(content)))).replace(
-    /<\/?[A-Za-z][^>]*>/g,
-    ''
-  );
+  stripTags(toString(fromMarkdown(signatureMetaToText(stripMdxImports(content)))));
 
 // Build the public path segment from a content-relative file path: drop the
 // extension and any trailing `index` so `foo/index.mdx` -> `foo`. This matches
