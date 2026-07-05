@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import { Container, Button } from '@/components/primitives';
-import { languages } from '@i18n/locales';
+import { languageCodes } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { Icon } from 'astro-icon/components';
 import {
@@ -17,7 +17,7 @@ import { formatPubDate, sortByPubDateDesc } from '@/utils/rss';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
 
-  return Object.keys(languages).flatMap((lang) =>
+  return languageCodes.flatMap((lang) =>
     posts.map((post) => {
       const filename = post.id.split('/').pop()!;
       return {

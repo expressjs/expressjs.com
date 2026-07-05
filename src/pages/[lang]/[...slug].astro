@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import DocLayout from '@layouts/DocLayout.astro';
-import { languages } from '@i18n/locales';
+import { languageCodes } from '@i18n/locales';
 import { render } from 'astro:content';
 import { getAdjacentPages } from '@utils/content';
 import { docsMenu } from '@/config/menu/docs';
@@ -59,7 +59,7 @@ export async function getStaticPaths() {
     });
   });
 
-  for (const lang of Object.keys(languages)) {
+  for (const lang of languageCodes) {
     api.forEach((page) => {
       const slugParts = page.id.split('/');
       const version = slugParts[0];
@@ -74,7 +74,7 @@ export async function getStaticPaths() {
 
   const defaultVersionApiPages = api.filter((page) => page.id.startsWith(`${DEFAULT_VERSION}/`));
 
-  for (const lang of Object.keys(languages)) {
+  for (const lang of languageCodes) {
     defaultVersionApiPages.forEach((page) => {
       const [, ...restSlugParts] = page.id.split('/');
       const nonVersionedSlug = restSlugParts.join('/');
@@ -116,7 +116,7 @@ export async function getStaticPaths() {
     p.id.startsWith(`${DEFAULT_LANG}/`)
   );
 
-  for (const lang of Object.keys(languages)) {
+  for (const lang of languageCodes) {
     if (lang === DEFAULT_LANG) continue;
 
     englishDefaultVersionPages.forEach((page) => {
@@ -137,7 +137,7 @@ export async function getStaticPaths() {
   }
 
   // Fallback: Create paths for non-English languages using English pages content
-  for (const lang of Object.keys(languages)) {
+  for (const lang of languageCodes) {
     if (lang === DEFAULT_LANG) continue;
 
     const englishContentPages = contentPages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
@@ -160,7 +160,7 @@ export async function getStaticPaths() {
   }
 
   // Fallback: Create paths for non-English languages using English docs content
-  for (const lang of Object.keys(languages)) {
+  for (const lang of languageCodes) {
     if (lang === DEFAULT_LANG) continue; // Skip English, already added
 
     const englishPages = pages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));

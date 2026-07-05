@@ -4,7 +4,7 @@ import satori from 'satori';
 import sharp from 'sharp';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
-import { languages } from '@/i18n/locales';
+import { languages, languageCodes } from '@/i18n/locales';
 import { useTranslations } from '@/i18n/utils';
 
 const COLORS = {
@@ -55,7 +55,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     props: { title: entry.data.title },
   }));
 
-  const homePaths = Object.keys(languages).map((lang) => {
+  const homePaths = languageCodes.map((lang) => {
     const t = useTranslations(lang as keyof typeof languages);
     return {
       params: { id: `home-${lang}.png` },

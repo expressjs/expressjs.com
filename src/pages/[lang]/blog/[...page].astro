@@ -1,6 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import { languages } from '@i18n/locales';
+import { languageCodes } from '@i18n/locales';
 import { Container, Grid, Col } from '@components/primitives';
 import { Tabs } from '@components/primitives/Tabs';
 import type { TabItem } from '@components/primitives';
@@ -13,7 +13,7 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction 
   const PAGE_SIZE = 6;
   const allPosts = await getCollection('blog');
 
-  return Object.keys(languages).flatMap((lang) => {
+  return languageCodes.flatMap((lang) => {
     const langPosts = sortByPubDateDesc(allPosts.filter((post) => post.id !== 'write-post'));
 
     const allTags = [...new Set(langPosts.flatMap((p) => p.data.tags ?? []))];
