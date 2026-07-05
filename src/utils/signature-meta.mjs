@@ -53,7 +53,8 @@ export const signatureMetaToText = (content) => {
     const indent = /^[ \t]*$/.test(beforeTag) ? beforeTag : '';
 
     if (slot) {
-      const title = slot === 'attributes' ? attributesTitle : slot === 'properties' ? 'Properties' : 'Returns';
+      const title =
+        slot === 'attributes' ? attributesTitle : slot === 'properties' ? 'Properties' : 'Returns';
       return `\n\n${indent}${title}:\n\n`;
     }
 
