@@ -4,13 +4,21 @@ import { fileURLToPath, URL } from 'node:url';
 import matter from 'gray-matter';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toString } from 'mdast-util-to-string';
+import { signatureMetaToText } from '../src/utils/signature-meta.mjs';
 
 const CONTENT_DIR = fileURLToPath(new URL('../src/content', import.meta.url));
 
 const stripMdxImports = (content) => content.replace(/^import\s+.*$/gm, '');
 
+// Strip HTML/JSX tags, then drop any leftover `<` that could still start a tag
+// (e.g. the one `<<a>script>` reconstructs). After the second pass no `<` precedes
+// a letter, so no tag-like content survives, while comparison text such as
+// `<21 || >=22` is preserved.
+const stripTags = (text) =>
+  text.replace(/<\/?[A-Za-z][^>]*>/g, '').replace(/<(?=\/?[A-Za-z])/g, '');
+
 const mdToText = (content) =>
-  toString(fromMarkdown(stripMdxImports(content))).replace(/<[^>]*>/g, '');
+  stripTags(toString(fromMarkdown(signatureMetaToText(stripMdxImports(content)))));
 
 // Build the public path segment from a content-relative file path: drop the
 // extension and any trailing `index` so `foo/index.mdx` -> `foo`. This matches
