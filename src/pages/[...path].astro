@@ -12,7 +12,8 @@
 // hardcodes a 2-second delay, which is a poor redirect experience.
 import { getCollection } from 'astro:content';
 import { DEFAULT_VERSION } from '@config/versions';
-import { REMOVED_LOCALES, CURRENT_LOCALES, removedPages } from '@config/removed-content';
+import { REMOVED_LOCALES, removedPages } from '@config/redirects/removed-content';
+import { languageCodes } from '@i18n/locales';
 
 export async function getStaticPaths() {
   const [docs, pages, api, blog] = await Promise.all([
@@ -69,7 +70,7 @@ export async function getStaticPaths() {
   // every current and removed locale) to redirect it.
   for (const path of Object.keys(removedPages)) {
     slugs.add(path.slice(1));
-    for (const locale of [...CURRENT_LOCALES, ...REMOVED_LOCALES]) {
+    for (const locale of [...languageCodes, ...REMOVED_LOCALES]) {
       slugs.add(`${locale}${path}`);
     }
   }
@@ -82,7 +83,7 @@ export async function getStaticPaths() {
 // targets; every other path goes to its English page.
 const rawPath = String(Astro.params.path);
 const firstSegment = rawPath.split('/')[0];
-const isCurrentLocale = CURRENT_LOCALES.includes(firstSegment);
+const isCurrentLocale = languageCodes.includes(firstSegment);
 const hasLocale = isCurrentLocale || REMOVED_LOCALES.includes(firstSegment);
 const locale = isCurrentLocale ? firstSegment : 'en';
 const slug = hasLocale ? rawPath.slice(firstSegment.length + 1) : rawPath;

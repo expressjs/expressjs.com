@@ -24,6 +24,10 @@ export const languages = {
 
 export type LanguageCode = keyof typeof languages;
 
+// All supported locale codes (e.g. `['en', 'de', …]`). Prefer this over repeating
+// `Object.keys(languages)` across the codebase.
+export const languageCodes = Object.keys(languages);
+
 export const languagesArray = Object.entries(languages).map(([code, obj]) => ({
   code,
   label: obj.label,

@@ -4,7 +4,7 @@ import { Flex, FlexItem } from '@components/primitives';
 import { Footer, Sidebar } from '@/components/patterns';
 import { Header } from '@/components/patterns';
 import { getLangFromUrl, replaceLanguageInPath } from '@/i18n/utils';
-import { languages } from '@/i18n/locales';
+import { languages, languageCodes } from '@/i18n/locales';
 
 interface Props {
   title?: string;
@@ -90,7 +90,7 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="canonical" href={canonicalUrl} />
 
     {
-      Object.keys(languages).map((altLang) => (
+      languageCodes.map((altLang) => (
         <link
           rel="alternate"
           hreflang={altLang}

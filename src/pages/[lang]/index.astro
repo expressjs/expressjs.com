@@ -2,11 +2,11 @@
 import { Hero, Features, AnnouncementBar } from '@components/patterns';
 import { Card, Col } from '@components/primitives';
 import Layout from '@layouts/Layout.astro';
-import { languages } from '@i18n/locales';
+import { languageCodes } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 
 export function getStaticPaths() {
-  return Object.keys(languages).map((lang) => ({
+  return languageCodes.map((lang) => ({
     params: { lang },
   }));
 }

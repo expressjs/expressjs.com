@@ -10,7 +10,7 @@ import svgr from 'vite-plugin-svgr';
 import Icons from 'unplugin-icons/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import redirects from './src/config/redirect.js';
+import redirects from './src/config/redirects/index.js';
 import { accessibleTablesIntegration } from './src/plugins/rehype-accessible-tables.mjs';
 import remarkRewriteLocalizedLinks from './src/plugins/remark-rewrite-localized-links.mjs';
 import remarkCodeTabs from './src/plugins/remark-code-tabs.mjs';
