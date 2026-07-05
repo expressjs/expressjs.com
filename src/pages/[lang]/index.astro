@@ -6,16 +6,17 @@ import { languageCodes } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 
 export function getStaticPaths() {
-  return languageCodes.map((lang) => ({
+  return ['/', ...languageCodes].map((lang) => ({
     params: { lang },
   }));
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const canonicalPathname = lang === 'en' ? '/' : `/${lang}/`;
 ---
 
-<Layout>
+<Layout canonicalPathname={canonicalPathname}>
   <AnnouncementBar />
   <Hero />
   <Features title={t('features.title')}>
