@@ -81,6 +81,18 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
 ### Función Middleware myLogger
 
 Aquí hay un ejemplo simple de una función middleware llamada "myLogger". Esta función solo imprime
@@ -93,6 +105,21 @@ const myLogger = function (req, res, next) {
   next();
 };
 ```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const myLogger = function (req: Request, res: Response, next: NextFunction) {
+  console.log('LOGGED');
+  next();
+};
+```
+
+Here `myLogger` is defined on its own rather than passed directly to `app.use()`, so TypeScript has
+no context to infer its parameters and they are annotated explicitly. You can instead type the whole
+function as `RequestHandler`, which types `req`, `res`, and `next` for you. When the middleware is
+written inline in the `app.use()` call, Express infers those three parameters and no annotations are
+needed.
 
 <Alert type="alerta">
 
@@ -143,6 +170,25 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+const myLogger = function (req: Request, res: Response, next: NextFunction) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
 Cada vez que la aplicación recibe una solicitud, imprime el mensaje "LOGGED" en el terminal.
 
 El orden de carga de middleware es importante: las funciones de middleware que se cargan primero también se ejecutan primero.
@@ -156,8 +202,43 @@ La función Middleware `myLogger` simplemente imprime un mensaje, luego pasa la 
 A continuación, crearemos una función de middleware llamada "requestTime" y agregaremos una propiedad llamada `requestTime`
 al objeto de la solicitud.
 
+<Alert type="alerta">
+
+Because the middleware adds a property to `req`, extend the request type in TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Declare
+the property (as optional, since a middleware may not run for every request) in a `.d.ts` file that
+is part of your project:
+
+```ts title="types/express.d.ts"
+declare global {
+  namespace Express {
+    interface Request {
+      requestTime?: number;
+    }
+  }
+}
+
+export {};
+```
+
+TypeScript picks up the file automatically, so no `tsconfig.json` change is needed unless you have
+set a custom `include` that does not cover its location. See
+[Extending the API in TypeScript](/guide/overriding-express-api#extending-the-api-in-typescript) for
+adding other custom properties and methods.
+
+</Alert>
+
 ```js
 const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const requestTime = function (req: Request, res: Response, next: NextFunction) {
   req.requestTime = Date.now();
   next();
 };
@@ -206,6 +287,27 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+const requestTime = function (req: Request, res: Response, next: NextFunction) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req: Request, res: Response) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
 Cuando hace una solicitud a la raíz de la aplicación, la aplicación ahora muestra la marca de tiempo de su solicitud en el navegador.
 
 ### Función Middleware validateCookies
@@ -216,6 +318,16 @@ Aquí hay una función de ejemplo que valida las cookies con un servicio externo
 
 ```js
 async function cookieValidator(cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
+  } catch {
+    throw new Error('Invalid cookies');
+  }
+}
+```
+
+```ts
+async function cookieValidator(cookies: Record<string, string>) {
   try {
     await externallyValidateCookie(cookies.testCookie);
   } catch {
@@ -274,6 +386,30 @@ app.use((err, req, res, next) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+import cookieParser from 'cookie-parser';
+import cookieValidator from './cookieValidator';
+
+const app: Express = express();
+
+async function validateCookies(req: Request, res: Response, next: NextFunction) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
 <Alert type="alerta">
 
 Observe cómo `next()` es llamado después de `await cookieValidator(req.cookies)`. Esto asegura que si
@@ -310,6 +446,17 @@ export default function (options) {
 }
 ```
 
+```ts title="my-middleware.ts"
+import { type Request, type Response, type NextFunction } from 'express';
+
+export default function (options) {
+  return function (req: Request, res: Response, next: NextFunction) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+}
+```
+
 El middleware ahora puede ser usado como se muestra a continuación.
 
 ```cjs title="index.cjs"
@@ -320,6 +467,12 @@ app.use(mw({ option1: '1', option2: '2' }));
 
 ```mjs title="index.mjs"
 import mw from './my-middleware.mjs';
+
+app.use(mw({ option1: '1', option2: '2' }));
+```
+
+```ts title="index.ts"
+import mw from './my-middleware';
 
 app.use(mw({ option1: '1', option2: '2' }));
 ```

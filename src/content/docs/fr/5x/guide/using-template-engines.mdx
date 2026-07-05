@@ -57,6 +57,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 Lorsque vous faites une requête sur la page d'accueil, le fichier `index.pug` sera rendu en HTML.
 
 Le cache du moteur de vue ne cache pas le contenu de la sortie du modèle, seulement le modèle sous-jacent. La vue est toujours rendue à chaque requête, même lorsque le cache est activé.

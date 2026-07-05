@@ -40,6 +40,21 @@ app.listen(port, () => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+const port = 3000;
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+```
+
 该应用启动一个服务器，并在 3000 端口监听连接请求。 当请求根 URL（`/`）或“ _route_”时，该应用会返回“Hello World!”。 对于其他所有路径，它都会返回 **404 Not Found**。
 
 ## 本地运行

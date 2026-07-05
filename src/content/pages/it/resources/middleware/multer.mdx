@@ -39,6 +39,14 @@ Questo README è disponibile anche in altre lingue:
 
 <PackageManagerCommand command="npm install multer" />
 
+<Alert type="info">
+
+`multer` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/multer" />
+
+</Alert>
+
 ## Utilizzo
 
 Multer aggiunge un oggetto `body` e un oggetto `file` o `files` all'oggetto `request`. L'oggetto `body` contiene i valori dei campi di testo del modulo, l'oggetto `file` o `files` contiene i file caricati attraverso il modulo.

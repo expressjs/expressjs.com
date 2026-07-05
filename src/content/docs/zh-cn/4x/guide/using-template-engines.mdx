@@ -53,6 +53,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 当访问首页时，`index.pug` 文件会被渲染成 HTML。
 
 视图引擎缓存不会缓存模板渲染后的输出内容，仅缓存原始模板文件本身。 即便开启缓存，每次请求视图仍会重新渲染。

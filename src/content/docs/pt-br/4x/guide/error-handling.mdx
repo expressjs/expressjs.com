@@ -24,6 +24,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  throw new Error('BROKEN'); // Express will catch this on its own.
+});
+```
+
 Para erros retornados de funções assíncronas, invocados pelos manipuladores de rota
 e intermediário, você deve passá-los para a função `next()`, onde o Express irá capturá-los a
 e processá-los. Por exemplo:
@@ -40,12 +48,35 @@ app.get('/', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err); // Pass errors to Express.
+    } else {
+      res.send(data);
+    }
+  });
+});
+```
+
 Começando pelo Express 5, roteadores e intermediários que retornam um Promise
 chamarão `next(value)` automaticamente quando eles rejeitarem ou lançarem um erro.
 Por exemplo:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
   const user = await getUserById(req.params.id);
   res.send(user);
 });
@@ -73,6 +104,19 @@ app.get('/', [
 ]);
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.writeFile('/inaccessible-path', 'data', next);
+  },
+  function (req: Request, res: Response) {
+    res.send('OK');
+  },
+]);
+```
+
 No exemplo acima, `next` é fornecido como o callback para `fs.writeFile`,
 que é chamado com ou sem erros. Se não houver erro, o segundo receptor
 é executado, caso contrário as pegadas do Express e processa o erro.
@@ -82,6 +126,20 @@ middleware e passá-los para o Expresso para processamento. Por exemplo:
 
 ```js
 app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   setTimeout(() => {
     try {
       throw new Error('BROKEN');
@@ -110,6 +168,18 @@ app.get('/', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
 Since promises automatically catch both synchronous errors and rejected promises,
 you can simply provide `next` as the final catch handler and Express will catch errors,
 because the catch handler is given the error as the first argument.
@@ -125,6 +195,23 @@ app.get('/', [
     });
   },
   function (req, res) {
+    res.locals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data;
+      next(err);
+    });
+  },
+  function (req: Request, res: Response) {
     res.locals.data = res.locals.data.split(',')[1];
     res.send(res.locals.data);
   },
@@ -186,6 +273,18 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
 Observe que o manipulador de erro padrão pode ser acionado se você chamar `next()` com um erro
 no seu código mais de uma vez. Mesmo que um erro personalizado de manipulação de middleware esteja no lugar.
 
@@ -199,6 +298,15 @@ exceto funções de manipulação de erro possuem quatro argumentos ao invés de
 
 ```js
 app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -234,6 +342,23 @@ app.use(
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```ts title="index.ts"
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   // logic
 });
 ```
@@ -287,6 +412,15 @@ function logErrors(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
+  console.error(err.stack);
+  next(err);
+}
+```
+
 Também neste exemplo, `clientErrorHandler` é definido como segue; neste caso, o erro é explicitamente passado para o próximo.
 
 Observe que quando _não_ estiver chamando "próximo" em uma função de manipulação de erros, você é responsável por escrever (e terminar) a resposta. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
@@ -301,10 +435,31 @@ function clientErrorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function clientErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' });
+  } else {
+    next(err);
+  }
+}
+```
+
 Implementar a função "catch-all" `errorHandler` da seguinte forma (por exemplo):
 
 ```js
 function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   res.status(500);
   res.render('error', { error: err });
 }
@@ -324,6 +479,28 @@ app.get(
     }
   },
   (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err);
+      res.json(doc);
+    });
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/a_route_behind_paywall',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user.hasPaid) {
+      // continue handling this request
+      next('route');
+    } else {
+      next();
+    }
+  },
+  (req: Request, res: Response, next: NextFunction) => {
     PaidContent.find((err, doc) => {
       if (err) return next(err);
       res.json(doc);

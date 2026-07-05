@@ -26,12 +26,34 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  throw new Error('BROKEN'); // Express will catch this on its own.
+});
+```
+
 For errors returned from asynchronous functions invoked by route handlers
 and middleware, you must pass them to the `next()` function, where Express will
 catch and process them. 例:
 
 ```js
 app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err); // Pass errors to Express.
+    } else {
+      res.send(data);
+    }
+  });
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
       next(err); // Pass errors to Express.
@@ -49,6 +71,15 @@ except error-handling functions have four arguments instead of three:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
   const user = await getUserById(req.params.id);
   res.send(user);
 });
@@ -76,6 +107,19 @@ app.get('/', [
 ]);
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.writeFile('/inaccessible-path', 'data', next);
+  },
+  function (req: Request, res: Response) {
+    res.send('OK');
+  },
+]);
+```
+
 In the above example, `next` is provided as the callback for `fs.writeFile`,
 which is called with or without errors. エラーがなければ、2番目の
 ハンドラが実行されます。そうでなければ、Expressはエラーをキャッチして処理します。
@@ -95,8 +139,22 @@ app.get('/', (req, res, next) => {
 });
 ```
 
-上の例では、
-非同期コードのエラーをキャッチし、Expressに渡すために`try...catch`ブロックを使用しています。 上の例では、
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+The above example uses a `try...catch` block to catch errors in the
+asynchronous code and pass them to Express. 上の例では、
 非同期コードのエラーをキャッチし、Expressに渡すために`try...catch`ブロックを使用しています。 `try...catch`
 ブロックが省略された場合、Expressは同期
 ハンドラコードの一部ではないため、エラーをキャッチしません。
@@ -106,6 +164,18 @@ app.get('/', (req, res, next) => {
 
 ```js
 app.get('/', (req, res, next) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   Promise.resolve()
     .then(() => {
       throw new Error('BROKEN');
@@ -136,24 +206,41 @@ app.get('/', [
 ]);
 ```
 
-上の例では、`readFile`
-呼び出しからいくつかの些細な文があります。 上の例では、`readFile`
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', [
+  function (req: Request, res: Response, next: NextFunction) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data;
+      next(err);
+    });
+  },
+  function (req: Request, res: Response) {
+    res.locals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
+```
+
+The above example has a couple of trivial statements from the `readFile`
+call. 上の例では、`readFile`
 呼び出しからいくつかの些細な文があります。 `readFile` でエラーが発生した場合、エラーは Express に渡されます。 それ以外の場合は、
 チェーン内の次のハンドラ
 で同期エラー処理の世界にすばやく戻ります。 そして、上記の例はデータを処理しようとします。 これが失敗した場合、
 同期エラーハンドラはそれをキャッチします。 `readFile`コールバックの
 内でこの処理を行った場合、アプリケーションが終了する可能性があり、Expressエラー
-ハンドラは実行されません。 そして、上記の例はデータを処理しようとします。 これが失敗した場合、
-同期エラーハンドラはそれをキャッチします。 `readFile`コールバックの
-内でこの処理を行った場合、アプリケーションが終了する可能性があり、Expressエラー
-ハンドラは実行されません。
+ハンドラは実行されません。 Then, the example above tries to process the data. If this fails, then the
+synchronous error handler will catch it. If you had done this processing inside
+the `readFile` callback, then the application might exit and the Express error
+handlers would not run.
 
 どちらの方法を使っても、Expressエラーハンドラを呼び出し、
 アプリケーションを存続させたい場合は Express がエラーを受け取ることを確認する必要があります。
 
 ## デフォルトのエラーハンドラです
 
-Expressには、アプリで発生する可能性のあるエラーを処理する内蔵のエラーハンドラが付属しています。 このデフォルトのエラー処理ミドルウェア関数は、ミドルウェア関数スタックの末尾に追加されます。 このデフォルトのエラー処理ミドルウェア関数は、ミドルウェア関数スタックの末尾に追加されます。
+Expressには、アプリで発生する可能性のあるエラーを処理する内蔵のエラーハンドラが付属しています。 このデフォルトのエラー処理ミドルウェア関数は、ミドルウェア関数スタックの末尾に追加されます。 This default error-handling middleware function is added at the end of the middleware function stack.
 
 If you pass an error to `next()` and you do not handle it in a custom error
 handler, it will be handled by the built-in error handler; the error will be
@@ -169,8 +256,8 @@ written to the client with the stack trace. スタックトレースは本番環
 エラーが書き込まれると、次の情報が
 応答に追加されます:
 
-- `res.statusCode` は `err.status` (または `err.statusCode`)から設定されます。
-  の場合、この値が4xxまたは5xxの範囲外の場合、500に設定されます。
+- The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
+  this value is outside the 4xx or 5xx range, it will be set to 500.
 - `res.statusMessage` はステータスコードに従って設定されます。
 - 本文は、プロダクション
   環境ではステータスコードメッセージのHTMLになります。そうでなければ、`err.stack`になります。
@@ -195,6 +282,18 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
 デフォルトのエラーハンドラは、コード内でエラー
 を複数回呼び出して`next()`を呼び出すとトリガされることに注意してください。 カスタムエラー処理ミドルウェアが導入されたとしてもです
 
@@ -208,6 +307,15 @@ except error-handling functions have four arguments instead of three:
 
 ```js
 app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -243,6 +351,23 @@ app.use(
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use((err, req, res, next) => {
+  // logic
+});
+```
+
+```ts title="index.ts"
+import { type Request, type Response, type NextFunction } from 'express';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   // logic
 });
 ```
@@ -296,6 +421,15 @@ function logErrors(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
+  console.error(err.stack);
+  next(err);
+}
+```
+
 この例でも、`clientErrorHandler`は以下のように定義されています。この場合、エラーは明示的に次のエラーに渡されます。
 
 Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
@@ -310,10 +444,31 @@ function clientErrorHandler(err, req, res, next) {
 }
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function clientErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' });
+  } else {
+    next(err);
+  }
+}
+```
+
 "catch-all" `errorHandler` 関数を以下のように実装します(例えば：
 
 ```js
 function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   res.status(500);
   res.render('error', { error: err });
 }
@@ -333,6 +488,28 @@ app.get(
     }
   },
   (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err);
+      res.json(doc);
+    });
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/a_route_behind_paywall',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user.hasPaid) {
+      // continue handling this request
+      next('route');
+    } else {
+      next();
+    }
+  },
+  (req: Request, res: Response, next: NextFunction) => {
     PaidContent.find((err, doc) => {
       if (err) return next(err);
       res.json(doc);

@@ -57,6 +57,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 Wenn du eine Anfrage an die Startseite stellt, wird die `index.pug` Datei als HTML dargestellt.
 
 Der View Engine-Cache speichert nicht den Inhalt der Templateausgabe, sondern nur die zugrunde liegende Vorlage selbst. Die Ansicht wird noch mit jeder Anfrage neu gerendert, auch wenn der Cache eingeschaltet ist.

@@ -53,6 +53,18 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
 ### ミドルウェア関数 myLogger
 
 Here is a simple example of a middleware function called "myLogger". This function just prints
@@ -66,6 +78,21 @@ const myLogger = function (req, res, next) {
   next();
 };
 ```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const myLogger = function (req: Request, res: Response, next: NextFunction) {
+  console.log('LOGGED');
+  next();
+};
+```
+
+Here `myLogger` is defined on its own rather than passed directly to `app.use()`, so TypeScript has
+no context to infer its parameters and they are annotated explicitly. You can instead type the whole
+function as `RequestHandler`, which types `req`, `res`, and `next` for you. When the middleware is
+written inline in the `app.use()` call, Express infers those three parameters and no annotations are
+needed.
 
 <Alert type="アラート">
 
@@ -117,6 +144,25 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+const myLogger = function (req: Request, res: Response, next: NextFunction) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
 アプリがリクエストを受け取るたびに、「LOGGED」というメッセージが端末に出力されます。
 
 ミドルウェアのロード順序は重要です。最初にロードされるミドルウェア関数も最初に実行されます。
@@ -130,8 +176,43 @@ app.listen(3000);
 次に、"requestTime" というミドルウェア関数を作成し、リクエストオブジェクトに `requestTime`
 というプロパティを追加します。
 
+<Alert type="アラート">
+
+Because the middleware adds a property to `req`, extend the request type in TypeScript with
+[declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Declare
+the property (as optional, since a middleware may not run for every request) in a `.d.ts` file that
+is part of your project:
+
+```ts title="types/express.d.ts"
+declare global {
+  namespace Express {
+    interface Request {
+      requestTime?: number;
+    }
+  }
+}
+
+export {};
+```
+
+TypeScript picks up the file automatically, so no `tsconfig.json` change is needed unless you have
+set a custom `include` that does not cover its location. See
+[Extending the API in TypeScript](/guide/overriding-express-api#extending-the-api-in-typescript) for
+adding other custom properties and methods.
+
+</Alert>
+
 ```js
 const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const requestTime = function (req: Request, res: Response, next: NextFunction) {
   req.requestTime = Date.now();
   next();
 };
@@ -180,6 +261,27 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+const requestTime = function (req: Request, res: Response, next: NextFunction) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req: Request, res: Response) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
 アプリのルートにリクエストを送信すると、アプリはブラウザにリクエストのタイムスタンプを表示するようになりました。
 
 ### ミドルウェア関数 validateCookies
@@ -190,6 +292,16 @@ app.listen(3000);
 
 ```js
 async function cookieValidator(cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
+  } catch {
+    throw new Error('Invalid cookies');
+  }
+}
+```
+
+```ts
+async function cookieValidator(cookies: Record<string, string>) {
   try {
     await externallyValidateCookie(cookies.testCookie);
   } catch {
@@ -248,6 +360,30 @@ app.use((err, req, res, next) => {
 app.listen(3000);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+import cookieParser from 'cookie-parser';
+import cookieValidator from './cookieValidator';
+
+const app: Express = express();
+
+async function validateCookies(req: Request, res: Response, next: NextFunction) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
 <Alert type="アラート">
 
 `await cookieValidator(req.cookies)`の後に`next()`が呼び出されることに注意してください。 これにより、
@@ -282,6 +418,17 @@ module.exports = function (options) {
 ```mjs title="my-middleware.mjs"
 export default function (options) {
   return function (req, res, next) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+}
+```
+
+```ts title="my-middleware.ts"
+import { type Request, type Response, type NextFunction } from 'express';
+
+export default function (options: Record<string, unknown>) {
+  return function (req: Request, res: Response, next: NextFunction) {
     // Implement the middleware function based on the options object
     next();
   };

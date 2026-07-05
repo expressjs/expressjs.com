@@ -57,6 +57,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 Quando effettui una richiesta alla home page, il file `index.pug` verrà renderizzato come HTML.
 
 La cache del motore di visualizzazione non memorizza in cache il contenuto dell'output del modello, solo il modello sottostante. La vista è ancora ri-renderizzata con ogni richiesta anche quando la cache è accesa.

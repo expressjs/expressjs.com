@@ -57,6 +57,17 @@ app.use((req, res, next) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
 本示例展示了一个挂载在 `/user/:id` 路径上的中间件函数。 只要是发往 `/user/:id` 路径的任意类型 HTTP 请求，都会执行该中间件函数。
 
 ```js
@@ -66,10 +77,27 @@ app.use('/user/:id', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  console.log('Request Type:', req.method);
+  next();
+});
+```
+
 该示例展示了一条路由及其处理函数（中间件体系）。 该函数处理指向 `/user/:id` 路径的 GET 请求。
 
 ```js
 app.get('/user/:id', (req, res, next) => {
+  res.send('USER');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   res.send('USER');
 });
 ```
@@ -85,6 +113,22 @@ app.use(
     next();
   },
   (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
     console.log('Request Type:', req.method);
     next();
   }
@@ -109,6 +153,26 @@ app.get(
 
 // handler for the /user/:id path, which prints the user ID
 app.get('/user/:id', (req, res, next) => {
+  res.send(req.params.id);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('ID:', req.params.id);
+    next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    res.send('User Info');
+  }
+);
+
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
   res.send(req.params.id);
 });
 ```
@@ -144,6 +208,29 @@ app.get('/user/:id', (req, res, next) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    // if the user ID is 0, skip to the next route
+    if (req.params.id === '0') next('route');
+    // otherwise pass the control to the next middleware function in this stack
+    else next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    // send a regular response
+    res.send('regular');
+  }
+);
+
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  res.send('special');
+});
+```
+
 中间件也可以定义在数组中，实现复用。
 
 该示例展示了一个使用数组封装的中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
@@ -161,6 +248,25 @@ function logMethod(req, res, next) {
 
 const logStuff = [logOriginalUrl, logMethod];
 app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+function logOriginalUrl(req: Request, res: Response, next: NextFunction) {
+  console.log('Request URL:', req.originalUrl);
+  next();
+}
+
+function logMethod(req: Request, res: Response, next: NextFunction) {
+  console.log('Request Type:', req.method);
+  next();
+}
+
+const logStuff = [logOriginalUrl, logMethod];
+app.get('/user/:id', logStuff, (req: Request, res: Response, next: NextFunction) => {
   res.send('User Info');
 });
 ```
@@ -276,6 +382,56 @@ router.get('/user/:id', (req, res, next) => {
 app.use('/', router);
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+const router = express.Router();
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req: Request, res: Response, next: NextFunction) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
+  '/user/:id',
+  (req: Request, res: Response, next: NextFunction) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
+  },
+  (req: Request, res: Response, next: NextFunction) => {
+    // render a regular page
+    res.render('regular');
+  }
+);
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.params.id);
+  res.render('special');
+});
+
+// mount the router on the app
+app.use('/', router);
+```
+
 若要跳过当前路由实例中剩余的中间件函数，调用 `next('router')` 即可将控制权交回给路由实例。
 
 该示例展示了一个中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
@@ -323,6 +479,28 @@ app.use('/admin', router, (req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+
+const app: Express = express();
+const router = express.Router();
+
+// predicate the router with a check and bail out when needed
+router.use((req: Request, res: Response, next: NextFunction) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+router.get('/user/:id', (req: Request, res: Response) => {
+  res.send('hello, user!');
+});
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req: Request, res: Response) => {
+  res.sendStatus(401);
+});
+```
+
 ## 错误处理中间件
 
 <Alert type="alert">
@@ -335,6 +513,15 @@ app.use('/admin', router, (req, res) => {
 
 ```js
 app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -376,6 +563,16 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 const app = express();
+
+// load the cookie-parsing middleware
+app.use(cookieParser());
+```
+
+```ts title="index.ts"
+import express, { type Express } from 'express';
+import cookieParser from 'cookie-parser';
+
+const app: Express = express();
 
 // load the cookie-parsing middleware
 app.use(cookieParser());

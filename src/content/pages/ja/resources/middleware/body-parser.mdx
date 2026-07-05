@@ -53,6 +53,14 @@ and `toString` may not be a function and instead a string or other user input.
 
 <PackageManagerCommand command="npm install body-parser" />
 
+<Alert type="情報">
+
+`body-parser` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/body-parser" />
+
+</Alert>
+
 ## API
 
 ```js

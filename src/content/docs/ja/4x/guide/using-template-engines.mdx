@@ -58,6 +58,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 ホームページへのリクエストを行うと、 `index.pug` ファイルは HTML としてレンダリングされます。
 
-ビューエンジンキャッシュはテンプレートの出力の内容をキャッシュせず、元のテンプレート自体のみキャッシュします。 キャッシュがオンの場合でも、ビューはリクエストごとに再レンダリングされます。 キャッシュがオンの場合でも、ビューはリクエストごとに再レンダリングされます。
+ビューエンジンキャッシュはテンプレートの出力の内容をキャッシュせず、元のテンプレート自体のみキャッシュします。 キャッシュがオンの場合でも、ビューはリクエストごとに再レンダリングされます。 The view is still re-rendered with every request even when the cache is on.

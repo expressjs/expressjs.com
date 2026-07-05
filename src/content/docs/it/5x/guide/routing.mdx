@@ -1,6 +1,6 @@
 ---
 title: Routing
-description: Scopri come definire e utilizzare i percorsi nelle applicazioni Express.js, inclusi i metodi di percorso, i percorsi e i parametri e utilizzando Router per il routing modulare.
+description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, typing requests and responses in TypeScript, and using Router for modular routing.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -42,6 +42,17 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello world');
+});
+```
+
 ## Metodi percorso
 
 Un metodo di percorso è derivato da uno dei metodi HTTP ed è collegato ad un'istanza della classe `express`.
@@ -60,13 +71,36 @@ app.post('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// GET method route
+app.get('/', (req: Request, res: Response) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req: Request, res: Response) => {
+  res.send('POST request to the homepage');
+});
+```
+
 Express supporta metodi che corrispondono a tutti i metodi di richiesta HTTP: `get`, `post`, e così via.
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. Ad esempio, il seguente gestore viene eseguito per le richieste al percorso `"/secret"` se si utilizza `GET`, `POST`, `PUT`, `DELETE`, o qualsiasi altro metodo di richiesta HTTP supportato nel [modulo http](https://nodejs.org/api/http.html#http_http_methods).
+C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
@@ -103,12 +137,39 @@ app.get('/random.text', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('root');
+});
+
+app.get('/about', (req: Request, res: Response) => {
+  res.send('about');
+});
+
+app.get('/random.text', (req: Request, res: Response) => {
+  res.send('random.text');
+});
+```
+
 ### Wildcards
 
 I caratteri jolly corrispondono a qualsiasi percorso dopo un prefisso. Devono avere un nome, proprio come i parametri del percorso, e sono catturati come array di segmenti di percorso.
 
 ```js
 app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
   // GET /files/images/logo.png
   console.dir(req.params.filepath);
   // => [ 'images', 'logo.png' ]
@@ -127,12 +188,33 @@ app.get('/{*splat}', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req: Request, res: Response) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
 ### Segmenti facoltativi
 
 Usa le parentesi graffe per definire segmenti opzionali in un percorso percorso. Quando il segmento non è presente, il parametro viene omesso da `req.params`.
 
 ```js
 app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/:file{.:ext}', (req: Request, res: Response) => {
   // GET /image.png => req.params = { file: 'image', ext: 'png' }
   // GET /image => req.params = { file: 'image' }
   res.send('ok');
@@ -161,6 +243,20 @@ app.get(/.*fly$/, (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches any path containing "a"
+app.get(/a/, (req: Request, res: Response) => {
+  res.send('/a/');
+});
+
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
+app.get(/.*fly$/, (req: Request, res: Response) => {
+  res.send('/.*fly$/');
+});
+```
+
 ## Parametri percorso
 
 I parametri del percorso sono denominati segmenti di URL che vengono utilizzati per catturare i valori specificati nella loro posizione nell'URL. I valori catturati sono popolati nell'oggetto `req.params`, con il nome del parametro route specificato nel percorso come loro rispettive chiavi.
@@ -177,6 +273,22 @@ Per definire i percorsi con i parametri del percorso, è sufficiente specificare
 app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params);
 });
+```
+
+In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
+`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
+Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
+to annotate the parameters when the handler is defined separately from the route, because the type
+checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
+
+```ts
+import { type Request, type Response } from 'express';
+
+const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
+  res.send(req.params);
+};
+
+app.get('/users/:userId/books/:bookId', sendParams);
 ```
 
 <Alert type="allerta">
@@ -223,6 +335,21 @@ app.get('/user/:id', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req: Request, res: Response) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
 In questo esempio:
 
 - `GET /user/5` → gestito dal primo percorso → invia "User 5"
@@ -234,6 +361,14 @@ Una singola funzione di callback può gestire un percorso. Per esempio:
 
 ```js
 app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/example/a', (req: Request, res: Response) => {
   res.send('Hello from A!');
 });
 ```
@@ -253,6 +388,21 @@ app.get(
 );
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/example/b',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
 Un array di funzioni di callback può gestire un percorso. Per esempio:
 
 ```js
@@ -267,6 +417,26 @@ const cb1 = function (req, res, next) {
 };
 
 const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req: Request, res: Response) {
   res.send('Hello from C!');
 };
 
@@ -294,6 +464,32 @@ app.get(
     next();
   },
   (req, res) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
     res.send('Hello from D!');
   }
 );
@@ -332,6 +528,22 @@ app
     res.send('Add a book');
   })
   .put((req, res) => {
+    res.send('Update the book');
+  });
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app
+  .route('/book')
+  .get((req: Request, res: Response) => {
+    res.send('Get a random book');
+  })
+  .post((req: Request, res: Response) => {
+    res.send('Add a book');
+  })
+  .put((req: Request, res: Response) => {
     res.send('Update the book');
   });
 ```
@@ -385,6 +597,30 @@ router.get('/', (req, res) => {
 });
 // define the about route
 router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
+```ts title="birds.ts"
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req: Request, res: Response) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req: Request, res: Response) => {
   res.send('About birds');
 });
 

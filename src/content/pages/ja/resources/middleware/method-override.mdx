@@ -23,6 +23,14 @@ PUTやDELETEなどのHTTP動詞をクライアントがサポートしていな�
 
 <PackageManagerCommand command="npm install method-override" />
 
+<Alert type="情報">
+
+`method-override` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/method-override" />
+
+</Alert>
+
 ## API
 
 **NOTE** It is very important that this module is used **before** any module that

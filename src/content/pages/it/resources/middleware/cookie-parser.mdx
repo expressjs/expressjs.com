@@ -22,6 +22,14 @@ che assegna `req.secret` in modo che possa essere utilizzata da altri middleware
 
 <PackageManagerCommand command="npm install cookie-parser" />
 
+<Alert type="info">
+
+`cookie-parser` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/cookie-parser" />
+
+</Alert>
+
 ## API
 
 ```js

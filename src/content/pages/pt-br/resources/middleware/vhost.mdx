@@ -17,6 +17,14 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <PackageManagerCommand command="npm install vhost" />
 
+<Alert type="informações">
+
+`vhost` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/vhost" />
+
+</Alert>
+
 ## API
 
 ```js

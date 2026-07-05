@@ -57,6 +57,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 Quando você faz uma solicitação à página inicial, o arquivo `index.pug` será processado como HTML.
 
 O cache do motor de exibição não armazena o conteúdo da saída do modelo, apenas o modelo subjacente em si. A visualização ainda é renderizada novamente com todas as requisições, mesmo que o cache esteja ativo.

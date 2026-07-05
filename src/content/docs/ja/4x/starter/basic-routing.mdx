@@ -41,10 +41,26 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+```
+
 ルートルート (`/`) の POST リクエストに応答します。アプリケーションのホームページ:
 
 ```js
 app.post('/', (req, res) => {
+  res.send('Got a POST request');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.post('/', (req: Request, res: Response) => {
   res.send('Got a POST request');
 });
 ```
@@ -57,10 +73,26 @@ app.put('/user', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.put('/user', (req: Request, res: Response) => {
+  res.send('Got a PUT request at /user');
+});
+```
+
 `/user`ルートへのDELETEリクエストに対応:
 
 ```js
 app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.delete('/user', (req: Request, res: Response) => {
   res.send('Got a DELETE request at /user');
 });
 ```

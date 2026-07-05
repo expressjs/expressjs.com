@@ -40,6 +40,14 @@ Multer は `multipart/form-data` を扱うための node.js ミドルウェア�
 
 <PackageManagerCommand command="npm install multer" />
 
+<Alert type="情報">
+
+`multer` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+
+<PackageManagerCommand command="npm install --save-dev @types/multer" />
+
+</Alert>
+
 ## 使用法
 
 Multer は `body` オブジェクトと `file` または `files` オブジェクトを `request` オブジェクトに追加します。 `body` オブジェクトには、フォームのテキストフィールドの値が含まれています。`file` または `files` オブジェクトには、フォームを介してアップロードされたファイルが含まれています。 `body` オブジェクトには、フォームのテキストフィールドの値が含まれています。`file` または `files` オブジェクトには、フォームを介してアップロードされたファイルが含まれています。

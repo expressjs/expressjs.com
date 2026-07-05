@@ -1,6 +1,6 @@
 ---
 title: ルーティング
-description: Express.jsアプリケーションでルートを定義して使用する方法を学びます。ルートメソッド、ルートパス、パラメータ、モジュラールーティングにルーターを使用する方法を学びます。
+description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, typing requests and responses in TypeScript, and using Router for modular routing.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -45,6 +45,17 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello world');
+});
+```
+
 ## ルートメソッド
 
 routeメソッドはHTTPメソッドのいずれかから派生し、`express` クラスのインスタンスに追加されます。
@@ -63,14 +74,37 @@ app.post('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// GET method route
+app.get('/', (req: Request, res: Response) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req: Request, res: Response) => {
+  res.send('POST request to the homepage');
+});
+```
+
 Expressは、すべてのHTTPリクエストメソッドに対応するメソッドをサポートしています: `get`、`post`など。
 完全なリストについては、 [app.METHOD](/api/application#appmethodpath-callback--callback-) を参照してください。
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。 For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。 For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
@@ -108,12 +142,39 @@ app.get('/random.text', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('root');
+});
+
+app.get('/about', (req: Request, res: Response) => {
+  res.send('about');
+});
+
+app.get('/random.text', (req: Request, res: Response) => {
+  res.send('random.text');
+});
+```
+
 ### ワイルドカード
 
 Wildcards match any path after a prefix. ワイルドカードはプレフィックスの後の任意のパスに一致します。 ルートパラメータと同様に名前が必要で、パスセグメントの配列として取得されます。
 
 ```js
 app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
   // GET /files/images/logo.png
   console.dir(req.params.filepath);
   // => [ 'images', 'logo.png' ]
@@ -132,12 +193,33 @@ app.get('/{*splat}', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req: Request, res: Response) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
 ### 任意のセグメント
 
 Use braces to define optional segments in a route path. ルートパスで任意のセグメントを定義するには、括弧を使用します。 セグメントが存在しない場合、パラメータは `req.params` から省略されます。
 
 ```js
 app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/:file{.:ext}', (req: Request, res: Response) => {
   // GET /image.png => req.params = { file: 'image', ext: 'png' }
   // GET /image => req.params = { file: 'image' }
   res.send('ok');
@@ -166,6 +248,20 @@ app.get(/.*fly$/, (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches any path containing "a"
+app.get(/a/, (req: Request, res: Response) => {
+  res.send('/a/');
+});
+
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
+app.get(/.*fly$/, (req: Request, res: Response) => {
+  res.send('/.*fly$/');
+});
+```
+
 ## ルートパラメータ
 
 Route parameters are named URL segments that are used to capture the values specified at their position in the URL. ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 取得した値は `req.params` オブジェクト内に入力され、パス内でそれぞれのキーとして指定されたrouteパラメータの名前が入力されます。
@@ -182,6 +278,22 @@ req.params: { "userId": "34", "bookId": "8989" }
 app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params);
 });
+```
+
+In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
+`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
+Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
+to annotate the parameters when the handler is defined separately from the route, because the type
+checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
+
+```ts
+import { type Request, type Response } from 'express';
+
+const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
+  res.send(req.params);
+};
+
+app.get('/users/:userId/books/:bookId', sendParams);
 ```
 
 <Alert type="アラート">
@@ -229,6 +341,21 @@ app.get('/user/:id', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req: Request, res: Response) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
 この例では:
 
 - `GET /user/5` → 最初のルートで処理 → "User 5" を送信
@@ -240,6 +367,14 @@ app.get('/user/:id', (req, res) => {
 
 ```js
 app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/example/a', (req: Request, res: Response) => {
   res.send('Hello from A!');
 });
 ```
@@ -259,6 +394,21 @@ app.get(
 );
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/example/b',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
 コールバック関数の配列はルートを処理できます。 例: 例:
 
 ```js
@@ -273,6 +423,26 @@ const cb1 = function (req, res, next) {
 };
 
 const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req: Request, res: Response) {
   res.send('Hello from C!');
 };
 
@@ -300,6 +470,32 @@ app.get(
     next();
   },
   (req, res) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
     res.send('Hello from D!');
   }
 );
@@ -339,6 +535,22 @@ app
     res.send('Add a book');
   })
   .put((req, res) => {
+    res.send('Update the book');
+  });
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app
+  .route('/book')
+  .get((req: Request, res: Response) => {
+    res.send('Get a random book');
+  })
+  .post((req: Request, res: Response) => {
+    res.send('Add a book');
+  })
+  .put((req: Request, res: Response) => {
     res.send('Update the book');
   });
 ```
@@ -392,6 +604,30 @@ router.get('/', (req, res) => {
 });
 // define the about route
 router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
+```ts title="birds.ts"
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req: Request, res: Response) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req: Request, res: Response) => {
   res.send('About birds');
 });
 

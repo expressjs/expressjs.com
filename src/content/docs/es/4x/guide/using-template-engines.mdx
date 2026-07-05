@@ -57,6 +57,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
+```
+
 Cuando hagas una solicitud a la página de inicio, el archivo `index.pug` será renderizado como HTML.
 
 La caché del motor de vistas no almacena en caché el contenido de la salida de la plantilla, sólo la misma plantilla subyacente. La vista todavía se vuelve a procesar con cada petición incluso cuando la caché está encendida.

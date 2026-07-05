@@ -39,10 +39,26 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+```
+
 响应根路由（/）应用的主页的 POST 请求：
 
 ```js
 app.post('/', (req, res) => {
+  res.send('Got a POST request');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.post('/', (req: Request, res: Response) => {
   res.send('Got a POST request');
 });
 ```
@@ -55,10 +71,26 @@ app.put('/user', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.put('/user', (req: Request, res: Response) => {
+  res.send('Got a PUT request at /user');
+});
+```
+
 响应 `/user` 路由的 DELETE 请求：
 
 ```js
 app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.delete('/user', (req: Request, res: Response) => {
   res.send('Got a DELETE request at /user');
 });
 ```

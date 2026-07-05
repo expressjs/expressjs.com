@@ -1,6 +1,6 @@
 ---
 title: Routage
-description: Apprenez à définir et utiliser des routes dans les applications Express.js, y compris les méthodes de trajet, les chemins de trajet, les paramètres et l'utilisation du routeur pour le routage modulaire.
+description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, typing requests and responses in TypeScript, and using Router for modular routing.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -42,6 +42,17 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts title="index.ts"
+import express, { type Express, type Request, type Response } from 'express';
+
+const app: Express = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello world');
+});
+```
+
 ## Méthodes de la route
 
 Une méthode de route est dérivée d'une des méthodes HTTP, et est attachée à une instance de la classe `express`.
@@ -60,13 +71,36 @@ app.post('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+// GET method route
+app.get('/', (req: Request, res: Response) => {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', (req: Request, res: Response) => {
+  res.send('POST request to the homepage');
+});
+```
+
 Express supporte les méthodes qui correspondent à toutes les méthodes de requête HTTP : `get`, `post`, et ainsi de suite.
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-Il y a une méthode de routage spéciale, `app.all()`, utilisée pour charger les fonctions du middleware à un chemin pour _toutes_ les méthodes de requête HTTP. Par exemple, le gestionnaire suivant est exécuté pour les requêtes vers la route `"/secret"` si vous utilisez `GET`, `POST`, `PUT`, `DELETE`, ou toute autre méthode de requête HTTP supportée dans le module [http](https://nodejs.org/api/http.html#http_http_methods).
+Il y a une méthode de routage spéciale, `app.all()`, utilisée pour charger les fonctions du middleware à un chemin pour _toutes_ les méthodes de requête HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
@@ -95,6 +129,14 @@ app.get('/', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('root');
+});
+```
+
 Ce chemin de route correspond aux requêtes à `/about`.
 
 ```js
@@ -103,10 +145,26 @@ app.get('/about', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/about', (req: Request, res: Response) => {
+  res.send('about');
+});
+```
+
 Ce chemin de route correspondra aux requêtes à `/random.text`.
 
 ```js
 app.get('/random.text', (req, res) => {
+  res.send('random.text');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/random.text', (req: Request, res: Response) => {
   res.send('random.text');
 });
 ```
@@ -121,10 +179,26 @@ app.get('/ab?cd', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab?cd', (req: Request, res: Response) => {
+  res.send('ab?cd');
+});
+```
+
 Ce chemin correspondra à `abcd`, `abbcd`, `abbbcd`, et ainsi de suite.
 
 ```js
 app.get('/ab+cd', (req, res) => {
+  res.send('ab+cd');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab+cd', (req: Request, res: Response) => {
   res.send('ab+cd');
 });
 ```
@@ -137,10 +211,26 @@ app.get('/ab*cd', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab*cd', (req: Request, res: Response) => {
+  res.send('ab*cd');
+});
+```
+
 Ce chemin de route correspondra à `/abe` et `/abcde`.
 
 ```js
 app.get('/ab(cd)?e', (req, res) => {
+  res.send('ab(cd)?e');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/ab(cd)?e', (req: Request, res: Response) => {
   res.send('ab(cd)?e');
 });
 ```
@@ -161,10 +251,26 @@ app.get(/a/, (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response } from 'express';
+
+app.get(/a/, (req: Request, res: Response) => {
+  res.send('/a/');
+});
+```
+
 Ce chemin d'itinéraire correspondra à `butterfly` et `dragonfly`, mais pas `butterflyman`, `dragonflyman`, et ainsi de suite.
 
 ```js
 app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get(/.*fly$/, (req: Request, res: Response) => {
   res.send('/.*fly$/');
 });
 ```
@@ -185,6 +291,22 @@ Pour définir des routes avec des paramètres d'itinéraire, il suffit de spéci
 app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params);
 });
+```
+
+In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
+`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
+Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
+to annotate the parameters when the handler is defined separately from the route, because the type
+checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
+
+```ts
+import { type Request, type Response } from 'express';
+
+const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
+  res.send(req.params);
+};
+
+app.get('/users/:userId/books/:bookId', sendParams);
 ```
 
 <Alert type="Alerte">
@@ -243,6 +365,21 @@ app.get('/user/:id', (req, res) => {
 });
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+  if (req.params.id === '0') {
+    return next('route');
+  }
+  res.send(`User ${req.params.id}`);
+});
+
+app.get('/user/:id', (req: Request, res: Response) => {
+  res.send('Special handler for user ID 0');
+});
+```
+
 Dans cet exemple :
 
 - `GET /user/5` → géré par la première route → envoie "Utilisateur 5"
@@ -254,6 +391,14 @@ Une seule fonction de rappel peut gérer une route. Par exemple :
 
 ```js
 app.get('/example/a', (req, res) => {
+  res.send('Hello from A!');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/example/a', (req: Request, res: Response) => {
   res.send('Hello from A!');
 });
 ```
@@ -273,6 +418,21 @@ app.get(
 );
 ```
 
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get(
+  '/example/b',
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
+    res.send('Hello from B!');
+  }
+);
+```
+
 Un tableau de fonctions de rappel peut gérer une route. Par exemple :
 
 ```js
@@ -287,6 +447,26 @@ const cb1 = function (req, res, next) {
 };
 
 const cb2 = function (req, res) {
+  res.send('Hello from C!');
+};
+
+app.get('/example/c', [cb0, cb1, cb2]);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+const cb2 = function (req: Request, res: Response) {
   res.send('Hello from C!');
 };
 
@@ -314,6 +494,32 @@ app.get(
     next();
   },
   (req, res) => {
+    res.send('Hello from D!');
+  }
+);
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+const cb0 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB0');
+  next();
+};
+
+const cb1 = function (req: Request, res: Response, next: NextFunction) {
+  console.log('CB1');
+  next();
+};
+
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req: Request, res: Response) => {
     res.send('Hello from D!');
   }
 );
@@ -352,6 +558,22 @@ app
     res.send('Add a book');
   })
   .put((req, res) => {
+    res.send('Update the book');
+  });
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app
+  .route('/book')
+  .get((req: Request, res: Response) => {
+    res.send('Get a random book');
+  })
+  .post((req: Request, res: Response) => {
+    res.send('Add a book');
+  })
+  .put((req: Request, res: Response) => {
     res.send('Update the book');
   });
 ```
@@ -405,6 +627,30 @@ router.get('/', (req, res) => {
 });
 // define the about route
 router.get('/about', (req, res) => {
+  res.send('About birds');
+});
+
+export default router;
+```
+
+```ts title="birds.ts"
+import express, { type Request, type Response, type NextFunction } from 'express';
+
+const router = express.Router();
+
+// middleware that is specific to this router
+const timeLog = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
+
+// define the home page route
+router.get('/', (req: Request, res: Response) => {
+  res.send('Birds home page');
+});
+// define the about route
+router.get('/about', (req: Request, res: Response) => {
   res.send('About birds');
 });
 
