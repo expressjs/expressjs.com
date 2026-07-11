@@ -102,6 +102,13 @@ You can specify more than one debug namespace by assigning a comma-separated lis
 $ DEBUG=http,mail,express:* node index.js
 ```
 
+## Debugging with launch configurations
+
+The same `DEBUG` environment variable can be set by any process launcher that supports environment
+variables, including IDE debug configurations. For example, VS Code can debug Node.js applications
+with auto attach, JavaScript Debug Terminal, launch configurations, or attach configurations; see
+[Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging).
+
 ## Advanced options
 
 When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
