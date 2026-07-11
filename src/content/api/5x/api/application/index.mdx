@@ -312,9 +312,10 @@ app.use('/admin', admin);
 <Signature>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -385,9 +386,10 @@ app.all('/api/{*splat}', requireAuthentication);
 <Signature>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -593,9 +595,10 @@ app.get('title');
 <Signature>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -763,9 +766,10 @@ actually supported.
 <Signature>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -784,6 +788,10 @@ actually supported.
 Routes an HTTP request, where METHOD is the HTTP method of the request, such as GET,
 PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 `app.post()`, `app.put()`, and so on. See [Routing methods](#routing-methods) below for the complete list.
+
+Route paths match the complete request path for a route. Unlike [app.use()](#appuse), a route path
+does not match path prefixes by default. For example, `app.get('/apple', ...)` matches "/apple" but
+not "/apple/images" unless the path pattern is written to match that longer path.
 
 #### Routing methods
 
@@ -1041,9 +1049,10 @@ it is usually better to use [req.baseUrl](/api/request/#reqbaseurl) to get the c
 <Signature>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -1083,9 +1092,10 @@ app.post('/', (req: Request, res: Response) => {
 <Signature>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -1124,9 +1134,10 @@ app.put('/', (req: Request, res: Response) => {
 <Signature runtime={{ 'Node.js': '>=20.19.3 <21 || >=22.2.0' }}>
   <Fragment slot="attributes">
     <Param name="path" type="String | RegExp | Array">
-      The path for which the middleware function is invoked; can be any of: a string representing a
-      path, a path pattern, a regular expression pattern to match paths, or an array of combinations
-      of any of the above. For examples, see [Path examples](#path-examples).
+      The path for which the route callback is invoked; can be any of: a string representing a path,
+      a path pattern, a regular expression pattern to match paths, or an array of combinations of
+      any of the above. Route paths match complete request paths; for syntax examples, see [Path
+      examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -1560,7 +1571,7 @@ the middleware function is executed when the base of the requested path matches 
 
 #### Description
 
-A route will match any path that follows its path immediately with a "`/`".
+Middleware mounted with `app.use()` will match any path that follows its path immediately with a "`/`".
 For example: `app.use('/apple', ...)` will match "/apple", "/apple/images",
 "/apple/images/news", and so on.
 
