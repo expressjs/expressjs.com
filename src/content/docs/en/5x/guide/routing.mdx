@@ -275,7 +275,11 @@ app.get('/users/:userId/books/:bookId', (req, res) => {
 });
 ```
 
-Wildcard parameters (`*`) are also supported in Express 5. Unlike named parameters (`:`), they capture one or more path segments and expose them as an array in `req.params`. See the [Wildcards](#wildcards) section above for details and examples.
+<Alert type="info">
+
+Wildcard parameters (`*`) are only supported in Express 5. Unlike named parameters (`:`), they capture one or more path segments and expose them as an array in `req.params`. See the [Wildcards](#wildcards) section above or the [migration guide](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) for details and examples.
+
+</Alert>
 
 In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
 `req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
