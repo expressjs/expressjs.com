@@ -401,7 +401,7 @@ app.use('/admin', function (req: Request, res: Response, next: NextFunction) {
 
 <Alert type="alert">
 
-Wildcard parameters (`*`) are introduced in Express 5. See the [migration guide to Express 5](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) for details.
+In Express 4, wildcard matches are exposed as unnamed parameters (for example, `req.params[0]`) and return a string. Express 5 introduces named wildcard parameters that are exposed as arrays. See the [migration guide](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) for details.
 
 </Alert>
 
