@@ -48,7 +48,7 @@ Node.js 请求体解析中间件
 
 <Alert type="info">
 
-`body-parser` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+`body-parser` 自身不附带 TypeScript 类型定义文件。 If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
 
 <PackageManagerCommand command="npm install --save-dev @types/body-parser" />
 
@@ -75,352 +75,225 @@ const text = require('body-parser/text');
 
 返回仅解析`json`且仅解析请求头`Content-Type`与`type`选项匹配的请求的中间件。 该解析器可识别请求体的任意Unicode编码，并自动解压`gzip`、`br`（brotli）与`deflate`编码的数据。
 
-A new `body` object containing the parsed data is populated on the `request`
-object after the middleware (i.e. `req.body`).
+中间件执行完成后，解析后的数据会存入请求对象上新增的 `body` 属性（即 `req.body`）。
 
 #### Options
 
-The `json` function takes an optional `options` object that may contain any of
-the following keys:
+`json` 方法接收一个可选的配置对象参数，该对象可包含以下任一属性：
 
-##### defaultCharset
+##### 默认字符集
 
-Specify the default character set for the json content if the charset is not
-specified in the `Content-Type` header of the request. Defaults to `utf-8`.
+若请求头 `Content-Type` 未指定字符集，则为 JSON 内容设置默认字符集。 Defaults to `utf-8`.
 
 ##### inflate
 
-When set to `true`, then deflated (compressed) bodies will be inflated; when
-`false`, deflated bodies are rejected. Defaults to `true`.
+设为 `true` 时，会解压经过压缩的请求体；设为 `false` 时，则拒绝处理压缩请求体。 默认值为 `true`。
 
 ##### limit
 
-Controls the maximum request body size. If this is a number, then the value
-specifies the number of bytes; if it is a string, the value is passed to the
-[bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
-to `'100kb'`.
+控制请求体的最大体积。 若该值为数字，则代表字节数；若为字符串，则交由 [bytes](https://www.npmjs.com/package/bytes) 库解析。 默认值为 `'100kb'`。
 
-> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
+> 建议不要设置过大的限制值，尽可能使用默认配置。 允许更大的请求载荷会增加内存占用，因为解码与数据转换需要消耗资源，同时处理更多数据也会延长响应耗时。 此处所说的“过大”指超出默认值的配置，例如5兆及以上的请求载荷就会开始产生上述风险。 使用默认限制值时，不会出现上述问题。
 
 ##### reviver
 
-The `reviver` option is passed directly to `JSON.parse` as the second
-argument. You can find more information on this argument
-[in the MDN documentation about JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#the_reviver_parameter).
+`reviver` 配置项会直接作为第二个参数传入 `JSON.parse`。 你可以在MDN关于JSON.parse的文档中查看该参数的更多信息
+[MDN JSON.parse文档之reviver参数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#the_reviver_parameter)。
 
 ##### strict
 
-When set to `true`, will only accept arrays and objects; when `false` will
-accept anything `JSON.parse` accepts. Defaults to `true`.
+设为 `true` 时，仅接受数组与对象；设为 `false` 时，可接受所有 `JSON.parse` 能够解析的内容。 默认值为 `true`。
 
 ##### type
 
-The `type` option is used to determine what media type the middleware will
-parse. This option can be a string, array of strings, or a function. If not a
-function, `type` option is passed directly to the
-[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
-be an extension name (like `json`), a mime type (like `application/json`), or
-a mime type with a wildcard (like `*/*` or `*/json`). If a function, the `type`
-option is called as `fn(req)` and the request is parsed if it returns a truthy
-value. Defaults to `application/json`.
+`type` 选项用于指定该中间件所要解析的媒体类型。 该选项可以是字符串、字符串数组或函数。 若不为函数，`type` 选项会直接传入 [type-is](https://www.npmjs.com/package/type-is#readme) 库，它可以是扩展名（如 `json`）、MIME 类型（如 `application/json`）或带通配符的 MIME 类型（如 `*/*`、`*/json`）。 若为函数，则 `type` 选项会以 `fn(req)` 形式调用，当函数返回真值时才会解析该请求。 默认值为 `application/json`。
 
 ##### verify
 
-The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`,
-where `buf` is a `Buffer` of the raw request body and `encoding` is the
-encoding of the request. The parsing can be aborted by throwing an error.
+如果配置了 `verify` 选项，会以 `verify(req, res, buf, encoding)` 的形式调用，其中 `buf` 是存储原始请求体的 `Buffer`，`encoding` 为请求的编码格式。 可通过抛出错误终止解析流程。
 
 ### bodyParser.raw([options])
 
-Returns middleware that parses all bodies as a `Buffer` and only looks at
-requests where the `Content-Type` header matches the `type` option. This
-parser supports automatic inflation of `gzip`, `br` (brotli) and `deflate`
-encodings.
+返回一个中间件，该中间件会将所有请求体解析为 `Buffer`，且仅处理 `Content-Type` 请求头与 `type` 选项匹配的请求。 该解析器支持自动解压 `gzip`、`br`（brotli）与 `deflate` 编码。
 
-A new `body` object containing the parsed data is populated on the `request`
-object after the middleware (i.e. `req.body`). This will be a `Buffer` object
+中间件执行完成后，解析后的数据会存入请求对象上新增的 `body` 属性（即 `req.body`）。 This will be a `Buffer` object
 of the body.
 
 #### Options
 
-The `raw` function takes an optional `options` object that may contain any of
-the following keys:
+`raw` 函数接收一个可选的 `options` 对象，该对象可包含以下任一属性：
 
 ##### inflate
 
-When set to `true`, then deflated (compressed) bodies will be inflated; when
-`false`, deflated bodies are rejected. Defaults to `true`.
+设为 `true` 时，会解压经过压缩的请求体；设为 `false` 时，则拒绝处理压缩请求体。 默认值为 `true`。
 
 ##### limit
 
-Controls the maximum request body size. If this is a number, then the value
-specifies the number of bytes; if it is a string, the value is passed to the
-[bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
-to `'100kb'`.
+控制请求体的最大体积。 若该值为数字，则代表字节数；若为字符串，则交由 [bytes](https://www.npmjs.com/package/bytes) 库解析。 默认值为 `'100kb'`。
 
-> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
+> 建议不要设置过大的限制值，尽可能使用默认配置。 允许更大的请求载荷会增加内存占用，因为解码与数据转换需要消耗资源，同时处理更多数据也会延长响应耗时。 此处所说的“过大”指超出默认值的配置，例如5兆及以上的请求载荷就会开始产生上述风险。 使用默认限制值时，不会出现上述问题。
 
 ##### type
 
-The `type` option is used to determine what media type the middleware will
-parse. This option can be a string, array of strings, or a function.
-If not a function, `type` option is passed directly to the
-[type-is](https://www.npmjs.com/package/type-is#readme) library and this
-can be an extension name (like `bin`), a mime type (like
-`application/octet-stream`), or a mime type with a wildcard (like `*/*` or
-`application/*`). If a function, the `type` option is called as `fn(req)`
-and the request is parsed if it returns a truthy value. Defaults to
-`application/octet-stream`.
+`type` 选项用于指定该中间件所要解析的媒体类型。 该选项可以是字符串、字符串数组或函数。
+若不为函数，`type` 选项会直接传入 [type-is](https://www.npmjs.com/package/type-is#readme) 库，它可以是扩展名（如 `bin`）、MIME 类型（如 `application/octet-stream`）或带通配符的 MIME 类型（如 `*/*`、`application/*`）。 若为函数，则 `type` 选项会以 `fn(req)` 形式调用，函数返回真值时才会解析该请求。 默认值为 `application/octet-stream`。
 
 ##### verify
 
-The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`,
-where `buf` is a `Buffer` of the raw request body and `encoding` is the
-encoding of the request. The parsing can be aborted by throwing an error.
+如果配置了 `verify` 选项，会以 `verify(req, res, buf, encoding)` 的形式调用，其中 `buf` 是存储原始请求体的 `Buffer`，`encoding` 为请求的编码格式。 可通过抛出错误终止解析流程。
 
 ### bodyParser.text([options])
 
-Returns middleware that parses all bodies as a string and only looks at
-requests where the `Content-Type` header matches the `type` option. This
-parser supports automatic inflation of `gzip`, `br` (brotli) and `deflate`
-encodings.
+返回一个中间件，该中间件会将所有请求体解析为字符串，且仅处理 `Content-Type` 请求头与 `type` 选项匹配的请求。 该解析器支持自动解压 `gzip`、`br`（brotli）与 `deflate` 编码。
 
-A new `body` string containing the parsed data is populated on the `request`
-object after the middleware (i.e. `req.body`). This will be a string of the
-body.
+中间件执行完成后，解析得到的字符串数据会作为新的 `body` 属性挂载到请求对象上（即 `req.body`）。 该值为请求体对应的字符串。
 
 #### Options
 
-The `text` function takes an optional `options` object that may contain any of
-the following keys:
+`text` 函数接收一个可选的 `options` 对象，该对象可包含以下任一属性：
 
-##### defaultCharset
+##### 默认字符集
 
-Specify the default character set for the text content if the charset is not
-specified in the `Content-Type` header of the request. Defaults to `utf-8`.
+若请求的 `Content-Type` 请求头未指定字符集，则使用该值作为文本内容的默认字符集。 Defaults to `utf-8`.
 
 ##### inflate
 
-When set to `true`, then deflated (compressed) bodies will be inflated; when
-`false`, deflated bodies are rejected. Defaults to `true`.
+设为 `true` 时，会解压经过压缩的请求体；设为 `false` 时，则拒绝处理压缩请求体。 默认值为 `true`。
 
 ##### limit
 
-Controls the maximum request body size. If this is a number, then the value
-specifies the number of bytes; if it is a string, the value is passed to the
-[bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
-to `'100kb'`.
+控制请求体的最大体积。 若该值为数字，则代表字节数；若为字符串，则交由 [bytes](https://www.npmjs.com/package/bytes) 库解析。 默认值为 `'100kb'`。
 
-> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
+> 建议不要设置过大的限制值，尽可能使用默认配置。 允许更大的请求载荷会增加内存占用，因为解码与数据转换需要消耗资源，同时处理更多数据也会延长响应耗时。 此处所说的“过大”指超出默认值的配置，例如5兆及以上的请求载荷就会开始产生上述风险。 使用默认限制值时，不会出现上述问题。
 
 ##### type
 
-The `type` option is used to determine what media type the middleware will
-parse. This option can be a string, array of strings, or a function. If not
-a function, `type` option is passed directly to the
-[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
-be an extension name (like `txt`), a mime type (like `text/plain`), or a mime
-type with a wildcard (like `*/*` or `text/*`). If a function, the `type`
-option is called as `fn(req)` and the request is parsed if it returns a
-truthy value. Defaults to `text/plain`.
+`type` 选项用于指定该中间件所要解析的媒体类型。 该选项可以是字符串、字符串数组或函数。 若不为函数，`type` 选项会直接传入 [type-is](https://www.npmjs.com/package/type-is#readme) 库，它可以是扩展名（如 `txt`）、MIME 类型（如 `text/plain`）或带通配符的 MIME 类型（如 `*/*`、`text/*`）。 若为函数，则 `type` 选项会以 `fn(req)` 形式调用，当函数返回真值时才会解析该请求。 默认值为 `text/plain`。
 
 ##### verify
 
-The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`,
-where `buf` is a `Buffer` of the raw request body and `encoding` is the
-encoding of the request. The parsing can be aborted by throwing an error.
+如果配置了 `verify` 选项，会以 `verify(req, res, buf, encoding)` 的形式调用，其中 `buf` 是存储原始请求体的 `Buffer`，`encoding` 为请求的编码格式。 可通过抛出错误终止解析流程。
 
 ### bodyParser.urlencoded([options])
 
-Returns middleware that only parses `urlencoded` bodies and only looks at
-requests where the `Content-Type` header matches the `type` option. This
-parser accepts only UTF-8 and ISO-8859-1 encodings of the body and supports
-automatic inflation of `gzip`, `br` (brotli) and `deflate` encodings.
+返回一个中间件，该中间件仅解析 `urlencoded` 格式请求体，且只处理 `Content-Type` 请求头与 `type` 选项匹配的请求。 该解析器仅支持 UTF-8 和 ISO-8859-1 编码的请求体，同时可自动解压 `gzip`、`br`（brotli）与 `deflate` 编码数据。
 
-A new `body` object containing the parsed data is populated on the `request`
-object after the middleware (i.e. `req.body`). This object will contain
-key-value pairs, where the value can be a string or array (when `extended` is
-`false`), or any type (when `extended` is `true`).
+中间件执行完成后，解析后的数据会存入请求对象上新增的 `body` 属性（即 `req.body`）。 该对象将包含键值对，值可以为字符串或数组（当`extended`为`false`时），或任意类型（当`extended`为`true`时）。
 
 #### Options
 
-The `urlencoded` function takes an optional `options` object that may contain
-any of the following keys:
+`urlencoded` 函数接收一个可选的配置对象 `options`，该对象可包含以下任意属性：
 
 ##### extended
 
-The "extended" syntax allows for rich objects and arrays to be encoded into the
-URL-encoded format, allowing for a JSON-like experience with URL-encoded. For
-more information, please see the qs
-library.
+`extended` 语法支持将复杂对象与数组编码为URL编码格式，让URL编码数据拥有类似JSON的使用体验。 如需了解更多信息，请[查看 qs 库](https://www.npmjs.com/package/qs#readme)。
 
-Defaults to `false`.
+默认值为`false`。
 
 ##### inflate
 
-When set to `true`, then deflated (compressed) bodies will be inflated; when
-`false`, deflated bodies are rejected. Defaults to `true`.
+设为 `true` 时，会解压经过压缩的请求体；设为 `false` 时，则拒绝处理压缩请求体。 默认值为 `true`。
 
 ##### limit
 
-Controls the maximum request body size. If this is a number, then the value
-specifies the number of bytes; if it is a string, the value is passed to the
-[bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
-to `'100kb'`.
+控制请求体的最大体积。 若该值为数字，则代表字节数；若为字符串，则交由 [bytes](https://www.npmjs.com/package/bytes) 库解析。 默认值为 `'100kb'`。
 
-> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
+> 建议不要设置过大的限制值，尽可能使用默认配置。 允许更大的请求载荷会增加内存占用，因为解码与数据转换需要消耗资源，同时处理更多数据也会延长响应耗时。 此处所说的“过大”指超出默认值的配置，例如5兆及以上的请求载荷就会开始产生上述风险。 使用默认限制值时，不会出现上述问题。
 
 ##### parameterLimit
 
-The `parameterLimit` option controls the maximum number of parameters that
-are allowed in the URL-encoded data. If a request contains more parameters
-than this value, a 413 will be returned to the client. Defaults to `1000`.
+`parameterLimit` 选项用于控制 URL 编码数据中允许携带的最大参数数量。 如果请求包含的参数数量超过该设定值，将会向客户端返回 413 状态码。 默认值为 `1000`。
 
 ##### type
 
-The `type` option is used to determine what media type the middleware will
-parse. This option can be a string, array of strings, or a function. If not
-a function, `type` option is passed directly to the
-[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
-be an extension name (like `urlencoded`), a mime type (like
-`application/x-www-form-urlencoded`), or a mime type with a wildcard (like
-`*/x-www-form-urlencoded`). If a function, the `type` option is called as
-`fn(req)` and the request is parsed if it returns a truthy value. Defaults
-to `application/x-www-form-urlencoded`.
+`type` 选项用于指定该中间件所要解析的媒体类型。 该选项可以是字符串、字符串数组或函数。 若`type`选项不是函数，则会直接传递给[type-is](https://www.npmjs.com/package/type-is#readme)库，该值可以是文件扩展名（如`urlencoded`）、MIME类型（如`application/x-www-form-urlencoded`）或带通配符的MIME类型（如`*/x-www-form-urlencoded`）。 如果`type`选项为函数，则以`fn(req)`形式调用该函数；若返回真值，则解析本次请求。 默认值为 `application/x-www-form-urlencoded`。
 
 ##### verify
 
-The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`,
-where `buf` is a `Buffer` of the raw request body and `encoding` is the
-encoding of the request. The parsing can be aborted by throwing an error.
+如果配置了 `verify` 选项，会以 `verify(req, res, buf, encoding)` 的形式调用，其中 `buf` 是存储原始请求体的 `Buffer`，`encoding` 为请求的编码格式。 可通过抛出错误终止解析流程。
 
-##### defaultCharset
+##### 默认字符集
 
-The default charset to parse as, if not specified in content-type. Must be
-either `utf-8` or `iso-8859-1`. Defaults to `utf-8`.
+当请求头 Content-Type 未指定字符集时，用于解析数据的默认字符集。 必须为 `utf-8` 或 `iso-8859-1` 二者之一。 Defaults to `utf-8`.
 
 ##### charsetSentinel
 
-Whether to let the value of the `utf8` parameter take precedence as the charset
-selector. It requires the form to contain a parameter named `utf8` with a value
-of `✓`. Defaults to `false`.
+是否允许 `utf8` 参数的值优先作为字符集选择依据。 要求表单包含一个名为 `utf8`、值为 `✓` 的参数。 默认值为`false`。
 
 ##### interpretNumericEntities
 
-Whether to decode numeric entities such as `&#9786;` when parsing an iso-8859-1
-form. Defaults to `false`.
+解析 iso-8859-1 格式表单时，是否解码 `&#9786;` 这类数字实体字符。 默认值为`false`。
 
 ##### depth
 
-The `depth` option is used to configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible.
+当 `extended` 为 `true` 时，`depth` 选项用于配置 `qs` 库解析对象的最大嵌套深度。 该配置可限制解析出的键值数量，有助于防范特定类型的恶意攻击。 默认值为 `32`。 建议将该值设置得尽可能小。
 
 ## Errors
 
-The middlewares provided by this module create errors using the
-[`http-errors` module](https://www.npmjs.com/package/http-errors). The errors
-will typically have a `status`/`statusCode` property that contains the suggested
-HTTP response code, an `expose` property to determine if the `message` property
-should be displayed to the client, a `type` property to determine the type of
-error without matching against the `message`, and a `body` property containing
-the read body, if available.
+本模块提供的中间件会借助[`http-errors` 模块](https://www.npmjs.com/package/http-errors)生成错误对象。 错误对象通常包含以下属性：
+`status`/`statusCode`：推荐使用的 HTTP 响应状态码；
+`expose`：控制是否向客户端展示 `message` 信息；
+`type`：用于区分错误类型，无需匹配消息文本；
+`body`：若已读取请求体，则存放读取到的请求体内容。
 
-The following are the common errors created, though any error can come through
-for various reasons.
+以下是该中间件常见生成的错误，不过因各类场景也可能出现其他错误。
 
-### content encoding unsupported
+### 不支持的内容编码
 
-This error will occur when the request had a `Content-Encoding` header that
-contained an encoding but the "inflation" option was set to `false`. The
-`status` property is set to `415`, the `type` property is set to
-`'encoding.unsupported'`, and the `charset` property will be set to the
-encoding that is unsupported.
+当请求携带的 `Content-Encoding` 请求头指定了编码格式，但 `inflation` 选项被设为 `false` 时，会触发该错误。 `status` 属性值为 `415`，`type` 属性值为 `'encoding.unsupported'`，`charset` 属性会记录不被支持的编码格式。
 
-### entity parse failed
+### 实体解析失败
 
-This error will occur when the request contained an entity that could not be
-parsed by the middleware. The `status` property is set to `400`, the `type`
+当中间件无法解析请求携带的请求实体时，会抛出该错误。 The `status` property is set to `400`, the `type`
 property is set to `'entity.parse.failed'`, and the `body` property is set to
 the entity value that failed parsing.
 
-### entity verify failed
+### 实体验证失败
 
-This error will occur when the request contained an entity that could not be
-failed verification by the defined `verify` option. The `status` property is
-set to `403`, the `type` property is set to `'entity.verify.failed'`, and the
-`body` property is set to the entity value that failed verification.
+当请求实体无法通过配置的 `verify` 选项校验时，会触发该错误。 `status` 属性值为 `403`，`type` 属性值为 `'entity.verify.failed'`，`body` 属性存放校验未通过的请求实体内容。
 
 ### request aborted
 
-This error will occur when the request is aborted by the client before reading
-the body has finished. The `received` property will be set to the number of
-bytes received before the request was aborted and the `expected` property is
-set to the number of expected bytes. The `status` property is set to `400`
-and `type` property is set to `'request.aborted'`.
+客户端在请求体读取完成前中断请求时，会抛出该错误。 `received` 属性记录请求中断前已接收的字节数，`expected` 属性记录预期接收的总字节数。 `status` 属性值为 `400`，`type` 属性值为 `'request.aborted'`。
 
-### request entity too large
+### 请求实体过大
 
-This error will occur when the request body's size is larger than the "limit"
-option. The `limit` property will be set to the byte limit and the `length`
-property will be set to the request body's length. The `status` property is
-set to `413` and the `type` property is set to `'entity.too.large'`.
+当请求体大小超过 `limit` 选项设定的限制值时，会抛出该错误。 `limit` 属性记录设定的字节上限，`length` 属性记录请求体实际大小。 `status` 属性值为 `413`，`type` 属性值为 `'entity.too.large'`。
 
-### request size did not match content length
+### 请求体实际大小与Content Length不匹配
 
-This error will occur when the request's length did not match the length from
-the `Content-Length` header. This typically occurs when the request is malformed,
-typically when the `Content-Length` header was calculated based on characters
-instead of bytes. The `status` property is set to `400` and the `type` property
-is set to `'request.size.invalid'`.
+当请求实际数据长度与 `Content-Length` 请求头标明的长度不一致时，会触发该错误。 该错误通常由格式异常的请求引发，常见场景是 `Content-Length` 请求头按照字符数而非字节数计算得出。 `status` 属性值为 `400`，`type` 属性值为 `'request.size.invalid'`。
 
-### stream encoding should not be set
+### 不应设置流编码
 
-This error will occur when something called the `req.setEncoding` method prior
-to this middleware. This module operates directly on bytes only and you cannot
-call `req.setEncoding` when using this module. The `status` property is set to
-`500` and the `type` property is set to `'stream.encoding.set'`.
+若在当前中间件执行前，有代码调用过 `req.setEncoding` 方法，则会触发该错误。 该模块仅直接处理原始字节流，使用本模块时不可调用 `req.setEncoding` 方法。 `status` 属性值为 `500`，`type` 属性值为 `'stream.encoding.set'`。
 
 ### stream is not readable
 
-This error will occur when the request is no longer readable when this middleware
-attempts to read it. This typically means something other than a middleware from
-this module read the request body already and the middleware was also configured to
-read the same request. The `status` property is set to `500` and the `type`
-property is set to `'stream.not.readable'`.
+当中间件尝试读取请求流，但该请求流已不可读时，会抛出该错误。 这种情况通常是：除了本模块中间件之外，已有其他代码提前读取过请求体，但当前中间件又被配置去读取同一个请求流。 `status` 属性值为 `500`，`type` 属性值为 `'stream.not.readable'`。
 
-### too many parameters
+### 参数太多了
 
-This error will occur when the content of the request exceeds the configured
-`parameterLimit` for the `urlencoded` parser. The `status` property is set to
-`413` and the `type` property is set to `'parameters.too.many'`.
+当请求参数数量超出 `urlencoded` 解析器配置的 `parameterLimit` 上限时，会触发该错误。 `status` 属性值为 `413`，`type` 属性值为 `'parameters.too.many'`。
 
-### unsupported charset "BOGUS"
+### 不支持的字符编码“BOGUS”
 
-This error will occur when the request had a charset parameter in the
-`Content-Type` header, but the `iconv-lite` module does not support it OR the
-parser does not support it. The charset is contained in the message as well
-as in the `charset` property. The `status` property is set to `415`, the
-`type` property is set to `'charset.unsupported'`, and the `charset` property
-is set to the charset that is unsupported.
+当请求的 `Content-Type` 请求头携带 charset 参数，但 iconv-lite 模块或当前解析器不支持该字符集时，会抛出此错误。 错误信息与 `charset` 属性中均会携带对应的字符集名称。 `status` 属性值为 `415`，`type` 属性值为 `'charset.unsupported'`，`charset` 属性存储不被支持的字符集名称。
 
-### unsupported content encoding "bogus"
+### 不支持的内容编码格式“bogus”
 
-This error will occur when the request had a `Content-Encoding` header that
-contained an unsupported encoding. The encoding is contained in the message
-as well as in the `encoding` property. The `status` property is set to `415`,
-the `type` property is set to `'encoding.unsupported'`, and the `encoding`
-property is set to the encoding that is unsupported.
+当请求头 `Content-Encoding` 中携带了不被支持的编码格式时，会触发该错误。 错误信息与 `encoding` 属性都会包含对应的编码标识。 `status` 属性值为 `415`，`type` 属性值为 `'encoding.unsupported'`，`encoding` 属性存储不被支持的编码格式。
 
-### The input exceeded the depth
+### 输入内容超出解析深度限制
 
-This error occurs when using `bodyParser.urlencoded` with the `extended` property set to `true` and the input exceeds the configured `depth` option. The `status` property is set to `400`. It is recommended to review the `depth` option and evaluate if it requires a higher value. When the `depth` option is set to `32` (default value), the error will not be thrown.
+当使用 `bodyParser.urlencoded` 并将 `extended` 配置为 `true` 时，若传入参数嵌套层级超过 `depth` 配置上限，就会触发该错误。 `status` 属性值为 `400`。 建议检查 `depth` 配置项，评估是否需要调大该数值。 当 `depth` 配置项设为默认值 32 时，不会抛出该错误。
 
 ## Examples
 
-### Express/Connect top-level generic
+### Express/Connect 顶层通用方法
 
-This example demonstrates adding a generic JSON and URL-encoded parser as a
-top-level middleware, which will parse the bodies of all incoming requests.
-This is the simplest setup.
+此示例演示将通用 JSON 和 URL 编码解析器注册为顶层中间件，它会解析所有入站请求的请求体。
+这是最简配置方案。
 
 ```js
 const express = require('express');
@@ -441,11 +314,9 @@ app.use(function (req, res) {
 });
 ```
 
-### Express route-specific
+### Express 路由专属
 
-This example demonstrates adding body parsers specifically to the routes that
-need them. In general, this is the most recommended way to use body-parser with
-Express.
+该示例演示仅为需要的路由单独配置请求体解析器。 通常来说，这是在 Express 中使用 body-parser 最推荐的方式。
 
 ```js
 const express = require('express');
@@ -472,10 +343,9 @@ app.post('/api/users', jsonParser, function (req, res) {
 });
 ```
 
-### Change accepted type for parsers
+### 修改解析器可接受的内容类型
 
-All the parsers accept a `type` option which allows you to change the
-`Content-Type` that the middleware will parse.
+所有解析器均支持 `type` 选项，你可通过该选项修改中间件能够解析的 `Content-Type`。
 
 ```js
 const express = require('express');
