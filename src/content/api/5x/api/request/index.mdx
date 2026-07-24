@@ -393,7 +393,7 @@ app.use('/admin', (req: Request, res: Response, next: NextFunction) => {
 
 <Alert type="info">
 
-Wildcard parameters (`*`) are only supported in Express 5. Unlike named parameters (`:`), they capture one or more path segments and expose them as an array in `req.params`. See the [migration guide](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) for details.
+Wildcard parameters (`*`) capture one or more path segments and expose them as an array in `req.params`. See the [migration guide](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) for details.
 
 </Alert>
 
