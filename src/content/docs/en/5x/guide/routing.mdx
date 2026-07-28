@@ -283,7 +283,7 @@ To also match the root path, wrap the wildcard in braces:
 ```js
 // Matches / , /foo , /foo/bar , etc.
 app.get('/{*splat}', (req, res) => {
-  // GET / => req.params.splat = []
+  // GET / => req.params = {}, splat is omitted
   // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
   res.send('ok');
 });
@@ -294,7 +294,7 @@ import { type Request, type Response } from 'express';
 
 // Matches / , /foo , /foo/bar , etc.
 app.get('/{*splat}', (req: Request, res: Response) => {
-  // GET / => req.params.splat = []
+  // GET / => req.params = {}, splat is omitted
   // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
   res.send('ok');
 });
@@ -318,6 +318,40 @@ import { type Request, type Response } from 'express';
 app.get('/:file{.:ext}', (req: Request, res: Response) => {
   // GET /image.png => req.params = { file: 'image', ext: 'png' }
   // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
+
+```js
+app.get('/user/{:id}', (req, res) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req, res) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/{:id}', (req: Request, res: Response) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req: Request, res: Response) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
   res.send('ok');
 });
 ```
