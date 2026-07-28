@@ -155,7 +155,7 @@ app.get('/random.text', (req: Request, res: Response) => {
 
 <Alert type="alert">
 
-The characters `?`, `+`, `*`, `[]`, and `()` are reserved and cannot be used as literal characters in route paths. Use `\` to escape them if needed.
+The characters `?`, `+`, `*`, `[]`, `()`, and `!` are reserved and cannot be used as literal characters in route paths, and braces are reserved for [optional segments](#optional-segments). Use `\` to escape them if needed.
 
 </Alert>
 
@@ -229,7 +229,7 @@ app.get('/users/:userId/books/:bookId', sendParams);
 
 <Alert type="alert">
 
-The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+The name of route parameters must be a valid JavaScript identifier. Other names can be used by quoting them, for example `:"user-name"`.
 
 </Alert>
 
