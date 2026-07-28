@@ -191,7 +191,7 @@ app.get(/.*fly$/, (req: Request, res: Response) => {
 
 ## Route parameters
 
-Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys. They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments) (`{...}`).
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys. They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments), which wrap either of them in braces.
 
 ### Named parameters
 

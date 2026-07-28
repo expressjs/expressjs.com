@@ -425,6 +425,8 @@ app.get('/files/*file', (req: Request, res: Response) => {
 });
 ```
 
+Parameters defined in [optional segments](/guide/routing/#optional-segments) that are not present in the request URL are omitted from `req.params` entirely.
+
 When you use a regular expression for the route definition, capture groups are provided as integer keys using `req.params[n]`, where `n` is the n<sup>th</sup> capture group.
 
 ```js
