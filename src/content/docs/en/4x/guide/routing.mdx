@@ -572,7 +572,7 @@ The methods on the response object (`res`) in the following table can send a res
 ## app.route()
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
@@ -705,7 +705,7 @@ app.use('/birds', birds);
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });
