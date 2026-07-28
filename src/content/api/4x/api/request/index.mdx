@@ -399,12 +399,6 @@ app.use('/admin', function (req: Request, res: Response, next: NextFunction) {
 
 ### req.params
 
-<Alert type="alert">
-
-In Express 4, wildcards (`*`) are unnamed, whereas in Express 5, wildcards must be explicitly named (e.g., `/*splat`). Please check the [migration guide to 5.x](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) before upgrading your routes.
-
-</Alert>
-
 <Signature type="Object" />
 
 This property is an object containing properties mapped to the [named route "parameters"](/guide/routing/#route-parameters). For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `{}`.
