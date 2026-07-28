@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-The examples above behave the same regardless of the [`strict routing` setting](/api/application/#application-settings). As with any other route, that setting only changes whether a trailing slash (such as `/order/`) is treated as a different path.
+Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.
 
 ## Route handlers
 
