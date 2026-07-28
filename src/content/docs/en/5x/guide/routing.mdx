@@ -195,7 +195,7 @@ Route parameters are named URL segments that are used to capture the values spec
 
 ### Named parameters
 
-Named parameters capture a single path segment at their position in the URL.
+Named parameters capture a single path segment at their position in the URL, or part of one when combined with literal characters, as shown further below.
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -249,7 +249,7 @@ req.params: { "genus": "Prunus", "species": "persica" }
 
 <Alert type="alert">
 
-Regexp characters are not supported in route paths. Use an array of paths or regular expressions instead.
+Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
 See the [path route matching syntax](/guide/migrating-5#path-route-matching-syntax) for more information.
 
 </Alert>
