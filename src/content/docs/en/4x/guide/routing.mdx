@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Route paths
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
+Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -367,6 +367,8 @@ characters with an additional backslash, for example `\\d+`.
 <Alert type="warning">
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. As a workaround, use `{0,}` instead of `*`.
 </Alert>
+
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
 
 ## Route handlers
 
