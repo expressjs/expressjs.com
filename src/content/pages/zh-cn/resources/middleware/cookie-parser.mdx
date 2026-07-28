@@ -13,10 +13,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
   npm="https://www.npmjs.com/package/cookie-parser"
 />
 
-Parse `Cookie` header and populate `req.cookies` with an object keyed by the
-cookie names. Optionally you may enable signed cookie support by passing a
-`secret` string, which assigns `req.secret` so it may be used by other
-middleware.
+解析 `Cookie` 请求头，并以 Cookie 名称为键生成对象挂载至 `req.cookies`。 你也可传入 `secret` 字符串开启签名 Cookie 支持，该参数会赋值给 `req.secret`，供其他中间件使用。
 
 ## 安装
 
@@ -24,7 +21,7 @@ middleware.
 
 <Alert type="info">
 
-`cookie-parser` does not include its own TypeScript type definitions. If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
+`cookie-parser` 自身不附带 TypeScript 类型定义文件。 If you use TypeScript, also install the community-maintained types from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) as a development dependency:
 
 <PackageManagerCommand command="npm install --save-dev @types/cookie-parser" />
 
@@ -38,64 +35,38 @@ var cookieParser = require('cookie-parser');
 
 ### cookieParser(secret, options)
 
-Create a new cookie parser middleware function using the given `secret` and
-`options`.
+使用传入的 `secret` 与 `options` 创建全新的 Cookie 解析中间件函数。
 
-- `secret` a string or array used for signing cookies. This is optional and if
-  not specified, will not parse signed cookies. If a string is provided, this
-  is used as the secret. If an array is provided, an attempt will be made to
-  unsign the cookie with each secret in order.
-- `options` an object that is passed to `cookie.parse` as the second option. See
-  [cookie](https://www.npmjs.org/package/cookie) for more information.
-  - `decode` a function to decode the value of the cookie
+- `secret`：用于签名 Cookie 的字符串或数组。 该参数为可选参数，若未指定，则不会解析签名 Cookie。 若传入字符串，则将其作为密钥。 若传入数组，会按顺序使用数组内每个密钥尝试解密签名 Cookie。
+- `options`：作为第二个参数传入 `cookie.parse` 的配置对象。 更多详情请查看 [cookie](https://www.npmjs.org/package/cookie)。
+  - `decode`：用于解码 Cookie 值的函数
 
-The middleware will parse the `Cookie` header on the request and expose the
-cookie data as the property `req.cookies` and, if a `secret` was provided, as
-the property `req.signedCookies`. These properties are name value pairs of the
-cookie name to cookie value.
+该中间件会解析请求头中的`Cookie`，并将 Cookie 数据挂载为`req.cookies`属性；若传入了`secret`密钥，则同时挂载为`req.signedCookies`属性。 这些属性是键值对，代表 Cookie 名称与对应 Cookie 值。
 
-When `secret` is provided, this module will unsign and validate any signed cookie
-values and move those name value pairs from `req.cookies` into `req.signedCookies`.
-A signed cookie is a cookie that has a value prefixed with `s:`. Signed cookies
-that fail signature validation will have the value `false` instead of the tampered
-value.
+当配置`secret`密钥时，该模块会对所有签名Cookie值进行解签与校验，并将对应的键值对从`req.cookies`转移至`req.signedCookies`中。
+签名 Cookie 是值以`s:`作为前缀的 Cookie。 签名校验失败的签名 Cookie，其值会为`false`，而非被篡改后的内容。
 
-In addition, this module supports special "JSON cookies". These are cookie where
-the value is prefixed with `j:`. When these values are encountered, the value will
-be exposed as the result of `JSON.parse`. If parsing fails, the original value will
-remain.
+此外，该模块支持特殊的“JSON Cookie”。 这类 Cookie 的值以 `j:` 作为前缀。 当识别到这类值时，会将其经`JSON.parse`解析后的结果对外暴露。 若解析失败，则保留原始值。
 
 ### cookieParser.JSONCookie(str)
 
-Parse a cookie value as a JSON cookie. This will return the parsed JSON value
-if it was a JSON cookie, otherwise, it will return the passed value.
+将 Cookie 值解析为 JSON Cookie。 如果是 JSON Cookie，将返回解析后的 JSON 值；否则返回传入的原始值。
 
 ### cookieParser.JSONCookies(cookies)
 
-Given an object, this will iterate over the keys and call `JSONCookie` on each
-value, replacing the original value with the parsed value. This returns the
-same object that was passed in.
+传入一个对象后，该方法会遍历对象所有键，并对每个值调用`JSONCookie`，用解析后的值替换原有值。 该方法返回传入的原对象。
 
 ### cookieParser.signedCookie(str, secret)
 
-Parse a cookie value as a signed cookie. This will return the parsed unsigned
-value if it was a signed cookie and the signature was valid. If the value was
-not signed, the original value is returned. If the value was signed but the
-signature could not be validated, `false` is returned.
+将 Cookie 值解析为签名 Cookie。 若为签名 Cookie 且签名校验通过，则返回解析后的未签名值。 若该值未经过签名，则返回原始值。 若该值已签名但签名校验不通过，则返回`false`。
 
-The `secret` argument can be an array or string. If a string is provided, this
-is used as the secret. If an array is provided, an attempt will be made to
-unsign the cookie with each secret in order.
+`secret` 参数可以为字符串或数组。 若传入字符串，则将其用作密钥。 若传入数组，则会按顺序使用数组内每一个密钥尝试对Cookie解签。
 
 ### cookieParser.signedCookies(cookies, secret)
 
-Given an object, this will iterate over the keys and check if any value is a
-signed cookie. If it is a signed cookie and the signature is valid, the key
-will be deleted from the object and added to the new object that is returned.
+传入一个对象时，该方法会遍历所有键，并检测每个值是否为签名 Cookie。 如果是签名 Cookie 且签名校验有效，则从原对象中删除该键，并将其添加到返回的新对象中。
 
-The `secret` argument can be an array or string. If a string is provided, this
-is used as the secret. If an array is provided, an attempt will be made to
-unsign the cookie with each secret in order.
+`secret` 参数可以为字符串或数组。 若传入字符串，则将其用作密钥。 若传入数组，则会按顺序使用数组内每一个密钥尝试对Cookie解签。
 
 ## 示例
 
