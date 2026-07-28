@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Route paths
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings or regular expressions.
+Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings or regular expressions. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -153,9 +153,110 @@ app.get('/random.text', (req: Request, res: Response) => {
 });
 ```
 
+<Alert type="alert">
+
+The characters `?`, `+`, `*`, `[]`, and `()` are reserved and cannot be used as literal characters in route paths. Use `\` to escape them if needed.
+
+</Alert>
+
+### Regular expressions
+
+You can also use regular expressions as route paths. This is useful when you need more complex matching logic.
+
+```js
+// Matches any path containing "a"
+app.get(/a/, (req, res) => {
+  res.send('/a/');
+});
+
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
+app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches any path containing "a"
+app.get(/a/, (req: Request, res: Response) => {
+  res.send('/a/');
+});
+
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
+app.get(/.*fly$/, (req: Request, res: Response) => {
+  res.send('/.*fly$/');
+});
+```
+
+## Route parameters
+
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys. They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments) (`{...}`).
+
+### Named parameters
+
+Named parameters capture a single path segment at their position in the URL.
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
+
+```js
+app.get('/users/:userId/books/:bookId', (req, res) => {
+  res.send(req.params);
+});
+```
+
+In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
+`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
+Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
+to annotate the parameters when the handler is defined separately from the route, because the type
+checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
+
+```ts
+import { type Request, type Response } from 'express';
+
+const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
+  res.send(req.params);
+};
+
+app.get('/users/:userId/books/:bookId', sendParams);
+```
+
+<Alert type="alert">
+
+The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+
+</Alert>
+
+Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+<Alert type="alert">
+
+Regexp characters are not supported in route paths. Use an array of paths or regular expressions instead.
+See the [path route matching syntax](/guide/migrating-5#path-route-matching-syntax) for more information.
+
+</Alert>
+
 ### Wildcards
 
-Wildcards match any path after a prefix. They must have a name, just like route parameters, and are captured as arrays of path segments.
+Wildcards match any path after a prefix. Like other route parameters they must have a name, but they are captured as an array of path segments instead of a string.
 
 ```js
 app.get('/files/*filepath', (req, res) => {
@@ -220,109 +321,6 @@ app.get('/:file{.:ext}', (req: Request, res: Response) => {
   res.send('ok');
 });
 ```
-
-<Alert type="alert">
-
-The characters `?`, `+`, `*`, `[]`, and `()` are reserved and cannot be used as literal characters in route paths. Use `\` to escape them if needed.
-
-</Alert>
-
-### Regular expressions
-
-You can also use regular expressions as route paths. This is useful when you need more complex matching logic.
-
-```js
-// Matches any path containing "a"
-app.get(/a/, (req, res) => {
-  res.send('/a/');
-});
-
-// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
-app.get(/.*fly$/, (req, res) => {
-  res.send('/.*fly$/');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-// Matches any path containing "a"
-app.get(/a/, (req: Request, res: Response) => {
-  res.send('/a/');
-});
-
-// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
-app.get(/.*fly$/, (req: Request, res: Response) => {
-  res.send('/.*fly$/');
-});
-```
-
-## Route parameters
-
-Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
-
-```
-Route path: /users/:userId/books/:bookId
-Request URL: http://localhost:3000/users/34/books/8989
-req.params: { "userId": "34", "bookId": "8989" }
-```
-
-To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
-
-```js
-app.get('/users/:userId/books/:bookId', (req, res) => {
-  res.send(req.params);
-});
-```
-
-<Alert type="info">
-
-Wildcard parameters (`*`) capture one or more path segments and expose them as an array in `req.params`. See the [Wildcards](#wildcards) section above or the [migration guide](https://expressjs.com/en/guide/migrating-5/#path-route-matching-syntax) for details and examples.
-
-</Alert>
-
-In TypeScript, `@types/express` infers the parameters from the route path, so in the handler above
-`req.params.userId` and `req.params.bookId` are already typed as `string` with no extra annotation.
-Reading a name that is not in the route (such as `req.params.other`) is a type error. You only need
-to annotate the parameters when the handler is defined separately from the route, because the type
-checker can no longer see the path. In that case, pass them as the first type argument of `Request`:
-
-```ts
-import { type Request, type Response } from 'express';
-
-const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Response) => {
-  res.send(req.params);
-};
-
-app.get('/users/:userId/books/:bookId', sendParams);
-```
-
-<Alert type="alert">
-
-The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
-
-</Alert>
-
-Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
-
-```
-Route path: /flights/:from-:to
-Request URL: http://localhost:3000/flights/LAX-SFO
-req.params: { "from": "LAX", "to": "SFO" }
-```
-
-```
-Route path: /plantae/:genus.:species
-Request URL: http://localhost:3000/plantae/Prunus.persica
-req.params: { "genus": "Prunus", "species": "persica" }
-```
-
-<Alert type="alert">
-
-Regexp characters are not supported in route paths. Use an array of paths or regular expressions instead.
-See the [path route matching syntax](/guide/migrating-5#path-route-matching-syntax) for more information.
-
-</Alert>
 
 ## Route handlers
 
