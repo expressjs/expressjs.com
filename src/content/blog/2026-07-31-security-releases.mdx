@@ -1,0 +1,41 @@
+---
+title: July 2026 Security Releases
+description: A security release for body-parser has been published. We recommend that all users upgrade as soon as possible.
+tags: ['security']
+authors:
+  - name: Ulises Gascon
+    github: UlisesGascon
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+The Express team has released [body-parser](https://www.npmjs.com/package/body-parser) 1.20.6 and 2.3.0, addressing a denial of service vulnerability triggered by invalid `limit` values.
+
+<Alert type="warning">
+
+We recommend upgrading to the latest version of body-parser to secure your applications. If you have a `package-lock.json`, you can update the dependency by running:
+
+```sh
+npm update body-parser
+```
+
+</Alert>
+
+The following vulnerability has been addressed:
+
+- [CVE-2026-12590 in body-parser middleware (Low)](#cve-2026-12590-in-body-parser-middleware-low)
+
+## CVE-2026-12590 in body-parser middleware (Low)
+
+**[body-parser](https://www.npmjs.com/package/body-parser) versions `< 1.20.6` and `>= 2.0.0, < 2.3.0` are vulnerable to denial of service when an invalid `limit` value silently disables size enforcement**
+
+When body-parser was configured with an invalid `limit` option value, such as an unparsable string or `NaN`, the internal call to `bytes.parse()` returned `null` and the request body size check was silently skipped. Applications that relied on `limit` as their primary safeguard against oversized request bodies would accept arbitrarily large payloads, leading to excessive memory and CPU usage and denial of service. This affected applications that pass a programmatically computed or user-configurable value to the `limit` option without validating it first. After the fix, invalid `limit` values throw a clear error at parser construction time instead of silently disabling enforcement.
+
+**Affected versions**: `< 1.20.6` and `>= 2.0.0, < 2.3.0`
+**Patched versions**: `>= 1.20.6` and `>= 2.3.0`
+
+For more details, see [GHSA-v422-hmwv-36x6](https://github.com/expressjs/body-parser/security/advisories/GHSA-v422-hmwv-36x6).
+
+---
+
+We recommend upgrading to the latest version of body-parser to secure your applications.
