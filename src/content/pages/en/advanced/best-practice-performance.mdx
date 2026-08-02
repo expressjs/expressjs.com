@@ -12,8 +12,10 @@ This topic clearly falls into the "devops" world, spanning both traditional deve
   - [Don't use synchronous functions](#dont-use-synchronous-functions)
   - [Do logging correctly](#do-logging-correctly)
   - [Handle exceptions properly](#handle-exceptions-properly)
+  - [Use worker threads for CPU-intensive tasks](#use-worker-threads-for-cpu-intensive-tasks)
 - Things to do in your environment / setup (the ops part):
   - [Set NODE_ENV to "production"](#set-node_env-to-production)
+  - [Use Node.js 24 or newer](#use-nodejs-24-or-newer)
   - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
   - [Run your app in a cluster](#run-your-app-in-a-cluster)
   - [Cache request results](#cache-request-results)
@@ -28,6 +30,7 @@ Here are some things you can do in your code to improve your application's perfo
 - [Don't use synchronous functions](#dont-use-synchronous-functions)
 - [Do logging correctly](#do-logging-correctly)
 - [Handle exceptions properly](#handle-exceptions-properly)
+- [Use worker threads for CPU-intensive tasks](#use-worker-threads-for-cpu-intensive-tasks)
 
 ### Use gzip compression
 
@@ -147,16 +150,55 @@ Additionally, using `uncaughtException` is officially recognized as [crude](http
 
 We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
 
+### Use worker threads for CPU-intensive tasks
+
+Node.js runs your JavaScript on a single thread, so a CPU-intensive operation - such as image processing, parsing or transforming large payloads, or cryptographic operations - can block the event loop and slow down every request your Express app is handling. If your app does CPU-bound work, you can run it in [worker threads](https://nodejs.org/api/worker_threads.html), which execute JavaScript in parallel within the same process, keeping the main thread free to serve requests.
+
+Worker threads share memory with the main thread and are a good fit for offloading CPU-intensive work. They are not a replacement for the [cluster module](#run-your-app-in-a-cluster), which runs multiple instances of your app in separate processes to scale across CPU cores. For scaling your app itself, see [Run your app in a cluster](#run-your-app-in-a-cluster).
+
+Creating a worker thread is relatively expensive, so avoid creating a new one for every request. Instead, use a fixed pool of workers that you reuse.
+
+```js
+const { Worker } = require('node:worker_threads');
+
+app.post('/resize', (req, res, next) => {
+  const worker = new Worker('./resize-worker.js', { workerData: req.body.image });
+
+  worker.once('message', (result) => res.send(result));
+  worker.once('error', next);
+});
+```
+
+For more information, see the [worker_threads documentation](https://nodejs.org/api/worker_threads.html).
+
 ## Things to do in your environment / setup
 
 Here are some things you can do in your system environment to improve your app's performance:
 
-- [Set NODE_ENV to "production"](#set-node_env-to-production)
-- [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-- [Run your app in a cluster](#run-your-app-in-a-cluster)
-- [Cache request results](#cache-request-results)
-- [Use a load balancer](#use-a-load-balancer)
-- [Use a reverse proxy](#use-a-reverse-proxy)
+- [Things to do in your code](#things-to-do-in-your-code)
+  - [Use gzip compression](#use-gzip-compression)
+  - [Don't use synchronous functions](#dont-use-synchronous-functions)
+  - [Do logging correctly](#do-logging-correctly)
+    - [For debugging](#for-debugging)
+    - [For app activity](#for-app-activity)
+  - [Handle exceptions properly](#handle-exceptions-properly)
+    - [Use try-catch](#use-try-catch)
+    - [Use promises](#use-promises)
+    - [What not to do](#what-not-to-do)
+  - [Use worker threads for CPU-intensive tasks](#use-worker-threads-for-cpu-intensive-tasks)
+- [Things to do in your environment / setup](#things-to-do-in-your-environment--setup)
+  - [Set NODE\_ENV to "production"](#set-node_env-to-production)
+  - [Use Node.js 24 or newer](#use-nodejs-24-or-newer)
+  - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+    - [Use a process manager](#use-a-process-manager)
+    - [Use an init system](#use-an-init-system)
+      - [Systemd](#systemd)
+  - [Run your app in a cluster](#run-your-app-in-a-cluster)
+    - [Using Node's cluster module](#using-nodes-cluster-module)
+    - [Using PM2](#using-pm2)
+  - [Cache request results](#cache-request-results)
+  - [Use a load balancer](#use-a-load-balancer)
+  - [Use a reverse proxy](#use-a-reverse-proxy)
 
 ### Set NODE_ENV to "production"
 
@@ -182,6 +224,12 @@ Environment=NODE_ENV=production
 ```
 
 For more information, see [Using Environment Variables In systemd Units](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
+
+### Use Node.js 24 or newer
+
+Running your app on a recent Node.js release is one of the easiest ways to improve performance. Benchmarks show that running Express on Node.js 24 can be roughly two times faster than on Node.js 22. The gains come from the cumulative improvements in the V8 JavaScript engine shipped with newer Node.js versions: a faster JIT compiler, more efficient garbage collection, and faster property access and regular-expression matching, all of which Express relies on heavily when processing requests and matching routes.
+
+Supporting old Node.js versions also holds Express back from adopting performance improvements, which is why Express 5 dropped support for versions before v18. See the [Node.js releases](https://nodejs.org/en/about/previous-releases) page for the current supported versions.
 
 ### Ensure your app automatically restarts
 
