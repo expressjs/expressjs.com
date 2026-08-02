@@ -135,7 +135,7 @@ Node.js runs your JavaScript on a single thread, so a CPU-intensive operation (s
 
 Each worker thread runs in its own JavaScript engine instance, so the data you pass to it through `workerData` or `postMessage` is copied, not shared. Copying large payloads has a cost of its own, which you can avoid by transferring objects such as `ArrayBuffer`s or by sharing memory explicitly with `SharedArrayBuffer`. Worker threads are not a replacement for [running your app in a cluster](#run-your-app-in-a-cluster), which scales your app across CPU cores by running multiple instances of it in separate processes.
 
-Creating a worker thread is relatively expensive, so avoid creating a new one for every request. Instead, use a fixed pool of workers that you reuse.
+This example offloads an image-resizing task to a worker, where `resize-worker.js` receives the image via `workerData` and posts the result back when it's done:
 
 ```js
 const { Worker } = require('node:worker_threads');
@@ -147,6 +147,27 @@ app.post('/resize', (req, res, next) => {
   worker.once('error', next);
 });
 ```
+
+Note that this example is kept simple for illustration: creating a worker thread is relatively expensive, so [the Node.js documentation recommends using a pool of workers](https://nodejs.org/api/worker_threads.html#worker-threads) instead of spawning a new one for every request. Create a fixed pool of workers at startup and dispatch tasks to them as requests come in, for example with a library like [piscina](https://www.npmjs.com/package/piscina):
+
+```js
+const path = require('node:path');
+const Piscina = require('piscina');
+
+const pool = new Piscina({ filename: path.resolve(__dirname, 'resize-worker.js') });
+
+app.post('/resize', async (req, res, next) => {
+  try {
+    res.send(await pool.run(req.body.image));
+  } catch (err) {
+    next(err);
+  }
+});
+```
+
+Here `resize-worker.js` simply exports the function to run in the pool, and piscina takes care of creating the workers, queueing tasks, and reusing threads across requests.
+
+For more guidance on keeping the event loop responsive, including when offloading work is worth its communication costs, see [Don't Block the Event Loop](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop) in the Node.js documentation.
 
 ## Things to do in your environment / setup
 
