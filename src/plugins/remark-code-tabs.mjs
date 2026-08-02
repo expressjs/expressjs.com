@@ -36,6 +36,12 @@
  * and leave the `code` nodes intact, so each block still gets full
  * expressive-code rendering (highlighting, copy button, …).
  *
+ * MDX only. The plugin emits MDX constructs (an `mdxjsEsm` import and a JSX
+ * `<CodeTabs>` element), so it is a no-op outside the MDX pipeline. In plain
+ * `.md` files those nodes would be serialized as literal text (the import
+ * would leak into the page) and the JSX wrapper cannot render, so the file is
+ * left untouched there.
+ *
  * The `tab="..."` token is stripped from each block's meta so expressive-code
  * never sees an unknown meta attribute. Labels are passed to the component as a
  * plain comma-separated string attribute (`tabs="CommonJS,ESM"`) to avoid
@@ -225,7 +231,12 @@ function hasComponentImport(tree) {
 }
 
 export default function remarkCodeTabs() {
-  return (tree) => {
+  return (tree, file) => {
+    const isMdxFile =
+      file?.extname === '.mdx' ||
+      (typeof file?.path === 'string' && file.path.toLowerCase().endsWith('.mdx'));
+    if (!isMdxFile) return;
+
     const grouped = walk(tree);
     if (grouped && !hasComponentImport(tree)) {
       tree.children.unshift(buildImport());

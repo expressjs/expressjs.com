@@ -7,9 +7,9 @@ function code(lang, meta = null, value = '') {
   return { type: 'code', lang, meta, value };
 }
 
-function run(children) {
+function run(children, file) {
   const tree = { type: 'root', children };
-  remarkCodeTabs()(tree);
+  remarkCodeTabs()(tree, file ?? { extname: '.mdx' });
   return tree;
 }
 
@@ -67,6 +67,31 @@ test('does not inject the import when nothing is grouped', () => {
   const tree = run([code('js', null, 'const a = 1')]);
   assert.equal(hasImport(tree), false);
   assert.equal(findTabs(tree), undefined);
+});
+
+test('is a no-op for plain markdown files (no import, no grouping, langs untouched)', () => {
+  const tree = run([code('cjs', null, "require('x')"), code('mjs', null, "import x from 'x'")], {
+    extname: '.md',
+  });
+  assert.equal(hasImport(tree), false);
+  assert.equal(findTabs(tree), undefined);
+  assert.deepEqual(
+    tree.children.map((n) => n.lang),
+    ['cjs', 'mjs']
+  );
+});
+
+test('treats a missing file handle as non-MDX and stays a no-op', () => {
+  const tree = { type: 'root', children: [code('cjs'), code('mjs')] };
+  remarkCodeTabs()(tree);
+  assert.equal(findTabs(tree), undefined);
+  assert.equal(hasImport(tree), false);
+});
+
+test('detects MDX via a file path ending in .mdx', () => {
+  const tree = run([code('cjs'), code('mjs')], { path: 'src/content/pages/en/x.mdx' });
+  assert.ok(findTabs(tree));
+  assert.ok(hasImport(tree));
 });
 
 test('does NOT group two standalone ts blocks (ts needs a cjs/mjs trigger)', () => {
