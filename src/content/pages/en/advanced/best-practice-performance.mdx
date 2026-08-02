@@ -40,7 +40,7 @@ Synchronous functions and methods tie up the executing process until they return
 
 Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in production. The only time when a synchronous function can be justified is upon initial startup.
 
-You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
+You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#--trace-sync-io) for more information.
 
 ### Do logging correctly
 
@@ -167,7 +167,7 @@ app.post('/resize', async (req, res, next) => {
 
 Here `resize-worker.js` simply exports the function to run in the pool, and piscina takes care of creating the workers, queueing tasks, and reusing threads across requests.
 
-For more guidance on keeping the event loop responsive, including when offloading work is worth its communication costs, see [Don't Block the Event Loop](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop) in the Node.js documentation.
+For more guidance on keeping the event loop responsive, including when offloading work is worth its communication costs, see [Don't Block the Event Loop](https://nodejs.org/learn/asynchronous-work/dont-block-the-event-loop) in the Node.js documentation.
 
 ## Things to do in your environment / setup
 

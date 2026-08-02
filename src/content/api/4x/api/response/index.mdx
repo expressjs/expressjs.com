@@ -47,7 +47,7 @@ app.get('/user/:id', function (request: Request, response: Response) {
 ```
 
 The `res` object is an enhanced version of Node's own response object
-and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpserverresponse).
 
 ## Properties
 
@@ -1192,7 +1192,7 @@ Aliased as `res.header(field [, value])`.
 </Signature>
 
 Sets the HTTP status for the response.
-It is a chainable alias of Node's [response.statusCode](https://nodejs.org/api/http.html#http_response_statuscode).
+It is a chainable alias of Node's [response.statusCode](https://nodejs.org/api/http.html#responsestatuscode).
 
 ```js
 res.status(403).end();
