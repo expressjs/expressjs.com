@@ -131,9 +131,9 @@ We also don't recommend using [domains](https://nodejs.org/api/domain.html). It 
 
 ### Use worker threads for CPU-intensive tasks
 
-Node.js runs your JavaScript on a single thread, so a CPU-intensive operation - such as image processing, parsing or transforming large payloads, or cryptographic operations - can block the event loop and slow down every request your Express app is handling. If your app does CPU-bound work, you can run it in [worker threads](https://nodejs.org/api/worker_threads.html), which execute JavaScript in parallel within the same process, keeping the main thread free to serve requests.
+Node.js runs your JavaScript on a single thread, so a CPU-intensive operation (such as image processing, parsing or transforming large payloads, or cryptographic operations) can block the event loop and slow down every request your Express app is handling. If your app does CPU-bound work, you can run it in [worker threads](https://nodejs.org/api/worker_threads.html), which execute JavaScript in parallel within the same process, keeping the main thread free to serve requests.
 
-Worker threads share memory with the main thread and are a good fit for offloading CPU-intensive work. They are not a replacement for the [cluster module](#run-your-app-in-a-cluster), which runs multiple instances of your app in separate processes to scale across CPU cores. For scaling your app itself, see [Run your app in a cluster](#run-your-app-in-a-cluster).
+Each worker thread runs in its own JavaScript engine instance, so the data you pass to it through `workerData` or `postMessage` is copied, not shared. Copying large payloads has a cost of its own, which you can avoid by transferring objects such as `ArrayBuffer`s or by sharing memory explicitly with `SharedArrayBuffer`. Worker threads are not a replacement for [running your app in a cluster](#run-your-app-in-a-cluster), which scales your app across CPU cores by running multiple instances of it in separate processes.
 
 Creating a worker thread is relatively expensive, so avoid creating a new one for every request. Instead, use a fixed pool of workers that you reuse.
 
@@ -147,8 +147,6 @@ app.post('/resize', (req, res, next) => {
   worker.once('error', next);
 });
 ```
-
-For more information, see the [worker_threads documentation](https://nodejs.org/api/worker_threads.html).
 
 ## Things to do in your environment / setup
 
