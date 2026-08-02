@@ -6,7 +6,7 @@ description: Learn how to use middleware in Express.js applications, including a
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-Express is a lightweight routing and middleware web framework. An Express application is essentially a series of middleware function calls executed during the request-response cycle.
+Express is a routing and middleware web framework with minimal functionality of its own: an Express application is essentially a series of middleware function calls executed during the request-response cycle.
 
 _Middleware_ functions are functions that have access to:
 
@@ -16,10 +16,10 @@ _Middleware_ functions are functions that have access to:
 
 Middleware functions can perform the following tasks:
 
-- Execute any code
-- Modify the request and response objects
-- End the request-response cycle
-- Pass control to the next middleware function
+- Execute any code.
+- Modify the request and response objects.
+- End the request-response cycle.
+- Pass control to the next middleware function.
 
 If a middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
@@ -35,12 +35,7 @@ You can load application-level and router-level middleware with an optional moun
 
 ## Application-level middleware
 
-Application-level middleware is bound to an instance of the [app object](/api/application) using:
-
-- `app.use()`
-- `app.METHOD()`
-
-where `METHOD` is the lowercase HTTP method of the request that the middleware function handles, such as `get`, `post`, `put`, or `delete`.
+Bind application-level middleware to an instance of the [app object](/api/application) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the lowercase HTTP method of the request that the middleware function handles, such as `get`, `post`, `put`, or `delete`.
 
 ### Middleware without a mount path
 
@@ -149,6 +144,8 @@ app.use(
   }
 );
 ```
+
+### Multiple route handlers
 
 Route handlers enable you to define multiple routes for a path. The example below defines two routes for GET requests to the `/user/:id` path. The second route will not cause any problems, but it will never get called because the first route ends the request-response cycle.
 
@@ -301,10 +298,7 @@ import express from 'express';
 const router = express.Router();
 ```
 
-Load router-level middleware using:
-
-- `router.use()`
-- `router.METHOD()`
+Load router-level middleware by using the `router.use()` and `router.METHOD()` functions.
 
 The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
 
