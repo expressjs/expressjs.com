@@ -62,9 +62,9 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Starting with Express 5, route handlers and middleware that return a Promise
-will call `next(value)` automatically when they reject or throw an error.
-For example:
+Route handlers and middleware that return a Promise call `next(value)`
+automatically when they reject or throw an error. This includes `async`
+functions, which always return a Promise. For example:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
@@ -181,6 +181,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 ```
 
 If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
+
+Note that the handler above does not return the promise chain, so Express does not know it exists, and attaching `.catch(next)` is what routes the error. Without the `.catch(next)`, the rejection would be unhandled and crash the process. If you return the promise instead, Express watches it and calls `next` automatically when it rejects, so the `.catch` is no longer needed:
+
+```js
+app.get('/', (req, res) => {
+  return Promise.resolve().then(() => {
+    throw new Error('BROKEN'); // Express will catch this and call next.
+  });
+});
+```
 
 You could also use a chain of handlers to rely on synchronous error
 catching, by reducing the asynchronous code to something trivial. For example:

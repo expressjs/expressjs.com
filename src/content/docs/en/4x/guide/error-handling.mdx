@@ -62,14 +62,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Starting with Express 5, route handlers and middleware that return a Promise
-will call `next(value)` automatically when they reject or throw an error.
-For example:
+Errors from rejected promises are not passed to `next` automatically, and this includes `async` functions: if an `async` route handler throws or awaits a rejected promise, the request will hang. You must catch the error yourself and pass it to Express:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
@@ -77,14 +79,22 @@ app.get('/user/:id', async (req, res, next) => {
 import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
-If `getUserById` throws an error or rejects, `next` will be called with either
-the thrown error or the rejected value. If no rejected value is provided, `next`
-will be called with a default Error object provided by the Express router.
+<Alert type="info">
+
+Consider [updating to Express 5](/guide/migrating-5), where route handlers and middleware that
+return a Promise call `next(value)` automatically when they reject or throw an error, making the
+`try...catch` above unnecessary.
+
+</Alert>
 
 If you pass anything to the `next()` function (except the string `'route'`),
 Express regards the current request as being an error and will skip any
