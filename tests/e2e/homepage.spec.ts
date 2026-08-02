@@ -242,4 +242,40 @@ test.describe('Homepage Content', () => {
     await expect(blueskyLink).toBeVisible();
     await expect(rssLink).toBeVisible();
   });
+
+  test('should preserve minimum social icon and target sizes on narrow screens', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    const footer = page.getByTestId('footer');
+    const measurementTolerance = 0.01;
+    const socialLinks = [
+      footer.getByRole('link', { name: /GitHub/i }),
+      footer.getByRole('link', { name: /Youtube/i }),
+      footer.getByRole('link', { name: /X account/i }),
+      footer.getByRole('link', { name: /slack/i }),
+      footer.getByRole('link', { name: /Open Collective/i }),
+      footer.getByRole('link', { name: /bluesky/i }),
+      footer.getByRole('link', { name: /RSS Feed/i }),
+    ];
+
+    for (const link of socialLinks) {
+      const linkBox = await link.boundingBox();
+      const iconBox = await link.locator('svg').boundingBox();
+
+      expect(linkBox).not.toBeNull();
+      expect(iconBox).not.toBeNull();
+      expect(linkBox!.width).toBeGreaterThanOrEqual(24 - measurementTolerance);
+      expect(linkBox!.height).toBeGreaterThanOrEqual(24 - measurementTolerance);
+      expect(iconBox!.width).toBeGreaterThanOrEqual(16 - measurementTolerance);
+      expect(iconBox!.height).toBeGreaterThanOrEqual(16 - measurementTolerance);
+    }
+
+    const viewport = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(viewport.scrollWidth).toBeLessThanOrEqual(viewport.clientWidth);
+  });
 });

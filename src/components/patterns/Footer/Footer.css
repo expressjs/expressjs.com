@@ -72,12 +72,23 @@
     justify-content: center;
     gap: var(--space-6);
 
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: var(--size-6);
+      min-height: var(--size-6);
+    }
+
     li {
       display: inline;
     }
 
     svg {
       color: var(--color-icon-primary);
+      width: var(--size-4);
+      height: var(--size-4);
+      flex-shrink: 0;
     }
 
     svg path {
@@ -86,6 +97,8 @@
 
     @media (--xs-only) {
       padding: var(--space-4) 0 var(--space-6);
+      flex-wrap: wrap;
+      gap: var(--space-3);
     }
 
     @media (--md-up) {
