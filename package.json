@@ -78,8 +78,8 @@
     "postcss-nested": "^8.0.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
+    "typescript": "^7.0.2",
+    "typescript-eslint": "^8.65.0",
     "unplugin-icons": "^23.0.1",
     "vite-plugin-svgr": "^5.2.0"
   },
