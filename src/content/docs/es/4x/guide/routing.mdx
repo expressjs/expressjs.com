@@ -13,7 +13,7 @@ por ejemplo, `app. et()` para manejar solicitudes GET y `app.post` para manejar 
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada.
+En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada. En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada.
 
 De hecho, los métodos de enrutamiento pueden tener más de una función de callback como argumentos.
 Con múltiples funciones de callback, es importante proporcionar `next` como un argumento a la función de callback y luego llamar `next()` dentro del cuerpo de la función para desactivar el control
@@ -415,7 +415,7 @@ En este ejemplo:
 
 Los manejadores de rutas pueden ser en forma de una función, un array de funciones o combinaciones de ambos, como se muestra en los siguientes ejemplos.
 
-Una única función de callback puede manejar una ruta. Por ejemplo:
+Más de una función de callback puede manejar una ruta (asegúrese de especificar el objeto `siguiente`). Por ejemplo:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -431,7 +431,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Más de una función de callback puede manejar una ruta (asegúrese de especificar el objeto `siguiente`). Por ejemplo:
+Una combinación de funciones independientes y arreglos de funciones puede manejar una ruta. Por ejemplo:
 
 ```js
 app.get(
@@ -555,7 +555,7 @@ app.get(
 
 ## Métodos de respuesta
 
-Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden enviar una respuesta al cliente y terminar el ciclo de solicitud y respuesta. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.
+Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden enviar una respuesta al cliente y terminar el ciclo de solicitud y respuesta. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.| Method | Description
 
 | Método                                          | Descripción                                                                                                 |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -608,9 +608,9 @@ app
 
 ## express.Router
 
-Utilice la clase `express.Router` para crear manejadores modulares de rutas. Una instancia de `Router` es un sistema completo de middleware y enrutamiento; por esta razón, a menudo se le denomina "mini-app".
+Utilice la clase `express.Router` para crear manejadores modulares de rutas. Una instancia de `Router` es un sistema completo de middleware y enrutamiento; por esta razón, a menudo se le denomina "mini-app".The following example creates a router as a module, loads a middlew
 
-El siguiente ejemplo crea un router como módulo, carga una función de middleware en él, define algunas rutas y monta el módulo del router en una ruta de la aplicación principal.
+El siguiente ejemplo crea un router como módulo, carga una función de middleware en él, define algunas rutas y monta el módulo del router en una ruta de la aplicación principal.Create a router file named `birds.js` in the app directory, with th
 
 Crea un archivo de enrutador llamado `birds.js` en el directorio de la aplicación, con el siguiente contenido:
 

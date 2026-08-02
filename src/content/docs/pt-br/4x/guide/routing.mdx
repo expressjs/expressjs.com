@@ -13,7 +13,7 @@ por exemplo, `app. et()` para lidar com solicitações GET e `app.post` para lid
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado.
+Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado. Em outras palavras, o aplicativo "listas" para solicitações que correspondem com a(s) rota(s) e método(s) especificado(s), e quando ela detecta uma correspondência, ela chama a função de retorno de chamada especificado.
 
 Na verdade, os métodos de roteamento podem ter mais de uma função de callback como argumentos.
 Com múltiplas funções de callback, é importante fornecer `next` como um argumento para a função de callback e então chamar `next()` dentro do corpo da função para liberar o controle
@@ -415,7 +415,7 @@ Neste exemplo:
 
 Os manipuladores de rotas podem estar na forma de uma função, um array de funções ou combinações de ambos, como mostrado nos exemplos a seguir.
 
-Uma única função de retorno de chamada pode manipular uma rota. Por exemplo:
+Mais de uma função de retorno de chamada pode manipular uma rota (certifique-se de especificar o objeto `next`). Por exemplo:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -431,7 +431,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Mais de uma função de retorno de chamada pode manipular uma rota (certifique-se de especificar o objeto `next`). Por exemplo:
+Uma combinação de funções independentes e matrizes de funções pode lidar com uma rota. Por exemplo:
 
 ```js
 app.get(
@@ -555,7 +555,7 @@ app.get(
 
 ## Métodos de resposta
 
-Os métodos no objeto de resposta ('res') na tabela a seguir podem enviar uma resposta para o cliente e encerrar o ciclo de resposta de solicitação. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.
+Os métodos no objeto de resposta ('res') na tabela a seguir podem enviar uma resposta para o cliente e encerrar o ciclo de resposta de solicitação. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.| Method | Description
 
 | Método                                          | Descrição:                                                                                          |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -608,9 +608,9 @@ app
 
 ## express.Router
 
-Use a classe 'express.Router' para criar módulo, manipuladores de rotas montáveis. Uma instância `Router` é um sistema completo de middleware e roteamento; por este motivo, é muitas vezes referido como um "mini-app".
+Use a classe 'express.Router' para criar módulo, manipuladores de rotas montáveis. Uma instância `Router` é um sistema completo de middleware e roteamento; por este motivo, é muitas vezes referido como um "mini-app".The following example creates a router as a module, loads a middlew
 
-O exemplo a seguir cria um roteador como um módulo, carrega uma função middleware nele define algumas rotas e monta o módulo do roteador em um caminho no aplicativo principal.
+O exemplo a seguir cria um roteador como um módulo, carrega uma função middleware nele define algumas rotas e monta o módulo do roteador em um caminho no aplicativo principal.Create a router file named `birds.js` in the app directory, with th
 
 Crie um arquivo de roteador chamado `birds.js` no diretório de aplicativos, com o seguinte conteúdo:
 

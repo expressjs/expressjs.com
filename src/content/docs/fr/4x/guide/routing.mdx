@@ -13,7 +13,7 @@ par exemple, `app. et()` pour gérer les requêtes GET et `app.post` pour gérer
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. En d'autres termes, l'application "écoute" les requêtes qui correspondent à la(les) route(s) spécifiée(s) et à la(les) méthode(s), et quand il détecte une correspondance, il appelle la fonction de rappel spécifiée.
+En d'autres termes, l'application "écoute" les requêtes qui correspondent à la(les) route(s) spécifiée(s) et à la(les) méthode(s), et quand il détecte une correspondance, il appelle la fonction de rappel spécifiée. En d'autres termes, l'application "écoute" les requêtes qui correspondent à la(les) route(s) spécifiée(s) et à la(les) méthode(s), et quand il détecte une correspondance, il appelle la fonction de rappel spécifiée.
 
 En fait, les méthodes de routage peuvent avoir plus d'une fonction de rappel en tant qu'arguments.
 Avec plusieurs fonctions de rappel, il est important de fournir `next` comme argument à la fonction de callback puis appeler `next()` dans le corps de la fonction pour distribuer le contrôle
@@ -415,7 +415,7 @@ Dans cet exemple :
 
 Les gestionnaires de routes peuvent être sous la forme d'une fonction, d'un tableau de fonctions, ou de combinaisons des deux, comme indiqué dans les exemples suivants.
 
-Une seule fonction de rappel peut gérer une route. Par exemple :
+Une combinaison de fonctions indépendantes et de tableaux de fonctions peut gérer une route. Par exemple :
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -555,7 +555,7 @@ app.get(
 
 ## Méthodes de réponse
 
-Les méthodes de l'objet de réponse (`res`) dans la table suivante peuvent envoyer une réponse au client et terminer le cycle de réponse de la requête. Si aucune de ces méthodes n'est appelée à partir d'un gestionnaire d'itinéraire, la requête du client sera suspendue.
+Les méthodes de l'objet de réponse (`res`) dans la table suivante peuvent envoyer une réponse au client et terminer le cycle de réponse de la requête. Si aucune de ces méthodes n'est appelée à partir d'un gestionnaire d'itinéraire, la requête du client sera suspendue.| Method | Description
 
 | Méthode                                         | Libellé                                                                                           |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -608,7 +608,7 @@ app
 
 ## Routeur
 
-Utilisez la classe `express.Router` pour créer des gestionnaires de route modulaires et montables. Une instance `Router` est un système complet de middleware et de routage ; pour cette raison, elle est souvent appelée "mini-app".
+Utilisez la classe `express.Router` pour créer des gestionnaires de route modulaires et montables. Une instance `Router` est un système complet de middleware et de routage ; pour cette raison, elle est souvent appelée "mini-app".The following example creates a router as a module, loads a middlew
 
 L'exemple suivant crée un routeur en tant que module, charge une fonction middleware dedans, définit quelques routes, et monte le module routeur sur un chemin dans l'application principale.
 

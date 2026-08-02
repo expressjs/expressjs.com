@@ -13,7 +13,7 @@ per esempio, `app. et()` per gestire le richieste GET e `app.post` per gestire l
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. In altre parole, l'applicazione "ascolta" per le richieste che corrispondono ai percorsi e ai metodi specificati, e quando rileva una corrispondenza, chiama la funzione di callback specificata.
+In altre parole, l'applicazione "ascolta" per le richieste che corrispondono ai percorsi e ai metodi specificati, e quando rileva una corrispondenza, chiama la funzione di callback specificata. In altre parole, l'applicazione "ascolta" per le richieste che corrispondono ai percorsi e ai metodi specificati, e quando rileva una corrispondenza, chiama la funzione di callback specificata.
 
 Infatti, i metodi di routing possono avere più di una funzione di callback come argomenti.
 Con funzioni di callback multiple, è importante fornire `next` come argomento alla funzione di callback e poi chiamare `next()` all'interno del corpo della funzione per consegnare il controllo
@@ -415,7 +415,7 @@ In questo esempio:
 
 I gestori del percorso possono essere nella forma di una funzione, una serie di funzioni, o combinazioni di entrambi, come mostrato negli esempi seguenti.
 
-Una singola funzione di callback può gestire un percorso. Per esempio:
+Più di una funzione di callback può gestire un percorso (assicurati di specificare l'oggetto `next`). Per esempio:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -431,7 +431,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Più di una funzione di callback può gestire un percorso (assicurati di specificare l'oggetto `next`). Per esempio:
+Una combinazione di funzioni indipendenti e matrici di funzioni può gestire un percorso. Per esempio:
 
 ```js
 app.get(
@@ -555,7 +555,7 @@ app.get(
 
 ## Metodi di risposta
 
-I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.
+I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.| Method | Description
 
 | Metodo                                          | Descrizione                                                                                                        |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -608,9 +608,9 @@ app
 
 ## express.Router
 
-Usa la classe `express.Router` per creare i gestori modulari e montabili. Un'istanza `Router` è un sistema di routing e middleware completo; per questo motivo è spesso chiamata "mini-app".
+Usa la classe `express.Router` per creare i gestori modulari e montabili. Un'istanza `Router` è un sistema di routing e middleware completo; per questo motivo è spesso chiamata "mini-app".The following example creates a router as a module, loads a middlew
 
-L'esempio seguente crea un router come modulo, carica una funzione middleware in esso, definisce alcuni percorsi e monta il modulo del router su un percorso nell'app principale.
+L'esempio seguente crea un router come modulo, carica una funzione middleware in esso, definisce alcuni percorsi e monta il modulo del router su un percorso nell'app principale.Create a router file named `birds.js` in the app directory, with th
 
 Crea un file router chiamato `birds.js` nella directory delle app, con il seguente contenuto:
 

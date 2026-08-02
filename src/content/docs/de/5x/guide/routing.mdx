@@ -13,7 +13,7 @@ zum Beispiel, `app. et()` um GET-Anfragen und `app.post` zu behandeln, um POST-A
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf.
+Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf. Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf.
 
 In der Tat können die Routing-Methoden mehr als eine Callback-Funktion als Argumente haben.
 Mit mehreren Callback-Funktionen, es ist wichtig, `next` als Argument für die Callback-Funktion zur Verfügung zu stellen und dann `next()` im Körper der Funktion aufzurufen, um die Steuerung
@@ -403,7 +403,7 @@ Routenhandler können in Form einer Funktion, eines Arrays von Funktionen oder K
 
 ````
 
-Eine einzelne Callback-Funktion kann eine Route handhaben.
+Mehr als eine Callback-Funktion kann eine Route handhaben (stelle sicher, dass du das `next` Objekt angibst).
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -419,7 +419,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Mehr als eine Callback-Funktion kann eine Route handhaben (stelle sicher, dass du das `next` Objekt angibst). Zum Beispiel:
+Eine Kombination aus unabhängigen Funktionen und Arrays von Funktionen kann eine Route handhaben. Zum Beispiel:
 
 ```js
 app.get(
@@ -543,7 +543,7 @@ app.get(
 
 ## Antwortmethoden
 
-Die Methoden auf dem Antwortobjekt (`res`) in der folgenden Tabelle können eine Antwort an den Client senden und den Request-Antwort-Zyklus beenden. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.| Method | Description
+Die Methoden auf dem Antwortobjekt (`res`) in der folgenden Tabelle können eine Antwort an den Client senden und den Request-Antwort-Zyklus beenden. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.| Method | Description| Method | Description
 
 |                                                 |                                                                                                                                                                             |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -602,9 +602,9 @@ app
 
 ## express.Router
 
-Verwende die Klasse `express.Router`, um modulare mountbare Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und Routing-System; aus diesem Grund wird sie oft als "Mini-App" bezeichnet.The following example creates a router as a module, loads a middlew
+Verwende die Klasse `express.Router`, um modulare mountbare Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und Routing-System; aus diesem Grund wird sie oft als "Mini-App" bezeichnet.The following example creates a router as a module, loads a middlewThe following example creates a router as a module, loads a middlew
 
-Das folgende Beispiel erzeugt einen Router als Modul, lädt eine Middleware-Funktion darin definiert einige Routen und mountet das Router-Modul auf einem Pfad in der Hauptanwendung.Create a router file named `birds.js` in the app directory, with th
+Das folgende Beispiel erzeugt einen Router als Modul, lädt eine Middleware-Funktion darin definiert einige Routen und mountet das Router-Modul auf einem Pfad in der Hauptanwendung.Create a router file named `birds.js` in the app directory, with thCreate a router file named `birds.js` in the app directory, with th
 
 Erstelle eine Router-Datei namens `birds.js` im App-Verzeichnis, mit folgendem Inhalt:
 
