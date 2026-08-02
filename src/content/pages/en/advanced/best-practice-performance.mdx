@@ -5,22 +5,7 @@ description: Discover performance and reliability best practices for Express app
 
 This article discusses performance and reliability best practices for Express applications deployed to production.
 
-This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
-
-- Things to do in your code (the dev part):
-  - [Use gzip compression](#use-gzip-compression)
-  - [Don't use synchronous functions](#dont-use-synchronous-functions)
-  - [Do logging correctly](#do-logging-correctly)
-  - [Handle exceptions properly](#handle-exceptions-properly)
-  - [Use worker threads for CPU-intensive tasks](#use-worker-threads-for-cpu-intensive-tasks)
-- Things to do in your environment / setup (the ops part):
-  - [Set NODE_ENV to "production"](#set-node_env-to-production)
-  - [Use the latest LTS version of Node.js](#use-the-latest-lts-version-of-nodejs)
-  - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-  - [Run your app in a cluster](#run-your-app-in-a-cluster)
-  - [Cache request results](#cache-request-results)
-  - [Use a load balancer](#use-a-load-balancer)
-  - [Use a reverse proxy](#use-a-reverse-proxy)
+This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts: [things to do in your code](#things-to-do-in-your-code) (the dev part), and [things to do in your environment / setup](#things-to-do-in-your-environment--setup) (the ops part).
 
 ## Things to do in your code
 
