@@ -1,0 +1,37 @@
+---
+/**
+ * ReadMore Pattern Component
+ *
+ * Callout block with a book icon that points readers to a related guide
+ * or page for further reading. Visually mirrors the Alert primitive, but
+ * renders as an `aside` so it stays out of the heading outline; screen
+ * readers announce it as complementary content labeled by the title.
+ *
+ * Write the slot content as a full sentence with the link text naming the
+ * target page, so both prose and link-list navigation read well.
+ *
+ * @example
+ * <ReadMore>
+ *   For more information, see the [Error handling](/guide/error-handling) guide.
+ * </ReadMore>
+ */
+
+import './ReadMore.css';
+import type { HTMLAttributes } from 'astro/types';
+import { Icon } from 'astro-icon/components';
+import { Body, Flex } from '@components/primitives';
+
+type Props = { title?: string } & HTMLAttributes<'aside'>;
+
+const { title = 'Read more', class: className, ...rest } = Astro.props;
+---
+
+<aside class:list={['read-more', className]} aria-label={title} {...rest}>
+  <Flex align="center" gap="2">
+    <Icon name="fluent:book-open-16-regular" class="read-more__icon" size="18" aria-hidden="true" />
+    <Body as="p" vMargin={false} weight="bold" aria-hidden="true">{title}</Body>
+  </Flex>
+  <div class="read-more__description">
+    <slot />
+  </div>
+</aside>
