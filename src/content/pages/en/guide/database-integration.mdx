@@ -60,7 +60,9 @@ const db = new DatabaseSync('app.db');
 db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
 
 app.get('/users/:id', (req, res) => {
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id) as User | undefined;
+  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id) as
+    | User
+    | undefined;
   res.json(user);
 });
 
