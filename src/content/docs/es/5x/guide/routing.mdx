@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-No confundas la posición de la barra en la ruta con la [configuración `strict routing`](/api/application/#application-settings), que trata sobre la URL de la solicitud: controla si una URL que termina en barra sigue coincidiendo cuando la ruta no la exige. Por ejemplo, una solicitud a `/order/` coincide con la ruta `/order{/:id}` por defecto, pero devuelve un error 404 cuando strict routing está habilitado; la barra final de `/user/` no se ve afectada porque la ruta `/user/\{:id}` la exige. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+No confundas la posición de la barra en la ruta con la [configuración `strict routing`](/api/application/#application-settings), que trata sobre la URL de la solicitud: controla si una URL que termina en barra sigue coincidiendo cuando la ruta no la exige. Por ejemplo, una solicitud a `/order/` coincide con la ruta `/order{/:id}` por defecto, pero devuelve un error 404 cuando strict routing está habilitado; la barra final de `/user/` no se ve afectada porque la ruta `/user/\{:id}` la exige. Todas las solicitudes comentadas en los ejemplos anteriores se comportan igual independientemente de esa configuración.## Route handlersYou can provide multiple callback functions that
 
 ## Manejadores de rutas
 

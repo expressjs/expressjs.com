@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/\{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+Non confondere la posizione della barra nel percorso della rotta con l'[impostazione `strict routing`](/api/application/#application-settings), che riguarda l'URL della richiesta: controlla se un URL che termina con una barra non richiesta dal percorso della rotta corrisponde comunque. Ad esempio, una richiesta a `/order/` corrisponde per impostazione predefinita alla rotta `/order{/:id}`, ma restituisce un errore 404 quando strict routing è abilitato; la barra finale di `/user/` non è interessata perché la rotta `/user/\{:id}` la richiede. Tutte le richieste commentate negli esempi precedenti si comportano allo stesso modo indipendentemente da questa impostazione.## Route handlersYou can provide multiple callback functions that
 
 ## Gestori del percorso
 

@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/\{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+不要將路由路徑中斜線的位置與[`strict routing` 設定](/api/application/#application-settings)混淆，後者針對的是請求 URL：它控制以路由路徑未要求的斜線結尾的 URL 是否仍然匹配。 例如，對 `/order/` 的請求預設會匹配 `/order{/:id}` 路由，但在啟用 strict routing 時會傳回 404 錯誤；`/user/` 的結尾斜線不受影響，因為 `/user/\{:id}` 路由要求它。 上述範例中註解的所有請求無論該設定為何，行為都相同。## Route handlersYou can provide multiple callback functions that
 
 ## Route handlers
 

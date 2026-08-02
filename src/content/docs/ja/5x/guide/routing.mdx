@@ -364,7 +364,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/\{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+ルートパス内のスラッシュの位置を、リクエスト URL に関する[`strict routing` 設定](/api/application/#application-settings)と混同しないでください。この設定は、ルートパスが要求していないスラッシュで終わる URL が一致するかどうかを制御します。 たとえば、`/order/` へのリクエストはデフォルトでは `/order{/:id}` ルートに一致しますが、strict routing が有効な場合は 404 エラーを返します。`/user/` の末尾のスラッシュは、`/user/\{:id}` ルートがそれを必須としているため影響を受けません。 上記の例でコメントされているすべてのリクエストは、この設定に関係なく同じように動作します。## Route handlersYou can provide multiple callback functions that
 
 ## Route handlers
 
