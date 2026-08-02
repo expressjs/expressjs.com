@@ -15,7 +15,7 @@ This topic clearly falls into the "devops" world, spanning both traditional deve
   - [Use worker threads for CPU-intensive tasks](#use-worker-threads-for-cpu-intensive-tasks)
 - Things to do in your environment / setup (the ops part):
   - [Set NODE_ENV to "production"](#set-node_env-to-production)
-  - [Use Node.js 24 or newer](#use-nodejs-24-or-newer)
+  - [Use the latest LTS version of Node.js](#use-the-latest-lts-version-of-nodejs)
   - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
   - [Run your app in a cluster](#run-your-app-in-a-cluster)
   - [Cache request results](#cache-request-results)
@@ -188,7 +188,7 @@ Here are some things you can do in your system environment to improve your app's
   - [Use worker threads for CPU-intensive tasks](#use-worker-threads-for-cpu-intensive-tasks)
 - [Things to do in your environment / setup](#things-to-do-in-your-environment--setup)
   - [Set NODE\_ENV to "production"](#set-node_env-to-production)
-  - [Use Node.js 24 or newer](#use-nodejs-24-or-newer)
+  - [Use the latest LTS version of Node.js](#use-the-latest-lts-version-of-nodejs)
   - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
     - [Use a process manager](#use-a-process-manager)
     - [Use an init system](#use-an-init-system)
@@ -225,11 +225,9 @@ Environment=NODE_ENV=production
 
 For more information, see [Using Environment Variables In systemd Units](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
 
-### Use Node.js 24 or newer
+### Use the latest LTS version of Node.js
 
-Running your app on a recent Node.js release is one of the easiest ways to improve performance. Benchmarks show that running Express on Node.js 24 can be roughly two times faster than on Node.js 22. The gains come from the cumulative improvements in the V8 JavaScript engine shipped with newer Node.js versions: a faster JIT compiler, more efficient garbage collection, and faster property access and regular-expression matching, all of which Express relies on heavily when processing requests and matching routes.
-
-Supporting old Node.js versions also holds Express back from adopting performance improvements, which is why Express 5 dropped support for versions before v18. See the [Node.js releases](https://nodejs.org/en/about/previous-releases) page for the current supported versions.
+Running your app on a recent Node.js release is one of the easiest ways to improve performance. Each new version of Node.js ships with cumulative improvements to the V8 JavaScript engine and the runtime itself, so the same Express app can handle significantly more requests simply by upgrading. Benchmarks such as NodeSource's [Node.js Performance Report](https://nodesource.com/pages/content-node-performance-report-wb.html) show how much throughput can improve from one Node.js version to the next. For production, use the latest [LTS release](https://nodejs.org/en/about/previous-releases) of Node.js, and keep it up to date as new versions come out.
 
 ### Ensure your app automatically restarts
 
