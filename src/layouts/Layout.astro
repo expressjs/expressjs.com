@@ -23,10 +23,6 @@ const {
   canonicalPathname,
 } = Astro.props;
 
-const pageTitle = title
-  ? `${title} · Express.js`
-  : 'Express.js · Node.js web application framework';
-
 const pathname = Astro.url.pathname.replace(/\/$/, '');
 const segments = pathname.split('/').filter(Boolean);
 const langSegment = segments[0] || 'en';
@@ -34,6 +30,18 @@ const restSegments = segments.slice(1);
 const isApi =
   restSegments[0] === 'api' || (restSegments[1] === 'api' && /^\dx$/.test(restSegments[0] ?? ''));
 const isBlogOrApi = restSegments[0] === 'blog' || isApi;
+
+// Versioned pages carry the version in title/description so search engines
+// don't treat 4x and 5x as duplicates.
+const versionSegment = /^\dx$/.test(restSegments[0] ?? '') ? restSegments[0] : undefined;
+const versionLabel = versionSegment && `Express.js ${versionSegment[0]}.x`;
+
+const pageTitle = title
+  ? `${title} · ${versionLabel ?? 'Express.js'}`
+  : 'Express.js · Node.js web application framework';
+const pageDescription = versionLabel
+  ? `${description} Documentation for ${versionLabel}.`
+  : description;
 
 // Blog and API content is not translated, so their canonical is the English
 // page and they emit no hreflang alternates.
@@ -94,7 +102,7 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
 
     <link rel="canonical" href={canonicalUrl} />
 
@@ -128,7 +136,7 @@ const lang = getLangFromUrl(Astro.url);
     <meta property="og:site_name" content="Express.js" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content={imageUrl} />
     {authors?.map((author) => <meta property="article:author" content={author.name} />)}
 
@@ -136,7 +144,7 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@UseExpressJS" />
     <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:domain" content="expressjs.com" />
     <meta name="twitter:image" content={imageUrl} />
 
