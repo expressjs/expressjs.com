@@ -102,12 +102,21 @@ You can specify more than one debug namespace by assigning a comma-separated lis
 $ DEBUG=http,mail,express:* node index.js
 ```
 
-## Debugging with launch configurations
+## Setting DEBUG in your IDE
 
-The same `DEBUG` environment variable can be set by any process launcher that supports environment
-variables, including IDE debug configurations. For example, VS Code can debug Node.js applications
-with auto attach, JavaScript Debug Terminal, launch configurations, or attach configurations; see
-[Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging).
+The `DEBUG` environment variable can be set by any process launcher that supports environment variables, including the run and debug configurations of your IDE. For example, in VS Code you can set it in the `env` property of a launch configuration:
+
+```json title=".vscode/launch.json"
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Launch Express app",
+  "program": "${workspaceFolder}/index.js",
+  "env": { "DEBUG": "express:*" }
+}
+```
+
+See [Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging) for the full list of launch options.
 
 ## Advanced options
 
