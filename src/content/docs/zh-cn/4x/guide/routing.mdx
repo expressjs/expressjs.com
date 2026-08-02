@@ -107,7 +107,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Route paths
 
-路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串、字符串模式或正则表达式。
+路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串、字符串模式或正则表达式。 They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -234,6 +234,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### 基于正则表达式的路由路径
 
 <Alert type="alert">
@@ -346,6 +366,14 @@ characters with an additional backslash, for example `\d+`.
 <Alert type="警告">
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. 作为替代方案，可用`{0,}`替代`*`。
 </Alert>
+
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
 
 ## Route handlers
 
@@ -543,7 +571,7 @@ app.get(
 ## app.route()
 
 你可以使用 `app.route()` 为路由路径创建可链式调用的路由处理程序。
-由于路径在单个位置指定，因此创建模块化路由十分有用，同时还能减少冗余和拼写错误。 For more information about routes, see: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 以下是使用 `app.route()` 定义的链式路由处理程序示例。
 
@@ -676,7 +704,7 @@ app.use('/birds', birds);
 
 应用现在将能够处理指向 `/birds` 和 `/birds/about` 的请求，同时会调用该路由专用的 `timeLog` 中间件函数。
 
-但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

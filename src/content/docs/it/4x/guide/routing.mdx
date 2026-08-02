@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Percorsi di rotta
 
-Percorsi di percorso, in combinazione con un metodo di richiesta, definire gli endpoint in cui le richieste possono essere fatte. I tracciati del percorso possono essere stringhe, motivi di stringa o espressioni regolari.
+Percorsi di percorso, in combinazione con un metodo di richiesta, definire gli endpoint in cui le richieste possono essere fatte. I tracciati del percorso possono essere stringhe, motivi di stringa o espressioni regolari. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -235,6 +235,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### Percorsi di percorso basati su espressioni regolari
 
 <Alert type="allerta">
@@ -347,6 +367,14 @@ con un backslash aggiuntivo, ad esempio `\d+`.
 <Alert type="avviso">
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. Come soluzione puoi usare `{0,}` invece di `*`.
 </Alert>
+
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
 
 ## Gestori del percorso
 
@@ -544,7 +572,7 @@ I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare
 ## app.route()
 
 È possibile creare i gestori di rotte per un percorso utilizzando `app.route()`.
-Poiché il percorso è specificato in una singola posizione, è utile creare percorsi modulari, così come ridurre la ridondanza e pneumatici. Per ulteriori informazioni sulle rotte, si veda: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`.
 
@@ -677,7 +705,7 @@ app.use('/birds', birds);
 
 L'app sarà ora in grado di gestire le richieste di `/birds` e `/birds/about`, oltre a chiamare la funzione middleware `timeLog` che è specifica per il percorso.
 
-Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

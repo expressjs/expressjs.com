@@ -112,7 +112,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## ルートパス
 
-ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列または正規表現にすることができます。 Route paths can be strings or regular expressions.
+ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列または正規表現にすることができます。 Route paths can be strings or regular expressions. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="情報">
 
@@ -158,77 +158,9 @@ app.get('/random.text', (req: Request, res: Response) => {
 });
 ```
 
-### ワイルドカード
-
-Wildcards match any path after a prefix. ワイルドカードはプレフィックスの後の任意のパスに一致します。 ルートパラメータと同様に名前が必要で、パスセグメントの配列として取得されます。
-
-```js
-app.get('/files/*filepath', (req, res) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-ルートパスに一致させるには、ワイルドカードを括弧で囲みます。
-
-```js
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req, res) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req: Request, res: Response) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-### 任意のセグメント
-
-Use braces to define optional segments in a route path. ルートパスで任意のセグメントを定義するには、括弧を使用します。 セグメントが存在しない場合、パラメータは `req.params` から省略されます。
-
-```js
-app.get('/:file{.:ext}', (req, res) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/:file{.:ext}', (req: Request, res: Response) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
 <Alert type="アラート">
 
-`?`、`+`、`*`、`[]`、`()`の文字は予約されており、ルートパスの文字列として使用することはできません。 必要に応じてエスケープするには`\`を使用します。 Use `\` to escape them if needed.
+The characters `?`, `+`, `*`, `[]`, `()`, and `!` are reserved and cannot be used as literal characters in route paths, and braces are reserved for [optional segments](#optional-segments). Use `\` to escape them if needed.
 
 </Alert>
 
@@ -264,7 +196,11 @@ app.get(/.*fly$/, (req: Request, res: Response) => {
 
 ## ルートパラメータ
 
-Route parameters are named URL segments that are used to capture the values specified at their position in the URL. ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 取得した値は `req.params` オブジェクト内に入力され、パス内でそれぞれのキーとして指定されたrouteパラメータの名前が入力されます。
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. ルートパラメータは、URL 内の位置で指定された値をキャプチャするために使用される名前付きの URL セグメントです。 取得した値は `req.params` オブジェクト内に入力され、パス内でそれぞれのキーとして指定されたrouteパラメータの名前が入力されます。 They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments), which wrap either of them in braces.
+
+### Named parameters
+
+Named parameters capture a single path segment at their position in the URL, or part of one when combined with literal characters, as shown further below.
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -298,7 +234,7 @@ app.get('/users/:userId/books/:bookId', sendParams);
 
 <Alert type="アラート">
 
-ルートパラメータの名前は、"単語文字" ([A-Za-z0-9_] )で構成されている必要があります。
+The name of route parameters must be a valid JavaScript identifier. Other names can be used by quoting them, for example `:"user-name"`.
 
 </Alert>
 
@@ -318,15 +254,122 @@ req.params: { "genus": "Prunus", "species": "persica" }
 
 <Alert type="アラート">
 
-正規表現文字はルートパスではサポートされていません。 代わりにパスまたは正規表現の配列を使用してください。
-詳細については、[パスルートマッチング構文](/guide/migrating-5#path-syntax)を参照してください。 Use an array of paths or regular expressions instead.
+Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
 See the [path route matching syntax](/guide/migrating-5#path-route-matching-syntax) for more information.
 
 </Alert>
 
+### ワイルドカード
+
+Wildcards match any path after a prefix. Like other route parameters they must have a name, but they are captured as an array of path segments instead of a string.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+ルートパスに一致させるには、ワイルドカードを括弧で囲みます。
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req: Request, res: Response) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### 任意のセグメント
+
+Use braces to define optional segments in a route path. ルートパスで任意のセグメントを定義するには、括弧を使用します。 セグメントが存在しない場合、パラメータは `req.params` から省略されます。
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/:file{.:ext}', (req: Request, res: Response) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
+
+```js
+app.get('/user/\{:id}', (req, res) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req, res) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/\{:id}', (req: Request, res: Response) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req: Request, res: Response) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/\{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+
 ## Route handlers
 
-リクエストを処理するために、 [middleware](/guide/using-middleware) のように動作する複数のコールバック関数を提供できます。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。 The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+リクエストを処理するために、 [middleware](/guide/using-middleware) のように動作する複数のコールバック関数を提供できます。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。 The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.```js
+app.get('/user/:id', (req, res, next) => {
+if (req.params.i
+
+````
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -339,7 +382,7 @@ app.get('/user/:id', (req, res, next) => {
 app.get('/user/:id', (req, res) => {
   res.send('Special handler for user ID 0');
 });
-```
+````
 
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
@@ -361,15 +404,17 @@ app.get('/user/:id', (req: Request, res: Response) => {
 - `GET /user/5` → 最初のルートで処理 → "User 5" を送信
 - `GET /user/0` → 最初のroute ('route')`を呼び出し、次に一致する `/user/:id\` route (ルート) をスキップします。
 
-ルートハンドラは、次の例に示すように、関数、関数の配列、または両方の組み合わせの形式で使用できます。
+ルートハンドラは、次の例に示すように、関数、関数の配列、または両方の組み合わせの形式で使用できます。A single callback function can handle a route. For example:```js
 
-単一のコールバック関数はルートを処理できます。 例: 例:
+````
+
+単一のコールバック関数はルートを処理できます。 例:
 
 ```js
 app.get('/example/a', (req, res) => {
   res.send('Hello from A!');
 });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -409,7 +454,7 @@ app.get(
 );
 ```
 
-コールバック関数の配列はルートを処理できます。 例: 例:
+コールバック関数の配列はルートを処理できます。 例:
 
 ```js
 const cb0 = function (req, res, next) {
@@ -503,27 +548,33 @@ app.get(
 
 ## レスポンスメソッド
 
-次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。 If none of these methods are called from a route handler, the client request will be left hanging.
+次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。 If none of these methods are called from a route handler, the client request will be left hanging.| Method | Description
 
-| 方法                                            | 説明                                                                               |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [res.download()](/api/response#resdownload)     | ダウンロードするファイルを指示します。                                             |
-| [res.end()](/api/response#resend)               | 応答プロセスを終了します。                                                         |
-| [res.json()](/api/response#resjson)             | JSON 応答を送信します。                                                            |
-| [res.jsonp()](/api/response#resjsonp)           | JSONP サポートを使用して JSON 応答を送信します。                                   |
-| [res.redirect()](/api/response#resredirect)     | Redirect a request.                                                                |
-| [res.render()](/api/response#resrender)         | ビューテンプレートをレンダリングします。                                           |
-| [res.send()](/api/response#ressend)             | さまざまなタイプの応答を送信します。                                               |
-| [res.sendFile()](/api/response#ressendfile)     | ファイルをオクテットストリームとして送信する。                                     |
-| [res.sendStatus()](/api/response#ressendstatus) | レスポンスステータスコードを設定し、文字列表現をレスポンスボディとして送信します。 |
+|                                                 |                                                                                                                                                      |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownload)     | ダウンロードするファイルを指示します。                                                                                                               |
+| [res.end()](/api/response#resend)               | 応答プロセスを終了します。                                                                                                                           |
+| [res.json()](/api/response#resjson)             | JSON 応答を送信します。                                                                                                                              |
+| [res.jsonp()](/api/response#resjsonp)           | JSONP サポートを使用して JSON 応答を送信します。                                                                                                     |
+|                                                 | Redirect a request.                                                                                                                                  |
+| [res.render()](/api/response#resrender)         | ビューテンプレートをレンダリングします。                                                                                                             |
+| [res.send()](/api/response#ressend)             | さまざまなタイプの応答を送信します。                                                                                                                 |
+| [res.sendFile()](/api/response#ressendfile)     | ファイルをオクテットストリームとして送信する。                                                                                                       |
+| [res.sendStatus()](/api/response#ressendstatus) | レスポンスステータスコードを設定し、文字列表現をレスポンスボディとして送信します。 \|## app.route()You can create chainable route handlers for a rou |
 
 ## app.route()
 
 `app.route()` を使用すると、ルートパスに対してチェーン可能なルートハンドラを作成できます。
 パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/api/router)。
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
 
-以下は、`app.route()`を使用して定義されたルートハンドラの例です。
+以下は、`app.route()`を使用して定義されたルートハンドラの例です。```js
+app
+.route('/book')
+.get((req, res) => {
+res.send('Ge
+
+````
 
 ```js
 app
@@ -537,7 +588,7 @@ app
   .put((req, res) => {
     res.send('Update the book');
   });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -557,9 +608,9 @@ app
 
 ## express.Router
 
-Use the `express.Router` class to create modular, mountable route handlers. `express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。
+Use the `express.Router` class to create modular, mountable route handlers. `express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。The following example creates a router as a module, loads a middlew
 
-次の例では、ルータをモジュールとして作成し、ミドルウェア関数をロードします。 いくつかのルートを定義し、メインアプリのパスにルータモジュールをマウントします。
+次の例では、ルータをモジュールとして作成し、ミドルウェア関数をロードします。 いくつかのルートを定義し、メインアプリのパスにルータモジュールをマウントします。Create a router file named `birds.js` in the app directory, with th
 
 appディレクトリに`birds.js`という名前のルーターファイルを作成します。以下の内容を使用します。
 
@@ -652,10 +703,13 @@ import birds from './birds';
 app.use('/birds', birds);
 ```
 
-アプリは `/birds` と `/birds/about` へのリクエストを処理できるようになりました。 同様に、ルート固有の「timeLog」ミドルウェア関数を呼び出します。
+アプリは `/birds` と `/birds/about` へのリクエストを処理できるようになりました。 同様に、ルート固有の「timeLog」ミドルウェア関数を呼び出します。But if the parent route `/birds` has path parameters, it will not b
 
-ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/api/application#appusepath-callback--callback) に渡す必要があります。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/api/application#appusepath-callback--callback) に渡す必要があります。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
+const router = express.Router({ mergeParams: true });
+
+````
 
 ```js
 const router = express.Router({ mergeParams: true });
-```
+````

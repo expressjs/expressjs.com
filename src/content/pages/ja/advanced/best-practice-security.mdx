@@ -65,7 +65,7 @@ Webアプリケーションの場合、最も重要なセキュリティ要件�
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {

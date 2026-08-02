@@ -112,7 +112,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## ルートパス
 
-ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列または正規表現にすることができます。 Route paths can be strings, string patterns, or regular expressions.
+ルートパスはリクエストメソッドと組み合わせて、リクエストを作成できるエンドポイントを定義します。 ルートパスは文字列または正規表現にすることができます。 Route paths can be strings, string patterns, or regular expressions. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="情報">
 
@@ -240,6 +240,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### 正規表現に基づく経路パス
 
 <Alert type="アラート">
@@ -352,6 +372,14 @@ req.params: {"userId": "42"}
 <Alert type="警告">
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. 回避策として、`*` の代わりに `{0,}` を使用します。
 </Alert>
+
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
 
 ## Route handlers
 
@@ -550,7 +578,7 @@ app.get(
 
 `app.route()` を使用すると、ルートパスに対してチェーン可能なルートハンドラを作成できます。
 パスは単一の場所で指定されているため、モジュラールートを作成することは、冗長性とタイプミスを削減するのに役立ちます。 ルートの詳細については、以下を参照してください: [Router() documentation](/api/router)。
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 以下は、`app.route()`を使用して定義されたルートハンドラの例です。
 
@@ -683,7 +711,7 @@ app.use('/birds', birds);
 
 アプリは `/birds` と `/birds/about` へのリクエストを処理できるようになりました。 同様に、ルート固有の「timeLog」ミドルウェア関数を呼び出します。
 
-ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/api/application#appusepath-callback--callback) に渡す必要があります。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+ただし、親ルート `/birds` にパスパラメータがある場合、サブルートからデフォルトではアクセスできません。 アクセス可能にするには、 `mergeParams` オプションを Router コンストラクタ [reference](/api/application#appusepath-callback--callback) に渡す必要があります。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

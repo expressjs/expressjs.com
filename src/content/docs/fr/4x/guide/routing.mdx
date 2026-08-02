@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Chemins de la route
 
-Les chemins de la route, en combinaison avec une méthode de requête, définissent les points de terminaison à partir desquels les requêtes peuvent être faites. Les chemins de route peuvent être des chaînes, des chaînes de caractères ou des expressions régulières.
+Les chemins de la route, en combinaison avec une méthode de requête, définissent les points de terminaison à partir desquels les requêtes peuvent être faites. Les chemins de route peuvent être des chaînes, des chaînes de caractères ou des expressions régulières. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="Infos">
 
@@ -235,6 +235,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### Chemins de route basés sur des expressions régulières
 
 <Alert type="Alerte">
@@ -347,6 +367,14 @@ avec un antislash supplémentaire, par exemple `\d+`.
 <Alert type="avertissement">
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. Comme solution de contournement, utilisez `{0,}` au lieu de `*`.
 </Alert>
+
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
 
 ## Gestionnaires de routes
 
@@ -544,7 +572,7 @@ Les méthodes de l'objet de réponse (`res`) dans la table suivante peuvent envo
 ## app.route()
 
 Vous pouvez créer des gestionnaires de routes chaînables pour un chemin en utilisant `app.route()`.
-Parce que le chemin est spécifié à un seul endroit, la création de routes modulaires est utile, tout comme la réduction de la redondance et des fautes de frappe. Pour plus d'informations sur les routes, voir : [Documentation de Router()](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Voici un exemple de gestionnaires de routes enchaînés qui sont définis en utilisant `app.route()`.
 
@@ -677,7 +705,7 @@ app.use('/birds', birds);
 
 L'application sera maintenant en mesure de traiter les demandes vers `/birds` et `/birds/about`, ainsi que d'appeler la fonction middleware `timeLog` qui est spécifique à la route.
 
-Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

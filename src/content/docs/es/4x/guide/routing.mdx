@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Rutas de ruta
 
-Las rutas de ruta, en combinación con un método de solicitud, definen los extremos en los que se pueden realizar las solicitudes. Las rutas pueden ser cadenas, patrones de cadenas o expresiones regulares.
+Las rutas de ruta, en combinación con un método de solicitud, definen los extremos en los que se pueden realizar las solicitudes. Las rutas pueden ser cadenas, patrones de cadenas o expresiones regulares. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -235,6 +235,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### Rutas de ruta basadas en expresiones regulares
 
 <Alert type="alerta">
@@ -347,6 +367,14 @@ caracteres con una barra inversa adicional, por ejemplo `\d+`.
 <Alert type="advertencia">
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. Como un workaround, usa `{0,}` en lugar de `*`.
 </Alert>
+
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
 
 ## Manejadores de rutas
 
@@ -544,7 +572,7 @@ Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden envi
 ## app.route()
 
 Puede crear manejadores de rutas encadenables para una ruta usando `app.route()`.
-Debido a que la ruta se especifica en una única ubicación, la creación de rutas modulares es útil, al igual que la reducción de redundancia y tipografías. Para más información sobre rutas, vea: [documentación Router() ](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Aquí hay un ejemplo de manejadores encadenados de rutas que se definen usando `app.route()`.
 
@@ -677,7 +705,7 @@ app.use('/birds', birds);
 
 La aplicación ahora será capaz de manejar solicitudes a `/birds` y `/birds/about`, así como llamar a la función de middleware `timeLog` que es específica de la ruta.
 
-Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

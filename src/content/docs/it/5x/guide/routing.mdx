@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Percorsi di rotta
 
-Percorsi di percorso, in combinazione con un metodo di richiesta, definire gli endpoint in cui le richieste possono essere fatte. I percorsi del percorso possono essere stringhe o espressioni regolari.
+Percorsi di percorso, in combinazione con un metodo di richiesta, definire gli endpoint in cui le richieste possono essere fatte. I percorsi del percorso possono essere stringhe o espressioni regolari. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -153,77 +153,9 @@ app.get('/random.text', (req: Request, res: Response) => {
 });
 ```
 
-### Wildcards
-
-I caratteri jolly corrispondono a qualsiasi percorso dopo un prefisso. Devono avere un nome, proprio come i parametri del percorso, e sono catturati come array di segmenti di percorso.
-
-```js
-app.get('/files/*filepath', (req, res) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-Per abbinare anche il percorso di root, avvolgere il wildcard in graffe:
-
-```js
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req, res) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req: Request, res: Response) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-### Segmenti facoltativi
-
-Usa le parentesi graffe per definire segmenti opzionali in un percorso percorso. Quando il segmento non è presente, il parametro viene omesso da `req.params`.
-
-```js
-app.get('/:file{.:ext}', (req, res) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/:file{.:ext}', (req: Request, res: Response) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
 <Alert type="allerta">
 
-I caratteri `?`, `+`, `*`, `[]`, e `()` sono riservati e non possono essere usati come caratteri letterali nei percorsi del percorso. Usa `\` per sfuggire se necessario.
+The characters `?`, `+`, `*`, `[]`, `()`, and `!` are reserved and cannot be used as literal characters in route paths, and braces are reserved for [optional segments](#optional-segments). Usa `\` per sfuggire se necessario.
 
 </Alert>
 
@@ -259,7 +191,11 @@ app.get(/.*fly$/, (req: Request, res: Response) => {
 
 ## Parametri percorso
 
-I parametri del percorso sono denominati segmenti di URL che vengono utilizzati per catturare i valori specificati nella loro posizione nell'URL. I valori catturati sono popolati nell'oggetto `req.params`, con il nome del parametro route specificato nel percorso come loro rispettive chiavi.
+I parametri del percorso sono denominati segmenti di URL che vengono utilizzati per catturare i valori specificati nella loro posizione nell'URL. I valori catturati sono popolati nell'oggetto `req.params`, con il nome del parametro route specificato nel percorso come loro rispettive chiavi. They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments), which wrap either of them in braces.
+
+### Named parameters
+
+Named parameters capture a single path segment at their position in the URL, or part of one when combined with literal characters, as shown further below.
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -293,7 +229,7 @@ app.get('/users/:userId/books/:bookId', sendParams);
 
 <Alert type="allerta">
 
-Il nome dei parametri del percorso deve essere composto da "caratteri di parola" ([A-Za-z0-9_]).
+The name of route parameters must be a valid JavaScript identifier. Other names can be used by quoting them, for example `:"user-name"`.
 
 </Alert>
 
@@ -313,14 +249,122 @@ req.params: { "genus": "Prunus", "species": "persica" }
 
 <Alert type="allerta">
 
-I caratteri Regexp non sono supportati nei percorsi del percorso. Usa invece un array di tracciati o espressioni regolari.
+Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
 Per maggiori informazioni consultare il [percorso percorso corrispondente alla sintassi](/guide/migrating-5#path-syntax).
 
 </Alert>
 
+### Wildcards
+
+I caratteri jolly corrispondono a qualsiasi percorso dopo un prefisso. Like other route parameters they must have a name, but they are captured as an array of path segments instead of a string.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+Per abbinare anche il percorso di root, avvolgere il wildcard in graffe:
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req: Request, res: Response) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Segmenti facoltativi
+
+Usa le parentesi graffe per definire segmenti opzionali in un percorso percorso. Quando il segmento non è presente, il parametro viene omesso da `req.params`.
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/:file{.:ext}', (req: Request, res: Response) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
+
+```js
+app.get('/user/\{:id}', (req, res) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req, res) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/\{:id}', (req: Request, res: Response) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req: Request, res: Response) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/\{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+
 ## Gestori del percorso
 
-È possibile fornire più funzioni di callback che si comportano come [middleware](/guide/using-middleware) per gestire una richiesta. L'unica eccezione è che questi callback potrebbero invocare `next('route')` per bypassare i rimanenti callback del percorso. È possibile utilizzare questo meccanismo per imporre condizioni preliminari su un percorso, poi passare il controllo ai percorsi successivi se non c'è motivo di procedere con il percorso corrente.
+È possibile fornire più funzioni di callback che si comportano come [middleware](/guide/using-middleware) per gestire una richiesta. L'unica eccezione è che questi callback potrebbero invocare `next('route')` per bypassare i rimanenti callback del percorso. È possibile utilizzare questo meccanismo per imporre condizioni preliminari su un percorso, poi passare il controllo ai percorsi successivi se non c'è motivo di procedere con il percorso corrente.```js
+app.get('/user/:id', (req, res, next) => {
+if (req.params.i
+
+````
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -333,7 +377,7 @@ app.get('/user/:id', (req, res, next) => {
 app.get('/user/:id', (req, res) => {
   res.send('Special handler for user ID 0');
 });
-```
+````
 
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
@@ -355,15 +399,17 @@ In questo esempio:
 - `GET /user/5` → gestito dal primo percorso → invia "User 5"
 - `GET /user/0` → prima rotta chiama `next('route')`, saltando al prossimo percorso corrispondente `/user/:id`
 
-I gestori del percorso possono essere nella forma di una funzione, una serie di funzioni, o combinazioni di entrambi, come mostrato negli esempi seguenti.
+I gestori del percorso possono essere nella forma di una funzione, una serie di funzioni, o combinazioni di entrambi, come mostrato negli esempi seguenti.A single callback function can handle a route. For example:```js
 
-Una singola funzione di callback può gestire un percorso. Per esempio:
+````
+
+Una singola funzione di callback può gestire un percorso.
 
 ```js
 app.get('/example/a', (req, res) => {
   res.send('Hello from A!');
 });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -403,7 +449,7 @@ app.get(
 );
 ```
 
-Un array di funzioni di callback può gestire un percorso. Per esempio:
+Un array di funzioni di callback può gestire un percorso.
 
 ```js
 const cb0 = function (req, res, next) {
@@ -497,26 +543,32 @@ app.get(
 
 ## Metodi di risposta
 
-I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.
+I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.| Method | Description
 
-| Metodo                                          | Descrizione                                                                                                        |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [res.download()](/api/response#resdownload)     | Avverte un file da scaricare.                                                                                      |
-| [res.end()](/api/response#resend)               | Termina il processo di risposta.                                                                                   |
-| [res.json()](/api/response#resjson)             | Invia una risposta JSON.                                                                                           |
-| [res.jsonp()](/api/response#resjsonp)           | Invia una risposta JSON con il supporto JSONP.                                                                     |
-| [res.redirect()](/api/response#resredirect)     | Reindirizza una richiesta.                                                                                         |
-| [res.render()](/api/response#resrender)         | Render un modello di visualizzazione.                                                                              |
-| [res.send()](/api/response#ressend)             | Invia una risposta di vari tipi.                                                                                   |
-| [res.sendFile()](/api/response#ressendfile)     | Invia un file come un flusso di otte.                                                                              |
-| [res.sendStatus()](/api/response#ressendstatus) | Imposta il codice di stato della risposta e invia la sua rappresentazione della stringa come corpo della risposta. |
+|                                                 |                                                                                                                                                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [res.download()](/api/response#resdownload)     | Avverte un file da scaricare.                                                                                                                                                        |
+| [res.end()](/api/response#resend)               | Termina il processo di risposta.                                                                                                                                                     |
+| [res.json()](/api/response#resjson)             | Invia una risposta JSON.                                                                                                                                                             |
+| [res.jsonp()](/api/response#resjsonp)           | Invia una risposta JSON con il supporto JSONP.                                                                                                                                       |
+|                                                 | Reindirizza una richiesta.                                                                                                                                                           |
+| [res.render()](/api/response#resrender)         | Render un modello di visualizzazione.                                                                                                                                                |
+| [res.send()](/api/response#ressend)             | Invia una risposta di vari tipi.                                                                                                                                                     |
+| [res.sendFile()](/api/response#ressendfile)     | Invia un file come un flusso di otte.                                                                                                                                                |
+| [res.sendStatus()](/api/response#ressendstatus) | Imposta il codice di stato della risposta e invia la sua rappresentazione della stringa come corpo della risposta. \|## app.route()You can create chainable route handlers for a rou |
 
 ## app.route()
 
 È possibile creare i gestori di rotte per un percorso utilizzando `app.route()`.
-Poiché il percorso è specificato in una singola posizione, è utile creare percorsi modulari, così come ridurre la ridondanza e pneumatici. Per ulteriori informazioni sulle rotte, si veda: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
 
-Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`.
+Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`.```js
+app
+.route('/book')
+.get((req, res) => {
+res.send('Ge
+
+````
 
 ```js
 app
@@ -530,7 +582,7 @@ app
   .put((req, res) => {
     res.send('Update the book');
   });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -550,9 +602,9 @@ app
 
 ## express.Router
 
-Usa la classe `express.Router` per creare i gestori modulari e montabili. Un'istanza `Router` è un sistema di routing e middleware completo; per questo motivo è spesso chiamata "mini-app".
+Usa la classe `express.Router` per creare i gestori modulari e montabili. Un'istanza `Router` è un sistema di routing e middleware completo; per questo motivo è spesso chiamata "mini-app".The following example creates a router as a module, loads a middlew
 
-L'esempio seguente crea un router come modulo, carica una funzione middleware in esso, definisce alcuni percorsi e monta il modulo del router su un percorso nell'app principale.
+L'esempio seguente crea un router come modulo, carica una funzione middleware in esso, definisce alcuni percorsi e monta il modulo del router su un percorso nell'app principale.Create a router file named `birds.js` in the app directory, with th
 
 Crea un file router chiamato `birds.js` nella directory delle app, con il seguente contenuto:
 
@@ -645,10 +697,13 @@ import birds from './birds';
 app.use('/birds', birds);
 ```
 
-L'app sarà ora in grado di gestire le richieste di `/birds` e `/birds/about`, oltre a chiamare la funzione middleware `timeLog` che è specifica per il percorso.
+L'app sarà ora in grado di gestire le richieste di `/birds` e `/birds/about`, oltre a chiamare la funzione middleware `timeLog` che è specifica per il percorso.But if the parent route `/birds` has path parameters, it will not b
 
-Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
+const router = express.Router({ mergeParams: true });
+
+````
 
 ```js
 const router = express.Router({ mergeParams: true });
-```
+````

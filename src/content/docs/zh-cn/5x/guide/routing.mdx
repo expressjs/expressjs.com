@@ -107,7 +107,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Route paths
 
-路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串或正则表达式。
+路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串或正则表达式。 They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -152,77 +152,9 @@ app.get('/random.text', (req: Request, res: Response) => {
 });
 ```
 
-### Wildcards
-
-通配符可以匹配前缀后的任意路径。 它们必须像路由参数一样拥有名称，并且会被捕获为**路径片段组成的数组**。
-
-```js
-app.get('/files/*filepath', (req, res) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-若要同时匹配根路径，请将通配符用花括号包裹：
-
-```js
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req, res) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req: Request, res: Response) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-### Optional segments
-
-使用花括号在路由路径中定义可选片段。 当该片段不存在时，该参数会从 `req.params` 中省略。
-
-```js
-app.get('/:file{.:ext}', (req, res) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/:file{.:ext}', (req: Request, res: Response) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
 <Alert type="alert">
 
-字符 `?`、`+`、`*`、`[]` 和 `()` 为保留字符，不能在路由路径中用作字面字符。 如有需要，可使用`\`对其进行转义。
+The characters `?`, `+`, `*`, `[]`, `()`, and `!` are reserved and cannot be used as literal characters in route paths, and braces are reserved for [optional segments](#optional-segments). 如有需要，可使用`\`对其进行转义。
 
 </Alert>
 
@@ -258,7 +190,11 @@ app.get(/.*fly$/, (req: Request, res: Response) => {
 
 ## Route parameters
 
-路由参数是命名式URL片段，用于捕获URL中对应位置所指定的值。 捕获的值会存入`req.params`对象，路径中定义的路由参数名作为该对象对应的键名。
+路由参数是命名式URL片段，用于捕获URL中对应位置所指定的值。 捕获的值会存入`req.params`对象，路径中定义的路由参数名作为该对象对应的键名。 They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments), which wrap either of them in braces.
+
+### Named parameters
+
+Named parameters capture a single path segment at their position in the URL, or part of one when combined with literal characters, as shown further below.
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -292,7 +228,7 @@ app.get('/users/:userId/books/:bookId', sendParams);
 
 <Alert type="alert">
 
-路由参数的名称必须由“单词字符”（[A-Za-z0-9_]）组成。
+The name of route parameters must be a valid JavaScript identifier. Other names can be used by quoting them, for example `:"user-name"`.
 
 </Alert>
 
@@ -312,14 +248,122 @@ req.params: { "genus": "Prunus", "species": "persica" }
 
 <Alert type="alert">
 
-路由路径中不支持正则表达式字符。 请改用路径数组或正则表达式。
+Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
 See the [path route matching syntax](/guide/migrating-5#path-syntax) for more information.
 
 </Alert>
 
+### Wildcards
+
+通配符可以匹配前缀后的任意路径。 Like other route parameters they must have a name, but they are captured as an array of path segments instead of a string.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+若要同时匹配根路径，请将通配符用花括号包裹：
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req: Request, res: Response) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Optional segments
+
+使用花括号在路由路径中定义可选片段。 当该片段不存在时，该参数会从 `req.params` 中省略。
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/:file{.:ext}', (req: Request, res: Response) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
+
+```js
+app.get('/user/\{:id}', (req, res) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req, res) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/\{:id}', (req: Request, res: Response) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req: Request, res: Response) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+Do not confuse the position of the slash in the route path with the [`strict routing` setting](/api/application/#application-settings), which is about the request URL: it controls whether a URL ending in a slash that the route path does not require still matches. For example, a request for `/order/` matches the `/order{/:id}` route by default, but returns a 404 error when strict routing is enabled; the trailing slash of `/user/` is unaffected because the `/user/\{:id}` route requires it. All the requests commented in the examples above behave the same regardless of that setting.## Route handlersYou can provide multiple callback functions that
+
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. 唯一的例外是这些回调函数可以调用 `next('route')` 来跳过剩余的路由回调。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。
+You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. 唯一的例外是这些回调函数可以调用 `next('route')` 来跳过剩余的路由回调。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。```js
+app.get('/user/:id', (req, res, next) => {
+if (req.params.i
+
+````
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -332,7 +376,7 @@ app.get('/user/:id', (req, res, next) => {
 app.get('/user/:id', (req, res) => {
   res.send('Special handler for user ID 0');
 });
-```
+````
 
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
@@ -354,15 +398,17 @@ app.get('/user/:id', (req: Request, res: Response) => {
 - `GET /user/5` → 由第一个路由处理 → 返回 "User 5"
 - `GET /user/0` → 第一个路由调用 `next('route')`，跳转到下一个匹配的 `/user/:id` 路由
 
-路由处理程序可以采用函数、函数数组或二者结合的形式，如下示例所示。
+路由处理程序可以采用函数、函数数组或二者结合的形式，如下示例所示。A single callback function can handle a route. For example:```js
 
-单个回调函数即可处理一个路由。 举个例子：
+````
+
+单个回调函数即可处理一个路由。
 
 ```js
 app.get('/example/a', (req, res) => {
   res.send('Hello from A!');
 });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -402,7 +448,7 @@ app.get(
 );
 ```
 
-一个回调函数数组可以处理一个路由。 举个例子：
+一个回调函数数组可以处理一个路由。
 
 ```js
 const cb0 = function (req, res, next) {
@@ -496,26 +542,32 @@ app.get(
 
 ## Response methods
 
-下表中的响应对象（`res`）方法可向客户端发送响应，并终止请求-响应循环。 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。
+下表中的响应对象（`res`）方法可向客户端发送响应，并终止请求-响应循环。 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。| Method | Description
 
-| Method                                          | 描述                                                 |
-| ----------------------------------------------- | ---------------------------------------------------- |
-| [res.download()](/api/response#resdownload)     | 提示客户端下载一个文件。                             |
-| [res.end()](/api/response#resend)               | 结束响应流程。                                       |
-| [res.json()](/api/response#resjson)             | 发送 JSON 响应。                                     |
-| [res.jsonp()](/api/response#resjsonp)           | 发送支持 JSONP 的 JSON 响应。                        |
-| [res.redirect()](/api/response#resredirect)     | 重定向请求。                                         |
-| [res.render()](/api/response#resrender)         | 渲染视图模板。                                       |
-| [res.send()](/api/response#ressend)             | 发送多种类型的响应。                                 |
-| [res.sendFile()](/api/response#ressendfile)     | 以八位字节流的形式发送文件。                         |
-| [res.sendStatus()](/api/response#ressendstatus) | 设置响应状态码，并将其字符串表示形式作为响应体发送。 |
+|                                                 |                                                                                                                        |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownload)     | 提示客户端下载一个文件。                                                                                               |
+| [res.end()](/api/response#resend)               | 结束响应流程。                                                                                                         |
+| [res.json()](/api/response#resjson)             | 发送 JSON 响应。                                                                                                       |
+| [res.jsonp()](/api/response#resjsonp)           | 发送支持 JSONP 的 JSON 响应。                                                                                          |
+|                                                 | 重定向请求。                                                                                                           |
+| [res.render()](/api/response#resrender)         | 渲染视图模板。                                                                                                         |
+| [res.send()](/api/response#ressend)             | 发送多种类型的响应。                                                                                                   |
+| [res.sendFile()](/api/response#ressendfile)     | 以八位字节流的形式发送文件。                                                                                           |
+| [res.sendStatus()](/api/response#ressendstatus) | 设置响应状态码，并将其字符串表示形式作为响应体发送。 \|## app.route()You can create chainable route handlers for a rou |
 
 ## app.route()
 
 你可以使用 `app.route()` 为路由路径创建可链式调用的路由处理程序。
-由于路径在单个位置指定，因此创建模块化路由十分有用，同时还能减少冗余和拼写错误。 For more information about routes, see: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
 
-以下是使用 `app.route()` 定义的链式路由处理程序示例。
+以下是使用 `app.route()` 定义的链式路由处理程序示例。```js
+app
+.route('/book')
+.get((req, res) => {
+res.send('Ge
+
+````
 
 ```js
 app
@@ -529,7 +581,7 @@ app
   .put((req, res) => {
     res.send('Update the book');
   });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -549,9 +601,9 @@ app
 
 ## express.Router
 
-使用 `express.Router` 类创建模块化、可挂载的路由处理程序。 `Router` 实例是一个完整的中间件和路由系统；因此，它通常被称为“迷你应用”。
+使用 `express.Router` 类创建模块化、可挂载的路由处理程序。 `Router` 实例是一个完整的中间件和路由系统；因此，它通常被称为“迷你应用”。The following example creates a router as a module, loads a middlew
 
-以下示例创建一个路由模块，在其中加载中间件函数、定义若干路由，并将该路由模块挂载到主应用的指定路径上。
+以下示例创建一个路由模块，在其中加载中间件函数、定义若干路由，并将该路由模块挂载到主应用的指定路径上。Create a router file named `birds.js` in the app directory, with th
 
 在应用目录中创建一个名为 `birds.js` 的路由文件，内容如下：
 
@@ -644,10 +696,13 @@ import birds from './birds';
 app.use('/birds', birds);
 ```
 
-应用现在将能够处理指向 `/birds` 和 `/birds/about` 的请求，同时会调用该路由专用的 `timeLog` 中间件函数。
+应用现在将能够处理指向 `/birds` 和 `/birds/about` 的请求，同时会调用该路由专用的 `timeLog` 中间件函数。But if the parent route `/birds` has path parameters, it will not b
 
-但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
+const router = express.Router({ mergeParams: true });
+
+````
 
 ```js
 const router = express.Router({ mergeParams: true });
-```
+````
