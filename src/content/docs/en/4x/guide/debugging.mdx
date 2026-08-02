@@ -154,6 +154,18 @@ The `DEBUG` environment variable can be set by any process launcher that support
 
 See [Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging) for the full list of launch options.
 
+## Using the Node.js inspector
+
+Debug logs show what the app did; for stepping through your code with breakpoints, use the built-in Node.js inspector. Start your app with the `--inspect` flag:
+
+```bash
+$ node --inspect index.js
+```
+
+Then attach a debugging client, such as Chrome DevTools (open `chrome://inspect`), VS Code, or any other inspector-capable tool, to set breakpoints in your route handlers and middleware, step through code, and inspect variables.
+
+If you need to debug something that happens during startup, use `--inspect-brk` instead, which pauses execution on the first line until a debugger attaches. See the [Node.js debugging guide](https://nodejs.org/en/learn/getting-started/debugging) for details.
+
 ## Debugging the HTTP layer
 
 Express runs on top of the Node.js `http` module, which has its own debugging facilities that work with any Express app.
