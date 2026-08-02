@@ -180,9 +180,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Since promises automatically handle both synchronous errors and rejected promises,
-you can simply provide `next` as the final catch handler and Express will catch errors,
-because the catch handler is given the error as the first argument.
+If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
 
 You could also use a chain of handlers to rely on synchronous error
 catching, by reducing the asynchronous code to something trivial. For example:
@@ -424,7 +422,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
 
-Notice that when you do not call "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
 function clientErrorHandler(err, req, res, next) {
