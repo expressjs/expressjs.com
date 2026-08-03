@@ -4,103 +4,217 @@ description: Scopri come abilitare e utilizzare i log di debug nelle applicazion
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-Per vedere tutti i log interni utilizzati in Express, imposta la variabile d'ambiente `DEBUG` su
-`express:*` quando lancia la tua app.
+To see all the internal logs used in Express, set the `DEBUG` environment variable to `express:*,router,router:*` when launching your app. Routing is handled by the separate [router](https://github.com/pillarjs/router) package, so its logs live under the `router` namespace and are not included in `express:*`.
 
 ```bash
-$ DEBUG=express:* node index.js
+$ DEBUG=express:*,router,router:* node index.js
 ```
 
 Su Windows, utilizzare il comando corrispondente.
 
 ```bash
-> $env:DEBUG = "express:*"; node index.js
+> $env:DEBUG = "express:*,router,router:*"; node index.js
 ```
 
-L'esecuzione di questo comando nell'app predefinita generata dal [express generator](/starter/generator) stampa il seguente output:
+Running this command on a small app with a JSON body parser and a mounted router prints the following output:
+
+```cjs title="index.cjs"
+const express = require('express');
+
+const app = express();
+
+app.use(express.json());
+
+const users = express.Router();
+users.get('/', (req, res) => {
+  res.json([]);
+});
+
+app.use('/users', users);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+
+const app = express();
+
+app.use(express.json());
+
+const users = express.Router();
+users.get('/', (req, res) => {
+  res.json([]);
+});
+
+app.use('/users', users);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
 
 ```bash
-$ DEBUG=express:* node ./bin/www
-  express:router:route new / +0ms
-  express:router:layer new / +1ms
-  express:router:route get / +1ms
-  express:router:layer new / +0ms
-  express:router:route new / +1ms
-  express:router:layer new / +0ms
-  express:router:route get / +0ms
-  express:router:layer new / +0ms
-  express:application compile etag weak +1ms
-  express:application compile query parser extended +0ms
-  express:application compile trust proxy false +0ms
-  express:application booting in development mode +1ms
-  express:router use / query +0ms
-  express:router:layer new / +0ms
-  express:router use / expressInit +0ms
-  express:router:layer new / +0ms
-  express:router use / favicon +1ms
-  express:router:layer new / +0ms
-  express:router use / logger +0ms
-  express:router:layer new / +0ms
-  express:router use / jsonParser +0ms
-  express:router:layer new / +1ms
-  express:router use / urlencodedParser +0ms
-  express:router:layer new / +0ms
-  express:router use / cookieParser +0ms
-  express:router:layer new / +0ms
-  express:router use / stylus +90ms
-  express:router:layer new / +0ms
-  express:router use / serveStatic +0ms
-  express:router:layer new / +0ms
-  express:router use / router +0ms
-  express:router:layer new / +1ms
-  express:router use /users router +0ms
-  express:router:layer new /users +0ms
-  express:router use / &amp;lt;anonymous&amp;gt; +0ms
-  express:router:layer new / +0ms
-  express:router use / &amp;lt;anonymous&amp;gt; +0ms
-  express:router:layer new / +0ms
-  express:router use / &amp;lt;anonymous&amp;gt; +0ms
-  express:router:layer new / +0ms
+$ DEBUG=express:*,router,router:* node index.js
+  express:application set "x-powered-by" to true +0ms
+  express:application set "etag" to 'weak' +3ms
+  express:application set "etag fn" to [Function: generateETag] +0ms
+  express:application set "env" to 'development' +1ms
+  express:application set "query parser" to 'simple' +0ms
+  express:application set "query parser fn" to [Function: parse] +0ms
+  express:application set "subdomain offset" to 2 +1ms
+  express:application set "trust proxy" to false +0ms
+  express:application set "trust proxy fn" to [Function: trustNone] +1ms
+  express:application booting in development mode +0ms
+  express:application set "view" to [Function: View] +0ms
+  express:application set "views" to '/projects/example/views' +1ms
+  express:application set "jsonp callback name" to 'callback' +0ms
+  router use '/' jsonParser +0ms
+  router:layer new '/' +0ms
+  router:route new '/' +0ms
+  router:layer new '/' +3ms
+  router:route get / +0ms
+  router:layer new '/' +1ms
+  router use '/users' router +4ms
+  router:layer new '/users' +0ms
+  router:route new '/' +1ms
+  router:layer new '/' +0ms
+  router:route get / +1ms
+  router:layer new '/' +1ms
 ```
 
 Quando viene fatta una richiesta all'applicazione, vedrete i registri specificati nel codice Express:
 
 ```bash
-  express:router dispatching GET / +4h
-  express:router query  : / +2ms
-  express:router expressInit  : / +0ms
-  express:router favicon  : / +0ms
-  express:router logger  : / +1ms
-  express:router jsonParser  : / +0ms
-  express:router urlencodedParser  : / +1ms
-  express:router cookieParser  : / +0ms
-  express:router stylus  : / +0ms
-  express:router serveStatic  : / +2ms
-  express:router router  : / +2ms
-  express:router dispatching GET / +1ms
-  express:view lookup "index.pug" +338ms
-  express:view stat "/projects/example/views/index.pug" +0ms
-  express:view render "/projects/example/views/index.pug" +1ms
+  router dispatching GET /users +712ms
+  router jsonParser  : /users +1ms
+  router trim prefix (/users) from url /users +2ms
+  router router /users : /users +0ms
+  router dispatching GET / +0ms
 ```
 
-Per vedere i log solo dall'implementazione del router, imposta il valore di `DEBUG` su `express:router`. Allo stesso modo, per vedere i log solo dall'implementazione dell'applicazione, imposta il valore di `DEBUG` su `express:application`, e così via.
+To see the logs only from the router implementation, set the value of `DEBUG` to `router,router:*`. Allo stesso modo, per vedere i log solo dall'implementazione dell'applicazione, imposta il valore di `DEBUG` su `express:application`, e così via.
 
-## Applicazioni generate da `express`
+## Using `debug` in your own code
 
-Un'applicazione generata dal comando `express` utilizza il modulo `debug` e il suo namespace di debug è indirizzato al nome dell'applicazione.
+The same [debug](https://www.npmjs.com/package/debug) module that Express uses internally is available for your application code. Install it, create one or more loggers scoped to a namespace of your choosing, and call them wherever you would otherwise use `console.log`:
 
-Ad esempio, se hai generato l'app con `$ express sample-app`, puoi abilitare le istruzioni di debug con il seguente comando:
+<PackageManagerCommand command="npm install debug" />
+
+```cjs title="index.cjs"
+const express = require('express');
+const debug = require('debug')('myapp:server');
+
+const app = express();
+
+app.get('/', (req, res) => {
+  debug('handling request from %s', req.ip);
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  debug('listening on port 3000');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import debugModule from 'debug';
+
+const debug = debugModule('myapp:server');
+const app = express();
+
+app.get('/', (req, res) => {
+  debug('handling request from %s', req.ip);
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  debug('listening on port 3000');
+});
+```
+
+These statements print nothing by default. Enable them through the same `DEBUG` environment variable, using your own namespace:
 
 ```bash
-$ DEBUG=sample-app:* node ./bin/www
+$ DEBUG=myapp:* node index.js
 ```
 
 È possibile specificare più di uno spazio dei nomi di debug assegnando una lista di nomi separati da virgole:
 
 ```bash
-$ DEBUG=http,mail,express:* node index.js
+$ DEBUG=myapp:*,router node index.js
 ```
+
+## Setting DEBUG in your IDE
+
+The `DEBUG` environment variable can be set by any process launcher that supports environment variables, including the run and debug configurations of your IDE. For example, in VS Code you can set it in the `env` property of a launch configuration:
+
+```json title=".vscode/launch.json"
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Launch Express app",
+  "program": "${workspaceFolder}/index.js",
+  "env": { "DEBUG": "express:*,router,router:*" }
+}
+```
+
+See [Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging) for the full list of launch options.
+
+## Using the Node.js inspector
+
+Debug logs show what the app did; for stepping through your code with breakpoints, use the built-in Node.js inspector. Start your app with the `--inspect` flag:
+
+```bash
+$ node --inspect index.js
+```
+
+Then attach a debugging client, such as Chrome DevTools (open `chrome://inspect`), VS Code, or any other inspector-capable tool, to set breakpoints in your route handlers and middleware, step through code, and inspect variables.
+
+If you need to debug something that happens during startup, use `--inspect-brk` instead, which pauses execution on the first line until a debugger attaches. See the [Node.js debugging guide](https://nodejs.org/learn/getting-started/debugging) for details.
+
+## Debugging the HTTP layer
+
+Express runs on top of the Node.js `http` module, which has its own debugging facilities that work with any Express app.
+
+Setting the `NODE_DEBUG` environment variable to `http` makes Node.js print internal logs from the HTTP layer, such as connection handling and socket events:
+
+```bash
+$ NODE_DEBUG=http node index.js
+```
+
+You can combine it with other subsystems, such as `net` or `stream`, in a comma-separated list. Be aware that this output can expose sensitive data such as authentication headers, so use it only in development.
+
+## Diagnostics channels
+
+Node.js publishes an event for every HTTP request through the [diagnostics_channel](https://nodejs.org/api/diagnostics_channel.html#http) module, which you can subscribe to without patching Express or adding middleware:
+
+```cjs title="index.cjs"
+const { subscribe } = require('node:diagnostics_channel');
+
+subscribe('http.server.request.start', ({ request }) => {
+  console.log(`${request.method} ${request.url}`);
+});
+```
+
+```mjs title="index.mjs"
+import { subscribe } from 'node:diagnostics_channel';
+
+subscribe('http.server.request.start', ({ request }) => {
+  console.log(`${request.method} ${request.url}`);
+});
+```
+
+Other built-in channels cover the rest of the request lifecycle, such as `http.server.response.finish`, and the client side of `http.request` calls. See the [diagnostics_channel documentation](https://nodejs.org/api/diagnostics_channel.html#http) for the full list.
 
 ## Opzioni avanzate
 

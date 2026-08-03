@@ -3,6 +3,8 @@ title: FAQ
 description: Express.jsについてよく寄せられる質問の答えを見つけましょう。その中には、アプリケーション構造、モデル、認証、テンプレートエンジン、エラー処理などのトピックが含まれます。
 ---
 
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
+
 ## アプリケーションを構成するにはどうすればいいですか?
 
 There is no definitive answer to this question. この質問には決定的な答えはありません。 The answer depends
@@ -49,7 +51,11 @@ To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
 
-詳しくは、[Expressでテンプレートエンジンを使用する](/guide/using-template-engines)を参照してください。
+<ReadMore>
+
+For more information, see the [Using template engines with Express](/guide/using-template-engines) guide.
+
+</ReadMore>
 
 ## 404応答はどのように処理すればいいですか?
 
@@ -100,7 +106,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-詳細については、[Error handling](/guide/error-handling)を参照してください。
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## プレーンHTMLをレンダリングするにはどうすればいいですか?
 

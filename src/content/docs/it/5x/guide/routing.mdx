@@ -88,7 +88,7 @@ app.post('/', (req: Request, res: Response) => {
 Express supporta metodi che corrispondono a tutti i metodi di richiesta HTTP: `get`, `post`, e così via.
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#httpmethods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -543,7 +543,7 @@ app.get(
 
 ## Metodi di risposta
 
-I metodi sull'oggetto di risposta (`res`) nella tabella seguente possono inviare una risposta al client e terminare il ciclo di richiesta-risposta. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.| Method | Description| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.| Method | Description| Method | Description
 
 |                                                 |                                                                                                                                                                                      |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

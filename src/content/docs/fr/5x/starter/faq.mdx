@@ -3,6 +3,8 @@ title: Foire Aux Questions
 description: Retrouvez les réponses aux questions les plus fréquemment posées sur Express.js, y compris les sujets sur la structure de l'application, les modèles, l'authentification, les moteurs de gabarit, la gestion des erreurs, et plus encore.
 ---
 
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
+
 ## Comment structurer ma candidature ?
 
 Il n'y a pas de réponse définitive à cette question. La réponse dépend
@@ -42,7 +44,11 @@ Pour normaliser les interfaces du moteur de gabarits et la mise en cache, consul
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 pour plus de support. Les moteurs de gabarits non listés peuvent toujours supporter la signature Express.
 
-Pour plus d'informations, voir [Utilisation de moteurs de gabarits avec Express](/guide/using-template-engines).
+<ReadMore>
+
+For more information, see the [Using template engines with Express](/guide/using-template-engines) guide.
+
+</ReadMore>
 
 ## Comment gérer 404 réponses?
 
@@ -92,7 +98,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Pour plus d'informations, voir [Gestion des erreurs](/en/guide/error-handling).
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## Comment rendre le HTML simple ?
 
