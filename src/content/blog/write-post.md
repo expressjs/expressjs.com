@@ -16,7 +16,7 @@ If you have an idea for a blog post, follow these steps to propose it and potent
 
     If the Express TC accepts your proposal, start to write your post by forking the [expressjs.com](https://github.com/expressjs/expressjs.com) repository and cloning it to your local machine. Once you open a pull request, you'll be able to preview your post on GitHub. See step six below.
 
-> Optional: To run the site locally and preview your post before opening a PR, see the [setup instructions in the README](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom).
+> Optional: To run the site locally and preview your post before opening a PR, see the [setup instructions in the README](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#readme).
 
 1.  **Create a new file**
 
