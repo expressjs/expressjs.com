@@ -68,16 +68,32 @@
     padding: 0;
     margin: 0;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: var(--space-6);
 
     li {
-      display: inline;
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      /* Keep a usable hit area even when icons are 16px */
+      min-width: var(--size-6);
+      min-height: var(--size-6);
     }
 
     svg {
       color: var(--color-icon-primary);
+      flex-shrink: 0;
+      /* Override reset max-width:100% so flex layout cannot shrink icons */
+      width: var(--size-4);
+      height: var(--size-4);
+      max-width: none;
     }
 
     svg path {
@@ -126,6 +142,8 @@
 
   .kawaii-toggle {
     font-size: var(--font-size-sm);
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .kawaii-toggle[aria-pressed='true'] {
