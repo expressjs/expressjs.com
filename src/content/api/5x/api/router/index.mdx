@@ -121,6 +121,31 @@ router.get('/events', (req: Request, res: Response) => {
 app.use('/calendar', router);
 ```
 
+### router(req, res, [next])
+
+<Signature>
+  <Fragment slot="attributes">
+    <Param name="req" type="Request">
+      The request object.
+    </Param>
+    <Param name="res" type="Response">
+      The response object.
+    </Param>
+    <Param name="next" type="Function" optional>
+      The callback to pass control to the next matching middleware.
+    </Param>
+  </Fragment>
+</Signature>
+
+Dispatches `req` and `res` through the router's middleware and route stack.
+Express uses this callable form when a router is mounted with `app.use()` or
+`router.use()`.
+
+If no middleware ends the response, or if a middleware passes control by calling
+`next()`, the optional `next` callback receives control. If a middleware calls
+`next(err)`, Express skips the remaining non-error handlers and calls `next` with
+the error.
+
 ### router.all()
 
 <Signature returns="Router">
