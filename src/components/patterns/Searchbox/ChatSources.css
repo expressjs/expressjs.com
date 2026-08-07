@@ -3,14 +3,31 @@
     position: relative;
     overflow: hidden;
 
+    &::before,
     &::after {
       content: '';
       position: absolute;
       top: 0;
-      right: 0;
       bottom: 0;
+      z-index: 1;
       width: var(--space-16);
       pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(
+        to left,
+        transparent,
+        color-mix(in oklch, var(--color-bg-primary) 15%, transparent) 20%,
+        color-mix(in oklch, var(--color-bg-primary) 40%, transparent) 40%,
+        color-mix(in oklch, var(--color-bg-primary) 70%, transparent) 65%,
+        var(--color-bg-primary) 90%
+      );
+    }
+
+    &::after {
+      right: 0;
       background: linear-gradient(
         to right,
         transparent,
@@ -29,21 +46,18 @@
     gap: var(--space-3);
     margin-top: var(--space-8);
     margin-bottom: 0;
-    overflow-x: scroll;
+    overflow-x: auto;
     scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    padding-left: 0;
+    scrollbar-width: thin;
+    padding-inline: var(--space-16);
     list-style: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 
   .chat-sources-item {
     display: flex;
+    flex: 0 0 auto;
     max-width: 100%;
+    min-width: 0;
     height: 100%;
     align-items: center;
     gap: var(--space-2);
@@ -52,13 +66,15 @@
 
   .chat-sources-link {
     display: block;
-    width: var(--space-64);
+    width: min(var(--space-64), calc(100vw - var(--space-8)));
+    min-width: 0;
     height: 100%;
     border-radius: var(--radius-xl);
     background-color: var(--color-bg-tertiary);
     padding: var(--space-3);
     color: var(--color-text-primary);
     text-decoration: none;
+    overflow-wrap: anywhere;
     cursor: pointer;
     transition: var(--transition-colors);
 
@@ -80,6 +96,7 @@
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-secondary);
     overflow: hidden;
+    min-width: 0;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     margin: 0;
