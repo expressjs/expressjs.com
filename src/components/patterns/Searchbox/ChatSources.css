@@ -3,14 +3,31 @@
     position: relative;
     overflow: hidden;
 
+    &::before,
     &::after {
       content: '';
       position: absolute;
       top: 0;
-      right: 0;
       bottom: 0;
+      z-index: 1;
       width: var(--space-16);
       pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(
+        to left,
+        transparent,
+        color-mix(in oklch, var(--color-bg-primary) 15%, transparent) 20%,
+        color-mix(in oklch, var(--color-bg-primary) 40%, transparent) 40%,
+        color-mix(in oklch, var(--color-bg-primary) 70%, transparent) 65%,
+        var(--color-bg-primary) 90%
+      );
+    }
+
+    &::after {
+      right: 0;
       background: linear-gradient(
         to right,
         transparent,
@@ -32,8 +49,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    padding-left: 0;
-    padding-right: var(--space-16);
+    padding-inline: var(--space-16);
     list-style: none;
   }
 
