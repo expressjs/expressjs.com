@@ -20,4 +20,4 @@ Versionen, die EOL (Ende des Lebens) _may_ sind, erhalten Updates für kritische
 
 Wenn Sie nicht in der Lage sind, auf eine unterstützte Version von Express zu aktualisieren, wenden Sie sich bitte an einen unserer Partner, um Sicherheitsaktualisierungen zu erhalten:
 
-- [HeroDevs unendlicher Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
+- [HeroDevs unendlicher Support](https://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
