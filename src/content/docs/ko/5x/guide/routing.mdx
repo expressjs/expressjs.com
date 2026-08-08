@@ -13,7 +13,7 @@ for example, `app.get()` to handle GET requests and `app.post` to handle POST re
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
+In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function. These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method.
 
 In fact, the routing methods can have more than one callback function as arguments.
 With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
@@ -88,7 +88,7 @@ app.post('/', (req: Request, res: Response) => {
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#httpmethods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Route paths
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings or regular expressions.
+Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings or regular expressions. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -153,77 +153,9 @@ app.get('/random.text', (req: Request, res: Response) => {
 });
 ```
 
-### Wildcards
-
-Wildcards match any path after a prefix. They must have a name, just like route parameters, and are captured as arrays of path segments.
-
-```js
-app.get('/files/*filepath', (req, res) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
-  // GET /files/images/logo.png
-  console.dir(req.params.filepath);
-  // => [ 'images', 'logo.png' ]
-  res.send(`File: ${req.params.filepath.join('/')}`);
-});
-```
-
-To also match the root path, wrap the wildcard in braces:
-
-```js
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req, res) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-// Matches / , /foo , /foo/bar , etc.
-app.get('/{*splat}', (req: Request, res: Response) => {
-  // GET / => req.params.splat = []
-  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
-  res.send('ok');
-});
-```
-
-### Optional segments
-
-Use braces to define optional segments in a route path. When the segment is not present, the parameter is omitted from `req.params`.
-
-```js
-app.get('/:file{.:ext}', (req, res) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
-```ts
-import { type Request, type Response } from 'express';
-
-app.get('/:file{.:ext}', (req: Request, res: Response) => {
-  // GET /image.png => req.params = { file: 'image', ext: 'png' }
-  // GET /image => req.params = { file: 'image' }
-  res.send('ok');
-});
-```
-
 <Alert type="alert">
 
-The characters `?`, `+`, `*`, `[]`, and `()` are reserved and cannot be used as literal characters in route paths. Use `\` to escape them if needed.
+The characters `?`, `+`, `*`, `[]`, `()`, and `!` are reserved and cannot be used as literal characters in route paths, and braces are reserved for [optional segments](#optional-segments). Use `\` to escape them if needed.
 
 </Alert>
 
@@ -259,7 +191,11 @@ app.get(/.*fly$/, (req: Request, res: Response) => {
 
 ## Route parameters
 
-Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys. They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments), which wrap either of them in braces.
+
+### Named parameters
+
+Named parameters capture a single path segment at their position in the URL, or part of one when combined with literal characters, as shown further below.
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -293,7 +229,7 @@ app.get('/users/:userId/books/:bookId', sendParams);
 
 <Alert type="alert">
 
-The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+The name of route parameters must be a valid JavaScript identifier. Other names can be used by quoting them, for example `:"user-name"`.
 
 </Alert>
 
@@ -313,14 +249,122 @@ req.params: { "genus": "Prunus", "species": "persica" }
 
 <Alert type="alert">
 
-Regexp characters are not supported in route paths. Use an array of paths or regular expressions instead.
+Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
 See the [path route matching syntax](/guide/migrating-5#path-syntax) for more information.
 
 </Alert>
 
+### Wildcards
+
+Wildcards match any path after a prefix. Like other route parameters they must have a name, but they are captured as an array of path segments instead of a string.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/files/*filepath', (req: Request<{ filepath: string[] }>, res: Response) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+To also match the root path, wrap the wildcard in braces:
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req: Request, res: Response) => {
+  // GET / => req.params = {}, splat is omitted
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Optional segments
+
+Use braces to define optional segments in a route path. When the segment is not present, the parameter is omitted from `req.params`.
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/:file{.:ext}', (req: Request, res: Response) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
+
+The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
+
+```js
+app.get('/user/\{:id}', (req, res) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req, res) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/\{:id}', (req: Request, res: Response) => {
+  // GET /user/42 => req.params = { id: '42' }
+  // GET /user/ => req.params = {}
+  // GET /user => 404, only the parameter is optional
+  res.send('ok');
+});
+
+app.get('/order{/:id}', (req: Request, res: Response) => {
+  // GET /order/42 => req.params = { id: '42' }
+  // GET /order => req.params = {}, the whole segment is optional
+  res.send('ok');
+});
+```
+
+라우트 경로에서 슬래시의 위치를 요청 URL에 관한 [`strict routing` 설정](/api/application/#application-settings)과 혼동하지 마세요. 이 설정은 라우트 경로가 요구하지 않는 슬래시로 끝나는 URL이 여전히 일치하는지를 제어합니다. 예를 들어 `/order/` 요청은 기본적으로 `/order{/:id}` 라우트와 일치하지만, strict routing이 활성화되면 404 오류를 반환합니다. `/user/`의 끝 슬래시는 `/user/\{:id}` 라우트가 이를 요구하므로 영향을 받지 않습니다. 위 예제에서 주석으로 표시된 모든 요청은 이 설정과 관계없이 동일하게 동작합니다.## Route handlersYou can provide multiple callback functions that
+
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.```js
+app.get('/user/:id', (req, res, next) => {
+if (req.params.i
+
+````
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -333,7 +377,7 @@ app.get('/user/:id', (req, res, next) => {
 app.get('/user/:id', (req, res) => {
   res.send('Special handler for user ID 0');
 });
-```
+````
 
 ```ts
 import { type Request, type Response, type NextFunction } from 'express';
@@ -355,15 +399,17 @@ In this example:
 - `GET /user/5` → handled by first route → sends "User 5"
 - `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
 
-Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.
+Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.A single callback function can handle a route. For example:```js
 
-A single callback function can handle a route. For example:
+````
+
+More than one callback function can handle a route (make sure you specify the `next` object).
 
 ```js
 app.get('/example/a', (req, res) => {
   res.send('Hello from A!');
 });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -373,7 +419,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-More than one callback function can handle a route (make sure you specify the `next` object). For example:
+A combination of independent functions and arrays of functions can handle a route. For example:
 
 ```js
 app.get(
@@ -403,7 +449,7 @@ app.get(
 );
 ```
 
-An array of callback functions can handle a route. For example:
+An array of callback functions can handle a route.
 
 ```js
 const cb0 = function (req, res, next) {
@@ -497,26 +543,32 @@ app.get(
 
 ## Response methods
 
-The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.| Method | Description| Method | Description
 
-| Method                                          | Description                                                                           |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [res.download()](/api/response#resdownload)     | Prompt a file to be downloaded.                                                       |
-| [res.end()](/api/response#resend)               | End the response process.                                                             |
-| [res.json()](/api/response#resjson)             | Send a JSON response.                                                                 |
-| [res.jsonp()](/api/response#resjsonp)           | Send a JSON response with JSONP support.                                              |
-| [res.redirect()](/api/response#resredirect)     | Redirect a request.                                                                   |
-| [res.render()](/api/response#resrender)         | Render a view template.                                                               |
-| [res.send()](/api/response#ressend)             | Send a response of various types.                                                     |
-| [res.sendFile()](/api/response#ressendfile)     | Send a file as an octet stream.                                                       |
-| [res.sendStatus()](/api/response#ressendstatus) | Set the response status code and send its string representation as the response body. |
+|                                                 |                                                                                                                                                         |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [res.download()](/api/response#resdownload)     | Prompt a file to be downloaded.                                                                                                                         |
+| [res.end()](/api/response#resend)               | End the response process.                                                                                                                               |
+| [res.json()](/api/response#resjson)             | Send a JSON response.                                                                                                                                   |
+| [res.jsonp()](/api/response#resjsonp)           | Send a JSON response with JSONP support.                                                                                                                |
+|                                                 | Redirect a request.                                                                                                                                     |
+| [res.render()](/api/response#resrender)         | Render a view template.                                                                                                                                 |
+| [res.send()](/api/response#ressend)             | Send a response of various types.                                                                                                                       |
+| [res.sendFile()](/api/response#ressendfile)     | Send a file as an octet stream.                                                                                                                         |
+| [res.sendStatus()](/api/response#ressendstatus) | Set the response status code and send its string representation as the response body. \|## app.route()You can create chainable route handlers for a rou |
 
 ## app.route()
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
 
-Here is an example of chained route handlers that are defined by using `app.route()`.
+|## app.route()You can create chainable route handlers for a rou```js
+app
+.route('/book')
+.get((req, res) => {
+res.send('Ge
+
+````
 
 ```js
 app
@@ -530,7 +582,7 @@ app
   .put((req, res) => {
     res.send('Update the book');
   });
-```
+````
 
 ```ts
 import { type Request, type Response } from 'express';
@@ -550,9 +602,9 @@ app
 
 ## express.Router
 
-Use the `express.Router` class to create modular, mountable route handlers. A `Router` instance is a complete middleware and routing system; for this reason, it is often referred to as a "mini-app".
+Use the `express.Router` class to create modular, mountable route handlers. A `Router` instance is a complete middleware and routing system; for this reason, it is often referred to as a "mini-app".The following example creates a router as a module, loads a middlewThe following example creates a router as a module, loads a middlew
 
-The following example creates a router as a module, loads a middleware function in it, defines some routes, and mounts the router module on a path in the main app.
+The following example creates a router as a module, loads a middleware function in it, defines some routes, and mounts the router module on a path in the main app.Create a router file named `birds.js` in the app directory, with thCreate a router file named `birds.js` in the app directory, with th
 
 Create a router file named `birds.js` in the app directory, with the following content:
 
@@ -645,10 +697,13 @@ import birds from './birds';
 app.use('/birds', birds);
 ```
 
-The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
+The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.But if the parent route `/birds` has path parameters, it will not b
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
+const router = express.Router({ mergeParams: true });
+
+````
 
 ```js
 const router = express.Router({ mergeParams: true });
-```
+````

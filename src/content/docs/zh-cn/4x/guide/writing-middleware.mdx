@@ -4,6 +4,7 @@ description: 学习如何为 Express.js 应用编写自定义中间件函数，�
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Middleware_ functions are functions that have access to the [request object](/api#req) (`req`), the [response object](/api#res) (`res`), and the `next` function in the application's request-response cycle. `next` 函数是 Express 路由器中的一个函数，调用该函数时，会执行当前中间件之后的下一个中间件。
 
@@ -193,7 +194,8 @@ app.listen(3000);
 
 ### 中间件函数 requestTime
 
-接下来，我们将创建一个名为 `requestTime` 的中间件函数，并向请求对象添加一个名为 `requestTime` 的属性。
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the [request object](/api/request).
 
 <Alert type="alert">
 
@@ -409,9 +411,13 @@ app.listen(3000);
 
 </Alert>
 
-由于你可以访问请求对象、响应对象、堆栈中的下一个中间件函数以及整个 Node.js API，因此中间件函数的用途是无限的。
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware).
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## 可配置中间件
 

@@ -3,6 +3,8 @@ title: Perguntas Frequentes
 description: Encontre respostas para perguntas frequentes sobre Express.js, incluindo tópicos sobre a estrutura do aplicativo, modelos, autenticação, mecanismos de modelo, tratamento de erros e muito mais.
 ---
 
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
+
 ## Como eu devo estruturar meu aplicativo?
 
 Não há uma resposta definitiva a esta questão. A resposta depende
@@ -42,7 +44,11 @@ Para normalizar interfaces do motor de modelos e cache de cache, veja o projeto
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 para suporte. Motores de modelos não listados ainda podem suportar a assinatura Express.
 
-Para obter mais informações, consulte [Usando mecanismos de modelo com Express](/guide/using-template-engines).
+<ReadMore>
+
+For more information, see the [Using template engines with Express](/guide/using-template-engines) guide.
+
+</ReadMore>
 
 ## Como lidamos com 404 respostas?
 
@@ -92,7 +98,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Para obter mais informações, consulte [Manipulação de erro](/guide/error-handling).
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## Como faço para tornar HTML simples?
 
