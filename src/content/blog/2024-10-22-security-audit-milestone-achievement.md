@@ -30,7 +30,7 @@ The audit identified several vulnerabilities, including potential Cross-Site Scr
 - **CVE-2024-43799**: XSS in the `send` utility module—patched in version >= 0.19.0.
 - **CVE-2024-43800**: XSS in `serve-static`—fixed in versions >= 1.16.0 and >= 2.1.0.
 
-Each of these vulnerabilities was promptly addressed by our dedicated [security triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team), ensuring that users remain protected against known threats.
+Each of these vulnerabilities was promptly addressed by our dedicated [security triage team](https://github.com/expressjs/security-wg#security-triage-team-expressjssecurity-triage), ensuring that users remain protected against known threats.
 
 For full details on the audit results, you can access the [official audit report here](https://ostif.org/wp-content/uploads/2024/10/expressjs-2024-security-audit-report.pdf).
 
