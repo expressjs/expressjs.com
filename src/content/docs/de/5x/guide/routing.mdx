@@ -9,7 +9,7 @@ _Routing_ bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kund
 Für eine Einführung in das Routing siehe [Basic routing](/starter/basic-routing).
 
 Du definierst Routing, indem du Methoden des Express `app` Objekts verwendest, die den HTTP-Methoden entsprechen;
-zum Beispiel, `app. et()` um GET-Anfragen und `app.post` zu behandeln, um POST-Anfragen zu bearbeiten. For a full list,
+zum Beispiel, `app.get()` um GET-Anfragen und `app.post` zu behandeln, um POST-Anfragen zu bearbeiten. For a full list,
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
@@ -250,7 +250,7 @@ req.params: { "genus": "Prunus", "species": "persica" }
 <Alert type="warnung">
 
 Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
-Weitere Informationen finden Sie in der Syntax [Pfadroute Match](/en/guide/migrating-5#path-syntax) .
+Weitere Informationen finden Sie in der Syntax [Pfadroute Match](/guide/migrating-5#path-route-matching-syntax).
 
 </Alert>
 
@@ -543,7 +543,7 @@ app.get(
 
 ## Antwortmethoden
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.| Method | Description| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.| Method | Description
 
 |                                                 |                                                                                                                                                                             |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -602,9 +602,9 @@ app
 
 ## express.Router
 
-Verwende die Klasse `express.Router`, um modulare mountbare Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und Routing-System; aus diesem Grund wird sie oft als "Mini-App" bezeichnet.The following example creates a router as a module, loads a middlewThe following example creates a router as a module, loads a middlew
+Verwende die Klasse `express.Router`, um modulare mountbare Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und Routing-System; aus diesem Grund wird sie oft als "Mini-App" bezeichnet.The following example creates a router as a module, loads a middlew
 
-Das folgende Beispiel erzeugt einen Router als Modul, lädt eine Middleware-Funktion darin definiert einige Routen und mountet das Router-Modul auf einem Pfad in der Hauptanwendung.Create a router file named `birds.js` in the app directory, with thCreate a router file named `birds.js` in the app directory, with th
+Das folgende Beispiel erzeugt einen Router als Modul, lädt eine Middleware-Funktion darin definiert einige Routen und mountet das Router-Modul auf einem Pfad in der Hauptanwendung.Create a router file named `birds.js` in the app directory, with th
 
 Erstelle eine Router-Datei namens `birds.js` im App-Verzeichnis, mit folgendem Inhalt:
 

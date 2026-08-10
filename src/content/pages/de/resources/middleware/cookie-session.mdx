@@ -1,5 +1,5 @@
 ---
-title: cookie-Session Middleware
+title: cookie-session Middleware
 description: Cookie Session Middleware
 ---
 
@@ -9,8 +9,8 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="2.1.1"
-  github="https://github.com/express js/cookie-Sitzung"
-  npm="https://www.npmjs.com/package/cookie-Sitzung"
+  github="https://github.com/expressjs/cookie-session"
+  npm="https://www.npmjs.com/package/cookie-session"
 />
 
 Einfache Cookie-basierte Session Middleware.
@@ -36,7 +36,7 @@ zu verschlüsseln, oder stattdessen eine serverseitige Sitzung verwenden.
 
 **HINWEIS** Dieses Modul verhindert nicht das Wiederholen von Sitzungen, da das Ablaufdatum festgelegt ist, dass nur
 des Cookies; wenn dies ein Anliegen Ihrer Anwendung ist, können Sie ein Ablaufdatum
-in `req speichern. ession` Objekt und validieren Sie es auf dem Server und implementieren Sie jede andere Logik
+in `req.session` Objekt speichern und validieren Sie es auf dem Server und implementieren Sie jede andere Logik
 um die Session so zu erweitern, wie Ihre Anwendung es braucht.
 
 ## Installieren
@@ -76,7 +76,7 @@ app.use(
 );
 ```
 
-### cookieSession(Optionen)
+### cookieSession(options)
 
 Erstellen Sie eine neue Cookie Session Middleware mit den bereitgestellten Optionen. Diese Middleware
 wird die Eigenschaft `session` an `req` anhängen, die ein Objekt zur Verfügung stellt, das
@@ -86,7 +86,7 @@ in der Anfrage angegeben wurde, oder eine geladene Sitzung aus der Anfrage.
 Die Middleware wird automatisch einen `Set-Cookie` Header zur Antwort hinzufügen, wenn der
 Inhalt von `req.session` geändert wurde. _Hinweis_ dass kein `Set-Cookie` Header in der Antwort
 sein wird (und daher keine Sitzung für einen bestimmten Benutzer erstellt), es sei denn, es gibt
-Inhalt in der Sitzung, also sollten Sie etwas zu `req. ession` sobald
+Inhalt in der Sitzung, also sollten Sie etwas zu `req.session` sobald
 du identifizierende Daten für die Sitzung gespeichert hast.
 
 #### Optionen
@@ -97,7 +97,7 @@ Cookie Session akzeptiert diese Eigenschaften im Objekt Optionen.
 
 Der Name des zu setzenden Cookies, Standardwert ist `session`.
 
-##### tasten
+##### keys
 
 Die Liste der Schlüssel, die verwendet werden sollen, um Cookies zu signieren und zu verifizieren, oder eine konfigurierte
 [`Keygrip`](https://www.npmjs.com/package/keygrip) Instanz. Setze Cookies sind immer
@@ -105,7 +105,7 @@ signiert mit `keys[0]`, während die anderen Schlüssel für die Überprüfung g
 für die Schlüsselrotation erlaubt wird. If a `Keygrip` instance is provided, it can be used to
 change signature parameters like the algorithm of the signature.
 
-##### geheim
+##### secret
 
 Ein String, der als Einzelschlüssel verwendet wird, wenn `keys` nicht angegeben wird.
 
@@ -122,7 +122,7 @@ Die Optionen können auch folgende enthalten (für die vollständige Liste, sieh
 - `path`: ein String, der den Pfad des Cookie (`/` standardmäßig anzeigt).
 - `domain`: ein String, der die Domain des Cookie angibt (kein Standard).
 - `partitioned`: ein boolescher Hinweis, ob das Cookie in Chrome für das [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (`false` standardmäßig partitioniert werden soll). Wenn dies der Fall ist, werden Cookies von eingebetteten Websites partitioniert und nur von der gleichen obersten Ebene aus lesbar, von der aus sie erstellt wurden.
-- `priority`: eine Zeichenkette, die die Cookie-Priorität angibt. Dies kann auf `'low'`, `'medium' oder `'high' gesetzt werden.
+- `priority`: eine Zeichenkette, die die Cookie-Priorität angibt. Dies kann auf `'low'`, `'medium'` oder `'high'` gesetzt werden.
 - `sameSite`: ein boolescher oder String, der angibt, ob das Cookie ein "gleiches" Cookie ist (standardmäßig `false`). Dies kann auf `'strict'`, `'lax'`, `'none'` oder `true` gesetzt werden (die Karte auf `'strict'`)
 - `secure`: ein boolescher Hinweis darauf, ob das Cookie nur über HTTPS gesendet werden soll (`false` standardmäßig für HTTP, `true` standardmäßig für HTTPS). Wenn dies auf `true` und Knoten gesetzt ist. s ist nicht direkt über eine TLS-Verbindung Lesen Sie bitte, wie [Einrichten Express hinter Proxies](/guide/behind-proxies) oder das Cookie nicht korrekt gesetzt werden kann.
 - `httpOnly`: ein boolescher Hinweis darauf, ob das Cookie nur über HTTP(S) gesendet und nicht dem Client JavaScript zur Verfügung gestellt wird (standardmäßig `true`).
@@ -133,15 +133,15 @@ Die Optionen können auch folgende enthalten (für die vollständige Liste, sieh
 
 Stellt die Sitzung für die angegebene Anfrage dar.
 
-#### .isGeändert
+#### .isChanged
 
 Ist `true` wenn die Sitzung während der Anfrage geändert wurde.
 
-#### .isNeu
+#### .isNew
 
 Ist `true` wenn die Sitzung neu ist.
 
-#### .isbesiedelt
+#### .isPopulated
 
 Legen Sie fest, ob die Sitzung mit Daten besetzt wurde oder leer ist.
 
@@ -228,7 +228,7 @@ app.use(function (req, res, next) {
 
 Dieses Modul sendet keinen `Set-Cookie` Header, wenn sich der Inhalt der Sitzung
 nicht geändert hat. Dies bedeutet, dass das Ablaufdatum einer Sitzung im
-Browser verlängern wird (in Reaktion auf Benutzeraktivität) ) eine Art
+Browser verlängern wird (in Reaktion auf Benutzeraktivität) eine Art
 Änderung der Sitzung ist notwendig.
 
 ```js
@@ -307,4 +307,4 @@ zu einer [alternativen Sitzungsstrategie](https://github.com/expressjs/session#c
 
 [MIT](https://github.com/expressjs/cookie-session/blob/HEAD/LICENSE)
 
-[npm-url]: https://npmjs.org/package/cookie-Sitzung
+[npm-url]: https://npmjs.org/package/cookie-session

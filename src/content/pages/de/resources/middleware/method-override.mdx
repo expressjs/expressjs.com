@@ -1,5 +1,5 @@
 ---
-title: Methode, Middleware zu überschreiben
+title: method-override Middleware
 description: HTTP-Verben überschreiben
 ---
 
@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="3.0.0"
-  github="https://github.com/express js/method-override"
+  github="https://github.com/expressjs/method-override"
   npm="https://www.npmjs.com/package/method-override"
 />
 
@@ -40,12 +40,12 @@ das `csurf` Modul verwendet werden muss).
 ### methodOverride(getter, Optionen)
 
 Erstelle eine neue Middleware-Funktion, um die Eigenschaft `req.method` mit einem neuen
--Wert zu überschreiben. Dieser Wert wird aus dem angegebenen 'getter' gezogen.
+-Wert zu überschreiben. Dieser Wert wird aus dem angegebenen `getter` gezogen.
 
 - `getter` - Der zu verwendende Getter, um die überschriebene Anfragemethode für die Anfrage aufzurufen. (Standard: `X-HTTP-Method-Override`)
 - `options.methods` - Die erlaubten Methoden, in denen die ursprüngliche Anfrage sein muss, um auf eine Methode zu überprüfen, die Wert überschreibt. (Standard: `['POST']`)
 
-Wenn die gefundene Methode von node.js Core unterstützt wird, dann `req. ethod` wird auf diesen Wert
+Wenn die gefundene Methode von node.js Core unterstützt wird, dann `req.method` wird auf diesen Wert
 gesetzt, als wäre er ursprünglich dieser Wert. Der vorherige Wert der `req.method`
 wird in `req.originalMethod` gespeichert.
 
@@ -91,7 +91,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 Beispielaufruf mit Überschreibung mit `XMLHttpRequest`:
 
-{/* eslint-env Browser */}
+{/* eslint-env browser */}
 
 ```js
 const xhr = new XMLHttpRequest();

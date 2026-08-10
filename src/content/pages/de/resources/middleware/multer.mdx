@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="2.2.0"
-  github="https://github.com/express js/multer"
+  github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
 
@@ -22,18 +22,18 @@ oben auf [busboy](https://github.com/mscdex/busboy) geschrieben, um maximale Eff
 
 Diese README ist auch in anderen Sprachen verfügbar:
 
-|                                                                                              |                    |
-| -------------------------------------------------------------------------------------------- | ------------------ |
-| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)                    | Arabisch           |
-| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)                | Chinesisch         |
-| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)                   | Französisch        |
-| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)                     | Koreanisch         |
-| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md)               | Portugiesisch (BR) |
-| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md)               | Russisch           |
-| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)                    | Spanisch           |
-| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)                | Uzbek              |
-| [Ansicht\<unk> \<unk> t Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md) | Vietnamese         |
-| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)                     | Türkisch           |
+|                                                                                |                    |
+| ------------------------------------------------------------------------------ | ------------------ |
+| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)      | Arabisch           |
+| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)  | Chinesisch         |
+| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)     | Französisch        |
+| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)       | Koreanisch         |
+| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md) | Portugiesisch (BR) |
+| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md) | Russisch           |
+| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)      | Spanisch           |
+| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)  | Uzbek              |
+| [Việt Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md)     | Vietnamese         |
+| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)       | Türkisch           |
 
 ## Installation
 
@@ -138,15 +138,15 @@ Jede Datei enthält folgende Informationen:
 
 | Schlüssel      | Beschreibung                                   | Notiz           |
 | -------------- | ---------------------------------------------- | --------------- |
-| Feldname       | Feldname im Formular angegeben                 |                 |
+| `fieldname`    | Feldname im Formular angegeben                 |                 |
 | `originalname` | Name der Datei auf dem Computer des Benutzers  |                 |
-| `codieren`     | Kodierungstyp der Datei                        |                 |
-| "mimetype"     | Mime-Typ der Datei                             |                 |
+| `encoding`     | Kodierungstyp der Datei                        |                 |
+| `mimetype`     | Mime-Typ der Datei                             |                 |
 | `size`         | Größe der Datei in Bytes                       |                 |
-| "Ziel"         | Der Ordner, in dem die Datei gespeichert wurde | `DiskStorage`   |
-| "Dateiname"    | Der Name der Datei innerhalb des `destination` | `DiskStorage`   |
+| `destination`  | Der Ordner, in dem die Datei gespeichert wurde | `DiskStorage`   |
+| `filename`     | Der Name der Datei innerhalb des `destination` | `DiskStorage`   |
 | `path`         | Der vollständige Pfad zur hochgeladenen Datei  | `DiskStorage`   |
-| 'buffer'       | Ein `Buffer` der gesamten Datei                | `MemoryStorage` |
+| `buffer`       | Ein `Buffer` der gesamten Datei                | `MemoryStorage` |
 
 ### `multer(opts)`
 
@@ -159,13 +159,13 @@ Umbenennungsfunktion kann an Ihre Bedürfnisse angepasst werden.
 
 Die folgenden Optionen können an Multer übergeben werden.
 
-| Schlüssel              | Beschreibung                                                                                                                                                                            |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "dest" oder "Speicher" | Wo die Dateien gespeichert werden sollen                                                                                                                                                |
-| "fileFilter"           | Funktion, um zu kontrollieren, welche Dateien akzeptiert werden                                                                                                                         |
-| `Limits`               | Grenzen der hochgeladenen Daten                                                                                                                                                         |
-| `preservePath`         | Behalte den vollen Pfad der Dateien statt nur des Basisnamens                                                                                                                           |
-| `defParamCharset`      | Standardzeichensatz für Werte von Bauteilheader-Parametern (z.B. Dateiname), die keine erweiterten Parameter sind (welche einen expliziten Zeichensatz enthalten). Standard: \`'latin1' |
+| Schlüssel             | Beschreibung                                                                                                                                                                            |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dest` oder `storage` | Wo die Dateien gespeichert werden sollen                                                                                                                                                |
+| `fileFilter`          | Funktion, um zu kontrollieren, welche Dateien akzeptiert werden                                                                                                                         |
+| `limits`              | Grenzen der hochgeladenen Daten                                                                                                                                                         |
+| `preservePath`        | Behalte den vollen Pfad der Dateien statt nur des Basisnamens                                                                                                                           |
+| `defParamCharset`     | Standardzeichensatz für Werte von Bauteilheader-Parametern (z.B. Dateiname), die keine erweiterten Parameter sind (welche einen expliziten Zeichensatz enthalten). Standard: `'latin1'` |
 
 In einer durchschnittlichen Web-App könnte nur `dest` erforderlich sein, und konfiguriert werden, wie in
 das folgende Beispiel.
@@ -178,14 +178,14 @@ Wenn du mehr Kontrolle über deine Uploads haben möchtest, möchtest du die Opt
 anstelle von `dest` verwenden. Multerschiffe mit Speichermotoren `DiskStorage`
 und `MemoryStorage`; Weitere Motoren sind von Dritten erhältlich.
 
-#### `.single(Feldname)`
+#### `.single(fieldname)`
 
-Akzeptieren Sie eine einzelne Datei mit dem Namen `Feldname`. Die einzelne Datei wird
+Akzeptieren Sie eine einzelne Datei mit dem Namen `fieldname`. Die einzelne Datei wird
 in `req.file` gespeichert.
 
-#### `.array(Feldname[, maxCount])`
+#### `.array(fieldname[, maxCount])`
 
-Akzeptieren Sie ein Array von Dateien, alle mit dem Namen `Feldname`. Optionaler Fehler wenn
+Akzeptieren Sie ein Array von Dateien, alle mit dem Namen `fieldname`. Optionaler Fehler wenn
 mehr als `maxCount`-Dateien hochgeladen werden. Das Array der Dateien wird in
 `req.files` gespeichert.
 
@@ -219,7 +219,7 @@ Fügen Sie Multer nie als globale Middleware hinzu, da ein böswilliger Benutzer
 Dateien zu einer Route hochladen konnte, die Sie nicht erwartet haben. Verwenden Sie diese Funktion nur auf Routen
 , wo Sie die hochgeladenen Dateien behandeln.
 
-### "Speicher"
+### `storage`
 
 #### `DiskStorage`
 
@@ -266,7 +266,7 @@ Reihenfolge ab, dass der Client Felder und Dateien an den Server überträgt.
 
 Um die im Callback verwendete Aufrufkonvention zu verstehen (muss
 Null als erster Parameter übergeben werden), lesen Sie bitte
-[Node. s Fehlerbehandlung](https://web.archive.org/web/20220417042018/https://www.joyent.com/node-js/production/design/errors)
+[Node.js Fehlerbehandlung](https://web.archive.org/web/20220417042018/https://www.joyent.com/node-js/production/design/errors)
 
 #### `MemoryStorage`
 
@@ -285,7 +285,7 @@ Wenn Sie Speicher verwenden, enthält die Datei-Info ein Feld mit dem Namen
 -Zahlen sehr schnell kann dazu führen, dass Ihre Anwendung bei Verwendung des
 Arbeitsspeichers nicht mehr genügend Speicher hat.
 
-### `Limits`
+### `limits`
 
 Ein Objekt, das die Größengrenzen der folgenden optionalen Eigenschaften angibt. Multer übergibt dieses Objekt direkt an den Busboy und die Details der Eigenschaften finden Sie auf [Busboys Seite](https://github.com/mscdex/busboy#busboy-methods).
 
@@ -293,18 +293,18 @@ Die folgenden Ganzzahlwerte sind verfügbar:
 
 | Schlüssel           | Beschreibung                                                                                         | Standard      |
 | ------------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
-| "fieldNameSize"     | Max. Feldnamensgröße                                                                                 | 100 Bytes     |
-| "fieldGröße"        | Maximale Feldwertgröße (in Bytes)                                                                    | 1MB           |
-| `Felder`            | Maximale Anzahl von Nicht-Dateifeldern                                                               | Unendlichkeit |
-| Dateigröße          | Für mehrteilige Formulare ist die maximale Dateigröße (in Bytes)                                     | Unendlichkeit |
-| `Dateien`           | Für mehrteilige Formulare ist die maximale Anzahl von Dateifeldern                                   | Unendlichkeit |
-| "Teile"             | Für mehrteilige Formulare ist die maximale Anzahl von Teilen (Felder + Dateien)                      | Unendlichkeit |
-| "headerPairs"       | Bei mehrteiligen Formularen ist die maximale Anzahl der Kopfzeilen-Schlüssel=>Werte-Paare zum Parsen | 2000          |
+| `fieldNameSize`     | Max. Feldnamensgröße                                                                                 | 100 Bytes     |
+| `fieldSize`         | Maximale Feldwertgröße (in Bytes)                                                                    | 1MB           |
+| `fields`            | Maximale Anzahl von Nicht-Dateifeldern                                                               | Unendlichkeit |
+| `fileSize`          | Für mehrteilige Formulare ist die maximale Dateigröße (in Bytes)                                     | Unendlichkeit |
+| `files`             | Für mehrteilige Formulare ist die maximale Anzahl von Dateifeldern                                   | Unendlichkeit |
+| `parts`             | Für mehrteilige Formulare ist die maximale Anzahl von Teilen (Felder + Dateien)                      | Unendlichkeit |
+| `headerPairs`       | Bei mehrteiligen Formularen ist die maximale Anzahl der Kopfzeilen-Schlüssel=>Werte-Paare zum Parsen | 2000          |
 | `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)                           | Unendlichkeit |
 
 Die Angabe der Grenzwerte kann dazu beitragen, Ihre Website vor Denial of Service (DoS) Attacken zu schützen.
 
-### "fileFilter"
+### `fileFilter`
 
 Setze dies auf eine Funktion um zu kontrollieren, welche Dateien hochgeladen werden sollen und welche
 übersprungen werden soll. Die Funktion sollte so aussehen:
@@ -340,7 +340,7 @@ Wenn ein Fehler auftritt, wird Multer den Fehler an Express übertragen. Du kann
 eine schöne Fehlerseite anzeigen, indem du [den Standard-Express-Weg](/guide/error-handling).
 
 Wenn Sie Fehler speziell von Multer auffangen möchten, können Sie die
-Middleware-Funktion selbst aufrufen. Außerdem, wenn du nur [die Multer-Fehler] fangen möchtest (https://github.com/expressjs/multer/blob/main/lib/multer-error.js), du kannst die `MulterError` Klasse verwenden, die an das `multer` Objekt selbst angeschlossen ist (e. . `err instance`multer.MulterError\`).
+Middleware-Funktion selbst aufrufen. Außerdem, wenn du nur [die Multer-Fehler] fangen möchtest (https://github.com/expressjs/multer/blob/main/lib/multer-error.js), du kannst die `MulterError` Klasse verwenden, die an das `multer` Objekt selbst angeschlossen ist (z. B. `err instanceof multer.MulterError`).
 
 ```javascript
 const multer = require('multer');
@@ -368,5 +368,5 @@ Informationen zum Aufbau Ihrer eigenen Speicher-Engine finden Sie unter [Multer 
 [MIT](https://github.com/expressjs/multer/blob/HEAD/LICENSE)
 
 [npm-url]: https://npmjs.org/package/multer
-[ossf-Scorecard-Abzeichen]: https://api.scorecard.dev/projects/github.com/expressjs/multer/badge
-[ossf-Punkte-Visualisierer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/multer
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/multer/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/multer
