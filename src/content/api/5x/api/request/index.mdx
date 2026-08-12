@@ -1,6 +1,6 @@
 ---
 title: Request Object
-description: The request object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+description: The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -211,7 +211,7 @@ contains cookies sent by the request. If the request contains no cookies, it def
 ```js
 // Cookie: name=tj
 console.dir(req.cookies.name);
-// => "tj"
+// => 'tj'
 ```
 
 If the cookie has been signed, you have to use [req.signedCookies](#reqsignedcookies).
@@ -292,7 +292,7 @@ the value of this property is derived from the left-most entry in the
 
 ```js
 console.dir(req.ip);
-// => "127.0.0.1"
+// => '127.0.0.1'
 ```
 
 ### req.ips
@@ -361,7 +361,7 @@ the "mounting" feature of [app.use()](/api/application/#appuse) will rewrite `re
 ```js
 // GET /search?q=something
 console.dir(req.originalUrl);
-// => "/search?q=something"
+// => '/search?q=something'
 ```
 
 `req.originalUrl` is available both in middleware and router objects, and is a
@@ -398,7 +398,7 @@ This property is an object containing properties mapped to the [named route "par
 ```js
 // GET /user/tj
 console.dir(req.params.name);
-// => "tj"
+// => 'tj'
 ```
 
 Properties corresponding to wildcard parameters are arrays containing separate path segments split on `/`:
@@ -433,7 +433,7 @@ When you use a regular expression for the route definition, capture groups are p
 app.use(/^\/file\/(.*)$/, (req, res) => {
   // GET /file/javascripts/jquery.js
   console.dir(req.params[0]);
-  // => "javascripts/jquery.js"
+  // => 'javascripts/jquery.js'
 });
 ```
 
@@ -443,7 +443,7 @@ import { type Request, type Response } from 'express';
 app.use(/^\/file\/(.*)$/, (req: Request, res: Response) => {
   // GET /file/javascripts/jquery.js
   console.dir(req.params[0]);
-  // => "javascripts/jquery.js"
+  // => 'javascripts/jquery.js'
 });
 ```
 
@@ -468,7 +468,7 @@ Contains the path part of the request URL.
 ```js
 // example.com/users?sort=desc
 console.dir(req.path);
-// => "/users"
+// => '/users'
 ```
 
 <Alert type="info">
@@ -490,7 +490,7 @@ This header can be set by the client or by the proxy.
 
 ```js
 console.dir(req.protocol);
-// => "http"
+// => 'http'
 ```
 
 ### req.query
@@ -637,7 +637,7 @@ If no signed cookies are sent, the property defaults to `{}`.
 ```js
 // Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
 console.dir(req.signedCookies.user);
-// => "tobi"
+// => 'tobi'
 ```
 
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
@@ -663,7 +663,7 @@ An array of subdomains in the domain name of the request.
 ```js
 // Host: "tobi.ferrets.example.com"
 console.dir(req.subdomains);
-// => ["ferrets", "tobi"]
+// => ['ferrets', 'tobi']
 ```
 
 The application property `subdomain offset`, which defaults to 2, is used for determining the
@@ -708,17 +708,17 @@ list or array, the method returns the _best_ match (if any).
 ```js
 // Accept: text/html
 req.accepts('html');
-// => "html"
+// => 'html'
 
 // Accept: text/*, application/json
 req.accepts('html');
-// => "html"
+// => 'html'
 req.accepts('text/html');
-// => "text/html"
+// => 'text/html'
 req.accepts(['json', 'text']);
-// => "json"
+// => 'json'
 req.accepts('application/json');
-// => "application/json"
+// => 'application/json'
 
 // Accept: text/*, application/json
 req.accepts('image/png');
@@ -727,7 +727,7 @@ req.accepts('png');
 
 // Accept: text/*;q=.5, application/json
 req.accepts(['html', 'json']);
-// => "json"
+// => 'json'
 ```
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
@@ -832,10 +832,10 @@ The `Referrer` and `Referer` fields are interchangeable.
 
 ```js
 req.get('Content-Type');
-// => "text/plain"
+// => 'text/plain'
 
 req.get('content-type');
-// => "text/plain"
+// => 'text/plain'
 
 req.get('Something');
 // => undefined
