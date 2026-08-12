@@ -134,6 +134,20 @@ src/content/api/
 - Versioned: `/en/5x/api/application` → Express 5.x application API
 - Non-versioned: `/en/api/application` → Defaults to Express 5.x
 
+### Style Conventions
+
+The reference pages for every version follow the same conventions, so that switching between
+Express 4.x and 5.x only shows real API differences:
+
+- Property and method sections are listed alphabetically, so `req.host` comes before `req.hostname`.
+- Result comments in code samples use single quotes, matching the Prettier `singleQuote` setting:
+  `res.type('png'); // => 'image/png'`. Double quotes are kept only where the sample shows JSON or a
+  raw HTTP header.
+- The frontmatter `description` of the request and response pages repeats the opening sentence of the
+  page, which refers to the objects as `req` and `res` rather than spelling out their full names.
+
+`tests/unit/api-docs-style.test.mjs` checks these conventions, and it runs as part of `npm run test:unit`.
+
 ## Versioning
 
 The Express.js documentation supports multiple versions. Content is organized by version in both the `docs` and `api` collections.
