@@ -97,7 +97,7 @@ Colors are defined using OKLCH color space with `light-dark()` for theme switchi
 `<DocBottomNav>` closes a doc page with links to the previous and next page in a single
 flex row. The row uses `flex-wrap: wrap-reverse`, so when the two titles cannot sit side
 by side the _Next_ link wraps onto its own line above _Previous_ instead of overflowing
-the page. On wide viewports both links stay side by side on one line.
+the page. On wider screens both links stay side by side on one line.
 
 The DOM order stays previous-then-next, so keyboard and screen reader order is unchanged
 when the row wraps.
