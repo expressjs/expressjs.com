@@ -101,4 +101,3 @@ the page. Viewports wide enough for both links keep them on one line.
 
 The DOM order stays previous-then-next, so keyboard and screen reader order is unchanged
 when the row wraps.
-
