@@ -91,3 +91,14 @@ Colors are defined using OKLCH color space with `light-dark()` for theme switchi
 | `xs` | < 768px        | `--xs-only`            |
 | `md` | 768px – 1439px | `--md-only`, `--md-up` |
 | `lg` | >= 1440px      | `--lg-up`, `--lg-down` |
+
+## Doc Bottom Navigation
+
+`<DocBottomNav>` closes a doc page with links to the previous and next page in a single
+flex row. The row uses `flex-wrap: wrap-reverse`, so when the two titles cannot sit side
+by side the _Next_ link wraps onto its own line above _Previous_ instead of overflowing
+the page. Viewports wide enough for both links keep them on one line.
+
+The DOM order stays previous-then-next, so keyboard and screen reader order is unchanged
+when the row wraps.
+
