@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import rehypeAccessibleTables  from '../../src/plugins/rehype-accessible-tables.mjs';
+import rehypeAccessibleTables from '../../src/plugins/rehype-accessible-tables.mjs';
 
 test('wraps mdx raw HTML tables in a responsive scroller', () => {
   const tree = {

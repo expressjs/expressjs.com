@@ -15,7 +15,8 @@ export default function rehypeAccessibleTables() {
 
     const isThNode = (node) =>
       (node.type === 'element' && node.tagName === 'th') ||
-      ((node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') && node.name === 'th');
+      ((node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') &&
+        node.name === 'th');
 
     const parentAlreadyWrapped = (parent) =>
       !!parent &&
@@ -24,8 +25,7 @@ export default function rehypeAccessibleTables() {
       parent.properties?.className?.includes('table-scroller');
 
     const hasScope = (node) =>
-      !!node?.properties?.scope ||
-      !!node?.attributes?.some((attr) => attr?.name === 'scope');
+      !!node?.properties?.scope || !!node?.attributes?.some((attr) => attr?.name === 'scope');
 
     const setScope = (node, value) => {
       if (node.type === 'element') {
@@ -77,4 +77,3 @@ export default function rehypeAccessibleTables() {
     });
   };
 }
-
