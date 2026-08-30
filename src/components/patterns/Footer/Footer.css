@@ -74,6 +74,7 @@
 
     li {
       display: inline;
+      flex-shrink: 0;
     }
 
     svg {
@@ -86,6 +87,7 @@
 
     @media (--xs-only) {
       padding: var(--space-4) 0 var(--space-6);
+      flex-wrap: wrap;
     }
 
     @media (--md-up) {
