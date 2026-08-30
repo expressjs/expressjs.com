@@ -45,7 +45,7 @@ export default defineConfig({
             behavior: 'wrap',
           },
         ],
-        rehypeAccessibleTables
+        rehypeAccessibleTables,
       ],
     }),
   },
