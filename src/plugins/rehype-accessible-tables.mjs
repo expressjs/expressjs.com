@@ -1,41 +1,69 @@
 import { visit, SKIP } from 'unist-util-visit';
 
 /**
- * Rehype plugin that makes tables responsive and accessible:
+ * Rehype plugin that makes tables responsive and add accessibility attributes:
  * - Wraps each <table> in a <div class="table-scroller"> for horizontal scroll on small viewports
  * - Adds scope="col" to <th> inside <thead>
  * - Adds scope="row" to <th> inside <tbody>
  */
-export function rehypeAccessibleTables() {
+export default function rehypeAccessibleTables() {
   return (tree) => {
-    // Add scope="col" to th elements inside thead
-    visit(tree, 'element', (node) => {
-      if (node.tagName !== 'thead') return;
-      visit(node, 'element', (th) => {
-        if (th.tagName === 'th' && !th.properties.scope) {
-          th.properties.scope = 'col';
-        }
-      });
-    });
+    const isTableNode = (node) =>
+      (node.type === 'element' && node.tagName === 'table') ||
+      ((node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') &&
+        node.name === 'table');
 
-    // Add scope="row" to th elements inside tbody
-    visit(tree, 'element', (node) => {
-      if (node.tagName !== 'tbody') return;
-      visit(node, 'element', (th) => {
-        if (th.tagName === 'th' && !th.properties.scope) {
-          th.properties.scope = 'row';
-        }
-      });
-    });
+    const isThNode = (node) =>
+      (node.type === 'element' && node.tagName === 'th') ||
+      ((node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') && node.name === 'th');
 
-    // Wrap tables in a scrollable container
-    visit(tree, 'element', (node, index, parent) => {
-      if (node.tagName !== 'table') return;
-      if (!parent || index == null) return;
+    const parentAlreadyWrapped = (parent) =>
+      !!parent &&
+      parent.type === 'element' &&
+      parent.tagName === 'div' &&
+      parent.properties?.className?.includes('table-scroller');
 
-      // Skip if already wrapped
-      if (parent.tagName === 'div' && parent.properties?.className?.includes('table-scroller'))
+    const hasScope = (node) =>
+      !!node?.properties?.scope ||
+      !!node?.attributes?.some((attr) => attr?.name === 'scope');
+
+    const setScope = (node, value) => {
+      if (node.type === 'element') {
+        node.properties ??= {};
+        node.properties.scope = value;
         return;
+      }
+
+      node.attributes ??= [];
+      if (!node.attributes.some((attr) => attr?.name === 'scope')) {
+        node.attributes.push({ type: 'mdxJsxAttribute', name: 'scope', value });
+      }
+    };
+
+    const sectionScopeByTag = {
+      thead: 'col',
+      tbody: 'row',
+    };
+
+    const checks = ['element', 'mdxJsxFlowElement', 'mdxJsxTextElement'];
+
+    visit(tree, checks, (node, index, parent) => {
+      const sectionScope =
+        (node.type === 'element' && sectionScopeByTag[node.tagName]) ||
+        ((node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') &&
+          sectionScopeByTag[node.name]);
+
+      if (sectionScope) {
+        visit(node, checks, (th) => {
+          if (isThNode(th) && !hasScope(th)) {
+            setScope(th, sectionScope);
+          }
+        });
+      }
+
+      if (!isTableNode(node)) return;
+      if (!parent || index == null || !Array.isArray(parent.children)) return;
+      if (parentAlreadyWrapped(parent)) return;
 
       const wrapper = {
         type: 'element',
@@ -45,28 +73,8 @@ export function rehypeAccessibleTables() {
       };
 
       parent.children.splice(index, 1, wrapper);
-      // Skip the inserted wrapper so we don't revisit the table inside it
       return [SKIP, index + 1];
     });
   };
 }
 
-/**
- * Astro integration wrapper — registers rehypeAccessibleTables after
- * astro-expressive-code has already added its own rehype plugin, so
- * the two don't interfere with each other in the pipeline.
- */
-export function accessibleTablesIntegration() {
-  return {
-    name: 'rehype-accessible-tables',
-    hooks: {
-      'astro:config:setup': ({ updateConfig }) => {
-        updateConfig({
-          markdown: {
-            rehypePlugins: [rehypeAccessibleTables],
-          },
-        });
-      },
-    },
-  };
-}
