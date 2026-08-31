@@ -71,6 +71,7 @@
     align-items: center;
     justify-content: center;
     gap: var(--space-6);
+    flex-wrap: wrap;
 
     li {
       display: inline;
@@ -87,7 +88,6 @@
 
     @media (--xs-only) {
       padding: var(--space-4) 0 var(--space-6);
-      flex-wrap: wrap;
     }
 
     @media (--md-up) {
