@@ -69,7 +69,7 @@ export default defineConfig({
         borderWidth: 'var(--border-width-1)',
       },
     }),
-    mdx({ rehypePlugins: [rehypeAccessibleTables] }),
+    mdx(),
     icon(),
     react(),
     sitemap({
