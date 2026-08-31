@@ -97,9 +97,9 @@ For more details, see [GHSA-jxfw-x594-9x9m](https://github.com/expressjs/morgan/
 
 ## CVE-2026-77063 in multer middleware (Low)
 
-**[multer](https://www.npmjs.com/package/multer) versions `< 2.3.0` are vulnerable to a file size limit bypass through an asynchronous fileFilter race condition**
+**[multer](https://www.npmjs.com/package/multer) versions `< 2.3.0` are vulnerable to a file size limit bypass through an asynchronous `fileFilter` race condition**
 
-When an application used an asynchronous fileFilter together with the fileSize limit, a race condition in multer's file stream handling could allow a file that exceeds the configured size limit to bypass the size-limit rejection. The impact is limited because the underlying multipart parser still truncates the stream at the size limit, so this is a bypass of the limit rejection rather than uncontrolled resource consumption. The fix in 2.3.0 registers the size-limit handling before the asynchronous filter runs.
+When an application used an asynchronous `fileFilter` together with the `fileSize` limit, a race condition in multer's file stream handling could allow a file that exceeds the configured size limit to bypass the size-limit rejection. The impact is limited because the underlying multipart parser still truncates the stream at the size limit, so this is a bypass of the limit rejection rather than uncontrolled resource consumption. The fix in 2.3.0 registers the size-limit handling before the asynchronous filter runs.
 
 **Affected versions**: `< 2.3.0`
 **Patched version**: `>= 2.3.0`
