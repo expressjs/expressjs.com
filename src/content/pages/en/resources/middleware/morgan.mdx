@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.11.0"
+  version="1.12.0"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
@@ -34,6 +34,16 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 </Alert>
 
 ## API
+
+For ES Modules:
+
+{/* eslint-disable no-unused-vars */}
+
+```js
+import morgan from 'morgan';
+```
+
+For CommonJS:
 
 {/* eslint-disable no-unused-vars */}
 
@@ -90,7 +100,7 @@ Morgan accepts these properties in the options object.
 
 ##### immediate
 
-Write log line on request instead of response. This means that a requests will
+Write log line on request instead of response. This means that requests will
 be logged even if the server crashes, _but data from the response (like the
 response code, content length, etc.) cannot be logged_.
 
@@ -113,6 +123,33 @@ morgan('combined', {
 ##### stream
 
 Output stream for writing log lines, defaults to `process.stdout`.
+
+If the stream is in object mode (`stream.writableObjectMode` is `true`) and the
+format function returns an object, the object is written to the stream as-is,
+without a trailing newline. This allows passing structured log entries to
+loggers that accept objects:
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(
+  function (tokens, req, res) {
+    return {
+      method: tokens.method(req, res),
+      url: tokens.url(req, res),
+      status: Number(tokens.status(req, res)),
+    };
+  },
+  {
+    stream: {
+      writableObjectMode: true,
+      write: function (entry) {
+        // entry is the object returned by the format function
+      },
+    },
+  }
+);
+```
 
 #### Predefined Formats
 
@@ -150,6 +187,11 @@ for information codes.
 # will output
 GET /dev 200 0.224 ms - 2
 ```
+
+Coloring is disabled when the [`NO_COLOR`](https://no-color.org) environment
+variable is set to any non-empty value, in which case the output above is
+written without any escape sequences. The variable is read once, when `morgan`
+is first required.
 
 ##### short
 
@@ -192,7 +234,7 @@ token definition.
 
 The token function is expected to be called with the arguments `req` and `res`, representing
 the HTTP request and HTTP response. Additionally, the token can accept further arguments of
-it's choosing to customize behavior.
+its choosing to customize behavior.
 
 ##### :date[format]
 
@@ -218,7 +260,7 @@ The process ID of the Node.js process handling the request.
 
 ##### :referrer
 
-The Referrer header of the request. This will use the standard mis-spelled Referer header if exists, otherwise Referrer.
+The Referrer header of the request. This will use the standard mis-spelled Referer header if it exists, otherwise Referrer.
 
 ##### :remote-addr
 
@@ -264,7 +306,7 @@ include on the number, defaulting to `3`, which provides microsecond precision.
 
 ##### :url
 
-The URL of the request. This will use `req.originalUrl` if exists, otherwise `req.url`.
+The URL of the request. This will use `req.originalUrl` if it exists, otherwise `req.url`.
 
 ##### :user-agent
 
@@ -274,12 +316,12 @@ The contents of the User-Agent header of the request.
 
 Compile a format string into a `format` function for use by `morgan`. A format string
 is a string that represents a single log line and can utilize token syntax.
-Tokens are references by `:token-name`. If tokens accept arguments, they can
+Tokens are referenced by `:token-name`. If tokens accept arguments, they can
 be passed using `[]`, for example: `:token-name[pretty]` would pass the string
 `'pretty'` as an argument to the token `token-name`.
 
 The function returned from `morgan.compile` takes three arguments `tokens`, `req`, and
-`res`, where `tokens` is object with all defined tokens, `req` is the HTTP request and
+`res`, where `tokens` is an object with all defined tokens, `req` is the HTTP request and
 `res` is the HTTP response. The function will return a string that will be the log line,
 or `undefined` / `null` to skip logging.
 
@@ -290,7 +332,7 @@ advanced uses, this compile function is directly available.
 
 ### express/connect
 
-Sample app that will log all request in the Apache combined format to STDOUT
+Sample app that will log all requests in the Apache combined format to STDOUT
 
 ```js
 var express = require('express');
@@ -307,7 +349,7 @@ app.get('/', function (req, res) {
 
 ### vanilla http server
 
-Sample app that will log all request in the Apache combined format to STDOUT
+Sample app that will log all requests in the Apache combined format to STDOUT
 
 ```js
 var finalhandler = require('finalhandler');
@@ -431,7 +473,7 @@ Sample app that will use custom token formats. This adds an ID to all requests a
 ```js
 var express = require('express');
 var morgan = require('morgan');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 morgan.token('id', function getId(req) {
   return req.id;
