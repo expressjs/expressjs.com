@@ -44,7 +44,7 @@ For more details, see [GHSA-72gw-mp4g-v24j](https://github.com/expressjs/multer/
 
 Morgan's `:remote-user` token writes the Basic auth username from the `Authorization` header to the log stream without neutralizing control characters. A crafted `Authorization: Basic` header containing CR/LF characters can inject forged log lines, corrupting the one-request-per-line structure of access logs. The built-in `combined`, `common`, `default`, and `short` formats are affected, as well as any custom format that includes `:remote-user`.
 
-**Affected versions**: `>= 1.2.0, <= 1.10.1`
+**Affected versions**: `>= 1.2.0, <= 1.10.1`\
 **Patched version**: `>= 1.11.0`
 
 For more details, see [GHSA-4vj7-5mj6-jm8m](https://github.com/expressjs/morgan/security/advisories/GHSA-4vj7-5mj6-jm8m).
@@ -55,7 +55,7 @@ For more details, see [GHSA-4vj7-5mj6-jm8m](https://github.com/expressjs/morgan/
 
 When multer's `diskStorage` engine is used, aborted or malformed multipart uploads leave orphaned partial files on disk. The cleanup path does not run on every error condition, so an attacker can fill the upload directory by repeatedly opening and dropping connections mid-upload. Over time this exhausts disk space, causing denial of service on the host.
 
-**Affected versions**: `>= 2.0.0-alpha.1, < 2.2.0` and `>= 3.0.0-alpha.1, < 3.0.0-alpha.2`
+**Affected versions**: `>= 2.0.0-alpha.1, < 2.2.0` and `>= 3.0.0-alpha.1, < 3.0.0-alpha.2`\
 **Patched version**: `>= 2.2.0` (stable line) and `>= 3.0.0-alpha.2` (alpha line)
 
 For more details, see [GHSA-3p4h-7m6x-2hcm](https://github.com/expressjs/multer/security/advisories/GHSA-3p4h-7m6x-2hcm).
