@@ -50,6 +50,7 @@
     scroll-behavior: smooth;
     scrollbar-width: thin;
     padding-inline: var(--space-16);
+    padding-block: var(--space-4);
     list-style: none;
   }
 
