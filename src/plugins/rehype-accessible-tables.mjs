@@ -1,4 +1,4 @@
-import { visit } from 'unist-util-visit';
+import { SKIP, visit } from 'unist-util-visit';
 
 /**
  * Rehype plugin that:
@@ -7,6 +7,12 @@ import { visit } from 'unist-util-visit';
  * - Adds scope="row" to <th> in <tbody>
  *
  * Supports both regular HAST elements and MDX JSX elements.
+ *
+ * NOTE:
+ * Process the table in separate passes so each step can safely modify the tree.
+ * Pass 1 and Pass 2 use the default traversal behavior, so `CONTINUE` does not
+ * need to be returned explicitly. Pass 3 uses `SKIP` after wrapping a table
+ * because its children have already been processed.
  */
 export default function rehypeAccessibleTables() {
   return (tree) => {
@@ -69,7 +75,7 @@ export default function rehypeAccessibleTables() {
      * don't modify the tree during this pass.
      * creating a little lookup table:
      * <tr object> → "col"
-     * <tr object> → "row
+     * <tr object> → "row"
      */
     const rowScopes = new WeakMap();
 
@@ -117,7 +123,7 @@ export default function rehypeAccessibleTables() {
     });
 
     /*
-     * lastly Wrap every table:
+     * Wrap every table:
      *
      * <div class="table-scroller">
      *   <table>...</table>
@@ -133,7 +139,7 @@ export default function rehypeAccessibleTables() {
       }
 
       if (isTableScroller(parent)) {
-        return;
+        return SKIP;
       }
 
       const wrapper = {
@@ -147,11 +153,7 @@ export default function rehypeAccessibleTables() {
 
       parent.children.splice(index, 1, wrapper);
 
-      /*
-       * Don't continue traversing into the table after moving it.
-       * Scope processing has already happened in the previous passes.
-       */
-      return;
+      return SKIP;
     });
   };
 }
