@@ -1,15 +1,20 @@
 @layer patterns {
   .doc-nav {
     display: flex;
-    /* Wrap in reverse so that when the two titles cannot sit side by side the
-       "Next" link moves onto its own line above "Previous" instead of
-       overflowing the page on narrow viewports. */
-    flex-wrap: wrap-reverse;
     justify-content: space-between;
     gap: var(--space-4);
     margin-top: var(--space-8);
     padding-top: var(--space-6);
     border-top: 1px solid var(--color-border-secondary);
+  }
+
+  .doc-nav__link--prev,
+  .doc-nav__link--next {
+    flex-grow: 1;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   .doc-nav__link--next {
