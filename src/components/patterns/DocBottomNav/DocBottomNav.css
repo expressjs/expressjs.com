@@ -6,6 +6,16 @@
     margin-top: var(--space-8);
     padding-top: var(--space-6);
     border-top: 1px solid var(--color-border-secondary);
+    flex-wrap: wrap;
+  }
+
+  .doc-nav__link--prev,
+  .doc-nav__link--next {
+    flex-grow: 1;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   .doc-nav__link--next {
