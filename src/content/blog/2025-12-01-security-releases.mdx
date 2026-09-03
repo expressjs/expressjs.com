@@ -19,7 +19,7 @@ We recommend upgrading to the latest version of body-parser to secure your appli
 
 The following vulnerabilities have been addressed:
 
-- [CVE-2025-13466 in body-parser middleware (Moderate)](#cve-2025-13466-in-body-parser-middleware-moderate)
+- [CVE-2025-13466 in Body-parser middleware (Moderate)](#cve-2025-13466-in-body-parser-middleware-moderate)
 
 ## CVE-2025-13466 in Body-parser middleware (Moderate)
 
@@ -27,7 +27,7 @@ The following vulnerabilities have been addressed:
 
 body-parser 2.2.0 is vulnerable to denial of service due to inefficient handling of URL-encoded bodies with very large numbers of parameters. An attacker can send payloads containing thousands of parameters within the default 100KB request size limit, causing elevated CPU and memory usage. This can lead to service slowdown or partial outages under sustained malicious traffic.
 
-**Affected versions**: `2.2.0`
+**Affected versions**: `2.2.0`\
 **Patched version**: `>= 2.2.1`
 
 For more details, see [GHSA-wqch-xfxh-vrr4](https://github.com/expressjs/body-parser/security/advisories/GHSA-wqch-xfxh-vrr4).
