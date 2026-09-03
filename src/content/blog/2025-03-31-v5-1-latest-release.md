@@ -100,15 +100,11 @@ Express major versions will go through three supported phases:
 
 For the existing release lines, we will set the following phase dates:
 
-<div markdown="1" style="overflow-x: auto; max-width: 100%;">
-
 | Major | CURRENT                         | ACTIVE     | MAINTENANCE                   | EOL                           |
 | ----- | ------------------------------- | ---------- | ----------------------------- | ----------------------------- |
 | 4.x   |                                 |            | 2025-04-01                    | \*no sooner than 2026-10-01   |
 | 5.x   | 2024-09-11                      | 2025-03-31 | \*\*no sooner than 2026-04-01 | \*\*no sooner than 2027-04-01 |
 | 6.x   | \*\*\*no sooner than 2026-01-01 |            |                               |                               |
-
-</div>
 
 As you can see, this means that v5.1.0 being tagged `latest` indicates that we moved from `CURRENT` to `ACTIVE` which
 starts the clock on EOL for v4 by moving it to `MAINTENANCE`. We recognize that v4 is a special case having been the
