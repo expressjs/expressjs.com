@@ -36,7 +36,7 @@ The following vulnerabilities have been addressed:
 
 hbs did not escape the output of asynchronous helpers the way it does for synchronous helpers, so a helper registered through `registerAsyncHelper` that returned attacker-influenced data emitted that data into the rendered page without neutralization. Applications that used async helpers to render values derived from user input were exposed to cross-site scripting, allowing script execution in the victim's browser. The fix in 4.3.0 escapes async helper output consistently with synchronous helpers.
 
-**Affected versions**: `>= 2.1.0, <= 4.2.1`
+**Affected versions**: `>= 2.1.0, <= 4.2.1`\
 **Patched version**: `>= 4.3.0`
 
 For more details, see [GHSA-rg36-rxv9-2m9q](https://github.com/pillarjs/hbs/security/advisories/GHSA-rg36-rxv9-2m9q).
@@ -49,7 +49,7 @@ For more details, see [GHSA-rg36-rxv9-2m9q](https://github.com/pillarjs/hbs/secu
 
 When a disk-backed upload was aborted or truncated before the write stream finished, multer removed the visible file from the upload directory but did not close the underlying write file descriptor. A remote attacker able to reach an upload route using the built-in disk storage could send repeated aborted or malformed multipart uploads, each one leaking a file descriptor and retaining disk blocks until the process exits, leading to resource exhaustion and denial of service. The fix in 2.3.0 closes the destination write stream on abnormal source termination and defers cleanup until the stream has closed.
 
-**Affected versions**: `= 2.2.0`
+**Affected versions**: `= 2.2.0`\
 **Patched version**: `>= 2.3.0`
 
 For more details, see [GHSA-qfvm-cv95-jqjf](https://github.com/expressjs/multer/security/advisories/GHSA-qfvm-cv95-jqjf).
@@ -62,7 +62,7 @@ For more details, see [GHSA-qfvm-cv95-jqjf](https://github.com/expressjs/multer/
 
 A small multipart request containing two specially crafted text field names caused an uncaught `RangeError` in multer's field parser and terminated the Node.js process. The first field used a very large numeric array index to allocate a maximum-length sparse array, and a second field pushed past that length, which threw inside the append-field dependency and was not caught by multer. A single unauthenticated request was sufficient to crash the server, making this a remotely triggered denial of service. The fix in 2.3.0 handles the parser error and rejects the request instead of crashing.
 
-**Affected versions**: `< 2.3.0`
+**Affected versions**: `< 2.3.0`\
 **Patched version**: `>= 2.3.0`
 
 For more details, see [GHSA-wc9g-mqfw-jrwm](https://github.com/expressjs/multer/security/advisories/GHSA-wc9g-mqfw-jrwm).
@@ -75,7 +75,7 @@ For more details, see [GHSA-wc9g-mqfw-jrwm](https://github.com/expressjs/multer/
 
 A multipart request with a first field using a very large numeric array index made multer allocate a maximum-length sparse array, and a second field with a non-numeric key then triggered a full-length iteration inside the append-field dependency that blocked the event loop and left the process unable to handle other requests. A single request was enough to make the worker unresponsive, so this is a remotely triggered denial of service. multer 2.3.0 adds an opt-in `limits.fieldArrayIndexLimit` option that rejects oversized indexes. We recommend upgrading to 2.3.0 and setting `limits.fieldArrayIndexLimit` to the largest array index your application needs.
 
-**Affected versions**: `< 2.3.0`
+**Affected versions**: `< 2.3.0`\
 **Patched version**: `>= 2.3.0`
 
 For more details, see [GHSA-535w-7cp7-47q4](https://github.com/expressjs/multer/security/advisories/GHSA-535w-7cp7-47q4).
@@ -88,7 +88,7 @@ For more details, see [GHSA-535w-7cp7-47q4](https://github.com/expressjs/multer/
 
 morgan's log-field escaping did not neutralize the Unicode line separator characters U+0085, U+2028, and U+2029. An unauthenticated remote client could place these characters in an attacker-controlled log token, for example a Basic auth username surfaced through the remote-user token, so that Unicode-aware downstream log processing split a single request log into multiple logical records. This is a log forging issue and a follow-up to CVE-2026-5078, which only addressed ASCII control characters. The fix in 1.12.0 extends the escaping set to cover these Unicode line separators.
 
-**Affected versions**: `< 1.12.0`
+**Affected versions**: `< 1.12.0`\
 **Patched version**: `>= 1.12.0`
 
 For more details, see [GHSA-jxfw-x594-9x9m](https://github.com/expressjs/morgan/security/advisories/GHSA-jxfw-x594-9x9m).
@@ -101,7 +101,7 @@ For more details, see [GHSA-jxfw-x594-9x9m](https://github.com/expressjs/morgan/
 
 When an application used an asynchronous `fileFilter` together with the `fileSize` limit, a race condition in multer's file stream handling could allow a file that exceeds the configured size limit to bypass the size-limit rejection. The impact is limited because the underlying multipart parser still truncates the stream at the size limit, so this is a bypass of the limit rejection rather than uncontrolled resource consumption. The fix in 2.3.0 registers the size-limit handling before the asynchronous filter runs.
 
-**Affected versions**: `< 2.3.0`
+**Affected versions**: `< 2.3.0`\
 **Patched version**: `>= 2.3.0`
 
 For more details, see [GHSA-qvfw-j98x-7q72](https://github.com/expressjs/multer/security/advisories/GHSA-qvfw-j98x-7q72).
