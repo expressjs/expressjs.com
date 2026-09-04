@@ -89,6 +89,7 @@ Português
 Prunus
 Riva
 SAWARATSUKI
+scroller
 sder
 secr
 sendfile
