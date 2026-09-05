@@ -31,6 +31,7 @@ Security best practices for Express applications in production include:
 - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
 - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
   - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
+- [Lint your code for security issues](#lint-your-code-for-security-issues)
 - [Additional considerations](#additional-considerations)
 
 ## Don't use deprecated or vulnerable versions of Express
@@ -303,6 +304,19 @@ $ snyk test
 Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. In general, these databases are excellent resources for knowledge and tools about Node security.
 
 Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://owasp.org/www-project-top-ten/) and take precautions to avoid them.
+
+## Lint your code for security issues
+
+Dependency scanning (as described above) checks the packages you install, but not the code you write. Static analysis tools catch insecure code patterns at lint time&mdash;before the code ships&mdash;such as:
+
+- Hardcoded secrets and credentials in source code
+- Unsafe redirects (see [Prevent open redirects](#prevent-open-redirects))
+- Missing cookie security flags (see [Use cookies securely](#use-cookies-securely))
+- Injection-prone string building for SQL queries or shell commands
+
+Most Express apps already run [ESLint](https://eslint.org/) for code quality, and several ESLint plugins add security-focused rules on top of it. Run these checks in CI alongside your tests so that new violations fail the build.
+
+Static analysis complements, but does not replace, the runtime protections described on this page, such as Helmet and dependency scanning.
 
 ## Additional considerations
 
