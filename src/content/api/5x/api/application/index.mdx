@@ -1195,7 +1195,7 @@ app.query('/search', (req: Request, res: Response) => {
 <Signature>
   <Fragment slot="attributes">
     <Param name="view" type="String">
-      The name of the view to render.
+      The file path of the view to render (absolute or relative to the `views` setting).
     </Param>
     <Param name="locals" type="Object" optional>
       An object whose properties define local variables for the view.
@@ -1209,6 +1209,12 @@ app.query('/search', (req: Request, res: Response) => {
 Returns the rendered HTML of a view via the `callback` function. It accepts an optional parameter
 that is an object containing local variables for the view. It is like [res.render()](/api/response/#resrender),
 except it cannot send the rendered view to the client on its own.
+
+The `view` argument is resolved the same way as [res.render()](/api/response/#resrender). It can be
+an absolute path, or a path relative to the `views` setting. If the path does not include an
+extension, Express uses the `view engine` setting to determine the template file extension. For
+example, with `app.set('views', './views')` and `app.set('view engine', 'pug')`, `app.render('email')`
+renders the template at `views/email.pug`.
 
 <Alert type="info">
 
