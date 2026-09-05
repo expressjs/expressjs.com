@@ -52,6 +52,25 @@ for example `@types/cors` alongside `cors`.
 
 </Alert>
 
+Since the `tsconfig.json` below uses `"module": "nodenext"`, TypeScript determines whether each
+file is treated as an ES Module or CommonJS based on the `"type"` field in your `package.json`.
+Add `"type": "module"` to your `package.json` so that ES Module `import`/`export` syntax is
+recognized:
+
+```json title="package.json"
+{
+  "type": "module"
+}
+```
+
+<Alert type="warning">
+
+Without `"type": "module"`, TypeScript will treat `.ts` files as CommonJS and report an error like
+`ECMAScript imports and exports cannot be written in a CommonJS file under 'verbatimModuleSyntax'`
+when you use `import`/`export` syntax.
+
+</Alert>
+
 Add a `tsconfig.json`. These options mirror how Node.js runs TypeScript and make the compiler reject
 non-erasable syntax (such as `enum`s, namespaces, and parameter properties) that Node cannot strip:
 
