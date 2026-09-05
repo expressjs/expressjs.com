@@ -64,15 +64,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Define error-handling middleware functions in the same way as other middleware functions,
-except error-handling functions have four arguments instead of three:
-`(err, req, res, next)`.
-例:
+Errors from rejected promises are not passed to `next` automatically, and this includes `async` functions: if an `async` route handler throws or awaits a rejected promise, the rejection is unhandled, which crashes the process on current Node.js versions. You must catch the error yourself and pass it to Express:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
@@ -80,14 +81,22 @@ app.get('/user/:id', async (req, res, next) => {
 import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
-If `getUserById` throws an error or rejects, `next` will be called with either
-the thrown error or the rejected value. 拒否された値が指定されていない場合、 `next`
-はExpress ルータが提供するデフォルトの Error オブジェクトで呼び出されます。
+<Alert type="情報">
+
+Consider [updating to Express 5](/guide/migrating-5), where route handlers and middleware that
+return a Promise call `next(value)` automatically when they reject or throw an error, making the
+`try...catch` above unnecessary.
+
+</Alert>
 
 `next()`関数に何かを渡した場合（`'route'`を除く）。
 Expressは現在のリクエストをエラーとみなし、
@@ -184,9 +193,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Since promises automatically catch both synchronous errors and rejected promises,
-you can simply provide `next` as the final catch handler and Express will catch errors,
-because the catch handler is given the error as the first argument.
+If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
 
 また、非同期コードを些細なものに減らすことで、同期エラー
 のキャッチに依存するハンドラのチェーンを使用することもできます。 例: 例:
@@ -223,7 +230,7 @@ app.get('/', [
 ]);
 ```
 
-The above example has a couple of trivial statements from the `readFile`
+The above example contains a couple of trivial statements following the `readFile`
 call. 上の例では、`readFile`
 呼び出しからいくつかの些細な文があります。 `readFile` でエラーが発生した場合、エラーは Express に渡されます。 それ以外の場合は、
 チェーン内の次のハンドラ
@@ -432,7 +439,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 この例でも、`clientErrorHandler`は以下のように定義されています。この場合、エラーは明示的に次のエラーに渡されます。
 
-Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

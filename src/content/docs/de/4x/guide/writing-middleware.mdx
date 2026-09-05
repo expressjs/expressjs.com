@@ -4,6 +4,7 @@ description: Erfahren Sie, wie Sie benutzerdefinierte Middleware-Funktionen für
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/api#req) (`req`), die [Antwort-Objekt](/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
 
@@ -199,8 +200,8 @@ Die Middleware-Funktion `myLogger` druckt einfach eine Nachricht, übergibt dann
 
 ### Middleware-Funktionsanfragezeit
 
-Als nächstes erstellen wir eine Middleware-Funktion namens "requestTime" und fügen eine Eigenschaft namens `requestTime`
-dem Anfrageobjekt hinzu.
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the [request object](/api/request).
 
 <Alert type="warnung">
 
@@ -420,9 +421,13 @@ Anfrage als Fehler und überspringt alle verbleibenden Funktionen zur Fehlerbeha
 
 </Alert>
 
-Weil Sie Zugriff auf das Anfrageobjekt, das Antwortobjekt, die nächste Middleware-Funktion im Stapel und den gesamten Knoten haben. s API, die Möglichkeiten mit Middleware-Funktionen sind endlos.
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-Für weitere Informationen über Express Middleware siehe: [Express Middleware](/guide/using-middleware).
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## Konfigurierbare Middleware
 

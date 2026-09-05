@@ -3,6 +3,8 @@ title: FAQ  常见问题解答
 description: 查找有关 Express.js 的常见问题解答，涵盖应用程序架构、数据模型、身份验证、模板引擎、错误处理等相关主题。
 ---
 
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
+
 ## 我应该如何组织我的应用程序？
 
 这个问题没有标准答案。 答案取决于你的应用规模以及参与开发的团队。 为实现最大限度的灵活性，Express 不会对项目结构做任何强制限定。
@@ -33,7 +35,11 @@ See [LoopBack](http://loopback.io) for an Express-based framework that is center
 Express 支持所有符合 `(path, locals, callback)` 入参规范的模板引擎。
 如需统一各类模板引擎的接口与缓存机制，可查看 [consolidate.js](https://github.com/visionmedia/consolidate.js) 项目以获取相关支持。 未列入清单的模板引擎也可能兼容 Express 的调用规范。
 
-For more information, see [Using template engines with Express](/guide/using-template-engines).
+<ReadMore>
+
+For more information, see the [Using template engines with Express](/guide/using-template-engines) guide.
+
+</ReadMore>
 
 ## 如何处理 404 响应？
 
@@ -75,7 +81,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-For more information, see [Error handling](/guide/error-handling).
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## 如何渲染纯 HTML？
 

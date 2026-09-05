@@ -13,7 +13,7 @@ por ejemplo, `app. et()` para manejar solicitudes GET y `app.post` para manejar 
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada.
+En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada. En otras palabras, la aplicación "escucha" para peticiones que coinciden con el/los método(s) especificado(s), y cuando detecta una coincidencia, llama a la función de callback especificada.
 
 De hecho, los métodos de enrutamiento pueden tener más de una función de callback como argumentos.
 Con múltiples funciones de callback, es importante proporcionar `next` como un argumento a la función de callback y luego llamar `next()` dentro del cuerpo de la función para desactivar el control
@@ -88,7 +88,7 @@ app.post('/', (req: Request, res: Response) => {
 Express soporta métodos que corresponden a todos los métodos de petición HTTP: `get`, `post`, y así sucesivamente.
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-Hay un método especial de enrutamiento, `app.all()`, usado para cargar funciones de middleware en una ruta para _all_ métodos de petición HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+Hay un método especial de enrutamiento, `app.all()`, usado para cargar funciones de middleware en una ruta para _all_ métodos de petición HTTP. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#httpmethods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Rutas de ruta
 
-Las rutas de ruta, en combinación con un método de solicitud, definen los extremos en los que se pueden realizar las solicitudes. Las rutas pueden ser cadenas, patrones de cadenas o expresiones regulares.
+Las rutas de ruta, en combinación con un método de solicitud, definen los extremos en los que se pueden realizar las solicitudes. Las rutas pueden ser cadenas, patrones de cadenas o expresiones regulares. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -235,6 +235,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### Rutas de ruta basadas en expresiones regulares
 
 <Alert type="alerta">
@@ -348,6 +368,14 @@ caracteres con una barra inversa adicional, por ejemplo `\d+`.
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. Como un workaround, usa `{0,}` en lugar de `*`.
 </Alert>
 
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
+
 ## Manejadores de rutas
 
 Puedes proporcionar múltiples funciones de callback que se comportan como [middleware](/guide/using-middleware) para gestionar una solicitud. La única excepción es que estos callbacks podrían invocar a `next('route')` para evitar las llamadas restantes de ruta. Se puede utilizar este mecanismo para imponer condiciones previas a una ruta, luego pasar el control a las rutas posteriores si no hay razón para proceder con la ruta actual.
@@ -387,7 +415,7 @@ En este ejemplo:
 
 Los manejadores de rutas pueden ser en forma de una función, un array de funciones o combinaciones de ambos, como se muestra en los siguientes ejemplos.
 
-Una única función de callback puede manejar una ruta. Por ejemplo:
+Más de una función de callback puede manejar una ruta (asegúrese de especificar el objeto `siguiente`). Por ejemplo:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -403,7 +431,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Más de una función de callback puede manejar una ruta (asegúrese de especificar el objeto `siguiente`). Por ejemplo:
+Una combinación de funciones independientes y arreglos de funciones puede manejar una ruta. Por ejemplo:
 
 ```js
 app.get(
@@ -527,7 +555,7 @@ app.get(
 
 ## Métodos de respuesta
 
-Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden enviar una respuesta al cliente y terminar el ciclo de solicitud y respuesta. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.| Method | Description
 
 | Método                                          | Descripción                                                                                                 |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -544,7 +572,7 @@ Los métodos en el objeto de respuesta (`res`) en la siguiente tabla pueden envi
 ## app.route()
 
 Puede crear manejadores de rutas encadenables para una ruta usando `app.route()`.
-Debido a que la ruta se especifica en una única ubicación, la creación de rutas modulares es útil, al igual que la reducción de redundancia y tipografías. Para más información sobre rutas, vea: [documentación Router() ](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Aquí hay un ejemplo de manejadores encadenados de rutas que se definen usando `app.route()`.
 
@@ -580,9 +608,9 @@ app
 
 ## express.Router
 
-Utilice la clase `express.Router` para crear manejadores modulares de rutas. Una instancia de `Router` es un sistema completo de middleware y enrutamiento; por esta razón, a menudo se le denomina "mini-app".
+Utilice la clase `express.Router` para crear manejadores modulares de rutas. Una instancia de `Router` es un sistema completo de middleware y enrutamiento; por esta razón, a menudo se le denomina "mini-app".The following example creates a router as a module, loads a middlew
 
-El siguiente ejemplo crea un router como módulo, carga una función de middleware en él, define algunas rutas y monta el módulo del router en una ruta de la aplicación principal.
+El siguiente ejemplo crea un router como módulo, carga una función de middleware en él, define algunas rutas y monta el módulo del router en una ruta de la aplicación principal.Create a router file named `birds.js` in the app directory, with th
 
 Crea un archivo de enrutador llamado `birds.js` en el directorio de la aplicación, con el siguiente contenido:
 
@@ -677,7 +705,7 @@ app.use('/birds', birds);
 
 La aplicación ahora será capaz de manejar solicitudes a `/birds` y `/birds/about`, así como llamar a la función de middleware `timeLog` que es específica de la ruta.
 
-Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+Pero si la ruta padre `/birds` tiene parámetros de ruta, no será accesible por defecto desde las subrutas. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

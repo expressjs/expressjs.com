@@ -4,6 +4,7 @@ description: 了解如何在 Express.js 应用中使用内置的 `static` 中间
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 要托管图片、CSS 文件和 JavaScript 文件等静态文件，需使用 Express 内置的 `express.static` 中间件函数。
 
@@ -84,4 +85,8 @@ import path from 'path';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+<ReadMore>
+
 For more details about the `serve-static` function and its options, see [serve-static](/resources/middleware/serve-static).
+
+</ReadMore>

@@ -4,6 +4,7 @@ description: 通过设置 DEBUG 环境变量来开启并使用 Express.js 应用
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 若要查看 Express 中使用的所有内部日志，请在启动应用时将 `DEBUG` 环境变量设置为 `express:*`。
 
@@ -85,21 +86,118 @@ $ DEBUG=express:* node ./bin/www
 
 若仅查看来自路由实现的日志，请将 `DEBUG` 的值设置为 `express:router`。 同理，若仅查看来自应用实现的日志，请将 `DEBUG` 的值设置为 `express:application`，以此类推。
 
-## 由 `express` 生成的应用
+## Using `debug` in your own code
 
-由 `express` 命令生成的应用会使用 `debug` 模块，且其调试命名空间的作用域限定为应用名称。
+The same [debug](https://www.npmjs.com/package/debug) module that Express uses internally is available for your application code. Install it, create one or more loggers scoped to a namespace of your choosing, and call them wherever you would otherwise use `console.log`:
 
-例如，如果你使用 `$ express sample-app` 命令生成了应用，可以通过以下命令启用调试语句：
+<PackageManagerCommand command="npm install debug" />
+
+```cjs title="index.cjs"
+const express = require('express');
+const debug = require('debug')('myapp:server');
+
+const app = express();
+
+app.get('/', (req, res) => {
+  debug('handling request from %s', req.ip);
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  debug('listening on port 3000');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import debugModule from 'debug';
+
+const debug = debugModule('myapp:server');
+const app = express();
+
+app.get('/', (req, res) => {
+  debug('handling request from %s', req.ip);
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  debug('listening on port 3000');
+});
+```
+
+These statements print nothing by default. Enable them through the same `DEBUG` environment variable, using your own namespace:
 
 ```bash
-$ DEBUG=sample-app:* node ./bin/www
+$ DEBUG=myapp:* node index.js
 ```
 
 你可以通过指定以英文逗号分隔的名称列表，来启用多个调试命名空间：
 
 ```bash
-$ DEBUG=http,mail,express:* node index.js
+$ DEBUG=myapp:*,express:router node index.js
 ```
+
+## Setting DEBUG in your IDE
+
+The `DEBUG` environment variable can be set by any process launcher that supports environment variables, including the run and debug configurations of your IDE. For example, in VS Code you can set it in the `env` property of a launch configuration:
+
+```json title=".vscode/launch.json"
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Launch Express app",
+  "program": "${workspaceFolder}/index.js",
+  "env": { "DEBUG": "express:*" }
+}
+```
+
+See [Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging) for the full list of launch options.
+
+## Using the Node.js inspector
+
+Debug logs show what the app did; for stepping through your code with breakpoints, use the built-in Node.js inspector. Start your app with the `--inspect` flag:
+
+```bash
+$ node --inspect index.js
+```
+
+Then attach a debugging client, such as Chrome DevTools (open `chrome://inspect`), VS Code, or any other inspector-capable tool, to set breakpoints in your route handlers and middleware, step through code, and inspect variables.
+
+If you need to debug something that happens during startup, use `--inspect-brk` instead, which pauses execution on the first line until a debugger attaches. See the [Node.js debugging guide](https://nodejs.org/learn/getting-started/debugging) for details.
+
+## Debugging the HTTP layer
+
+Express runs on top of the Node.js `http` module, which has its own debugging facilities that work with any Express app.
+
+Setting the `NODE_DEBUG` environment variable to `http` makes Node.js print internal logs from the HTTP layer, such as connection handling and socket events:
+
+```bash
+$ NODE_DEBUG=http node index.js
+```
+
+You can combine it with other subsystems, such as `net` or `stream`, in a comma-separated list. Be aware that this output can expose sensitive data such as authentication headers, so use it only in development.
+
+## Diagnostics channels
+
+Node.js publishes an event for every HTTP request through the [diagnostics_channel](https://nodejs.org/api/diagnostics_channel.html#http) module, which you can subscribe to without patching Express or adding middleware:
+
+```cjs title="index.cjs"
+const { subscribe } = require('node:diagnostics_channel');
+
+subscribe('http.server.request.start', ({ request }) => {
+  console.log(`${request.method} ${request.url}`);
+});
+```
+
+```mjs title="index.mjs"
+import { subscribe } from 'node:diagnostics_channel';
+
+subscribe('http.server.request.start', ({ request }) => {
+  console.log(`${request.method} ${request.url}`);
+});
+```
+
+Other built-in channels cover the rest of the request lifecycle, such as `http.server.response.finish`, and the client side of `http.request` calls. See the [diagnostics_channel documentation](https://nodejs.org/api/diagnostics_channel.html#http) for the full list.
 
 ## 高级选项
 

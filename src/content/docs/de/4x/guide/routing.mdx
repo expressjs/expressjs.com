@@ -9,11 +9,11 @@ _Routing_ bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kund
 Für eine Einführung in das Routing siehe [Basic routing](/starter/basic-routing).
 
 Du definierst Routing, indem du Methoden des Express `app` Objekts verwendest, die den HTTP-Methoden entsprechen;
-zum Beispiel, `app. et()` um GET-Anfragen und `app.post` zu behandeln, um POST-Anfragen zu bearbeiten. For a full list,
+zum Beispiel, `app.get()` um GET-Anfragen und `app.post` zu behandeln, um POST-Anfragen zu bearbeiten. For a full list,
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf.
+Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf. Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf.
 
 In der Tat können die Routing-Methoden mehr als eine Callback-Funktion als Argumente haben.
 Mit mehreren Callback-Funktionen, es ist wichtig, `next` als Argument für die Callback-Funktion zur Verfügung zu stellen und dann `next()` im Körper der Funktion aufzurufen, um die Steuerung
@@ -88,7 +88,7 @@ app.post('/', (req: Request, res: Response) => {
 Express unterstützt Methoden, die allen HTTP-Anfragemethoden entsprechen: `get`, `post` und so weiter.
 For a full list, see [app.METHOD](/api/application#appmethod).
 
-Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für _all_ HTTP-Requestmethoden zu laden. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für _all_ HTTP-Requestmethoden zu laden. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#httpmethods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -108,7 +108,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Routenpfade
 
-Routenpfade in Kombination mit einer Anfragemethode definieren die Endpunkte, an denen Anfragen gestellt werden können. Routenpfade können Zeichenketten, Zeichenkettenmuster oder reguläre Ausdrücke sein.
+Routenpfade in Kombination mit einer Anfragemethode definieren die Endpunkte, an denen Anfragen gestellt werden können. Routenpfade können Zeichenketten, Zeichenkettenmuster oder reguläre Ausdrücke sein. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -235,6 +235,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### Routenpfade basierend auf regulären Ausdrücken
 
 <Alert type="warnung">
@@ -348,6 +368,14 @@ Zeichen mit einem zusätzlichen Backslash maskieren, zum Beispiel `\d+`.
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. Benutze `{0,}` anstelle von `*`.
 </Alert>
 
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
+
 ## Routenhandler
 
 Du kannst mehrere Callback-Funktionen bereitstellen, die sich wie [middleware](/guide/using-middleware) verhalten um eine Anfrage zu bearbeiten. Die einzige Ausnahme ist, dass diese Callbacks `next('route')` aufrufen könnten, um die restlichen Rufnummern zu umgehen. Sie können diesen Mechanismus nutzen, um Vorbedingungen auf einer Route aufzuerlegen, dann die Kontrolle an die nachfolgenden Routen übergeben, wenn es keinen Grund gibt, mit der aktuellen Route fortzufahren.
@@ -387,7 +415,7 @@ In diesem Beispiel:
 
 Routenhandler können in Form einer Funktion, eines Arrays von Funktionen oder Kombinationen beider sein, wie in den folgenden Beispielen gezeigt.
 
-Eine einzelne Callback-Funktion kann eine Route handhaben. Zum Beispiel:
+Mehr als eine Callback-Funktion kann eine Route handhaben (stelle sicher, dass du das `next` Objekt angibst). Zum Beispiel:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -403,7 +431,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Mehr als eine Callback-Funktion kann eine Route handhaben (stelle sicher, dass du das `next` Objekt angibst). Zum Beispiel:
+Eine Kombination aus unabhängigen Funktionen und Arrays von Funktionen kann eine Route handhaben. Zum Beispiel:
 
 ```js
 app.get(
@@ -527,7 +555,7 @@ app.get(
 
 ## Antwortmethoden
 
-Die Methoden auf dem Antwortobjekt (`res`) in der folgenden Tabelle können eine Antwort an den Client senden und den Request-Antwort-Zyklus beenden. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.
 
 | Methode                                         | Beschreibung                                                                                              |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -544,7 +572,7 @@ Die Methoden auf dem Antwortobjekt (`res`) in der folgenden Tabelle können eine
 ## app.route()
 
 Sie können verkettende Routenhandler für einen Routenpfad erstellen, indem Sie `app.route()` verwenden.
-Da der Weg an einem einzigen Ort angegeben wird, ist die Schaffung modularer Routen hilfreich, ebenso wie die Reduzierung von Redundanz und Typos. Weitere Informationen über Routen finden Sie unter [Router() documentation](/api/router).
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Hier ist ein Beispiel für verkettete Routenhandler, die mit `app.route()` definiert werden.
 
@@ -580,9 +608,9 @@ app
 
 ## express.Router
 
-Verwende die Klasse `express.Router`, um modulare mountbare Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und Routing-System; aus diesem Grund wird sie oft als "Mini-App" bezeichnet.
+Verwende die Klasse `express.Router`, um modulare mountbare Routenhandler zu erstellen. Eine `Router`-Instanz ist ein komplettes Middleware- und Routing-System; aus diesem Grund wird sie oft als "Mini-App" bezeichnet.The following example creates a router as a module, loads a middlew
 
-Das folgende Beispiel erzeugt einen Router als Modul, lädt eine Middleware-Funktion darin definiert einige Routen und mountet das Router-Modul auf einem Pfad in der Hauptanwendung.
+Das folgende Beispiel erzeugt einen Router als Modul, lädt eine Middleware-Funktion darin definiert einige Routen und mountet das Router-Modul auf einem Pfad in der Hauptanwendung.Create a router file named `birds.js` in the app directory, with th
 
 Erstelle eine Router-Datei namens `birds.js` im App-Verzeichnis, mit folgendem Inhalt:
 
@@ -677,7 +705,7 @@ app.use('/birds', birds);
 
 Die App wird nun in der Lage sein, Anfragen an `/birds` und `/birds/about` zu bearbeiten, aufrufen sowie die Middleware-Funktion `timeLog` aufrufen, die spezifisch für die Route ist.
 
-Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

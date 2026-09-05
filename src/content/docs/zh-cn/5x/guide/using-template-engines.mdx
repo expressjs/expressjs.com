@@ -1,6 +1,6 @@
 ---
 title: 在 Express 中使用模板引擎
-description: 了解如何在 Express.js 中集成并使用 Pug、Handlebars、EJS 等模板引擎，高效渲染动态 HTML 页面。
+description: Discover how to integrate and use template engines like Pug, Handlebars-compatible engines, and EJS with Express.js to render dynamic HTML pages efficiently.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -9,15 +9,15 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 模板引擎能够让你在应用中使用静态模板文件。 运行时，模板引擎会将模板文件中的变量替换为实际值，并把模板转换成HTML文件发送至客户端。
 这种方式能够简化HTML页面的开发。
 
-[Express应用生成器](/en/starter/generator)默认使用[Pug](https://pugjs.org/api/getting-started.html)，同时也支持[Handlebars](https://www.npmjs.com/package/handlebars)、[EJS](https://www.npmjs.com/package/ejs)等模板引擎。
+The [Express application generator](/starter/generator) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it can generate apps configured for Handlebars-compatible engines such as [hbs](https://www.npmjs.com/package/hbs), [EJS](https://www.npmjs.com/package/ejs), among others.
 
-To render template files, set the following [application setting properties](/api/application/#appset), in the default `app.js` created by the generator:
+For apps created by the generator, these settings are added to the generated `app.js`. For apps you create without the generator, set the following [application setting properties](/api/application/#appset) yourself:
 
 - `views`，模板文件所在的目录。 例如：`app.set('views', './views')`。
   该配置默认为应用根目录下的`views`目录。
 - `view engine`，要使用的模板引擎。 例如，要使用 Pug 模板引擎：`app.set('view engine', 'pug')`。
 
-然后安装对应的模板引擎 npm 包；例如要安装 Pug：
+Then install the corresponding Express-compatible template engine npm package; for example to install Pug:
 
 <PackageManagerCommand command="npm install pug --save" />
 
@@ -25,6 +25,7 @@ To render template files, set the following [application setting properties](/ap
 符合 Express 规范的模板引擎如 Pug会导出一个名为`__express(filePath, options, callback)`的函数，`res.render()`会调用该函数来渲染模板代码。
 
 有些模板引擎并不遵循此规范。 [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)库遵循此规范，对所有主流Node.js模板引擎进行了统一封装，因此可在Express中无缝使用。
+For example, install [hbs](https://www.npmjs.com/package/hbs) or any other Express-compatible Handlebars view engine instead of the raw `handlebars` package by itself.
 
 </Alert>
 

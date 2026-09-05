@@ -5,7 +5,7 @@ description: Discover how to customize and extend the Express.js API by overridi
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express API は、リクエストオブジェクトとレスポンスオブジェクトのさまざまなメソッドとプロパティで構成されています。 これらはプロトタイプによって継承されます。 Express API には 2 つの拡張ポイントがあります。 These are inherited by prototype. There are two extension points for the Express API:
+The Express API consists of various methods and properties on the [request](/api/request) and [response](/api/response) objects. These are inherited by prototype. There are two extension points for the Express API:
 
 1. `express.request` と `express.response` のグローバルプロトタイプ。
 2. `app.request`と`app.response`でアプリ固有のプロトタイプ。

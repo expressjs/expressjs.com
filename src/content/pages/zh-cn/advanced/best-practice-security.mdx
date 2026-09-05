@@ -63,7 +63,7 @@ Also ensure you are not using any of the vulnerable Express versions listed on t
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {

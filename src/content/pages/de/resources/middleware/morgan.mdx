@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.11.0"
-  github="https://github.com/expresjs/morgan"
+  github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
 
@@ -35,13 +35,13 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 
 ## API
 
-{/* eslint-deaktivieren Sie keine unbenutzten vars */}
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var morgan = require('morgan');
 ```
 
-### morgan(Format, Optionen)
+### morgan(format, options)
 
 Erstelle eine neue morgan logger Middleware-Funktion mit dem angegebenen `format` und `options`.
 Das `format` Argument kann ein String eines vordefinierten Namens sein (siehe unten für die Namen)
@@ -54,7 +54,7 @@ oder `undefined` / `null` sein wird, um die Protokollierung zu überspringen.
 
 #### Eine vordefinierte Format-Zeichenkette verwenden
 
-{/* eslint-Deaktiviere keinen Untoten */}
+{/* eslint-disable no-undef */}
 
 ```js
 morgan('tiny');
@@ -62,7 +62,7 @@ morgan('tiny');
 
 #### Format-Zeichenkette von vordefinierten Tokens verwenden
 
-{/* eslint-Deaktiviere keinen Untoten */}
+{/* eslint-disable no-undef */}
 
 ```js
 morgan(':method :url :status :res[content-length] - :response-time ms');
@@ -70,7 +70,7 @@ morgan(':method :url :status :res[content-length] - :response-time ms');
 
 #### Verwende eine benutzerdefinierte Formatfunktion
 
-{/* eslint-Deaktiviere keinen Untoten */}
+{/* eslint-disable no-undef */}
 
 ```js
 morgan(function (tokens, req, res) {
@@ -88,18 +88,18 @@ morgan(function (tokens, req, res) {
 
 Morgan akzeptiert diese Eigenschaften im Optionsobjekt.
 
-##### sofort
+##### immediate
 
 Schreiben Sie die Logzeile auf Anfrage statt auf Antwort. Dies bedeutet, dass Anfragen
 protokolliert werden, auch wenn der Server abstürzt, _aber Daten aus der Antwort (wie der Antwortcode
 usw.) kann nicht protokolliert werden_.
 
-##### überspringen
+##### skip
 
 Funktion, um festzustellen, ob die Protokollierung übersprungen wird, wird standardmäßig `false` verwendet. Diese Funktion
 wird als `skip(req, res)` aufgerufen.
 
-{/* eslint-Deaktiviere keinen Untoten */}
+{/* eslint-disable no-undef */}
 
 ```js
 // EXAMPLE: only log error responses
@@ -110,7 +110,7 @@ morgan('combined', {
 });
 ```
 
-##### streamen
+##### stream
 
 Ausgabe-Stream zum Schreiben von Logzeilen, standardmäßig `process.stdout`.
 
@@ -118,7 +118,7 @@ Ausgabe-Stream zum Schreiben von Logzeilen, standardmäßig `process.stdout`.
 
 Es werden verschiedene vordefinierte Formate bereitgestellt:
 
-##### kombiniert
+##### combined
 
 Standard Apache kombinierte Logausgabe.
 
@@ -128,7 +128,7 @@ Standard Apache kombinierte Logausgabe.
 ::1 - - [27/Nov/2024:06:21:42 +0000] "GET /combined HTTP/1.1" 200 2 "-" "curl/8.7.1"
 ```
 
-##### häufig
+##### common
 
 Standard Apache gemeinsame Protokollausgabe.
 
@@ -138,7 +138,7 @@ Standard Apache gemeinsame Protokollausgabe.
 ::1 - - [27/Nov/2024:06:21:46 +0000] "GET /common HTTP/1.1" 200 2
 ```
 
-##### dew
+##### dev
 
 Existiert die Ausgabe, die nach Antwortstatus für die Entwicklungsanwendung gefärbt wird. Der `:status`
 Token wird grün für Erfolgscodes eingefärbt, rot für Server-Fehlercodes,
@@ -151,7 +151,7 @@ für Informationscodes.
 GET /dev 200 0.224 ms - 2
 ```
 
-##### kurz
+##### short
 
 Kürzer als Standardwert, auch mit Antwortzeit.
 
@@ -161,7 +161,7 @@ Kürzer als Standardwert, auch mit Antwortzeit.
 ::1 - GET /short HTTP/1.1 200 2 - 0.283 ms
 ```
 
-##### winzig
+##### tiny
 
 Die minimale Ausgabe.
 
@@ -179,7 +179,7 @@ Um ein Token zu definieren, rufen Sie einfach `morgan.token()` mit dem Namen und
 Diese Callback-Funktion wird voraussichtlich einen String-Wert zurückgeben. Der zurückgegebene Wert ist dann
 verfügbar als ":type" in diesem Fall:
 
-{/* eslint-Deaktiviere keinen Untoten */}
+{/* eslint-disable no-undef */}
 
 ```js
 morgan.token('type', function (req, res) {
@@ -200,11 +200,11 @@ Das aktuelle Datum und die Uhrzeit in UTC. Die verfügbaren Formate sind:
 
 - `clf` für das gemeinsame Protokollformat (`"10/Oct/2000:13:55:36 +0000"`)
 - `iso` für das gemeinsame ISO 8601 Datumsformat (`2000-10-10T13:55:36.000Z`)
-- `web` für das übliche RFC 1123 Datumsformat (`Die, 10 Okt 2000 13:55:36 GMT`)
+- `web` für das übliche RFC 1123 Datumsformat (`Tue, 10 Oct 2000 13:55:36 GMT`)
 
 Wenn kein Format angegeben ist, dann ist der Standard `web`.
 
-##### :http-Version
+##### :http-version
 
 Die HTTP-Version der Anfrage.
 
@@ -224,7 +224,7 @@ Der Referrer-Header der Anfrage. Dies wird den Standard-falsch geschriebenen Ref
 
 Die entfernte Adresse der Anfrage. Dies wird `req.ip` verwenden, andernfalls der Standardwert `req.connection.remoteAddress` (Socket-Adresse).
 
-##### :Remote-Benutzer
+##### :remote-user
 
 Der Benutzer hat sich als Teil des Basic auth für die Anfrage authentifiziert.
 
@@ -238,7 +238,7 @@ Wert im Log als `"-"` angezeigt.
 Der angegebene `header` der Antwort. Wenn der Header nicht vorhanden ist, wird der
 Wert im Log als `"-"` angezeigt.
 
-##### :Antwortzeit[digits]
+##### :response-time[digits]
 
 Die Zeit zwischen der Anfrage, die in `morgan` eintrifft, und der Antwort-
 -Header in Millisekunden.
@@ -254,7 +254,7 @@ Wenn der Anfrage/Antwortzyklus abgeschlossen ist, bevor eine Antwort an den
 Client gesendet wurde (zum Beispiel der TCP-Socket wurde vorzeitig von einem Client geschlossen, der
 die Anfrage abbrecht), dann wird der Status leer sein (wird als `"-"` im Log angezeigt).
 
-##### :Gesamtzeit[digits]
+##### :total-time[digits]
 
 Die Zeit zwischen der Anfrage, die in `morgan` eintrifft, und wenn die Antwort
 beendet ist, wird in Millisekunden auf die Verbindung geschrieben.
@@ -266,7 +266,7 @@ enthalten ist für die Zahl, Standardwert ist `3`, was die Genauigkeit der Mikro
 
 Die URL der Anfrage. Dies wird `req.originalUrl` verwenden, wenn vorhanden, andernfalls `req.url`.
 
-##### :user-Agent
+##### :user-agent
 
 Der Inhalt des User-Agent-Headers der Anfrage.
 
@@ -278,7 +278,7 @@ Token sind Referenzen von `:token-name`. Wenn Tokens Argumente akzeptieren, kön
 mit `[]` übergeben werden, zum Beispiel: `:token-name[pretty]` würde den String
 `'pretty'` als Argument an den Token `token-name` übergeben.
 
-Die Funktion kam von `morgan. ompile` verwendet drei Argumente `tokens`, `req` und
+Die Funktion kam von `morgan.compile` verwendet drei Argumente `tokens`, `req` und
 `res`, wobei `tokens` Objekt mit allen definierten Tokens ist, `req` ist die HTTP-Anfrage und
 `res` ist die HTTP-Antwort. Die Funktion gibt einen String zurück, der die Log-Zeile,
 oder `undefined` / `null` sein wird, um die Protokollierung zu überspringen.
@@ -288,7 +288,7 @@ erweiterte Anwendungen ist diese Kompilierungsfunktion direkt verfügbar.
 
 ## Beispiele
 
-### ausdrucken/verbinden
+### express/connect
 
 Beispiel-App, die alle Anfragen im Apache kombinierten Format in STDOUT protokolliert
 
