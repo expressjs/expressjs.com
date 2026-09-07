@@ -20,4 +20,4 @@ Versões que são EOL (fim de vida) _pode_ receber atualizações de vulnerabili
 
 Se você não puder atualizar para uma versão suportada do Express, entre em contato com um de nossos parceiros para receber atualizações de segurança:
 
-- [Suporte para HeroDevs Final Interminável](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
+- [Suporte para HeroDevs Final Interminável](https://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
