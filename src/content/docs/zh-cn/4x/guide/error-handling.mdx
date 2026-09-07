@@ -55,13 +55,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-从 Express 5 开始，返回 Promise 的路由处理程序和中间件在拒绝（reject）或抛出错误时，将自动调用 `next(value)`。
-举个例子：
+Errors from rejected promises are not passed to `next` automatically, and this includes `async` functions: if an `async` route handler throws or awaits a rejected promise, the rejection is unhandled, which crashes the process on current Node.js versions. You must catch the error yourself and pass it to Express:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
@@ -69,12 +72,22 @@ app.get('/user/:id', async (req, res, next) => {
 import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
-如果 `getUserById` 抛出错误或被拒绝（reject），`next` 将会使用抛出的错误或被拒绝的值来调用。 如果未提供拒绝值，则会使用 Express 路由内置的默认错误对象调用 `next`。
+<Alert type="info">
+
+Consider [updating to Express 5](/guide/migrating-5), where route handlers and middleware that
+return a Promise call `next(value)` automatically when they reject or throw an error, making the
+`try...catch` above unnecessary.
+
+</Alert>
 
 如果向 `next()` 传入任意参数（字符串 `'route'` 除外），Express 会将当前请求视作出错，并跳过后续所有非错误处理的路由与中间件函数。
 
@@ -160,7 +173,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-由于 Promise 会自动捕获同步错误和被拒绝的 Promise，你只需将 `next` 作为最终的 catch 处理程序传入即可，Express 会捕获错误，因为 catch 处理程序会将错误作为第一个参数传入。
+If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
 
 你也可以使用处理程序链，将异步代码简化为简单逻辑，从而依靠同步错误捕获机制。 举个例子：
 
@@ -196,7 +209,8 @@ app.get('/', [
 ]);
 ```
 
-上述示例包含几条来自 `readFile` 调用的简单语句。 如果 `readFile` 引发错误，则会将错误传递给 Express；否则你将迅速回到处理程序链中下一个处理函数的同步错误处理流程。 然后，上述示例会尝试处理数据。 如果此过程失败，同步错误处理程序将会捕获该错误。 如果你将此处理逻辑写在 `readFile` 回调函数内部，应用程序可能会直接退出，Express 错误处理程序将无法执行。
+The above example contains a couple of trivial statements following the `readFile`
+call. 如果 `readFile` 引发错误，则会将错误传递给 Express；否则你将迅速回到处理程序链中下一个处理函数的同步错误处理流程。 然后，上述示例会尝试处理数据。 如果此过程失败，同步错误处理程序将会捕获该错误。 如果你将此处理逻辑写在 `readFile` 回调函数内部，应用程序可能会直接退出，Express 错误处理程序将无法执行。
 
 无论你使用哪种方法，若希望 Express 错误处理程序被调用且应用程序持续运行，必须确保 Express 能够接收到错误。
 
@@ -378,7 +392,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
 
-Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

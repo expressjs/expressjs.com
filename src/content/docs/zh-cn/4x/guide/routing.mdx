@@ -7,14 +7,16 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 **路由**是指应用程序的端点（URI）如何响应客户端的请求。
 For an introduction to routing, see [Basic routing](/starter/basic-routing).
+For an introduction to routing, see [Basic routing](/starter/basic-routing).
 
 你可以使用 Express `app` 对象中与 HTTP 方法对应的方法来定义路由；
 例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 For a full list,
 see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method. 换句话说，应用程序会“监听”匹配指定路由和方法的请求，当检测到匹配时，就会调用指定的回调函数。
+换句话说，应用程序会“监听”匹配指定路由和方法的请求，当检测到匹配时，就会调用指定的回调函数。 These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method.
 
+事实上，路由方法可以接受多个回调函数作为参数。
 事实上，路由方法可以接受多个回调函数作为参数。
 对于多个回调函数，务必在回调函数中传入`next`作为参数，然后在函数体内调用`next()`，将控制权传递给下一个回调函数。
 
@@ -84,10 +86,13 @@ app.post('/', (req: Request, res: Response) => {
 });
 ```
 
-Express 支持对应于所有 HTTP 请求方法的方法：get、post 等。
-For a full list, see [app.METHOD](/api/application#appmethod).
+你可以使用 Express `app` 对象中与 HTTP 方法对应的方法来定义路由；
+例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 For a full list,
+see [app.METHOD](/api/application#appmethod).
+You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
-有一种特殊的路由方法 **app.all()**，用于为某一路径加载所有 HTTP 请求方法通用的中间件函数。 For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+有一种特殊的路由方法 **app.all()**，用于为某一路径加载所有 HTTP 请求方法通用的中间件函数。 For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods). For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `QUERY`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#httpmethods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -107,7 +112,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 ## Route paths
 
-路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串、字符串模式或正则表达式。
+路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串、字符串模式或正则表达式。 路由路径与请求方法结合，定义了可以接收请求的端点。 路由路径可以是字符串或正则表达式。 They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
 <Alert type="info">
 
@@ -234,6 +239,26 @@ app.get('/ab(cd)?e', (req: Request, res: Response) => {
 });
 ```
 
+A wildcard (`*`) on its own matches anything at its position, including entire subpaths. For example, this route path will match `/file/style.css` as well as `/file/javascripts/jquery.js`. Wildcards are unnamed, so the matched value is available as `req.params[0]` instead of a named parameter.
+
+```js
+app.get('/file/*', (req, res) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/file/*', (req: Request, res: Response) => {
+  // GET /file/javascripts/jquery.js
+  res.send(req.params[0]);
+  // => 'javascripts/jquery.js'
+});
+```
+
 ### 基于正则表达式的路由路径
 
 <Alert type="alert">
@@ -276,7 +301,7 @@ app.get(/.*fly$/, (req: Request, res: Response) => {
 
 ## Route parameters
 
-路由参数是命名式URL片段，用于捕获URL中对应位置所指定的值。 捕获的值会存入`req.params`对象，路径中定义的路由参数名作为该对象对应的键名。
+路由参数是命名式URL片段，用于捕获URL中对应位置所指定的值。 捕获的值会存入`req.params`对象，路径中定义的路由参数名作为该对象对应的键名。 They come in three forms: [named parameters](#named-parameters) (`:name`), [wildcards](#wildcards) (`*name`), and [optional segments](#optional-segments), which wrap either of them in braces. 捕获的值会存入`req.params`对象，路径中定义的路由参数名作为该对象对应的键名。
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -347,9 +372,17 @@ characters with an additional backslash, for example `\d+`.
 The [`*`](https://github.com/expressjs/express/issues/2495) character in regular expressions is not interpreted in the usual way. 作为替代方案，可用`{0,}`替代`*`。
 </Alert>
 
+Unlike named route parameters, wildcard (`*`) matches in [string patterns](#route-paths-based-on-string-patterns) and capture groups in regular expressions are unnamed: their values are available by position, as `req.params[0]`, `req.params[1]`, and so on.
+
+```
+Route path: /file/*/size/*
+Request URL: http://localhost:3000/file/javascripts/jquery.js/size/large
+req.params: { "0": "javascripts/jquery.js", "1": "large" }
+```
+
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. 唯一的例外是这些回调函数可以调用 `next('route')` 来跳过剩余的路由回调。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。
+You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. 唯一的例外是这些回调函数可以调用 `next('route')` 来跳过剩余的路由回调。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -402,7 +435,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-多个回调函数可以处理同一个路由（请确保你指定了 `next` 对象）。 举个例子：
+多个回调函数可以处理同一个路由（请确保你指定了 `next` 对象）。 举个例子： 举个例子：
 
 ```js
 app.get(
@@ -526,7 +559,7 @@ app.get(
 
 ## Response methods
 
-下表中的响应对象（`res`）方法可向客户端发送响应，并终止请求-响应循环。 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。
 
 | Method                                          | 描述                                                 |
 | ----------------------------------------------- | ---------------------------------------------------- |
@@ -543,7 +576,8 @@ app.get(
 ## app.route()
 
 你可以使用 `app.route()` 为路由路径创建可链式调用的路由处理程序。
-由于路径在单个位置指定，因此创建模块化路由十分有用，同时还能减少冗余和拼写错误。 For more information about routes, see: [Router() documentation](/api/router).
+你可以使用 `app.route()` 为路由路径创建可链式调用的路由处理程序。
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 以下是使用 `app.route()` 定义的链式路由处理程序示例。
 
@@ -579,9 +613,9 @@ app
 
 ## express.Router
 
-使用 `express.Router` 类创建模块化、可挂载的路由处理程序。 `Router` 实例是一个完整的中间件和路由系统；因此，它通常被称为“迷你应用”。
+使用 `express.Router` 类创建模块化、可挂载的路由处理程序。 使用 `express.Router` 类创建模块化、可挂载的路由处理程序。 `Router` 实例是一个完整的中间件和路由系统；因此，它通常被称为“迷你应用”。The following example creates a router as a module, loads a middlew
 
-以下示例创建一个路由模块，在其中加载中间件函数、定义若干路由，并将该路由模块挂载到主应用的指定路径上。
+以下示例创建一个路由模块，在其中加载中间件函数、定义若干路由，并将该路由模块挂载到主应用的指定路径上。Create a router file named `birds.js` in the app directory, with th
 
 在应用目录中创建一个名为 `birds.js` 的路由文件，内容如下：
 
@@ -676,7 +710,7 @@ app.use('/birds', birds);
 
 应用现在将能够处理指向 `/birds` 和 `/birds/about` 的请求，同时会调用该路由专用的 `timeLog` 中间件函数。
 
-但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application#appuse).
+但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

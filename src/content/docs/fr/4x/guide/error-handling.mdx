@@ -62,14 +62,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-À partir de Express 5, les gestionnaires de route et les middleware qui retournent une Promise
-appelleront automatiquement `next(value)` quand ils rejettent ou lancent une erreur.
-Par exemple :
+Errors from rejected promises are not passed to `next` automatically, and this includes `async` functions: if an `async` route handler throws or awaits a rejected promise, the rejection is unhandled, which crashes the process on current Node.js versions. You must catch the error yourself and pass it to Express:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
@@ -77,14 +79,22 @@ app.get('/user/:id', async (req, res, next) => {
 import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
-Si `getUserById` lance une erreur ou un rejet, `next` sera appelé avec soit
-l'erreur émise ou la valeur rejetée. Si aucune valeur rejetée n'est fournie, `next`
-sera appelée avec un objet Error par défaut fourni par le routeur Express.
+<Alert type="Infos">
+
+Consider [updating to Express 5](/guide/migrating-5), where route handlers and middleware that
+return a Promise call `next(value)` automatically when they reject or throw an error, making the
+`try...catch` above unnecessary.
+
+</Alert>
 
 If you pass anything to the `next()` function (except the string `'route'`),
 Express regards the current request as being an error and will skip any
@@ -180,9 +190,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Puisque les promesses attrapent automatiquement à la fois les erreurs synchrones et les promesses rejetées,
-vous pouvez simplement fournir `next` car le gestionnaire de capture final et Express attrapera des erreurs,
-parce que le gestionnaire de capture est donné l'erreur comme premier argument.
+If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
 
 Vous pouvez également utiliser une chaîne de gestionnaires pour vous fier à l'erreur synchrone
 attrapant, en réduisant le code asynchrone à quelque chose de trivial. Par exemple :
@@ -219,8 +227,8 @@ app.get('/', [
 ]);
 ```
 
-L'exemple ci-dessus a quelques déclarations triviales de l'appel `readFile`
-. Si `readFile` cause une erreur, alors il passe l'erreur à Express, sinon vous
+The above example contains a couple of trivial statements following the `readFile`
+call. Si `readFile` cause une erreur, alors il passe l'erreur à Express, sinon vous
 revenez rapidement au monde de la gestion des erreurs synchrones dans le prochain gestionnaire
 de la chaîne. Ensuite, l'exemple ci-dessus tente de traiter les données. Si cela échoue, alors le gestionnaire d'erreurs synchrone
 l'attrapera. Si vous aviez fait ce traitement à l'intérieur de
@@ -424,7 +432,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 Aussi dans cet exemple, `clientErrorHandler` est défini comme suit ; dans ce cas, l'erreur est explicitement passée au suivant.
 
-Notez que lorsque _not_ appelez "next" dans une fonction de gestion des erreurs, vous êtes responsable de l'écriture (et de la fin) de la réponse. Sinon, ces demandes seront « bloquées » et ne seront pas admissibles au ramassage des déchets.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Sinon, ces demandes seront « bloquées » et ne seront pas admissibles au ramassage des déchets.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

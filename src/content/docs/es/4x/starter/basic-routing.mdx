@@ -4,6 +4,7 @@ description: Aprenda los fundamentos de la enrutamiento en aplicaciones Express.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Enrutamiento_ se refiere a determinar cómo responde una aplicación a una solicitud de cliente a un punto final en particular, que es una URI (o ruta) y un método específico de petición HTTP (GET, POST, etc.).
 
@@ -96,4 +97,8 @@ app.delete('/user', (req: Request, res: Response) => {
 });
 ```
 
-Para más detalles sobre enrutamiento, vea la [guía de enrutamiento](/guide/routing).
+<ReadMore>
+
+For more details about routing, see the [Routing](/guide/routing) guide.
+
+</ReadMore>

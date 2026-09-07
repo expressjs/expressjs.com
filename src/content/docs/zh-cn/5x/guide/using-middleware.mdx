@@ -5,19 +5,24 @@ description: 了解如何在 Express.js 应用中使用中间件，包括应用�
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
-Express 是一款路由与中间件 Web 框架，自身仅提供极简的基础功能：一个 Express 应用本质上就是一连串中间件函数的调用。
+Express is a routing and middleware web framework with minimal functionality of its own: an Express application is essentially a series of middleware function calls executed during the request-response cycle.
 
-_Middleware_ functions are functions that have access to the [request object](/api#req) (`req`), the [response object](/api#res) (`res`), and the next middleware function in the application's request-response cycle. 下一个中间件函数通常使用名为`next`的变量来表示。
+_Middleware_ functions are functions that have access to:
+
+- The [request object](/api/request) (`req`)
+- The [response object](/api/response) (`res`)
+- The next middleware function in the application's request-response cycle, commonly named `next`
 
 中间件函数可执行下列任务：
 
 - 执行任意代码。
-- 修改请求对象与响应对象。
+- Modify the request and response objects.
 - 终止请求-响应周期。
-- 调用栈中的下一个中间件函数。
+- Pass control to the next middleware function.
 
-如果当前中间件函数没有终止请求-响应周期，它必须调用 `next()` 以将控制权传递给下一个中间件函数。 否则，请求将会被挂起。
+If a middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. 否则，请求将会被挂起。
 
 Express 应用可以使用以下类型的中间件：
 
@@ -27,14 +32,15 @@ Express 应用可以使用以下类型的中间件：
 - [Built-in middleware](#middleware.built-in)
 - [Third-party middleware](#middleware.third-party)
 
-你可以通过可选的挂载路径加载应用级中间件和路由级中间件。
-你也可以同时加载一系列中间件函数，这会在挂载点处创建中间件系统的一个子栈。
+你可以通过可选的挂载路径加载应用级中间件和路由级中间件。 Multiple middleware functions can also be loaded together, which creates a middleware sub-stack at a mount point.
 
 ## 应用级中间件
 
-Bind application-level middleware to an instance of the [app object](/api#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
+Bind application-level middleware to an instance of the [app object](/api/application) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the lowercase HTTP method of the request that the middleware function handles, such as `get`, `post`, `put`, or `delete`.
 
-本示例展示了一个没有挂载路径的中间件函数。 每当应用接收请求时，该函数都会被执行。
+### Middleware without a mount path
+
+The following middleware function runs every time the app receives a request:
 
 ```cjs title="index.cjs"
 const express = require('express');
@@ -68,7 +74,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-本示例展示了一个挂载在 `/user/:id` 路径上的中间件函数。 只要是发往 `/user/:id` 路径的任意类型 HTTP 请求，都会执行该中间件函数。
+### Middleware mounted on a path
+
+The following middleware function runs for any type of HTTP request on the `/user/:id` path:
 
 ```js
 app.use('/user/:id', (req, res, next) => {
@@ -86,24 +94,27 @@ app.use('/user/:id', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
+### Route handlers
+
 该示例展示了一条路由及其处理函数（中间件体系）。 该函数处理指向 `/user/:id` 路径的 GET 请求。
 
 ```js
-app.get('/user/:id', (req, res, next) => {
+app.get('/user/:id', (req, res) => {
   res.send('USER');
 });
 ```
 
 ```ts
-import { type Request, type Response, type NextFunction } from 'express';
+import { type Request, type Response } from 'express';
 
-app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   res.send('USER');
 });
 ```
 
-下面是在指定挂载路径的挂载点加载一系列中间件函数的示例。
-该示例演示了一个中间件子栈，会对所有访问 `/user/:id` 路径的各类 HTTP 请求打印请求信息。
+### Middleware sub-stacks
+
+Multiple middleware functions can be loaded together at a mount point to form a middleware sub-stack. This example prints request info for any type of HTTP request to the `/user/:id` path:
 
 ```js
 app.use(
@@ -134,11 +145,11 @@ app.use(
   }
 );
 ```
+
+### Multiple route handlers
 
 路由处理程序支持为同一个路径定义多条路由。 下面的示例为 `/user/:id` 路径的 GET 请求定义了两条路由。 第二条路由不会报错，但永远不会被执行，因为第一条路由已经结束了请求-响应周期。
 
-该示例展示了一个中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
-
 ```js
 app.get(
   '/user/:id',
@@ -146,13 +157,13 @@ app.get(
     console.log('ID:', req.params.id);
     next();
   },
-  (req, res, next) => {
+  (req, res) => {
     res.send('User Info');
   }
 );
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', (req, res, next) => {
+app.get('/user/:id', (req, res) => {
   res.send(req.params.id);
 });
 ```
@@ -166,18 +177,20 @@ app.get(
     console.log('ID:', req.params.id);
     next();
   },
-  (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response) => {
     res.send('User Info');
   }
 );
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   res.send(req.params.id);
 });
 ```
 
-若要跳过路由中间件栈中剩余的中间件函数，调用 `next('route')` 即可将控制权传递给下一条路由。
+### Skipping to the next route
+
+Call `next('route')` to skip the remaining middleware functions in a router middleware stack and pass control to the next route.
 
 <Alert type="info">
 
@@ -185,7 +198,7 @@ app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
 
 </Alert>
 
-该示例展示了一个中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
+In the following example, if the user ID is `0`, the first handler skips to the next route, which sends a special response:
 
 ```js
 app.get(
@@ -196,14 +209,14 @@ app.get(
     // otherwise pass the control to the next middleware function in this stack
     else next();
   },
-  (req, res, next) => {
+  (req, res) => {
     // send a regular response
     res.send('regular');
   }
 );
 
 // handler for the /user/:id path, which sends a special response
-app.get('/user/:id', (req, res, next) => {
+app.get('/user/:id', (req, res) => {
   res.send('special');
 });
 ```
@@ -219,21 +232,21 @@ app.get(
     // otherwise pass the control to the next middleware function in this stack
     else next();
   },
-  (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response) => {
     // send a regular response
     res.send('regular');
   }
 );
 
 // handler for the /user/:id path, which sends a special response
-app.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+app.get('/user/:id', (req: Request, res: Response) => {
   res.send('special');
 });
 ```
 
-中间件也可以定义在数组中，实现复用。
+### Reusable middleware arrays
 
-该示例展示了一个使用数组封装的中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
+Middleware functions can also be grouped into arrays for better reusability. 该示例展示了一个使用数组封装的中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
 
 ```js
 function logOriginalUrl(req, res, next) {
@@ -247,7 +260,7 @@ function logMethod(req, res, next) {
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app.get('/user/:id', logStuff, (req, res, next) => {
+app.get('/user/:id', logStuff, (req, res) => {
   res.send('User Info');
 });
 ```
@@ -266,14 +279,14 @@ function logMethod(req: Request, res: Response, next: NextFunction) {
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app.get('/user/:id', logStuff, (req: Request, res: Response, next: NextFunction) => {
+app.get('/user/:id', logStuff, (req: Request, res: Response) => {
   res.send('User Info');
 });
 ```
 
 ## 路由级中间件
 
-路由级中间件的工作方式与应用级中间件完全相同，唯一区别是它绑定到 `express.Router()` 的实例上。
+Router-level middleware works the same way as application-level middleware, except it is bound to an instance of `express.Router()`.
 
 ```js
 const router = express.Router();
@@ -317,19 +330,19 @@ router.use(
 router.get(
   '/user/:id',
   (req, res, next) => {
-    // if the user ID is 0, skip to the next router
+    // if the user ID is 0, skip to the next route
     if (req.params.id === '0') next('route');
     // otherwise pass control to the next middleware function in this stack
     else next();
   },
-  (req, res, next) => {
+  (req, res) => {
     // render a regular page
     res.render('regular');
   }
 );
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', (req, res, next) => {
+router.get('/user/:id', (req, res) => {
   console.log(req.params.id);
   res.render('special');
 });
@@ -367,19 +380,19 @@ router.use(
 router.get(
   '/user/:id',
   (req, res, next) => {
-    // if the user ID is 0, skip to the next router
+    // if the user ID is 0, skip to the next route
     if (req.params.id === '0') next('route');
     // otherwise pass control to the next middleware function in this stack
     else next();
   },
-  (req, res, next) => {
+  (req, res) => {
     // render a regular page
     res.render('regular');
   }
 );
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', (req, res, next) => {
+router.get('/user/:id', (req, res) => {
   console.log(req.params.id);
   res.render('special');
 });
@@ -417,19 +430,19 @@ router.use(
 router.get(
   '/user/:id',
   (req: Request, res: Response, next: NextFunction) => {
-    // if the user ID is 0, skip to the next router
+    // if the user ID is 0, skip to the next route
     if (req.params.id === '0') next('route');
     // otherwise pass control to the next middleware function in this stack
     else next();
   },
-  (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response) => {
     // render a regular page
     res.render('regular');
   }
 );
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
+router.get('/user/:id', (req: Request, res: Response) => {
   console.log(req.params.id);
   res.render('special');
 });
@@ -438,9 +451,11 @@ router.get('/user/:id', (req: Request, res: Response, next: NextFunction) => {
 app.use('/', router);
 ```
 
-若要跳过当前路由实例中剩余的中间件函数，调用 `next('router')` 即可将控制权交回给路由实例。
+### Skipping out of a router
 
-该示例展示了一个中间件子栈，用于处理 `/user/:id` 路径的 GET 请求。
+Use `next('router')` to skip the rest of the router's middleware functions and pass control back out of the router instance.
+
+In the following example, the router only responds when the request includes an `x-auth` header. Otherwise, `next('router')` exits the router and the app responds with a 401 status:
 
 ```cjs title="index.cjs"
 const express = require('express');
@@ -509,12 +524,6 @@ app.use('/admin', router, (req: Request, res: Response) => {
 
 ## 错误处理中间件
 
-<Alert type="alert">
-
-错误处理中间件始终接收**四个**参数。 你必须传入**四个参数**，才能将其标识为错误处理中间件函数。 即使你不需要使用 `next` 对象，也必须声明它，以保持函数签名不变。 否则，`next` 对象会被解析为常规中间件，从而无法处理错误。
-
-</Alert>
-
 定义错误处理中间件函数的方式与其他中间件一致，唯一区别是它接收四个参数而非三个，标准函数签名为：`(err, req, res, next)`。
 
 ```js
@@ -533,17 +542,27 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-For details about error-handling middleware, see: [Error handling](/guide/error-handling).
+<Alert type="alert">
+
+错误处理中间件始终接收**四个**参数。 你必须传入**四个参数**，才能将其标识为错误处理中间件函数。 即使你不需要使用 `next` 对象，也必须声明它，以保持函数签名不变。 否则，`next` 对象会被解析为常规中间件，从而无法处理错误。
+
+</Alert>
+
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## 内置中间件
-
-从 4.x 版本开始，Express 不再依赖 [Connect](https://github.com/senchalabs/connect)。 之前包含在 Express 中的中间件函数，现在已经拆分到独立的模块中；查看[中间件函数列表](https://github.com/senchalabs/connect#middleware)。
 
 Express 包含以下内置中间件函数：
 
 - [express.static](/api/express/#expressstatic) serves static assets such as HTML files, images, and so on.
-- [express.json](/api/express/#expressjson) parses incoming requests with JSON payloads. **注意：此功能仅在 Express 4.16.0 及以上版本可用**
-- [express.urlencoded](/api/express/#expressurlencoded) parses incoming requests with URL-encoded payloads. **注意：此功能仅在 Express 4.16.0 及以上版本可用**
+- [express.json](/api/express/#expressjson) parses incoming requests with JSON payloads.
+- [express.raw](/api/express/#expressraw) parses incoming requests with Buffer payloads.
+- [express.text](/api/express/#expresstext) parses incoming requests with text payloads.
+- [express.urlencoded](/api/express/#expressurlencoded) parses incoming requests with URL-encoded payloads.
 
 ## 第三方中间件
 
@@ -584,4 +603,8 @@ const app: Express = express();
 app.use(cookieParser());
 ```
 
-如需查看可配合 Express 使用的常用第三方中间件部分清单，请参阅：[第三方中间件](/resources/middleware)。
+<ReadMore>
+
+For a partial list of third-party middleware functions that are commonly used with Express, see the [Third-party middleware](/resources/middleware) page.
+
+</ReadMore>

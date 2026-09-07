@@ -1,5 +1,5 @@
 ---
-title: errorhandler middleware
+title: errorhandler Middleware
 description: Middleware für Entwicklungsfehler
 ---
 
@@ -9,15 +9,15 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.5.2"
-  github="https://github.com/express js/errorhandler"
+  github="https://github.com/expressjs/errorhandler"
   npm="https://www.npmjs.com/package/errorhandler"
 />
 
 Middleware für den Entwicklungs-only Fehlerhandler.
 
 Diese Middleware ist nur für eine Entwicklungsumgebung gedacht als
-werden die \_full error stack Traces und die internen Details eines Objekts, das an dieses
-Modul übergeben wurde, an den Client zurückgeschickt, wenn ein Fehler auftritt.
+werden die _full error stack Traces und die internen Details eines Objekts, das an dieses
+Modul übergeben wurde_, an den Client zurückgeschickt, wenn ein Fehler auftritt.
 
 Wenn Express ein Objekt als Fehler zur Verfügung gestellt wird, wird dieses Modul
 so viel über dieses Objekt wie möglich anzeigen und wird dies durch die Verwendung von Inhaltsaushandlung
@@ -49,7 +49,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 
 ## API
 
-{/* eslint-deaktivieren Sie keine unbenutzten vars */}
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var errorhandler = require('errorhandler');
@@ -106,7 +106,7 @@ if (process.env.NODE_ENV === 'development') {
 Manchmal möchten Sie die Fehler während der Entwicklung an einen anderen Ort als STDERR
 ausgeben, wie zum Beispiel eine Systembenachrichtigung.
 
-{/* Elint-Deaktiviere Handle-callback-err */}
+{/* eslint-disable handle-callback-err */}
 
 ```js
 var connect = require('connect');

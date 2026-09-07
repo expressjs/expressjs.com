@@ -3,6 +3,8 @@ title: FAQ
 description: Encuentre respuestas a preguntas frecuentes sobre Express.js, incluyendo temas sobre estructura de aplicaciones, modelos, autenticación, motores de plantillas, manejo de errores, y más.
 ---
 
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
+
 ## ¿Cómo debo estructurar mi aplicación?
 
 No hay una respuesta definitiva a esta pregunta. La respuesta depende
@@ -42,7 +44,11 @@ Para normalizar las interfaces del motor de plantillas y la caché, consulte el 
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 para obtener soporte. Los motores de plantillas no listados pueden seguir soportando la firma Express.
 
-Para obtener más información, consulte [Usar motores de plantilla con Express](/guide/using-template-engines).
+<ReadMore>
+
+For more information, see the [Using template engines with Express](/guide/using-template-engines) guide.
+
+</ReadMore>
 
 ## ¿Cómo puedo manejar las respuestas 404?
 
@@ -92,7 +98,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Para más información, vea [Gestión de errores](/en/guide/error-handling).
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## ¿Cómo renderizo HTML plano?
 

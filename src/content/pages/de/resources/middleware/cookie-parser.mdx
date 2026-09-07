@@ -1,5 +1,5 @@
 ---
-title: cookie-Parser Middleware
+title: cookie-parser Middleware
 description: HTTP-Anfrage-Cookies analysieren
 ---
 
@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.4.7"
-  github="https://github.com/express js/cookie-parser"
+  github="https://github.com/expressjs/cookie-parser"
   npm="https://www.npmjs.com/package/cookie-parser"
 />
 
@@ -36,7 +36,7 @@ Middleware verwendet werden kann.
 var cookieParser = require('cookie-parser');
 ```
 
-### cookieParser(geheim, Optionen)
+### cookieParser(secret, options)
 
 Erstelle eine neue Cookie-Parser-Middleware-Funktion mit den angegebenen `secret` und
 `options`.
@@ -47,10 +47,10 @@ Erstelle eine neue Cookie-Parser-Middleware-Funktion mit den angegebenen `secret
   das Cookie mit jedem Geheimnis in der Reihenfolge zu entfernen.
 - `options` ein Objekt, das als zweite Option an `cookie.parse` übergeben wird. Siehe
   [cookie](https://www.npmjs.org/package/cookie) für weitere Informationen.
-  - `decodieren` eine Funktion, um den Wert des Cookies zu dekodieren
+  - `decode` eine Funktion, um den Wert des Cookies zu dekodieren
 
 Die Middleware analysiert den `Cookie`-Header auf Anfrage und legt die Cookie-Daten
-als Eigenschaft `req. ookies` und, wenn ein `secret` angegeben wurde, als
+als Eigenschaft `req.cookies` und, wenn ein `secret` angegeben wurde, als
 die Eigenschaft `req.signedCookies`. Diese Eigenschaften sind Namen-Wert-Paare des
 Cookie-Namens zum Cookie-Wert.
 
@@ -70,13 +70,13 @@ als Ergebnis von `JSON.parse` angezeigt. Wenn das Parsen fehlschlägt, bleibt de
 Analysieren Sie einen Cookie-Wert als JSON-Cookie. Dies gibt den geparsten JSON-Wert
 zurück, wenn es ein JSON-Cookie war, andernfalls wird der übergebene Wert zurückgegeben.
 
-### cookieParser.JSONCookies(Cookies)
+### cookieParser.JSONCookies(cookies)
 
 Wird ein Objekt angegeben, wird es über die Schlüssel iterieren und `JSONCookie` auf jeden
 Wert aufrufen, wodurch der ursprüngliche Wert durch den analysierten Wert ersetzt wird. Dies gibt das gleiche
 Objekt zurück, das weitergegeben wurde.
 
-### cookieParser.signedCookie(str, geheim)
+### cookieParser.signedCookie(str, secret)
 
 Parsen Sie einen Cookie-Wert als signiertes Cookie. Dies gibt den parsed unsignierten Wert
 zurück, wenn es ein signiertes Cookie war und die Signatur gültig war. Wenn der Wert
@@ -87,7 +87,7 @@ Das `secret` Argument kann ein Array oder ein String sein. Wenn eine Zeichenkett
 als Geheimnis verwendet. Wenn ein Array zur Verfügung gestellt wird, wird versucht
 das Cookie mit jedem Geheimnis in der Reihenfolge zu entfernen.
 
-### cookieParser.signedCookies(Cookies, geheim)
+### cookieParser.signedCookies(cookies, secret)
 
 Wenn ein Objekt angegeben wird, wird dies über die Schlüssel iteriert und überprüft, ob ein
 signierter Cookie ist. Wenn es ein signiertes Cookie ist und die Signatur gültig ist, der Schlüssel
@@ -124,4 +124,4 @@ app.listen(8080);
 
 [MIT](https://github.com/expressjs/cookie-parser/blob/HEAD/LICENSE)
 
-[npm-url]: https://npmjs.org/package/cookie-Parser
+[npm-url]: https://npmjs.org/package/cookie-parser

@@ -4,6 +4,7 @@ description: Express.jsアプリケーションでルーティングの基礎を
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Routing_ は、アプリケーションが特定のエンドポイントに対してどのように応答するかを決定することを指します。 これはURI(またはパス)と特定のHTTPリクエストメソッド(GET、POSTなど)です。
 
@@ -97,4 +98,8 @@ app.delete('/user', (req: Request, res: Response) => {
 });
 ```
 
-For more details about routing, see the [routing guide](/guide/routing).
+<ReadMore>
+
+For more details about routing, see the [Routing](/guide/routing) guide.
+
+</ReadMore>

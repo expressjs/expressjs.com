@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.9.1"
-  github="https://github.com/expressjs/Timeout"
+  github="https://github.com/expressjs/timeout"
   npm="https://www.npmjs.com/package/connect-timeout"
 />
 
@@ -57,7 +57,7 @@ akzeptiert wird. Beim Timeout wird `req` \`"timeout" emittieren.
 Die `timeout` Funktion benötigt ein optionales `options` Objekt, das
 eines der folgenden Schlüssel enthalten kann:
 
-##### antworten
+##### respond
 
 Legt fest, ob dieses Modul in Form der Weiterleitung eines Fehlers "reagiert" wird.
 Falls `true`, wird der Timeout-Fehler an `next()` übergeben, so dass du das Antwortverhalten
@@ -107,7 +107,7 @@ function haltOnTimedout(req, res, next) {
 app.listen(3000);
 ```
 
-### explizit 3.x
+### express 3.x
 
 ```javascript
 var express = require('express');
@@ -139,7 +139,7 @@ function savePost(post, cb) {
 app.listen(3000);
 ```
 
-### verbinden
+### connect
 
 ```javascript
 var bodyParser = require('body-parser');

@@ -4,6 +4,7 @@ description: 組み込みの 'static' ミドルウェアを使用して、Expres
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 画像、CSSファイル、JavaScriptファイルなどの静的ファイルを提供するには、Express で組み込まれているミドルウェア関数「express.static」を使用します。
 
@@ -85,4 +86,8 @@ import path from 'path';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+<ReadMore>
+
 `serve-static` 関数とそのオプションの詳細については、 [serve-static](/resources/middleware/serve-static) を参照してください。
+
+</ReadMore>

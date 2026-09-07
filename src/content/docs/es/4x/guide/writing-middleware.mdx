@@ -4,6 +4,7 @@ description: Aprenda cómo escribir funciones personalizadas de middleware para 
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 Además, la función de callback de la ruta raíz utiliza la propiedad que la función middleware añade a `req` (el objeto de la solicitud). La aplicación ahora utiliza la función de middleware `requestTime`.
 
@@ -199,8 +200,8 @@ La función Middleware `myLogger` simplemente imprime un mensaje, luego pasa la 
 
 ### Tiempo de solicitud de la función Middleware
 
-A continuación, crearemos una función de middleware llamada "requestTime" y agregaremos una propiedad llamada `requestTime`
-al objeto de la solicitud.
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the [request object](/api/request).
 
 <Alert type="alerta">
 
@@ -420,9 +421,13 @@ que no sea de manejo de enrutamiento y middleware restante.
 
 </Alert>
 
-Debido a que tiene acceso al objeto de solicitud, el objeto de respuesta, la siguiente función de middleware en la pila, y el nodo entero. s API, las posibilidades con funciones middleware son infinitas.
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-Para más información sobre middleware exprés, vea: [Usando middleware exprés](/guide/using-middleware).
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## Middleware configurable
 
