@@ -43,133 +43,23 @@ nécessaire pour exécuter votre application. Suivez simplement ces étapes :
 
 Le tableau suivant liste les middleware Express 3 et leurs homologues dans Express 4.
 
-<table class="doctable" border="1">
-  <tr>
-    <th>Express 3</th>
-    <th>Express 4</th>
-  </tr>
-  <tr>
-    <td>
-      <code>express.bodyParser</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/body-parser">body-parser</a> +
-      <a href="https://github.com/expressjs/multer">multer</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.compress</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/compression">compression</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.cookieSession</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/cookie-session">session de cookies</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.cookieParser</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/cookie-parser">analyseur de cookies</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.logger</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/morgan">morgan</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.session</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/session">session expresse</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.favicon</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/serve-favicon">favicon service</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.responseTime</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/response-time">temps de réponse</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.errorHandler</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/errorhandler">errorhandler</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.methodOverride</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/method-override">méthode-override</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.timeout</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/timeout">délai de connexion</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.vhost</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/vhost">vhost</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.csrf</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/csurf">csurf</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.directory</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/serve-index">indice de service</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.static</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/serve-static">serve-static</a>
-    </td>
-  </tr>
-</table>
+| Express 3                | Express 4                                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `express.bodyParser`     | [body-parser](https://github.com/expressjs/body-parser) + [multer](https://github.com/expressjs/multer) |
+| `express.compress`       | [compression](https://github.com/expressjs/compression)                                                 |
+| `express.cookieSession`  | [cookie-session](https://github.com/expressjs/cookie-session)                                           |
+| `express.cookieParser`   | [cookie-parser](https://github.com/expressjs/cookie-parser)                                             |
+| `express.logger`         | [morgan](https://github.com/expressjs/morgan)                                                           |
+| `express.session`        | [express-session](https://github.com/expressjs/session)                                                 |
+| `express.favicon`        | [serve-favicon](https://github.com/expressjs/serve-favicon)                                             |
+| `express.responseTime`   | [response-time](https://github.com/expressjs/response-time)                                             |
+| `express.errorHandler`   | [errorhandler](https://github.com/expressjs/errorhandler)                                               |
+| `express.methodOverride` | [method-override](https://github.com/expressjs/method-override)                                         |
+| `express.timeout`        | [connect-timeout](https://github.com/expressjs/timeout)                                                 |
+| `express.vhost`          | [vhost](https://github.com/expressjs/vhost)                                                             |
+| `express.csrf`           | [csurf](https://github.com/expressjs/csurf)                                                             |
+| `express.directory`      | [serve-index](https://github.com/expressjs/serve-index)                                                 |
+| `express.static`         | [serve-static](https://github.com/expressjs/serve-static)                                               |
 
 Voici la [liste complète](https://github.com/senchalabs/connect#middleware) du middleware Express 4.
 
@@ -305,79 +195,21 @@ spécifique à la route.
 
 Le tableau suivant liste d'autres changements mineurs mais importants dans Express 4 :
 
-<table class="doctable" border="1">
-  <tr>
-    <th>Objet</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>Node.js</td>
-    <td>Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`http.createServer()`</td>
-    <td markdown="1">
-      Le module `http` n'est plus nécessaire, à moins que vous ayez besoin de travailler directement
-      avec lui (socket.io/SPDY/HTTPS). L'application peut être démarrée en utilisant la fonction
-      `app.listen()`.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`app.configure()`</td>
-    <td markdown="1">
-      La fonction `app.configure()` a été supprimée. Utilisez la fonction `process.env.NODE_ENV` ou
-      `app.get('env')` pour détecter l'environnement et configurer l'application en conséquence.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`json spaces`</td>
-    <td markdown="1">
-      La propriété `json spaces` de l'application est désactivée par défaut dans Express 4.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`req.accepted()`</td>
-    <td markdown="1">
-      Utilisez `req.accepts()`, `req.acceptsEncodings()`, `req.acceptsCharsets()`, et
-      `req.acceptsLanguages()`.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.location()`</td>
-    <td markdown="1">Ne résout plus les URL relatives.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`req.params`</td>
-    <td markdown="1">A été un tableau ; maintenant un objet.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.locals`</td>
-    <td markdown="1">Était une fonction ; maintenant un objet.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.headerSent`</td>
-    <td markdown="1">Changé en `res.headersSent`.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`app.route`</td>
-    <td markdown="1">Maintenant disponible en tant que `app.mountpath`.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.on('header')`</td>
-    <td markdown="1">Supprimé.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.charset`</td>
-    <td markdown="1">Supprimé.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
-    <td markdown="1">
-      La fonctionnalité est maintenant limitée à définir la valeur de base des cookies. Utilisez
-      `res.cookie()` pour ajouter une fonctionnalité .
-    </td>
-  </tr>
-</table>
+| Object                             | Libellé                                                                                                                                                                                      |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js                            | Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.                                                                                                        |
+| `http.createServer()`              | The `http` module is no longer needed, unless you need to directly work with it (socket.io/SPDY/HTTPS). L'application peut être démarrée en utilisant la fonction&#xA;`app.listen()`.        |
+| `app.configure()`                  | La fonction `app.configure()` a été supprimée. Utilisez la fonction `process.env.NODE_ENV` ou&#xA;`app.get('env')` pour détecter l'environnement et configurer l'application en conséquence. |
+| `json spaces`                      | La propriété `json spaces` de l'application est désactivée par défaut dans Express 4.                                                                                                        |
+| `req.accepted()`                   | Utilisez `req.accepts()`, `req.acceptsEncodings()`, `req.acceptsCharsets()`, et&#xA;`req.acceptsLanguages()`.                                                                                |
+| `res.location()`                   | No longer resolves relative URLs.                                                                                                                                                            |
+| `req.params`                       | Was an array; now an object.                                                                                                                                                                 |
+| `res.locals`                       | Was a function; now an object.                                                                                                                                                               |
+| `res.headerSent`                   | Changed to `res.headersSent`.                                                                                                                                                                |
+| `app.route`                        | Now available as `app.mountpath`.                                                                                                                                                            |
+| `res.on('header')`                 | Removed.                                                                                                                                                                                     |
+| `res.charset`                      | Removed.                                                                                                                                                                                     |
+| `res.setHeader('Set-Cookie', val)` | La fonctionnalité est maintenant limitée à définir la valeur de base des cookies. Use `res.cookie()` for added functionality.                                                                |
 
 ## Exemple de migration d'applications
 
