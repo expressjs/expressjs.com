@@ -1,15 +1,4 @@
-import type { Menu } from '../types';
 
-export const middlewareMenu: Menu = {
-  items: [
-    {
-      href: `/`,
-      label: 'menu.items.overview',
-      ariaLabel: 'menu.aria.middleware',
-    },
-    // these are NOT translation keys keep raw
-    {
-      href: `/body-parser`,
       label: 'body-parser',
       ariaLabel: 'body-parser middleware',
     },
@@ -90,3 +79,15 @@ export const middlewareMenu: Menu = {
     },
   ],
 };
+import type { Menu } from '../types';
+
+export const middlewareMenu: Menu = {
+  items: [
+    {
+      href: `/`,
+      label: 'menu.items.overview',
+      ariaLabel: 'menu.aria.middleware',
+    },
+    // these are NOT translation keys keep raw
+    {
+      href: `/body-parser
