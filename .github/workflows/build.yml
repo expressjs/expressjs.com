@@ -105,3 +105,5 @@ jobs:
             --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
             dist/
           fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

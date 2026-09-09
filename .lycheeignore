@@ -1,9 +1,6 @@
 # Prevent rate limit for npmjs links
 ^https?://(www\.)?npmjs\.(com|org)/
 
-# Prevent github rate limit
-^https://github\.com/
-
 # Exclude 404 pages
 dist/(.*/)?404((/index)?\.html|/)$
 
