@@ -71,9 +71,11 @@
     align-items: center;
     justify-content: center;
     gap: var(--space-6);
+    flex-wrap: wrap;
 
     li {
       display: inline;
+      flex-shrink: 0;
     }
 
     svg {
