@@ -7,7 +7,7 @@ authors:
     github: expressjs
 ---
 
-The [OpenJS Foundation CNA](https://cna.openjsf.org/) is taking a [coordinated break from September 17 to October 6, 2026](https://openjsf.org/blog), and setting a good example for the community while doing it. The Express security team is joining the pause for the same window. Their post explains the reasoning, and it matches what we see in the Express ecosystem firsthand.
+The [OpenJS Foundation CNA](https://cna.openjsf.org/) is taking a [coordinated break from September 17 to October 6, 2026](https://openjsf.org/blog/the-openjs-foundation-cna-is-taking-a-coordinated-break), and setting a good example for the community while doing it. The Express security team is joining the pause for the same window. Their post explains the reasoning, and it matches what we see in the Express ecosystem firsthand.
 
 ## What this means for Express
 
