@@ -1,656 +1,172 @@
 ---
 title: Database integration
-description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
+description: Learn how to connect databases to Express.js applications, when to use an ORM, and best practices for connection pooling, security, and error handling.
 ---
 
-import Alert from '@components/primitives/Alert/Alert.astro';
-import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
-
-Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
-
-- [Cassandra](#cassandra)
-- [Couchbase](#couchbase)
-- [CouchDB](#couchdb)
-- [LevelDB](#leveldb)
-- [MySQL](#mysql)
-- [MongoDB](#mongodb)
-- [Neo4j](#neo4j)
-- [Oracle](#oracle)
-- [PostgreSQL](#postgresql)
-- [Redis](#redis)
-- [SQL Server](#sql-server)
-- [SQLite](#sqlite)
-- [Elasticsearch](#elasticsearch)
-
-<Alert type="alert">
-
-These database drivers are among many that are available. For other options, search on the
-[npm](https://www.npmjs.com/) site.
-
-</Alert>
-
-## Cassandra
-
-**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
-
-### Installation
-
-<PackageManagerCommand command="npm install cassandra-driver" />
-
-### Example
-
-```cjs title="index.cjs"
-const cassandra = require('cassandra-driver');
-const client = new cassandra.Client({ contactPoints: ['localhost'] });
-
-client.execute('select key from system.local', (err, result) => {
-  if (err) throw err;
-  console.log(result.rows[0]);
-});
-```
-
-```mjs title="index.mjs"
-import cassandra from 'cassandra-driver';
-
-const client = new cassandra.Client({ contactPoints: ['localhost'] });
-
-client.execute('select key from system.local', (err, result) => {
-  if (err) throw err;
-  console.log(result.rows[0]);
-});
-```
-
-## Couchbase
-
-**Module**: [couchnode](https://github.com/couchbase/couchnode)
-
-### Installation
-
-<PackageManagerCommand command="npm install couchbase" />
-
-### Example
-
-```cjs title="index.cjs"
-const couchbase = require('couchbase');
-const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
-
-// add a document to a bucket
-bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(result);
-  }
-});
-
-// get all documents with shoe size 13
-const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1';
-const query = N1qlQuery.fromString(n1ql);
-bucket.query(query, [13], (err, result) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(result);
-  }
-});
-```
-
-```mjs title="index.mjs"
-import couchbase from 'couchbase';
-
-const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
-
-// add a document to a bucket
-bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(result);
-  }
-});
-
-// get all documents with shoe size 13
-const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1';
-const query = N1qlQuery.fromString(n1ql);
-bucket.query(query, [13], (err, result) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(result);
-  }
-});
-```
-
-## CouchDB
-
-**Module**: [nano](https://github.com/dscape/nano)
-
-### Installation
-
-<PackageManagerCommand command="npm install nano" />
-
-### Example
-
-```js title="index.js"
-const nano = require('nano')('http://localhost:5984');
-nano.db.create('books');
-const books = nano.db.use('books');
-
-// Insert a book document in the books database
-books.insert({ name: 'The Art of war' }, null, (err, body) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(body);
-  }
-});
-
-// Get a list of all books
-books.list((err, body) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(body.rows);
-  }
-});
-```
-
-## LevelDB
-
-**Module**: [levelup](https://github.com/rvagg/node-levelup)
-
-### Installation
-
-<PackageManagerCommand command="npm install level levelup leveldown" />
-
-### Example
-
-```cjs title="index.cjs"
-const levelup = require('levelup');
-const db = levelup('./mydb');
-
-db.put('name', 'LevelUP', (err) => {
-  if (err) return console.log('Ooops!', err);
-
-  db.get('name', (err, value) => {
-    if (err) return console.log('Ooops!', err);
-
-    console.log(`name=${value}`);
-  });
-});
-```
-
-```mjs title="index.mjs"
-import levelup from 'levelup';
-
-const db = levelup('./mydb');
-
-db.put('name', 'LevelUP', (err) => {
-  if (err) return console.log('Ooops!', err);
-
-  db.get('name', (err, value) => {
-    if (err) return console.log('Ooops!', err);
-
-    console.log(`name=${value}`);
-  });
-});
-```
-
-## MySQL
-
-**Module**: [mysql](https://github.com/felixge/node-mysql/)
-
-### Installation
-
-<PackageManagerCommand command="npm install mysql" />
-
-### Example
-
-```cjs title="index.cjs"
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'dbuser',
-  password: 's3kreee7',
-  database: 'my_db',
-});
-
-connection.connect();
-
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-  if (err) throw err;
-
-  console.log('The solution is: ', rows[0].solution);
-});
-
-connection.end();
-```
-
-```mjs title="index.mjs"
-import mysql from 'mysql';
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'dbuser',
-  password: 's3kreee7',
-  database: 'my_db',
-});
-
-connection.connect();
-
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-  if (err) throw err;
-
-  console.log('The solution is: ', rows[0].solution);
-});
-
-connection.end();
-```
-
-## MongoDB
-
-**Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
-
-### Installation
-
-<PackageManagerCommand command="npm install mongodb" />
-
-### Example (v2.\*)
-
-```js title="index.js"
-const MongoClient = require('mongodb').MongoClient;
-
-MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
-  if (err) throw err;
-
-  db.collection('mammals')
-    .find()
-    .toArray((err, result) => {
-      if (err) throw err;
-
-      console.log(result);
-    });
-});
-```
-
-### Example (v3.\*)
-
-```js title="index.js"
-const MongoClient = require('mongodb').MongoClient;
-
-MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
-  if (err) throw err;
-
-  const db = client.db('animals');
-
-  db.collection('mammals')
-    .find()
-    .toArray((err, result) => {
-      if (err) throw err;
-
-      console.log(result);
-    });
-});
-```
-
-If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
-
-## Neo4j
-
-**Module**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
-
-### Installation
-
-<PackageManagerCommand command="npm install neo4j-driver" />
-
-### Example
-
-```cjs title="index.cjs"
-const neo4j = require('neo4j-driver');
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'));
-
-const session = driver.session();
-
-session.readTransaction((tx) => {
-  return tx
-    .run('MATCH (n) RETURN count(n) AS count')
-    .then((res) => {
-      console.log(res.records[0].get('count'));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
-```
-
-```mjs title="index.mjs"
-import neo4j from 'neo4j-driver';
-
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'));
-
-const session = driver.session();
-
-session.readTransaction((tx) => {
-  return tx
-    .run('MATCH (n) RETURN count(n) AS count')
-    .then((res) => {
-      console.log(res.records[0].get('count'));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
-```
-
-## Oracle
-
-**Module**: [oracledb](https://github.com/oracle/node-oracledb)
-
-### Installation
-
-NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
-
-<PackageManagerCommand command="npm install oracledb" />
-
-### Example
-
-```cjs title="index.cjs"
-const oracledb = require('oracledb');
-const config = {
-  user: '<your db user>',
-  password: '<your db password>',
-  connectString: 'localhost:1521/orcl',
-};
-
-async function getEmployee(empId) {
-  let conn;
-
-  try {
-    conn = await oracledb.getConnection(config);
-
-    const result = await conn.execute('select * from employees where employee_id = :id', [empId]);
-
-    console.log(result.rows[0]);
-  } catch (err) {
-    console.log('Ouch!', err);
-  } finally {
-    if (conn) {
-      // conn assignment worked, need to close
-      await conn.close();
-    }
-  }
-}
-
-getEmployee(101);
-```
-
-```mjs title="index.mjs"
-import oracledb from 'oracledb';
-
-const config = {
-  user: '<your db user>',
-  password: '<your db password>',
-  connectString: 'localhost:1521/orcl',
-};
-
-async function getEmployee(empId) {
-  let conn;
-
-  try {
-    conn = await oracledb.getConnection(config);
-
-    const result = await conn.execute('select * from employees where employee_id = :id', [empId]);
-
-    console.log(result.rows[0]);
-  } catch (err) {
-    console.log('Ouch!', err);
-  } finally {
-    if (conn) {
-      // conn assignment worked, need to close
-      await conn.close();
-    }
-  }
-}
-
-getEmployee(101);
-```
-
-## PostgreSQL
-
-**Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
-
-### Installation
-
-<PackageManagerCommand command="npm install pg-promise" />
-
-### Example
-
-```js title="index.js"
-const pgp = require('pg-promise')(/* options */);
-const db = pgp('postgres://username:password@host:port/database');
-
-db.one('SELECT $1 AS value', 123)
-  .then((data) => {
-    console.log('DATA:', data.value);
-  })
-  .catch((error) => {
-    console.log('ERROR:', error);
-  });
-```
-
-## Redis
-
-**Module**: [redis](https://github.com/mranney/node_redis)
-
-### Installation
-
-<PackageManagerCommand command="npm install redis" />
-
-### Example
-
-```cjs title="index.cjs"
-const redis = require('redis');
-const client = redis.createClient();
-
-client.on('error', (err) => {
-  console.log(`Error ${err}`);
-});
-
-client.set('string key', 'string val', redis.print);
-client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
-
-client.hkeys('hash key', (err, replies) => {
-  console.log(`${replies.length} replies:`);
-
-  replies.forEach((reply, i) => {
-    console.log(`    ${i}: ${reply}`);
-  });
-
-  client.quit();
-});
-```
-
-```mjs title="index.mjs"
-import redis from 'redis';
-
-const client = redis.createClient();
-
-client.on('error', (err) => {
-  console.log(`Error ${err}`);
-});
-
-client.set('string key', 'string val', redis.print);
-client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
-
-client.hkeys('hash key', (err, replies) => {
-  console.log(`${replies.length} replies:`);
-
-  replies.forEach((reply, i) => {
-    console.log(`    ${i}: ${reply}`);
-  });
-
-  client.quit();
-});
-```
-
-## SQL Server
-
-**Module**: [tedious](https://github.com/tediousjs/tedious)
-
-### Installation
-
-<PackageManagerCommand command="npm install tedious" />
-
-### Example
-
-```js title="index.js"
-const Connection = require('tedious').Connection;
-const Request = require('tedious').Request;
-
-const config = {
-  server: 'localhost',
-  authentication: {
-    type: 'default',
-    options: {
-      userName: 'your_username', // update me
-      password: 'your_password', // update me
-    },
-  },
-};
-
-const connection = new Connection(config);
-
-connection.on('connect', (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    executeStatement();
-  }
-});
-
-function executeStatement() {
-  request = new Request("select 123, 'hello world'", (err, rowCount) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(`${rowCount} rows`);
-    }
-    connection.close();
-  });
-
-  request.on('row', (columns) => {
-    columns.forEach((column) => {
-      if (column.value === null) {
-        console.log('NULL');
-      } else {
-        console.log(column.value);
-      }
-    });
-  });
-
-  connection.execSql(request);
-}
-```
+Express doesn't include database support out of the box, and it doesn't need to. Connecting a database to an Express app is just a matter of loading an appropriate Node.js driver or ORM in your app. This page shows the general pattern using SQLite as an example, points you to the official documentation for other popular databases, and covers a few practices that apply no matter which database you choose.
 
 ## SQLite
 
-**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
-
-### Installation
-
-<PackageManagerCommand command="npm install sqlite3" />
-
-### Example
-
-```js title="index.js"
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database(':memory:');
-
-db.serialize(() => {
-  db.run('CREATE TABLE lorem (info TEXT)');
-  const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-
-  for (let i = 0; i < 10; i++) {
-    stmt.run(`Ipsum ${i}`);
-  }
-
-  stmt.finalize();
-
-  db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
-    console.log(`${row.id}: ${row.info}`);
-  });
-});
-
-db.close();
-```
-
-## Elasticsearch
-
-**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
-
-### Installation
-
-<PackageManagerCommand command="npm install elasticsearch" />
+Node.js includes a built-in SQLite client, [node:sqlite](https://nodejs.org/api/sqlite.html), available without a flag since Node.js 22.13.0. No installation is required. For older Node.js versions, [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) offers a similar synchronous API.
 
 ### Example
 
 ```cjs title="index.cjs"
-const elasticsearch = require('elasticsearch');
-const client = elasticsearch.Client({
-  host: 'localhost:9200',
+const express = require('express');
+const { DatabaseSync } = require('node:sqlite');
+
+const app = express();
+const db = new DatabaseSync('app.db');
+
+db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+
+app.get('/users/:id', (req, res) => {
+  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
+  res.json(user);
 });
 
-client
-  .search({
-    index: 'books',
-    type: 'book',
-    body: {
-      query: {
-        multi_match: {
-          query: 'express js',
-          fields: ['title', 'description'],
-        },
-      },
-    },
-  })
-  .then(
-    (response) => {
-      const hits = response.hits.hits;
-    },
-    (error) => {
-      console.trace(error.message);
-    }
-  );
+app.listen(3000);
 ```
 
 ```mjs title="index.mjs"
-import elasticsearch from 'elasticsearch';
+import express from 'express';
+import { DatabaseSync } from 'node:sqlite';
 
-const client = elasticsearch.Client({
-  host: 'localhost:9200',
+const app = express();
+const db = new DatabaseSync('app.db');
+
+db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+
+app.get('/users/:id', (req, res) => {
+  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
+  res.json(user);
 });
 
-client
-  .search({
-    index: 'books',
-    type: 'book',
-    body: {
-      query: {
-        multi_match: {
-          query: 'express js',
-          fields: ['title', 'description'],
-        },
-      },
-    },
-  })
-  .then(
-    (response) => {
-      const hits = response.hits.hits;
-    },
-    (error) => {
-      console.trace(error.message);
-    }
-  );
+app.listen(3000);
 ```
+
+```ts title="index.ts"
+import express from 'express';
+import { DatabaseSync } from 'node:sqlite';
+
+interface User {
+  id: number;
+  name: string;
+}
+
+const app = express();
+const db = new DatabaseSync('app.db');
+
+db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+
+app.get('/users/:id', (req, res) => {
+  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id) as
+    | User
+    | undefined;
+  res.json(user);
+});
+
+app.listen(3000);
+```
+
+## Other databases
+
+Every other database follows the same pattern: install the Node.js driver from npm, create a client or connection pool once when the app starts, and use it in your route handlers. Refer to the official documentation of each driver for connection options and API details:
+
+- PostgreSQL: [pg](https://node-postgres.com/) or [postgres](https://github.com/porsager/postgres)
+- MySQL and MariaDB: [mysql2](https://sidorares.github.io/node-mysql2/docs) or [mariadb](https://mariadb.com/docs/connectors/mariadb-connector-nodejs)
+- MongoDB: [mongodb](https://www.mongodb.com/docs/drivers/node/current/)
+- Redis: [redis](https://redis.io/docs/latest/develop/clients/nodejs/) or [ioredis](https://github.com/redis/ioredis)
+- SQL Server: [mssql](https://github.com/tediousjs/node-mssql)
+- Oracle: [oracledb](https://www.npmjs.com/package/oracledb)
+- Cassandra: [cassandra-driver](https://docs.datastax.com/en/developer/nodejs-driver/latest/)
+- Elasticsearch: [@elastic/elasticsearch](https://www.elastic.co/docs/reference/elasticsearch/clients/javascript)
+
+For any database not listed here, search for its driver on the [npm](https://www.npmjs.com/) site.
+
+## ORMs and query builders
+
+The example above uses a database driver directly, which is a good fit for small apps and for learning how things work. As an application grows, an ORM (object-relational mapper) or a query builder can take over concerns such as schema definitions, migrations, relations between tables, and input mapping, while reducing boilerplate. Many of them also provide type safety when used with TypeScript.
+
+Popular options in the Node.js ecosystem include:
+
+- [Prisma](https://www.prisma.io/): a type-safe ORM with a schema-first workflow and built-in migrations. Supports PostgreSQL, MySQL, SQLite, SQL Server, MongoDB, and CockroachDB.
+- [Drizzle ORM](https://orm.drizzle.team/): a lightweight, TypeScript-first ORM with a SQL-like query API and a migrations toolkit.
+- [Sequelize](https://sequelize.org/): a mature, promise-based ORM for PostgreSQL, MySQL, MariaDB, SQLite, and SQL Server.
+- [TypeORM](https://typeorm.io/): an ORM built around decorators and entities, supporting many SQL databases and MongoDB.
+- [Mongoose](https://mongoosejs.com/): the most widely used ODM (object document mapper) for MongoDB.
+- [Knex.js](https://knexjs.org/): a flexible SQL query builder with migrations support, useful when you want control over your queries without writing raw strings.
+- [Kysely](https://kysely.dev/): a type-safe SQL query builder for TypeScript.
+
+There is no single right choice. Query builders keep you close to SQL, while full ORMs abstract more of it away. Pick the level of abstraction that matches your team and project, and prefer tools that are actively maintained.
+
+## Best practices
+
+These practices apply regardless of the database or library you choose. The snippets below use the connection pool from the [pg](https://node-postgres.com/) driver as an example, but every driver and ORM offers an equivalent.
+
+### Create connections once and reuse them
+
+Opening a database connection is expensive. Most drivers provide a connection pool: a set of connections that is opened once, kept alive, and shared across requests, so each query borrows an existing connection instead of opening a new one. Create the pool (or client) once when the app starts, then reuse it in your route handlers, as the example on this page does. Never open a new connection inside a request handler.
+
+### Use parameterized queries
+
+Never build queries by concatenating or interpolating user input into the query string. Doing so exposes your app to SQL injection (or the equivalent injection attack for NoSQL databases). Every driver and ORM supports parameterized queries or prepared statements, which pass user input separately from the query itself:
+
+```js
+// Vulnerable: user input becomes part of the query
+const user = await pool.query(`SELECT * FROM users WHERE id = ${req.params.id}`);
+
+// Safe: user input is passed as a parameter
+const user = await pool.query('SELECT * FROM users WHERE id = $1', [req.params.id]);
+```
+
+Also validate user input before it reaches your queries, both for security and for data integrity.
+
+### Keep credentials out of your code
+
+Never hardcode connection strings, usernames, or passwords in your source code, and never commit them to version control. Read them from environment variables or a secrets manager instead:
+
+```js
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+```
+
+During development, you can keep these values in a `.env` file and load it with Node.js's built-in support for environment files, with no extra dependencies:
+
+```bash
+node --env-file=.env index.js
+```
+
+Make sure `.env` is listed in your `.gitignore` file so it never gets committed.
+
+### Handle database errors
+
+Database calls fail: connections drop, queries time out, constraints are violated. In Express 5, errors thrown in async route handlers are passed to your [error-handling middleware](/en/guide/error-handling) automatically, so define one and decide there what to expose to clients. Avoid leaking internal error details, such as query text or stack traces, in API responses.
+
+### Cancel work when the client disconnects
+
+Since Node.js 24.16.0, every request exposes [req.signal](https://nodejs.org/api/http.html#messagesignal), an `AbortSignal` that is aborted when the client disconnects. Pass it to any cancellation-aware API, such as a database driver that supports abort signals, so your app stops doing work nobody is waiting for:
+
+```js
+app.get('/reports', async (req, res) => {
+  const report = await generateReport({ signal: req.signal });
+  res.json(report);
+});
+```
+
+### Close connections on shutdown
+
+When your app receives a termination signal, stop accepting new requests and close your database connections so in-flight queries can finish cleanly:
+
+```js
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const server = app.listen(3000);
+
+process.on('SIGTERM', () => {
+  server.close(async () => {
+    await pool.end();
+    process.exit(0);
+  });
+});
+```
+
+If you already use an [AbortSignal](https://nodejs.org/api/globals.html#class-abortsignal) to coordinate cancellation across your app, you can pass it to `app.listen` and abort it instead of calling `server.close()` directly.
