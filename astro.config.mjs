@@ -12,7 +12,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import redirects from './src/config/redirects/index.js';
 import movedPages from './src/config/redirects/moved-pages.json' with { type: 'json' };
-import { accessibleTablesIntegration } from './src/plugins/rehype-accessible-tables.mjs';
+import rehypeAccessibleTables from './src/plugins/rehype-accessible-tables.mjs';
 import remarkRewriteLocalizedLinks from './src/plugins/remark-rewrite-localized-links.mjs';
 import remarkCodeTabs from './src/plugins/remark-code-tabs.mjs';
 import rehypeRewriteLocalizedLinks from './src/plugins/rehype-rewrite-localized-links.mjs';
@@ -45,6 +45,7 @@ export default defineConfig({
             behavior: 'wrap',
           },
         ],
+        rehypeAccessibleTables,
       ],
     }),
   },
@@ -68,7 +69,6 @@ export default defineConfig({
         borderWidth: 'var(--border-width-1)',
       },
     }),
-    accessibleTablesIntegration(),
     mdx(),
     icon(),
     react(),
