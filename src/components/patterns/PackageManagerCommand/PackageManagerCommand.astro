@@ -68,7 +68,7 @@ const defaultManager = managers[0];
 
 <script>
   const STORAGE_KEY = 'expressjs:package-manager';
-  const MANAGERS = ['npm', 'yarn', 'pnpm', 'bun'];
+  const MANAGERS = ['npm', 'yarn', 'pnpm', 'bun', 'deno'];
 
   function applyManager(pm: string) {
     document.querySelectorAll<HTMLElement>('[data-pm-command]').forEach((root) => {
