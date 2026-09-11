@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.0"
+  version="2.3.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -17,23 +17,6 @@ Multer is a node.js middleware for handling `multipart/form-data`, which is prim
 on top of [busboy](https://github.com/mscdex/busboy) for maximum efficiency.
 
 **NOTE**: Multer will not process any form which is not multipart (`multipart/form-data`).
-
-## Translations
-
-This README is also available in other languages:
-
-|                                                                                |                 |
-| ------------------------------------------------------------------------------ | --------------- |
-| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)      | Arabic          |
-| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)  | Chinese         |
-| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)     | French          |
-| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)       | Korean          |
-| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md) | Portuguese (BR) |
-| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md) | Russian         |
-| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)      | Spanish         |
-| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)  | Uzbek           |
-| [Việt Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md)     | Vietnamese      |
-| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)       | Turkish         |
 
 ## Installation
 
@@ -136,17 +119,17 @@ app.post('/stats', upload.single('uploaded_file'), function (req, res) {
 
 Each file contains the following information:
 
-| Key            | Description                                   | Note            |
-| -------------- | --------------------------------------------- | --------------- |
-| `fieldname`    | Field name specified in the form              |
-| `originalname` | Name of the file on the user's computer       |
-| `encoding`     | Encoding type of the file                     |
-| `mimetype`     | Mime type of the file                         |
-| `size`         | Size of the file in bytes                     |
-| `destination`  | The folder to which the file has been saved   | `DiskStorage`   |
-| `filename`     | The name of the file within the `destination` | `DiskStorage`   |
-| `path`         | The full path to the uploaded file            | `DiskStorage`   |
-| `buffer`       | A `Buffer` of the entire file                 | `MemoryStorage` |
+| Key            | Description                                                                         | Note            |
+| -------------- | ----------------------------------------------------------------------------------- | --------------- |
+| `fieldname`    | Field name specified in the form                                                    |
+| `originalname` | Name of the file on the user's computer, or the full path when `preservePath: true` |
+| `encoding`     | Encoding type of the file                                                           |
+| `mimetype`     | Mime type of the file                                                               |
+| `size`         | Size of the file in bytes                                                           |
+| `destination`  | The folder to which the file has been saved                                         | `DiskStorage`   |
+| `filename`     | The name of the file within the `destination`                                       | `DiskStorage`   |
+| `path`         | The full path to the uploaded file                                                  | `DiskStorage`   |
+| `buffer`       | A `Buffer` of the entire file                                                       | `MemoryStorage` |
 
 ### `multer(opts)`
 
@@ -164,7 +147,7 @@ The following are the options that can be passed to Multer.
 | `dest` or `storage` | Where to store the files                                                                                                                                                   |
 | `fileFilter`        | Function to control which files are accepted                                                                                                                               |
 | `limits`            | Limits of the uploaded data                                                                                                                                                |
-| `preservePath`      | Keep the full path of files instead of just the base name                                                                                                                  |
+| `preservePath`      | Keep the full client-supplied path in `file.originalname` instead of just the base name                                                                                    |
 | `defParamCharset`   | Default character set to use for values of part header parameters (e.g. filename) that are not extended parameters (that contain an explicit charset). Default: `'latin1'` |
 
 In an average web app, only `dest` might be required, and configured as shown in
@@ -173,6 +156,14 @@ the following example.
 ```javascript
 const upload = multer({ dest: 'uploads/' });
 ```
+
+When `preservePath` is enabled, Multer passes the incoming filename through with
+any path segments provided by the client. This is exposed as `file.originalname`;
+it does not change the destination folder, create directories, or sanitize the
+path for you. `file.originalname` is always client-supplied and should be treated
+as untrusted; with `preservePath` it additionally contains the path segments the
+client sent. Normalize or validate it before using it in a custom `filename` or
+storage engine.
 
 If you want more control over your uploads, you'll want to use the `storage`
 option instead of `dest`. Multer ships with storage engines `DiskStorage`
@@ -188,6 +179,9 @@ in `req.file`.
 Accept an array of files, all with the name `fieldname`. Optionally error out if
 more than `maxCount` files are uploaded. The array of files will be stored in
 `req.files`.
+
+Files skipped by `fileFilter` do not count towards `maxCount`. Use
+`limits.files` to bound how many files are read from a request.
 
 #### `.fields(fields)`
 
@@ -226,21 +220,26 @@ where you are handling the uploaded files.
 The disk storage engine gives you full control on storing files to disk.
 
 ```javascript
+const crypto = require('crypto');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '/tmp/my-uploads');
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix);
+    crypto.randomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, file.fieldname + '-' + raw.toString('hex'));
+    });
   },
 });
 
 const upload = multer({ storage: storage });
 ```
 
-There are two options available, `destination` and `filename`. They are both
-functions that determine where the file should be stored.
+There are three options available: `destination`, `filename` and `flush`. All of
+them except `flush` are functions that determine where the file should be
+stored.
 
 `destination` is used to determine within which folder the uploaded files should
 be stored. This can also be given as a `string` (e.g. `'/tmp/uploads'`). If no
@@ -268,6 +267,14 @@ For understanding the calling convention used in the callback (needing to pass
 null as the first param), refer to
 [Node.js error handling](https://web.archive.org/web/20220417042018/https://www.joyent.com/node-js/production/design/errors)
 
+`flush` is an optional boolean. When set to `true`, the file data is flushed to
+disk with an `fsync` call before the upload handler runs, which prevents data
+loss if the process or the system crashes while the data is still sitting in
+the operating system's page cache. It is disabled by default because forcing a
+disk flush on every upload has a performance cost. Note that this syncs the
+file contents only; if the new directory entry must survive a crash as well,
+fsync the destination directory yourself.
+
 #### `MemoryStorage`
 
 The memory storage engine stores the files in memory as `Buffer` objects. It
@@ -287,20 +294,36 @@ memory storage is used.
 
 ### `limits`
 
-An object specifying the size limits of the following optional properties. Multer passes this object into busboy directly, and the details of the properties can be found on [busboy's page](https://github.com/mscdex/busboy#busboy-methods).
+An object specifying the size limits of the following optional properties. Multer passes this object into busboy directly, and the details of the properties can be found on [busboy's page](https://github.com/mscdex/busboy#exports).
+
+`limits` can also be a function that receives the request and returns such an
+object. It is called once per request, before parsing starts, so limits can
+depend on e.g. the authenticated user:
+
+```javascript
+const upload = multer({
+  limits: function (req) {
+    return { fileSize: req.user.maxUploadSize };
+  },
+});
+```
+
+Limits apply to the whole request; there is no per-file limit. To restrict
+individual files by type or name, use `fileFilter` or a custom storage engine.
 
 The following integer values are available:
 
-| Key                 | Description                                                                | Default   |
-| ------------------- | -------------------------------------------------------------------------- | --------- |
-| `fieldNameSize`     | Max field name size                                                        | 100 bytes |
-| `fieldSize`         | Max field value size (in bytes)                                            | 1MB       |
-| `fields`            | Max number of non-file fields                                              | Infinity  |
-| `fileSize`          | For multipart forms, the max file size (in bytes)                          | Infinity  |
-| `files`             | For multipart forms, the max number of file fields                         | Infinity  |
-| `parts`             | For multipart forms, the max number of parts (fields + files)              | Infinity  |
-| `headerPairs`       | For multipart forms, the max number of header key=>value pairs to parse    | 2000      |
-| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels) | Infinity  |
+| Key                    | Description                                                                     | Default  |
+| ---------------------- | ------------------------------------------------------------------------------- | -------- |
+| `fieldNameSize`        | Max field name size                                                             | Infinity |
+| `fieldSize`            | Max field value size (in bytes)                                                 | 1MB      |
+| `fields`               | Max number of non-file fields                                                   | Infinity |
+| `fileSize`             | For multipart forms, the max file size (in bytes)                               | Infinity |
+| `files`                | For multipart forms, the max number of file fields                              | Infinity |
+| `parts`                | For multipart forms, the max number of parts (fields + files)                   | Infinity |
+| `headerPairs`          | For multipart forms, the max number of header key=>value pairs to parse         | 2000     |
+| `fieldNestingDepth`    | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)      | Infinity |
+| `fieldArrayIndexLimit` | Max numeric array index accepted inside a field name (e.g. `a[3]` uses index 3) | Infinity |
 
 Specifying the limits can help protect your site against denial of service (DoS) attacks.
 
@@ -333,14 +356,20 @@ Specifying the [limits](#limits) can help protect your site against denial of se
 - `files` -- set to the maximum number of files per request
 - `fields` -- set to the maximum number of text fields per request
 - `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
+- `fieldArrayIndexLimit` -- set to the largest array index your field names require (e.g. `100` for `a[99]`)
 
 ## Error handling
 
 When encountering an error, Multer will delegate the error to Express. You can
-display a nice error page using [the standard express way](/guide/error-handling).
+display a nice error page using [the standard express way](/guide/error-handling/).
 
 If you want to catch errors specifically from Multer, you can call the
 middleware function by yourself. Also, if you want to catch only [the Multer errors](https://github.com/expressjs/multer/blob/main/lib/multer-error.js), you can use the `MulterError` class that is attached to the `multer` object itself (e.g. `err instanceof multer.MulterError`).
+
+Multer errors carry a `code` (e.g. `LIMIT_FILE_SIZE`) and, when the error concerns
+a specific field, its name in `field`. Errors about a specific file
+(`LIMIT_FILE_SIZE`, `LIMIT_UNEXPECTED_FILE`) also expose the client-supplied file
+name in `filename`; treat it as untrusted input, like `file.originalname`.
 
 ```javascript
 const multer = require('multer');
