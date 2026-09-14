@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.8.1"
+  version="1.8.2"
   github="https://github.com/expressjs/compression"
   npm="https://www.npmjs.com/package/compression"
 />
@@ -21,13 +21,13 @@ The following compression codings are supported:
 - gzip
 - br (brotli)
 
-**Note** Brotli is supported only since Node.js versions v11.7.0 and v10.16.0.
+**Note** Brotli is available in all currently supported Node.js LTS versions (v18+).
 
 ## Install
 
 This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+[`npm install` command](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
 <PackageManagerCommand command="npm install compression" />
 
@@ -304,7 +304,7 @@ The Express.js project welcomes all constructive contributions. Contributions ta
 from code for bug fixes and enhancements, to additions and fixes to documentation, additional
 tests, triaging incoming pull requests and issues, and more!
 
-See the [Contributing Guide](https://github.com/expressjs/express/blob/master/Contributing.md) for more technical details on contributing.
+See the [Contributing Guide](https://github.com/expressjs/.github/blob/HEAD/CONTRIBUTING.md) for more technical details on contributing.
 
 ## License
 
