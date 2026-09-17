@@ -154,9 +154,11 @@ LIST_END
     ' <<<"$CONTENT")
   fi
 
-  # Convert relative links to absolute GitHub URLs
+  # Convert relative links to absolute GitHub URLs. Skip fenced code blocks
+  # (lines between ``` markers): the regex can't tell a real markdown link
+  # from code that merely looks like one, e.g. `tokens['x'](req, res)`.
   BASEURL="https://github.com/$org/$repo/blob/HEAD"
-  CONTENT=$(echo "$CONTENT" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
+  CONTENT=$(echo "$CONTENT" | sed -E "/^\`\`\`/,/^\`\`\`/!s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
 
   # Turn absolute self-links (https://expressjs.com/en/guide/x.html) into internal,
   # language-agnostic paths (/guide/x) so they resolve on this site and get localized
