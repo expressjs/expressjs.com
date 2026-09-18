@@ -27,3 +27,6 @@ dist/(.*/)?404((/index)?\.html|/)$
 # Oracle pages return 403 when connected
 ^https://www\.mysql\.com/
 ^https://www\.oracle\.com/
+
+# NVD pages time out when requested from CI runners
+^https://nvd\.nist\.gov/
