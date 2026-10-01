@@ -91,6 +91,12 @@ export const docsMenu: Menu = {
           label: 'menu.items.overridingExpressApi',
           ariaLabel: 'menu.aria.overridingExpressApi',
         },
+        {
+          href: `/security`,
+          label: 'menu.items.security',
+          ariaLabel: 'menu.aria.security',
+          global: true,
+        },
       ],
     },
     {
