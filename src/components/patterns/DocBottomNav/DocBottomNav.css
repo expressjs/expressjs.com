@@ -1,11 +1,17 @@
 @layer patterns {
   .doc-nav {
     display: flex;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
     gap: var(--space-4);
     margin-top: var(--space-8);
     padding-top: var(--space-6);
     border-top: 1px solid var(--color-border-secondary);
+  }
+
+  .doc-nav__link {
+    max-width: 100%;
+    white-space: normal;
   }
 
   .doc-nav__link--next {
