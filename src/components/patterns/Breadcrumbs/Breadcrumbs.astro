@@ -33,37 +33,35 @@ const homeHref = getHomePath(lang);
       </Body>
       {items.length > 0 && <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />}
     </li>
-    {
-      items.map((item, index) => (
-        <li class="flex items-center gap-3">
-          {item.href ? (
-            <Body vMargin={false} as="a" href={item.href} class="breadcrumb-link">
-              {item.icon && (
-                <Icon
-                  name={item.icon}
-                  aria-hidden={item.label ? 'true' : undefined}
-                  aria-label={!item.label ? item.ariaLabel : undefined}
-                />
-              )}
-              {item.label}
-            </Body>
-          ) : (
-            <Body vMargin={false} class="breadcrumb-item">
-              {item.icon && (
-                <Icon
-                  name={item.icon}
-                  aria-hidden={item.label ? 'true' : undefined}
-                  aria-label={!item.label ? item.ariaLabel : undefined}
-                />
-              )}
-              {item.label}
-            </Body>
-          )}
-          {index < items.length - 1 && (
-            <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />
-          )}
-        </li>
-      ))
-    }
+    {items.map((item, index) => (
+      <li class="flex items-center gap-3">
+        {item.href ? (
+          <Body vMargin={false} as="a" href={item.href} class="breadcrumb-link">
+            {item.icon && (
+              <Icon
+                name={item.icon}
+                aria-hidden={item.label ? 'true' : undefined}
+                aria-label={!item.label ? item.ariaLabel : undefined}
+              />
+            )}
+            {item.label}
+          </Body>
+        ) : (
+          <Body vMargin={false} class="breadcrumb-item">
+            {item.icon && (
+              <Icon
+                name={item.icon}
+                aria-hidden={item.label ? 'true' : undefined}
+                aria-label={!item.label ? item.ariaLabel : undefined}
+              />
+            )}
+            {item.label}
+          </Body>
+        )}
+        {index < items.length - 1 && (
+          <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />
+        )}
+      </li>
+    ))}
   </ol>
 </nav>

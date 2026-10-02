@@ -14,30 +14,28 @@ interface Props {
 const { posts, lang, title } = Astro.props;
 ---
 
-{
-  posts.length > 0 && (
-    <section class="related-content">
-      <H2>{title}</H2>
-      <div class="related-content__grid">
-        {posts.map((p) => {
-          const pFilename = p.id.split('/').pop() ?? p.id;
-          const pDate = formatPubDate(p, { month: 'long', day: 'numeric', year: 'numeric' });
-          const pAuthors = (p.data.authors ?? []).map((a) => ({
-            src: a.github ? `https://github.com/${a.github}.png` : '',
-            name: a.name ?? '',
-          }));
-          return (
-            <PostCard
-              href={`/${lang}/blog/${pFilename}`}
-              labels={p.data.tags ?? []}
-              title={p.data.title}
-              coverSrc={p.data.cover || `/og/blog-${pFilename}.png`}
-              authors={pAuthors}
-              avatarCaption={pDate}
-            />
-          );
-        })}
-      </div>
-    </section>
-  )
-}
+{posts.length > 0 && (
+  <section class="related-content">
+    <H2>{title}</H2>
+    <div class="related-content__grid">
+      {posts.map((p) => {
+        const pFilename = p.id.split('/').pop() ?? p.id;
+        const pDate = formatPubDate(p, { month: 'long', day: 'numeric', year: 'numeric' });
+        const pAuthors = (p.data.authors ?? []).map((a) => ({
+          src: a.github ? `https://github.com/${a.github}.png` : '',
+          name: a.name ?? '',
+        }));
+        return (
+          <PostCard
+            href={`/${lang}/blog/${pFilename}`}
+            labels={p.data.tags ?? []}
+            title={p.data.title}
+            coverSrc={p.data.cover || `/og/blog-${pFilename}.png`}
+            authors={pAuthors}
+            avatarCaption={pDate}
+          />
+        );
+      })}
+    </div>
+  </section>
+)}

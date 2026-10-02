@@ -60,16 +60,16 @@ const whatsappShareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
 ---
 
 <div class:list={['post-header', className]} {...rest}>
-  {
-    labels.length > 0 && (
-      <Flex gap="2" wrap="wrap">
-        {labels.map((label) => (
-          <Tag>{label}</Tag>
-        ))}
-      </Flex>
-    )
-  }
-  <H1 id="overview" vMargin={false} class="post-header__title"><a href="#overview">{title}</a></H1>
+  {labels.length > 0 && (
+    <Flex gap="2" wrap="wrap">
+      {labels.map((label) => (
+        <Tag>{label}</Tag>
+      ))}
+    </Flex>
+  )}
+  <H1 id="overview" vMargin={false} class="post-header__title">
+    <a href="#overview">{title}</a>
+  </H1>
   {authors.length > 0 && <Avatar authors={authors} caption={date} size="md" />}
   <div class="post-header__share" role="group" aria-label={t('post.share')}>
     <a
@@ -132,21 +132,19 @@ const whatsappShareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
     </button>
   </div>
 
-  {
-    cover && (
-      <div class="post-header__cover">
-        <Image
-          src={cover}
-          alt=""
-          aria-hidden="true"
-          width={1200}
-          height={630}
-          loading="eager"
-          fetchpriority="high"
-        />
-      </div>
-    )
-  }
+  {cover && (
+    <div class="post-header__cover">
+      <Image
+        src={cover}
+        alt=""
+        aria-hidden="true"
+        width={1200}
+        height={630}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  )}
 </div>
 
 <script>

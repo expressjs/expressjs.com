@@ -43,60 +43,58 @@ const {
 const filteredItems = filterItems(items, version);
 ---
 
-{
-  filteredItems
-    .filter((item) => isLink(item) || hasSubmenu(item))
-    .map((item, itemIndex) => {
-      const itemId = getItemId(parentId, sectionIndex, itemIndex);
-      const itemHref = item.href;
+{filteredItems
+  .filter((item) => isLink(item) || hasSubmenu(item))
+  .map((item, itemIndex) => {
+    const itemId = getItemId(parentId, sectionIndex, itemIndex);
+    const itemHref = item.href;
 
-      const itemVersioned = item.submenu?.versioned ?? versioned;
-      const itemBasePath = item.submenu?.basePath ?? basePath;
+    const itemVersioned = item.submenu?.versioned ?? versioned;
+    const itemBasePath = item.submenu?.basePath ?? basePath;
 
-      const href = itemHref
-        ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version, item.global)
-        : '';
+    const href = itemHref
+      ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version, item.global)
+      : '';
 
-      const isActive =
-        hasSubmenu(item) && variant === 'root'
-          ? submenuContainsCurrentPath(
-              item.submenu,
-              itemBasePath,
-              itemVersioned,
-              currentPath,
-              lang,
-              version
-            )
-          : href
-            ? normalizePath(currentPath) === normalizePath(href)
-            : false;
+    const isActive =
+      hasSubmenu(item) && variant === 'root'
+        ? submenuContainsCurrentPath(
+            item.submenu,
+            itemBasePath,
+            itemVersioned,
+            currentPath,
+            lang,
+            version
+          )
+        : href
+          ? normalizePath(currentPath) === normalizePath(href)
+          : false;
 
-      if (hasSubmenu(item)) {
-        return (
-          <SidebarNavItem
-            item={item}
-            href={href}
-            isActive={isActive}
-            variant={variant}
-            type="submenu"
-            submenuId={`submenu-${itemId}`}
-            targetLevel={targetLevel}
-            showIcon={showIcon}
-            lang={lang}
-          />
-        );
-      }
-
+    if (hasSubmenu(item)) {
       return (
         <SidebarNavItem
           item={item}
           href={href}
           isActive={isActive}
           variant={variant}
-          type="link"
+          type="submenu"
+          submenuId={`submenu-${itemId}`}
+          targetLevel={targetLevel}
           showIcon={showIcon}
           lang={lang}
         />
       );
-    })
-}
+    }
+
+    return (
+      <SidebarNavItem
+        item={item}
+        href={href}
+        isActive={isActive}
+        variant={variant}
+        type="link"
+        showIcon={showIcon}
+        lang={lang}
+      />
+    );
+  })}

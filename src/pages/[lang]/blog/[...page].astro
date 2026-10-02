@@ -70,13 +70,11 @@ const filterTabs: TabItem[] = [
     />
     <Tabs tabs={filterTabs} defaultValue="all" data-posts-filter />
     <Grid gap="4" align="stretch" data-posts-grid>
-      {
-        pagePosts.map((post) => (
-          <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
-            <PostCard {...getPostProps(post)} />
-          </Col>
-        ))
-      }
+      {pagePosts.map((post) => (
+        <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
+          <PostCard {...getPostProps(post)} />
+        </Col>
+      ))}
     </Grid>
     <Pagination
       data-pagination
@@ -87,13 +85,11 @@ const filterTabs: TabItem[] = [
       style={page.lastPage <= 1 ? 'display:none' : ''}
     />
     <template data-posts-pool>
-      {
-        langPosts.map((post) => (
-          <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
-            <PostCard {...getPostProps(post)} />
-          </Col>
-        ))
-      }
+      {langPosts.map((post) => (
+        <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
+          <PostCard {...getPostProps(post)} />
+        </Col>
+      ))}
     </template>
   </Container>
 </Layout>

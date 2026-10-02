@@ -23,7 +23,7 @@
 
 The site is built with [Astro](https://astro.build), TypeScript, and MDX.
 
-**Prerequisites:** Node.js >= 24.13.0 and npm >= 11.0.0
+**Prerequisites:** Node.js >= 24.15.0 and npm >= 11.0.0
 
 ```bash
 npm install

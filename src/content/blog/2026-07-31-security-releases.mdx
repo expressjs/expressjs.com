@@ -31,7 +31,7 @@ The following vulnerability has been addressed:
 
 When body-parser was configured with an invalid `limit` option value, such as an unparsable string or `NaN`, the internal call to `bytes.parse()` returned `null` and the request body size check was silently skipped. Applications that relied on `limit` as their primary safeguard against oversized request bodies would accept arbitrarily large payloads, leading to excessive memory and CPU usage and denial of service. This affected applications that pass a programmatically computed or user-configurable value to the `limit` option without validating it first. After the fix, invalid `limit` values throw a clear error at parser construction time instead of silently disabling enforcement.
 
-**Affected versions**: `< 1.20.6` and `>= 2.0.0, < 2.3.0`
+**Affected versions**: `< 1.20.6` and `>= 2.0.0, < 2.3.0`\
 **Patched versions**: `>= 1.20.6` and `>= 2.3.0`
 
 For more details, see [GHSA-v422-hmwv-36x6](https://github.com/expressjs/body-parser/security/advisories/GHSA-v422-hmwv-36x6).

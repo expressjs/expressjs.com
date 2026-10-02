@@ -3,6 +3,8 @@ title: FAQ
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 ---
 
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
+
 ## How should I structure my application?
 
 There is no definitive answer to this question. The answer depends
@@ -42,7 +44,11 @@ To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
 
-For more information, see [Using template engines with Express](/guide/using-template-engines).
+<ReadMore>
+
+For more information, see the [Using template engines with Express](/guide/using-template-engines) guide.
+
+</ReadMore>
 
 ## How do I handle 404 responses?
 
@@ -92,7 +98,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-For more information, see [Error handling](/guide/error-handling).
+<ReadMore>
+
+For more information, see the [Error handling](/guide/error-handling) guide.
+
+</ReadMore>
 
 ## How do I render plain HTML?
 

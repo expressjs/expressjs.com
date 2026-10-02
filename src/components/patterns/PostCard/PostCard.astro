@@ -64,20 +64,20 @@ const {
 <article class:list={['post-card', className]} {...rest}>
   <a href={href} class="post-card__link">
     <div>
-      {
-        coverSrc && (
-          <Image
-            class="post-card__cover"
-            src={coverSrc}
-            alt={coverAlt || ''}
-            width={1200}
-            height={630}
-            loading="lazy"
-          />
-        )
-      }
+      {coverSrc && (
+        <Image
+          class="post-card__cover"
+          src={coverSrc}
+          alt={coverAlt || ''}
+          width={1200}
+          height={630}
+          loading="lazy"
+        />
+      )}
       <div class="post-card__labels">
-        {labels.map((label) => <Tag>{label}</Tag>)}
+        {labels.map((label) => (
+          <Tag>{label}</Tag>
+        ))}
       </div>
       <H3 as="h2" vMargin={false} class="post-card__title">
         {title}

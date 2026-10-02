@@ -45,7 +45,7 @@ app.get('/user/:id', (request: Request, response: Response) => {
 ```
 
 The `req` object is an enhanced version of Node's own request object
-and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_incomingmessage).
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpincomingmessage).
 
 ## Properties
 
@@ -350,7 +350,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 <Alert type="alert">
 
 `req.url` is not a native Express property, it is inherited from Node's [http
-module](https://nodejs.org/api/http.html#http_message_url).
+module](https://nodejs.org/api/http.html#messageurl).
 
 </Alert>
 

@@ -5,29 +5,11 @@ description: Discover performance and reliability best practices for Express app
 
 This article discusses performance and reliability best practices for Express applications deployed to production.
 
-This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
-
-- Things to do in your code (the dev part):
-  - [Use gzip compression](#use-gzip-compression)
-  - [Don't use synchronous functions](#dont-use-synchronous-functions)
-  - [Do logging correctly](#do-logging-correctly)
-  - [Handle exceptions properly](#handle-exceptions-properly)
-- Things to do in your environment / setup (the ops part):
-  - [Set NODE_ENV to "production"](#set-node_env-to-production)
-  - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-  - [Run your app in a cluster](#run-your-app-in-a-cluster)
-  - [Cache request results](#cache-request-results)
-  - [Use a load balancer](#use-a-load-balancer)
-  - [Use a reverse proxy](#use-a-reverse-proxy)
+This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts: [things to do in your code](#things-to-do-in-your-code) (the dev part), and [things to do in your environment / setup](#things-to-do-in-your-environment--setup) (the ops part).
 
 ## Things to do in your code
 
-Here are some things you can do in your code to improve your application's performance:
-
-- [Use gzip compression](#use-gzip-compression)
-- [Don't use synchronous functions](#dont-use-synchronous-functions)
-- [Do logging correctly](#do-logging-correctly)
-- [Handle exceptions properly](#handle-exceptions-properly)
+Here are some things you can do in your code to improve your application's performance.
 
 ### Use gzip compression
 
@@ -58,7 +40,7 @@ Synchronous functions and methods tie up the executing process until they return
 
 Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in production. The only time when a synchronous function can be justified is upon initial startup.
 
-You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#trace-sync-io) for more information.
+You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#--trace-sync-io) for more information.
 
 ### Do logging correctly
 
@@ -147,16 +129,49 @@ Additionally, using `uncaughtException` is officially recognized as [crude](http
 
 We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
 
+### Use worker threads for CPU-intensive tasks
+
+Node.js runs your JavaScript on a single thread, so a CPU-intensive operation (such as image processing, parsing or transforming large payloads, or cryptographic operations) can block the event loop and slow down every request your Express app is handling. If your app does CPU-bound work, you can run it in [worker threads](https://nodejs.org/api/worker_threads.html), which execute JavaScript in parallel within the same process, keeping the main thread free to serve requests.
+
+Each worker thread runs in its own JavaScript engine instance, so the data you pass to it through `workerData` or `postMessage` is copied, not shared. Copying large payloads has a cost of its own, which you can avoid by transferring objects such as `ArrayBuffer`s or by sharing memory explicitly with `SharedArrayBuffer`. Worker threads are not a replacement for [running your app in a cluster](#run-your-app-in-a-cluster), which scales your app across CPU cores by running multiple instances of it in separate processes.
+
+This example offloads an image-resizing task to a worker, where `resize-worker.js` receives the image via `workerData` and posts the result back when it's done:
+
+```js
+const { Worker } = require('node:worker_threads');
+
+app.post('/resize', (req, res, next) => {
+  const worker = new Worker('./resize-worker.js', { workerData: req.body.image });
+
+  worker.once('message', (result) => res.send(result));
+  worker.once('error', next);
+});
+```
+
+Note that this example is kept simple for illustration: creating a worker thread is relatively expensive, so [the Node.js documentation recommends using a pool of workers](https://nodejs.org/api/worker_threads.html#worker-threads) instead of spawning a new one for every request. Create a fixed pool of workers at startup and dispatch tasks to them as requests come in, for example with a library like [piscina](https://www.npmjs.com/package/piscina):
+
+```js
+const path = require('node:path');
+const Piscina = require('piscina');
+
+const pool = new Piscina({ filename: path.resolve(__dirname, 'resize-worker.js') });
+
+app.post('/resize', async (req, res, next) => {
+  try {
+    res.send(await pool.run(req.body.image));
+  } catch (err) {
+    next(err);
+  }
+});
+```
+
+Here `resize-worker.js` simply exports the function to run in the pool, and piscina takes care of creating the workers, queueing tasks, and reusing threads across requests.
+
+For more guidance on keeping the event loop responsive, including when offloading work is worth its communication costs, see [Don't Block the Event Loop](https://nodejs.org/learn/asynchronous-work/dont-block-the-event-loop) in the Node.js documentation.
+
 ## Things to do in your environment / setup
 
-Here are some things you can do in your system environment to improve your app's performance:
-
-- [Set NODE_ENV to "production"](#set-node_env-to-production)
-- [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-- [Run your app in a cluster](#run-your-app-in-a-cluster)
-- [Cache request results](#cache-request-results)
-- [Use a load balancer](#use-a-load-balancer)
-- [Use a reverse proxy](#use-a-reverse-proxy)
+Here are some things you can do in your system environment to improve your app's performance.
 
 ### Set NODE_ENV to "production"
 
@@ -182,6 +197,10 @@ Environment=NODE_ENV=production
 ```
 
 For more information, see [Using Environment Variables In systemd Units](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
+
+### Use the latest LTS version of Node.js
+
+Running your app on a recent Node.js release is one of the easiest ways to improve performance. Each new version of Node.js ships with cumulative improvements to the V8 JavaScript engine and the runtime itself, so the same Express app can handle significantly more requests simply by upgrading. Benchmarks such as NodeSource's [Node.js Performance Report](https://nodesource.com/pages/content-node-performance-report-wb.html) show how much throughput can improve from one Node.js version to the next. For production, use the latest [LTS release](https://nodejs.org/en/about/previous-releases) of Node.js, and keep it up to date as new versions come out.
 
 ### Ensure your app automatically restarts
 

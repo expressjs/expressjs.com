@@ -36,32 +36,30 @@ const tocHeadings =
     : [];
 ---
 
-{
-  tocHeadings.length > 0 && (
-    <nav class:list={['toc', className]} aria-label={t('post.toc')} {...rest}>
-      <p class="toc__heading" aria-hidden="true">
-        {t('post.toc')}
-      </p>
+{tocHeadings.length > 0 && (
+  <nav class:list={['toc', className]} aria-label={t('post.toc')} {...rest}>
+    <p class="toc__heading" aria-hidden="true">
+      {t('post.toc')}
+    </p>
 
-      <details class="toc__details">
-        <summary class="toc__summary">
-          <span class="toc__summary-label">{t('post.toc')}</span>
-          <Icon name="fluent:chevron-down-20-regular" class="toc__chevron" aria-hidden="true" />
-        </summary>
+    <details class="toc__details">
+      <summary class="toc__summary">
+        <span class="toc__summary-label">{t('post.toc')}</span>
+        <Icon name="fluent:chevron-down-20-regular" class="toc__chevron" aria-hidden="true" />
+      </summary>
 
-        <ol class="toc__list">
-          {tocHeadings.map((heading) => (
-            <li class:list={['toc__item', `toc__item--h${heading.depth}`]}>
-              <a class="toc__link" href={`#${heading.slug}`}>
-                {heading.text}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </details>
-    </nav>
-  )
-}
+      <ol class="toc__list">
+        {tocHeadings.map((heading) => (
+          <li class:list={['toc__item', `toc__item--h${heading.depth}`]}>
+            <a class="toc__link" href={`#${heading.slug}`}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </details>
+  </nav>
+)}
 
 <script>
   function initToc(details: HTMLDetailsElement) {

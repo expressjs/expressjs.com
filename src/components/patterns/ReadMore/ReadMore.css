@@ -1,0 +1,29 @@
+/**
+ * ReadMore Component Styles
+ */
+
+@layer patterns {
+  .read-more {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border-left-width: var(--border-width-4);
+    border-left-style: solid;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    margin: var(--space-4) 0;
+    background-color: var(--color-bg-success);
+    border-color: var(--color-border-success);
+  }
+
+  .read-more__icon {
+    flex-shrink: 0;
+    color: var(--color-text-success);
+  }
+
+  .read-more__description {
+    p {
+      margin: 0;
+    }
+  }
+}

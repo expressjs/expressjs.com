@@ -32,7 +32,7 @@ The following vulnerabilities have been addressed:
 
 A bad regular expression is generated any time you have three or more parameters within a single segment, separated by something that is not a period. For example, `/:a-:b-:c`. The backtrack protection added in v0.1.12 only prevents ambiguity for two parameters. With three or more, the generated lookahead does not block single separator characters, causing catastrophic backtracking.
 
-**Affected versions**: `<= 0.1.12`
+**Affected versions**: `<= 0.1.12`\
 **Patched version**: `>= 0.1.13`
 
 For more details, see [GHSA-37ch-88jc-xwx2](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-37ch-88jc-xwx2).
@@ -43,7 +43,7 @@ For more details, see [GHSA-37ch-88jc-xwx2](https://github.com/pillarjs/path-to-
 
 A bad regular expression is generated any time you have multiple sequential optional groups, such as `{a}{b}{c}:z`. The generated regex grows exponentially with the number of groups, causing denial of service. Avoid passing user-controlled input as route patterns.
 
-**Affected versions**: `>= 8.0.0`
+**Affected versions**: `>= 8.0.0`\
 **Patched version**: `>= 8.4.0`
 
 For more details, see [GHSA-j3q9-mxjg-w52f](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-j3q9-mxjg-w52f).
@@ -54,7 +54,7 @@ For more details, see [GHSA-j3q9-mxjg-w52f](https://github.com/pillarjs/path-to-
 
 When using multiple wildcards combined with at least one parameter, a regular expression can be generated that is vulnerable to ReDoS. The second wildcard must be somewhere other than the end of the path. For example, `/*foo-*bar-:baz`.
 
-**Affected versions**: `>= 8.0.0, <= 8.3.0`
+**Affected versions**: `>= 8.0.0, <= 8.3.0`\
 **Patched version**: `>= 8.4.0`
 
 For more details, see [GHSA-27v5-c462-wpq7](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-27v5-c462-wpq7).

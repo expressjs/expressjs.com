@@ -33,7 +33,7 @@ The following vulnerabilities have been addressed:
 
 A crafted multipart upload with a long header value can cause regex matching in the Content-Disposition filename parser to take seconds, blocking the Node.js event loop. Any service accepting multipart uploads via multiparty is affected. A small header of around 8 KB is sufficient to trigger the vulnerable backtracking.
 
-**Affected versions**: `<= 4.2.3`
+**Affected versions**: `<= 4.2.3`\
 **Patched version**: `>= 4.3.0`
 
 For more details, see [GHSA-65x3-rw7q-gx94](https://github.com/pillarjs/multiparty/security/advisories/GHSA-65x3-rw7q-gx94).
@@ -44,7 +44,7 @@ For more details, see [GHSA-65x3-rw7q-gx94](https://github.com/pillarjs/multipar
 
 A multipart upload with a field name that collides with an inherited Object.prototype property such as `__proto__`, `constructor`, or `toString` causes the parser to invoke `.push()` on the inherited prototype value rather than an array, throwing a TypeError that propagates as an uncaught exception and crashes the process. Any service accepting multipart uploads via multiparty is affected.
 
-**Affected versions**: `<= 4.2.3`
+**Affected versions**: `<= 4.2.3`\
 **Patched version**: `>= 4.3.0`
 
 For more details, see [GHSA-qxch-whhj-8956](https://github.com/pillarjs/multiparty/security/advisories/GHSA-qxch-whhj-8956).
@@ -55,7 +55,7 @@ For more details, see [GHSA-qxch-whhj-8956](https://github.com/pillarjs/multipar
 
 A multipart upload with a Content-Disposition header whose `filename*` parameter contains a malformed percent-encoding causes the parser to invoke `decodeURI` on the value without try/catch. The resulting URIError propagates as an uncaught exception and crashes the process. Any service accepting multipart uploads via multiparty is affected.
 
-**Affected versions**: `<= 4.2.3`
+**Affected versions**: `<= 4.2.3`\
 **Patched version**: `>= 4.3.0`
 
 For more details, see [GHSA-xh3c-6gcq-g4rv](https://github.com/pillarjs/multiparty/security/advisories/GHSA-xh3c-6gcq-g4rv).

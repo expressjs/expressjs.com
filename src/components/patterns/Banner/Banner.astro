@@ -26,37 +26,35 @@ const end = endDate ? new Date(endDate) : null;
 const isActive = (!start || now >= start) && (!end || now <= end);
 ---
 
-{
-  isActive && (
-    <div
-      class:list={['banner', `banner--${variant}`]}
-      data-banner-id={id ?? undefined}
-      data-dismissible={dismissible}
-      role="alert"
-    >
-      <Container>
-        <Flex align="center" gap="2">
-          <span class="banner__icon" aria-hidden="true">
-            {variant === 'info' ? (
-              <Icon name="fluent:info-16-regular" size="20" />
-            ) : (
-              <Icon name="fluent:warning-16-regular" size="20" />
-            )}
-          </span>
-          <Body as="h3" vMargin={false} weight="bold">
-            {title}
-          </Body>
-        </Flex>
-        <slot />
-      </Container>
-      {dismissible && (
-        <button class="banner__dismiss" aria-label="Dismiss banner">
-          <Icon name="fluent:dismiss-16-regular" size="16" />
-        </button>
-      )}
-    </div>
-  )
-}
+{isActive && (
+  <div
+    class:list={['banner', `banner--${variant}`]}
+    data-banner-id={id ?? undefined}
+    data-dismissible={dismissible}
+    role="alert"
+  >
+    <Container>
+      <Flex align="center" gap="2">
+        <span class="banner__icon" aria-hidden="true">
+          {variant === 'info' ? (
+            <Icon name="fluent:info-16-regular" size="20" />
+          ) : (
+            <Icon name="fluent:warning-16-regular" size="20" />
+          )}
+        </span>
+        <Body as="h3" vMargin={false} weight="bold">
+          {title}
+        </Body>
+      </Flex>
+      <slot />
+    </Container>
+    {dismissible && (
+      <button class="banner__dismiss" aria-label="Dismiss banner">
+        <Icon name="fluent:dismiss-16-regular" size="16" />
+      </button>
+    )}
+  </div>
+)}
 
 <script>
   document.querySelectorAll<HTMLElement>('.banner').forEach((banner) => {

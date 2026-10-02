@@ -27,3 +27,4 @@ export { default as WriteBanner } from './WriteBanner/WriteBanner.astro';
 export { default as RelatedContent } from './RelatedContent/RelatedContent.astro';
 export { default as DocBottomNav } from './DocBottomNav/DocBottomNav.astro';
 export { default as MiddlewareInfo } from './MiddlewareInfo/MiddlewareInfo.astro';
+export { default as ReadMore } from './ReadMore/ReadMore.astro';

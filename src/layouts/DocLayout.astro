@@ -44,17 +44,15 @@ const breadcrumbs = buildBreadcrumbs(Astro.url.pathname, t);
 <Layout title={title} description={description} canonicalPathname={canonicalPathname}>
   <Container>
     <PageTopbar breadcrumbs={breadcrumbs}>
-      {
-        editUrl && (
-          <Button as="a" variant="secondary" size="sm" href={editUrl}>
-            <Icon
-              name={isTranslation ? 'fluent:translate-20-regular' : 'github'}
-              aria-hidden="true"
-            />
-            {isTranslation ? t('page.translateThis') : t('page.editOnGitHub')}
-          </Button>
-        )
-      }
+      {editUrl && (
+        <Button as="a" variant="secondary" size="sm" href={editUrl}>
+          <Icon
+            name={isTranslation ? 'fluent:translate-20-regular' : 'github'}
+            aria-hidden="true"
+          />
+          {isTranslation ? t('page.translateThis') : t('page.editOnGitHub')}
+        </Button>
+      )}
     </PageTopbar>
 
     <div class="doc-layout">

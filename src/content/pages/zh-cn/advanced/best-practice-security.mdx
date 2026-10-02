@@ -17,22 +17,6 @@ Policies and Procedures.
 
 </Alert>
 
-Express 应用生产环境安全最佳实践包含：
-
-- [请勿使用已弃用或存在漏洞的 Express 版本](#请勿使用已弃用或存在漏洞的-express-版本)
-- [启用TLS](#use-tls)
-- [切勿信任用户输入](#切勿信任用户输入)
-  - [防止开放重定向](#防止开放重定向)
-- [使用 Helmet](#use-helmet)
-- [减少指纹信息泄露](#reduce-fingerprinting)
-- [安全使用 Cookie](#use-cookies-securely)
-  - [不使用默认会话 cookie 名称](#dont-use-the-default-session-cookie-name)
-  - [设置 cookie 安全选项](#set-cookie-security-options)
-- [防止使用暴力攻击授权](#prevent-brute-force-attacks-against-authorization)
-- [确保您的依赖是安全的](#ensure-your-dependencies-are-secure)
-  - [避免其他已知漏洞](#avoid-other-known-vulnerabilities)
-- [其他考虑](#additional-considerations)
-
 ## 请勿使用已弃用或存在漏洞的 Express 版本
 
 Express 2.x 与 3.x 版本已不再维护。 这些版本中的安全与性能问题将不再进行修复。 不要使用它们！ If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
