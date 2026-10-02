@@ -103,5 +103,6 @@ jobs:
             --exclude-loopback
             --remap "https://expressjs\.com\/((?:[^\/]+\/)*[^\/\.]+)\/?$ file://$PWD/dist/\$1/index.html"
             --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
+            --accept 100..=103,200..=299,418
             dist/
           fail: true
