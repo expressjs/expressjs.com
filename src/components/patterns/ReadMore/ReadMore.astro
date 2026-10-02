@@ -29,7 +29,9 @@ const { title = 'Read more', class: className, ...rest } = Astro.props;
 <aside class:list={['read-more', className]} aria-label={title} {...rest}>
   <Flex align="center" gap="2">
     <Icon name="fluent:book-open-16-regular" class="read-more__icon" size="18" aria-hidden="true" />
-    <Body as="p" vMargin={false} weight="bold" aria-hidden="true">{title}</Body>
+    <Body as="p" vMargin={false} weight="bold" aria-hidden="true">
+      {title}
+    </Body>
   </Flex>
   <div class="read-more__description">
     <slot />
