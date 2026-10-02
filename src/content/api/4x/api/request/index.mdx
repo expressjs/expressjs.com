@@ -244,6 +244,22 @@ console.dir(req.fresh);
 // => true
 ```
 
+### req.host
+
+<Signature type="String" deprecated="v4.5.0" />
+
+<Alert type="alert">
+
+`req.host` is a deprecated alias of [`req.hostname`](#reqhostname) and returns the same value — the hostname with the port number stripped off. It has emitted a deprecation warning since Express v4.5.0. Use `req.hostname` instead.
+
+</Alert>
+
+```js
+// Host: "example.com:3000"
+console.dir(req.host);
+// => 'example.com'
+```
+
 ### req.hostname
 
 <Signature type="String" />
@@ -269,22 +285,6 @@ more than once.
 ```js
 // Host: "example.com:3000"
 console.dir(req.hostname);
-// => 'example.com'
-```
-
-### req.host
-
-<Signature type="String" deprecated="v4.5.0" />
-
-<Alert type="alert">
-
-`req.host` is a deprecated alias of [`req.hostname`](#reqhostname) and returns the same value — the hostname with the port number stripped off. It has emitted a deprecation warning since Express v4.5.0. Use `req.hostname` instead.
-
-</Alert>
-
-```js
-// Host: "example.com:3000"
-console.dir(req.host);
 // => 'example.com'
 ```
 
@@ -671,17 +671,17 @@ list or array, the method returns the _best_ match (if any).
 ```js
 // Accept: text/html
 req.accepts('html');
-// => "html"
+// => 'html'
 
 // Accept: text/*, application/json
 req.accepts('html');
-// => "html"
+// => 'html'
 req.accepts('text/html');
-// => "text/html"
+// => 'text/html'
 req.accepts(['json', 'text']);
-// => "json"
+// => 'json'
 req.accepts('application/json');
-// => "application/json"
+// => 'application/json'
 
 // Accept: text/*, application/json
 req.accepts('image/png');
@@ -690,7 +690,7 @@ req.accepts('png');
 
 // Accept: text/*;q=.5, application/json
 req.accepts(['html', 'json']);
-// => "json"
+// => 'json'
 ```
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
@@ -856,10 +856,10 @@ The `Referrer` and `Referer` fields are interchangeable.
 
 ```js
 req.get('Content-Type');
-// => "text/plain"
+// => 'text/plain'
 
 req.get('content-type');
-// => "text/plain"
+// => 'text/plain'
 
 req.get('Something');
 // => undefined
@@ -943,15 +943,15 @@ Returns the value of param `name` when present.
 ```js
 // ?name=tobi
 req.param('name');
-// => "tobi"
+// => 'tobi'
 
 // POST name=tobi
 req.param('name');
-// => "tobi"
+// => 'tobi'
 
 // /user/tobi for /user/:name
 req.param('name');
-// => "tobi"
+// => 'tobi'
 ```
 
 Lookup is performed in the following order:
