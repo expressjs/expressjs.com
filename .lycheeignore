@@ -28,5 +28,6 @@ dist/(.*/)?404((/index)?\.html|/)$
 ^https://www\.mysql\.com/
 ^https://www\.oracle\.com/
 
-# Frequent 403, social media link from footer
+# Twitter/X rate limit (profile link and tweet intents)
 ^https://x\.com/UseExpressJS$
+^https://x\.com/intent/tweet
