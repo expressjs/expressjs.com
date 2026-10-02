@@ -73,21 +73,17 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
     aria-label={ariaLabel}
     disabled={disabled}
   >
-    {
-      icon && (
-        <div class="select-icon">
-          <Icon name={icon} size="20" color="var(--color-icon-primary)" aria-hidden="true" />
-        </div>
-      )
-    }
+    {icon && (
+      <div class="select-icon">
+        <Icon name={icon} size="20" color="var(--color-icon-primary)" aria-hidden="true" />
+      </div>
+    )}
     <BodyMd vMargin={false} class:list={['select-label', hideLabel && 'sr-only']} data-select-label>
       {displayLabel}
     </BodyMd>
-    {
-      !hideLabel && (
-        <Icon name="fluent:chevron-down-20-regular" class="select-caret" aria-hidden="true" />
-      )
-    }
+    {!hideLabel && (
+      <Icon name="fluent:chevron-down-20-regular" class="select-caret" aria-hidden="true" />
+    )}
   </button>
 
   <div
@@ -96,32 +92,28 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
     role="listbox"
     aria-label={ariaLabel}
   >
-    {
-      options.map((option) => (
-        <button
-          type="button"
-          class="select-option"
-          role="option"
-          aria-selected={option.value === selectedOption?.value ? 'true' : 'false'}
-          data-select-option
-          data-value={String(option.value)}
-          disabled={option.disabled}
-        >
-          <BodyMd vMargin={false}>{option.label}</BodyMd>
-        </button>
-      ))
-    }
+    {options.map((option) => (
+      <button
+        type="button"
+        class="select-option"
+        role="option"
+        aria-selected={option.value === selectedOption?.value ? 'true' : 'false'}
+        data-select-option
+        data-value={String(option.value)}
+        disabled={option.disabled}
+      >
+        <BodyMd vMargin={false}>{option.label}</BodyMd>
+      </button>
+    ))}
   </div>
 
-  {
-    name && (
-      <input
-        type="hidden"
-        name={name}
-        value={selectedOption?.value ? String(selectedOption.value) : ''}
-      />
-    )
-  }
+  {name && (
+    <input
+      type="hidden"
+      name={name}
+      value={selectedOption?.value ? String(selectedOption.value) : ''}
+    />
+  )}
 </div>
 
 <script>

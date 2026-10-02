@@ -36,13 +36,17 @@ const t = useTranslations(lang);
   <BodyMd
     vMargin={false}
     class={`label-dark ${!showLabels ? 'sr-only' : ''}`}
-    aria-label={t('theme.switchToLight')}>{t('theme.switchToLight')}</BodyMd
+    aria-label={t('theme.switchToLight')}
   >
+    {t('theme.switchToLight')}
+  </BodyMd>
   <BodyMd
     vMargin={false}
     class={`label-light ${!showLabels ? 'sr-only' : ''}`}
-    aria-label={t('theme.switchToDark')}>{t('theme.switchToDark')}</BodyMd
+    aria-label={t('theme.switchToDark')}
   >
+    {t('theme.switchToDark')}
+  </BodyMd>
 </button>
 
 <script>

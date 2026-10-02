@@ -58,47 +58,43 @@ const displayType = optional && type ? `${type} | undefined` : type;
   </div>
 
   <div class="param__body">
-    {
-      (displayType || defaultValue !== undefined || since || deprecated) && (
-        <div class="param__meta">
-          {displayType && (
-            <span class="param__meta-item">
-              <span class="param__label">Type:</span>
-              <code class="type-tag">{displayType}</code>
-            </span>
-          )}
-          {defaultValue !== undefined && (
-            <span class="param__meta-item">
-              <span class="param__label">Default:</span>
-              <code class="param__value">{defaultValue}</code>
-            </span>
-          )}
-          {since && (
-            <span class="param__meta-item">
-              <span class="param__label">Added in:</span>
-              <code class="param__value">{since}</code>
-            </span>
-          )}
-          {deprecated && (
-            <span class="param__meta-item param__meta-item--deprecated">
-              <span class="param__label">Deprecated in:</span>
-              <code class="param__value">{deprecated}</code>
-            </span>
-          )}
-        </div>
-      )
-    }
+    {(displayType || defaultValue !== undefined || since || deprecated) && (
+      <div class="param__meta">
+        {displayType && (
+          <span class="param__meta-item">
+            <span class="param__label">Type:</span>
+            <code class="type-tag">{displayType}</code>
+          </span>
+        )}
+        {defaultValue !== undefined && (
+          <span class="param__meta-item">
+            <span class="param__label">Default:</span>
+            <code class="param__value">{defaultValue}</code>
+          </span>
+        )}
+        {since && (
+          <span class="param__meta-item">
+            <span class="param__label">Added in:</span>
+            <code class="param__value">{since}</code>
+          </span>
+        )}
+        {deprecated && (
+          <span class="param__meta-item param__meta-item--deprecated">
+            <span class="param__label">Deprecated in:</span>
+            <code class="param__value">{deprecated}</code>
+          </span>
+        )}
+      </div>
+    )}
 
     <div class="param__desc">
       <slot />
     </div>
 
-    {
-      hasProperties && (
-        <div class="signature__params param__children">
-          <slot name="properties" />
-        </div>
-      )
-    }
+    {hasProperties && (
+      <div class="signature__params param__children">
+        <slot name="properties" />
+      </div>
+    )}
   </div>
 </div>

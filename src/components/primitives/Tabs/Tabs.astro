@@ -29,20 +29,18 @@ const { tabs, defaultValue = tabs[0]?.value, class: className, ...rest } = Astro
 ---
 
 <div class:list={['tabs', className]} role="tablist" {...rest}>
-  {
-    tabs.map((tab) => (
-      <button
-        role="tab"
-        type="button"
-        class:list={['tabs__tab', tab.value === defaultValue && 'tabs__tab--active']}
-        aria-selected={tab.value === defaultValue ? 'true' : 'false'}
-        tabindex={tab.value === defaultValue ? 0 : -1}
-        data-tabs-value={tab.value}
-      >
-        {tab.label}
-      </button>
-    ))
-  }
+  {tabs.map((tab) => (
+    <button
+      role="tab"
+      type="button"
+      class:list={['tabs__tab', tab.value === defaultValue && 'tabs__tab--active']}
+      aria-selected={tab.value === defaultValue ? 'true' : 'false'}
+      tabindex={tab.value === defaultValue ? 0 : -1}
+      data-tabs-value={tab.value}
+    >
+      {tab.label}
+    </button>
+  ))}
 </div>
 
 <script>

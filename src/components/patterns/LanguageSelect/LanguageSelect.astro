@@ -42,7 +42,7 @@ const options = languages.map((lang) => ({
   ariaLabel={t('language.selectLabel')}
   class={className}
   data-language-select
-  {...id && { id }}
+  {...(id && { id })}
   {...rest}
 />
 

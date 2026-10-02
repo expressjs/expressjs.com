@@ -55,58 +55,54 @@ const hasFooter =
 ---
 
 <section class="signature">
-  {
-    hasAttributes && (
-      <div class="signature__attributes">
-        <h4 class="signature__attributes-title">{attributesTitle}</h4>
-        <div class="signature__params">
-          <slot name="attributes" />
-        </div>
+  {hasAttributes && (
+    <div class="signature__attributes">
+      <h4 class="signature__attributes-title">{attributesTitle}</h4>
+      <div class="signature__params">
+        <slot name="attributes" />
       </div>
-    )
-  }
+    </div>
+  )}
 
-  {
-    hasFooter && (
-      <div class="signature__footer">
-        {type && (
-          <p class="signature__line">
-            <span class="signature__line-label">Type:</span>
-            <code class="type-tag">{type}</code>
-          </p>
-        )}
-        {hasReturns && (
-          <p class="signature__line">
-            <span class="signature__line-arrow" aria-hidden="true">
-              ↵
-            </span>
-            <span class="signature__line-label">Returns:</span>
-            {hasReturnsSlot ? <slot name="returns" /> : <code class="type-tag">{returns}</code>}
-          </p>
-        )}
-        {since && (
-          <p class="signature__line">
-            <span class="signature__line-label">Added in:</span>
-            <code class="type-tag">{since}</code>
-          </p>
-        )}
-        {runtimeEntries.length > 0 && (
-          <p class="signature__line signature__line--runtime">
-            <span class="signature__line-label">Requires runtime:</span>
-            {runtimeEntries.map(([name, version]) => (
-              <code class="type-tag type-tag--runtime">
-                {name} {version}
-              </code>
-            ))}
-          </p>
-        )}
-        {deprecated && (
-          <p class="signature__line signature__line--deprecated">
-            <span class="signature__line-label">Deprecated in:</span>
-            <code class="type-tag type-tag--deprecated">{deprecated}</code>
-          </p>
-        )}
-      </div>
-    )
-  }
+  {hasFooter && (
+    <div class="signature__footer">
+      {type && (
+        <p class="signature__line">
+          <span class="signature__line-label">Type:</span>
+          <code class="type-tag">{type}</code>
+        </p>
+      )}
+      {hasReturns && (
+        <p class="signature__line">
+          <span class="signature__line-arrow" aria-hidden="true">
+            ↵
+          </span>
+          <span class="signature__line-label">Returns:</span>
+          {hasReturnsSlot ? <slot name="returns" /> : <code class="type-tag">{returns}</code>}
+        </p>
+      )}
+      {since && (
+        <p class="signature__line">
+          <span class="signature__line-label">Added in:</span>
+          <code class="type-tag">{since}</code>
+        </p>
+      )}
+      {runtimeEntries.length > 0 && (
+        <p class="signature__line signature__line--runtime">
+          <span class="signature__line-label">Requires runtime:</span>
+          {runtimeEntries.map(([name, version]) => (
+            <code class="type-tag type-tag--runtime">
+              {name} {version}
+            </code>
+          ))}
+        </p>
+      )}
+      {deprecated && (
+        <p class="signature__line signature__line--deprecated">
+          <span class="signature__line-label">Deprecated in:</span>
+          <code class="type-tag type-tag--deprecated">{deprecated}</code>
+        </p>
+      )}
+    </div>
+  )}
 </section>
