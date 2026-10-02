@@ -5,13 +5,15 @@ description: Learn how to connect databases to Express.js applications, when to 
 
 To connect a database to an Express app simply load the desired Node.js driver or ORM in your app. The general pattern is shown below using SQLite as an example.
 
-There are also a few [best practices ](#best-practices) to follow, regardless of the database you're using.
+There are also a few [best practices](#best-practices) to follow, regardless of the database you're using.
 
 ## SQLite
 
 Node.js includes a built-in SQLite client, [node:sqlite](https://nodejs.org/api/sqlite.html), available without a flag since Node.js 22.13.0. No installation is required. For older Node.js versions, [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) offers a similar synchronous API.
 
 ### Example
+
+This example creates a sample user that you can retrieve at `http://localhost:3000/users/1`. It uses a synchronous SQLite API for simplicity: long-running queries block the thread handling requests. For workloads with long-running queries, consider moving database work to a worker thread or using an asynchronous database driver.
 
 ```cjs title="index.cjs"
 const express = require('express');
@@ -20,10 +22,15 @@ const { DatabaseSync } = require('node:sqlite');
 const app = express();
 const db = new DatabaseSync('app.db');
 
-db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)');
+db.prepare('INSERT INTO users (id, name) VALUES (?, ?) ON CONFLICT(id) DO NOTHING').run(1, 'Alice');
+const findUser = db.prepare('SELECT id, name FROM users WHERE id = ?');
 
 app.get('/users/:id', (req, res) => {
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
+  const user = findUser.get(req.params.id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
   res.json(user);
 });
 
@@ -37,10 +44,15 @@ import { DatabaseSync } from 'node:sqlite';
 const app = express();
 const db = new DatabaseSync('app.db');
 
-db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)');
+db.prepare('INSERT INTO users (id, name) VALUES (?, ?) ON CONFLICT(id) DO NOTHING').run(1, 'Alice');
+const findUser = db.prepare('SELECT id, name FROM users WHERE id = ?');
 
 app.get('/users/:id', (req, res) => {
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
+  const user = findUser.get(req.params.id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
   res.json(user);
 });
 
@@ -59,12 +71,15 @@ interface User {
 const app = express();
 const db = new DatabaseSync('app.db');
 
-db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)');
+db.prepare('INSERT INTO users (id, name) VALUES (?, ?) ON CONFLICT(id) DO NOTHING').run(1, 'Alice');
+const findUser = db.prepare('SELECT id, name FROM users WHERE id = ?');
 
 app.get('/users/:id', (req, res) => {
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id) as
-    | User
-    | undefined;
+  const user = findUser.get(req.params.id) as User | undefined;
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
   res.json(user);
 });
 
@@ -96,33 +111,41 @@ Popular options in the Node.js ecosystem include:
 - [Drizzle ORM](https://orm.drizzle.team/): a lightweight, TypeScript-first ORM with a SQL-like query API and a migrations toolkit.
 - [Sequelize](https://sequelize.org/): a mature, promise-based ORM for PostgreSQL, MySQL, MariaDB, SQLite, and SQL Server.
 - [TypeORM](https://typeorm.io/): an ORM built around decorators and entities, supporting many SQL databases and MongoDB.
-- [Mongoose](https://mongoosejs.com/): the most widely used ODM (object document mapper) for MongoDB.
+- [Mongoose](https://mongoosejs.com/): an ODM (object document mapper) for MongoDB.
 - [Knex.js](https://knexjs.org/): a flexible SQL query builder with migrations support, useful when you want control over your queries without writing raw strings.
 - [Kysely](https://kysely.dev/): a type-safe SQL query builder for TypeScript.
 
-There is no single right choice. Query builders keep you close to SQL, while full ORMs abstract more of it away. Pick the level of abstraction that matches your team and project, and prefer tools that are actively maintained.
+Each ORM has its own API, supported databases, and approach to schemas, migrations, and queries. Features and setup requirements vary, so consult each project's documentation before choosing one. Query builders keep you close to SQL, while full ORMs abstract more of it away. Pick the level of abstraction that matches your team and project, and prefer tools that are actively maintained.
 
 ## Best practices
 
-These practices apply regardless of the database or library you choose. The snippets below use the connection pool from the [pg](https://node-postgres.com/) driver as an example, but every driver and ORM offers an equivalent.
+Adapt these practices to the database and library you choose. The snippets below illustrate separate parts of an application. The PostgreSQL snippets assume you have installed the [pg](https://node-postgres.com/) driver and created a shared pool:
+
+```js
+import { Pool } from 'pg';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+```
 
 ### Create connections once and reuse them
 
-Opening a database connection is expensive. Most drivers provide a connection pool: a set of connections that is opened once, kept alive, and shared across requests, so each query borrows an existing connection instead of opening a new one. Create the pool (or client) once when the app starts, then reuse it in your route handlers, as the example on this page does. Never open a new connection inside a request handler.
+Opening a database connection is expensive. Many drivers provide a connection pool that creates connections as needed and reuses them across requests. Create the pool (or client) once when the app starts. Acquire connections from that shared pool as needed in your route handlers, for example for a transaction, and always release them in a `finally` block. For individual queries, `pool.query()` in `pg` handles acquiring and releasing a connection for you.
 
 ### Use parameterized queries
 
-Never build queries by concatenating or interpolating user input into the query string. Doing so exposes your app to SQL injection (or the equivalent injection attack for NoSQL databases). Every driver and ORM supports parameterized queries or prepared statements, which pass user input separately from the query itself:
+Never build SQL queries by concatenating or interpolating user input into the query string. Doing so exposes your app to SQL injection. Use your driver's parameterized queries or prepared statements to pass user input separately from the query itself.
 
 ```js
 // Vulnerable: user input becomes part of the query
 const user = await pool.query(`SELECT * FROM users WHERE id = ${req.params.id}`);
+```
 
+```js
 // Safe: user input is passed as a parameter
 const user = await pool.query('SELECT * FROM users WHERE id = $1', [req.params.id]);
 ```
 
-Also validate user input before it reaches your queries, both for security and for data integrity.
+Also validate user input before it reaches your queries, both for security and for data integrity. For NoSQL databases, construct queries using the driver's API and validate the types, fields, and operators you accept. Do not pass user-supplied query objects directly to the database.
 
 ### Keep credentials out of your code
 
@@ -160,7 +183,6 @@ app.get('/reports', async (req, res) => {
 When your app receives a termination signal, stop accepting new requests and close your database connections so in-flight queries can finish cleanly:
 
 ```js
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const server = app.listen(3000);
 
 process.on('SIGTERM', () => {
