@@ -20,4 +20,4 @@ EOL (終了) _may_ のバージョンは、重大なセキュリティ脆弱性�
 
 サポートされているバージョンの Express にアップデートできない場合は、以下のいずれかのパートナーにお問い合わせください:
 
-- [HeroDevs Never-Ending Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
+- [HeroDevs Never-Ending Support](https://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)

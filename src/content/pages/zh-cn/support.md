@@ -20,4 +20,4 @@ description: 了解不同 Express.js 版本的支持计划，包括当前仍受�
 
 如果你无法升级到受支持的 Express 版本，请联系以下合作伙伴获取安全更新：
 
-- [HeroDevs Never-Ending Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
+- [HeroDevs Never-Ending Support](https://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
