@@ -1,0 +1,89 @@
+---
+title: Security Checklist
+description: A checklist of the security decisions Express leaves to you, with a page on each one.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express intentionally leaves most security decisions up to application developers. This page is a checklist of those decisions, to use while building or deploying an Express application.
+
+Not every item will apply to your application, but ask yourself each question before going to production. A "no", or a question you don't understand, means there is a fix to make or a topic to look at more closely. Each question links to a page covering what Express does, what can go wrong, and what we recommend. Questions without links are out of scope of Express itself or its family of middleware.
+
+This list is a gift to the Express community, from the community. It is not complete, and it is not a substitute for a general web security checklist. [OWASP](https://owasp.org/) covers the things this guide won't.
+
+## Who Is This For?
+
+We assume you can already build an Express application and know what an HTTP request is. Beyond that, this page should be useful whether it is your first Express application or your 100th. Advanced developers are not expected to be security experts, and someone brand new to Express may bring plenty of security experience with them. To respect your time, we focus on the risks and mitigations specific to Express rather than teaching fundamentals or going deep on any one topic.
+
+## Express Threat Model
+
+You might ask yourself "if I have to do all this work to secure my application, does that mean Express isn't secure?". Fair question!
+
+Express takes responsibility for the security of its own code. Developers are responsible for the security of the applications they build with it. We outline where that boundary sits in our [Threat Model](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md).
+
+<Alert type="info">
+
+If you believe you have discovered a security vulnerability in Express, please see [Security Policies and Procedures](/resources/contributing#security-policies-and-procedures).
+
+</Alert>
+
+## Before you write a route
+
+- Are you on a [supported Express release](/support)?
+- Do you know where TLS terminates in front of your app?
+- Does CI run `npm audit` or an equivalent, and does someone act on it?
+- Are you watching [Express releases](https://github.com/expressjs/express/releases) and [security advisories](https://github.com/expressjs/express/security/advisories)?
+
+## Untrusted input
+
+- Is every value from `req.body`, `req.query`, `req.params`, headers, and cookies [validated before use](/security/untrusted-input)?
+- Have you chosen your [`query parser` setting and `urlencoded` `extended` option](/security/untrusted-input) on purpose?
+- Are file paths, redirect targets, and shell arguments [built only from allowlisted values](/security/untrusted-input)?
+
+## Route patterns and middleware order
+
+- Are your route patterns free of [repetition that can be forced into catastrophic backtracking](/security/route-patterns)?
+- Is authentication middleware [mounted before every route it protects](/security/route-patterns)?
+- Does anything in front of the app that filters by path [match Express's routing rules](/security/route-patterns)?
+
+## Response sinks
+
+- Do `res.redirect`, `res.render`, `res.links`, `res.set`, and `res.jsonp` [only receive sanitized values](/security/response-sinks)?
+- Does your template engine [escape HTML by default](/security/response-sinks)?
+- Do you [set `Content-Type` explicitly](/security/response-sinks) when sending user-derived data?
+- Are [security response headers](/security/response-sinks) set, and is `X-Powered-By` removed?
+
+## Serving files
+
+- Does `express.static` [serve only files you intend to be public](/security/serving-files)?
+- When `res.sendFile` or `res.download` gets a path from request data, is [`root` set and the path allowlisted](/security/serving-files)?
+- Are [uploads limited in size and count](/security/serving-files) and stored outside any static directory?
+
+## Proxies and client identity
+
+- Is `trust proxy` [set to match your deployment](/security/proxies), and never `true` when a client can reach the app directly?
+- Does anything keyed on `req.ip`, `req.hostname`, or `req.protocol` [run without `trust proxy` set](/security/proxies)?
+
+## Error handling
+
+- Is an [error-handling middleware registered after all routes](/security/error-handling)?
+- Is [`NODE_ENV=production` set in production](/security/error-handling)?
+- Do errors thrown in async handlers [reach your error handler](/security/error-handling)?
+
+## Resource exhaustion
+
+- Does every body parser have a [`limit` that matches what the route expects](/security/resource-exhaustion)?
+- Is there [rate limiting on login and other expensive endpoints](/security/resource-exhaustion)?
+- Are [server timeouts set](/security/resource-exhaustion), or is something in front of Node absorbing slow clients?
+
+## Sessions, cookies, CSRF, CORS
+
+- Are cookies set with [`Secure`, `HttpOnly`, and `SameSite`](/security/sessions)?
+- Is the [cookie signing secret](/security/sessions) loaded from the environment rather than source?
+- Is the [session store](/security/sessions) something other than `MemoryStore` in production?
+- Do cookie-authenticated routes that change state have [CSRF protection](/security/csrf)?
+- Does CORS use an [explicit origin allowlist](/security/cors)?
+
+## Logging
+
+- Are request logs [safe against user-controlled values](/security/logging) and free of secrets?
