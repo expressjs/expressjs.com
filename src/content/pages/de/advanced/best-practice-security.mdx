@@ -48,7 +48,7 @@ Hier ist ein Beispiel für die Überprüfung von URLs, bevor `res.redirect` oder
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
@@ -296,6 +296,6 @@ Hier sind einige weitere Empfehlungen der ausgezeichneten [Node.js Security Chec
 - Verteidigen Sie gegen SQL-Injektionsangriffe durch parametrierte Abfragen oder vorbereitete Anweisungen.
 - Benutzen Sie das Open-Source [sqlmap](http://sqlmap.org/) Werkzeug, um Verwundbarkeiten in Ihrer App zu erkennen.
 - Verwenden Sie die Werkzeuge [nmap](https://nmap.org/) und [sslyze](https://github.com/nabla-c0d3/sslyze) um die Konfiguration Ihrer SSL-Chiffren zu testen, Schlüssel, Neuverhandlung sowie die Gültigkeit Ihres Zertifikats.
-- Verwende [safe-regex](https://www.npmjs.com/package/safe-regex), um sicherzustellen, dass deine regulären Ausdrücke nicht anfällig für [reguläre Ausdrucksverweigerung des Dienstes](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) Angriffe sind.
+- Verwende [safe-regex](https://www.npmjs.com/package/safe-regex), um sicherzustellen, dass deine regulären Ausdrücke nicht anfällig für [reguläre Ausdrucksverweigerung des Dienstes](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) Angriffe sind.
 
 [helmet]: https://helmetjs.github.io/

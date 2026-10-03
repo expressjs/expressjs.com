@@ -1,6 +1,6 @@
 ---
 title: Template-Engines mit Express verwenden
-description: Entdecken Sie, wie Sie Template-Engines wie Pug, Handlebars und EJS mit Express.js integrieren und nutzen können, um dynamische HTML-Seiten effizient zu machen.
+description: Discover how to integrate and use template engines like Pug, Handlebars-compatible engines, and EJS with Express.js to render dynamic HTML pages efficiently.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -10,15 +10,15 @@ Eine _template engine_ ermöglicht es Ihnen, statische Template-Dateien in Ihrer
 Variablen in einer Template-Datei mit aktuellen Werten und verwandelt die Vorlage in eine HTML-Datei, die an den Client gesendet wird.
 Dieser Ansatz erleichtert die Gestaltung einer HTML-Seite.
 
-Der [Express-Anwendungsgenerator](/starter/generator) verwendet [Pug](https://pugjs.org/api/getting-started.html) als Standardwert, aber es unterstützt auch [Handlebars](https://www.npmjs.com/package/handlebars), und [EJS](https://www.npmjs.com/package/ejs), unter anderem.
+The [Express application generator](/starter/generator) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it can generate apps configured for Handlebars-compatible engines such as [hbs](https://www.npmjs.com/package/hbs), [EJS](https://www.npmjs.com/package/ejs), among others.
 
-To render template files, set the following [application setting properties](/api/application/#appset), in the default `app.js` created by the generator:
+For apps created by the generator, these settings are added to the generated `app.js`. For apps you create without the generator, set the following [application setting properties](/api/application/#appset) yourself:
 
 - `views`, das Verzeichnis, in dem sich die Template-Dateien befinden. Eg: `app.set('views', './views')`.
   Dies ist standardmäßig im Verzeichnis `views` im Root-Verzeichnis der Anwendung.
 - `view engine`, die zu verwendende Template-Engine. Um zum Beispiel die Mückenvorlagen-Engine zu verwenden: `app.set('view engine', 'pug')`.
 
-Installieren Sie dann das entsprechende Template Engine npm Paket; zum Beispiel um Pug:
+Then install the corresponding Express-compatible template engine npm package; for example to install Pug:
 
 <PackageManagerCommand command="npm install pug --save" />
 
@@ -28,6 +28,7 @@ welche `res.render()` aufruft, um den Template-Code zu rendern.
 
 Einige Template-Engines folgen nicht dieser Konvention. Die [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
 Bibliothek folgt dieser Konvention, indem sie alle populären Template-Engines von Node.js abbildet, und arbeitet daher nahtlos in Express.
+For example, install [hbs](https://www.npmjs.com/package/hbs) or any other Express-compatible Handlebars view engine instead of the raw `handlebars` package by itself.
 
 </Alert>
 

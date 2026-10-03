@@ -37,11 +37,11 @@ Policies and Procedures.
 - 4.19.0, 4.19.1
   - Fixed open redirect vulnerability in `res.location` and `res.redirect` ([advisory](https://github.com/expressjs/express/security/advisories/GHSA-rv95-896h-c2vc), [CVE-2024-29041](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-29041)).
 - 4.17.3
-  - 依赖`qs`已更新以修复一处[安全漏洞](https://github.com/advisories/GHSA-hrpp-h998-j3pp)。 若使用了下述 API：`req.query`、`req.body`、`req.param`，该问题可能对你的应用造成影响。
+  - 依赖`qs`已更新以修复一处[安全漏洞](https://github.com/advisories/GHSA-hrpp-h998-j3pp)。若使用了下述 API：`req.query`、`req.body`、`req.param`，该问题可能对你的应用造成影响。
 - 4.16.0
   - The dependency `forwarded` has been updated to address a [vulnerability](https://npmjs.com/advisories/527). 如果使用了下列API，这可能会影响您的应用程序：`req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`。
   - The dependency `mime` has been updated to address a [vulnerability](https://npmjs.com/advisories/535), but this issue does not impact Express.
-  - 依赖`send`已完成更新，用于防范[Node.js 8.5.0相关漏洞](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/)。 该问题仅会在 Node.js 8.5.0 特定版本中运行 Express 时产生影响。
+  - 依赖`send`已完成更新，用于防范[Node.js 8.5.0相关漏洞](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/)。该问题仅会在 Node.js 8.5.0 特定版本中运行 Express 时产生影响。
 - 4.15.5
   - The dependency `debug` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:debug:20170905), but this issue does not impact Express.
   - The dependency `fresh` has been updated to address a [vulnerability](https://npmjs.com/advisories/526). 若你的应用使用了以下 API，则会受到影响：`express.static`、`req.fresh`、`res.json`、`res.jsonp`、`res.send`、`res.sendfile`、`res.sendFile`、`res.sendStatus`。
@@ -56,7 +56,7 @@ Policies and Procedures.
 - 4.8.8
   - Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
 - 4.8.4
-  - Node.js 0.10 在特定情况下可能会发生文件描述符（`fd`）泄漏，从而影响 `express.static` 和 `res.sendfile`。 恶意请求可能导致文件描述符（`fd`）泄漏，最终引发`EMFILE`错误并造成服务器无响应。
+  - Node.js 0.10 在特定情况下可能会发生文件描述符（`fd`）泄漏，从而影响 `express.static` 和 `res.sendfile`。恶意请求可能导致文件描述符（`fd`）泄漏，最终引发`EMFILE`错误并造成服务器无响应。
 - 4.8.0
   - 查询字符串中包含极高索引的稀疏数组，可能导致进程内存耗尽并使服务器崩溃。
   - 深度嵌套的查询字符串对象会导致进程阻塞，使服务器暂时无法响应。
@@ -66,7 +66,7 @@ Policies and Procedures.
 <Alert type="警告">
 **Express 3.x 已终止生命周期，不再提供维护支持**
 
-3.x 版本自2015年8月1日最后一次更新后，已知及潜在的安全、性能漏洞均不再修复。 强烈建议使用最新版本的 Express。
+3.x 版本自2015年8月1日最后一次更新后，已知及潜在的安全、性能漏洞均不再修复。强烈建议使用最新版本的 Express。
 
 If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/support#commercial-support-options).
 
@@ -79,7 +79,7 @@ If you are unable to upgrade past 3.x, please consider [Commercial Support Optio
 - 3.16.10
   - 在 `expres.static` 中固定的目录遍历脆弱性。
 - 3.16.6
-  - Node.js 0.10 在特定情况下可能会发生文件描述符（`fd`）泄漏，从而影响 `express.static` 和 `res.sendfile`。 恶意请求可能导致文件描述符（`fd`）泄漏，最终引发`EMFILE`错误并造成服务器无响应。
+  - Node.js 0.10 在特定情况下可能会发生文件描述符（`fd`）泄漏，从而影响 `express.static` 和 `res.sendfile`。恶意请求可能导致文件描述符（`fd`）泄漏，最终引发`EMFILE`错误并造成服务器无响应。
 - 3.16.0
   - 查询字符串中包含极高索引的稀疏数组，会导致进程内存耗尽并使服务器崩溃。
   - 深度嵌套的查询字符串对象会导致进程阻塞，使服务器暂时无法响应。

@@ -1,5 +1,5 @@
 ---
-title: Body-Parser Middleware
+title: body-parser Middleware
 description: Node.js Körper parsen Middleware
 ---
 
@@ -20,7 +20,7 @@ unter der `req.body` Eigenschaft.
 
 **Note** As `req.body`'s shape is based on user-controlled input, all
 properties and values in this object are untrusted and should be validated
-before trusting. Zum Beispiel `req.body.foo. oString()` kann auf mehreren
+before trusting. Zum Beispiel `req.body.foo.toString()` kann auf mehreren
 Wegen fehlschlagen, zum Beispiel könnte die `foo` Eigenschaft nicht vorhanden sein oder kein String sein,
 und `toString` sind möglicherweise keine Funktion und stattdessen eine Zeichenkette oder andere Benutzereingabe.
 
@@ -43,6 +43,10 @@ Dieses Modul bietet folgende Parser:
 - [Rohkörper-Parser](#bodyparserrawoptions)
 - [Text Körper Parser](#bodyparsertextoptions)
 - [URL-kodierter Form-Body Parser](#bodyparserurlencodedoptions)
+
+All parsers support automatic inflation of `gzip`, `br` (brotli), `deflate`
+and `zstd` encodings. `zstd` is available in Node.js `^22.15.0` and
+`>=23.8.0`.
 
 Andere Körper-Parser, die Sie interessieren können:
 
@@ -84,9 +88,8 @@ Die verschiedenen Fehler, die von diesem Modul zurückgegeben werden, werden im
 ### bodyParser.json([options])
 
 Gibt Middleware zurück, die nur `json` analysiert und nur Anfragen ansieht, bei denen
-der `Content-Type` Header mit der `type` Option übereinstimmt. Dieser Parser akzeptiert jede
-Unicode-Kodierung des Körpers und unterstützt die automatische Inflation von `gzip`,
-`br` (brotli) und `deflate` Kodierungen.
+der `Content-Type` Header mit der `type` Option übereinstimmt. This parser accepts any
+Unicode encoding of the body.
 
 Ein neues `body` Objekt mit den geparsten Daten wird auf dem `request`
 Objekt nach der Middleware (d.h. `req.body`) gefüllt.
@@ -96,22 +99,22 @@ Objekt nach der Middleware (d.h. `req.body`) gefüllt.
 The `json` function takes an optional `options` object that may contain any of
 the following keys:
 
-##### standard Zeichensatz
+##### defaultCharset
 
 Geben Sie den Standardzeichensatz für den json-Inhalt an, wenn der Zeichensatz nicht
 im `Content-Type`-Header der Anfrage angegeben ist. Standard ist `utf-8`.
 
-##### aufblasen
+##### inflate
 
 Wenn auf `true` gesetzt, dann werden die entschärften (komprimierten) Körper aufgeblasen; wenn
 `false` wird, werden die entschärften Körper abgelehnt. Standard ist `true`.
 
-##### begrenzen
+##### limit
 
 Steuert die maximale Größe des Request-Bodys. Wenn dies eine Zahl ist, gibt der Wert
 die Anzahl der Bytes an; wenn es sich um einen String handelt, wird der Wert an die
 [bytes](https://www.npmjs.com/package/bytes) Bibliothek zum Parsen übergeben. Standard
-auf `'100kb`.
+ist `'100kb'`.
 
 > Es wird empfohlen, nicht ein sehr hohes Limit zu konfigurieren und den Standardwert wann immer möglich zu verwenden. Das Erlauben größerer Payloads erhöht die Speicherauslastung aufgrund der Ressourcen, die für die Dekodierung und Transformation benötigt werden, und es kann auch zu längeren Reaktionszeiten führen, wenn mehr Daten verarbeitet werden. Mit „sehr hoch“ meinen wir Werte über dem Standardwert, zum Beispiel mit einer Nutzlast von 5 MB oder mehr können bereits damit begonnen werden, diese Risiken einzuführen. Bei den Standardlimits treten diese Probleme nicht auf.
 
@@ -121,12 +124,12 @@ Die Option `reviver` wird als zweites
 Argument direkt an `JSON.parse` übergeben. You can find more information on this argument
 [in the MDN documentation about JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#the_reviver_parameter).
 
-##### strikt
+##### strict
 
 When set to `true`, will only accept arrays and objects; when `false` will
 accept anything `JSON.parse` accepts. Standard ist `true`.
 
-##### typ
+##### type
 
 Die Option `type` wird verwendet, um festzustellen, welcher Medientyp die Middleware
 parst. Diese Option kann ein String, ein Array von Strings oder eine Funktion sein. Wenn nicht
@@ -137,7 +140,7 @@ ein Mime-Typ mit einem Platzhalter (wie `*/*` oder `*/json`). Wenn eine Funktion
 als `fn(req)` aufgerufen und die Anfrage wird geparst, wenn sie einen wahrhaften
 Wert zurückgibt. Standard ist `application/json`.
 
-##### überprüfen
+##### verify
 
 Die `verify` Option, falls vorhanden, wird als `verify(req, res, buf, encoding)` aufgerufen,
 wobei `buf` ein `Buffer` des Roh-Request-Body ist und `encoding` die
@@ -146,9 +149,7 @@ Kodierung der Anfrage. Das Parsen kann durch Werfen eines Fehlers abgebrochen we
 ### bodyParser.raw([options])
 
 Gibt Middleware zurück, die alle Körper als `Buffer` parst und nur
-Anfragen ansieht, wo der `Content-Type` Header mit der `type` Option übereinstimmt. Dieser
-Parser unterstützt die automatische Inflation von `gzip`, `br` (brotli) und `deflate`
-Kodierungen.
+Anfragen ansieht, wo der `Content-Type` Header mit der `type` Option übereinstimmt.
 
 Ein neues `body` Objekt mit den geparsten Daten wird auf dem `request`
 Objekt nach der Middleware (d.h. `req.body`) gefüllt. Dies wird ein `Buffer` Objekt
@@ -159,21 +160,21 @@ des Körpers sein.
 The `raw` function takes an optional `options` object that may contain any of
 the following keys:
 
-##### aufblasen
+##### inflate
 
 Wenn auf `true` gesetzt, dann werden die entschärften (komprimierten) Körper aufgeblasen; wenn
 `false` wird, werden die entschärften Körper abgelehnt. Standard ist `true`.
 
-##### begrenzen
+##### limit
 
 Steuert die maximale Größe des Request-Bodys. Wenn dies eine Zahl ist, gibt der Wert
 die Anzahl der Bytes an; wenn es sich um einen String handelt, wird der Wert an die
 [bytes](https://www.npmjs.com/package/bytes) Bibliothek zum Parsen übergeben. Standard
-auf `'100kb`.
+ist `'100kb'`.
 
 > Es wird empfohlen, nicht ein sehr hohes Limit zu konfigurieren und den Standardwert wann immer möglich zu verwenden. Das Erlauben größerer Payloads erhöht die Speicherauslastung aufgrund der Ressourcen, die für die Dekodierung und Transformation benötigt werden, und es kann auch zu längeren Reaktionszeiten führen, wenn mehr Daten verarbeitet werden. Mit „sehr hoch“ meinen wir Werte über dem Standardwert, zum Beispiel mit einer Nutzlast von 5 MB oder mehr können bereits damit begonnen werden, diese Risiken einzuführen. Bei den Standardlimits treten diese Probleme nicht auf.
 
-##### typ
+##### type
 
 Die Option `type` wird verwendet, um festzustellen, welcher Medientyp die Middleware
 parst. Diese Option kann ein String, ein Array von Strings oder eine Funktion sein.
@@ -185,7 +186,7 @@ kann ein Name der Erweiterung sein (wie `bin`), ein Mime-Typ (wie
 and the request is parsed if it returns a truthy value. Standardmäßig
 `application/octet-stream`.
 
-##### überprüfen
+##### verify
 
 Die `verify` Option, falls vorhanden, wird als `verify(req, res, buf, encoding)` aufgerufen,
 wobei `buf` ein `Buffer` des Roh-Request-Body ist und `encoding` die
@@ -194,50 +195,48 @@ Kodierung der Anfrage. Das Parsen kann durch Werfen eines Fehlers abgebrochen we
 ### bodyParser.text([options])
 
 Gibt Middleware zurück, die alle Körper als String parst und nur
-Anfragen ansieht, in denen der `Content-Type` Header mit der `type` Option übereinstimmt. Dieser
-Parser unterstützt die automatische Inflation von `gzip`, `br` (brotli) und `deflate`
-Kodierungen.
+Anfragen ansieht, in denen der `Content-Type` Header mit der `type` Option übereinstimmt.
 
-Ein neuer `body` String, der die geparsten Daten enthält, wird auf dem `request`
-Objekt nach der Middleware (d.h. `req.body`) gefüllt. Dies wird eine Zeichenkette des
-Körpers sein.
+A new `body` string containing the parsed data is populated on the `request`
+object after the middleware (i.e. `req.body`). This will be a string of the
+body.
 
 #### Optionen
 
 The `text` function takes an optional `options` object that may contain any of
 the following keys:
 
-##### standard Zeichensatz
+##### defaultCharset
 
-Geben Sie den Standardzeichensatz für den Textinhalt an, wenn der Zeichensatz nicht
-im `Content-Type`-Header der Anfrage angegeben ist. Standard ist `utf-8`.
+Specify the default character set for the text content if the charset is not
+specified in the `Content-Type` header of the request. Standard ist `utf-8`.
 
-##### aufblasen
+##### inflate
 
 Wenn auf `true` gesetzt, dann werden die entschärften (komprimierten) Körper aufgeblasen; wenn
 `false` wird, werden die entschärften Körper abgelehnt. Standard ist `true`.
 
-##### begrenzen
+##### limit
 
 Steuert die maximale Größe des Request-Bodys. Wenn dies eine Zahl ist, gibt der Wert
 die Anzahl der Bytes an; wenn es sich um einen String handelt, wird der Wert an die
 [bytes](https://www.npmjs.com/package/bytes) Bibliothek zum Parsen übergeben. Standard
-auf `'100kb`.
+ist `'100kb'`.
 
 > Es wird empfohlen, nicht ein sehr hohes Limit zu konfigurieren und den Standardwert wann immer möglich zu verwenden. Das Erlauben größerer Payloads erhöht die Speicherauslastung aufgrund der Ressourcen, die für die Dekodierung und Transformation benötigt werden, und es kann auch zu längeren Reaktionszeiten führen, wenn mehr Daten verarbeitet werden. Mit „sehr hoch“ meinen wir Werte über dem Standardwert, zum Beispiel mit einer Nutzlast von 5 MB oder mehr können bereits damit begonnen werden, diese Risiken einzuführen. Bei den Standardlimits treten diese Probleme nicht auf.
 
-##### typ
+##### type
 
 Die Option `type` wird verwendet, um festzustellen, welcher Medientyp die Middleware
-parst. Diese Option kann ein String, ein Array von Strings oder eine Funktion sein. Wenn nicht
-eine Funktion, Die Option `type` wird direkt an die
-[type-is](https://www.npmjs.com/package/type-is#readme) übergeben und kann
-ein Name der Erweiterung sein (wie `txt`), ein Mime-Typ (wie `text/plain`), oder ein Mime
-tippen Sie mit einem Platzhalter (wie `*/*` oder `text/*`). Wenn eine Funktion, wird die `type`
-Option als `fn(req)` aufgerufen und die Anfrage geparst, wenn sie einen
-truthy Wert zurückgibt. Standard ist `text/plain`.
+parst. Diese Option kann ein String, ein Array von Strings oder eine Funktion sein. If not
+a function, `type` option is passed directly to the
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
+be an extension name (like `txt`), a mime type (like `text/plain`), or a mime
+type with a wildcard (like `*/*` or `text/*`). If a function, the `type`
+option is called as `fn(req)` and the request is parsed if it returns a
+truthy value. Defaults to `text/plain`.
 
-##### überprüfen
+##### verify
 
 Die `verify` Option, falls vorhanden, wird als `verify(req, res, buf, encoding)` aufgerufen,
 wobei `buf` ein `Buffer` des Roh-Request-Body ist und `encoding` die
@@ -245,195 +244,194 @@ Kodierung der Anfrage. Das Parsen kann durch Werfen eines Fehlers abgebrochen we
 
 ### bodyParser.urlencoded([options])
 
-Gibt Middleware zurück, die nur `urlencoded` Körper analysiert und nur
-Anfragen ansieht, in denen der `Content-Type` Header mit der `type` Option übereinstimmt. Dieser
-Parser akzeptiert nur UTF-8 und ISO-8859-1 Kodierungen des Körpers und unterstützt
-automatische Inflation von `gzip`, `br` (brotli) und `deflate` Kodierungen.
+Returns middleware that only parses `urlencoded` bodies and only looks at
+requests where the `Content-Type` header matches the `type` option. This
+parser accepts only UTF-8 and ISO-8859-1 encodings of the body.
 
 Ein neues `body` Objekt mit den geparsten Daten wird auf dem `request`
-Objekt nach der Middleware (d.h. `req.body`) gefüllt. Dieses Objekt wird Paare mit Schlüsselwert
-enthalten, wobei der Wert ein String oder ein Array sein kann (wenn `extended`
-`false` ist), oder jeder beliebige Typ (wenn `extended` `true` ist).
+Objekt nach der Middleware (d.h. `req.body`) gefüllt. This object will contain
+key-value pairs, where the value can be a string or array (when `extended` is
+`false`), or any type (when `extended` is `true`).
 
 #### Optionen
 
 The `urlencoded` function takes an optional `options` object that may contain
 any of the following keys:
 
-##### erweitert
+##### extended
 
-Die "extended" Syntax erlaubt es, reiche Objekte und Arrays in das
-URL-kodierte Format zu kodieren. Dies ermöglicht eine JSON-ähnliche Erfahrung mit URL-kodiert. For
+The "extended" syntax allows for rich objects and arrays to be encoded into the
+URL-encoded format, allowing for a JSON-like experience with URL-encoded. For
 more information, please see the qs
 library.
 
-Standard ist `false`.
+Defaults to `false`.
 
-##### aufblasen
+##### inflate
 
 Wenn auf `true` gesetzt, dann werden die entschärften (komprimierten) Körper aufgeblasen; wenn
 `false` wird, werden die entschärften Körper abgelehnt. Standard ist `true`.
 
-##### begrenzen
+##### limit
 
 Steuert die maximale Größe des Request-Bodys. Wenn dies eine Zahl ist, gibt der Wert
 die Anzahl der Bytes an; wenn es sich um einen String handelt, wird der Wert an die
 [bytes](https://www.npmjs.com/package/bytes) Bibliothek zum Parsen übergeben. Standard
-auf `'100kb`.
+ist `'100kb'`.
 
 > Es wird empfohlen, nicht ein sehr hohes Limit zu konfigurieren und den Standardwert wann immer möglich zu verwenden. Das Erlauben größerer Payloads erhöht die Speicherauslastung aufgrund der Ressourcen, die für die Dekodierung und Transformation benötigt werden, und es kann auch zu längeren Reaktionszeiten führen, wenn mehr Daten verarbeitet werden. Mit „sehr hoch“ meinen wir Werte über dem Standardwert, zum Beispiel mit einer Nutzlast von 5 MB oder mehr können bereits damit begonnen werden, diese Risiken einzuführen. Bei den Standardlimits treten diese Probleme nicht auf.
 
 ##### parameterLimit
 
-Die Option `parameterLimit` steuert die maximale Anzahl an Parametern, die
-in den URL-kodierten Daten erlaubt. If a request contains more parameters
-than this value, a 413 will be returned to the client. Standard ist `1000`.
+The `parameterLimit` option controls the maximum number of parameters that
+are allowed in the URL-encoded data. If a request contains more parameters
+than this value, a 413 will be returned to the client. Defaults to `1000`.
 
-##### typ
+##### type
 
 Die Option `type` wird verwendet, um festzustellen, welcher Medientyp die Middleware
-parst. Diese Option kann ein String, ein Array von Strings oder eine Funktion sein. Wenn nicht
-eine Funktion, Die Option `type` wird direkt an die
-[type-is](https://www.npmjs.com/package/type-is#readme) übergeben und kann
-ein Name der Erweiterung sein (wie `urlencoded`), ein Mime-Typ (wie
-`application/x-www-form-urlencoded`), oder ein Mime-Typ mit einem Platzhalter (wie
-`*/x-www-form-urlencoded`). Wenn eine Funktion aufgerufen wird, wird die `type` Option als
-`fn(req)` aufgerufen und die Anfrage wird geparst, wenn sie einen truthy-Wert zurückgibt. Standardmäßig
-auf `application/x-www-form-urlencoded`.
+parst. Diese Option kann ein String, ein Array von Strings oder eine Funktion sein. If not
+a function, `type` option is passed directly to the
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
+be an extension name (like `urlencoded`), a mime type (like
+`application/x-www-form-urlencoded`), or a mime type with a wildcard (like
+`*/x-www-form-urlencoded`). If a function, the `type` option is called as
+`fn(req)` and the request is parsed if it returns a truthy value. Defaults
+to `application/x-www-form-urlencoded`.
 
-##### überprüfen
+##### verify
 
 Die `verify` Option, falls vorhanden, wird als `verify(req, res, buf, encoding)` aufgerufen,
 wobei `buf` ein `Buffer` des Roh-Request-Body ist und `encoding` die
 Kodierung der Anfrage. Das Parsen kann durch Werfen eines Fehlers abgebrochen werden.
 
-##### standard Zeichensatz
+##### defaultCharset
 
-Der voreingestellte Zeichensatz, als der nicht im Inhaltstyp angegeben wird. Muss
-entweder `utf-8` oder `iso-8859-1` sein. Standard ist `utf-8`.
+The default charset to parse as, if not specified in content-type. Must be
+either `utf-8` or `iso-8859-1`. Standard ist `utf-8`.
 
 ##### charsetSentinel
 
-Gibt an, ob der Wert des Parameters `utf8` als Zeichensatz
-Vorrang haben soll. Es erfordert, dass das Formular einen Parameter namens `utf8` mit einem Wert
-von `\<unk> ` enthält. Standard ist `false`.
+Whether to let the value of the `utf8` parameter take precedence as the charset
+selector. It requires the form to contain a parameter named `utf8` with a value
+of `✓`. Defaults to `false`.
 
-##### interpretieren NumericEntities
+##### interpretNumericEntities
 
-Gibt an, ob numerische Entitäten wie `&#9786;` beim Parsen eines iso-8859-1
-dekodiert werden sollen. Standard ist `false`.
+Whether to decode numeric entities such as `&#9786;` when parsing an iso-8859-1
+form. Defaults to `false`.
 
-##### tiefe
+##### depth
 
-Die Option `depth` wird benutzt um die maximale Tiefe der `qs` Bibliothek zu konfigurieren, wenn `extended` `true` ist. Dies erlaubt Ihnen, die Anzahl der geparsten Schlüssel zu begrenzen und kann nützlich sein, um bestimmte Arten von Missbrauch zu verhindern. Standard ist `32`. Es wird empfohlen, diesen Wert so niedrig wie möglich zu halten.
+The `depth` option is used to configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible.
 
-## Fehler
+## Errors
 
-Die von diesem Modul bereitgestellten Middlewares erzeugen Fehler mit Hilfe des
-[`http-errors` Modul](https://www.npmjs.com/package/http-errors). Die Fehler
-werden typischerweise eine Eigenschaft `status`/`statusCode` haben, die den vorgeschlagenen
-HTTP-Antwortcode enthält eine `expose` Eigenschaft um festzustellen, ob die `message` Eigenschaft
-dem Client angezeigt werden soll, eine Eigenschaft `type` um den Typ des
-Fehlers zu ermitteln, ohne mit der `message` übereinzustimmen, und eine `body`-Eigenschaft mit
-des gelesenen Textes, falls verfügbar.
+The middlewares provided by this module create errors using the
+[`http-errors` module](https://www.npmjs.com/package/http-errors). The errors
+will typically have a `status`/`statusCode` property that contains the suggested
+HTTP response code, an `expose` property to determine if the `message` property
+should be displayed to the client, a `type` property to determine the type of
+error without matching against the `message`, and a `body` property containing
+the read body, if available.
 
-Die folgenden sind die häufigen Fehler erzeugt, obwohl jeder Fehler aus verschiedenen Gründen durch
-kommen kann.
+The following are the common errors created, though any error can come through
+for various reasons.
 
-### Inhaltskodierung nicht unterstützt
+### content encoding unsupported
 
-Dieser Fehler tritt auf, wenn die Anfrage einen `Content-Encoding`-Header hatte, der
-eine Kodierung enthielt, aber die Option "inflation" wurde auf `false` gesetzt. Die Eigenschaft
+This error will occur when the request had a `Content-Encoding` header that
+contained an encoding but the "inflation" option was set to `false`. Die Eigenschaft
 `status` ist auf `415` gesetzt, die Eigenschaft `type` ist auf
-`'encoding gesetzt. nsupported'` und die Eigenschaft `charset` wird auf die nicht unterstützte Kodierung
+`'encoding.unsupported'` und die Eigenschaft `charset` wird auf die nicht unterstützte Kodierung
 gesetzt.
 
-### Entitäts-Parse fehlgeschlagen
+### entity parse failed
 
 This error will occur when the request contained an entity that could not be
 parsed by the middleware. Die Eigenschaft `status` ist auf `400` gesetzt, die Eigenschaft `type`
-ist auf `'entity.parse gesetzt. ailed'` und die Eigenschaft `body` ist auf
+ist auf `'entity.parse.failed'` und die Eigenschaft `body` ist auf
 gesetzt, der Entitätswert der fehlgeschlagen ist.
 
-### Entität verifizieren fehlgeschlagen
+### entity verify failed
 
-Dieser Fehler tritt auf, wenn die Anfrage eine Entität enthielt, die nicht
-sein konnte durch die definierte `verify` Option zu verifizieren. Die Eigenschaft `status` ist
-auf `403` gesetzt, die Eigenschaft `type` ist auf `'entity.verify gesetzt. ailed'` und die Eigenschaft
+This error will occur when the request contained an entity that could not be
+verified by the defined `verify` option. Die Eigenschaft `status` ist
+auf `403` gesetzt, die Eigenschaft `type` ist auf `'entity.verify.failed'` und die Eigenschaft
 `body` wird auf den Entitätswert gesetzt, der bei der Überprüfung fehlgeschlagen ist.
 
-### abgebrochen
+### request aborted
 
-Dieser Fehler tritt auf, wenn die Anfrage vom Client abgebrochen wird, bevor der Inhalt
-gelesen wird. Die Eigenschaft `empfangen` wird auf die Anzahl der empfangenen
-Bytes gesetzt, bevor die Anfrage abgebrochen wurde und die Eigenschaft `erwartet` ist
+This error will occur when the request is aborted by the client before reading
+the body has finished. Die Eigenschaft `received` wird auf die Anzahl der empfangenen
+Bytes gesetzt, bevor die Anfrage abgebrochen wurde und die Eigenschaft `expected` ist
 auf die Anzahl der erwarteten Bytes gesetzt. Die Eigenschaft `status` wurde auf `400`
-gesetzt und `type` auf \`'request.aborted'gesetzt.
+gesetzt und `type` auf `'request.aborted'` gesetzt.
 
-### Anfrage Entität zu groß
+### request entity too large
 
-Dieser Fehler tritt auf, wenn die Größe des Request-Bodys größer ist als die Option "limit"
-. Die Eigenschaft `limit` wird auf das Bytelimit gesetzt und die Eigenschaft `length`
-wird auf die Länge des Anfragekörpers gesetzt. Die Eigenschaft `status` ist
-auf `413` gesetzt und die Eigenschaft `type` auf \`'entity.too.large' gesetzt.
+This error will occur when the request body's size is larger than the "limit"
+option. The `limit` property will be set to the byte limit and the `length`
+property will be set to the request body's length. Die Eigenschaft `status` ist
+auf `413` gesetzt und die Eigenschaft `type` auf `'entity.too.large'` gesetzt.
 
-### Anfragengröße stimmt nicht mit der Länge des Inhalts überein
+### request size did not match content length
 
-Dieser Fehler tritt auf, wenn die Länge der Anfrage nicht mit der Länge von
-übereinstimmt, dem `Content-Length` Header. Dies tritt in der Regel auf, wenn die Anfrage fehlerhaft formatiert ist,
-typischerweise wenn der `Content-Length` Header auf der Grundlage von Zeichen
-anstelle von Bytes berechnet wurde. Die Eigenschaft `status` ist auf `400` gesetzt und die Eigenschaft `type`
-ist auf \`'request.size.invalid'gesetzt.
+This error will occur when the request's length did not match the length from
+the `Content-Length` header. This typically occurs when the request is malformed,
+typically when the `Content-Length` header was calculated based on characters
+instead of bytes. Die Eigenschaft `status` ist auf `400` gesetzt und die Eigenschaft `type`
+ist auf `'request.size.invalid'` gesetzt.
 
-### streamkodierung sollte nicht gesetzt werden
+### stream encoding should not be set
 
-Dieser Fehler tritt auf, wenn etwas als `req.setEncoding` Methode vor
-auf diese Middleware lautete. Dieses Modul funktioniert nur auf Bytes und Sie können bei Verwendung dieses Moduls nicht
-`req.setEncoding` aufrufen. Die Eigenschaft `status` ist auf
-`500` gesetzt und die Eigenschaft `type` ist auf \`'stream.encoding.set' gesetzt.
+This error will occur when something called the `req.setEncoding` method prior
+to this middleware. This module operates directly on bytes only and you cannot
+call `req.setEncoding` when using this module. Die Eigenschaft `status` ist auf
+`500` gesetzt und die Eigenschaft `type` ist auf `'stream.encoding.set'` gesetzt.
 
-### stream ist nicht lesbar
+### stream is not readable
 
-Dieser Fehler tritt auf, wenn die Anfrage nicht mehr lesbar ist, wenn diese Middleware
-versucht, sie zu lesen. Dies bedeutet typischerweise etwas anderes als eine Middleware von
-dieses Modul liest bereits den Request-Body und die Middleware wurde auch auf
-konfiguriert, die gleiche Anfrage zu lesen. Die Eigenschaft `status` ist auf `500` gesetzt und die Eigenschaft `type`
-ist auf \`'stream.not.readable' gesetzt.
+This error will occur when the request is no longer readable when this middleware
+attempts to read it. This typically means something other than a middleware from
+this module read the request body already and the middleware was also configured to
+read the same request. Die Eigenschaft `status` ist auf `500` gesetzt und die Eigenschaft `type`
+ist auf `'stream.not.readable'` gesetzt.
 
-### zu viele Parameter
+### too many parameters
 
-Dieser Fehler tritt auf, wenn der Inhalt der Anfrage den konfigurierten
-`parameterLimit` für den `urlencoded` Parser übersteigt. Die Eigenschaft `status` ist auf
-`413` gesetzt und die Eigenschaft `type` ist auf `'parameters.too.many` gesetzt.
+This error will occur when the content of the request exceeds the configured
+`parameterLimit` for the `urlencoded` parser. Die Eigenschaft `status` ist auf
+`413` gesetzt und die Eigenschaft `type` ist auf `'parameters.too.many'` gesetzt.
 
-### nicht unterstütztes Zeichensatz "BOGUS"
+### unsupported charset "BOGUS"
 
-Dieser Fehler tritt auf, wenn die Anfrage einen Zeichensatz-Parameter im
-`Content-Type` Header hatte aber das Modul `iconv-lite` unterstützt es nicht oder der
-Parser unterstützt es nicht. Der Zeichensatz ist sowohl in der Nachricht als auch in
-wie in der Eigenschaft `charset` enthalten. Die Eigenschaft `status` ist auf `415` gesetzt, die Eigenschaft
-`type` ist auf `'-Zeichensatz gesetzt. nsupported'` und die Eigenschaft `charset`
+This error will occur when the request had a charset parameter in the
+`Content-Type` header, but the `iconv-lite` module does not support it OR the
+parser does not support it. The charset is contained in the message as well
+as in the `charset` property. Die Eigenschaft `status` ist auf `415` gesetzt, die Eigenschaft
+`type` ist auf `'charset.unsupported'` und die Eigenschaft `charset`
 wird auf den Zeichensatz gesetzt, der nicht unterstützt wird.
 
-### nicht unterstützte Inhaltskodierung "bogus"
+### unsupported content encoding "bogus"
 
-Dieser Fehler tritt auf, wenn die Anfrage einen `Content-Encoding`-Header hatte, der
-eine nicht unterstützte Kodierung enthielt. Die Kodierung ist sowohl in der Nachricht
-als auch in der Eigenschaft `encoding` enthalten. Die Eigenschaft `status` ist auf `415` gesetzt,
-die Eigenschaft `type` ist auf `'encoding gesetzt. nsupported'` und die Eigenschaft `encoding`
+This error will occur when the request had a `Content-Encoding` header that
+contained an unsupported encoding. The encoding is contained in the message
+as well as in the `encoding` property. Die Eigenschaft `status` ist auf `415` gesetzt,
+die Eigenschaft `type` ist auf `'encoding.unsupported'` gesetzt und die Eigenschaft `encoding`
 wird auf die nicht unterstützte Kodierung gesetzt.
 
-### Die Eingabe hat die Tiefe überschritten
+### The input exceeded the depth
 
-Dieser Fehler tritt auf, wenn `bodyParser.urlencoded` mit der Eigenschaft `extended` auf `true` gesetzt wird und die Eingabe die konfigurierte Option `depth` überschreitet. Die Eigenschaft `status` ist auf `400` gesetzt. Es wird empfohlen, die `depth` Option zu überprüfen und auszuwerten, wenn ein höherer Wert erforderlich ist. Wenn die Option `depth` auf `32` gesetzt ist (Standardwert) wird der Fehler nicht angezeigt.
+This error occurs when using `bodyParser.urlencoded` with the `extended` property set to `true` and the input exceeds the configured `depth` option. The `status` property is set to `400`. It is recommended to review the `depth` option and evaluate if it requires a higher value. When the `depth` option is set to `32` (default value), the error will not be thrown.
 
 ## Beispiele
 
-### Ausdrücken/Verbinden auf oberster Ebene generisch
+### Express/Connect top-level generic
 
 This example demonstrates adding a generic JSON and URL-encoded parser as a
 top-level middleware, which will parse the bodies of all incoming requests.
-Dies ist die einfachste Einrichtung.
+This is the simplest setup.
 
 ```js
 const express = require('express');
@@ -454,11 +452,11 @@ app.use(function (req, res) {
 });
 ```
 
-### Express-Route-spezifisch
+### Express route-specific
 
-Dieses Beispiel zeigt das Hinzufügen von Körper-Parsern zu den Routen, die
-benötigt. Im Allgemeinen ist dies der am meisten empfohlene Weg, Körper-Parser mit
-Express zu verwenden.
+This example demonstrates adding body parsers specifically to the routes that
+need them. In general, this is the most recommended way to use body-parser with
+Express.
 
 ```js
 const express = require('express');
@@ -485,10 +483,10 @@ app.post('/api/users', jsonParser, function (req, res) {
 });
 ```
 
-### Akzeptierten Typ für Parser ändern
+### Change accepted type for parsers
 
-Alle Parser akzeptieren eine `type`-Option, mit der du die
-`Content-Type` ändern kannst, die die Middleware parsen wird.
+All the parsers accept a `type` option which allows you to change the
+`Content-Type` that the middleware will parse.
 
 ```js
 const express = require('express');
@@ -511,5 +509,5 @@ app.use(bodyParser.text({ type: 'text/html' }));
 [MIT](https://github.com/expressjs/body-parser/blob/HEAD/LICENSE)
 
 [npm-url]: https://npmjs.com/package/body-parser
-[ossf-Scorecard-Abzeichen]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
-[ossf-Punkte-Visualisierer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser

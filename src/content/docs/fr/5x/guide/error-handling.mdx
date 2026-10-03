@@ -14,6 +14,8 @@ handler so you don't need to write your own to get started.
 Il est important de s'assurer qu'Express attrape toutes les erreurs qui se produisent lorsque
 exécute des gestionnaires de routes et des middleware.
 
+### Errors in synchronous code
+
 Les erreurs qui se produisent dans le code synchrone dans les gestionnaires de route et les middleware
 ne nécessitent aucun travail supplémentaire. If synchronous code throws an error, then Express will
 catch and process it. Par exemple :
@@ -32,9 +34,95 @@ app.get('/', (req: Request, res: Response) => {
 });
 ```
 
-For errors returned from asynchronous functions invoked by route handlers
-and middleware, you must pass them to the `next()` function, where Express will
-catch and process them. Par exemple :
+### Errors in asynchronous code
+
+The recommended way to write asynchronous handlers is with `async` functions.
+Route handlers and middleware that return a Promise call `next(value)`
+automatically when they reject or throw an error, and `async` functions always
+return a Promise, so their errors reach Express with no extra work. Par exemple :
+
+```js
+app.get('/user/:id', async (req, res) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/user/:id', async (req: Request, res: Response) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+Si `getUserById` lance une erreur ou un rejet, `next` sera appelé avec soit
+l'erreur émise ou la valeur rejetée. Si aucune valeur rejetée n'est fournie, `next`
+sera appelée avec un objet Error par défaut fourni par le routeur Express.
+
+If you pass anything to the `next()` function (except the string `'route'`),
+Express regards the current request as being an error and will skip any
+remaining non-error handling routing and middleware functions.
+
+### Working with promise chains
+
+If you build a promise chain instead of using an `async` function, return the
+promise from the handler and Express will likewise call `next` automatically
+when it rejects:
+
+```js
+app.get('/', (req, res) => {
+  return Promise.resolve().then(() => {
+    throw new Error('BROKEN'); // Express will catch this and call next.
+  });
+});
+```
+
+```ts
+import { type Request, type Response } from 'express';
+
+app.get('/', (req: Request, res: Response) => {
+  return Promise.resolve().then(() => {
+    throw new Error('BROKEN'); // Express will catch this and call next.
+  });
+});
+```
+
+If the promise is not returned, Express does not know it exists, and you must
+route the error yourself by providing `next` as the final catch handler.
+Without it, the rejection would be unhandled and crash the process:
+
+```js
+app.get('/', (req, res, next) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
+```
+
+This works because if a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, `.catch` calls its handler with the error as the first argument, which is exactly the argument `next` expects, so the error reaches Express.
+
+### Working with callback APIs
+
+Errors produced by callback-based APIs, such as those in `node:fs`, are not
+thrown and are not part of any promise. The callback receives them as its first
+argument, and you must pass them to the `next()` function yourself, where
+Express will catch and process them. Par exemple :
 
 ```js
 app.get('/', (req, res, next) => {
@@ -61,34 +149,6 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
   });
 });
 ```
-
-À partir de Express 5, les gestionnaires de route et les middleware qui retournent une Promise
-appelleront automatiquement `next(value)` quand ils rejettent ou lancent une erreur.
-Par exemple :
-
-```js
-app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
-});
-```
-
-```ts
-import { type Request, type Response, type NextFunction } from 'express';
-
-app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
-});
-```
-
-Si `getUserById` lance une erreur ou un rejet, `next` sera appelé avec soit
-l'erreur émise ou la valeur rejetée. Si aucune valeur rejetée n'est fournie, `next`
-sera appelée avec un objet Error par défaut fourni par le routeur Express.
-
-If you pass anything to the `next()` function (except the string `'route'`),
-Express regards the current request as being an error and will skip any
-remaining non-error handling routing and middleware functions.
 
 Si le callback dans une séquence ne fournit aucune donnée, seulement des erreurs, vous pouvez simplifier
 ce code comme suit:
@@ -120,69 +180,6 @@ app.get('/', [
 Dans l'exemple ci-dessus, `next` est fourni comme callback pour `fs.writeFile`,
 qui est appelé avec ou sans erreurs. S'il n'y a pas d'erreur, le second
 est exécuté, sinon Express attrape et traite l'erreur.
-
-Vous devez attraper les erreurs qui se produisent dans le code asynchrone invoqué par les gestionnaires de route ou
-middleware et les passer à Express pour le traitement. Par exemple :
-
-```js
-app.get('/', (req, res, next) => {
-  setTimeout(() => {
-    try {
-      throw new Error('BROKEN');
-    } catch (err) {
-      next(err);
-    }
-  }, 100);
-});
-```
-
-```ts
-import { type Request, type Response, type NextFunction } from 'express';
-
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  setTimeout(() => {
-    try {
-      throw new Error('BROKEN');
-    } catch (err) {
-      next(err);
-    }
-  }, 100);
-});
-```
-
-L'exemple ci-dessus utilise un bloc `try...catch` pour attraper des erreurs dans le code
-asynchrone et les passer à Express. Si le bloc `try...catch`
-était omis, Express ne attrapera pas l'erreur car il ne fait pas partie du code du gestionnaire
-synchrone.
-
-Utilise des promesses pour éviter les frais généraux du bloc `essayer...catch` ou lorsque tu utilises les fonctions
-qui renvoient des promesses. Par exemple :
-
-```js
-app.get('/', (req, res, next) => {
-  Promise.resolve()
-    .then(() => {
-      throw new Error('BROKEN');
-    })
-    .catch(next); // Errors will be passed to Express.
-});
-```
-
-```ts
-import { type Request, type Response, type NextFunction } from 'express';
-
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  Promise.resolve()
-    .then(() => {
-      throw new Error('BROKEN');
-    })
-    .catch(next); // Errors will be passed to Express.
-});
-```
-
-Puisque les promesses attrapent automatiquement à la fois les erreurs synchrones et les promesses rejetées,
-vous pouvez simplement fournir `next` car le gestionnaire de capture final et Express attrapera des erreurs,
-parce que le gestionnaire de capture est donné l'erreur comme premier argument.
 
 Vous pouvez également utiliser une chaîne de gestionnaires pour vous fier à l'erreur synchrone
 attrapant, en réduisant le code asynchrone à quelque chose de trivial. Par exemple :
@@ -219,13 +216,48 @@ app.get('/', [
 ]);
 ```
 
-L'exemple ci-dessus a quelques déclarations triviales de l'appel `readFile`
-. Si `readFile` cause une erreur, alors il passe l'erreur à Express, sinon vous
+The above example contains a couple of trivial statements following the `readFile`
+call. Si `readFile` cause une erreur, alors il passe l'erreur à Express, sinon vous
 revenez rapidement au monde de la gestion des erreurs synchrones dans le prochain gestionnaire
 de la chaîne. Ensuite, l'exemple ci-dessus tente de traiter les données. Si cela échoue, alors le gestionnaire d'erreurs synchrone
 l'attrapera. Si vous aviez fait ce traitement à l'intérieur de
 la callback `readFile`, alors l'application pourrait quitter et les gestionnaires d'erreur
 Express ne s'exécuteraient pas.
+
+Finally, for asynchronous code that provides no error-first callback, such as a
+timer, catch errors inside the asynchronous code itself and pass them to
+Express:
+
+```js
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+```ts
+import { type Request, type Response, type NextFunction } from 'express';
+
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+L'exemple ci-dessus utilise un bloc `try...catch` pour attraper des erreurs dans le code
+asynchrone et les passer à Express. Si le bloc `try...catch`
+était omis, Express ne attrapera pas l'erreur car il ne fait pas partie du code du gestionnaire
+synchrone.
 
 Quelle que soit la méthode que vous utilisez, si vous voulez que les gestionnaires d'erreur Express soient appelés et que l'application
 survive, vous devez vous assurer qu'Express reçoit l'erreur.
@@ -424,7 +456,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 Aussi dans cet exemple, `clientErrorHandler` est défini comme suit ; dans ce cas, l'erreur est explicitement passée au suivant.
 
-Notez que lorsque _not_ appelez "next" dans une fonction de gestion des erreurs, vous êtes responsable de l'écriture (et de la fin) de la réponse. Sinon, ces demandes seront « bloquées » et ne seront pas admissibles au ramassage des déchets.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Sinon, ces demandes seront « bloquées » et ne seront pas admissibles au ramassage des déchets.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

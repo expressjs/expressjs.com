@@ -5,12 +5,12 @@ description: Discover how to customize and extend the Express.js API by overridi
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express API 由请求对象和响应对象上的多种方法与属性组成。 这些内容通过原型继承。 Express API 有两个扩展点：
+The Express API consists of various methods and properties on the [request](/api/request) and [response](/api/response) objects. 这些内容通过原型继承。 Express API 有两个扩展点：
 
 1. `express.request` 和 `express.response` 上的全局原型。
 2. 应用专属原型位于 `app.request` 和 `app.response`。
 
-修改全局原型会影响同一进程中所有已加载的 Express 应用。 如果需要，你可以在创建新应用后仅修改应用专属原型，从而实现仅针对当前应用的修改。
+修改全局原型会影响同一进程中所有已加载的 Express 应用。如果需要，你可以在创建新应用后仅修改应用专属原型，从而实现仅针对当前应用的修改。
 
 ## 方法
 
@@ -46,7 +46,7 @@ app.response.sendStatus = function (
 } as Response['sendStatus'];
 ```
 
-上述实现彻底更改了`res.sendStatus`原本的方法签名。 该方法现在可接收状态码、编码类型以及要发送给客户端的消息。
+上述实现彻底更改了`res.sendStatus`原本的方法签名。该方法现在可接收状态码、编码类型以及要发送给客户端的消息。
 
 In TypeScript, augmenting `express-serve-static-core` adds the new overload to the `Response` type so call sites such as `res.sendStatus(404, 'application/json', body)` type-check. The assignment is cast with `as Response['sendStatus']` because replacing a method with a different signature cannot be checked against the original declaration.
 
@@ -67,7 +67,7 @@ Express API 中的属性分为两类：
 
 第二类属性可通过 Express API 扩展接口进行重写。
 
-以下代码重写了`req.ip`值的获取方式。 现在，它仅返回 `Client-IP` 请求头的值。
+以下代码重写了`req.ip`值的获取方式。现在，它仅返回 `Client-IP` 请求头的值。
 
 ```js
 Object.defineProperty(app.request, 'ip', {
@@ -158,9 +158,9 @@ signature, because the method did not previously exist on the type.
 
 ## Prototype
 
-为了提供 Express API，传递给 Express 的请求/响应对象（例如通过 `app(req, res)`）需要继承自相同的原型链。 默认情况下，请求对象继承自 `http.IncomingRequest.prototype`，响应对象继承自 `http.ServerResponse.prototype`。
+为了提供 Express API，传递给 Express 的请求/响应对象（例如通过 `app(req, res)`）需要继承自相同的原型链。默认情况下，请求对象继承自 `http.IncomingRequest.prototype`，响应对象继承自 `http.ServerResponse.prototype`。
 
-除非必要，否则建议仅在应用层面执行此操作，而非全局层面。 此外，请注意所使用的原型需尽可能与默认原型的功能保持一致。
+除非必要，否则建议仅在应用层面执行此操作，而非全局层面。此外，请注意所使用的原型需尽可能与默认原型的功能保持一致。
 
 ```js
 // Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse

@@ -4,6 +4,7 @@ description: Understand how to serve static files like images, CSS, and JavaScri
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
 
@@ -85,4 +86,8 @@ import path from 'path';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+<ReadMore>
+
 For more details about the `serve-static` function and its options, see [serve-static](/resources/middleware/serve-static).
+
+</ReadMore>

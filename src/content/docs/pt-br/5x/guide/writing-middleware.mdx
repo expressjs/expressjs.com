@@ -4,6 +4,7 @@ description: Aprenda a escrever funções de middleware personalizadas para apli
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 Middleware\_ são funções que têm acesso ao [objeto de requisição](/api#req) (`req`), a [objeto de resposta](/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
 
@@ -170,8 +171,8 @@ A função middleware `myLogger` simplesmente imprime uma mensagem, então passa
 
 ### Tempo de solicitação de função Middleware
 
-Em seguida, vamos criar uma função middleware chamada "requestTime" e adicionar uma propriedade chamada `requestTime`
-ao objeto solicitado.
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the [request object](/api/request).
 
 <Alert type="alerta">
 
@@ -391,9 +392,13 @@ atual é um erro e pulará quaisquer funções que ainda não sejam de manipula�
 
 </Alert>
 
-Como você tem acesso ao objeto de solicitação, o objeto de resposta, a próxima função de middleware na pilha, e todo o nó. s API, as possibilidades com funções de middleware são infinitas.
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-Para mais informações sobre Express middleware, veja: [Usando Express middleware](/guide/using-middleware).
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## middleware configurável
 

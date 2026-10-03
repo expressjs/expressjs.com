@@ -9,14 +9,14 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="2.2.1"
-  github="https://github.com/express/serve-static"
+  github="https://github.com/expressjs/serve-static"
   npm="https://www.npmjs.com/package/serve-static"
 />
 
 ## インストール
 
 これは、 [Node.js](https://nodejs.org/en/) モジュールで、
-[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[npm registry](https://www.npmjs.com/) を介して利用できます。インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 <PackageManagerCommand command="npm install serve-static" />
@@ -54,12 +54,12 @@ of the `Range` request header.
 ##### cacheControl
 
 `Cache-Control` レスポンスヘッダーの設定を有効または無効にします。デフォルトは
-true です。 これを無効にすると、 `immutable` と `maxAge` オプションは無視されます。
+true です。これを無効にすると、 `immutable` と `maxAge` オプションは無視されます。
 
 ##### dotfiles
 
-「dotfiles」が発生したときにどのように扱われるかを設定します。 ドットファイルは、
-またはドット(.)で始まるディレクトリです。 このチェックは、実際にパスが
+「dotfiles」が発生したときにどのように扱われるかを設定します。ドットファイルは、
+またはドット(.)で始まるディレクトリです。このチェックは、実際にパスが
 ディスク上に存在するかどうかをチェックすることなく、
 で行われます。 If `root` is specified, only the dotfiles above the root are
 checked (i.e. the root itself can be within a dotfile when set
@@ -77,7 +77,7 @@ etag の生成を有効または無効にします。デフォルトは true で
 
 ##### extensions
 
-ファイル拡張子のフォールバックを設定します。 設定すると、ファイルが見つからない場合、指定された
+ファイル拡張子のフォールバックを設定します。設定すると、ファイルが見つからない場合、指定された
 拡張子がファイル名に追加され、検索されます。
 が存在する最初のものが提供されます。 Example: `['html', 'htm']`.
 
@@ -86,10 +86,10 @@ etag の生成を有効または無効にします。デフォルトは true で
 ##### Fallthrough
 
 クライアントエラーが処理されていない
-リクエストとしてフォールスルーされるミドルウェアを設定します。そうでなければ、クライアントエラーを転送します。 違いは、悪いリクエストや存在しないファイルへのリクエストなどのクライアント
+リクエストとしてフォールスルーされるミドルウェアを設定します。そうでなければ、クライアントエラーを転送します。違いは、悪いリクエストや存在しないファイルへのリクエストなどのクライアント
 エラーが発生すると、このミドルウェアは
 単純に次のミドルウェアに`next()`が発生します。この値は
-が`true`の場合。 この値が `false` の場合、これらのエラー (404でさえ) は
+が`true`の場合。この値が `false` の場合、これらのエラー (404でさえ) は
 `next(err)` を呼び出します。
 
 通常、複数の物理ディレクトリが
@@ -113,28 +113,28 @@ short-circuiting 404s for less overhead. このミドルウェアは
 ##### インデックス
 
 デフォルトでは、このモジュールはディレクトリのリクエスト
-に応答して「index.html」ファイルを送信します。 この設定を無効にするには、`false` または新しいインデックスを提供するには、
+に応答して「index.html」ファイルを送信します。この設定を無効にするには、`false` または新しいインデックスを提供するには、
 文字列または配列を優先順位で渡します。
 
 ##### 最終更新日
 
-`Last-Modified` ヘッダーを有効または無効にします。デフォルトは true です。 ファイル
+`Last-Modified` ヘッダーを有効または無効にします。デフォルトは true です。ファイル
 システムの最後の変更値を使用します。
 
 ##### maxAge
 
-httpキャッシュのために最大年齢をミリ秒単位で指定します。デフォルトは0です。 この
+httpキャッシュのために最大年齢をミリ秒単位で指定します。デフォルトは0です。この
 は [ms](https://www.npmjs.org/package/ms#readme)
 モジュールで受け付けられる文字列にすることもできます。
 
 ##### リダイレクト
 
-パス名がdirの場合、末尾の"/"にリダイレクトします。 デフォルトは `true` です。
+パス名がdirの場合、末尾の"/"にリダイレクトします。デフォルトは `true` です。
 
 ##### setHeaders
 
-レスポンスにカスタムヘッダーを設定する関数です。 ヘッダへの変更は
-で同期的に行われます。 関数は `fn(res, path, stat)` と呼ばれます。引数は
+レスポンスにカスタムヘッダーを設定する関数です。ヘッダへの変更は
+で同期的に行われます。関数は `fn(res, path, stat)` と呼ばれます。引数は
 です。
 
 - `res` the response object
@@ -227,7 +227,7 @@ app.listen(3000);
 #### パスの異なる設定
 
 この例では、送信された
-ファイルによって異なる最大年齢を設定する方法を示します。 この例では、HTMLファイルはキャッシュされませんが、
+ファイルによって異なる最大年齢を設定する方法を示します。この例では、HTMLファイルはキャッシュされませんが、
 はすべて1日間です。
 
 ```js

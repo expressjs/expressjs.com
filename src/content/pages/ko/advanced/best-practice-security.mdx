@@ -48,7 +48,7 @@ Here is an example of checking URLs before using `res.redirect` or `res.location
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
@@ -269,7 +269,7 @@ $ npm audit
 
 If you want to stay more secure, consider [Snyk](https://snyk.io/).
 
-Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
+Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://docs.snyk.io/discover-snyk/getting-started) that checks your application against [Snyk's open source vulnerability database](https://security.snyk.io/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
 
 ```bash
 $ npm install -g snyk
@@ -286,7 +286,7 @@ $ snyk test
 
 Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. In general, these databases are excellent resources for knowledge and tools about Node security.
 
-Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) and take precautions to avoid them.
+Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://owasp.org/www-project-top-ten/) and take precautions to avoid them.
 
 ## Additional considerations
 
@@ -294,8 +294,8 @@ Here are some further recommendations from the excellent [Node.js Security Check
 
 - Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
 - Defend against SQL injection attacks by using parameterized queries or prepared statements.
-- Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
+- Use the open-source [sqlmap](https://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
 - Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
-- Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
+- Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
-[helmet]: https://helmetjs.github.io/
+[helmet]: https://helmet.js.org/

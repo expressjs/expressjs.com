@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.9.1"
-  github="https://github.com/express/timeout"
+  github="https://github.com/expressjs/timeout"
   npm="https://www.npmjs.com/package/connect-timeout"
 />
 
@@ -18,7 +18,7 @@ Connect/Expressアプリケーションフレームワークでリクエスト�
 ## インストール
 
 これは、 [Node.js](https://nodejs.org/en/) モジュールで、
-[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[npm registry](https://www.npmjs.com/) を介して利用できます。インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 <PackageManagerCommand command="npm install connect-timeout" />
@@ -39,8 +39,7 @@ Connect/Expressアプリケーションフレームワークでリクエスト�
 を参照してください。
 
 リクエストが与えられた
-タイムアウトを超えた場合、ライブラリは「timeout」イベントを発行しますが、ノードは遅いリクエストを終了するまで処理を続けます。
-タイムアウトコールバックで
+タイムアウトを超えた場合、ライブラリは「timeout」イベントを発行しますが、ノードは遅いリクエストを終了するまで処理を続けます。タイムアウトコールバックで
 HTTP レスポンスを返している場合でも、遅いリクエストは引き続きCPUとメモリを使用します。 For better control over CPU/memory,
 you may need to find the events that are taking a long time (3rd party HTTP
 requests, disk I/O, database calls) and find a way to cancel them, and/or
@@ -50,7 +49,7 @@ close the attached sockets.
 
 `time`ミリ秒でタイムアウトするミドルウェアを返します。 `time` は
 [ms](https://www.npmjs.org/package/ms#readme)
-モジュールで受け付ける文字列にすることもできます。 タイムアウト時に、 `req` は `"timeout"`を出力します。
+モジュールで受け付ける文字列にすることもできます。タイムアウト時に、 `req` は `"timeout"`を出力します。
 
 #### オプション
 
@@ -61,8 +60,8 @@ any of the following keys:
 
 このモジュールがエラーを転送する形で「応答」するかどうかを制御します。
 `true` の場合、レスポンスの動作を
-カスタマイズできるように、タイムアウトエラーが `next()` に渡されます。 このエラーは `.timeout` プロパティと
-`.status == 503` を持ちます。 このデフォルトは `true` です。
+カスタマイズできるように、タイムアウトエラーが `next()` に渡されます。このエラーは `.timeout` プロパティと
+`.status == 503` を持ちます。このデフォルトは `true` です。
 
 ### req.clearTimeout()
 

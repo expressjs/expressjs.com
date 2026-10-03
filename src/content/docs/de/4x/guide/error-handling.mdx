@@ -62,14 +62,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Starting with Express 5, route handlers and middleware that return a Promise
-will call `next(value)` automatically when they reject or throw an error.
-Zum Beispiel:
+Errors from rejected promises are not passed to `next` automatically, and this includes `async` functions: if an `async` route handler throws or awaits a rejected promise, the rejection is unhandled, which crashes the process on current Node.js versions. You must catch the error yourself and pass it to Express:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
@@ -77,14 +79,22 @@ app.get('/user/:id', async (req, res, next) => {
 import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
-Wenn `getUserById` einen Fehler oder eine Ablehnung, wird `next` entweder mit
-dem Wurffehler oder dem abgelehnten Wert aufgerufen. Wenn kein abgelehnter Wert angegeben wird, wird `next`
-mit einem Standard-Fehlerobjekt aufgerufen, das vom Express-Router bereitgestellt wird.
+<Alert type="info">
+
+Consider [updating to Express 5](/guide/migrating-5), where route handlers and middleware that
+return a Promise call `next(value)` automatically when they reject or throw an error, making the
+`try...catch` above unnecessary.
+
+</Alert>
 
 Wenn du etwas an die `next()` Funktion übergibt (außer den String `'route'`),
 Express betrachtet die aktuelle Anfrage als Fehler und überspringt alle
@@ -180,9 +190,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Da Versprechungen automatisch sowohl synchrone Fehler als auch abgelehnte Versprechungen fangen,
-du kannst einfach `next` angeben, da der letzte Catch Handler und Express Fehler fängt an
-weil der Catch-Handler den Fehler als erstes Argument angibt.
+If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
 
 Sie können auch eine Kette von Handlern verwenden, um sich auf synchrone Fehler
 zu stützen, indem Sie den asynchronen Code auf etwas Triviales reduzieren. Zum Beispiel:
@@ -219,8 +227,8 @@ app.get('/', [
 ]);
 ```
 
-Das obige Beispiel hat ein paar triviale Anweisungen aus dem Aufruf `readFile`
-. If `readFile` causes an error, then it passes the error to Express, otherwise you
+The above example contains a couple of trivial statements following the `readFile`
+call. If `readFile` causes an error, then it passes the error to Express, otherwise you
 quickly return to the world of synchronous error handling in the next handler
 in the chain. Dann versucht das obige Beispiel die Daten zu verarbeiten. Wenn dies fehlschlägt, fängt der Synchron-Fehlerhandler
 ihn ab. Hätten Sie diese Verarbeitung innerhalb von
@@ -424,7 +432,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 Auch in diesem Beispiel wird `clientErrorHandler` wie folgt definiert; in diesem Fall wird der Fehler explizit an den nächsten weitergegeben.
 
-Beachten Sie, dass, wenn _not_ in einer Fehlerbehandlungsfunktion "Weiter" aufruft, Sie dafür verantwortlich sind, die Antwort zu schreiben (und zu beenden). Andernfalls werden diese Anträge "hängen" und sind nicht für die Müllsammlung berechtigt.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Andernfalls werden diese Anträge "hängen" und sind nicht für die Müllsammlung berechtigt.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

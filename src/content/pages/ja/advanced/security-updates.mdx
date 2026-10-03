@@ -9,7 +9,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Node.js の脆弱性は Express に直接影響します。 そのため、Node.js
 脆弱性を監視する と最新の
-安定版の Node.js を使用していることを確認してください。 そのため、Node.js
+安定版の Node.js を使用していることを確認してください。そのため、Node.js
 脆弱性を監視する と最新の
 安定版の Node.js を使用していることを確認してください。
 
@@ -43,7 +43,7 @@ Express でセキュリティ上の脆弱性を発見したと思われる場合
 - 4.16.0
   - The dependency `forwarded` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-mpcf-4gmh-23w8). 依存関係の `forwarded` が [vulnerability](https://npmjs.com/advisories/527) に更新されました。 以下の API が使用されている場合、アプリケーションに影響を与える可能性があります: `req.host` 、 `req.hostname` 、 `req.ips` 、 `req.protocol` 。
   - The dependency `mime` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-wrvr-8mpx-r7pp), but this issue does not impact Express.
-  - 依存関係の `send` が更新され、[Node.js 8.5.0 脆弱性](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/)に対する保護が提供されました。 これは、Express が特定の Node.js バージョン 8.5.0 で実行されることにのみ影響します。 これは、Express が特定の Node.js バージョン 8.5.0 で実行されることにのみ影響します。
+  - 依存関係の `send` が更新され、[Node.js 8.5.0 脆弱性](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/)に対する保護が提供されました。 これは、Express が特定の Node.js バージョン 8.5.0 で実行されることにのみ影響します。これは、Express が特定の Node.js バージョン 8.5.0 で実行されることにのみ影響します。
 - 4.15.5
   - 依存関係の `debug` が [vulnerability](https://snyk.io/vuln/npm:debug:20170905) アドレスに更新されましたが、この問題は Express には影響しません。
   - The dependency `fresh` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-9qj9-36jm-prpv). 依存関係の `fresh` が [vulnerability](https://npmjs.com/advisories/526) に更新されました。 `express.static` 、 `req.fresh` 、 `res.json` 、 `res.json` 、 `res.send` 、 `res.send` 、 `res.sendFile` 、 `res.sendFile` 、 `res.sendStatus` などのAPIが使用されると、アプリケーションに影響します。
@@ -58,7 +58,7 @@ Express でセキュリティ上の脆弱性を発見したと思われる場合
 - 4.8.8
   - `express.static` ([advisory](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)のディレクトリトラバーサルの脆弱性を修正しました。
 - 4.8.4
-  - Node.js 0.10 は、`express.static` と `res.sendfile` に影響を与える特定の状況で `fd` をリークできます。 悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。 悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。
+  - Node.js 0.10 は、`express.static` と `res.sendfile` に影響を与える特定の状況で `fd` をリークできます。 悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。
 - 4.8.0
   - クエリ文字列に非常に高いインデックスを持つ疎行列は、プロセスがメモリ不足になり、サーバーがクラッシュする可能性があります。
   - 非常にネストされたクエリ文字列オブジェクトは、プロセスをブロックし、サーバーが一時的に応答しないようにする可能性があります。
@@ -68,7 +68,7 @@ Express でセキュリティ上の脆弱性を発見したと思われる場合
 <Alert type="警告">
 **エクスプレス 3.x is END-OF-LIFE and no longer maintained**
 
-3.x における既知のセキュリティとパフォーマンスの問題は、前回のアップデート(2015年8月1日)から解決されていません。 最新版のExpressをご利用いただくことを強くお勧めします。
+3.x における既知のセキュリティとパフォーマンスの問題は、前回のアップデート(2015年8月1日)から解決されていません。最新版のExpressをご利用いただくことを強くお勧めします。
 
 3.x以降のアップグレードができない場合は、[Commercial Support Options](/support#commercial-support-options)をご検討ください。
 
@@ -81,7 +81,7 @@ Express でセキュリティ上の脆弱性を発見したと思われる場合
 - 3.16.10
   - `express.static`におけるディレクトリトラバーサルの脆弱性を修正しました。
 - 3.16.6
-  - Node.js 0.10 は、`express.static` と `res.sendfile` に影響を与える特定の状況で `fd` をリークできます。 悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。 悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。
+  - Node.js 0.10 は、`express.static` と `res.sendfile` に影響を与える特定の状況で `fd` をリークできます。 悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。悪意のある要求は`fd`がリークし、最終的には`EMFILE`エラーとサーバーの応答性が低下する可能性があります。
 - 3.16.0
   - クエリ文字列のインデックスが非常に高いスパース配列は、プロセスがメモリ不足になり、サーバーがクラッシュする可能性があります。
   - 非常にネストされたクエリ文字列オブジェクトは、プロセスをブロックし、サーバーが一時的に応答しないようにする可能性があります。

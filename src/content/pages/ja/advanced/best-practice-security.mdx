@@ -6,9 +6,9 @@ description: 運用中のExpressアプリのセキュリティベストプラク
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-_"production"_ という用語は、アプリケーションや API がエンドユーザーや消費者に一般的に提供されるソフトウェアのライフサイクルにおける段階を指します。 対照的に、\*"development"\*段階では、コードを積極的に書いたりテストしたりしており、アプリケーションは外部からのアクセスに開かれていません。 対応するシステム環境はそれぞれ _production_ と _development_ と呼ばれています。 対照的に、*"development"*段階では、コードを積極的に書いたりテストしたりしており、アプリケーションは外部からのアクセスに開かれていません。 対応するシステム環境はそれぞれ _production_ と _development_ と呼ばれています。
+_"production"_ という用語は、アプリケーションや API がエンドユーザーや消費者に一般的に提供されるソフトウェアのライフサイクルにおける段階を指します。 対照的に、\*"development"\*段階では、コードを積極的に書いたりテストしたりしており、アプリケーションは外部からのアクセスに開かれていません。 対応するシステム環境はそれぞれ _production_ と _development_ と呼ばれています。対照的に、*"development"*段階では、コードを積極的に書いたりテストしたりしており、アプリケーションは外部からのアクセスに開かれていません。対応するシステム環境はそれぞれ _production_ と _development_ と呼ばれています。
 
-開発環境と生産環境は通常、異なる設定であり、非常に異なる要件を持っています。 開発で問題のあるものは、生産では受け入れられないかもしれません。 たとえば、開発環境では、デバッグ用のエラーの詳細なロギングを行うことができます。 同じ行動が本番環境ではセキュリティ上の懸念になることがあります 開発では拡張性、信頼性、パフォーマンスを心配する必要はありませんが、それらの懸念は生産において重要になります。
+開発環境と生産環境は通常、異なる設定であり、非常に異なる要件を持っています。開発で問題のあるものは、生産では受け入れられないかもしれません。たとえば、開発環境では、デバッグ用のエラーの詳細なロギングを行うことができます。 同じ行動が本番環境ではセキュリティ上の懸念になることがあります開発では拡張性、信頼性、パフォーマンスを心配する必要はありませんが、それらの懸念は生産において重要になります。
 
 <Alert type="情報">
 
@@ -19,23 +19,22 @@ Express でセキュリティ上の脆弱性を発見したと思われる場合
 
 ## 非推奨または脆弱なバージョンの Express を使用しない
 
-Express 2.x と 3.x はメンテナンスされなくなりました。 これらのバージョンのセキュリティとパフォーマンスの問題は修正されません。 それらを使用しないでください! これらのバージョンのセキュリティとパフォーマンスの問題は修正されません。 それらを使用しないでください! If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
+Express 2.x と 3.x はメンテナンスされなくなりました。 これらのバージョンのセキュリティとパフォーマンスの問題は修正されません。 それらを使用しないでください! これらのバージョンのセキュリティとパフォーマンスの問題は修正されません。それらを使用しないでください! If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
 
 Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/advanced/security-updates). もしそうであれば、安定版リリースのいずれかにアップデートしてください。
 
 ## TLS を使用
 
-機密データを扱ったり転送したりする場合は、[Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) を使用して接続とデータを保護します。 この技術は、クライアントからサーバーに送信される前にデータを暗号化し、一般的な(そして簡単な)ハッキングを防ぎます。 機密データを扱ったり転送したりする場合は、[Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) を使用して接続とデータを保護します。 この技術は、クライアントからサーバーに送信される前にデータを暗号化し、一般的な(そして簡単な)ハッキングを防ぎます。 Ajax と POST リクエストは目に見えて明らかではなく、ブラウザーでは「非表示」に見えるかもしれません。 彼らのネットワークトラフィックは、[パケットスニッフィング](https://en.wikipedia.org/wiki/Packet_analyzer)と[man-in-the-middle攻撃](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)に対して脆弱です。
+機密データを扱ったり転送したりする場合は、[Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) を使用して接続とデータを保護します。この技術は、クライアントからサーバーに送信される前にデータを暗号化し、一般的な(そして簡単な)ハッキングを防ぎます。機密データを扱ったり転送したりする場合は、[Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) を使用して接続とデータを保護します。 この技術は、クライアントからサーバーに送信される前にデータを暗号化し、一般的な(そして簡単な)ハッキングを防ぎます。 Ajax と POST リクエストは目に見えて明らかではなく、ブラウザーでは「非表示」に見えるかもしれません。 彼らのネットワークトラフィックは、[パケットスニッフィング](https://en.wikipedia.org/wiki/Packet_analyzer)と[man-in-the-middle攻撃](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)に対して脆弱です。
 
-SSL(Secure Socket Layer)暗号化に精通しているかもしれません。 [TLS is simply the next progression of SSL](https://learn.microsoft.com/en-us/windows/win32/secauthn/tls-versus-ssl). 言い換えれば、以前SSLを使用していた場合は、TLSへのアップグレードを検討してください。 一般的に、Nginx は TLS を扱うことをお勧めします。 For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
+SSL(Secure Socket Layer)暗号化に精通しているかもしれません。 [TLS is simply the next progression of SSL](https://learn.microsoft.com/en-us/windows/win32/secauthn/tls-versus-ssl). 言い換えれば、以前SSLを使用していた場合は、TLSへのアップグレードを検討してください。一般的に、Nginx は TLS を扱うことをお勧めします。 For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
 
 Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
 ## ユーザー入力を信頼しない
 
 Webアプリケーションの場合、最も重要なセキュリティ要件の1つは、適切なユーザー入力検証と処理です。 これは多くの形態で来て、我々はここでそれらのすべてをカバーしません。
-最終的に、アプリケーションが受け入れるユーザー入力の種類を検証し、正しく処理する責任はあなたのものです。 これは多くの形態で来て、我々はここでそれらのすべてをカバーしません。
-最終的に、アプリケーションが受け入れるユーザー入力の種類を検証し、正しく処理する責任はあなたのものです。
+最終的に、アプリケーションが受け入れるユーザー入力の種類を検証し、正しく処理する責任はあなたのものです。これは多くの形態で来て、我々はここでそれらのすべてをカバーしません。最終的に、アプリケーションが受け入れるユーザー入力の種類を検証し、正しく処理する責任はあなたのものです。
 
 ### 開いているリダイレクトを防止
 
@@ -49,7 +48,7 @@ Webアプリケーションの場合、最も重要なセキュリティ要件�
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
@@ -63,7 +62,7 @@ app.use((req, res) => {
 
 [Helmet][helmet] は、HTTPヘッダーを適切に設定することで、よく知られているWeb脆弱性からアプリを保護するのに役立ちます。
 
-Helmet は、セキュリティ関連の HTTP レスポンスヘッダーを設定するミドルウェア機能です。 ヘルメットは、デフォルトで次のヘッダーを設定します。 ヘルメットは、デフォルトで次のヘッダーを設定します。
+Helmet は、セキュリティ関連の HTTP レスポンスヘッダーを設定するミドルウェア機能です。 ヘルメットは、デフォルトで次のヘッダーを設定します。ヘルメットは、デフォルトで次のヘッダーを設定します。
 
 - `Content-Security-Policy`: 多くの攻撃を軽減するためにあなたのページで何が起こるかを許可する強力なリスト
 - `Cross-Origin-Opener-Policy`: あなたのページを分離するのに役立ちます
@@ -76,10 +75,10 @@ Helmet は、セキュリティ関連の HTTP レスポンスヘッダーを設�
 - `X-Download-Options`: 強制的にダウンロードを保存します (Internet Explorerのみ)
 - `X-Frame-Options`: [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking) 攻撃を軽減する従来のヘッダー
 - `X-Permitted-Cross-Domain-Policies`: Acrobat など、Adobe 製品のクロスドメイン動作を制御します
-- `X-Powered-By`: Webサーバーに関する情報。 簡単な攻撃で使用できるため削除されました 簡単な攻撃で使用できるため削除されました
+- `X-Powered-By`: Webサーバーに関する情報。 簡単な攻撃で使用できるため削除されました簡単な攻撃で使用できるため削除されました
 - `X-XSS-Protection`: [XSS アタック](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting)を軽減しようとするレガシーヘッダーが悪化するため、ヘルメットは無効にします
 
-各ヘッダーは、設定または無効にできます。 詳細については、[its documentation website][helmet] をご覧ください。 詳細については、[its documentation website][helmet] をご覧ください。
+各ヘッダーは、設定または無効にできます。 詳細については、[its documentation website][helmet] をご覧ください。詳細については、[its documentation website][helmet] をご覧ください。
 
 他のモジュールと同様にヘルメットをインストール：
 
@@ -277,7 +276,7 @@ $ npm audit
 
 もっと安全な場合は、 [Snyk](https://snyk.io/) を検討してください。
 
-Snyk は [コマンド ライン ツール](https://www.npmjs.com/package/snyk) と [Github 統合](https://snyk.io/docs/github) の両方を提供しており、依存関係の既知の脆弱性についてアプリケーションを [Snyk のオープン ソース 脆弱性 データベース](https://snyk.io/vuln/) でチェックします。 CLI を以下のようにインストールします。 Install the CLI as follows:
+Snyk は [コマンド ライン ツール](https://www.npmjs.com/package/snyk) と [Github 統合](https://docs.snyk.io/discover-snyk/getting-started) の両方を提供しており、依存関係の既知の脆弱性についてアプリケーションを [Snyk のオープン ソース 脆弱性 データベース](https://security.snyk.io/) でチェックします。 CLI を以下のようにインストールします。 Install the CLI as follows:
 
 ```bash
 $ npm install -g snyk
@@ -294,7 +293,7 @@ $ snyk test
 
 Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. 一般的に、これらのデータベースは、Node セキュリティに関する知識とツールのための優れたリソースです。
 
-Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) and take precautions to avoid them.
+Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://owasp.org/www-project-top-ten/) and take precautions to avoid them.
 
 ## その他の考慮事項
 
@@ -302,8 +301,8 @@ Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a
 
 - クロスサイト・スクリプティング(XSS)やコマンドインジェクション攻撃から保護するため、常にユーザー入力をフィルタリングしてサニタイズします。
 - パラメータ化されたクエリまたは準備された文を使用してSQLインジェクション攻撃を防御します。
-- アプリケーションのSQLインジェクションの脆弱性を検出するには、オープンソースの [sqlmap](http://sqlmap.org/)ツールを使用してください。
+- アプリケーションのSQLインジェクションの脆弱性を検出するには、オープンソースの [sqlmap](https://sqlmap.org/)ツールを使用してください。
 - SSL暗号の設定をテストするには、 [nmap](https://nmap.org/) と [sslyze](https://github.com/nabla-c0d3/sslyze) ツールを使用します。 キー、再ネゴシエーション、および証明書の有効性。
-- [safe-regex](https://www.npmjs.com/package/safe-regex) を使用して、正規表現が [正規表現 サービス妨害](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) 攻撃の影響を受けないようにしましょう。
+- [safe-regex](https://www.npmjs.com/package/safe-regex) を使用して、正規表現が [正規表現 サービス妨害](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) 攻撃の影響を受けないようにしましょう。
 
-[helmet]: https://helmetjs.github.io/
+[helmet]: https://helmet.js.org/
