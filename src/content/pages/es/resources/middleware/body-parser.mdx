@@ -44,6 +44,10 @@ Este módulo proporciona los siguientes analizadores:
 - [Analizador de cuerpo de texto](#bodyparsertextoptions)
 - [Analizador del cuerpo del URL codificado](#bodyparserurlencodedoptions)
 
+All parsers support automatic inflation of `gzip`, `br` (brotli), `deflate`
+and `zstd` encodings. `zstd` is available in Node.js `^22.15.0` and
+`>=23.8.0`.
+
 Otros analizadores de cuerpo en los que podría estar interesado:
 
 - [body](https://www.npmjs.com/package/body#readme)
@@ -84,9 +88,8 @@ Los varios errores devueltos por este módulo se describen en la
 ### bodyParser.json([options])
 
 Devuelve middleware que solo analiza `json` y solo mira las solicitudes donde
-la cabecera `Content-Type` coincide con la opción `type`. Este analizador acepta cualquier codificación
-Unicode del cuerpo y soporta la inflación automática de codificaciones `gzip`,
-`br` (brotli) y `deflate`.
+la cabecera `Content-Type` coincide con la opción `type`. This parser accepts any
+Unicode encoding of the body.
 
 Un nuevo objeto `body` que contiene los datos analizados es poblado en el objeto `request`
 después del middleware (es decir, `req.body`).
@@ -146,9 +149,7 @@ de la solicitud. El análisis puede ser abortado lanzando un error.
 ### bodyParser.raw([options])
 
 Devuelve middleware que analiza todos los cuerpos como un `Buffer` y solo mira solicitudes
-donde la cabecera `Content-Type` coincide con la opción `type`. Este analizador
-soporta la inflación automática de codificaciones `gzip`, `br` (brotli) y `deflate`
-.
+donde la cabecera `Content-Type` coincide con la opción `type`.
 
 Un nuevo objeto `body` que contiene los datos analizados es poblado en el objeto `request`
 después del middleware (es decir, `req.body`). Este será un objeto de `Buffer`
@@ -194,23 +195,21 @@ de la solicitud. El análisis puede ser abortado lanzando un error.
 ### bodyParser.text([options])
 
 Devuelve middleware que analiza todos los cuerpos como una cadena y solo mira peticiones
-donde la cabecera `Content-Type` coincide con la opción `type`. Este analizador
-soporta la inflación automática de codificaciones `gzip`, `br` (brotli) y `deflate`
-.
+donde la cabecera `Content-Type` coincide con la opción `type`.
 
-Una nueva cadena `body` que contiene los datos analizados es poblada en el objeto `request`
-después del middleware (es decir, `req.body`). Esta será una cadena del cuerpo
-.
+A new `body` string containing the parsed data is populated on the `request`
+object after the middleware (i.e. `req.body`). This will be a string of the
+body.
 
 #### Opciones
 
-La función `text` toma un objeto opcional `options` que puede contener cualquiera de
-las siguientes claves:
+The `text` function takes an optional `options` object that may contain any of
+the following keys:
 
 ##### por defecto Charset
 
-Especifica el conjunto de caracteres predeterminado para el contenido del texto si el conjunto de caracteres no es
-especificado en la cabecera `Content-Type` de la solicitud. Por defecto es `utf-8`.
+Specify the default character set for the text content if the charset is not
+specified in the `Content-Type` header of the request. Por defecto es `utf-8`.
 
 ##### inflado
 
@@ -233,9 +232,9 @@ parse. Esta opción puede ser una cadena, array de cadenas, o una función. If n
 a function, `type` option is passed directly to the
 [type-is](https://www.npmjs.com/package/type-is#readme) library and this can
 be an extension name (like `txt`), a mime type (like `text/plain`), or a mime
-type with a wildcard (like `*/*` or `text/*`). Si una función, la opción `type`
-se llama como `fn(req)` y la solicitud se analiza si devuelve un valor verdadero
-. Por defecto es `text/plain`.
+type with a wildcard (like `*/*` or `text/*`). If a function, the `type`
+option is called as `fn(req)` and the request is parsed if it returns a
+truthy value. Defaults to `text/plain`.
 
 ##### verificar
 
@@ -245,10 +244,9 @@ de la solicitud. El análisis puede ser abortado lanzando un error.
 
 ### bodyParser.urlencoded([options])
 
-Devuelve middleware que solo analiza cuerpos de `urlencoded` y solo mira solicitudes de
-donde la cabecera `Content-Type` coincide con la opción `type`. Este analizador
-acepta solo codificaciones UTF-8 e ISO-8859-1 del cuerpo y soporta la inflación automática
-de codificaciones `gzip`, `br` (brotli) y `deflate`.
+Returns middleware that only parses `urlencoded` bodies and only looks at
+requests where the `Content-Type` header matches the `type` option. This
+parser accepts only UTF-8 and ISO-8859-1 encodings of the body.
 
 Un nuevo objeto `body` que contiene los datos analizados es poblado en el objeto `request`
 después del middleware (es decir, `req.body`). This object will contain
@@ -257,17 +255,17 @@ key-value pairs, where the value can be a string or array (when `extended` is
 
 #### Opciones
 
-La función `urlencoded` toma un objeto opcional `options` que puede contener
-cualquiera de las siguientes claves:
+The `urlencoded` function takes an optional `options` object that may contain
+any of the following keys:
 
-##### extendido
+##### extended
 
-La sintaxis "extendida" permite que objetos y arreglos enriquecidos sean codificados en el formato codificado en URL
-, permitiendo una experiencia similar a JSON con codificación URL. Para obtener
-más información, por favor ver la librería qs
-.
+The "extended" syntax allows for rich objects and arrays to be encoded into the
+URL-encoded format, allowing for a JSON-like experience with URL-encoded. For
+more information, please see the qs
+library.
 
-Por defecto es `false`.
+Defaults to `false`.
 
 ##### inflado
 
@@ -283,11 +281,11 @@ a `'100kb'`.
 
 > Se recomienda no configurar un límite muy alto y utilizar el valor por defecto siempre que sea posible. Permitir cargas mayores aumenta el uso de memoria debido a los recursos necesarios para decodificar y transformar, y también puede llevar a tiempos de respuesta más largos a medida que se procesan más datos. Por “muy alto”, nos referimos a valores por encima del valor predeterminado, por ejemplo las cargas útiles de 5 MB o más ya pueden empezar a introducir estos riesgos. Con los límites por defecto, estos problemas no se producen.
 
-##### parámetro límite
+##### parameterLimit
 
-La opción `parameterLimit` controla el número máximo de parámetros que
-están permitidos en los datos codificados en la URL. Si una solicitud contiene más parámetros
-que este valor, se devolverá un 413 al cliente. Por defecto es `1000`.
+The `parameterLimit` option controls the maximum number of parameters that
+are allowed in the URL-encoded data. If a request contains more parameters
+than this value, a 413 will be returned to the client. Defaults to `1000`.
 
 ##### tipo
 
@@ -297,9 +295,9 @@ a function, `type` option is passed directly to the
 [type-is](https://www.npmjs.com/package/type-is#readme) library and this can
 be an extension name (like `urlencoded`), a mime type (like
 `application/x-www-form-urlencoded`), or a mime type with a wildcard (like
-`*/x-www-form-urlencoded`). Si una función, la opción `type` se llama
-`fn(req)` y la solicitud se analiza si devuelve un valor verdadero. Por defecto
-a `application/x-www-form-urlencoded`.
+`*/x-www-form-urlencoded`). If a function, the `type` option is called as
+`fn(req)` and the request is parsed if it returns a truthy value. Defaults
+to `application/x-www-form-urlencoded`.
 
 ##### verificar
 
@@ -309,131 +307,131 @@ de la solicitud. El análisis puede ser abortado lanzando un error.
 
 ##### por defecto Charset
 
-El conjunto de caracteres por defecto a analizar, si no se especifica en el tipo de contenido. Debe ser
-ya sea `utf-8` o `iso-8859-1`. Por defecto es `utf-8`.
+The default charset to parse as, if not specified in content-type. Must be
+either `utf-8` or `iso-8859-1`. Por defecto es `utf-8`.
 
 ##### charsetSentinel
 
-Si dejar que el valor del parámetro `utf8` tenga precedencia como selector
-. Requiere que el formulario contenga un parámetro llamado `utf8` con un valor
-de `mañ`. Por defecto es `false`.
+Whether to let the value of the `utf8` parameter take precedence as the charset
+selector. It requires the form to contain a parameter named `utf8` with a value
+of `✓`. Defaults to `false`.
 
-##### interpretar entidades numéricas
+##### interpretNumericEntities
 
-Si decodificar entidades numéricas como `&#9786;` al analizar un formulario iso-8859-1
-. Por defecto es `false`.
+Whether to decode numeric entities such as `&#9786;` when parsing an iso-8859-1
+form. Defaults to `false`.
 
-##### profundidad
+##### depth
 
-La opción `depth` se utiliza para configurar la profundidad máxima de la librería `qs` cuando `extendido` es `true`. Esto le permite limitar la cantidad de claves que se analizan y pueden ser útiles para prevenir ciertos tipos de abuso. Por defecto es `32`. Se recomienda mantener este valor lo más bajo posible.
+The `depth` option is used to configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible.
 
-## Errores
+## Errors
 
-Los middlewares proporcionados por este módulo crean errores usando el módulo
-[`http-errors`](https://www.npmjs.com/package/http-errors). Los errores
-normalmente tendrán una propiedad `status`/`statusCode` que contiene el código de respuesta
-sugerido, una propiedad `expose` para determinar si la propiedad `message`
-debe mostrarse al cliente, una propiedad `type` para determinar el tipo de error
-sin coincidir con el `message`, y una propiedad `body` que contiene
-el cuerpo leído, si está disponible.
+The middlewares provided by this module create errors using the
+[`http-errors` module](https://www.npmjs.com/package/http-errors). The errors
+will typically have a `status`/`statusCode` property that contains the suggested
+HTTP response code, an `expose` property to determine if the `message` property
+should be displayed to the client, a `type` property to determine the type of
+error without matching against the `message`, and a `body` property containing
+the read body, if available.
 
-Los siguientes son los errores comunes creados, aunque cualquier error puede pasar por
-por varias razones.
+The following are the common errors created, though any error can come through
+for various reasons.
 
-### codificación de contenido no soportada
+### content encoding unsupported
 
-Este error ocurrirá cuando la solicitud tuviera una cabecera `Content-Encoding` que
-contenía una codificación pero la opción "inflación" se estableció en `false`. La propiedad
-`status` se establece en `415`, la propiedad `type` se establece en
-`'encoding. nsupported'`, y la propiedad `charset` se establecerá en la codificación
-que no es compatible.
+This error will occur when the request had a `Content-Encoding` header that
+contained an encoding but the "inflation" option was set to `false`. The
+`status` property is set to `415`, the `type` property is set to
+`'encoding.unsupported'`, and the `charset` property will be set to the
+encoding that is unsupported.
 
-### análisis de entidad fallido
-
-This error will occur when the request contained an entity that could not be
-parsed by the middleware. La propiedad `status` se establece en `400`, la propiedad `type`
-se establece en `'entity.parse. ailed'`, y la propiedad `body` se establece en
-el valor de la entidad que falló en el análisis.
-
-### falló la verificación de la entidad
+### entity parse failed
 
 This error will occur when the request contained an entity that could not be
-failed verification by the defined `verify` option. La propiedad `status` es
-establecido a `403`, la propiedad `type` se establece en `'entity.verify. ailed'`, y la propiedad
-`body` se establece en el valor de la entidad que falló la verificación.
+parsed by the middleware. The `status` property is set to `400`, the `type`
+property is set to `'entity.parse.failed'`, and the `body` property is set to
+the entity value that failed parsing.
 
-### solicitud abortada
+### entity verify failed
 
-Este error se producirá cuando el cliente aborte la solicitud antes de leer
-el cuerpo ha terminado. La propiedad `received` se establecerá al número de
-bytes recibidos antes de que la solicitud fuera abortada y la propiedad `expected` sea
-establecido al número de bytes esperados. La propiedad `status` se establece en `400`
-y la propiedad `type` se establece en `'request.aborted'`.
+This error will occur when the request contained an entity that could not be
+verified by the defined `verify` option. The `status` property is
+set to `403`, the `type` property is set to `'entity.verify.failed'`, and the
+`body` property is set to the entity value that failed verification.
 
-### entidad de solicitud demasiado grande
+### request aborted
 
-Este error ocurrirá cuando el tamaño del cuerpo de solicitud sea mayor que la opción "límite"
-. La propiedad `limit` se establecerá al límite de bytes y la propiedad `length`
-se establecerá a la longitud del cuerpo de solicitud. La propiedad `status` es
-establece a `413` y la propiedad `type` se establece a `'entity.too.large'`.
+This error will occur when the request is aborted by the client before reading
+the body has finished. The `received` property will be set to the number of
+bytes received before the request was aborted and the `expected` property is
+set to the number of expected bytes. The `status` property is set to `400`
+and `type` property is set to `'request.aborted'`.
 
-### el tamaño de la solicitud no coincide con la longitud del contenido
+### request entity too large
 
-Este error ocurrirá cuando la longitud de la solicitud no coincida con la longitud de
-la cabecera `Content-Length`. Esto normalmente ocurre cuando la solicitud está mal formada,
-normalmente cuando la cabecera `Content-Length` fue calculada basado en los caracteres
-en lugar de bytes. La propiedad `status` se establece en `400` y la propiedad `type`
-se establece en `'request.size.invalid'`.
+This error will occur when the request body's size is larger than the "limit"
+option. The `limit` property will be set to the byte limit and the `length`
+property will be set to the request body's length. The `status` property is
+set to `413` and the `type` property is set to `'entity.too.large'`.
 
-### no debe establecerse la codificación de stream
+### request size did not match content length
 
-Este error ocurrirá cuando algo llamado el método `req.setEncoding` previo
-a este middleware. Este módulo opera directamente sólo en bytes y no puede llamar
-a `req.setEncoding` al usar este módulo. La propiedad `status` está establecida en
-`500` y la propiedad `type` se establece en `'stream.encoding.set'`.
+This error will occur when the request's length did not match the length from
+the `Content-Length` header. This typically occurs when the request is malformed,
+typically when the `Content-Length` header was calculated based on characters
+instead of bytes. The `status` property is set to `400` and the `type` property
+is set to `'request.size.invalid'`.
 
-### stream no es legible
+### stream encoding should not be set
 
-Este error ocurrirá cuando la solicitud ya no sea legible cuando este middleware
-intente leerla. Normalmente significa algo que no sea un middleware de
-este módulo lee el cuerpo de la solicitud y el middleware también fue configurado para
-leer la misma solicitud. La propiedad `status` se establece en `500` y la propiedad `type`
-se establece en `'stream.not.readable'`.
+This error will occur when something called the `req.setEncoding` method prior
+to this middleware. This module operates directly on bytes only and you cannot
+call `req.setEncoding` when using this module. The `status` property is set to
+`500` and the `type` property is set to `'stream.encoding.set'`.
 
-### demasiados parámetros
+### stream is not readable
 
-Este error ocurrirá cuando el contenido de la solicitud excede el `parameterLimit` configurado
-para el analizador `urlencoded`. La propiedad `status` está establecida en
-`413` y la propiedad `type` se establece en `'parameters.too.many'`.
+This error will occur when the request is no longer readable when this middleware
+attempts to read it. This typically means something other than a middleware from
+this module read the request body already and the middleware was also configured to
+read the same request. The `status` property is set to `500` and the `type`
+property is set to `'stream.not.readable'`.
 
-### conjunto de caracteres no soportado "BOGUS"
+### too many parameters
 
-Este error ocurrirá cuando la solicitud tenga un parámetro de conjunto de caracteres en la cabecera
-`Content-Type`, pero el módulo `iconv-lite` no lo soporta O el analizador
-no lo soporta. El conjunto de caracteres está contenido en el mensaje así como en
-como en la propiedad `charset`. La propiedad `status` se establece en `415`, la propiedad
-`type` se establece en `'charset. nsupported'`, y la propiedad `charset`
-está establecida en el conjunto de caracteres que no es compatible.
+This error will occur when the content of the request exceeds the configured
+`parameterLimit` for the `urlencoded` parser. The `status` property is set to
+`413` and the `type` property is set to `'parameters.too.many'`.
 
-### codificación de contenido no soportada "bogus"
+### unsupported charset "BOGUS"
 
-Este error ocurrirá cuando la solicitud tuviera una cabecera `Content-Encoding` que
-contenía una codificación no soportada. La codificación está contenida en el mensaje
-así como en la propiedad `encoding`. La propiedad `status` está establecida a `415`,
-la propiedad `type` se establece en `'encoding. nsupported'`, y la propiedad `encoding`
-está establecida en la codificación que no es compatible.
+This error will occur when the request had a charset parameter in the
+`Content-Type` header, but the `iconv-lite` module does not support it OR the
+parser does not support it. The charset is contained in the message as well
+as in the `charset` property. The `status` property is set to `415`, the
+`type` property is set to `'charset.unsupported'`, and the `charset` property
+is set to the charset that is unsupported.
 
-### La entrada excedió la profundidad
+### unsupported content encoding "bogus"
 
-Este error ocurre cuando se usa `bodyParser.urlencoded` con la propiedad `extended` establecida a `true` y la entrada excede la opción `depth` configurada. La propiedad `status` está establecida a `400`. Se recomienda revisar la opción `depth` y evaluar si requiere un valor mayor. Cuando la opción `depth` se establece en `32` (valor por defecto), el error no se arrojará.
+This error will occur when the request had a `Content-Encoding` header that
+contained an unsupported encoding. The encoding is contained in the message
+as well as in the `encoding` property. The `status` property is set to `415`,
+the `type` property is set to `'encoding.unsupported'`, and the `encoding`
+property is set to the encoding that is unsupported.
+
+### The input exceeded the depth
+
+This error occurs when using `bodyParser.urlencoded` with the `extended` property set to `true` and the input exceeds the configured `depth` option. The `status` property is set to `400`. It is recommended to review the `depth` option and evaluate if it requires a higher value. When the `depth` option is set to `32` (default value), the error will not be thrown.
 
 ## Ejemplos
 
-### Exprimir/Conectar genéricos de nivel superior
+### Express/Connect top-level generic
 
-Este ejemplo demuestra agregar un analizador de JSON genérico y un analizador codificado en URL como un middleware
-de nivel superior, el cual analizará los cuerpos de todas las solicitudes entrantes.
-Esta es la configuración más sencilla.
+This example demonstrates adding a generic JSON and URL-encoded parser as a
+top-level middleware, which will parse the bodies of all incoming requests.
+This is the simplest setup.
 
 ```js
 const express = require('express');
@@ -454,10 +452,10 @@ app.use(function (req, res) {
 });
 ```
 
-### Ruta Express específica
+### Express route-specific
 
-Este ejemplo demuestra agregar analizadores de cuerpo específicamente a las rutas que
-los necesita. En general, esta es la forma más recomendada de usar el analizador del cuerpo con
+This example demonstrates adding body parsers specifically to the routes that
+need them. In general, this is the most recommended way to use body-parser with
 Express.
 
 ```js
@@ -485,10 +483,10 @@ app.post('/api/users', jsonParser, function (req, res) {
 });
 ```
 
-### Cambiar el tipo aceptado para los analizadores
+### Change accepted type for parsers
 
-Todos los analizadores aceptan una opción `type` que te permite cambiar el
-`Content-Type` que el middleware analizará.
+All the parsers accept a `type` option which allows you to change the
+`Content-Type` that the middleware will parse.
 
 ```js
 const express = require('express');
@@ -511,5 +509,5 @@ app.use(bodyParser.text({ type: 'text/html' }));
 [MIT](https://github.com/expressjs/body-parser/blob/HEAD/LICENSE)
 
 [npm-url]: https://npmjs.com/package/body-parser
-[insignia osf-scorecard-scorecard-]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
-[visualizador-escorecard-ossf]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser

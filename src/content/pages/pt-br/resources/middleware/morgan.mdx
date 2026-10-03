@@ -8,14 +8,14 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.11.0"
+  version="1.12.1"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
 
 Requisição de logger middleware HTTP para node.js
 
-> Nomeado após [Dexter](http://en.wikipedia.org/wiki/Dexter_Morgan), uma série que você não deve assistir até a conclusão.
+> Named after [Dexter](https://en.wikipedia.org/wiki/Dexter_Morgan), a show you should not watch until completion.
 
 ## Instalação
 
@@ -34,6 +34,16 @@ Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
 </Alert>
 
 ## API
+
+For ES Modules:
+
+{/* eslint-disable no-unused-vars */}
+
+```js
+import morgan from 'morgan';
+```
+
+For CommonJS:
 
 {/* eslint-disable no-unused-vars */}
 
@@ -92,9 +102,9 @@ Morgan aceita essas propriedades no objeto de opções.
 
 ##### imediato
 
-Escrever linha de log na solicitação em vez de resposta. Isso significa que um pedido será registrado
-mesmo que o servidor falhe, _mas dados da resposta (como o código
-de resposta, comprimento de conteúdo, etc.) não pode ser logado_.
+Escrever linha de log na solicitação em vez de resposta. This means that requests will
+be logged even if the server crashes, _but data from the response (like the
+response code, content length, etc.) não pode ser logado_.
 
 ##### Pular
 
@@ -115,6 +125,33 @@ morgan('combined', {
 ##### fluxo
 
 Fluxo de saída para escrever linhas de log, padrão para `process.stdout`.
+
+If the stream is in object mode (`stream.writableObjectMode` is `true`) and the
+format function returns an object, the object is written to the stream as-is,
+without a trailing newline. This allows passing structured log entries to
+loggers that accept objects:
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(
+  function (tokens, req, res) {
+    return {
+      method: tokens.method(req, res),
+      url: tokens.url(req, res),
+      status: Number(tokens.status(req, res)),
+    };
+  },
+  {
+    stream: {
+      writableObjectMode: true,
+      write: function (entry) {
+        // entry is the object returned by the format function
+      },
+    },
+  }
+);
+```
 
 #### Formatos predefinidos
 
@@ -152,6 +189,11 @@ não coloridos para códigos de informação.
 # will output
 GET /dev 200 0.224 ms - 2
 ```
+
+Coloring is disabled when the [`NO_COLOR`](https://no-color.org) environment
+variable is set to any non-empty value, in which case the output above is
+written without any escape sequences. The variable is read once, when `morgan`
+is first required.
 
 ##### curto
 
@@ -193,8 +235,8 @@ Chamando `morgan.token()` usando o mesmo nome que um token existente substituir�
 do token.
 
 Espera-se que a função de token seja chamada com os argumentos `req` e `res`, representando
-a solicitação HTTP e a resposta HTTP. Além disso, o token pode aceitar mais argumentos de
-que ele escolheu personalizar o comportamento.
+a solicitação HTTP e a resposta HTTP. Additionally, the token can accept further arguments of
+its choosing to customize behavior.
 
 ##### :date[format]
 
@@ -220,7 +262,7 @@ O ID do processo do Node.js lidando com a solicitação.
 
 #####
 
-O cabeçalho do Referrer da solicitação. Isto usará o cabeçalho Referer de ortografia incorreta se existir, caso contrário será Referente.
+O cabeçalho do Referrer da solicitação. This will use the standard mis-spelled Referer header if it exists, otherwise Referrer.
 
 ##### :remote-addr
 
@@ -266,7 +308,7 @@ incluir no número, por padrão até `3`, que fornece precisão de microsegundos
 
 #####
 
-A URL da solicitação. Isto usará `req.originalUrl` se existir, caso contrário `req.url`.
+A URL da solicitação. This will use `req.originalUrl` if it exists, otherwise `req.url`.
 
 ##### :user-agent
 
@@ -276,13 +318,13 @@ O conteúdo do cabeçalho User-Agent da solicitação.
 
 Compilar uma string de formato em uma função `format` para usar por `morgan`. Uma string de formato
 é uma string que representa uma única linha de log e pode utilizar a sintaxe do token.
-Tokens são referências por `:token-name`. If tokens accept arguments, they can
+Tokens are referenced by `:token-name`. If tokens accept arguments, they can
 be passed using `[]`, for example: `:token-name[pretty]` would pass the string
 `'pretty'` as an argument to the token `token-name`.
 
-A função retornada de `morgan. ompile` recebe três argumentos `tokens`, `req`, e
-`res`, onde `tokens` é objeto com todos os tokens definidos, `req` é a solicitação HTTP e
-`res` é a resposta HTTP. A função retornará uma string que será a linha de log,
+The function returned from `morgan.compile` takes three arguments `tokens`, `req`, and
+`res`, where `tokens` is an object with all defined tokens, `req` is the HTTP request and
+`res` is the HTTP response. A função retornará uma string que será a linha de log,
 ou `undefined` / `null` para pular o log.
 
 Normally formats are defined using `morgan.format(name, format)`, but for certain
@@ -292,7 +334,7 @@ advanced uses, this compile function is directly available.
 
 ### expressão/conexão
 
-Aplicativo de exemplo que registrará todos os pedidos no formato combinado do Apache para STDOUT
+Sample app that will log all requests in the Apache combined format to STDOUT
 
 ```js
 var express = require('express');
@@ -309,7 +351,7 @@ app.get('/', function (req, res) {
 
 ### servidor http vanilla
 
-Aplicativo de exemplo que registrará todos os pedidos no formato combinado do Apache para STDOUT
+Sample app that will log all requests in the Apache combined format to STDOUT
 
 ```js
 var finalhandler = require('finalhandler');
@@ -433,7 +475,7 @@ Exemplo de aplicativo que usará formatos de token personalizados. Isso adiciona
 ```js
 var express = require('express');
 var morgan = require('morgan');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 morgan.token('id', function getId(req) {
   return req.id;

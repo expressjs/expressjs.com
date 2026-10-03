@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.0"
+  version="2.4.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -17,23 +17,6 @@ Multer est un middleware de node.js pour gérer `multipart/form-data`, qui est p
 au-dessus de [busboy](https://github.com/mscdex/busboy) pour une efficacité maximale.
 
 **REMARQUE** : Multer ne traitera aucun formulaire qui n'est pas multipartie (`multipart/form-data`).
-
-## Traductions
-
-Ce README est également disponible dans d'autres langues :
-
-|                                                                                 |                |
-| ------------------------------------------------------------------------------- | -------------- |
-| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)       | Arabe          |
-| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)   | Chinois        |
-| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)      | Français       |
-| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)        | Coréen         |
-| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md)  | Portugais (BR) |
-| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md)  | Russe          |
-| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)       | Espagnol       |
-| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)   | Uzbek          |
-| [Vie\<unk> Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md) | Vietnamese     |
-| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)        | Turc           |
 
 ## Installation
 
@@ -130,23 +113,26 @@ app.post('/stats', upload.single('uploaded_file'), function (req, res) {
 });
 ```
 
+Complete client-side and server-side examples (browser `FormData` uploads of a
+blob and of an image) are in the [`examples/`](https://github.com/expressjs/multer/blob/HEAD/examples/) folder.
+
 ## API
 
 ### Informations sur le fichier
 
 Chaque fichier contient les informations suivantes :
 
-| Clés          | Libellé                                            | Note               |
-| ------------- | -------------------------------------------------- | ------------------ |
-| `nomdechamp`  | Nom du champ spécifié dans le formulaire           |                    |
-| `nomoriginal` | Nom du fichier sur l'ordinateur de l'utilisateur   |                    |
-| `encodage`    | Type d'encodage du fichier                         |                    |
-| `mimetype`    | Type Mime du fichier                               |                    |
-| `size`        | Taille du fichier en octets                        |                    |
-| `destination` | Le dossier dans lequel le fichier a été sauvegardé | `DiskStorage`      |
-| `filename`    | Le nom du fichier dans la `destination`            | `DiskStorage`      |
-| `path`        | Le chemin complet vers le fichier téléchargé       | `DiskStorage`      |
-| `tampon`      | Un `Buffer` du fichier entier                      | `Stockage mémoire` |
+| Clés          | Libellé                                                                             | Note               |
+| ------------- | ----------------------------------------------------------------------------------- | ------------------ |
+| `nomdechamp`  | Nom du champ spécifié dans le formulaire                                            |                    |
+| `nomoriginal` | Name of the file on the user's computer, or the full path when `preservePath: true` |                    |
+| `encodage`    | Type d'encodage du fichier                                                          |                    |
+| `mimetype`    | Type Mime du fichier                                                                |                    |
+| `size`        | Taille du fichier en octets                                                         |                    |
+| `destination` | Le dossier dans lequel le fichier a été sauvegardé                                  | `DiskStorage`      |
+| `filename`    | Le nom du fichier dans la `destination`                                             | `DiskStorage`      |
+| `path`        | Le chemin complet vers le fichier téléchargé                                        | `DiskStorage`      |
+| `tampon`      | Un `Buffer` du fichier entier                                                       | `Stockage mémoire` |
 
 ### `multer(opts)`
 
@@ -161,11 +147,15 @@ Voici les options qui peuvent être passées à Multer.
 
 | Clés                | Libellé                                                                                                                                                                                                                                        |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defCharset`        | Default character set to use for text field values that do not declare one. Default: `'utf8'`                                                                                                                                                  |
+| `defParamCharset`   | Le jeu de caractères par défaut à utiliser pour les valeurs des paramètres de l'en-tête de la partie (par exemple le nom du fichier) qui ne sont pas des paramètres étendus (contenant un jeu de caractères explicite). Par défaut: `'latin1'` |
 | `dest` ou `storage` | Où stocker les fichiers                                                                                                                                                                                                                        |
 | `fileFilter`        | Fonction pour contrôler quels fichiers sont acceptés                                                                                                                                                                                           |
+| `fileHwm`           | `highWaterMark` of each file stream (`file.stream`). Default: busboy's default                                                                                                                                                                 |
+| `highWaterMark`     | `highWaterMark` of the multipart parser stream. Default: busboy's default                                                                                                                                                                      |
 | `limites`           | Limites des données téléchargées                                                                                                                                                                                                               |
-| `preservePath`      | Garder le chemin complet des fichiers au lieu du nom de base                                                                                                                                                                                   |
-| `defParamCharset`   | Le jeu de caractères par défaut à utiliser pour les valeurs des paramètres de l'en-tête de la partie (par exemple le nom du fichier) qui ne sont pas des paramètres étendus (contenant un jeu de caractères explicite). Par défaut: `'latin1'` |
+| `preservePath`      | Keep the full client-supplied path in `file.originalname` instead of just the base name                                                                                                                                                        |
+| `streamHandler`     | Function that feeds the request body to busboy; defaults to `req.pipe(busboy)`                                                                                                                                                                 |
 
 Dans une application web moyenne, seul `dest` peut être requis, et configuré comme montré dans
 l'exemple suivant.
@@ -173,6 +163,14 @@ l'exemple suivant.
 ```javascript
 const upload = multer({ dest: 'uploads/' });
 ```
+
+When `preservePath` is enabled, Multer passes the incoming filename through with
+any path segments provided by the client. This is exposed as `file.originalname`;
+it does not change the destination folder, create directories, or sanitize the
+path for you. `file.originalname` is always client-supplied and should be treated
+as untrusted; with `preservePath` it additionally contains the path segments the
+client sent. Normalize or validate it before using it in a custom `filename` or
+storage engine.
 
 Si vous voulez plus de contrôle sur vos envois, vous voudrez utiliser l'option `storage`
 au lieu de `dest`. Multer est livré avec des moteurs de stockage `DiskStorage`
@@ -188,6 +186,9 @@ dans `req.file`.
 Accepte un tableau de fichiers, tous avec le nom `fieldname`. Erreur optionnelle si
 plus que les fichiers `maxCount` sont téléchargés. Le tableau de fichiers sera stocké dans
 `req.files`.
+
+Files skipped by `fileFilter` do not count towards `maxCount`. Use
+`limits.files` to bound how many files are read from a request.
 
 #### `.fields(fields)`
 
@@ -226,21 +227,26 @@ où vous gérez les fichiers téléchargés.
 Le moteur de stockage de disque vous donne un contrôle total sur le stockage des fichiers sur disque.
 
 ```javascript
+const crypto = require('crypto');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '/tmp/my-uploads');
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix);
+    crypto.randomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, file.fieldname + '-' + raw.toString('hex'));
+    });
   },
 });
 
 const upload = multer({ storage: storage });
 ```
 
-Il y a deux options disponibles, `destination` et `filename`. Ce sont les deux fonctions
-qui déterminent où le fichier doit être stocké.
+There are three options available: `destination`, `filename` and `flush`. All of
+them except `flush` are functions that determine where the file should be
+stored.
 
 `destination` is used to determine within which folder the uploaded files should
 be stored. Cela peut également être donné en tant que `string` (par exemple `'/tmp/uploads'`). Si aucun
@@ -268,6 +274,14 @@ Pour comprendre la convention d'appel utilisée dans le callback (avoir besoin d
 null comme premier paramètre), reportez-vous à
 [Node. s gestion des erreurs](https://web.archive.org/web/20220417042018/https://www.joyent.com/node-js/production/design/errors)
 
+`flush` is an optional boolean. When set to `true`, the file data is flushed to
+disk with an `fsync` call before the upload handler runs, which prevents data
+loss if the process or the system crashes while the data is still sitting in
+the operating system's page cache. It is disabled by default because forcing a
+disk flush on every upload has a performance cost. Note that this syncs the
+file contents only; if the new directory entry must survive a crash as well,
+fsync the destination directory yourself.
+
 #### `Stockage mémoire`
 
 Le moteur de stockage de mémoire stocke les fichiers en mémoire comme des objets `Buffer`. It
@@ -287,20 +301,36 @@ memory storage is used.
 
 ### `limites`
 
-Un objet spécifiant les limites de taille des propriétés optionnelles suivantes. Multer passe cet objet directement dans busboy, et les détails des propriétés peuvent être trouvés sur la page [busboy's page](https://github.com/mscdex/busboy#busboy-methods).
+Un objet spécifiant les limites de taille des propriétés optionnelles suivantes. Multer passes this object into busboy directly, and the details of the properties can be found on [busboy's page](https://github.com/mscdex/busboy#exports).
+
+`limits` can also be a function that receives the request and returns such an
+object. It is called once per request, before parsing starts, so limits can
+depend on e.g. the authenticated user:
+
+```javascript
+const upload = multer({
+  limits: function (req) {
+    return { fileSize: req.user.maxUploadSize };
+  },
+});
+```
+
+Limits apply to the whole request; there is no per-file limit. To restrict
+individual files by type or name, use `fileFilter` or a custom storage engine.
 
 Les valeurs entières suivantes sont disponibles :
 
-| Clés                | Libellé                                                                               | Par défaut |
-| ------------------- | ------------------------------------------------------------------------------------- | ---------- |
-| `fieldNameSize`     | Taille maximale du nom du champ                                                       | 100 octets |
-| `fieldSize`         | Taille maximale du champ (en octets)                                                  | 1 Mo       |
-| `champs`            | Nombre maximum de champs hors fichier                                                 | Infini     |
-| `fileSize`          | Pour les formes multiparties, la taille maximale du fichier (en octets)               | Infini     |
-| `fichiers`          | Pour les formulaires en plusieurs parties, le nombre maximum de champs de fichier     | Infini     |
-| `Parties`           | Pour les formes multiparties, le nombre maximum de parties (champs + fichiers)        | Infini     |
-| `headerPairs`       | Pour les formes multiparties, le nombre maximum de clés d'en-tête =>valeur à analyser | 2000       |
-| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)            | Infini     |
+| Clés                   | Libellé                                                                               | Par défaut |
+| ---------------------- | ------------------------------------------------------------------------------------- | ---------- |
+| `fieldNameSize`        | Taille maximale du nom du champ                                                       | Infini     |
+| `fieldSize`            | Taille maximale du champ (en octets)                                                  | 1 Mo       |
+| `champs`               | Nombre maximum de champs hors fichier                                                 | Infini     |
+| `fileSize`             | Pour les formes multiparties, la taille maximale du fichier (en octets)               | Infini     |
+| `fichiers`             | Pour les formulaires en plusieurs parties, le nombre maximum de champs de fichier     | Infini     |
+| `Parties`              | Pour les formes multiparties, le nombre maximum de parties (champs + fichiers)        | Infini     |
+| `headerPairs`          | Pour les formes multiparties, le nombre maximum de clés d'en-tête =>valeur à analyser | 2000       |
+| `fieldNestingDepth`    | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)            | Infini     |
+| `fieldArrayIndexLimit` | Max numeric array index accepted inside a field name (e.g. `a[3]` uses index 3)       | Infini     |
 
 Spécifier les limites peut aider à protéger votre site contre les attaques par déni de service (DoS).
 
@@ -325,6 +355,30 @@ function fileFilter(req, file, cb) {
 }
 ```
 
+### `streamHandler`
+
+By default Multer reads the request with `req.pipe(busboy)`. Some platforms
+consume the request body before your handlers run, so there is nothing left to
+pipe. Google Cloud Functions and Firebase Functions, for example, expose the
+already-read body as `req.rawBody`. Provide a `streamHandler` to feed busboy
+yourself in that case:
+
+```javascript
+const upload = multer({
+  storage: multer.memoryStorage(),
+  streamHandler: function (req, busboy) {
+    if (req.rawBody) {
+      busboy.end(req.rawBody);
+    } else {
+      req.pipe(busboy);
+    }
+  },
+});
+```
+
+The function receives the request and the busboy instance and must write the
+whole multipart body to busboy and end it.
+
 ## Security
 
 Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
@@ -333,6 +387,7 @@ Specifying the [limits](#limits) can help protect your site against denial of se
 - `files` -- set to the maximum number of files per request
 - `fields` -- set to the maximum number of text fields per request
 - `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
+- `fieldArrayIndexLimit` -- set to the largest array index your field names require (e.g. `100` for `a[99]`)
 
 ## Gestion des erreurs
 
@@ -341,6 +396,11 @@ afficher une belle page d'erreur en utilisant [le type express way](/guide/error
 
 Si vous voulez attraper des erreurs spécifiques à Multer, vous pouvez appeler la fonction
 middleware par vous-même. Aussi, si vous voulez attraper seulement [les erreurs Multer](https://github.com/expressjs/multer/blob/main/lib/multer-error.js), vous pouvez utiliser la classe `MulterError` qui est attachée à l'objet `multer` lui-même (e. . `err instanceof multer.MulterError`).
+
+Multer errors carry a `code` (e.g. `LIMIT_FILE_SIZE`) and, when the error concerns
+a specific field, its name in `field`. Errors about a specific file
+(`LIMIT_FILE_SIZE`, `LIMIT_UNEXPECTED_FILE`) also expose the client-supplied file
+name in `filename`; treat it as untrusted input, like `file.originalname`.
 
 ```javascript
 const multer = require('multer');
@@ -368,5 +428,5 @@ Pour plus d'informations sur la façon de construire votre propre moteur de stoc
 [MIT](https://github.com/expressjs/multer/blob/HEAD/LICENSE)
 
 [npm-url]: https://npmjs.org/package/multer
-[badge ossf-scorecard]: https://api.scorecard.dev/projects/github.com/expressjs/multer/badge
-[visualiseur-scorecard-ossf]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/multer
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/multer/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/multer

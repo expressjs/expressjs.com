@@ -37,6 +37,10 @@ Node.js 请求体解析中间件
 - [Text body parser](#bodyparsertextoptions)
 - [URL-encoded form body parser](#bodyparserurlencodedoptions)
 
+All parsers support automatic inflation of `gzip`, `br` (brotli), `deflate`
+and `zstd` encodings. `zstd` is available in Node.js `^22.15.0` and
+`>=23.8.0`.
+
 你可能感兴趣的其他请求体解析器：
 
 - [body](https://www.npmjs.com/package/body#readme)
@@ -73,7 +77,8 @@ const text = require('body-parser/text');
 
 ### bodyParser.json([options])
 
-返回仅解析`json`且仅解析请求头`Content-Type`与`type`选项匹配的请求的中间件。该解析器可识别请求体的任意Unicode编码，并自动解压`gzip`、`br`（brotli）与`deflate`编码的数据。
+返回仅解析`json`且仅解析请求头`Content-Type`与`type`选项匹配的请求的中间件。 This parser accepts any
+Unicode encoding of the body.
 
 中间件执行完成后，解析后的数据会存入请求对象上新增的 `body` 属性（即 `req.body`）。
 
@@ -114,7 +119,7 @@ const text = require('body-parser/text');
 
 ### bodyParser.raw([options])
 
-返回一个中间件，该中间件会将所有请求体解析为 `Buffer`，且仅处理 `Content-Type` 请求头与 `type` 选项匹配的请求。该解析器支持自动解压 `gzip`、`br`（brotli）与 `deflate` 编码。
+返回一个中间件，该中间件会将所有请求体解析为 `Buffer`，且仅处理 `Content-Type` 请求头与 `type` 选项匹配的请求。
 
 中间件执行完成后，解析后的数据会存入请求对象上新增的 `body` 属性（即 `req.body`）。 This will be a `Buffer` object
 of the body.
@@ -143,7 +148,7 @@ of the body.
 
 ### bodyParser.text([options])
 
-返回一个中间件，该中间件会将所有请求体解析为字符串，且仅处理 `Content-Type` 请求头与 `type` 选项匹配的请求。该解析器支持自动解压 `gzip`、`br`（brotli）与 `deflate` 编码。
+返回一个中间件，该中间件会将所有请求体解析为字符串，且仅处理 `Content-Type` 请求头与 `type` 选项匹配的请求。
 
 中间件执行完成后，解析得到的字符串数据会作为新的 `body` 属性挂载到请求对象上（即 `req.body`）。该值为请求体对应的字符串。
 
@@ -175,7 +180,8 @@ of the body.
 
 ### bodyParser.urlencoded([options])
 
-返回一个中间件，该中间件仅解析 `urlencoded` 格式请求体，且只处理 `Content-Type` 请求头与 `type` 选项匹配的请求。该解析器仅支持 UTF-8 和 ISO-8859-1 编码的请求体，同时可自动解压 `gzip`、`br`（brotli）与 `deflate` 编码数据。
+返回一个中间件，该中间件仅解析 `urlencoded` 格式请求体，且只处理 `Content-Type` 请求头与 `type` 选项匹配的请求。 This
+parser accepts only UTF-8 and ISO-8859-1 encodings of the body.
 
 中间件执行完成后，解析后的数据会存入请求对象上新增的 `body` 属性（即 `req.body`）。该对象将包含键值对，值可以为字符串或数组（当`extended`为`false`时），或任意类型（当`extended`为`true`时）。
 
@@ -249,7 +255,8 @@ the entity value that failed parsing.
 
 ### 实体验证失败
 
-当请求实体无法通过配置的 `verify` 选项校验时，会触发该错误。 `status` 属性值为 `403`，`type` 属性值为 `'entity.verify.failed'`，`body` 属性存放校验未通过的请求实体内容。
+This error will occur when the request contained an entity that could not be
+verified by the defined `verify` option. `status` 属性值为 `403`，`type` 属性值为 `'entity.verify.failed'`，`body` 属性存放校验未通过的请求实体内容。
 
 ### request aborted
 
