@@ -367,7 +367,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 
 ## Route handlers
 
-リクエストを処理するために、 [middleware](/guide/using-middleware) のように動作する複数のコールバック関数を提供できます。 唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルートコールバックをバイパスすることです。 このメカニズムを使用して、ルート上に事前条件を設定できます。 次に現在のルートを進める理由がなければ次のルートに制御を渡す。 The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.```js
+リクエストを処理するために、[ミドルウェア](/guide/using-middleware)のように動作する複数のコールバック関数を指定できます。 The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.```js
 app.get('/user/:id', (req, res, next) => {
 if (req.params.i
 
