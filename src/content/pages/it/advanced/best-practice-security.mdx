@@ -48,7 +48,7 @@ Ecco un esempio di controllo degli URL prima di usare `res.redirect` o `res.loca
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
@@ -269,7 +269,7 @@ $ npm audit
 
 Se vuoi rimanere più sicuro, considera [Snyk](https://snyk.io/).
 
-Snyk offre sia un [strumento da riga di comando](https://www.npmjs.com/package/snyk) che una [integrazione Github](https://snyk.io/docs/github) che controlla la tua applicazione contro [database di vulnerabilità open source di Snyk](https://snyk.io/vuln/) per qualsiasi vulnerabilità nota nelle tue dipendenze. Installare il CLI come segue:
+Snyk offre sia un [strumento da riga di comando](https://www.npmjs.com/package/snyk) che una [integrazione Github](https://docs.snyk.io/discover-snyk/getting-started) che controlla la tua applicazione contro [database di vulnerabilità open source di Snyk](https://security.snyk.io/) per qualsiasi vulnerabilità nota nelle tue dipendenze. Installare il CLI come segue:
 
 ```bash
 $ npm install -g snyk
@@ -286,7 +286,7 @@ $ snyk test
 
 Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. In generale, queste banche dati sono risorse eccellenti per la conoscenza e gli strumenti sulla sicurezza del nodo.
 
-Infine, Express apps&mdash;come qualsiasi altra web app&mdash;può essere vulnerabile a una varietà di attacchi basati sul web. Conoscere se stessi con conosciute [vulnerabilità web](https://www.owasp.org/www-project-top-ten/) e prendere precauzioni per evitarli.
+Infine, Express apps&mdash;come qualsiasi altra web app&mdash;può essere vulnerabile a una varietà di attacchi basati sul web. Conoscere se stessi con conosciute [vulnerabilità web](https://owasp.org/www-project-top-ten/) e prendere precauzioni per evitarli.
 
 ## Considerazioni aggiuntive
 
@@ -296,6 +296,6 @@ Ecco alcuni ulteriori consigli dall'eccellente [Node.js Security Checklist](http
 - Difendi gli attacchi di SQL injection utilizzando query parametrizzate o dichiarazioni preparate.
 - Usa lo strumento open-source [sqlmap](http://sqlmap.org/) per rilevare le vulnerabilità di SQL injection nella tua app.
 - Usa gli strumenti [nmap](https://nmap.org/) e [sslyze](https://github.com/nabla-c0d3/sslyze) per testare la configurazione dei tuoi cifrari SSL, chiavi, rinegoziazione e validità del certificato.
-- Usa [safe-regex](https://www.npmjs.com/package/safe-regex) per garantire che le tue espressioni regolari non siano suscettibili di [espressione regolare negazione del servizio](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacchi.
+- Usa [safe-regex](https://www.npmjs.com/package/safe-regex) per garantire che le tue espressioni regolari non siano suscettibili di [espressione regolare negazione del servizio](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) attacchi.
 
-[helmet]: https://helmetjs.github.io/
+[helmet]: https://helmet.js.org/

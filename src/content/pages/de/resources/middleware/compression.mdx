@@ -1,5 +1,5 @@
 ---
-title: komprimierte Middleware
+title: compression Middleware
 description: Node.js Komprimierungs-Middleware
 ---
 
@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.8.1"
-  github="https://github.com/express js/komprimieren"
+  github="https://github.com/expressjs/compression"
   npm="https://www.npmjs.com/package/compression"
 />
 
@@ -45,11 +45,11 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 var compression = require('compression');
 ```
 
-### komprimieren ([options])
+### compression([options])
 
 Gibt die Komprimierung Middleware mit den angegebenen `options` zurück. Die Middleware
 wird versuchen, Antwortkörper für alle Anfragen zu komprimieren, die durch
-die Middleware durchlaufen, basierend auf den angegebenen `Optionen`.
+die Middleware durchlaufen, basierend auf den angegebenen `options`.
 
 Diese Middleware wird niemals Antworten komprimieren, die einen `Cache-Control`
 Header mit der [`no-transform` Direktive](https://tools.ietf.org/html/rfc7234#section-5.2.2.4),
@@ -70,9 +70,9 @@ Standard: `zlib.constants.Z_DEFAULT_CHUNK`, oder `16384`.
 Siehe [Node.js Dokumentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 bezüglich der Verwendung.
 
-##### filtern
+##### filter
 
-Typ: `Funktion`
+Typ: `Function`
 
 Eine Funktion, um zu entscheiden, ob die Antwort für Komprimierung in Betracht gezogen werden soll.
 Diese Funktion wird als `filter(req, res)` aufgerufen und wird voraussichtlich
@@ -82,7 +82,7 @@ die Antwort zu komprimieren.
 Die Standard-Filterfunktion verwendet das [compressible](https://www.npmjs.com/package/compressible)
 Modul, um festzustellen, ob `res.getHeader('Content-Type')` komprimierbar ist.
 
-##### Level
+##### level
 
 Typ: `Number`<br />
 Standard: `zlib.constants.Z_DEFAULT_COMPRESSION`, oder `-1`
@@ -122,13 +122,13 @@ Level).
 Siehe [Node.js Dokumentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 bezüglich der Verwendung.
 
-##### brodeli
+##### brotli
 
 Typ: `Object`
 
 Dies gibt die Optionen für die Konfiguration von Brotli an. Siehe [Node.js documentation](https://nodejs.org/api/zlib.html#class-brotlioptions) für eine vollständige Liste der verfügbaren Optionen.
 
-##### strategie
+##### strategy
 
 Typ: `Number`<br />
 Standard: `zlib.constants.Z_DEFAULT_STRATEGY`
@@ -153,7 +153,7 @@ is not set appropriately.
 
 **Hinweis** in der obigen Liste ist `zlib` von `zlib = require('zlib')`.
 
-##### schwelle
+##### threshold
 
 Typ: `Number` oder `String`<br />
 Standard: `1kb`
@@ -175,7 +175,7 @@ Standard: `zlib.constants.Z_DEFAULT_WINDOWBITS`, oder `15`
 Siehe [Node.js Dokumentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 bezüglich der Verwendung.
 
-##### Encoding durchsetzen
+##### enforceEncoding
 
 Typ: `String`<br />
 Standard: `identity`
@@ -213,7 +213,7 @@ Dieses Modul fügt eine `res.flush()` Methode hinzu, um die teilweise komprimier
 
 ## Beispiele
 
-### ausdrücken
+### express
 
 Wenn Sie dieses Modul mit Ausdrücken verwenden, einfach `app.use` das Modul als
 hoch. Anfragen, die durch die Middleware gehen, werden komprimiert.
@@ -312,6 +312,6 @@ Siehe [Mitwirkende Anleitung](https://github.com/expressjs/express/blob/master/C
 
 [npm-url]: https://npmjs.org/package/komprimiert
 [downloads-url]: https://npmcharts.com/compare/compression?minimal=true
-[ossf-Scorecard-Abzeichen]: https://api.scorecard.dev/projects/github.com/expressjs/compression/badge
-[ossf-Punkte-Visualisierer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/compression
-[finanzing-url]: https://opencollective.com/express
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/compression/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/compression
+[funding-url]: https://opencollective.com/express

@@ -7,15 +7,15 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 ## 应用程序
 
-通常指一个或多个为特定目的而设计并执行操作的程序。 在 Express 语境中，指运行在 Node.js 平台上并使用 Express API 的程序。 Might also refer to an [app object](/api#express).
+通常指一个或多个为特定目的而设计并执行操作的程序。在 Express 语境中，指运行在 Node.js 平台上并使用 Express API 的程序。 Might also refer to an [app object](/api#express).
 
 ## API
 
-应用程序编程接口。 首次使用时请写出缩写的全称。
+应用程序编程接口。首次使用时请写出缩写的全称。
 
 ## Express
 
-一个快速、无约束、极简的 Node.js Web 应用框架。 一般情况下，推荐使用“Express”，而不是“Express.js”，不过后者也是可以接受的。
+一个快速、无约束、极简的 Node.js Web 应用框架。一般情况下，推荐使用“Express”，而不是“Express.js”，不过后者也是可以接受的。
 
 ## libuv
 
@@ -23,9 +23,9 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 ## 中间件
 
-一个在 Express 路由层中、最终请求处理函数之前被调用的函数，它位于原始请求与最终目标路由处理之间。 关于中间件术语的一些细微说明：
+一个在 Express 路由层中、最终请求处理函数之前被调用的函数，它位于原始请求与最终目标路由处理之间。关于中间件术语的一些细微说明：
 
-- `var foo = require('middleware')` 被称为“引入”或“使用”一个 Node.js 模块。 随后，语句 `var mw = foo()` 通常会返回该中间件。
+- `var foo = require('middleware')` 被称为“引入”或“使用”一个 Node.js 模块。随后，语句 `var mw = foo()` 通常会返回该中间件。
 - `app.use(mw)` 被称为“将中间件添加到全局处理栈中”。
 - `app.get('/foo', mw, (req, res) => { /* ... */ })` is called _adding the middleware to the "GET /foo" processing stack_.
 
@@ -45,15 +45,15 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 ## request
 
-一次 HTTP 请求。 客户端向服务器发送一条 HTTP 请求消息，服务器随后返回响应。 The request must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
+一次 HTTP 请求。客户端向服务器发送一条 HTTP 请求消息，服务器随后返回响应。 The request must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
 
 ## response
 
-一个 HTTP 响应。 服务器向客户端返回一条 HTTP 响应消息。 该响应包含请求的完成状态信息，并且可能在消息体中包含所请求的内容。
+一个 HTTP 响应。服务器向客户端返回一条 HTTP 响应消息。该响应包含请求的完成状态信息，并且可能在消息体中包含所请求的内容。
 
 ## route
 
-URL 中用于标识资源的部分。 例如，在 `http://foo.com/products/id` 中，“/products/id” 就是路由。
+URL 中用于标识资源的部分。例如，在 `http://foo.com/products/id` 中，“/products/id” 就是路由。
 
 ## router
 

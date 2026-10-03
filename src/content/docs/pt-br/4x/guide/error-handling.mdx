@@ -62,14 +62,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Começando pelo Express 5, roteadores e intermediários que retornam um Promise
-chamarão `next(value)` automaticamente quando eles rejeitarem ou lançarem um erro.
-Por exemplo:
+Errors from rejected promises are not passed to `next` automatically, and this includes `async` functions: if an `async` route handler throws or awaits a rejected promise, the rejection is unhandled, which crashes the process on current Node.js versions. You must catch the error yourself and pass it to Express:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
@@ -77,14 +79,22 @@ app.get('/user/:id', async (req, res, next) => {
 import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/user/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await getUserById(req.params.id);
-  res.send(user);
+  try {
+    const user = await getUserById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
 });
 ```
 
-Se `getUserById` lança um erro ou rejeita, `next` será chamado com
-o erro lançado ou o valor rejeitado. Se nenhum valor rejeitado for fornecido, `next`
-será chamado com um objeto de erro padrão fornecido pelo roteador Express.
+<Alert type="informações">
+
+Consider [updating to Express 5](/guide/migrating-5), where route handlers and middleware that
+return a Promise call `next(value)` automatically when they reject or throw an error, making the
+`try...catch` above unnecessary.
+
+</Alert>
 
 Se você passar qualquer coisa para a função `next()` (exceto a string `'route'`),
 Expressa que a requisição atual é um erro e irá pular quaisquer funções
@@ -180,9 +190,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-Since promises automatically catch both synchronous errors and rejected promises,
-you can simply provide `next` as the final catch handler and Express will catch errors,
-because the catch handler is given the error as the first argument.
+If a callback in the promise chain throws, the chain turns that exception into a rejection, which travels down to the final `.catch`. There, passing `next` as the handler is enough: `.catch` calls it with the error as its first argument, which is exactly the argument `next` expects, so the error reaches Express.
 
 Se você tiver um gerenciador de rotas com múltiplas funções de retorno de chamada, você pode usar o parâmetro `rota` para pular para o próximo manipulador de rota. Por exemplo:
 
@@ -218,8 +226,8 @@ app.get('/', [
 ]);
 ```
 
-O exemplo acima tem algumas declarações triviais da chamada `readFile`
-. If `readFile` causes an error, then it passes the error to Express, otherwise you
+The above example contains a couple of trivial statements following the `readFile`
+call. If `readFile` causes an error, then it passes the error to Express, otherwise you
 quickly return to the world of synchronous error handling in the next handler
 in the chain. Então, o exemplo acima tenta processar os dados. Se isso falhar, o manipulador de erro
 síncrono irá pegá-lo. Se você tivesse feito este processamento dentro do
@@ -423,7 +431,7 @@ function logErrors(err: Error, req: Request, res: Response, next: NextFunction) 
 
 Também neste exemplo, `clientErrorHandler` é definido como segue; neste caso, o erro é explicitamente passado para o próximo.
 
-Observe que quando _não_ estiver chamando "próximo" em uma função de manipulação de erros, você é responsável por escrever (e terminar) a resposta. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
+Notice that when you do not call `next` in an error-handling function, you are responsible for writing (and ending) the response. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

@@ -4,6 +4,7 @@ description: Describa cómo servir archivos estáticos como imágenes, CSS y Jav
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 Para servir archivos estáticos como imágenes, archivos CSS, y archivos JavaScript, utiliza la función middleware integrada `express.static` en Express.
 
@@ -85,4 +86,8 @@ import path from 'path';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+<ReadMore>
+
 Para más detalles sobre la función `serve-static` y sus opciones, vea [serve-static](/resources/middleware/serve-static).
+
+</ReadMore>

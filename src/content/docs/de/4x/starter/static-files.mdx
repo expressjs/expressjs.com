@@ -4,6 +4,7 @@ description: Verstehen Sie, wie Sie statische Dateien wie Bilder, CSS und JavaSc
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 Um statische Dateien wie Bilder, CSS-Dateien und JavaScript-Dateien bereitzustellen, verwenden Sie die in Express integrierte Middleware-Funktion `express.static`.
 
@@ -85,4 +86,8 @@ import path from 'path';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+<ReadMore>
+
 Weitere Informationen über die `serve-static` Funktion und ihre Optionen finden Sie unter [serve-static](/resources/middleware/serve-static).
+
+</ReadMore>

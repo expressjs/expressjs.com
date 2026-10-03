@@ -4,6 +4,7 @@ description: Aprenda a habilitar e usar logs de depuração nos aplicativos Expr
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 Para ver todos os logs internos usados no Express, defina a variável de ambiente `DEBUG` para
 `express:*` ao iniciar seu aplicativo.
@@ -86,21 +87,118 @@ Quando um pedido for feito ao aplicativo, você verá os logs especificados no c
 
 Para ver os logs apenas da implementação do roteador, defina o valor de `DEBUG` para `express:router`. Da mesma forma, para ver apenas os logs da implementação do aplicativo, defina o valor de `DEBUG` para `express:application`, e assim por diante.
 
-## Aplicações geradas por `express`
+## Using `debug` in your own code
 
-Uma aplicação gerada pelo comando `express` usa o módulo `debug` e seu namespace de depuração é escopo para o nome da aplicação.
+The same [debug](https://www.npmjs.com/package/debug) module that Express uses internally is available for your application code. Install it, create one or more loggers scoped to a namespace of your choosing, and call them wherever you would otherwise use `console.log`:
 
-Por exemplo, se você gerou o app com `$ express sample-app`, você pode ativar as instruções de depuração com o seguinte comando:
+<PackageManagerCommand command="npm install debug" />
+
+```cjs title="index.cjs"
+const express = require('express');
+const debug = require('debug')('myapp:server');
+
+const app = express();
+
+app.get('/', (req, res) => {
+  debug('handling request from %s', req.ip);
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  debug('listening on port 3000');
+});
+```
+
+```mjs title="index.mjs"
+import express from 'express';
+import debugModule from 'debug';
+
+const debug = debugModule('myapp:server');
+const app = express();
+
+app.get('/', (req, res) => {
+  debug('handling request from %s', req.ip);
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  debug('listening on port 3000');
+});
+```
+
+These statements print nothing by default. Enable them through the same `DEBUG` environment variable, using your own namespace:
 
 ```bash
-$ DEBUG=sample-app:* node ./bin/www
+$ DEBUG=myapp:* node index.js
 ```
 
 Você pode especificar mais de um namespace de depuração atribuindo uma lista de nomes separada por vírgulas:
 
 ```bash
-$ DEBUG=http,mail,express:* node index.js
+$ DEBUG=myapp:*,express:router node index.js
 ```
+
+## Setting DEBUG in your IDE
+
+The `DEBUG` environment variable can be set by any process launcher that supports environment variables, including the run and debug configurations of your IDE. For example, in VS Code you can set it in the `env` property of a launch configuration:
+
+```json title=".vscode/launch.json"
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Launch Express app",
+  "program": "${workspaceFolder}/index.js",
+  "env": { "DEBUG": "express:*" }
+}
+```
+
+See [Node.js debugging in VS Code](https://code.visualstudio.com/docs/nodejs/nodejs-debugging) for the full list of launch options.
+
+## Using the Node.js inspector
+
+Debug logs show what the app did; for stepping through your code with breakpoints, use the built-in Node.js inspector. Start your app with the `--inspect` flag:
+
+```bash
+$ node --inspect index.js
+```
+
+Then attach a debugging client, such as Chrome DevTools (open `chrome://inspect`), VS Code, or any other inspector-capable tool, to set breakpoints in your route handlers and middleware, step through code, and inspect variables.
+
+If you need to debug something that happens during startup, use `--inspect-brk` instead, which pauses execution on the first line until a debugger attaches. See the [Node.js debugging guide](https://nodejs.org/learn/getting-started/debugging) for details.
+
+## Debugging the HTTP layer
+
+Express runs on top of the Node.js `http` module, which has its own debugging facilities that work with any Express app.
+
+Setting the `NODE_DEBUG` environment variable to `http` makes Node.js print internal logs from the HTTP layer, such as connection handling and socket events:
+
+```bash
+$ NODE_DEBUG=http node index.js
+```
+
+You can combine it with other subsystems, such as `net` or `stream`, in a comma-separated list. Be aware that this output can expose sensitive data such as authentication headers, so use it only in development.
+
+## Diagnostics channels
+
+Node.js publishes an event for every HTTP request through the [diagnostics_channel](https://nodejs.org/api/diagnostics_channel.html#http) module, which you can subscribe to without patching Express or adding middleware:
+
+```cjs title="index.cjs"
+const { subscribe } = require('node:diagnostics_channel');
+
+subscribe('http.server.request.start', ({ request }) => {
+  console.log(`${request.method} ${request.url}`);
+});
+```
+
+```mjs title="index.mjs"
+import { subscribe } from 'node:diagnostics_channel';
+
+subscribe('http.server.request.start', ({ request }) => {
+  console.log(`${request.method} ${request.url}`);
+});
+```
+
+Other built-in channels cover the rest of the request lifecycle, such as `http.server.response.finish`, and the client side of `http.request` calls. See the [diagnostics_channel documentation](https://nodejs.org/api/diagnostics_channel.html#http) for the full list.
 
 ## Opções avançadas
 

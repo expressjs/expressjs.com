@@ -1,5 +1,5 @@
 ---
-title: session-Middleware
+title: session Middleware
 description: Einfache Sitzungs-Middleware für Express
 ---
 
@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.19.0"
-  github="https://github.com/express js/Sitzung"
+  github="https://github.com/expressjs/session"
   npm="https://www.npmjs.com/package/express-session"
 />
 
@@ -35,7 +35,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 var session = require('express-session');
 ```
 
-### session(Optionen)
+### session(options)
 
 Erstellen Sie eine Session Middleware mit den angegebenen `Optionen`.
 
@@ -58,7 +58,7 @@ Eine Liste der Geschäfte finden Sie unter [kompatible Session-Shopes](#compatib
 
 `express-session` akzeptiert diese Eigenschaften im Optionsobjekt.
 
-##### kochen
+##### cookie
 
 Einstellungsobjekt für das Session-ID-Cookie. Der Standardwert ist
 `{ path: '/', httpOnly: true, secure: false, maxAge: null }`.
@@ -125,7 +125,7 @@ kein Maximalalter gesetzt.
 **Notiz** Wenn sowohl `expires` als auch `maxAge` in den Optionen gesetzt werden, dann ist das letzte
 im Objekt was verwendet wird.
 
-##### cookie.partitioniert
+##### cookie.partitioned
 
 Gibt den `boolean` Wert für das [`Partitioned` `Set-Cookie`](https://github.com/expressjs/session/blob/HEAD/rfc-cutler-httpbis-partitioned-cookies)
 Attribut an. Wenn Wahrheit, ist das `Partitioned` Attribut gesetzt, andernfalls nicht.
@@ -138,10 +138,10 @@ Weitere Informationen finden Sie in [dem Vorschlag](https://github.com/privacycg
 
 ##### cookie.path
 
-Gibt den Wert für `Path` `Set-Cookie` an. Standardmäßig wird dies auf \`'/' gesetzt, welcher
+Gibt den Wert für `Path` `Set-Cookie` an. Standardmäßig wird dies auf `'/'` gesetzt, welcher
 der Wurzelpfad der Domain ist.
 
-##### cookie.priorität
+##### cookie.priority
 
 Legt den `string` als Wert für das [`Priority` `Set-Cookie` Attribut][rfc-west-cookie-priority-00-4.1] fest.
 
@@ -285,7 +285,7 @@ Der Standardwert ist nicht definiert.
   als sicher angesehen, wenn es eine direkte TLS/SSL-Verbindung gibt.
 - `undefined` verwendet die "trust proxy"-Einstellung von express
 
-##### neuladen
+##### resave
 
 Erzwingt die Sitzung, wieder im Session-Store zu speichern, selbst wenn die Sitzung
 während der Anfrage nie geändert wurde. Abhängig von Ihrem Shop könnte dies
@@ -304,7 +304,7 @@ können Sie sicher `resave: false` setzen. Wenn die `touch`
 Methode nicht implementiert wird und Ihr Shop ein Ablaufdatum für gespeicherte Sitzungen festlegt, dann müssen Sie
 wahrscheinlich `resave: true`.
 
-##### rollen
+##### rolling
 
 Erzwingen Sie das Session-Identifikator-Cookie bei jeder Antwort zu setzen. Die Ablaufzeit
 wird auf das Original [`maxAge`](#cookiemaxage), zurückgesetzt und das Ablaufdatum
@@ -325,7 +325,7 @@ auf `false` gesetzt, das Cookie wird nicht auf eine Antwort mit einer nicht init
 Sitzung gesetzt. Diese Option ändert nur das Verhalten, wenn eine bestehende Sitzung
 für die Anfrage geladen wurde.
 
-##### saveUninitialisiert
+##### saveUninitialized
 
 Zwingt eine Sitzung, die "uninitialisiert" ist, in den Store gespeichert werden. Eine Sitzung ist
 uninitialisiert, wenn sie neu ist, aber nicht geändert wurde. Das Auswählen von `false` ist nützlich für
@@ -343,7 +343,7 @@ fügt ein leeres Passport-Objekt zur Sitzung hinzu, nachdem ein Benutzer
 authentifiziert ist , was als Änderung der Sitzung behandelt wird, wodurch
 gespeichert wird. _Dies wurde in PassportJS 0.3.0_ behoben
 
-##### geheim
+##### secret
 
 **Benötigte Option**
 
@@ -371,16 +371,16 @@ Elemente.
 **Notiz** HMAC-256 wird benutzt um die Session-ID zu signieren. Aus diesem Grund sollte das Geheimnis
 mindestens 32 Bytes Entropie enthalten.
 
-##### speichern
+##### store
 
 Die Session-Shop-Instanz ist standardmäßig eine neue `MemoryStore`-Instanz.
 
-##### entfernt
+##### unset
 
 Kontrollieren Sie das Ergebnis der Einstellung `req.session` (durch `delete`, Einstellung auf `null`,
 etc.).
 
-Der Standardwert ist \`'keep'.
+Der Standardwert ist `'keep'`.
 
 - `'destroy'` Die Sitzung wird zerstört (gelöscht), wenn die Antwort endet.
 - `'keep'` Die Sitzung im Shop wird beibehalten, aber Änderungen während
@@ -423,7 +423,7 @@ req.session.regenerate(function (err) {
 });
 ```
 
-#### Session.destroy(Rückruf)
+#### Session.destroy(callback)
 
 Zerstört die Sitzung und wird die `req.session` Eigenschaft entfernen.
 Sobald der `Callback` abgeschlossen ist, wird der `Callback` aufgerufen.
@@ -434,7 +434,7 @@ req.session.destroy(function (err) {
 });
 ```
 
-#### Session.reload(Callback)
+#### Session.reload(callback)
 
 Lädt die Sitzungsdaten aus dem Shop neu und füllt das
 `req.session` Objekt neu. Sobald der `Callback` abgeschlossen ist, wird der `Callback` aufgerufen.
@@ -445,7 +445,7 @@ req.session.reload(function (err) {
 });
 ```
 
-#### Session.save(Callback)
+#### Session.save(callback)
 
 Speichere die Session zurück im Shop, Ersetzen der Inhalte im Shop durch den
 Inhalt im Speicher (obwohl ein Shop etwas anderes tun kann - konsultieren Sie die
@@ -596,7 +596,7 @@ könnte den Leerlauf-Timer zurücksetzen.
 Die folgenden Module implementieren einen Session-Shop, der mit diesem
 -Modul kompatibel ist. Bitte machen Sie einen PR um zusätzliche Module hinzuzufügen :)
 
-[![★][aerospike-session-store-image] [aerospike-session-store-image] Aerospike-session-store][aerospike-session-store-url] Ein Session-Shop mit [Aerospike](http://www.aerospike.com/).
+[![★][aerospike-session-store-image] aerospike-session-store][aerospike-session-store-url] Ein Session-Shop mit [Aerospike](http://www.aerospike.com/).
 
 [aerospike-session-store-url]: https://www.npmjs.com/package/aerospike-session-store
 
@@ -1001,7 +1001,7 @@ Verwenden Sie unter Windows den entsprechenden Befehl;
 [MIT](https://github.com/expressjs/session/blob/HEAD/LICENSE)
 
 [rfc-6265bis-03-4.1.2.7]: https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7
-[rfc-cutler-httpbis-partitionierte Cookies]: <https://tools.ietf.org/html/draft-cutler-httpbis-partitionierte Cookies/>
+[rfc-cutler-httpbis-partitioned-cookies]: https://tools.ietf.org/html/draft-cutler-httpbis-partitioned-cookies/
 [rfc-west-cookie-priority-00-4.1]: https://tools.ietf.org/html/draft-west-cookie-priority-00#section-4.1
-[node-url]: https://nodejs.org/de/download
+[node-url]: https://nodejs.org/en/download
 [npm-url]: https://npmjs.org/package/express-session

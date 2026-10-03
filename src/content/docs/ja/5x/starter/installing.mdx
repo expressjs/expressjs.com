@@ -6,7 +6,7 @@ description: Learn how to install Express.js in your Node.js environment, includ
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-始める前に、 [Node.js](https://nodejs.org/) 18 以上のインストールがあることを確認してください。 次に、アプリケーションのディレクトリを作成し、その中に移動します。
+始める前に、 [Node.js](https://nodejs.org/) 18 以上のインストールがあることを確認してください。次に、アプリケーションのディレクトリを作成し、その中に移動します。
 
 ```bash
 mkdir myapp
@@ -18,8 +18,7 @@ cd myapp
 
 <PackageManagerCommand command="npm init" />
 
-このコマンドを実行すると、アプリケーションの名前やバージョンなど、さまざまなものが表示されます。
-今のところ、RETURNを押すと、ほとんどのデフォルトを受け入れることができます。以下の例外があります。
+このコマンドを実行すると、アプリケーションの名前やバージョンなど、さまざまなものが表示されます。今のところ、RETURNを押すと、ほとんどのデフォルトを受け入れることができます。以下の例外があります。
 
 ```
 entry point: (index.js)
@@ -27,7 +26,7 @@ entry point: (index.js)
 
 `app.js`、またはメインファイルの名前を何でも入力します。 `index.js`にしたい場合は、RETURNを押して、推奨されるデフォルトのファイル名を受け入れます。
 
-次に、Expressを`myapp`ディレクトリにインストールし、依存関係リストに保存します。 例:
+次に、Expressを`myapp`ディレクトリにインストールし、依存関係リストに保存します。例:
 
 <PackageManagerCommand command="npm install express" />
 
@@ -70,7 +69,7 @@ non-erasable syntax (such as `enum`s, namespaces, and parameter properties) that
 }
 ```
 
-Write your application in TypeScript, annotating the request and response objects:
+Write your application in TypeScript, annotating the [request](/api/request) and [response](/api/response) objects:
 
 ```ts title="src/app.ts"
 import express, { type Express, type Request, type Response } from 'express';

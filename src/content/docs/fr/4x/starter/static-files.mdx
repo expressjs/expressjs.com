@@ -4,6 +4,7 @@ description: Comprendre comment servir les fichiers statiques comme les images, 
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 Pour servir des fichiers statiques tels que des images, des fichiers CSS et des fichiers JavaScript, utilisez la fonction middleware intégrée `express.static` dans Express.
 
@@ -85,4 +86,8 @@ import path from 'path';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
+<ReadMore>
+
 Pour plus de détails sur la fonction `serve-static` et ses options, voir [serve-static](/resources/middleware/serve-static).
+
+</ReadMore>

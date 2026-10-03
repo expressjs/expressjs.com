@@ -18,7 +18,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 ## インストール
 
 これは、 [Node.js](https://nodejs.org/en/) モジュールで、
-[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[npm registry](https://www.npmjs.com/) を介して利用できます。インストールは
 [`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 <PackageManagerCommand command="npm install serve-index" />
@@ -54,7 +54,7 @@ Serve indexはoptionsオブジェクトでこれらのプロパティを受け�
 
 ##### フィルター
 
-このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 The `filter` function
+このフィルタ機能をファイルに適用します。デフォルトは `false` です。このフィルタ機能をファイルに適用します。 デフォルトは `false` です。 The `filter` function
 is called for each file, with the signature `filter(filename, index, files, dir)`
 where `filename` is the name of the file, `index` is the array index, `files` is
 the array of files and `dir` is the absolute path the file is located (and thus,
@@ -62,20 +62,20 @@ the directory the listing is for).
 
 ##### hidden
 
-非表示(ドット)ファイルを表示します。 デフォルトは `false` です。
+非表示(ドット)ファイルを表示します。デフォルトは `false` です。
 
 ##### アイコン
 
-アイコンを表示 デフォルトは `false` です。
+アイコンを表示デフォルトは `false` です。
 
 ##### stylesheet
 
-CSS スタイルシートへのオプションのパス。 デフォルトはビルトインスタイルシートです。 デフォルトはビルトインスタイルシートです。
+CSS スタイルシートへのオプションのパス。 デフォルトはビルトインスタイルシートです。デフォルトはビルトインスタイルシートです。
 
 ##### テンプレート
 
 HTMLテンプレートまたはHTML
-文字列をレンダリングする関数への任意のパス。 デフォルトはビルトインテンプレートです。 デフォルトはビルトインテンプレートです。
+文字列をレンダリングする関数への任意のパス。 デフォルトはビルトインテンプレートです。デフォルトはビルトインテンプレートです。
 
 When given a string, the string is used as a file path to load and then the
 following tokens are replaced in templates:
@@ -87,12 +87,12 @@ following tokens are replaced in templates:
 
 関数として与えられた場合、関数は `template(locals, callback)`
 と呼ばれ、`callback(error, htmlString)` を呼び出す必要があります。 以下はローカルで提供される
-です。 以下はローカルで提供される
+です。以下はローカルで提供される
 です。
 
 - `directory`は表示されているディレクトリです（`/`がルートです）。
 - `displayIcons` は、アイコンをレンダリングするかどうかを指定するためのブール値です。
-- `fileList` はディレクトリ内のファイルのソートされた配列です。 配列には、以下のプロパティを持つ
+- `fileList` はディレクトリ内のファイルのソートされた配列です。配列には、以下のプロパティを持つ
   オブジェクトが含まれています。
   - `name` はファイルの相対的な名前です。
   - `stat` はファイルの `fs.Stats` オブジェクトです。
@@ -102,7 +102,7 @@ following tokens are replaced in templates:
 
 ##### 表示
 
-表示モード `tiles`と`details`があります。 表示モード `tiles`と`details`があります。 デフォルトは `tiles` です。
+表示モード `tiles`と`details`があります。表示モード `tiles`と`details`があります。 デフォルトは `tiles` です。
 
 ## 例
 

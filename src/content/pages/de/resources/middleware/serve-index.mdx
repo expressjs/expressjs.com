@@ -1,5 +1,5 @@
 ---
-title: dienst-Index Middleware
+title: serve-index Middleware
 description: Serve-Verzeichnislisten
 ---
 
@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="1.9.2"
-  github="https://github.com/express js/serve-index"
+  github="https://github.com/expressjs/serve-index"
   npm="https://www.npmjs.com/package/serve-index"
 />
 
@@ -37,23 +37,23 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 var serveIndex = require('serve-index');
 ```
 
-### serveIndex(Pfad, Optionen)
+### serveIndex(path, options)
 
 Gibt Middlware zurück, die einen Index des Verzeichnisses im angegebenen `path` enthält.
 
-Der `path` basiert auf dem `req.url` Wert, also wird eine `req.url` von `'/some/dir`
+Der `path` basiert auf dem `req.url` Wert, also wird eine `req.url` von `'/some/dir'`
 mit einem `path` von `'public'` auf `'public/some/dir'` schauen. Wenn du
-so etwas wie `express verwendest, kannst du die URL "base" mit `app.use\` ändern (siehe
+so etwas wie `express` verwendest, kannst du die URL "base" mit `app.use` ändern (siehe
 das Expressbeispiel).
 
 #### Optionen
 
 Serve-Index akzeptiert diese Eigenschaften im Options-Objekt.
 
-##### filtern
+##### filter
 
 Diese Filterfunktion auf Dateien anwenden. Standard ist `false`. Die `filter` Funktion
-wird für jede Datei aufgerufen, mit der Signatur `filter(Dateiname, Index, Dateien, dir)`
+wird für jede Datei aufgerufen, mit der Signatur `filter(filename, index, files, dir)`
 wobei `filename` der Name der Datei ist `index` ist der Array-Index, `files` ist
 das Array der Dateien und `dir` ist der absolute Pfad, den die Datei befindet (und somit
 das Verzeichnis, für das das Angebot bestimmt ist).
@@ -62,7 +62,7 @@ das Verzeichnis, für das das Angebot bestimmt ist).
 
 Versteckte (Punkte) Dateien anzeigen. Standard ist `false`.
 
-##### symbole
+##### icons
 
 Symbole anzeigen. Standard ist `false`.
 
@@ -70,7 +70,7 @@ Symbole anzeigen. Standard ist `false`.
 
 Optionaler Pfad zu einem CSS-Stylesheet. Standardmäßig ein eingebautes Stylesheet.
 
-##### vorlage
+##### template
 
 Optionaler Pfad zu einer HTML-Vorlage oder einer Funktion, die einen HTML-
 -String darstellen wird. Standardmäßig wird eine eingebaute Vorlage verwendet.
@@ -97,7 +97,7 @@ angegebenen Gebietsschema:
 - `style` ist das Standardstylesheet oder der Inhalt der `stylesheet` Option.
 - `viewName` ist der Ansichtsname, der von der `view` Option angegeben wird.
 
-##### anschauen
+##### view
 
 Anzeigemodus. `tiles` und `details` sind verfügbar. Standard ist `tiles`.
 
