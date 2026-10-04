@@ -154,9 +154,11 @@ LIST_END
     ' <<<"$CONTENT")
   fi
 
-  # Convert relative links to absolute GitHub URLs
+  # Convert relative links to absolute GitHub URLs. Skip fenced code blocks
+  # (lines between ``` markers): the regex can't tell a real markdown link
+  # from code that merely looks like one, e.g. `tokens['x'](req, res)`.
   BASEURL="https://github.com/$org/$repo/blob/HEAD"
-  CONTENT=$(echo "$CONTENT" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
+  CONTENT=$(echo "$CONTENT" | sed -E "/^\`\`\`/,/^\`\`\`/!s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
 
   # Turn absolute self-links (https://expressjs.com/en/guide/x.html) into internal,
   # language-agnostic paths (/guide/x) so they resolve on this site and get localized
@@ -169,12 +171,12 @@ LIST_END
   }ge')
 
   # Apply configured URL replacements (dead/moved links → working alternatives).
-  # The lookahead requires the match to end at a URL boundary, so a URL that is a
-  # prefix of another (e.g. the site root vs a sub-path) isn't corrupted.
+  # Match both URL boundaries: don't rewrite a URL embedded in another URL
+  # (e.g. a Wayback Machine snapshot) or a prefix of a longer path.
   for pair in "${URL_REPLACEMENTS[@]}"; do
     FROM="${pair%%|*}"
     TO="${pair#*|}"
-    CONTENT=$(FROM="$FROM" TO="$TO" perl -pe 's/\Q$ENV{FROM}\E(?=[\s)">]|$)/$ENV{TO}/g' <<<"$CONTENT")
+    CONTENT=$(FROM="$FROM" TO="$TO" perl -pe 's/(?<![^\s(<"\x27])\Q$ENV{FROM}\E(?=[\s)">\x27]|$)/$ENV{TO}/g' <<<"$CONTENT")
   done
 
   # Build the MDX import and component

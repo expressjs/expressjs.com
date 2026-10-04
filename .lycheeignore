@@ -27,3 +27,7 @@ dist/(.*/)?404((/index)?\.html|/)$
 # Oracle pages return 403 when connected
 ^https://www\.mysql\.com/
 ^https://www\.oracle\.com/
+
+# Twitter/X rate limit (profile link and tweet intents)
+^https://x\.com/UseExpressJS$
+^https://x\.com/intent/tweet

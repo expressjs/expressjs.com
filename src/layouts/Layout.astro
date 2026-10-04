@@ -95,7 +95,6 @@ const lang = getLangFromUrl(Astro.url);
         }
       })();
     </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -106,24 +105,22 @@ const lang = getLangFromUrl(Astro.url);
 
     <link rel="canonical" href={canonicalUrl} />
 
-    {
-      !isBlogOrApi &&
-        ['x-default', ...languageCodes].map((altLang) => {
-          let altPath = replaceLanguageInPath(
-            canonicalPath,
-            altLang === 'x-default' ? 'en' : altLang
-          );
-          // The English homepage is canonically served at `/`, not `/en/`.
-          if (altPath === '/en/') altPath = '/';
-          return (
-            <link
-              rel="alternate"
-              hreflang={altLang}
-              href={new URL(altPath, Astro.site || Astro.url.origin)}
-            />
-          );
-        })
-    }
+    {!isBlogOrApi &&
+      ['x-default', ...languageCodes].map((altLang) => {
+        let altPath = replaceLanguageInPath(
+          canonicalPath,
+          altLang === 'x-default' ? 'en' : altLang
+        );
+        // The English homepage is canonically served at `/`, not `/en/`.
+        if (altPath === '/en/') altPath = '/';
+        return (
+          <link
+            rel="alternate"
+            hreflang={altLang}
+            href={new URL(altPath, Astro.site || Astro.url.origin)}
+          />
+        );
+      })}
 
     <title>{pageTitle}</title>
 
@@ -138,7 +135,9 @@ const lang = getLangFromUrl(Astro.url);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content={imageUrl} />
-    {authors?.map((author) => <meta property="article:author" content={author.name} />)}
+    {authors?.map((author) => (
+      <meta property="article:author" content={author.name} />
+    ))}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

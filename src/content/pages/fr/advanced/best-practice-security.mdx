@@ -17,22 +17,6 @@ de sécurité [/en/resources/contributing#security-policies-and-procedures).
 
 </Alert>
 
-Les meilleures pratiques de sécurité pour les applications Express en production comprennent:
-
-- [Ne pas utiliser de versions obsolètes ou vulnérables d'Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-- [Utiliser TLS](#use-tls)
-- [Ne pas faire confiance à la saisie de l'utilisateur](#do-not-trust-user-input)
-  - [Empêcher les redirections ouvertes](#prevent-open-redirects)
-- [Utiliser le casque](#use-helmet)
-- [Réduire l'empreinte digitale](#reduce-fingerprinting)
-- (#use-cookies-securely)
-  - [Ne pas utiliser le nom du cookie de session par défaut](#dont-use-the-default-session-cookie-name)
-  - (#set-cookie-security-options)
-- [Empêcher les attaques par force brute contre l'autorisation](#prevent-brute-force-attacks-against-authorization)
-- [Assurez-vous que vos dépendances sont sécurisées](#ensure-your-dependencies-are-secure)
-  - [Éviter les autres vulnérabilités connues](#avoid-other-known-vulnerabilities)
-- [Considérations supplémentaires](#additional-considerations)
-
 ## Ne pas utiliser les versions obsolètes ou vulnérables de Express
 
 Express 2.x et 3.x ne sont plus maintenus. Les problèmes de sécurité et de performance dans ces versions ne seront pas résolus. Ne les utilisez pas ! Si vous n'avez pas déménagé vers la version 4, suivez le [guide de migration](/en/guide/migrating-4) ou envisagez [Options de support commercial](/en/support#commercial-support-options).
