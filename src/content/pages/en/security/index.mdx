@@ -7,19 +7,25 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express intentionally leaves most security decisions up to application developers. This page is a checklist of those decisions, to use while building or deploying an Express application.
 
-Not every item will apply to your application, but consider each question before going to production. For items that apply, a "no", or a question you don't understand, means there is a fix to make or a topic to look at more closely. Each question links to a page covering what Express does, what can go wrong, and what we recommend. Questions without links are out of scope of Express itself or its family of middleware. The questions are ordered roughly by when you meet them while building an application.
+Not every item will apply to your application, but consider each question before going to production. For items that apply, a "no", or a question you don't understand, means there is a fix to make or a topic to look at more closely. Each question links to a page covering what Express does, what can go wrong, and what to do about it. Questions without links are out of scope of Express itself or its family of middleware. The questions are ordered roughly by when you meet them while building an application.
 
 This list is a gift to the Express community, from the community. It is not complete, and it is not a substitute for a general web security checklist. [OWASP](https://owasp.org/) covers the things this guide won't.
 
-## Who is this for?
+## What you should already know
 
-We assume you can already build an Express application and know what an HTTP request is. Beyond that, this page should be useful whether it is your first Express application or your 100th. Advanced developers are not expected to be security experts, and someone brand new to Express may bring plenty of security experience with them. To respect your time, we focus on the risks and mitigations specific to Express rather than teaching fundamentals or going deep on any one topic.
+This security documentation assumes you have a general familiarity with Express and Node.js applications. It assumes you already know:
+
+- What HTTP requests are and how they work.
+- The basics of Node.js development.
+- How to build an Express application.
+
+This documentation focuses on the risks and mitigations specific to Express rather than teaching security fundamentals or going deep on any one topic.
 
 ## Express threat model
 
 You might ask yourself "if I have to do all this work to secure my application, does that mean Express isn't secure?". Fair question!
 
-The Express project takes responsibility for the security of its own code through ongoing security reviews, vulnerability reports, and fixes. Developers are responsible for the security of the applications they build with it, including how they configure and use Express and its middleware. Our [Threat Model](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md) explains where that boundary sits.
+The Express project takes responsibility for the security of its own code through ongoing security reviews, vulnerability reports, and fixes. Developers are responsible for the security of the applications they build with it, including how they configure and use Express and its middleware. The [Express threat model](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md) explains where that boundary sits.
 
 <Alert type="info">
 
@@ -43,7 +49,7 @@ If you believe you have discovered a security vulnerability in Express, please s
 ## Route patterns and middleware order
 
 - Are your route patterns free of [repetition that can be forced into catastrophic backtracking](/security/route-patterns)?
-- Is authentication middleware [mounted before every route it protects](/security/route-patterns)?
+- Is authentication and authorization middleware [mounted before every route it protects](/security/route-patterns)?
 - Does anything in front of the app that filters by path [match Express's routing rules](/security/route-patterns)?
 
 ## Response sinks
