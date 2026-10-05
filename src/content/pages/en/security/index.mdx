@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express intentionally leaves most security decisions up to application developers. This page is a checklist of those decisions, to use while building or deploying an Express application.
 
-Not every item will apply to your application, but ask yourself each question before going to production. A "no", or a question you don't understand, means there is a fix to make or a topic to look at more closely. Each question links to a page covering what Express does, what can go wrong, and what we recommend. Questions without links are out of scope of Express itself or its family of middleware.
+Not every item will apply to your application, but consider each question before going to production. For items that apply, a "no", or a question you don't understand, means there is a fix to make or a topic to look at more closely. Each question links to a page covering what Express does, what can go wrong, and what we recommend. Questions without links are out of scope of Express itself or its family of middleware. The questions are ordered roughly by when you meet them while building an application.
 
 This list is a gift to the Express community, from the community. It is not complete, and it is not a substitute for a general web security checklist. [OWASP](https://owasp.org/) covers the things this guide won't.
 
-## Who Is This For?
+## Who is this for?
 
 We assume you can already build an Express application and know what an HTTP request is. Beyond that, this page should be useful whether it is your first Express application or your 100th. Advanced developers are not expected to be security experts, and someone brand new to Express may bring plenty of security experience with them. To respect your time, we focus on the risks and mitigations specific to Express rather than teaching fundamentals or going deep on any one topic.
 
-## Express Threat Model
+## Express threat model
 
 You might ask yourself "if I have to do all this work to secure my application, does that mean Express isn't secure?". Fair question!
 
-Express takes responsibility for the security of its own code. Developers are responsible for the security of the applications they build with it. We outline where that boundary sits in our [Threat Model](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md).
+The Express project takes responsibility for the security of its own code through ongoing security reviews, vulnerability reports, and fixes. Developers are responsible for the security of the applications they build with it, including how they configure and use Express and its middleware. Our [Threat Model](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md) explains where that boundary sits.
 
 <Alert type="info">
 
@@ -62,7 +62,7 @@ If you believe you have discovered a security vulnerability in Express, please s
 ## Proxies and client identity
 
 - Is `trust proxy` [set to match your deployment](/security/proxies), and never `true` when a client can reach the app directly?
-- Does anything keyed on `req.ip`, `req.hostname`, or `req.protocol` [run without `trust proxy` set](/security/proxies)?
+- If your app is behind a proxy, is [`trust proxy` configured](/security/proxies) so features using `req.ip`, `req.hostname`, or `req.protocol` receive the correct client information?
 
 ## Error handling
 
