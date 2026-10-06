@@ -106,3 +106,5 @@ jobs:
             --accept 100..=103,200..=299,418
             dist/
           fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
