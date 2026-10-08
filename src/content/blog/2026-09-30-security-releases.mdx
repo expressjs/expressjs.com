@@ -1,0 +1,127 @@
+---
+title: September 2026 Security Releases
+description: Security releases for compression, cookies, hbs, morgan, multer, multiparty, and proxy-addr have been published. We recommend that all users upgrade as soon as possible.
+tags: ['security']
+authors:
+  - name: Ulises Gascon
+    github: UlisesGascon
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+The Express team has released [compression](https://www.npmjs.com/package/compression) 1.8.2, [cookies](https://www.npmjs.com/package/cookies) 0.9.2, [hbs](https://www.npmjs.com/package/hbs) 4.3.1, [morgan](https://www.npmjs.com/package/morgan) 1.12.1, [multer](https://www.npmjs.com/package/multer) 2.4.0, [multiparty](https://www.npmjs.com/package/multiparty) 4.3.1, and [proxy-addr](https://www.npmjs.com/package/proxy-addr) 2.0.8, addressing seven vulnerabilities across proxy trust, response compression, multipart parsing, template rendering, access logging, and cookie handling.
+
+The Express security team took a [scheduled break](/blog/2026-09-09-joining-the-openjs-cna-security-break) over the recent holiday period, alongside the [OpenJS Foundation CNA coordinated break](https://openjsf.org/blog/the-openjs-foundation-cna-is-taking-a-coordinated-break). There were no security incidents or escalations while we were away. We are now back at full capacity: the reports that arrived during the break have been triaged, and further fixes are already in progress for the coming weeks. We are grateful to the reporters and to the wider team for their patience and support, which made the break possible, and we encourage other maintainers to take time away with the same confidence.
+
+<Alert type="warning">
+
+We recommend upgrading to the latest versions of compression, cookies, hbs, morgan, multer, multiparty, and proxy-addr to secure your applications. If you have a `package-lock.json`, you can update the dependencies by running:
+
+```sh
+npm update compression cookies hbs morgan multer multiparty proxy-addr
+```
+
+</Alert>
+
+The following vulnerabilities have been addressed:
+
+- [CVE-2026-90711 in proxy-addr utility module (Critical)](#cve-2026-90711-in-proxy-addr-utility-module-critical)
+- [CVE-2026-87776 in compression middleware (High)](#cve-2026-87776-in-compression-middleware-high)
+- [CVE-2026-87908 in multiparty utility module (High)](#cve-2026-87908-in-multiparty-utility-module-high)
+- [CVE-2026-87123 in hbs template engine (Medium)](#cve-2026-87123-in-hbs-template-engine-medium)
+- [CVE-2026-87859 in morgan middleware (Medium)](#cve-2026-87859-in-morgan-middleware-medium)
+- [CVE-2026-88932 in multer middleware (Medium)](#cve-2026-88932-in-multer-middleware-medium)
+- [CVE-2026-88038 in cookies utility module (Medium)](#cve-2026-88038-in-cookies-utility-module-medium)
+
+## CVE-2026-90711 in proxy-addr utility module (Critical)
+
+**[proxy-addr](https://www.npmjs.com/package/proxy-addr) versions `>= 1.1.0, < 2.0.8` are vulnerable to IP spoofing when a trusted proxy subnet is configured in IPv4-mapped IPv6 notation**
+
+proxy-addr decides which network hops to trust so that Express can believe the `X-Forwarded-For` header when setting `req.ip` and `req.ips`. When a trusted proxy subnet was written as an IPv4-mapped IPv6 address with a short prefix, such as `::ffff:10.0.0.0/8`, the subnet compiled with all-zero leading bits and matched every address instead of the block it named. Every unauthenticated client was then trusted as a proxy, so an attacker could set `req.ip` to any value and defeat IP-based access control, rate limiting, geolocation, and audit logging. The fix in 2.0.8 treats an IPv4 address as matching an IPv6 trust subnet only when that subnet genuinely covers the IPv4-mapped range.
+
+**Affected versions**: `>= 1.1.0, < 2.0.8`\
+**Patched version**: `>= 2.0.8`
+
+For more details, see [GHSA-jqcg-44mw-7w3h](https://github.com/jshttp/proxy-addr/security/advisories/GHSA-jqcg-44mw-7w3h).
+
+---
+
+## CVE-2026-87776 in compression middleware (High)
+
+**[compression](https://www.npmjs.com/package/compression) versions `< 1.8.2` are vulnerable to denial of service through a memory leak on prematurely closed responses**
+
+When a client disconnected before a compressed response finished sending, the zlib stream created to compress that response was never destroyed, so each aborted response leaked its native zlib memory. A remote client could repeatedly open requests and abort them mid-response, growing server memory with every aborted request until the process runs out of memory. All applications using compression are affected. The fix in 1.8.2 destroys the compression stream when the response closes early.
+
+**Affected versions**: `< 1.8.2`\
+**Patched version**: `>= 1.8.2`
+
+For more details, see [GHSA-vc2v-76pw-4v95](https://github.com/expressjs/compression/security/advisories/GHSA-vc2v-76pw-4v95).
+
+---
+
+## CVE-2026-87908 in multiparty utility module (High)
+
+**[multiparty](https://www.npmjs.com/package/multiparty) versions `>= 2.1.0, < 4.3.1` are vulnerable to denial of service through unbounded part-header accumulation**
+
+multiparty bounds the total size of accumulated field values and uploaded file bytes, but did not bound the size of an individual part header. By sending a `multipart/form-data` request with a part header that never terminates, an unauthenticated attacker could grow server memory in proportion to the bytes sent until the process runs out of memory and crashes, even with every documented limit configured. Any service accepting multipart uploads through multiparty is affected. The fix in 4.3.1 adds a `maxHeadersSize` option, defaulting to 16 KB, that bounds per-part header size.
+
+**Affected versions**: `>= 2.1.0, < 4.3.1`\
+**Patched version**: `>= 4.3.1`
+
+For more details, see [GHSA-5h46-2939-q3wh](https://github.com/pillarjs/multiparty/security/advisories/GHSA-5h46-2939-q3wh).
+
+---
+
+## CVE-2026-87123 in hbs template engine (Medium)
+
+**[hbs](https://www.npmjs.com/package/hbs) version `4.3.0` is vulnerable to denial of service through an unhandled exception in async helper output escaping**
+
+hbs 4.3.0 could crash the Node.js process when an async helper registered with `registerAsyncHelper` resolved to an object with a truthy but non-callable `toHTML` property. During output escaping handlebars calls `value.toHTML()`, which throws, and because the async substitution runs on a later tick outside the render function's `try/catch`, the throw became an uncaught exception that terminated the process with no response sent and no chance for the Express error handler to intercept it. An object parsed from untrusted JSON such as `{"toHTML":"x"}` produces exactly this shape, so applications whose async helpers can resolve to externally-influenced objects could be crashed remotely. Only 4.3.0 is affected, and the fix in 4.3.1 handles the throw as a normal render error.
+
+**Affected versions**: `= 4.3.0`\
+**Patched version**: `>= 4.3.1`
+
+For more details, see [GHSA-3c55-w9jx-p5jr](https://github.com/pillarjs/hbs/security/advisories/GHSA-3c55-w9jx-p5jr).
+
+---
+
+## CVE-2026-87859 in morgan middleware (Medium)
+
+**[morgan](https://www.npmjs.com/package/morgan) versions `< 1.12.1` are vulnerable to log injection through an unescaped double quote in quoted log fields**
+
+morgan writes attacker-controlled request data into the access log. Its field escaping neutralized control characters and Unicode line separators but not the double quote, which delimits the quoted fields of the Apache combined log format morgan emits. An attacker who controlled a value written to a quoted field, such as the user-agent, the referrer, or a request header, could include a double quote to close that field early so that text they supplied was read as the following field by any log consumer that parses by field position. In custom formats that quote an attacker-controlled token before a server-controlled one, this lets the attacker forge values they otherwise do not control. The fix in 1.12.1 escapes the double quote as well.
+
+**Affected versions**: `< 1.12.1`\
+**Patched version**: `>= 1.12.1`
+
+For more details, see [GHSA-9f6g-j8ch-79g4](https://github.com/expressjs/morgan/security/advisories/GHSA-9f6g-j8ch-79g4).
+
+---
+
+## CVE-2026-88932 in multer middleware (Medium)
+
+**[multer](https://www.npmjs.com/package/multer) versions `>= 2.2.0, < 2.4.0` are vulnerable to denial of service through orphaned disk writes on aborted uploads**
+
+multer's `diskStorage` could leave complete, orphaned files on disk when a multipart upload was aborted in the brief window before the storage engine assigned the file path. An earlier cleanup fix removed only in-flight uploads that already had a path, so an upload aborted inside that window was written to disk with nothing left to remove it and no handle given to the application to clean it up. An unauthenticated attacker sending aborted requests to any route backed by disk storage could accumulate orphaned files until the upload directory or the shared system temporary directory was exhausted. The fix in 2.4.0 cleans up files aborted within this window.
+
+**Affected versions**: `>= 2.2.0, < 2.4.0`\
+**Patched version**: `>= 2.4.0`
+
+For more details, see [GHSA-3pph-fpjx-jg34](https://github.com/expressjs/multer/security/advisories/GHSA-3pph-fpjx-jg34).
+
+---
+
+## CVE-2026-88038 in cookies utility module (Medium)
+
+**[cookies](https://www.npmjs.com/package/cookies) versions `< 0.9.2` are vulnerable to Set-Cookie attribute injection through unvalidated domain and path options**
+
+cookies validates cookie names and values against character sets that reject `;`, but the `domain` and `path` options were checked only against a permissive matcher that allows `;`, and both were written into the `Set-Cookie` header unescaped. An application that passed untrusted or request-derived data into `domain` or `path`, for example `domain: '.' + req.headers.host`, let that value inject additional cookie attributes and override `SameSite`, `Secure`, `HttpOnly`, or `Domain` on the cookies the application issued. The fix in 0.9.2 validates `domain` and `path` against the stricter RFC 6265 character sets.
+
+**Affected versions**: `< 0.9.2`\
+**Patched version**: `>= 0.9.2`
+
+For more details, see [GHSA-x44v-5gxf-r6hf](https://github.com/pillarjs/cookies/security/advisories/GHSA-x44v-5gxf-r6hf).
+
+---
+
+We recommend upgrading to the latest versions of compression, cookies, hbs, morgan, multer, multiparty, and proxy-addr to secure your applications.
