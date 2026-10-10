@@ -300,3 +300,51 @@ Rules:
 - **`resources`, `support`, `blog`** are never versioned; links are language-only.
 - External URLs, relative links (`./x`), pure anchors (`#x`) and already-localized links (`/en/...`)
   are left untouched.
+
+## Plugins
+
+### 1. rehypeAccessibleTables()
+
+#### Why was this plugin created?
+
+The documentation team chose **Markdown tables as the preferred and simplest way to write tables in the documentation**.
+
+Markdown tables are easier to read and maintain in source files, especially for contributors. For example:
+
+```md
+| Method | Description   |
+| ------ | ------------- |
+| GET    | Retrieve data |
+| POST   | Create data   |
+```
+
+Because Markdown tables are the preferred format, we want contributors to be able to write tables using simple Markdown without having to worry about additional HTML markup for accessibility or responsive behavior.
+
+However, Markdown source does not provide everything we need for the final website. The generated table may need additional attributes and styling behavior, such as:
+
+```html
+<th scope="col">Method</th>
+```
+
+and a wrapper for horizontal scrolling:
+
+```html
+<div class="table-scroller">
+  <table>
+    ...
+  </table>
+</div>
+```
+
+Tables can also be written using raw HTML or MDX JSX in cases where Markdown does not provide enough flexibility.
+
+Instead of asking contributors to manually add this markup, the `rehype-accessible-tables` plugin applies the required changes automatically during the Astro build process.
+
+This gives us the best of both approaches:
+
+- **Markdown remains the preferred authoring format** for documentation tables.
+- **Accessibility and responsive behavior are handled automatically** by the build pipeline.
+- **Raw HTML and MDX JSX tables are also supported** when more control is needed.
+- **The generated website maintains consistent table behavior** across the documentation.
+
+This keeps the source documentation simple while allowing the generated website to have better accessibility, responsiveness, and consistency.
