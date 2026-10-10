@@ -1,5 +1,5 @@
 ---
-title: statische Middleware
+title: serve-static Middleware
 description: Statische Dateien Servieren
 ---
 
@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="2.2.1"
-  github="https://github.com/express js/serve-statisch"
+  github="https://github.com/expressjs/serve-static"
   npm="https://www.npmjs.com/package/serve-static"
 />
 
@@ -35,7 +35,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 const serveStatic = require('serve-static');
 ```
 
-### serveStatic(root, Optionen)
+### serveStatic(root, options)
 
 Erstellen Sie eine neue Middleware-Funktion, um Dateien innerhalb eines angegebenen Wurzel-
 -Verzeichnisses zu bedienen. Die zu bedienende Datei wird durch die Kombination von `req.url`
@@ -45,7 +45,7 @@ zur nächsten Middleware zu bewegen, was Stapeln und Fallbacks erlaubt.
 
 #### Optionen
 
-##### akzeptiere Wertebereiche
+##### acceptRanges
 
 Aktivieren oder deaktivieren Sie die Annahme von Fernanforderungen. Standardmäßig ist dies wahr.
 Deaktivieren wird `Accept-Ranges` nicht senden und den Inhalt
@@ -62,20 +62,20 @@ Legen Sie fest, wie "dotfiles" beim Auftreten behandelt werden. Eine Dotdatei is
 oder ein Verzeichnis, das mit einem Punkt beginnt ("."). Beachten Sie, dass diese Überprüfung auf
 durchgeführt wird, ohne zu überprüfen, ob der Pfad tatsächlich auf der
 Platte vorhanden ist. Wenn `root` angegeben ist, werden nur die Punkte oberhalb des Roots
-aktiviert (i. . Das Root selbst kann innerhalb einer dotfile liegen, wenn
-auf "deny" gesetzt wird.
+aktiviert (d. i. Das Root selbst kann innerhalb einer dotfile liegen, wenn
+auf "deny" gesetzt wird).
 
-- `erlaub'` Keine spezielle Behandlung für dotfiles.
+- `'allow'` Keine spezielle Behandlung für dotfiles.
 - `'deny'` leugne eine Anfrage für eine dotfile und 403/`next()`.
 - `'ignore'` Pretend as the dotfile does not exist and 404/`next()`.
 
-Der Standardwert ist 'ignore'.
+Der Standardwert ist `'ignore'`.
 
 ##### etag
 
 Aktiviere oder deaktiviere Etagenerzeugung, Standardwert ist 'true'.
 
-##### erweiterungen
+##### extensions
 
 Fallbacks für Dateierweiterung festlegen. Wenn gesetzt, wenn eine Datei nicht gefunden wird, werden die angegebenen
 -Erweiterungen zum Dateinamen hinzugefügt und gesucht. Die Erste, die
@@ -83,7 +83,7 @@ existiert, wird bedient. Example: `['html', 'htm']`.
 
 Der Standardwert ist `false`.
 
-##### durchfallen
+##### fallthrough
 
 Legen Sie die Middleware so fest, dass Client-Fehler nur als unbehandelte
 -Anfragen durchlaufen, sonst leiten Sie einen Client-Fehler weiter. Der Unterschied ist, dass Client-
@@ -102,7 +102,7 @@ alle Methoden antworten.
 
 Der Standardwert ist `true`.
 
-##### unveränderbar
+##### immutable
 
 Aktivieren oder deaktivieren Sie die `immutable` Direktive in der `Cache-Control` Antwort
 -Kopfzeile, standardmäßig `false`. Wenn `true` gesetzt ist, sollte die `maxAge` Option
@@ -110,13 +110,13 @@ ebenfalls angegeben werden, um das Caching zu aktivieren. The `immutable` direct
 supported clients from making conditional requests during the life of the
 `maxAge` option to check if the file has changed.
 
-##### indexieren
+##### index
 
 Standardmäßig sendet dieses Modul "index.html" Dateien als Antwort auf eine Anfrage
 in einem Verzeichnis. Um diese Einstellung zu deaktivieren `false` oder um einen neuen Index anzuliefern, übergeben Sie einen
 String oder ein Array in bevorzugter Reihenfolge.
 
-##### zuletzt geändert
+##### lastModified
 
 Aktiviere oder deaktiviere `Last-Modified` Header. Standardmäßig ist 'true'. Verwendet den zuletzt geänderten Wert der Datei
 .
@@ -127,7 +127,7 @@ Geben Sie ein Max-Alter in Millisekunden für http Caching an, standardmäßig 0
 can also be a string accepted by the [ms](https://www.npmjs.org/package/ms#readme)
 module.
 
-##### umleiten
+##### redirect
 
 Umleiten zu "/" am Ende, wenn der Pfadname ein dir. Standard ist `true`.
 
@@ -138,8 +138,8 @@ occur synchronously. Die Funktion wird als `fn(res, path, stat)` aufgerufen, wob
 die Argumente sind:
 
 - `res` das Antwortobjekt
-- "path" der Dateipfad, der gesendet wird
-- "stat" das stat-Objekt der zu sendenden Datei
+- `path` der Dateipfad, der gesendet wird
+- `stat` das stat-Objekt der zu sendenden Datei
 
 ## Beispiele
 
@@ -258,5 +258,5 @@ function setCustomCacheControl(res, file) {
 
 [MIT](https://github.com/expressjs/serve-static/blob/HEAD/LICENSE)
 
-[node-url]: https://nodejs.org/de/download/
+[node-url]: https://nodejs.org/en/download/
 [npm-url]: https://npmjs.org/package/serve-static

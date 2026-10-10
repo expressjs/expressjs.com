@@ -48,7 +48,7 @@ Voici un exemple de vérification des URLs avant d'utiliser `res.redirect` ou `r
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
@@ -286,7 +286,7 @@ $ snyk test
 
 Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?query=ecosystem%3Anpm) or [Snyk](https://security.snyk.io/vuln/npm) advisories that may affect Express or other modules that your app uses. En général, ces bases de données sont d'excellentes ressources pour la connaissance et les outils sur la sécurité des nœuds.
 
-Enfin, les applications Express&mdash;comme toutes les autres applications web&mdash;peuvent être vulnérables à diverses attaques sur le Web. Familiarisez-vous avec les [vulnérabilités web connues](https://www.owasp.org/www-project-top-ten/) et prenez des précautions pour les éviter.
+Enfin, les applications Express&mdash;comme toutes les autres applications web&mdash;peuvent être vulnérables à diverses attaques sur le Web. Familiarisez-vous avec les [vulnérabilités web connues](https://owasp.org/www-project-top-ten/) et prenez des précautions pour les éviter.
 
 ## Considérations supplémentaires
 
@@ -294,8 +294,8 @@ Voici quelques autres recommandations de l'excellent [Liste de contrôle de séc
 
 - Filtrer et nettoyer toujours les entrées de l'utilisateur pour se protéger contre les attaques de script intersite (XSS) et d'injection de commandes.
 - Protégez contre les attaques d'injection SQL en utilisant des requêtes paramétrées ou des requêtes préparées.
-- Utilisez l'outil [sqlmap](http://sqlmap.org/) pour détecter les vulnérabilités d'injection SQL dans votre application.
+- Utilisez l'outil [sqlmap](https://sqlmap.org/) pour détecter les vulnérabilités d'injection SQL dans votre application.
 - Utilisez les outils [nmap](https://nmap.org/) et [sslyze](https://github.com/nabla-c0d3/sslyze) pour tester la configuration de vos codes SSL, , et renégociation ainsi que la validité de votre certificat.
-- Utilisez [safe-regex](https://www.npmjs.com/package/safe-regex) pour vous assurer que vos expressions régulières ne sont pas susceptibles d'attaques [déni de service d'expression régulière](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS).
+- Utilisez [safe-regex](https://www.npmjs.com/package/safe-regex) pour vous assurer que vos expressions régulières ne sont pas susceptibles d'attaques [déni de service d'expression régulière](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS).
 
-[helmet]: https://helmetjs.github.io/
+[helmet]: https://helmet.js.org/

@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="3.0.2"
-  github="https://github.com/express js/vhost"
+  github="https://github.com/expressjs/vhost"
   npm="https://www.npmjs.com/package/vhost"
 />
 
@@ -31,7 +31,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 var vhost = require('vhost');
 ```
 
-### vhost(Hostname, Handle)
+### vhost(hostname, handle)
 
 Erstelle eine neue Middleware-Funktion, um die Anfrage an `handle` zu übergeben, wenn der eingehende
 Host für die Anfrage mit `hostname` übereinstimmt. Die Funktion wird wie eine Standard-Middleware als
@@ -66,7 +66,7 @@ app.use(
 
 ## Beispiele
 
-### mit Verbindung für statische Servierung verwenden
+### mit connect für statische Servierung verwenden
 
 ```js
 var connect = require('connect');
@@ -96,7 +96,7 @@ app.use(vhost('assets-*.example.com', staticapp));
 app.listen(3000);
 ```
 
-### mit Verbindung für Benutzer-Subdomains verwenden
+### mit connect für Benutzer-Subdomains verwenden
 
 ```js
 var connect = require('connect');

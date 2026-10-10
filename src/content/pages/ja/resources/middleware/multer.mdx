@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.2.0"
+  version="2.4.0"
   github="https://github.com/expressjs/multer"
   npm="https://www.npmjs.com/package/multer"
 />
@@ -18,23 +18,6 @@ Multer は `multipart/form-data` を扱うための node.js ミドルウェア�
 の上に [busboy](https://github.com/mscdex/busboy)と書かれており、最大限の効率を得ることができます。
 
 **注意**: Multer はマルチパートでないフォームを処理しません (`multipart/form-data`)。
-
-## 翻訳
-
-このREADMEは他の言語でも利用できます:
-
-|                                                                                          |                   |
-| ---------------------------------------------------------------------------------------- | ----------------- |
-| [العربية](https://github.com/expressjs/multer/blob/main/doc/README-ar.md)                | アラビア文字      |
-| [简体中文](https://github.com/expressjs/multer/blob/main/doc/README-zh-cn.md)            | 中国語            |
-| [Français](https://github.com/expressjs/multer/blob/main/doc/README-fr.md)               | フランス語        |
-| [한국어](https://github.com/expressjs/multer/blob/main/doc/README-ko.md)                 | Korean            |
-| [Português](https://github.com/expressjs/multer/blob/main/doc/README-pt-br.md)           | ポルトガル語 (BR) |
-| [Русский язык](https://github.com/expressjs/multer/blob/main/doc/README-ru.md)           | ロシア語          |
-| [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)                | スペイン語        |
-| [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)            | Uzbek             |
-| [Vie\<unk> \<unk> t Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md) | Vietnamese        |
-| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)                 | トルコ語          |
 
 ## インストール
 
@@ -119,7 +102,7 @@ multer が HTML 形式でどのように使用されるかについての例を�
 </form>
 ```
 
-次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。 アップロード関数のフォームから `name` フィールドの値を使用することが重要です。 これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。 次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。 アップロード関数のフォームから `name` フィールドの値を使用することが重要です。 これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。 これらのフィールドが HTML フォームとサーバーで同じでない場合、アップロードに失敗します:
+次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。アップロード関数のフォームから `name` フィールドの値を使用することが重要です。これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。次に、javascriptファイルで、ファイルと本文の両方にアクセスするために、これらの行を追加します。 アップロード関数のフォームから `name` フィールドの値を使用することが重要です。 これは、リクエストのどのフィールドにファイルを探すべきかをmulterに伝えます。 これらのフィールドが HTML フォームとサーバーで同じでない場合、アップロードに失敗します:
 
 ```javascript
 const multer = require('multer');
@@ -131,23 +114,26 @@ app.post('/stats', upload.single('uploaded_file'), function (req, res) {
 });
 ```
 
+Complete client-side and server-side examples (browser `FormData` uploads of a
+blob and of an image) are in the [`examples/`](https://github.com/expressjs/multer/blob/HEAD/examples/) folder.
+
 ## API
 
 ### ファイル情報
 
 各ファイルには以下の情報が含まれています:
 
-| キー           | 説明                                       | メモ            |
-| -------------- | ------------------------------------------ | --------------- |
-| `fieldname`    | フォームで指定されたフィールド名           |                 |
-| `originalname` | ユーザーのコンピューター上のファイルの名前 |                 |
-| `encoding`     | ファイルのエンコードタイプ                 |                 |
-| `mimetype`     | ファイルの Mime タイプ                     |                 |
-| `size`         | バイト単位のファイルのサイズ               |                 |
-| `destination`  | ファイルが保存されたフォルダ               | `DiskStorage`   |
-| `filename`     | `destination`内のファイルの名前            | `DiskStorage`   |
-| `path`         | アップロードされたファイルへのフルパス     | `DiskStorage`   |
-| `buffer`       | ファイル全体の `Buffer`                    | `MemoryStorage` |
+| キー           | 説明                                                                                | メモ            |
+| -------------- | ----------------------------------------------------------------------------------- | --------------- |
+| `fieldname`    | フォームで指定されたフィールド名                                                    |                 |
+| `originalname` | Name of the file on the user's computer, or the full path when `preservePath: true` |                 |
+| `encoding`     | ファイルのエンコードタイプ                                                          |                 |
+| `mimetype`     | ファイルの Mime タイプ                                                              |                 |
+| `size`         | バイト単位のファイルのサイズ                                                        |                 |
+| `destination`  | ファイルが保存されたフォルダ                                                        | `DiskStorage`   |
+| `filename`     | `destination`内のファイルの名前                                                     | `DiskStorage`   |
+| `path`         | アップロードされたファイルへのフルパス                                              | `DiskStorage`   |
+| `buffer`       | ファイル全体の `Buffer`                                                             | `MemoryStorage` |
 
 ### `multer(opts)`
 
@@ -164,11 +150,15 @@ Multer に渡すことができるオプションは以下のとおりです。
 
 | キー                    | 説明                                                                                                                                                                         |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defCharset`            | Default character set to use for text field values that do not declare one. Default: `'utf8'`                                                                                |
+| `defParamCharset`       | 拡張パラメータではない (明示的な文字セットを含む) 部品ヘッダーパラメータの値(ファイル名など)に使用するデフォルトの文字セット。 デフォルト: `'latin1'` デフォルト: `'latin1'` |
 | `dest` または `storage` | ファイルを保存する場所                                                                                                                                                       |
 | `fileFilter`            | 受け入れられるファイルを制御する関数                                                                                                                                         |
+| `fileHwm`               | `highWaterMark` of each file stream (`file.stream`). Default: busboy's default                                                                                               |
+| `highWaterMark`         | `highWaterMark` of the multipart parser stream. Default: busboy's default                                                                                                    |
 | `limits`                | アップロードしたデータの制限                                                                                                                                                 |
-| `preservePath`          | ベース名の代わりにファイルの完全なパスを保持します                                                                                                                           |
-| `defParamCharset`       | 拡張パラメータではない (明示的な文字セットを含む) 部品ヘッダーパラメータの値(ファイル名など)に使用するデフォルトの文字セット。 デフォルト: `'latin1'` デフォルト: `'latin1'` |
+| `preservePath`          | Keep the full client-supplied path in `file.originalname` instead of just the base name                                                                                      |
+| `streamHandler`         | Function that feeds the request body to busboy; defaults to `req.pipe(busboy)`                                                                                               |
 
 In an average web app, only `dest` might be required, and configured as shown in
 the following example.
@@ -176,6 +166,14 @@ the following example.
 ```javascript
 const upload = multer({ dest: 'uploads/' });
 ```
+
+When `preservePath` is enabled, Multer passes the incoming filename through with
+any path segments provided by the client. This is exposed as `file.originalname`;
+it does not change the destination folder, create directories, or sanitize the
+path for you. `file.originalname` is always client-supplied and should be treated
+as untrusted; with `preservePath` it additionally contains the path segments the
+client sent. Normalize or validate it before using it in a custom `filename` or
+storage engine.
 
 アップロードをもっと制御したい場合は、`dest` の代わりに `storage`
 オプションを使用します。 Multer はストレージエンジン `DiskStorage`
@@ -185,14 +183,17 @@ const upload = multer({ dest: 'uploads/' });
 #### `.single(fieldname)`
 
 `fieldname`という名前のファイルを受け入れます。 単一のファイルは
-を `req.file` に格納します。 単一のファイルは
+を `req.file` に格納します。単一のファイルは
 を `req.file` に格納します。
 
 #### `.array(fieldname[, maxCount])`
 
-`fieldname`という名前のファイルの配列を受け入れます。 必要に応じて、
-が `maxCount`ファイルよりも大きい場合にエラーが発生します。 ワイヤ上にあるすべてのファイルを受け入れます。 ファイルの配列は
+`fieldname`という名前のファイルの配列を受け入れます。必要に応じて、
+が `maxCount`ファイルよりも大きい場合にエラーが発生します。ワイヤ上にあるすべてのファイルを受け入れます。 ファイルの配列は
 `req.files` に格納されます。
+
+Files skipped by `fileFilter` do not count towards `maxCount`. Use
+`limits.files` to bound how many files are read from a request.
 
 #### `.fields(fields)`
 
@@ -200,8 +201,7 @@ const upload = multer({ dest: 'uploads/' });
 の配列を持つオブジェクトは`req.files`に保存されます。
 
 `fields`は、`name`とオプションで`maxCount`を持つオブジェクトの配列でなければなりません。
-例
-例
+例例
 
 ```javascript
 [
@@ -212,19 +212,18 @@ const upload = multer({ dest: 'uploads/' });
 
 #### `.none()`
 
-テキストフィールドのみ受け入れます。 ファイルのアップロードが完了した場合は、
+テキストフィールドのみ受け入れます。ファイルのアップロードが完了した場合は、
 "LIMIT_UNEXPECTED_FILE"でエラーが発生します。
 
 #### `.any()`
 
-ワイヤ上にあるすべてのファイルを受け入れます。 ファイルの配列は
+ワイヤ上にあるすべてのファイルを受け入れます。ファイルの配列は
 `req.files` に格納されます。
 
-**警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。
-**警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。
+**警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。**警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。
 悪意のあるユーザーが予想していなかったルートに
 ファイルをアップロードできるため、multer をグローバルミドルウェアとして追加しないでください。 アップロードされたファイルを処理しているルート
-でのみこの機能を使用してください。 アップロードされたファイルを処理しているルート
+でのみこの機能を使用してください。アップロードされたファイルを処理しているルート
 でのみこの機能を使用してください。
 
 ### `storage`
@@ -234,22 +233,26 @@ const upload = multer({ dest: 'uploads/' });
 ディスクストレージエンジンは、ディスクにファイルを保存することを完全に制御します。
 
 ```javascript
+const crypto = require('crypto');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '/tmp/my-uploads');
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix);
+    crypto.randomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, file.fieldname + '-' + raw.toString('hex'));
+    });
   },
 });
 
 const upload = multer({ storage: storage });
 ```
 
-`destination` と `filename` の2つのオプションが利用できます。 これらはどちらも、ファイルをどこに保存するかを決める
-関数です。 これらはどちらも、ファイルをどこに保存するかを決める
-関数です。
+There are three options available: `destination`, `filename` and `flush`. All of
+them except `flush` are functions that determine where the file should be
+stored.
 
 `destination` is used to determine within which folder the uploaded files should
 be stored. これは文字列として与えることもできます(例: `'/tmp/uploads`)。
@@ -258,7 +261,7 @@ be stored. これは文字列として与えることもできます(例: `'/tmp
 
 **注意:** 関数として
 `destination` を指定するときにディレクトリを作成します。 文字列を渡すとき、multer は
-ディレクトリが作成されていることを確認します。 文字列を渡すとき、multer は
+ディレクトリが作成されていることを確認します。文字列を渡すとき、multer は
 ディレクトリが作成されていることを確認します。
 
 `destination` is used to determine within which folder the uploaded files should
@@ -273,18 +276,26 @@ be stored.
 各関数はリクエスト(`req`)と
 ファイル(`file`)に関する情報の両方を渡され、決定を助けます。
 
-`req.body` はまだ完全に入力されていない可能性があります。 これは、クライアントがフィールドとファイルをサーバーに送信する
+`req.body` はまだ完全に入力されていない可能性があります。これは、クライアントがフィールドとファイルをサーバーに送信する
 オーダーに依存します。
 
 コールバックで使用される呼び出し規約(最初のパラメータとして
 null を渡す必要がある)を理解するには、
 [Node] を参照してください。 s error handling](https://web.archive.org/web/20220417042018/https://www.joyent.com/node-js/production/design/errors)
 
+`flush` is an optional boolean. When set to `true`, the file data is flushed to
+disk with an `fsync` call before the upload handler runs, which prevents data
+loss if the process or the system crashes while the data is still sitting in
+the operating system's page cache. It is disabled by default because forcing a
+disk flush on every upload has a performance cost. Note that this syncs the
+file contents only; if the new directory entry must survive a crash as well,
+fsync the destination directory yourself.
+
 #### `MemoryStorage`
 
 メモリストレージエンジンはファイルを `Buffer` オブジェクトとして保存します。
-にはオプションはありません。
-にはオプションはありません。
+にはオプションはありません。 It
+doesn't have any options.
 
 ```javascript
 const storage = multer.memoryStorage();
@@ -300,20 +311,36 @@ memory storage is used.
 
 ### `limits`
 
-次のオプションプロパティのサイズ制限を指定するオブジェクト。 次のオプションプロパティのサイズ制限を指定するオブジェクト。 Multer はこのオブジェクトを busboy に直接渡し、プロパティの詳細は [busboy's page](https://github.com/mscdex/busboy#busboy-methods) にあります。
+An object specifying the size limits of the following optional properties. Multer passes this object into busboy directly, and the details of the properties can be found on [busboy's page](https://github.com/mscdex/busboy#exports).
+
+`limits` can also be a function that receives the request and returns such an
+object. It is called once per request, before parsing starts, so limits can
+depend on e.g. the authenticated user:
+
+```javascript
+const upload = multer({
+  limits: function (req) {
+    return { fileSize: req.user.maxUploadSize };
+  },
+});
+```
+
+Limits apply to the whole request; there is no per-file limit. To restrict
+individual files by type or name, use `fileFilter` or a custom storage engine.
 
 次の整数値が使用できます。
 
-| キー                | 説明                                                                       | デフォルト |
-| ------------------- | -------------------------------------------------------------------------- | ---------- |
-| `fieldNameSize`     | 最大フィールド名のサイズ                                                   | 100 バイト |
-| `fieldSize`         | 最大フィールド値のサイズ (バイト単位)                                      | 1MB        |
-| `fields`            | ファイル以外のフィールドの最大数                                           | Infinity   |
-| `fileSize`          | マルチパート形式の場合、最大ファイルサイズ（バイト単位）                   | Infinity   |
-| `files`             | 複数形の場合、ファイルフィールドの最大数                                   | Infinity   |
-| `parts`             | マルチパートフォームの場合、部品の最大数 (フィールド + ファイル)           | Infinity   |
-| `headerPairs`       | マルチパートフォームの場合、解析する最大ヘッダーキー=>値のペアの数         | 2000       |
-| `fieldNestingDepth` | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels) | Infinity   |
+| キー                   | 説明                                                                            | デフォルト |
+| ---------------------- | ------------------------------------------------------------------------------- | ---------- |
+| `fieldNameSize`        | 最大フィールド名のサイズ                                                        | Infinity   |
+| `fieldSize`            | 最大フィールド値のサイズ (バイト単位)                                           | 1MB        |
+| `fields`               | ファイル以外のフィールドの最大数                                                | Infinity   |
+| `fileSize`             | マルチパート形式の場合、最大ファイルサイズ（バイト単位）                        | Infinity   |
+| `files`                | 複数形の場合、ファイルフィールドの最大数                                        | Infinity   |
+| `parts`                | マルチパートフォームの場合、部品の最大数 (フィールド + ファイル)                | Infinity   |
+| `headerPairs`          | マルチパートフォームの場合、解析する最大ヘッダーキー=>値のペアの数              | 2000       |
+| `fieldNestingDepth`    | Max number of nesting levels for field names (e.g. `a[b][c]` has 2 levels)      | Infinity   |
+| `fieldArrayIndexLimit` | Max numeric array index accepted inside a field name (e.g. `a[3]` uses index 3) | Infinity   |
 
 制限を指定することは、サービス妨害(DoS)攻撃からサイトを保護するのに役立ちます。
 
@@ -338,6 +365,30 @@ function fileFilter(req, file, cb) {
 }
 ```
 
+### `streamHandler`
+
+By default Multer reads the request with `req.pipe(busboy)`. Some platforms
+consume the request body before your handlers run, so there is nothing left to
+pipe. Google Cloud Functions and Firebase Functions, for example, expose the
+already-read body as `req.rawBody`. Provide a `streamHandler` to feed busboy
+yourself in that case:
+
+```javascript
+const upload = multer({
+  storage: multer.memoryStorage(),
+  streamHandler: function (req, busboy) {
+    if (req.rawBody) {
+      busboy.end(req.rawBody);
+    } else {
+      req.pipe(busboy);
+    }
+  },
+});
+```
+
+The function receives the request and the busboy instance and must write the
+whole multipart body to busboy and end it.
+
 ## Security
 
 Specifying the [limits](#limits) can help protect your site against denial of service (DoS) attacks. The following limits are recommended for most applications:
@@ -346,15 +397,21 @@ Specifying the [limits](#limits) can help protect your site against denial of se
 - `files` -- set to the maximum number of files per request
 - `fields` -- set to the maximum number of text fields per request
 - `fieldNestingDepth` -- set to the minimum depth your field names require (e.g. `3` for `a[b][c]`)
+- `fieldArrayIndexLimit` -- set to the largest array index your field names require (e.g. `100` for `a[99]`)
 
 ## エラー処理
 
-エラーが発生した場合、MulterはエラーをExpressに委任します。 エラーが発生した場合、MulterはエラーをExpressに委任します。 You can
+エラーが発生した場合、MulterはエラーをExpressに委任します。エラーが発生した場合、MulterはエラーをExpressに委任します。 You can
 display a nice error page using [the standard express way](/guide/error-handling).
 
 Multer から特にエラーをキャッチしたい場合は、独自に
 ミドルウェア関数を呼び出すことができます。 Multer から特にエラーをキャッチしたい場合は、独自に
 ミドルウェア関数を呼び出すことができます。 Also, if you want to catch only [the Multer errors](https://github.com/expressjs/multer/blob/main/lib/multer-error.js), you can use the `MulterError` class that is attached to the `multer` object itself (e.g. `err instanceof multer.MulterError`).
+
+Multer errors carry a `code` (e.g. `LIMIT_FILE_SIZE`) and, when the error concerns
+a specific field, its name in `field`. Errors about a specific file
+(`LIMIT_FILE_SIZE`, `LIMIT_UNEXPECTED_FILE`) also expose the client-supplied file
+name in `filename`; treat it as untrusted input, like `file.originalname`.
 
 ```javascript
 const multer = require('multer');

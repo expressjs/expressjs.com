@@ -34,7 +34,7 @@ var vhost = require('vhost');
 ### vhost(hostname, handle)
 
 リクエストの
-ホストが`hostname`と一致する場合、`handle`にリクエストを渡すための新しいミドルウェア関数を作成します。 関数は、標準のミドルウェアのように、
+ホストが`hostname`と一致する場合、`handle`にリクエストを渡すための新しいミドルウェア関数を作成します。関数は、標準のミドルウェアのように、
 `handle(req, res, next)`と呼ばれます。
 
 `hostname`は文字列またはRegExpオブジェクトを使用できます。 When `hostname` is a string it can
@@ -43,7 +43,7 @@ contain `*` to match 1 or more characters in that section of the hostname. When
 and will be forced to match based on the start and end of the hostname.
 
 ホストが一致し、リクエストが vhost ハンドラに送信されると、`req.vhost`
-プロパティにオブジェクトが入力されます。 このオブジェクトには、各ワイルドカードに対応する数値プロパティ
+プロパティにオブジェクトが入力されます。このオブジェクトには、各ワイルドカードに対応する数値プロパティ
 があります(RegExp オブジェクトが指定されている場合はグループをキャプチャします)。
 `hostname` に一致します。
 
