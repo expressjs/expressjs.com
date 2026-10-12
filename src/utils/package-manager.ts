@@ -2,7 +2,7 @@
  * Package manager helpers.
  *
  * Converts an `npm`/`npx` command into the equivalent command for the other
- * supported package managers (Yarn, pnpm, Bun) so docs can show a single,
+ * supported package managers (Yarn, pnpm, Bun, Deno) so docs can show a single,
  * authored npm command and let readers pick their tool of choice.
  *
  * Authors write the npm command they already know; everything else is derived.
@@ -10,7 +10,7 @@
  * <pkg> --no-save`) should stay as a plain fenced code block instead.
  */
 
-export const PACKAGE_MANAGERS = ['npm', 'yarn', 'pnpm', 'bun'] as const;
+export const PACKAGE_MANAGERS = ['npm', 'yarn', 'pnpm', 'bun', 'deno'] as const;
 
 export type PackageManager = (typeof PACKAGE_MANAGERS)[number];
 
@@ -19,6 +19,7 @@ export const PACKAGE_MANAGER_LABELS: Record<PackageManager, string> = {
   yarn: 'yarn',
   pnpm: 'pnpm',
   bun: 'bun',
+  deno: 'deno',
 };
 
 /**
@@ -38,6 +39,7 @@ const sameForAll = (command: string): CommandMap => ({
   yarn: command,
   pnpm: command,
   bun: command,
+  deno: command,
 });
 
 const join = (...parts: (string | false | undefined)[]): string =>
@@ -52,7 +54,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
   const tokens = command.trim().split(/\s+/);
   const [bin, sub, ...rest] = tokens;
 
-  // npx codemod@latest ... -> yarn/pnpm dlx, bunx
+  // npx codemod@latest ... -> yarn/pnpm dlx, bunx, deno x
   if (bin === 'npx') {
     const exec = tokens.slice(1).join(' ');
     return {
@@ -60,6 +62,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
       yarn: join('yarn dlx', exec),
       pnpm: join('pnpm dlx', exec),
       bun: join('bunx', exec),
+      deno: join('deno x', exec),
     };
   }
 
@@ -73,7 +76,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
       const packages = rest.filter((t) => !t.startsWith('-'));
       const isDev = flags.some((f) => DEV_FLAGS.has(f));
       const isGlobal = flags.some((f) => GLOBAL_FLAGS.has(f));
-      // `--no-save` only exists on npm and Bun; Yarn and pnpm have no equivalent.
+      // `--no-save` only exists on npm and Bun; Yarn, pnpm and Deno have no equivalent.
       const hasNoSave = flags.includes('--no-save');
       const extra = flags.filter(
         (f) => !DEV_FLAGS.has(f) && !GLOBAL_FLAGS.has(f) && !SAVE_FLAGS.has(f)
@@ -88,6 +91,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
           yarn: join('yarn install', extras),
           pnpm: join('pnpm install', extras),
           bun: join('bun install', extras),
+          deno: join('deno install', extras),
         };
       }
 
@@ -102,6 +106,9 @@ export function convertPackageManagerCommand(command: string): CommandMap {
           ? null
           : join('pnpm add', isDev && '--save-dev', isGlobal && '--global', pkgs, extras),
         bun: join('bun add', isDev && '--dev', isGlobal && '--global', pkgs, extras),
+        deno: hasNoSave
+          ? null
+          : join(isGlobal ? 'deno install -g' : 'deno add', isDev && '--dev', pkgs, extras),
       };
     }
 
@@ -117,6 +124,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
         yarn: isGlobal ? join('yarn global remove', pkgs) : join('yarn remove', pkgs),
         pnpm: join('pnpm remove', isGlobal && '--global', pkgs),
         bun: join('bun remove', isGlobal && '--global', pkgs),
+        deno: join('deno uninstall', isGlobal && '--global', pkgs),
       };
     }
 
@@ -130,6 +138,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
           yarn: join('yarn init', args),
           pnpm: join('pnpm init', args),
           bun: join('bun init', args),
+          deno: join('deno init', args),
         };
       }
       return {
@@ -137,6 +146,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
         yarn: join('yarn create', args),
         pnpm: join('pnpm create', args),
         bun: join('bun create', args),
+        deno: join('deno create --npm', args),
       };
     }
 
@@ -147,6 +157,7 @@ export function convertPackageManagerCommand(command: string): CommandMap {
         yarn: join('yarn', args),
         pnpm: join('pnpm', args),
         bun: join('bun run', args),
+        deno: join('deno task', args),
       };
     }
 
