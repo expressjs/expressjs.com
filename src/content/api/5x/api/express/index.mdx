@@ -102,6 +102,17 @@ may not be a function and instead a string or other user-input.
 
 </Alert>
 
+<Alert type="info">
+
+`express.json()` (and other body-parsing middleware) will attempt to parse a request body
+regardless of the HTTP method — including `GET`, `HEAD`, and `DELETE` requests that
+conventionally carry no body. When using body-parsing middleware globally with `app.use()`,
+consider registering any rate-limiting or request-size-limiting middleware **before**
+body-parsing middleware in the chain, and apply body-parsing only to routes that expect a
+request body where possible.
+
+</Alert>
+
 ```cjs title="index.cjs" ins={5}
 const express = require('express');
 const app = express();
