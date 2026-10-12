@@ -20,4 +20,4 @@ Versioni che sono EOL (end-of-life) _may_ ricevere aggiornamenti per le vulnerab
 
 Se non riesci ad aggiornare ad una versione supportata di Express, contatta uno dei nostri partner per ricevere aggiornamenti di sicurezza:
 
-- [HeroDevs Never-Ending Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
+- [HeroDevs Never-Ending Support](https://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
