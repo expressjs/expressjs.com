@@ -1,6 +1,6 @@
 ---
 title: Response
-description: The response object represents the HTTP response that an Express app sends when it gets an HTTP request.
+description: The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -564,7 +564,7 @@ The match is case-insensitive.
 
 ```js
 res.get('Content-Type');
-// => "text/plain"
+// => 'text/plain'
 ```
 
 ### res.json()
@@ -1104,7 +1104,7 @@ res.type('.html'); // => 'text/html'
 res.type('html'); // => 'text/html'
 res.type('json'); // => 'application/json'
 res.type('application/json'); // => 'application/json'
-res.type('png'); // => image/png:
+res.type('png'); // => 'image/png'
 ```
 
 Aliased as `res.contentType(type)`.
