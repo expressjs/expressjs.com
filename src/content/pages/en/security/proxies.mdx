@@ -1,0 +1,75 @@
+---
+title: Proxies and client identity
+description: How trust proxy decides what req.ip, req.hostname, and req.protocol report, and what breaks when it does not match your deployment.
+---
+
+When you deploy an Express app behind a proxy, by default your application is no longer seeing the IP address in `req.ip` of the actual client who sent the request, as well as possibly seeing a different `req.hostname` or `req.protocol` than the original client used. This is a problem if your application is relying on those fields to make decisions like IP based rate limiting, including IP in access logs, or whether to set a session cookie marked `Secure`.
+
+By default, Express sets `req.ip` from the socket the request arrived on, not from any header. When your application is directly reachable over the internet, that address is the client that made the request. When your application sits behind a proxy, such as a load balancer or a reverse proxy like Nginx, every request arrives from the proxy, so `req.ip` is the proxy's address, not the client's. The same is true of `req.hostname` and `req.protocol`: behind a proxy that terminates TLS, Express sees a plain HTTP request from the proxy.
+
+The `trust proxy` setting exists to solve this. Proxies add the address they received a request from to the `X-Forwarded-For` header, and record the original host and protocol in `X-Forwarded-Host` and `X-Forwarded-Proto`. The setting tells Express which of those proxies to trust, so it can recover the client's address, host, and protocol from the headers instead of the socket. It is off by default, so those headers are ignored until you configure it.
+
+## Set `trust proxy` to match your deployment
+
+Set `trust proxy` to describe the proxies between your application and the internet. Prefer setting it to the addresses or range that your proxies connect from if you know them, otherwise set it to how many proxies sit in front of the application.
+
+If someone else runs your proxy setup, such as a hosting provider or cloud load balancer, consult their documentation to determine their address ranges, or how many sit in front of your application. If you run it yourself, you must determine this yourself.
+
+To configure `trust proxy`, set it on the Express application instance:
+
+```js
+app.set('trust proxy', '10.0.0.0/8'); // trust every proxy in this range
+app.set('trust proxy', ['203.0.113.10', '203.0.113.11']); // trust only these two proxies
+```
+
+Prefer setting an address range or list when you know what addresses your proxies connect from, and only use a count when you do not. A count trusts whatever sits at that position in the chain while a list trusts only your proxies, and stops trusting at the first address that isn't one of them. A range or list also has the benefit of not caring how many hops occur and won't break if one hop is added or removed as long as the new proxy is in the range.
+
+```js
+app.set('trust proxy', 1); // for an application behind a single proxy
+```
+
+When `trust proxy` is set, Express starts at the socket address and walks the `X-Forwarded-For` entries from right to left, trusting as many as the setting allows. `req.ip` is the first address it doesn't trust.
+
+Here's an example of an application behind one proxy, where a client sends its own `X-Forwarded-For` header to try to forge an address, and what the application sees depending on the `trust proxy` setting. The proxy appends the client's real address to the `X-Forwarded-For` list and opens a connection to the application:
+
+```text
+socket address:   203.0.113.10
+X-Forwarded-For:  198.51.100.7, 192.0.2.44
+```
+
+The socket address is the proxy. `198.51.100.7` is the forged address added by the client. `192.0.2.44` is the client's real address, added to the `X-Forwarded-For` header by the proxy.
+
+| `trust proxy`      | `req.ip`       | Result                                         |
+| ------------------ | -------------- | ---------------------------------------------- |
+| `false`            | `203.0.113.10` | The proxy. Too few hops trusted.               |
+| `['203.0.113.10']` | `192.0.2.44`   | The client. Correct. The proxy is in the list. |
+| `1`                | `192.0.2.44`   | The client. Correct.                           |
+| `2`                | `198.51.100.7` | The forged address. Too many.                  |
+| `true`             | `198.51.100.7` | The forged address. Every entry trusted.       |
+
+When the `trust proxy` setting matches your network topology the correct IP address from the `X-Forwarded-For` header is used. Trusting too few proxies will cause Express to identify the proxy as the client, while trusting too many proxies will allow clients to forge their IP address via the `X-Forwarded-For` header.
+
+`trust proxy` also accepts `true` as an option, but it is never required. Setting it to `true` will trust every entry in the `X-Forwarded-For` header, however many that is, so `req.ip` ends up as the leftmost address, which the client controls.
+
+## Proxy security beyond the setting
+
+Correctly configuring `trust proxy` is only one step in securely deploying behind a proxy.
+
+Setting `trust proxy` makes Express read three `X-Forwarded-*` headers to set information on the request object:
+
+- `X-Forwarded-For` sets `req.ip` and `req.ips`.
+- `X-Forwarded-Proto` sets `req.protocol` and `req.secure`.
+- `X-Forwarded-Host` sets `req.hostname`.
+
+`X-Forwarded-For` is walked by hop count, or checked against a range you set. But the other two headers are not walked. Once your setting is `1` or higher, or your range includes the connecting address, Express uses whatever they contain.
+
+So your proxy must overwrite at least `X-Forwarded-Proto` so a client cannot supply their own. A forged value makes `req.secure` true on a plain HTTP connection, which switches off anything that checks it, such as HTTPS-only redirects or secure cookie logic.
+
+Many proxies do not overwrite `X-Forwarded-Host`, so your application should not derive its own host from the request at all. A forged value pollutes anything built from `req.hostname`, such as a password reset link that now points at the attacker's domain. Put your canonical host in configuration and use that instead.
+
+When using a count as your `trust proxy` setting it is important to ensure your application is only reachable through the proxy and not directly from the internet. This is always a good idea behind a proxy, but applications that use a count are more exposed than those that use a range: a range checks the connecting address against your list before trusting any forwarded header, whereas a count trusts whichever address connected as the first hop, without checking what it is.
+
+## Related
+
+- [Express behind proxies](/guide/behind-proxies)
+- [`trust proxy` in the API reference](/api/application/#options-for-trust-proxy-setting)
