@@ -70,6 +70,7 @@
       "behindProxies": "Behind proxies",
       "databaseIntegration": "Database integration",
       "overridingExpressApi": "Overriding the Express API",
+      "security": "Security",
 
       "migratingTo4": "Moving to Express 4",
       "migratingTo5": "Moving to Express 5",
@@ -113,6 +114,7 @@
       "behindProxies": "Express behind proxies",
       "databaseIntegration": "Database integration guide",
       "overridingExpressApi": "Overriding the Express API guide",
+      "security": "Security checklist",
 
       "application": "Application overview",
       "request": "Request overview",
