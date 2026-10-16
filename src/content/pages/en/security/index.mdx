@@ -67,8 +67,8 @@ If you believe you have discovered a security vulnerability in Express, please s
 
 ## Proxies and client identity
 
-- Is `trust proxy` [set to match your deployment](/security/proxies), and never `true` when a client can reach the application directly?
-- If your application is behind a proxy, is [`trust proxy` configured](/security/proxies) so features using `req.ip`, `req.hostname`, or `req.protocol` receive the correct client information?
+- Is `trust proxy` [set to match your deployment](/security/proxies#set-trust-proxy-to-match-your-deployment), and is the application reachable only through that proxy?
+- Does your proxy [overwrite `X-Forwarded-Proto` and `X-Forwarded-Host`](/security/proxies#proxy-security-beyond-the-setting), so a client cannot set `req.protocol` or `req.hostname`?
 
 ## Error handling
 
