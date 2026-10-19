@@ -23,12 +23,14 @@ app.set('trust proxy', '10.0.0.0/8'); // trust every proxy in this range
 app.set('trust proxy', ['203.0.113.10', '203.0.113.11']); // trust only these two proxies
 ```
 
-Only set `trust proxy` to a count (integer value) when you don't know the addresses that your proxies connect from.  Otherwise, always set it to a range or list of addresses.
+Only set `trust proxy` to a count (integer value) when you don't know the addresses that your proxies connect from. Otherwise, always set it to a range or list of addresses.
 
-When you use a count, your application trust whatever sits at that position in the chain. In contrast, when you use a list, your application trusts only the specified addresses, and stops trusting at the first address that isn't one of them. Using a range or list also has the benefit of not caring how many hops occur and won't break if one hop is added or removed as long as the new proxy is in the range.
+When you use a count, your application trusts whatever sits at that position in the chain. In contrast, when you use a list, your application trusts only the specified addresses, and stops trusting at the first address that isn't one of them.
+
+Using a range or list also has the benefit of not caring how many hops occur and won't break if one hop is added or removed as long as all proxies remain in the range. A path with fewer hops than the configured count makes client IP forgery possible via `X-Forwarded-For`, and a path with more hops can incorrectly identify one of the proxies as the client.
 
 ```js
-app.set('trust proxy', 1); // for an application behind a single proxy
+app.set('trust proxy', 1); // setting based on count, for an application behind a single proxy
 ```
 
 When `trust proxy` is set, Express starts at the socket address and walks the `X-Forwarded-For` entries from right to left, trusting as many as the setting allows. `req.ip` is the first address it doesn't trust.
@@ -73,7 +75,7 @@ So your proxy must overwrite at least `X-Forwarded-Proto` so a client cannot sup
 
 Many proxies do not overwrite `X-Forwarded-Host`, so your application should not derive its own host from the request at all. A forged value pollutes anything built from `req.hostname`, such as a password reset link that now points at the attacker's domain. Put your canonical host in configuration and use that instead.
 
-When using a count as your `trust proxy` setting it is important to ensure your application is only reachable through the proxy and not directly from the internet. This is always a good idea behind a proxy, but applications that use a count are more exposed than those that use a range: a range checks the connecting address against your list before trusting any forwarded header, whereas a count trusts whichever address connected as the first hop, without checking what it is.
+When using a count as your `trust proxy` setting it is important to ensure every possible path to your application passes through exactly that number of proxies. When a path includes fewer proxies than set, such as when direct access from the internet is possible or when it is possible to bypass an outer hop like a CDN and still hit inner proxies, it is possible for clients to forge their IP address via `X-Forwarded-For` headers. When a path has more proxies than the count you set, the application may see the address of one of the proxies as the client IP even with a completely innocent `X-Forwarded-For` header. A range does not have this problem: an address that is not on your list is never trusted, whatever position it arrives in.
 
 ## Related
 
