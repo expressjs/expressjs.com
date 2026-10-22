@@ -697,8 +697,8 @@ To handle errors related to running the server (such as `EADDRINUSE`), attach th
 const server = app.listen(8080, '0.0.0.0', () => {
   console.log(`Listening on ${JSON.stringify(server.address())}`);
 });
-server.on('error', function(err) {
-  console.error(`Error starting the server: ${err.message}`);
+server.on('error', (error) => {
+  console.error(`Error starting the server: ${error.message}`);
   process.exitCode = 1;
 });
 ```
