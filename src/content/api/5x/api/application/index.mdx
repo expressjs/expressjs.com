@@ -689,17 +689,17 @@ app.listen('/tmp/sock'); // or listen on a UNIX socket
 
 <Alert type="info">
 
-When the server emits an `error` event (such as `EADDRINUSE`), the error is passed to the provided
-`callback`. Handle it inside the callback:
+To handle errors related to running the server (such as `EADDRINUSE`), attach the callback to `error` event using `server.on()` method as shown below:
 
 </Alert>
 
 ```js
-const server = app.listen(8080, '0.0.0.0', (error) => {
-  if (error) {
-    throw error; // e.g. EADDRINUSE
-  }
+const server = app.listen(8080, '0.0.0.0', () => {
   console.log(`Listening on ${JSON.stringify(server.address())}`);
+});
+server.on('error', function(err) {
+  console.error(`Error starting the server: ${err.message}`);
+  process.exitCode = 1;
 });
 ```
 
