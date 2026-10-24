@@ -323,3 +323,51 @@ test('does not double-wrap an already wrapped table', () => {
   assert.equal(wrapper.children.length, 1);
   assert.equal(wrapper.children[0].tagName, 'table');
 });
+
+for (const type of ['mdxJsxFlowElement', 'mdxJsxTextElement']) {
+  for (const name of ['class', 'className']) {
+    test(`does not double-wrap a table inside an MDX ${type} with ${name}`, () => {
+      const table = { type, name: 'table', attributes: [], children: [] };
+      const wrapper = {
+        type,
+        name: 'div',
+        attributes: [
+          {
+            type: 'mdxJsxAttribute',
+            name,
+            value: 'custom\t table-scroller\n responsive',
+          },
+        ],
+        children: [table],
+      };
+      const tree = { type: 'root', children: [wrapper] };
+
+      rehypeAccessibleTables()(tree);
+
+      assert.equal(tree.children[0], wrapper);
+      assert.deepEqual(wrapper.children, [table]);
+    });
+  }
+}
+
+test('wraps tables when an MDX parent only has a similarly named class', () => {
+  const table = { type: 'mdxJsxFlowElement', name: 'table', attributes: [], children: [] };
+  const parent = {
+    type: 'mdxJsxFlowElement',
+    name: 'div',
+    attributes: [
+      {
+        type: 'mdxJsxAttribute',
+        name: 'className',
+        value: 'custom-table-scroller table-scroller-extra',
+      },
+    ],
+    children: [table],
+  };
+  const tree = { type: 'root', children: [parent] };
+
+  rehypeAccessibleTables()(tree);
+
+  assert.deepEqual(parent.children[0].properties.className, ['table-scroller']);
+  assert.deepEqual(parent.children[0].children, [table]);
+});

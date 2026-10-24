@@ -63,11 +63,27 @@ export default function rehypeAccessibleTables() {
       }
     };
 
-    const isTableScroller = (node) =>
-      node?.type === 'element' &&
-      node.tagName === 'div' &&
-      Array.isArray(node.properties?.className) &&
-      node.properties.className.includes('table-scroller');
+    const hasScrollerClass = (className) =>
+      Array.isArray(className)
+        ? className.includes('table-scroller')
+        : typeof className === 'string' && className.split(/\s+/).includes('table-scroller');
+
+    const isTableScroller = (node) => {
+      if (getTagName(node) !== 'div') {
+        return false;
+      }
+
+      if (node.type === 'element') {
+        return hasScrollerClass(node.properties?.className);
+      }
+
+      return node.attributes?.some(
+        (attribute) =>
+          attribute?.type === 'mdxJsxAttribute' &&
+          (attribute.name === 'class' || attribute.name === 'className') &&
+          hasScrollerClass(attribute.value)
+      );
+    };
 
     /*
      * Remember which <tr> belongs to <thead> or <tbody>.
