@@ -10,8 +10,8 @@ For an introduction to routing, see [Basic routing](/starter/basic-routing).
 For an introduction to routing, see [Basic routing](/starter/basic-routing).
 
 HTTPメソッドに対応するExpress `app` オブジェクトのメソッドを使用してルーティングを定義します。
-のように、`app。 POST リクエストを処理する GET リクエストと `app.post\` を処理します。 For a full list,
-see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+のように、`app。 POST リクエストを処理する GET リクエストと `app.post\` を処理します。 You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
 言い換えれば、アプリケーションは指定されたルートとメソッドに一致するリクエストを「リッスン」します。 マッチを検出すると、指定されたコールバック関数を呼び出します。 These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method.

@@ -19,36 +19,7 @@ _Middleware_ functions are functions that have access to the [request object](/a
 
 下图展示了中间件函数调用的组成要素：
 
-<div class="table-scroller">
-<table id="mw-fig">
-<tr>
-<td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
-</td>
-<td class="mw-fig-callouts">
-<div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
-
-<div class="callout" id="callout2">
-  中间件函数适用的路径（路由）。
-</div>
-
-<div class="callout" id="callout3">
-  The middleware function.
-</div>
-
-<div class="callout" id="callout4">
-  中间件函数的回调参数，按照惯例命名为 “next”。
-</div>
-
-<div class="callout" id="callout5">
-  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
-</div>
-
-<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
-</td>
-</tr>
-</table>
-</div>
+![Elements of a middleware function call](/images/express-mw.png)
 
 从 Express 5 开始，返回 Promise 的中间件函数在被拒绝或抛出错误时，会自动调用 `next(value)`。 `next` 函数将以被拒绝的值或抛出的错误对象作为参数被调用。
 

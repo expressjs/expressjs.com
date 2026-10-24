@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.3.0"
+  version="2.4.0"
   github="https://github.com/expressjs/body-parser"
   npm="https://www.npmjs.com/package/body-parser"
 />
@@ -73,6 +73,12 @@ const text = require('body-parser/text');
 
 `bodyParser` 对象提供了多种工厂方法来创建中间件。所有中间件在请求头`Content-Type`与`type`选项匹配时，都会将解析后的请求体存入`req.body`属性。
 
+**Note** As of v2, `req.body` is left `undefined` when no body is parsed (for
+example when the request has neither `Content-Length` nor `Transfer-Encoding`,
+or when `Content-Type` does not match). In v1, `req.body` was always initialized
+to `{}`. Code that assumes `req.body` is always an object should use optional
+chaining (for example `req.body?.username`) or set a default.
+
 该模块抛出的各类错误在[错误章节](#errors)中有相关说明。
 
 ### bodyParser.json([options])
@@ -107,7 +113,8 @@ Unicode encoding of the body.
 
 ##### strict
 
-设为 `true` 时，仅接受数组与对象；设为 `false` 时，可接受所有 `JSON.parse` 能够解析的内容。默认值为 `true`。
+When set to `true`, it will only accept arrays and objects; when `false`, it will
+accept anything `JSON.parse` accepts. 默认值为 `true`。
 
 ##### type
 
@@ -292,7 +299,7 @@ verified by the defined `verify` option. `status` 属性值为 `403`，`type` �
 
 ### 输入内容超出解析深度限制
 
-当使用 `bodyParser.urlencoded` 并将 `extended` 配置为 `true` 时，若传入参数嵌套层级超过 `depth` 配置上限，就会触发该错误。 `status` 属性值为 `400`。建议检查 `depth` 配置项，评估是否需要调大该数值。当 `depth` 配置项设为默认值 32 时，不会抛出该错误。
+当使用 `bodyParser.urlencoded` 并将 `extended` 配置为 `true` 时，若传入参数嵌套层级超过 `depth` 配置上限，就会触发该错误。 `status` 属性值为 `400`。建议检查 `depth` 配置项，评估是否需要调大该数值。 With the default `depth` of `32`, an input with 33 or more levels of nesting gets this error.
 
 ## Examples
 

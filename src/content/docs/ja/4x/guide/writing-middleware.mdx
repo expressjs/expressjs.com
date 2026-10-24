@@ -19,36 +19,7 @@ _Middleware_ 関数は、[request object](/api#req) (`req`) にアクセスで�
 
 次の図はミドルウェア関数呼び出しの要素を示しています。
 
-<div class="テーブルスクロール">
-<table id="mw-fig">
-<tr>
-<td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" alt="ミドルウェア関数呼び出しの要素" id="mw-fig-img" />
-</td>
-<td class="mw-fig-callouts">
-<div class="callout" id="callout1">ミドルウェア関数が適用されるHTTPメソッド。</div>
-
-<div class="callout" id="callout2">
-  ミドルウェア関数が適用されるパス(ルート)。
-</div>
-
-<div class="callout" id="callout3">
-  ミドルウェア関数。
-</div>
-
-<div class="callout" id="callout4">
-  規約ごとに「next」と呼ばれるミドルウェア関数へのコールバック引数。
-</div>
-
-<div class="callout" id="callout5">
-  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
-</div>
-
-<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
-</td>
-</tr>
-</table>
-</div>
+![Elements of a middleware function call](/images/express-mw.png)
 
 Express 5以降、Promiseを返すミドルウェア関数はエラーの拒否またはスロー時に「next(value)」を呼び出します。 `next`は、拒否された値またはスローされたエラーで呼び出されます。 `next`は、拒否された値またはスローされたエラーで呼び出されます。
 

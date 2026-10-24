@@ -19,36 +19,7 @@ Se a função middleware atual não encerra o ciclo de resposta de solicitação
 
 A figura a seguir mostra os elementos de uma chamada de função middleware:
 
-<div class="table-scroller">
-<table id="mw-fig">
-<tr>
-<td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" alt="Elementos de uma chamada de função middleware" id="mw-fig-img" />
-</td>
-<td class="mw-fig-callouts">
-<div class="callout" id="callout1">método HTTP para o qual se aplicam as funções middleware.</div>
-
-<div class="callout" id="callout2">
-  Caminho (rota) para o qual a função middleware se aplica.
-</div>
-
-<div class="callout" id="callout3">
-  A função middleware.
-</div>
-
-<div class="callout" id="callout4">
-  Argumento de retorno para a função middleware, chamado "próximo" por convenção.
-</div>
-
-<div class="callout" id="callout5">
-  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
-</div>
-
-<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
-</td>
-</tr>
-</table>
-</div>
+![Elementos de uma chamada de função middleware](/images/express-mw.png)
 
 Começando com as funções de middleware Express, funções de intermediário que retornam uma Promessa chamarão `próximo(valor)` quando eles rejeitarem ou lançarem um erro. `next` será chamado com o valor rejeitado ou o erro lançado.
 

@@ -110,7 +110,7 @@ app.all('/secret', (req: Request, res: Response, next: NextFunction) => {
 
 Les chemins de la route, en combinaison avec une méthode de requête, définissent les points de terminaison à partir desquels les requêtes peuvent être faites. Les chemins de route peuvent être des chaînes de caractères ou des expressions régulières. They can also capture values from the URL, as described in [Route parameters](#route-parameters) below.
 
-<Alert type="Infos">
+<Alert type="info">
 
 Express utilise [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 pour correspondre aux chemins de route ; consultez la documentation path-to-regexp pour toutes les possibilités dans la définition des chemins de route.
 [Express Playground Router](https://bjohansebas.github.io/playground-router/) est un outil pratique pour tester les routes Express de base, bien qu'il ne supporte pas la recherche de patterns.
@@ -153,7 +153,7 @@ app.get('/random.text', (req: Request, res: Response) => {
 });
 ```
 
-<Alert type="Alerte">
+<Alert type="alert">
 
 The characters `?`, `+`, `*`, `[]`, `()`, and `!` are reserved and cannot be used as literal characters in route paths, and braces are reserved for [optional segments](#optional-segments). Utilisez `\` pour les échapper si nécessaire.
 
@@ -227,7 +227,7 @@ const sendParams = (req: Request<{ userId: string; bookId: string }>, res: Respo
 app.get('/users/:userId/books/:bookId', sendParams);
 ```
 
-<Alert type="Alerte">
+<Alert type="alert">
 
 The name of route parameters must be a valid JavaScript identifier. Other names can be used by quoting them, for example `:"user-name"`.
 
@@ -247,7 +247,7 @@ Request URL: http://localhost:3000/plantae/Prunus.persica
 req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
-<Alert type="Alerte">
+<Alert type="alert">
 
 Regexp characters are not supported inside string paths, so a parameter cannot be restricted with a suffix such as `:userId(\d+)`. Use an array of paths or a full regular expression instead.
 Voir la [syntaxe correspondante à la route des chemins](/en/guide/migrating-5#path-syntax) pour plus d'informations.
@@ -325,7 +325,7 @@ app.get('/:file{.:ext}', (req: Request, res: Response) => {
 The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
 
 ```js
-app.get('/user/\{:id}', (req, res) => {
+app.get('/user/{:id}', (req, res) => {
   // GET /user/42 => req.params = { id: '42' }
   // GET /user/ => req.params = {}
   // GET /user => 404, only the parameter is optional
@@ -342,7 +342,7 @@ app.get('/order{/:id}', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/\{:id}', (req: Request, res: Response) => {
+app.get('/user/{:id}', (req: Request, res: Response) => {
   // GET /user/42 => req.params = { id: '42' }
   // GET /user/ => req.params = {}
   // GET /user => 404, only the parameter is optional
@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Ne confondez pas la position de la barre oblique dans le chemin de la route avec le [paramètre `strict routing`](/api/application/#application-settings), qui concerne l'URL de la requête : il contrôle si une URL se terminant par une barre oblique que le chemin de la route n'exige pas correspond quand même. Par exemple, une requête vers `/order/` correspond par défaut à la route `/order{/:id}`, mais renvoie une erreur 404 lorsque strict routing est activé ; la barre oblique finale de `/user/` n'est pas concernée car la route `/user/\{:id}` l'exige. Toutes les requêtes commentées dans les exemples ci-dessus se comportent de la même manière quel que soit ce paramètre.
+Ne confondez pas la position de la barre oblique dans le chemin de la route avec le [paramètre `strict routing`](/api/application/#application-settings), qui concerne l'URL de la requête : il contrôle si une URL se terminant par une barre oblique que le chemin de la route n'exige pas correspond quand même. Par exemple, une requête vers `/order/` correspond par défaut à la route `/order{/:id}`, mais renvoie une erreur 404 lorsque strict routing est activé ; la barre oblique finale de `/user/` n'est pas concernée car la route `/user/{:id}` l'exige. Toutes les requêtes commentées dans les exemples ci-dessus se comportent de la même manière quel que soit ce paramètre.
 
 ## Gestionnaires de routes
 
