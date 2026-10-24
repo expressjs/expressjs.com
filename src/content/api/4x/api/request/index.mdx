@@ -983,6 +983,17 @@ Body-parsing middleware must be loaded for `req.param()` to work predictably. Re
         <Param name="combine" type="Boolean" default="false">
           Specify if overlapping and adjacent ranges should be combined. When `true`, ranges are
           combined and returned as if they were specified that way in the header.
+
+          ```js
+          // Range: bytes=0-99,50-149
+          const separate = req.range(1000, { combine: false });
+          console.log(separate[0]); // => { start: 0, end: 99 }
+          console.log(separate[1]); // => { start: 50, end: 149 }
+
+          const combined = req.range(1000, { combine: true });
+          console.log(combined[0]); // => { start: 0, end: 149 }
+          ```
+
         </Param>
       </Fragment>
     </Param>
