@@ -314,8 +314,8 @@ app.use('/admin', admin);
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -388,8 +388,8 @@ app.all('/api/{*splat}', requireAuthentication);
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -597,8 +597,8 @@ app.get('title');
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -768,8 +768,8 @@ actually supported.
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -789,9 +789,13 @@ Routes an HTTP request, where METHOD is the HTTP method of the request, such as 
 PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 `app.post()`, `app.put()`, and so on. See [Routing methods](#routing-methods) below for the complete list.
 
-Route paths match the complete request path for a route. Unlike [app.use()](#appuse), a route path
+String route paths match the complete request path. Unlike [app.use()](#appuse), a string route path
 does not match path prefixes by default. For example, `app.get('/apple', ...)` matches "/apple" but
 not "/apple/images" unless the path pattern is written to match that longer path.
+
+Regular expression route paths follow the expression's own matching rules. For example,
+`app.get(/apple/, ...)` also matches "/apple/images". Use `^` and `$` to require a complete match,
+as in `app.get(/^\/apple$/, ...)`.
 
 #### Routing methods
 
@@ -1051,8 +1055,8 @@ it is usually better to use [req.baseUrl](/api/request/#reqbaseurl) to get the c
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -1094,8 +1098,8 @@ app.post('/', (req: Request, res: Response) => {
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
@@ -1136,8 +1140,8 @@ app.put('/', (req: Request, res: Response) => {
     <Param name="path" type="String | RegExp | Array">
       The path for which the route callback is invoked; can be any of: a string representing a path,
       a path pattern, a regular expression pattern to match paths, or an array of combinations of
-      any of the above. Route paths match complete request paths; for syntax examples, see [Path
-      examples](#path-examples).
+      any of the above. String route paths match complete request paths; for syntax examples, see
+      [Path examples](#path-examples).
     </Param>
     <Param name="callback" type="Function | Function[]">
       Callback functions; can be: a middleware function, a series of middleware functions (separated
