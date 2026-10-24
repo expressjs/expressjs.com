@@ -169,7 +169,7 @@ Database calls fail: connections drop, queries time out, constraints are violate
 
 ### Cancel work when the client disconnects
 
-Since Node.js 24.16.0, every request exposes [req.signal](https://nodejs.org/api/http.html#messagesignal), an `AbortSignal` that is aborted when the client disconnects. Pass it to any cancellation-aware API, such as a database driver that supports abort signals, so your app stops doing work nobody is waiting for:
+Since Node.js 24.20.0, every request exposes [req.signal](https://nodejs.org/api/http.html#messagesignal), an `AbortSignal` that is aborted when the client disconnects. Pass it to any cancellation-aware API, such as a database driver that supports abort signals, so your app stops doing work nobody is waiting for:
 
 ```js
 app.get('/reports', async (req, res) => {
