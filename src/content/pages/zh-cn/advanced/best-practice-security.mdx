@@ -6,9 +6,9 @@ description: 了解Express应用部署至生产环境需遵循的关键安全最
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-术语\*\*「生产环境」**指软件生命周期中应用或API面向终端用户、调用方正式对外开放的阶段。 与之相对，**「开发环境」**阶段中，开发者仍在编写与测试代码，应用暂不对外开放访问。 对应的系统环境分别称作**生产环境**与**开发环境\*\*。
+术语\*\*「生产环境」**指软件生命周期中应用或API面向终端用户、调用方正式对外开放的阶段。与之相对，**「开发环境」**阶段中，开发者仍在编写与测试代码，应用暂不对外开放访问。对应的系统环境分别称作**生产环境**与**开发环境\*\*。
 
-开发环境与生产环境通常配置不同，需求差异悬殊。 在开发环境中可行的配置，放到生产环境未必适用。 例如：开发环境下可开启详细错误日志用于调试，但相同配置在生产环境中会带来安全隐患。 开发阶段无需考量扩展性、可靠性与性能，而在生产环境中这些指标至关重要。
+开发环境与生产环境通常配置不同，需求差异悬殊。在开发环境中可行的配置，放到生产环境未必适用。例如：开发环境下可开启详细错误日志用于调试，但相同配置在生产环境中会带来安全隐患。开发阶段无需考量扩展性、可靠性与性能，而在生产环境中这些指标至关重要。
 
 <Alert type="info">
 
@@ -19,13 +19,13 @@ Policies and Procedures.
 
 ## 请勿使用已弃用或存在漏洞的 Express 版本
 
-Express 2.x 与 3.x 版本已不再维护。 这些版本中的安全与性能问题将不再进行修复。 不要使用它们！ If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
+Express 2.x 与 3.x 版本已不再维护。这些版本中的安全与性能问题将不再进行修复。不要使用它们！ If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4) or consider [Commercial Support Options](/support#commercial-support-options).
 
 Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/advanced/security-updates). 如若正在使用，请升级至任一稳定版本，优先选择最新版。
 
 ## 使用 TLS
 
-如果您的应用处理或传输敏感数据，请使用 [传输图层安全](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) 来保护连接和数据。 该技术会在客户端向服务器发送数据前对数据进行加密，从而防范部分常见且易实施的攻击。 尽管 AJAX 和 POST 请求在浏览器中不会直观展现、看似处于 “隐藏” 状态，但它们的网络流量容易遭到[抓包分析](https://en.wikipedia.org/wiki/Packet_analyzer)与[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+如果您的应用处理或传输敏感数据，请使用 [传输图层安全](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) 来保护连接和数据。该技术会在客户端向服务器发送数据前对数据进行加密，从而防范部分常见且易实施的攻击。尽管 AJAX 和 POST 请求在浏览器中不会直观展现、看似处于 “隐藏” 状态，但它们的网络流量容易遭到[抓包分析](https://en.wikipedia.org/wiki/Packet_analyzer)与[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
 你或许熟悉安全套接字层（SSL）加密。 In general, we recommend Nginx to handle TLS. 换言之，若此前使用SSL，建议升级至TLS。 In other words, if you were using SSL before, consider upgrading to TLS. For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (TLSRef)](https://docs.tlsref.org/server-side-tls.html#recommended-configurations).
 
@@ -33,8 +33,7 @@ Also ensure you are not using any of the vulnerable Express versions listed on t
 
 ## 切勿信任用户输入
 
-对 Web 应用而言，最关键的安全要求之一是对用户输入进行合理的验证与处理。 这类风险形式多样，本文不逐一列举。
-最终，你需要全权负责验证并正确处理应用接收的各类用户输入。
+对 Web 应用而言，最关键的安全要求之一是对用户输入进行合理的验证与处理。这类风险形式多样，本文不逐一列举。最终，你需要全权负责验证并正确处理应用接收的各类用户输入。
 
 ### 防止开放重定向
 
@@ -47,7 +46,7 @@ Also ensure you are not using any of the vulnerable Express versions listed on t
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host !== 'example.com') {
+    if (new URL(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
@@ -74,10 +73,10 @@ Helmet 是用于设置安全相关 HTTP 响应头的中间件函数。 Helmet �
 - `X-Download-Options`：强制文件以下载形式保存（仅适用于 IE 浏览器）
 - `X-Frameworks`: 减少 [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking) 攻击的遗留标题
 - `X-Permitted-Cross-Domain-Policies`：控制Adobe系列产品（如Acrobat）的跨域行为
-- `X-Powered-By`：有关Web服务器的信息。 因易被用于简易攻击而移除
+- `X-Powered-By`：有关Web服务器的信息。因易被用于简易攻击而移除
 - `X-XSS-Protection`：用于缓解[XSS攻击](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting)的旧式请求头，但会带来安全隐患，因此Helmet将其禁用
 
-每个请求头均可配置或禁用。 如需了解更多详情，请访问[其官方文档网站][helmet]。
+每个请求头均可配置或禁用。如需了解更多详情，请访问[其官方文档网站][helmet]。
 
 像安装其他模块一样安装 Helmet：
 
@@ -106,9 +105,8 @@ app.use(helmet());
 
 ## 减少指纹识别
 
-它有助于提供额外的安全层，降低攻击者识别服务器所使用软件的能力，这种行为被称为“指纹识别”。 尽管其本身并非安全漏洞，
-但降低应用程序的指纹识别能力可提升其整体安全状况。
-服务器软件可通过其响应特定请求的特征进行指纹识别，例如通过HTTP响应头中的特征。
+它有助于提供额外的安全层，降低攻击者识别服务器所使用软件的能力，这种行为被称为“指纹识别”。尽管其本身并非安全漏洞，
+但降低应用程序的指纹识别能力可提升其整体安全状况。服务器软件可通过其响应特定请求的特征进行指纹识别，例如通过HTTP响应头中的特征。
 
 默认情况下，Express 会发送 `X-Powered-By` 响应头，你可以使用 `app.disable()` 方法将其禁用：
 
@@ -118,7 +116,7 @@ app.disable('x-powered-by');
 
 <Alert type="info">
 
-禁用 `X-Powered-By` 响应头并不能阻止老练的攻击者识别出应用正在运行 Express。 这或许能防范随意的漏洞利用，但仍有其他方法可以识别应用正在运行 Express。
+禁用 `X-Powered-By` 响应头并不能阻止老练的攻击者识别出应用正在运行 Express。这或许能防范随意的漏洞利用，但仍有其他方法可以识别应用正在运行 Express。
 
 </Alert>
 
@@ -151,13 +149,13 @@ app.use((err, req, res, next) => {
 - [express-session](https://www.npmjs.com/package/express-session)：替代了 Express 3.x 内置的 `express.session` 中间件。
 - [cookie-session](https://www.npmjs.com/package/cookie-session)：替代了 Express 3.x 内置的 `express.cookieSession` 中间件。
 
-这两个模块的主要区别在于它们存储 Cookie 会话数据的方式。 [express-session](https://www.npmjs.com/package/express-session) 中间件将会话数据存储在服务器端；它仅将会话ID保存到Cookie本身，不存储会话数据。 默认情况下，它使用内存存储，并非为生产环境设计。 In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
+这两个模块的主要区别在于它们存储 Cookie 会话数据的方式。 [express-session](https://www.npmjs.com/package/express-session) 中间件将会话数据存储在服务器端；它仅将会话ID保存到Cookie本身，不存储会话数据。默认情况下，它使用内存存储，并非为生产环境设计。 In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
 
-相比之下，[cookie-session](https://www.npmjs.com/package/cookie-session) 中间件实现基于Cookie的存储：它将整个会话序列化后存储到Cookie中，而非仅存储会话密钥。 仅当会话数据相对较小且易于编码为基本类型值（而非对象）时，才使用它。 尽管浏览器应支持每个Cookie至少4096字节，但为确保不超出限制，每个域的Cookie大小请勿超过4093字节。 此外，请注意**Cookie数据对客户端是可见的**，因此如果有任何需要保证数据安全或隐藏的需求，那么 `express-session` 会是更合适的选择。
+相比之下，[cookie-session](https://www.npmjs.com/package/cookie-session) 中间件实现基于Cookie的存储：它将整个会话序列化后存储到Cookie中，而非仅存储会话密钥。仅当会话数据相对较小且易于编码为基本类型值（而非对象）时，才使用它。尽管浏览器应支持每个Cookie至少4096字节，但为确保不超出限制，每个域的Cookie大小请勿超过4093字节。此外，请注意**Cookie数据对客户端是可见的**，因此如果有任何需要保证数据安全或隐藏的需求，那么 `express-session` 会是更合适的选择。
 
 ### 不要使用默认的会话Cookie名称
 
-使用默认会话Cookie名称会使你的应用易遭受攻击。 由此带来的安全隐患与`X-Powered-By`类似：潜在攻击者可借此识别服务器指纹，并针对性发起攻击。
+使用默认会话Cookie名称会使你的应用易遭受攻击。由此带来的安全隐患与`X-Powered-By`类似：潜在攻击者可借此识别服务器指纹，并针对性发起攻击。
 
 若要避免此问题，请使用通用的Cookie名称；例如使用 [express-session](https://www.npmjs.com/package/express-session) 中间件：
 
@@ -190,8 +188,8 @@ app.use(
 
 - `secure` - 确保浏览器只通过 HTTPS 发送 cookie 。
 - `httpOnly` - 确保 Cookie 仅通过 HTTP(S) 发送，不会被客户端 JavaScript 访问，有助于防范跨站脚本攻击。
-- `domain` - 表示 Cookie 的所属域名；用于将其与请求 URL 所在的服务器域名进行比对。 若匹配，则下一步检查路径属性。
-- `path` - 表示 Cookie 的路径；用于将其与请求路径进行比对。 若域名与路径均匹配，则在请求中发送该 Cookie。
+- `domain` - 表示 Cookie 的所属域名；用于将其与请求 URL 所在的服务器域名进行比对。若匹配，则下一步检查路径属性。
+- `path` - 表示 Cookie 的路径；用于将其与请求路径进行比对。若域名与路径均匹配，则在请求中发送该 Cookie。
 - `expires` - use to set expiration date for persistent cookies.
 
 以下是使用 [cookie-session](https://www.npmjs.com/package/cookie-session) 中间件的示例：
@@ -246,15 +244,15 @@ app.use(
 一种简单且有效的技巧是使用两个指标来阻止授权尝试：
 
 1. 同一用户名和IP地址连续失败的尝试次数。
-2. 某一IP地址在较长时间段内的失败尝试次数。 例如，如果一个IP地址在一天内失败尝试100次，则阻止该IP地址。
+2. 某一IP地址在较长时间段内的失败尝试次数。例如，如果一个IP地址在一天内失败尝试100次，则阻止该IP地址。
 
-[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) 包提供了可简便快捷实现该技巧的工具。 你可以在文档中找到[暴力破解防护示例](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
+[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) 包提供了可简便快捷实现该技巧的工具。你可以在文档中找到[暴力破解防护示例](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
 
 ## 确保你的依赖项安全
 
-使用 npm 管理应用依赖项功能强大且便捷。 但你使用的软件包可能包含严重的安全漏洞，这些漏洞同样会影响你的应用。 应用的安全性仅取决于依赖项中**最薄弱的环节**。
+使用 npm 管理应用依赖项功能强大且便捷。但你使用的软件包可能包含严重的安全漏洞，这些漏洞同样会影响你的应用。应用的安全性仅取决于依赖项中**最薄弱的环节**。
 
-从 npm@6 版本开始，npm 会自动审查每一次安装请求。 此外，你可以使用 `npm audit` 分析你的依赖树。
+从 npm@6 版本开始，npm 会自动审查每一次安装请求。此外，你可以使用 `npm audit` 分析你的依赖树。
 
 ```bash
 $ npm audit
@@ -283,12 +281,12 @@ Keep an eye out for [GitHub Advisory Database](https://github.com/advisories?que
 
 ## 其他注意事项
 
-以下是源自优质文档 [Node.js 安全检查清单](https://blog.risingstack.com/node-js-security-checklist/) 的补充建议。 关于这些建议的所有详细信息，请参阅该博客帖子：
+以下是源自优质文档 [Node.js 安全检查清单](https://blog.risingstack.com/node-js-security-checklist/) 的补充建议。关于这些建议的所有详细信息，请参阅该博客帖子：
 
 - 始终过滤并净化用户输入，防范跨站脚本（XSS）与命令注入攻击。
 - 使用参数化查询或预处理语句防范 SQL 注入攻击。
 - Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
 - 使用 [nmap](https://nmap.org/) 和 [sslyze](https://github.com/nabla-c0d3/sslyze) 工具测试 SSL 加密套件、密钥、重协商配置以及证书有效性。
-- Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
+- Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
 [helmet]: https://helmetjs.github.io/

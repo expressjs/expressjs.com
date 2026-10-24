@@ -4,6 +4,7 @@ description: Learn how to write custom middleware functions for Express.js appli
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Middleware_ functions are functions that have access to the [request object](/api#req) (`req`), the [response object](/api#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
@@ -171,7 +172,7 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 ### Middleware function requestTime
 
 Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
-to the request object.
+to the [request object](/api/request).
 
 <Alert type="alert">
 
@@ -391,9 +392,13 @@ functions.
 
 </Alert>
 
-Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware).
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## Configurable middleware
 

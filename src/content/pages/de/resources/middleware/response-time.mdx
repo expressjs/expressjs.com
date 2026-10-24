@@ -1,5 +1,5 @@
 ---
-title: antwortzeit-Middleware
+title: response-time Middleware
 description: Antwortzeit für Node.js Server
 ---
 
@@ -9,8 +9,8 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="2.3.4"
-  github="https://github.com/express js/Antwortzeit"
-  npm="https://www.npmjs.com/package/Antwortzeit"
+  github="https://github.com/expressjs/response-time"
+  npm="https://www.npmjs.com/package/response-time"
 />
 
 Antwortzeit für Node.js Server.
@@ -38,7 +38,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 
 ## API
 
-{/* eslint-deaktivieren Sie keine unbenutzten vars */}
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var responseTime = require('response-time');
@@ -60,7 +60,7 @@ contain any of the following keys:
 Die festgelegte Anzahl an Ziffern, die in der Ausgabe enthalten sein sollen, die immer in
 Millisekunden ist, Standardwert ist `3` (z.B.: `2.300ms`).
 
-##### kopf
+##### header
 
 Der Name des zu setzenden Headers, standardmäßig `X-Response-Time`.
 
@@ -77,7 +77,7 @@ als `fn(req, res, time)` aufgerufen, wobei `time` eine Zahl in Millisekunden ist
 
 ## Beispiele
 
-### ausdrucken/verbinden
+### express/connect
 
 ```js
 var express = require('express');
@@ -144,5 +144,5 @@ app.get('/', function (req, res) {
 
 [MIT](https://github.com/expressjs/response-time/blob/HEAD/LICENSE)
 
-[npm-url]: https://npmjs.org/package/Antwortzeit
-[node-url]: https://nodejs.org/de/download
+[npm-url]: https://npmjs.org/package/response-time
+[node-url]: https://nodejs.org/en/download

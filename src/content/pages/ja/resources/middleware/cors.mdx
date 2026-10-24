@@ -17,7 +17,7 @@ CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](/)/[Connect
 
 <Alert type="情報">
 
-**CORS の仕組み** このパッケージはレスポンスヘッダーを設定します。リクエストをブロックしません。 CORS はブラウザーによって強制されます。ヘッダーをチェックし、JavaScript がレスポンスを読み取れるかどうかを決定します。 ブラウザ以外のクライアント (curl, Postman, other servers) は CORS を完全に無視します。 詳細は [MDN CORS ガイド](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) を参照してください。
+**CORS の仕組み** このパッケージはレスポンスヘッダーを設定します。リクエストをブロックしません。 CORS はブラウザーによって強制されます。ヘッダーをチェックし、JavaScript がレスポンスを読み取れるかどうかを決定します。ブラウザ以外のクライアント (curl, Postman, other servers) は CORS を完全に無視します。詳細は [MDN CORS ガイド](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) を参照してください。
 
 </Alert>
 
@@ -37,7 +37,7 @@ CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](/)/[Connect
 ## インストール
 
 これは、 [Node.js](https://nodejs.org/en/) モジュールで、
-[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[npm registry](https://www.npmjs.com/) を介して利用できます。インストールは
 [`npm install` コマンド](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
 <PackageManagerCommand command="npm install cors" />
@@ -188,7 +188,7 @@ routes.
 
 ### CORS設定をリクエストごとに動的にカスタマイズする
 
-特定のルートやリクエストに異なるCORS設定を必要とするAPIでは、受信するリクエストに基づいて動的にCORSオプションを生成できます。 `cors` ミドルウェアは静的なオプションの代わりに関数を渡すことでこれを実現できます。 この関数は、受信リクエストごとに呼び出され、適切な CORS オプションを返すためにコールバックパターンを使用する必要があります。
+特定のルートやリクエストに異なるCORS設定を必要とするAPIでは、受信するリクエストに基づいて動的にCORSオプションを生成できます。 `cors` ミドルウェアは静的なオプションの代わりに関数を渡すことでこれを実現できます。この関数は、受信リクエストごとに呼び出され、適切な CORS オプションを返すためにコールバックパターンを使用する必要があります。
 
 この関数は受け入れられます：
 
@@ -236,19 +236,19 @@ app.listen(80, function () {
 
 ## 設定オプション
 
-- `origin`: **Access-Control-Allow-Origin** CORS ヘッダーを設定します。 可能な値:
+- `origin`: **Access-Control-Allow-Origin** CORS ヘッダーを設定します。可能な値:
   - `Boolean` - `origin`を`true`に設定し、`req.header('Origin')`で定義されている[request origin](https://datatracker.ietf.org/doc/html/draft-abarth-origin-09)を反映させるか、CORSを無効にするには`false`に設定します。
-  - `String` - 特定の原点に`origin`を設定します。 例えば、
+  - `String` - 特定の原点に`origin`を設定します。例えば、
     - `"http://example.com"` からのリクエストのみ許可されます。
     - すべてのドメインを許可する `"*"` 。
-  - `RegExp` - リクエストオリジンをテストするために使用される正規表現パターンに`origin`を設定します。 一致する場合はリクエストのオリジンが反映されます。 例えば、パターン `/example\.com$/` は "example.com" で終わるオリジンからのリクエストを反映します。
-  - `Array` - 有効な原点の配列に`origin`を設定します。 各原点は `String` または `RegExp` にすることができます。 例えば、 `["http://example1.com", /\.example2\.com$/]`は"http://example1.com"または"example2.com"のサブドメインからのリクエストを受け付けます。
-  - `Function` - カスタムロジックを実装する関数に`origin`を設定します。 この関数はリクエストのオリジンを最初のパラメータとして受け取り、コールバックを `callback(err, と呼ばれます。 origin)`, `origin` は `origin` オプションの関数ではない値です。
-- `methods`: **Access-Control-Allow-Methods** CORS ヘッダーを設定します。 カンマ区切り文字列 (ex: 'GET,PUT,POST') または配列 (例: `['GET', 'PUT', 'POST']`) を想定します。
-- `allowedHeaders`: **Access-Control-Allow-Headers** CORS ヘッダーを設定します。 カンマ区切り文字列 (例: 'Content-Type,Authorization') または配列 (例: `['Content-Type', 'Authorization']`) が期待されます。 指定しない場合は、リクエストの **Access-Control-Request-Headers** ヘッダーに指定されたヘッダーを反映します。
-- `exposedHeaders`: **Access-Control-Expose-Headers** CORS ヘッダーを設定します。 カンマ区切り文字列 (例: 'Content-Range,X-Content-Range') または配列 (例: `['Content-Range', 'X-Content-Range']`) を期待します。 指定されていない場合、カスタムヘッダーは公開されません。
-- `credentials`: **Access-Control-Allow-Credentials** CORS ヘッダーを設定します。 ヘッダを渡す場合は `true` に設定します。それ以外の場合は省略されます。
-- `maxAge`: **Access-Control-Max-Age** CORS ヘッダーを設定します。 ヘッダを渡すための整数に設定します。それ以外の場合は省略されます。
+  - `RegExp` - リクエストオリジンをテストするために使用される正規表現パターンに`origin`を設定します。一致する場合はリクエストのオリジンが反映されます。例えば、パターン `/example\.com$/` は "example.com" で終わるオリジンからのリクエストを反映します。
+  - `Array` - 有効な原点の配列に`origin`を設定します。各原点は `String` または `RegExp` にすることができます。例えば、 `["http://example1.com", /\.example2\.com$/]`は"http://example1.com"または"example2.com"のサブドメインからのリクエストを受け付けます。
+  - `Function` - カスタムロジックを実装する関数に`origin`を設定します。この関数はリクエストのオリジンを最初のパラメータとして受け取り、コールバックを `callback(err, と呼ばれます。 origin)`, `origin` は `origin` オプションの関数ではない値です。
+- `methods`: **Access-Control-Allow-Methods** CORS ヘッダーを設定します。カンマ区切り文字列 (ex: 'GET,PUT,POST') または配列 (例: `['GET', 'PUT', 'POST']`) を想定します。
+- `allowedHeaders`: **Access-Control-Allow-Headers** CORS ヘッダーを設定します。カンマ区切り文字列 (例: 'Content-Type,Authorization') または配列 (例: `['Content-Type', 'Authorization']`) が期待されます。指定しない場合は、リクエストの **Access-Control-Request-Headers** ヘッダーに指定されたヘッダーを反映します。
+- `exposedHeaders`: **Access-Control-Expose-Headers** CORS ヘッダーを設定します。カンマ区切り文字列 (例: 'Content-Range,X-Content-Range') または配列 (例: `['Content-Range', 'X-Content-Range']`) を期待します。指定されていない場合、カスタムヘッダーは公開されません。
+- `credentials`: **Access-Control-Allow-Credentials** CORS ヘッダーを設定します。ヘッダを渡す場合は `true` に設定します。それ以外の場合は省略されます。
+- `maxAge`: **Access-Control-Max-Age** CORS ヘッダーを設定します。ヘッダを渡すための整数に設定します。それ以外の場合は省略されます。
 - `preflightContinue`: CORS のプリフライト応答を次のハンドラに渡します。
 - `optionsSuccessStatus`: いくつかのレガシーブラウザ(IE11、様々なSmartTVs)が`204`でチョークするため、`OPTIONS`リクエストに成功するために使用するステータスコードを提供します。
 
@@ -271,11 +271,11 @@ app.listen(80, function () {
 
 ### "CORSは私のAPIを不正アクセスから保護します"
 
-**いいえ** CORS はアクセス制御ではありません。 どの HTTP クライアント (curl, Postman, 別のサーバー) でも CORS 設定に関係なく API を呼び出すことができます。 APIを保護するには認証と認証を使用してください。
+**いいえ** CORS はアクセス制御ではありません。どの HTTP クライアント (curl, Postman, 別のサーバー) でも CORS 設定に関係なく API を呼び出すことができます。 APIを保護するには認証と認証を使用してください。
 
 ### 「`origin: 'http://example.com'` を設定すると、ドメインが私のサーバーにアクセスできることだけを意味します」
 
-**いいえ** ブラウザはそのオリジンからのJavaScriptのみが応答を読み取ることができます。 サーバーは引き続きすべてのリクエストに応答します。
+**いいえ** ブラウザはそのオリジンからのJavaScriptのみが応答を読み取ることができます。サーバーは引き続きすべてのリクエストに応答します。
 
 ## ライセンス
 

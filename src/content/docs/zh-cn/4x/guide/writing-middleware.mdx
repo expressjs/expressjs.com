@@ -4,6 +4,7 @@ description: 学习如何为 Express.js 应用编写自定义中间件函数，�
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Middleware_ functions are functions that have access to the [request object](/api#req) (`req`), the [response object](/api#res) (`res`), and the `next` function in the application's request-response cycle. `next` 函数是 Express 路由器中的一个函数，调用该函数时，会执行当前中间件之后的下一个中间件。
 
@@ -14,7 +15,7 @@ _Middleware_ functions are functions that have access to the [request object](/a
 - 终止请求-响应周期。
 - 调用堆栈中的下一个中间件。
 
-如果当前中间件函数没有终止请求-响应周期，它必须调用 `next()` 以将控制权传递给下一个中间件函数。 否则，请求将会被挂起。
+如果当前中间件函数没有终止请求-响应周期，它必须调用 `next()` 以将控制权传递给下一个中间件函数。否则，请求将会被挂起。
 
 下图展示了中间件函数调用的组成要素：
 
@@ -53,8 +54,7 @@ _Middleware_ functions are functions that have access to the [request object](/a
 
 ## 示例
 
-以下是一个简单的 Express “Hello World” 应用示例。
-本文的后续部分将为该应用定义并添加三个中间件函数：
+以下是一个简单的 Express “Hello World” 应用示例。本文的后续部分将为该应用定义并添加三个中间件函数：
 一个名为 `myLogger`，用于打印简单的日志信息；一个名为 `requestTime`，用于显示 HTTP 请求的时间戳；还有一个名为 `validateCookies`，用于验证传入的 Cookie。
 
 ```cjs title="index.cjs"
@@ -94,7 +94,7 @@ app.listen(3000);
 
 ### 中间件函数 myLogger
 
-以下是一个名为 `myLogger` 的简单中间件函数示例。 当对应用的请求经过该函数时，它只会打印 "LOGGED"。 该中间件函数被赋值给了一个名为 `myLogger` 的变量。
+以下是一个名为 `myLogger` 的简单中间件函数示例。当对应用的请求经过该函数时，它只会打印 "LOGGED"。该中间件函数被赋值给了一个名为 `myLogger` 的变量。
 
 ```js
 const myLogger = function (req, res, next) {
@@ -120,12 +120,11 @@ needed.
 
 <Alert type="alert">
 
-注意上述代码中对 `next()` 的调用。 调用该函数会执行应用中的下一个中间件函数。 `next()` 函数并非 Node.js 或 Express API 的一部分，而是传递给中间件函数的第三个参数。 `next()` 函数可以被命名为任意名称，但按照惯例，它始终被命名为 `next`。 为避免混淆，请始终遵循此命名惯例。
+注意上述代码中对 `next()` 的调用。调用该函数会执行应用中的下一个中间件函数。 `next()` 函数并非 Node.js 或 Express API 的一部分，而是传递给中间件函数的第三个参数。 `next()` 函数可以被命名为任意名称，但按照惯例，它始终被命名为 `next`。为避免混淆，请始终遵循此命名惯例。
 
 </Alert>
 
-加载中间件函数时，需调用 `app.use()` 并传入该中间件函数。
-例如，以下代码在根路径（/）路由之前加载 `myLogger` 中间件函数。
+加载中间件函数时，需调用 `app.use()` 并传入该中间件函数。例如，以下代码在根路径（/）路由之前加载 `myLogger` 中间件函数。
 
 ```cjs title="index.cjs"
 const express = require('express');
@@ -193,7 +192,8 @@ app.listen(3000);
 
 ### 中间件函数 requestTime
 
-接下来，我们将创建一个名为 `requestTime` 的中间件函数，并向请求对象添加一个名为 `requestTime` 的属性。
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the [request object](/api/request).
 
 <Alert type="alert">
 
@@ -237,7 +237,7 @@ const requestTime = function (req: Request, res: Response, next: NextFunction) {
 };
 ```
 
-该应用现在使用了 `requestTime` 中间件函数。 此外，根路径路由的回调函数使用了中间件函数挂载到`req`（请求对象）上的属性。
+该应用现在使用了 `requestTime` 中间件函数。此外，根路径路由的回调函数使用了中间件函数挂载到`req`（请求对象）上的属性。
 
 ```cjs title="index.cjs"
 const express = require('express');
@@ -405,13 +405,17 @@ app.listen(3000);
 
 <Alert type="alert">
 
-注意 `next()` 是在 `await cookieValidator(req.cookies)` 之后调用的。 这能确保如果 `cookieValidator` 状态变为已兑现，堆栈中的下一个中间件将会被调用。 如果你向 `next()` 函数传入任何内容（字符串 `'route'` 或 `'router'` 除外），Express 会将当前请求视为错误，并跳过所有剩余的非错误处理路由和中间件函数。
+注意 `next()` 是在 `await cookieValidator(req.cookies)` 之后调用的。这能确保如果 `cookieValidator` 状态变为已兑现，堆栈中的下一个中间件将会被调用。如果你向 `next()` 函数传入任何内容（字符串 `'route'` 或 `'router'` 除外），Express 会将当前请求视为错误，并跳过所有剩余的非错误处理路由和中间件函数。
 
 </Alert>
 
-由于你可以访问请求对象、响应对象、堆栈中的下一个中间件函数以及整个 Node.js API，因此中间件函数的用途是无限的。
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware).
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## 可配置中间件
 
