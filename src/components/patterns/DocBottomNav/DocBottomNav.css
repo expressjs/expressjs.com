@@ -12,7 +12,9 @@
   .doc-nav__link--prev,
   .doc-nav__link--next {
     flex-grow: 1;
+    min-width: 0;
     white-space: normal;
+    overflow-wrap: anywhere;
 
     svg {
       flex-shrink: 0;
