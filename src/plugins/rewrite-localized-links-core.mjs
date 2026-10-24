@@ -16,7 +16,7 @@
  *   (`defaultVersion`) for unversioned collections (pages/blog) — is injected.
  * - "Global" pages inside those sections (the `pages`-collection ones, derived
  *   from the menu's `global: true` items) have no versioned URL, so they stay
- *   unversioned. Other sections (`resources`, `support`, `blog`) are never versioned.
+ *   unversioned. Other sections (`resources`, `support`, `blog`, `security`) are never versioned.
  * - Preserves query string and hash fragments.
  * - Skips already-localized paths (e.g. `/en/...`), external URLs, relative
  *   paths and pure-hash anchors.
@@ -32,7 +32,16 @@ import { DEFAULT_VERSION } from '../config/versions.ts';
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Sections whose internal links are localized. */
-const DEFAULT_PREFIXES = ['guide', 'starter', 'api', 'resources', 'advanced', 'support', 'blog'];
+const DEFAULT_PREFIXES = [
+  'guide',
+  'starter',
+  'api',
+  'resources',
+  'advanced',
+  'support',
+  'blog',
+  'security',
+];
 
 /** Sections that carry a version (every other section is language-only). */
 const DEFAULT_VERSIONED_SECTIONS = ['api', 'starter', 'guide', 'advanced'];
