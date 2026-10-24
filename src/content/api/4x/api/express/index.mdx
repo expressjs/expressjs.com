@@ -241,15 +241,43 @@ app.post('/upload', (req: Request, res: Response) => {
   <Fragment slot="attributes">
     <Param name="caseSensitive" type="Boolean" default="false">
       Enable case sensitivity. Disabled by default, treating `/Foo` and `/foo` as the same.
+
+      ```js
+      // caseSensitive: treat "/Foo" and "/foo" as different routes
+      const router = express.Router({ caseSensitive: true });
+      router.get('/Foo', (req, res) => res.send('Matched /Foo exactly'));
+      ```
+
     </Param>
     <Param name="mergeParams" type="Boolean" default="false" since="v4.5.0+">
       Preserve the `req.params` values from the parent router. If the parent and the child have
       conflicting param names, the child's value take precedence.
+
+      ```js
+      // mergeParams: access parent route params in child router
+      const parent = express.Router();
+      const child = express.Router({ mergeParams: true });
+
+      parent.use('/user/:userId', child);
+      child.get('/comments', (req, res) => {
+        // req.params.userId is available because mergeParams: true
+        res.send(`Comments for user ${req.params.userId}`);
+      });
+      ```
+
     </Param>
     <Param name="strict" type="Boolean" default="false">
       Enable strict routing. Disabled by default, `/foo` and `/foo/` are treated the same by the
       router.
+
+      ```js
+      // strict: treat "/foo" and "/foo/" as different routes
+      const strictRouter = express.Router({ strict: true });
+      strictRouter.get('/foo/', (req, res) => res.send('Matched /foo/ with trailing slash'));
+      ```
+
     </Param>
+
   </Fragment>
 </Signature>
 
