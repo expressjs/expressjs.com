@@ -244,22 +244,6 @@ console.dir(req.fresh);
 // => true
 ```
 
-### req.host
-
-<Signature type="String" deprecated="v4.5.0" />
-
-<Alert type="alert">
-
-`req.host` is a deprecated alias of [`req.hostname`](#reqhostname) and returns the same value — the hostname with the port number stripped off. It has emitted a deprecation warning since Express v4.5.0. Use `req.hostname` instead.
-
-</Alert>
-
-```js
-// Host: "example.com:3000"
-console.dir(req.host);
-// => 'example.com'
-```
-
 ### req.hostname
 
 <Signature type="String" />
@@ -285,6 +269,22 @@ more than once.
 ```js
 // Host: "example.com:3000"
 console.dir(req.hostname);
+// => 'example.com'
+```
+
+### req.host
+
+<Signature type="String" deprecated="v4.5.0" />
+
+<Alert type="alert">
+
+`req.host` is a deprecated alias of [`req.hostname`](#reqhostname) and returns the same value — the hostname with the port number stripped off. It has emitted a deprecation warning since Express v4.5.0. Use `req.hostname` instead.
+
+</Alert>
+
+```js
+// Host: "example.com:3000"
+console.dir(req.host);
 // => 'example.com'
 ```
 
