@@ -325,7 +325,7 @@ app.get('/:file{.:ext}', (req: Request, res: Response) => {
 The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
 
 ```js
-app.get('/user/\{:id}', (req, res) => {
+app.get('/user/{:id}', (req, res) => {
   // GET /user/42 => req.params = { id: '42' }
   // GET /user/ => req.params = {}
   // GET /user => 404, only the parameter is optional
@@ -342,7 +342,7 @@ app.get('/order{/:id}', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/\{:id}', (req: Request, res: Response) => {
+app.get('/user/{:id}', (req: Request, res: Response) => {
   // GET /user/42 => req.params = { id: '42' }
   // GET /user/ => req.params = {}
   // GET /user => 404, only the parameter is optional
@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-라우트 경로에서 슬래시의 위치를 요청 URL에 관한 [`strict routing` 설정](/api/application/#application-settings)과 혼동하지 마세요. 이 설정은 라우트 경로가 요구하지 않는 슬래시로 끝나는 URL이 여전히 일치하는지를 제어합니다. 예를 들어 `/order/` 요청은 기본적으로 `/order{/:id}` 라우트와 일치하지만, strict routing이 활성화되면 404 오류를 반환합니다. `/user/`의 끝 슬래시는 `/user/\{:id}` 라우트가 이를 요구하므로 영향을 받지 않습니다. 위 예제에서 주석으로 표시된 모든 요청은 이 설정과 관계없이 동일하게 동작합니다.
+라우트 경로에서 슬래시의 위치를 요청 URL에 관한 [`strict routing` 설정](/api/application/#application-settings)과 혼동하지 마세요. 이 설정은 라우트 경로가 요구하지 않는 슬래시로 끝나는 URL이 여전히 일치하는지를 제어합니다. 예를 들어 `/order/` 요청은 기본적으로 `/order{/:id}` 라우트와 일치하지만, strict routing이 활성화되면 404 오류를 반환합니다. `/user/`의 끝 슬래시는 `/user/{:id}` 라우트가 이를 요구하므로 영향을 받지 않습니다. 위 예제에서 주석으로 표시된 모든 요청은 이 설정과 관계없이 동일하게 동작합니다.
 
 ## Route handlers
 
@@ -556,7 +556,7 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 You can create chainable route handlers for a route path by using `app.route()`.
 Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
-|## app.route()You can create chainable route handlers for a rou
+\|## app.route()You can create chainable route handlers for a rou
 
 ```js
 app

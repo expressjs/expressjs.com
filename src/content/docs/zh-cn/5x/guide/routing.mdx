@@ -1,5 +1,5 @@
 ---
-title: Routing
+title: 路由
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, typing requests and responses in TypeScript, and using Router for modular routing.
 ---
 
@@ -10,8 +10,8 @@ For an introduction to routing, see [Basic routing](/starter/basic-routing).
 For an introduction to routing, see [Basic routing](/starter/basic-routing).
 
 你可以使用 Express `app` 对象中与 HTTP 方法对应的方法来定义路由；
-例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 For a full list,
-see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
 换句话说，应用程序会“监听”匹配指定路由和方法的请求，当检测到匹配时，就会调用指定的回调函数。 These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method.
@@ -329,7 +329,7 @@ app.get('/:file{.:ext}', (req: Request, res: Response) => {
 The braces can also wrap a whole parameter to make it optional. Note that everything inside the braces is optional, so the position of the slash matters:
 
 ```js
-app.get('/user/\{:id}', (req, res) => {
+app.get('/user/{:id}', (req, res) => {
   // GET /user/42 => req.params = { id: '42' }
   // GET /user/ => req.params = {}
   // GET /user => 404, only the parameter is optional
@@ -346,7 +346,7 @@ app.get('/order{/:id}', (req, res) => {
 ```ts
 import { type Request, type Response } from 'express';
 
-app.get('/user/\{:id}', (req: Request, res: Response) => {
+app.get('/user/{:id}', (req: Request, res: Response) => {
   // GET /user/42 => req.params = { id: '42' }
   // GET /user/ => req.params = {}
   // GET /user => 404, only the parameter is optional
@@ -360,7 +360,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-不要将路由路径中斜杠的位置与[`strict routing` 设置](/api/application/#application-settings)混淆，后者针对的是请求 URL：它控制以路由路径未要求的斜杠结尾的 URL 是否仍然匹配。例如，对 `/order/` 的请求默认匹配 `/order{/:id}` 路由，但在启用 strict routing 时会返回 404 错误；`/user/` 的末尾斜杠不受影响，因为 `/user/\{:id}` 路由要求它。上面示例中注释的所有请求无论该设置如何，行为都相同。
+不要将路由路径中斜杠的位置与[`strict routing` 设置](/api/application/#application-settings)混淆，后者针对的是请求 URL：它控制以路由路径未要求的斜杠结尾的 URL 是否仍然匹配。例如，对 `/order/` 的请求默认匹配 `/order{/:id}` 路由，但在启用 strict routing 时会返回 404 错误；`/user/` 的末尾斜杠不受影响，因为 `/user/{:id}` 路由要求它。上面示例中注释的所有请求无论该设置如何，行为都相同。
 
 ## Route handlers
 

@@ -19,36 +19,7 @@ Si la función actual de middleware no termina el ciclo de solicitud de respuest
 
 La siguiente figura muestra los elementos de una llamada a una función de middleware:
 
-<div class="rascacielos">
-<table id="higuera-mw">
-<tr>
-<td id="mw-figur-imgcell">
-<img src="/images/express-mw.png" alt="Elementos de una llamada a función middleware" id="mw-fig-img" />
-</td>
-<td class="mw-fig-callouts">
-<div class="callout" id="callout1">método HTTP para el cual se aplica la función middleware.</div>
-
-<div class="callout" id="callout2">
-  Ruta (ruta) para la que se aplica la función middleware.
-</div>
-
-<div class="callout" id="callout3">
-  La función Middleware.
-</div>
-
-<div class="callout" id="callout4">
-  Argumento de llamada a la función middleware, llamado "siguiente" por convención.
-</div>
-
-<div class="callout" id="callout5">
-  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
-</div>
-
-<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
-</td>
-</tr>
-</table>
-</div>
+![Elementos de una llamada a función middleware](/images/express-mw.png)
 
 A partir de Express 5, las funciones de middleware que devuelven una Promise llamarán `next(value)` cuando rechacen o lancen un error. `next` será llamado con el valor rechazado o con el error arrojado.
 

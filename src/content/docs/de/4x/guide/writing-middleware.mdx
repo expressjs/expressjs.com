@@ -19,36 +19,7 @@ Wenn die aktuelle Middleware-Funktion den Request-Antwort-Zyklus nicht beendet, 
 
 Die folgende Abbildung zeigt die Elemente eines Middleware-Funktionsaufrufs:
 
-<div class="tabell-scroller">
-<table id="mw-Abbildung">
-<tr>
-<td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" alt="Elemente eines Middleware Funktionsaufrufs" id="mw-fig-img" />
-</td>
-<td class="mw-fig-callouts">
-<div class="callout" id="callout1">HTTP-Methode, für die die Middleware-Funktion gilt.</div>
-
-<div class="callout" id="callout2">
-  Pfad (Route), für den die Middleware-Funktion gilt.
-</div>
-
-<div class="callout" id="callout3">
-  Die Middleware-Funktion.
-</div>
-
-<div class="callout" id="callout4">
-  Callback-Argument an die Middleware-Funktion, genannt "Next" durch Konvention.
-</div>
-
-<div class="callout" id="callout5">
-  HTTP [response](/api/response) argument to the middleware function, called "res" by convention.
-</div>
-
-<div class="callout" id="callout6">HTTP [request](/api/request) argument to the middleware function, called "req" by convention.</div>
-</td>
-</tr>
-</table>
-</div>
+![Elemente einer Middleware-Funktion aufruf](/images/express-mw.png)
 
 Beginnend mit Express 5 ruft Middleware-Funktionen, die ein Versprechen zurückgeben, `next(value)` auf, wenn sie einen Fehler ablehnen oder werfen. `next` wird entweder mit dem abgelehnten Wert oder mit dem Wurffehler aufgerufen.
 

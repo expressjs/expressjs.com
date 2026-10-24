@@ -1,5 +1,5 @@
 ---
-title: Routing
+title: 路由
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, typing requests and responses in TypeScript, and using Router for modular routing.
 ---
 
@@ -10,8 +10,8 @@ For an introduction to routing, see [Basic routing](/starter/basic-routing).
 For an introduction to routing, see [Basic routing](/starter/basic-routing).
 
 你可以使用 Express `app` 对象中与 HTTP 方法对应的方法来定义路由；
-例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 For a full list,
-see [app.METHOD](/api/application#appmethod). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+例如，`app.get()` 处理 GET 请求，`app.post` 处理 POST 请求。 You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details). You can also use [app.all()](/api/application#appall) to handle all HTTP methods and [app.use()](/api/application#appuse) to
 specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
 
 换句话说，应用程序会“监听”匹配指定路由和方法的请求，当检测到匹配时，就会调用指定的回调函数。 These routing methods specify a callback function (sometimes called a "handler function") that Express automatically runs when the application receives a request matching the specified route (endpoint) and HTTP method.
