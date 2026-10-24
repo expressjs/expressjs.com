@@ -6,15 +6,15 @@ description: Express.jsアプリケーションをバージョン4からバー�
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-エクスプレス5はエクスプレス4と大きく異なりません。 同じ基本APIを維持していますが、以前のバージョンとの互換性を破る変更はまだあります。 したがって、Express 5を使用するように更新すると、Express 4で構築されたアプリケーションが動作しない可能性があります。 したがって、Express 5を使用するように更新すると、Express 4で構築されたアプリケーションが動作しない可能性があります。
+エクスプレス5はエクスプレス4と大きく異なりません。 同じ基本APIを維持していますが、以前のバージョンとの互換性を破る変更はまだあります。 したがって、Express 5を使用するように更新すると、Express 4で構築されたアプリケーションが動作しない可能性があります。したがって、Express 5を使用するように更新すると、Express 4で構築されたアプリケーションが動作しない可能性があります。
 
 ## インストール
 
-このバージョンをインストールするには、**Node.js version 18以上**が必要です。 次に、アプリケーションディレクトリで次のコマンドを実行します。 次に、アプリケーションディレクトリで次のコマンドを実行します。
+このバージョンをインストールするには、**Node.js version 18以上**が必要です。 次に、アプリケーションディレクトリで次のコマンドを実行します。次に、アプリケーションディレクトリで次のコマンドを実行します。
 
 <PackageManagerCommand command="npm install &#x22;express@5&#x22;" />
 
-その後、自動テストを実行して何が失敗するかを確認し、以下に示すアップデートに従って問題を解決することができます。 テストに失敗した後、どのエラーが発生したかを確認するためにアプリケーションを実行します。 サポートされていないメソッドやプロパティを使用している場合は、すぐに確認できます。 テストに失敗した後、どのエラーが発生したかを確認するためにアプリケーションを実行します。 サポートされていないメソッドやプロパティを使用している場合は、すぐに確認できます。
+その後、自動テストを実行して何が失敗するかを確認し、以下に示すアップデートに従って問題を解決することができます。 テストに失敗した後、どのエラーが発生したかを確認するためにアプリケーションを実行します。 サポートされていないメソッドやプロパティを使用している場合は、すぐに確認できます。テストに失敗した後、どのエラーが発生したかを確認するためにアプリケーションを実行します。サポートされていないメソッドやプロパティを使用している場合は、すぐに確認できます。
 
 ## Express 5 Codemods
 
@@ -32,13 +32,13 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 ## 削除されたメソッドとプロパティ
 
-これらのメソッドやプロパティをアプリケーションで使用すると、クラッシュします。 したがって、バージョン5にアップデートした後、アプリを変更する必要があります。
+これらのメソッドやプロパティをアプリケーションで使用すると、クラッシュします。したがって、バージョン5にアップデートした後、アプリを変更する必要があります。
 
 ### app.del()
 
-Express 5では、`app.del()`関数がサポートされなくなりました。 この関数を使うと、エラーがスローされます。 HTTP DELETEルートを登録するには、代わりに`app.delete()`関数を使用します。 この関数を使うと、エラーがスローされます。 HTTP DELETEルートを登録するには、代わりに`app.delete()`関数を使用します。
+Express 5では、`app.del()`関数がサポートされなくなりました。 この関数を使うと、エラーがスローされます。 HTTP DELETEルートを登録するには、代わりに`app.delete()`関数を使用します。この関数を使うと、エラーがスローされます。 HTTP DELETEルートを登録するには、代わりに`app.delete()`関数を使用します。
 
-`delete`はJavaScriptで予約されているキーワードであるため、最初は`delete`の代わりに`del`が使用されていました。 しかし、ECMAScript 6 では、 `delete` などの予約キーワードをプロパティ名として使用することができます。 しかし、ECMAScript 6 では、 `delete` などの予約キーワードをプロパティ名として使用することができます。
+`delete`はJavaScriptで予約されているキーワードであるため、最初は`delete`の代わりに`del`が使用されていました。 しかし、ECMAScript 6 では、 `delete` などの予約キーワードをプロパティ名として使用することができます。しかし、ECMAScript 6 では、 `delete` などの予約キーワードをプロパティ名として使用することができます。
 
 #### 更新方法
 
@@ -98,7 +98,7 @@ This should not affect your code if you follow the Express 4 documentation of [a
 
 ### req.param(name)
 
-これは、潜在的に混乱し、フォームデータを取得する危険な方法が削除されました。 これは、潜在的に混乱し、フォームデータを取得する危険な方法が削除されました。 ここで、`req.params`、`req.body`、または`req.query`オブジェクトの中で、送信されたパラメータ名を具体的に探す必要があります。
+これは、潜在的に混乱し、フォームデータを取得する危険な方法が削除されました。これは、潜在的に混乱し、フォームデータを取得する危険な方法が削除されました。 ここで、`req.params`、`req.body`、または`req.query`オブジェクトの中で、送信されたパラメータ名を具体的に探す必要があります。
 
 #### 更新方法
 
@@ -142,7 +142,7 @@ Express 5 では署名 `res.jsonp(obj, status)` がサポートされなくな�
 
 ### res.jsonp(obj, status)
 
-Express 5 では署名 `res.jsonp(obj, status)` がサポートされなくなりました。 代わりに、ステータスを設定し、 `res.jsonp()` メソッドを次のようにチェーンします。`res.status(status).jsonp(obj)` 。
+Express 5 では署名 `res.jsonp(obj, status)` がサポートされなくなりました。代わりに、ステータスを設定し、 `res.jsonp()` メソッドを次のようにチェーンします。`res.status(status).jsonp(obj)` 。
 
 #### 更新方法
 
@@ -161,7 +161,7 @@ Express 5 では署名 `res.jsonp(obj, status)` がサポートされなくな�
 
 ### res.redirect(url, status)
 
-Express 5 では署名 `res.redirect(url, status)` がサポートされなくなりました。 代わりに、`res.redirect(status, url)` という署名を使用します。 代わりに、`res.redirect(status, url)` という署名を使用します。
+Express 5 では署名 `res.redirect(url, status)` がサポートされなくなりました。 代わりに、`res.redirect(status, url)` という署名を使用します。代わりに、`res.redirect(status, url)` という署名を使用します。
 
 #### 更新方法
 
@@ -185,7 +185,7 @@ Express 5 では署名 `res.redirect(url, status)` がサポートされなく�
 
 ### res.redirect('back') と res.location('back')
 
-Express 5では、`res.redirect()`と`res.location()`メソッドの魔法文字列`back`がサポートされなくなりました。 代わりに、 `req.get('Referrer') |'/'`の値を使用して前のページにリダイレクトします。 Express 4 では、`res.redirect('back')` と `res.location('back')` メソッドは廃止されました。 代わりに、 `req.get('Referrer') |'/'`の値を使用して前のページにリダイレクトします。 Express 4 では、`res.redirect('back')` と `res.location('back')` メソッドは廃止されました。
+Express 5では、`res.redirect()`と`res.location()`メソッドの魔法文字列`back`がサポートされなくなりました。 代わりに、 `req.get('Referrer') |'/'`の値を使用して前のページにリダイレクトします。 Express 4 では、`res.redirect('back')` と `res.location('back')` メソッドは廃止されました。代わりに、 `req.get('Referrer') |'/'`の値を使用して前のページにリダイレクトします。 Express 4 では、`res.redirect('back')` と `res.location('back')` メソッドは廃止されました。
 
 #### 更新方法
 
@@ -204,7 +204,7 @@ Express 5では、`res.redirect()`と`res.location()`メソッドの魔法文字
 
 ### res.send(body, status)
 
-Express 5 では署名 `res.send(obj, status)` がサポートされなくなりました。 代わりに、ステータスを設定し、 `res.status(status).send(obj)` のように、 `res.send()` メソッドを連鎖させます。 代わりに、ステータスを設定し、 `res.status(status).send(obj)` のように、 `res.send()` メソッドを連鎖させます。
+Express 5 では署名 `res.send(obj, status)` がサポートされなくなりました。 代わりに、ステータスを設定し、 `res.status(status).send(obj)` のように、 `res.send()` メソッドを連鎖させます。代わりに、ステータスを設定し、 `res.status(status).send(obj)` のように、 `res.send()` メソッドを連鎖させます。
 
 #### 更新方法
 
@@ -223,7 +223,7 @@ Express 5 では署名 `res.send(obj, status)` がサポートされなくなり
 
 ### res.send(status
 
-Express 5では、`status` が数値である署名 `res.send(status)` がサポートされなくなりました。 代わりに、 `res を使ってください。 endStatus(statusCode)` 関数は、HTTP レスポンスヘッダーのステータスコードを設定し、コードのテキストバージョンを送信します。 "Not Found", "Internal Server Error"など。
+Express 5では、`status` が数値である署名 `res.send(status)` がサポートされなくなりました。代わりに、 `res を使ってください。 endStatus(statusCode)` 関数は、HTTP レスポンスヘッダーのステータスコードを設定し、コードのテキストバージョンを送信します。 "Not Found", "Internal Server Error"など。
 \`res を使って数字を送る必要がある場合。 end()関数は、数字を文字列に変換するために引用符で囲みます Expressはサポートされていない古い署名を使用しようとしないようにします。
 
 #### 更新方法
@@ -262,7 +262,7 @@ Express 5では、`status` が数値である署名 `res.send(status)` がサポ
 
 ### res.sendFile() オプション
 
-`res.sendFile()`の`hidden`と`from`オプションはサポートされなくなりました。 代わりに `dotfiles` と `root` を使用してください。 代わりに `dotfiles` と `root` を使用してください。
+`res.sendFile()`の`hidden`と`from`オプションはサポートされなくなりました。 代わりに `dotfiles` と `root` を使用してください。代わりに `dotfiles` と `root` を使用してください。
 
 The `dotfiles` option applies to hidden directories in the path as well as hidden files. For example, a file served from an absolute path like `/var/www/app/.cache/index.html` now requires `dotfiles: 'allow'`, even though `index.html` is not a dotfile. In Express 4 a hidden directory in the path was served by default; Express 5 returns `404` unless you opt in.
 
@@ -295,7 +295,7 @@ If you serve an absolute path that contains a hidden directory, opt in with `dot
 
 ### express.static() オプション
 
-`express.static()`の`hidden`と`from`オプションはサポートされなくなりました。 代わりに `dotfiles` と `root` を使用してください。 `from`はAPIでは文書化されていませんが、`root`のエイリアスとして受け入れられています。 `dotfiles` のデフォルト値は `ignore"` になりました。 代わりに `dotfiles` と `root` を使用してください。 `from`はAPIでは文書化されていませんが、`root`のエイリアスとして受け入れられています。 `dotfiles` のデフォルト値は `ignore"` になりました。
+`express.static()`の`hidden`と`from`オプションはサポートされなくなりました。 代わりに `dotfiles` と `root` を使用してください。 `from`はAPIでは文書化されていませんが、`root`のエイリアスとして受け入れられています。 `dotfiles` のデフォルト値は `ignore"` になりました。代わりに `dotfiles` と `root` を使用してください。 `from`はAPIでは文書化されていませんが、`root`のエイリアスとして受け入れられています。 `dotfiles` のデフォルト値は `ignore"` になりました。
 
 The `dotfiles` check now also applies to hidden **directories** in the request path, not just hidden files. A request like `GET /.well-known/acme-challenge/...` that was served by default in Express 4 now returns `404` unless you set `dotfiles: 'allow'`. This only affects the part of the path relative to the configured `root`; a hidden directory in `root` itself is unaffected.
 
@@ -348,15 +348,15 @@ MIME タイプの値を扱うには、[`mime-types` package](https://github.com/
 
 ### MIMEタイプの変更
 
-[`mime-db`](https://github.com/jshttp/mime-db)の更新により、いくつかの MIME タイプが変更されました。 これらの変更は `express.static()` と `res.sendFile()` にのみ影響します。 [`mime-db`](https://github.com/jshttp/mime-db)の更新により、いくつかの MIME タイプが変更されました。 これらの変更は `express.static()` と `res.sendFile()` にのみ影響します。 変更の完全なリストについては、[`mime-db` changelog](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md) を参照してください。
+[`mime-db`](https://github.com/jshttp/mime-db)の更新により、いくつかの MIME タイプが変更されました。これらの変更は `express.static()` と `res.sendFile()` にのみ影響します。 [`mime-db`](https://github.com/jshttp/mime-db)の更新により、いくつかの MIME タイプが変更されました。 これらの変更は `express.static()` と `res.sendFile()` にのみ影響します。 変更の完全なリストについては、[`mime-db` changelog](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md) を参照してください。
 
-Express 4 は `mime-db` バージョン **1.52.0** を使用し、Express 5 は IANA や その他のMIME タイプの仕様への更新を反映した新しいバージョンを使用します。 最も注目すべき変更は、JavaScript ファイル (`.js`) が `application/javascript` の代わりに `text/javascript` として提供されるようになったことです。 最も注目すべき変更は、JavaScript ファイル (`.js`) が `application/javascript` の代わりに `text/javascript` として提供されるようになったことです。
+Express 4 は `mime-db` バージョン **1.52.0** を使用し、Express 5 は IANA や その他のMIME タイプの仕様への更新を反映した新しいバージョンを使用します。 最も注目すべき変更は、JavaScript ファイル (`.js`) が `application/javascript` の代わりに `text/javascript` として提供されるようになったことです。最も注目すべき変更は、JavaScript ファイル (`.js`) が `application/javascript` の代わりに `text/javascript` として提供されるようになったことです。
 
 Express 5 では、`mime-db` アップデートからの MIME タイプへの変更は、壊れた変更とはみなされません。 MIMEタイプはマイナーバージョンやパッチバージョン間で変更される可能性があるため、依存関係を更新する際は注意が必要です。
 
 ### express:routerデバッグログ
 
-Expressチームが管理する別の依存関係([`router`](https://github.com/pillarjs/router)) によりルータの処理ロジックが実行されるようになりました。 デバッグログは別の名前空間に移動しました Express 5.1以前はデバッグログは存在しませんでした。 それらを取得するには、最新のExpress 5バージョンに更新するか、`package-lock.json`の`router`パッケージを更新してください。 Express 5.1以前はデバッグログは存在しませんでした。 それらを取得するには、最新のExpress 5バージョンに更新するか、`package-lock.json`の`router`パッケージを更新してください。
+Expressチームが管理する別の依存関係([`router`](https://github.com/pillarjs/router)) によりルータの処理ロジックが実行されるようになりました。 デバッグログは別の名前空間に移動しました Express 5.1以前はデバッグログは存在しませんでした。 それらを取得するには、最新のExpress 5バージョンに更新するか、`package-lock.json`の`router`パッケージを更新してください。 Express 5.1以前はデバッグログは存在しませんでした。それらを取得するには、最新のExpress 5バージョンに更新するか、`package-lock.json`の`router`パッケージを更新してください。
 
 | v4                         | v5                                  |
 | -------------------------- | ----------------------------------- |
@@ -374,7 +374,7 @@ Expressチームが管理する別の依存関係([`router`](https://github.com/
 
 ## 変更済み
 
-これらの API はまだ存在しますが、動作は変更されています。 これらの変更を確認して、アプリが正常に動作することを確認してください。 これらの変更を確認して、アプリが正常に動作することを確認してください。
+これらの API はまだ存在しますが、動作は変更されています。 これらの変更を確認して、アプリが正常に動作することを確認してください。これらの変更を確認して、アプリが正常に動作することを確認してください。
 
 ### パス経路一致の構文
 
@@ -425,13 +425,13 @@ Expressチームが管理する別の依存関係([`router`](https://github.com/
 
 ### ミドルウェアとハンドラーから取り扱われる拒否された約束。
 
-rejected promiseを返すリクエストミドルウェアとハンドラは、「Error」として拒否された値をエラー処理ミドルウェアに転送することで処理されるようになりました。 つまり、 `async` 関数をミドルウェアとして、ハンドラを使うのはこれまで以上に簡単です。 rejected promiseを返すリクエストミドルウェアとハンドラは、「Error」として拒否された値をエラー処理ミドルウェアに転送することで処理されるようになりました。 つまり、 `async` 関数をミドルウェアとして、ハンドラを使うのはこれまで以上に簡単です。 `async` 関数でエラーがスローされるか、拒否された Promise が async 関数内で `await`ed になります。 これらのエラーは、`next(err)`を呼び出すかのようにエラーハンドラに渡されます。
+rejected promiseを返すリクエストミドルウェアとハンドラは、「Error」として拒否された値をエラー処理ミドルウェアに転送することで処理されるようになりました。つまり、 `async` 関数をミドルウェアとして、ハンドラを使うのはこれまで以上に簡単です。 rejected promiseを返すリクエストミドルウェアとハンドラは、「Error」として拒否された値をエラー処理ミドルウェアに転送することで処理されるようになりました。 つまり、 `async` 関数をミドルウェアとして、ハンドラを使うのはこれまで以上に簡単です。 `async` 関数でエラーがスローされるか、拒否された Promise が async 関数内で `await`ed になります。 これらのエラーは、`next(err)`を呼び出すかのようにエラーハンドラに渡されます。
 
 Express でのエラー処理の詳細については、[Error handling documentation](/guide/error-handling)を参照してください。
 
 #### 更新方法
 
-手動でエラーをキャッチせずに `async/await` を直接使用できるようになりました。 手動でエラーをキャッチせずに `async/await` を直接使用できるようになりました。 `getUserById` がエラーまたは拒否をスローした場合、`next` は拒否された値で自動的に呼び出されます。
+手動でエラーをキャッチせずに `async/await` を直接使用できるようになりました。手動でエラーをキャッチせずに `async/await` を直接使用できるようになりました。 `getUserById` がエラーまたは拒否をスローした場合、`next` は拒否された値で自動的に呼び出されます。
 
 ```diff
 -app.get('/user/:id', (req, res, next) => {
@@ -460,11 +460,11 @@ Express でのエラー処理の詳細については、[Error handling document
 
 ### express.static dotfiles
 
-`express.static` ミドルウェアの `dotfiles` オプションのデフォルトは `ignore"` になりました。 Express 4では、デフォルトでドットファイルが提供されました。 結果として、`のようにドット(`.`)で始まるディレクトリ内のファイル。 ell-known`はアクセスできなくなり、**404 Not Found**エラーが返されます。 これにより、Android App Links や Apple Universal Link などのドットディレクトリの提供に依存する機能が壊れる可能性があります。
+`express.static` ミドルウェアの `dotfiles` オプションのデフォルトは `ignore"` になりました。 Express 4では、デフォルトでドットファイルが提供されました。結果として、`のようにドット(`.`)で始まるディレクトリ内のファイル。 ell-known`はアクセスできなくなり、**404 Not Found**エラーが返されます。これにより、Android App Links や Apple Universal Link などのドットディレクトリの提供に依存する機能が壊れる可能性があります。
 
 #### 更新方法
 
-`dotfiles: "allow"`オプションを使用して、特定のドットディレクトリを明示的に提供します。 これにより、意図したドットディレクトリのみを安全に提供し、他のドットファイルのデフォルトの安全な動作を維持することができます。 これにより、意図したドットディレクトリのみを安全に提供し、他のドットファイルのデフォルトの安全な動作を維持することができます。
+`dotfiles: "allow"`オプションを使用して、特定のドットディレクトリを明示的に提供します。 これにより、意図したドットディレクトリのみを安全に提供し、他のドットファイルのデフォルトの安全な動作を維持することができます。これにより、意図したドットディレクトリのみを安全に提供し、他のドットファイルのデフォルトの安全な動作を維持することができます。
 
 ```diff
 +app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
@@ -493,8 +493,7 @@ Register each parameter name with its own `router.param()` call:
 ### app.listen
 
 Express 5 では、サーバーがエラーイベントを受信したときに `app.listen` メソッドがユーザーが提供するコールバック関数を呼び出します。 Express 4では、そのようなエラーがスローされます。 この変更により、エラー処理の責任が Express 5 のコールバック関数に移行されます。 エラーがある場合は、コールバックに引数として渡されます。
-例: Express 4では、そのようなエラーがスローされます。 この変更により、エラー処理の責任が Express 5 のコールバック関数に移行されます。 エラーがある場合は、コールバックに引数として渡されます。
-例:
+例: Express 4では、そのようなエラーがスローされます。この変更により、エラー処理の責任が Express 5 のコールバック関数に移行されます。エラーがある場合は、コールバックに引数として渡されます。例:
 
 ```js ins={2-4}
 const server = app.listen(8080, '0.0.0.0', (error) => {
@@ -507,7 +506,7 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 
 ### app.router
 
-Express 4 で削除された `app.router` オブジェクトは、Express 5 で復活しました。 新しいバージョンでは、このオブジェクトはベース Express ルータへの単なる参照です。 アプリが明示的にロードしなければならなかったExpress 3とは異なります。 新しいバージョンでは、このオブジェクトはベース Express ルータへの単なる参照です。 アプリが明示的にロードしなければならなかったExpress 3とは異なります。
+Express 4 で削除された `app.router` オブジェクトは、Express 5 で復活しました。 新しいバージョンでは、このオブジェクトはベース Express ルータへの単なる参照です。 アプリが明示的にロードしなければならなかったExpress 3とは異なります。新しいバージョンでは、このオブジェクトはベース Express ルータへの単なる参照です。 アプリが明示的にロードしなければならなかったExpress 3とは異なります。
 
 ### req.body
 
@@ -529,7 +528,7 @@ Express 4では、`req.host`関数がポート番号を間違って剥奪しま�
 
 ### req.params
 
-`req.params` オブジェクトに文字列パスを使用する際に **null プロトタイプ** が追加されました。 しかし、パスが正規表現で定義されている場合、`req.params` は通常のプロトタイプを持つ標準オブジェクトのままです。 さらに、2つの重要な行動変更があります。 しかし、パスが正規表現で定義されている場合、`req.params` は通常のプロトタイプを持つ標準オブジェクトのままです。 さらに、2つの重要な行動変更があります。
+`req.params` オブジェクトに文字列パスを使用する際に **null プロトタイプ** が追加されました。 しかし、パスが正規表現で定義されている場合、`req.params` は通常のプロトタイプを持つ標準オブジェクトのままです。 さらに、2つの重要な行動変更があります。しかし、パスが正規表現で定義されている場合、`req.params` は通常のプロトタイプを持つ標準オブジェクトのままです。さらに、2つの重要な行動変更があります。
 
 **ワイルドカードパラメータは配列になりました:**
 
@@ -572,7 +571,7 @@ Express 4では、マッチしないワイルドカードは空文字列(`'`)で
 
 ### req.query
 
-`req.query` プロパティはもはや書き込み可能なプロパティではなく、代わりにゲッターです。 デフォルトのクエリパーサが"extended"から"simple"に変更されました。 デフォルトのクエリパーサが"extended"から"simple"に変更されました。
+`req.query` プロパティはもはや書き込み可能なプロパティではなく、代わりにゲッターです。 デフォルトのクエリパーサが"extended"から"simple"に変更されました。デフォルトのクエリパーサが"extended"から"simple"に変更されました。
 
 ```js del={3}
 app.get('/search', (req, res) => {

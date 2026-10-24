@@ -43,133 +43,23 @@ middleware that is required to run your app. Simply follow these steps:
 
 The following table lists Express 3 middleware and their counterparts in Express 4.
 
-<table class="doctable" border="1">
-  <tr>
-    <th>Express 3</th>
-    <th>Express 4</th>
-  </tr>
-  <tr>
-    <td>
-      <code>express.bodyParser</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/body-parser">body-parser</a> +
-      <a href="https://github.com/expressjs/multer">multer</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.compress</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/compression">compression</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.cookieSession</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/cookie-session">cookie-session</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.cookieParser</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/cookie-parser">cookie-parser</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.logger</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/morgan">morgan</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.session</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/session">express-session</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.favicon</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/serve-favicon">serve-favicon</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.responseTime</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/response-time">response-time</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.errorHandler</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/errorhandler">errorhandler</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.methodOverride</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/method-override">method-override</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.timeout</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/timeout">connect-timeout</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.vhost</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/vhost">vhost</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.csrf</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/csurf">csurf</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.directory</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/serve-index">serve-index</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>express.static</code>
-    </td>
-    <td>
-      <a href="https://github.com/expressjs/serve-static">serve-static</a>
-    </td>
-  </tr>
-</table>
+| Express 3                | Express 4                                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `express.bodyParser`     | [body-parser](https://github.com/expressjs/body-parser) + [multer](https://github.com/expressjs/multer) |
+| `express.compress`       | [compression](https://github.com/expressjs/compression)                                                 |
+| `express.cookieSession`  | [cookie-session](https://github.com/expressjs/cookie-session)                                           |
+| `express.cookieParser`   | [cookie-parser](https://github.com/expressjs/cookie-parser)                                             |
+| `express.logger`         | [morgan](https://github.com/expressjs/morgan)                                                           |
+| `express.session`        | [express-session](https://github.com/expressjs/session)                                                 |
+| `express.favicon`        | [serve-favicon](https://github.com/expressjs/serve-favicon)                                             |
+| `express.responseTime`   | [response-time](https://github.com/expressjs/response-time)                                             |
+| `express.errorHandler`   | [errorhandler](https://github.com/expressjs/errorhandler)                                               |
+| `express.methodOverride` | [method-override](https://github.com/expressjs/method-override)                                         |
+| `express.timeout`        | [connect-timeout](https://github.com/expressjs/timeout)                                                 |
+| `express.vhost`          | [vhost](https://github.com/expressjs/vhost)                                                             |
+| `express.csrf`           | [csurf](https://github.com/expressjs/csurf)                                                             |
+| `express.directory`      | [serve-index](https://github.com/expressjs/serve-index)                                                 |
+| `express.static`         | [serve-static](https://github.com/expressjs/serve-static)                                               |
 
 Here is the [complete list](https://github.com/senchalabs/connect#middleware) of Express 4 middleware.
 
@@ -305,78 +195,21 @@ middleware that is specific to the route.
 
 The following table lists other small but important changes in Express 4:
 
-<table class="doctable" border="1">
-  <tr>
-    <th>Object</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>Node.js</td>
-    <td>Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`http.createServer()`</td>
-    <td markdown="1">
-      The `http` module is no longer needed, unless you need to directly work with it
-      (socket.io/SPDY/HTTPS). The app can be started by using the `app.listen()` function.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`app.configure()`</td>
-    <td markdown="1">
-      The `app.configure()` function has been removed. Use the `process.env.NODE_ENV` or
-      `app.get('env')` function to detect the environment and configure the app accordingly.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`json spaces`</td>
-    <td markdown="1">
-      The `json spaces` application property is disabled by default in Express 4.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`req.accepted()`</td>
-    <td markdown="1">
-      Use `req.accepts()`, `req.acceptsEncodings()`, `req.acceptsCharsets()`, and
-      `req.acceptsLanguages()`.
-    </td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.location()`</td>
-    <td markdown="1">No longer resolves relative URLs.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`req.params`</td>
-    <td markdown="1">Was an array; now an object.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.locals`</td>
-    <td markdown="1">Was a function; now an object.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.headerSent`</td>
-    <td markdown="1">Changed to `res.headersSent`.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`app.route`</td>
-    <td markdown="1">Now available as `app.mountpath`.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.on('header')`</td>
-    <td markdown="1">Removed.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.charset`</td>
-    <td markdown="1">Removed.</td>
-  </tr>
-  <tr>
-    <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
-    <td markdown="1">
-      Functionality is now limited to setting the basic cookie value. Use `res.cookie()` for added
-      functionality.
-    </td>
-  </tr>
-</table>
+| Object                             | Description                                                                                                                                                               |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js                            | Express 4 requires Node.js 0.10.x or later and has dropped support for Node.js 0.8.x.                                                                                     |
+| `http.createServer()`              | The `http` module is no longer needed, unless you need to directly work with it (socket.io/SPDY/HTTPS). The app can be started by using the `app.listen()` function.      |
+| `app.configure()`                  | The `app.configure()` function has been removed. Use the `process.env.NODE_ENV` or `app.get('env')` function to detect the environment and configure the app accordingly. |
+| `json spaces`                      | The `json spaces` application property is disabled by default in Express 4.                                                                                               |
+| `req.accepted()`                   | Use `req.accepts()`, `req.acceptsEncodings()`, `req.acceptsCharsets()`, and `req.acceptsLanguages()`.                                                                     |
+| `res.location()`                   | No longer resolves relative URLs.                                                                                                                                         |
+| `req.params`                       | Was an array; now an object.                                                                                                                                              |
+| `res.locals`                       | Was a function; now an object.                                                                                                                                            |
+| `res.headerSent`                   | Changed to `res.headersSent`.                                                                                                                                             |
+| `app.route`                        | Now available as `app.mountpath`.                                                                                                                                         |
+| `res.on('header')`                 | Removed.                                                                                                                                                                  |
+| `res.charset`                      | Removed.                                                                                                                                                                  |
+| `res.setHeader('Set-Cookie', val)` | Functionality is now limited to setting the basic cookie value. Use `res.cookie()` for added functionality.                                                               |
 
 ## Example app migration
 

@@ -4,6 +4,7 @@ description: 学习 Express.js 应用程序中路由的基础知识，包括如�
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 路由用于定义应用程序如何响应客户端对指定端点的请求；端点由统一资源标识符（URI，或称路径）和具体的 HTTP 请求方法（GET、POST 等）组成。
 
@@ -95,4 +96,8 @@ app.delete('/user', (req: Request, res: Response) => {
 });
 ```
 
-For more details about routing, see the [routing guide](/guide/routing).
+<ReadMore>
+
+For more details about routing, see the [Routing](/guide/routing) guide.
+
+</ReadMore>

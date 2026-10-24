@@ -6,15 +6,15 @@ description: Express.js 应用从 4 版升级至 5 版完整迁移指南，详�
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-Express 5 与 Express 4 差异不大；尽管基础 API 保持一致，但仍存在部分导致无法向下兼容的改动。 因此，基于 Express 4 构建的应用在升级至 Express 5 后可能无法正常运行。
+Express 5 与 Express 4 差异不大；尽管基础 API 保持一致，但仍存在部分导致无法向下兼容的改动。因此，基于 Express 4 构建的应用在升级至 Express 5 后可能无法正常运行。
 
 ## 安装
 
-安装该版本需要 **Node.js 18 及以上版本**。 随后在应用目录中执行以下命令：
+安装该版本需要 **Node.js 18 及以上版本**。随后在应用目录中执行以下命令：
 
 <PackageManagerCommand command="npm install &#x22;express@5&#x22;" />
 
-随后你可以运行自动化测试来排查失败项，并根据下方列出的更新内容修复问题。 解决测试失败问题后，运行应用查看出现的错误。 你可以立刻发现应用是否使用了任何不受支持的方法或属性。
+随后你可以运行自动化测试来排查失败项，并根据下方列出的更新内容修复问题。解决测试失败问题后，运行应用查看出现的错误。你可以立刻发现应用是否使用了任何不受支持的方法或属性。
 
 ## Express 5 Codemods
 
@@ -32,13 +32,13 @@ Express 5 与 Express 4 差异不大；尽管基础 API 保持一致，但仍存
 
 ## 移除方法和属性
 
-如果你的应用中使用了上述任意方法或属性，应用将会崩溃。 因此，更新到 5 版本后，你需要修改你的应用。
+如果你的应用中使用了上述任意方法或属性，应用将会崩溃。因此，更新到 5 版本后，你需要修改你的应用。
 
 ### app.del()
 
-Express 5 不再支持 `app.del()` 函数。 如果您使用此函数，将会出现错误。 要注册 HTTP DELETE 路由，请使用 `app.delete()` 函数。
+Express 5 不再支持 `app.del()` 函数。如果您使用此函数，将会出现错误。要注册 HTTP DELETE 路由，请使用 `app.delete()` 函数。
 
-起初，使用 `del` 而非 `delete`，因为 `delete` 是 JavaScript 中的保留关键字。 但从 ECMAScript 6 开始，`delete` 及其他保留关键字可以合法用作属性名。
+起初，使用 `del` 而非 `delete`，因为 `delete` 是 JavaScript 中的保留关键字。但从 ECMAScript 6 开始，`delete` 及其他保留关键字可以合法用作属性名。
 
 #### 如何更新
 
@@ -57,11 +57,11 @@ Express 5 不再支持 `app.del()` 函数。 如果您使用此函数，将会�
 
 ### app.param(fn)
 
-`app.param(fn)` 签名用于修改 `app.param(name, fn)` 函数的行为。 该方法自 v4.11.0 起已被弃用，Express 5 完全不再支持它。
+`app.param(fn)` 签名用于修改 `app.param(name, fn)` 函数的行为。该方法自 v4.11.0 起已被弃用，Express 5 完全不再支持它。
 
 ### 复数形式的方法名
 
-以下方法名已改为复数形式。 在 Express 4 中，使用旧方法会触发弃用警告。 Express 5 已完全不再支持这些方法：
+以下方法名已改为复数形式。在 Express 4 中，使用旧方法会触发弃用警告。 Express 5 已完全不再支持这些方法：
 
 `req.acceptsCharset()`替换为`req.acceptsets()`。
 
@@ -98,7 +98,7 @@ This should not affect your code if you follow the Express 4 documentation of [a
 
 ### req.param(name)
 
-这种可能造成混淆且存在风险的表单数据获取方法已被移除。 现在你需要在 `req.params`、`req.body` 或 `req.query` 对象中显式查找提交的参数名称。
+这种可能造成混淆且存在风险的表单数据获取方法已被移除。现在你需要在 `req.params`、`req.body` 或 `req.query` 对象中显式查找提交的参数名称。
 
 #### 如何更新
 
@@ -123,7 +123,7 @@ This should not affect your code if you follow the Express 4 documentation of [a
 
 ### res.json(obj, status)
 
-Express 5 不再支持 `res.json(obj, status)` 签名。 取而代之的是，先设置状态码，再链式调用 `res.json()` 方法，写法如下：`res.status(status).json(obj)`。
+Express 5 不再支持 `res.json(obj, status)` 签名。取而代之的是，先设置状态码，再链式调用 `res.json()` 方法，写法如下：`res.status(status).json(obj)`。
 
 #### 如何更新
 
@@ -142,7 +142,7 @@ Express 5 不再支持 `res.json(obj, status)` 签名。 取而代之的是，�
 
 ### res.jsonp(obj, status)
 
-Express 5 不再支持 `res.jsonp(obj, status)` 签名。 取而代之的是，先设置状态码，再链式调用 `res.jsonp()` 方法，写法如下：`res.status(status).jsonp(obj)`。
+Express 5 不再支持 `res.jsonp(obj, status)` 签名。取而代之的是，先设置状态码，再链式调用 `res.jsonp()` 方法，写法如下：`res.status(status).jsonp(obj)`。
 
 #### 如何更新
 
@@ -161,7 +161,7 @@ Express 5 不再支持 `res.jsonp(obj, status)` 签名。 取而代之的是，�
 
 ### res.redirect(url, status)
 
-Express 5 不再支持 `res.redirect(url, status)` 签名。 相反，使用下列签名：`res.redirect(status, url)`。
+Express 5 不再支持 `res.redirect(url, status)` 签名。相反，使用下列签名：`res.redirect(status, url)`。
 
 #### 如何更新
 
@@ -185,7 +185,7 @@ Express 5 不再支持 `res.redirect(url, status)` 签名。 相反，使用下�
 
 ### res.redirect('back') 与 res.location('back')
 
-Express 5 不再支持 `res.redirect()` 和 `res.location()` 方法中的魔法字符串 `back`。 取而代之，请使用 `req.get('Referrer') || '/'` 来重定向回上一页。 在 Express 4 中，`res.redirect('back')` 和 `res.location('back')` 方法已被弃用。
+Express 5 不再支持 `res.redirect()` 和 `res.location()` 方法中的魔法字符串 `back`。取而代之，请使用 `req.get('Referrer') || '/'` 来重定向回上一页。在 Express 4 中，`res.redirect('back')` 和 `res.location('back')` 方法已被弃用。
 
 #### 如何更新
 
@@ -204,7 +204,7 @@ Express 5 不再支持 `res.redirect()` 和 `res.location()` 方法中的魔法�
 
 ### res.send(body, status)
 
-Express 5 不再支持 `res.send(obj, status)` 这种签名。 取而代之的是，先设置状态码，再链式调用 `res.send()` 方法，写法如下：`res.status(status).send(obj)`。
+Express 5 不再支持 `res.send(obj, status)` 这种签名。取而代之的是，先设置状态码，再链式调用 `res.send()` 方法，写法如下：`res.status(status).send(obj)`。
 
 #### 如何更新
 
@@ -223,8 +223,7 @@ Express 5 不再支持 `res.send(obj, status)` 这种签名。 取而代之的�
 
 ### res.send(status)
 
-Express 5 不再支持签名 `res.send(status)` 是一个数字。 取而代之，请使用 `res.sendStatus(statusCode)` 函数，该函数会设置 HTTP 响应头状态码并发送该状态码的文本版本：“未找到”、“服务器内部错误”等。
-如果需要通过 `res.send()` 函数发送数字，请将数字用引号包裹转换为字符串，避免 Express 将其误判为尝试使用已不支持的旧签名。
+Express 5 不再支持签名 `res.send(status)` 是一个数字。取而代之，请使用 `res.sendStatus(statusCode)` 函数，该函数会设置 HTTP 响应头状态码并发送该状态码的文本版本：“未找到”、“服务器内部错误”等。如果需要通过 `res.send()` 函数发送数字，请将数字用引号包裹转换为字符串，避免 Express 将其误判为尝试使用已不支持的旧签名。
 
 #### 如何更新
 
@@ -262,7 +261,7 @@ Express 5 不再支持签名 `res.send(status)` 是一个数字。 取而代之�
 
 ### res.sendFile() options
 
-`res.sendFile()` 的 `hidden` 和 `from` 选项已不再支持。 使用 `dotfiles` 和 `root` 代替。
+`res.sendFile()` 的 `hidden` 和 `from` 选项已不再支持。使用 `dotfiles` 和 `root` 代替。
 
 The `dotfiles` option applies to hidden directories in the path as well as hidden files. For example, a file served from an absolute path like `/var/www/app/.cache/index.html` now requires `dotfiles: 'allow'`, even though `index.html` is not a dotfile. In Express 4 a hidden directory in the path was served by default; Express 5 returns `404` unless you opt in.
 
@@ -295,7 +294,7 @@ If you serve an absolute path that contains a hidden directory, opt in with `dot
 
 ### express.static() options
 
-不再支持 `expres.static()` 的 `hidden` 和 `from` 两个选项。 使用 `dotfiles` 和 `root` 代替。 注意，`from` 从未在 API 文档中记载，但曾被接受作为 `root` 的别名。 `dotfiles`的默认值现在是 \`"ignore"。
+不再支持 `expres.static()` 的 `hidden` 和 `from` 两个选项。使用 `dotfiles` 和 `root` 代替。注意，`from` 从未在 API 文档中记载，但曾被接受作为 `root` 的别名。 `dotfiles`的默认值现在是 \`"ignore"。
 
 The `dotfiles` check now also applies to hidden **directories** in the request path, not just hidden files. A request like `GET /.well-known/acme-challenge/...` that was served by default in Express 4 now returns `404` unless you set `dotfiles: 'allow'`. This only affects the part of the path relative to the configured `root`; a hidden directory in `root` itself is unaffected.
 
@@ -324,12 +323,11 @@ If you rely on serving a hidden directory such as `.well-known` (for example, AC
 
 ### router.param(fn)
 
-`router.param(fn)` 签名曾用于修改 `router.param(name, fn)` 函数的行为。 该方法自 v4.11.0 起已被弃用，Express 5 完全不再支持它。
+`router.param(fn)` 签名曾用于修改 `router.param(name, fn)` 函数的行为。该方法自 v4.11.0 起已被弃用，Express 5 完全不再支持它。
 
 ### express.static.mime
 
-在 Express 5 中，`mime` 不再是 `static` 字段的导出属性。
-请使用 [`mime-types` 包](https://github.com/jshttp/mime-types) 处理 MIME 类型值。
+在 Express 5 中，`mime` 不再是 `static` 字段的导出属性。请使用 [`mime-types` 包](https://github.com/jshttp/mime-types) 处理 MIME 类型值。
 
 #### 如何更新
 
@@ -347,15 +345,15 @@ If you rely on serving a hidden directory such as `.well-known` (for example, AC
 
 ### MIME 类型更改
 
-由于[`mime-db`](https://github.com/jshttp/mime-db) 的更新，几种MIME类型已经更改。 这些更改只会影响 `expres.static()` 和 `res.sendFile()` 。 完整的更改列表见[`mime-db`更新日志](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md)。
+由于[`mime-db`](https://github.com/jshttp/mime-db) 的更新，几种MIME类型已经更改。这些更改只会影响 `expres.static()` 和 `res.sendFile()` 。完整的更改列表见[`mime-db`更新日志](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md)。
 
-Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新的版本，以反映 IANA 及其他 MIME 类型规范的更新。 最显著的变化是，JavaScript 文件（`.js`）现在以 `text/javascript` 提供服务，而非 `application/javascript`。
+Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新的版本，以反映 IANA 及其他 MIME 类型规范的更新。最显著的变化是，JavaScript 文件（`.js`）现在以 `text/javascript` 提供服务，而非 `application/javascript`。
 
 在 Express 5 中，由 `mime-db` 更新带来的 MIME 类型变更**不被视为破坏性变更**，因此在更新依赖项时请务必谨慎，因为 MIME 类型可能在次要版本或补丁版本之间发生变化。
 
 ### express:router 调试日志
 
-路由器处理逻辑现在由 Express 团队维护的独立依赖项（[`router`](https://github.com/pillarjs/router)）执行，因此调试日志已迁移至其他命名空间。 在Express 5.1之前，这些调试日志不存在。 若要获取这些日志，请更新至最新的 Express 5 版本，或更新 `package-lock.json` 中的 `router` 包：
+路由器处理逻辑现在由 Express 团队维护的独立依赖项（[`router`](https://github.com/pillarjs/router)）执行，因此调试日志已迁移至其他命名空间。在Express 5.1之前，这些调试日志不存在。若要获取这些日志，请更新至最新的 Express 5 版本，或更新 `package-lock.json` 中的 `router` 包：
 
 | v4                         | v5                                  |
 | -------------------------- | ----------------------------------- |
@@ -373,11 +371,11 @@ Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新�
 
 ## 更改
 
-这些 API 仍然保留，但行为已发生变更。 请检查这些变更，确保你的应用正常运行。
+这些 API 仍然保留，但行为已发生变更。请检查这些变更，确保你的应用正常运行。
 
 ### 路径路由匹配语法
 
-路径路由匹配语法是指将字符串作为第一个参数传递给 `app.all()`、`app.use()`、`app.METHOD()`、`router.all()`、`router.METHOD()` 和 `router.use()` 这些 API。 已对路径字符串与传入请求的匹配规则做出如下修改：
+路径路由匹配语法是指将字符串作为第一个参数传递给 `app.all()`、`app.use()`、`app.METHOD()`、`router.all()`、`router.METHOD()` 和 `router.use()` 这些 API。已对路径字符串与传入请求的匹配规则做出如下修改：
 
 - 通配符 `*` 必须指定名称，和参数标记 `:` 的使用规则保持一致，请使用 `/*splat` 而非 `/*`
 
@@ -390,7 +388,7 @@ Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新�
 
   <Alert type="info">
 
-  `*splat` 匹配没有根路径的任何路径。 如果你需要同时匹配根路径，你可以使用 `/{*splat}` 来包装括号中的通配符。
+  `*splat` 匹配没有根路径的任何路径。如果你需要同时匹配根路径，你可以使用 `/{*splat}` 来包装括号中的通配符。
 
   ```js
   app.get('/{*splat}', async (req, res) => {
@@ -409,7 +407,7 @@ Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新�
    });
   ```
 
-- 路由路径中不支持正则表达式字符。 举个例子：
+- 路由路径中不支持正则表达式字符。举个例子：
 
   ```diff
   -app.get('/[discussion|page]/:slug', async (req, res) => {
@@ -424,13 +422,13 @@ Express 4 使用 **1.52.0** 版本的 `mime-db`，而 Express 5 使用了更新�
 
 ### 处理来自中间件和处理器的被拒绝 Promise
 
-返回被拒绝 Promise 的请求中间件和处理程序，现会将被拒绝的值作为 `Error` 转发给错误处理中间件进行处理。 这意味着使用 `async` 函数编写中间件和处理程序变得前所未有的简便。 当在 `async` 函数中抛出错误，或在异步函数内 `await` 了一个被拒绝的 Promise 时，这些错误将被传递给错误处理程序，效果等同于调用 `next(err)`。
+返回被拒绝 Promise 的请求中间件和处理程序，现会将被拒绝的值作为 `Error` 转发给错误处理中间件进行处理。这意味着使用 `async` 函数编写中间件和处理程序变得前所未有的简便。当在 `async` 函数中抛出错误，或在异步函数内 `await` 了一个被拒绝的 Promise 时，这些错误将被传递给错误处理程序，效果等同于调用 `next(err)`。
 
 Details of how Express handles errors is covered in the [error handling documentation](/guide/error-handling).
 
 #### 如何更新
 
-你现在可以直接使用 `async/await`，无需手动捕获错误。 若 `getUserById` 抛出错误或被拒绝，`next` 会自动以被拒绝的值作为参数被调用。
+你现在可以直接使用 `async/await`，无需手动捕获错误。若 `getUserById` 抛出错误或被拒绝，`next` 会自动以被拒绝的值作为参数被调用。
 
 ```diff
 -app.get('/user/:id', (req, res, next) => {
@@ -459,11 +457,11 @@ Details of how Express handles errors is covered in the [error handling document
 
 ### express.static dotfiles
 
-`express.static` 中间件的 `dotfiles` 选项现在默认值为 `"ignore"`。 在 Express 4 中，点文件默认提供服务。 因此，以点（`.`）开头的目录（如 `.well-known`）内的文件将不再可访问，并会返回**404 未找到**错误。 这可能会破坏依赖于提供点目录服务的功能，例如 Android 应用链接和 Apple 通用链接。
+`express.static` 中间件的 `dotfiles` 选项现在默认值为 `"ignore"`。在 Express 4 中，点文件默认提供服务。因此，以点（`.`）开头的目录（如 `.well-known`）内的文件将不再可访问，并会返回**404 未找到**错误。这可能会破坏依赖于提供点目录服务的功能，例如 Android 应用链接和 Apple 通用链接。
 
 #### 如何更新
 
-使用 `dotfiles: "allow"` 选项显式提供特定的点目录服务。 这使你可以安全地仅提供预期的点目录，同时对其他点文件保持默认的安全行为。
+使用 `dotfiles: "allow"` 选项显式提供特定的点目录服务。这使你可以安全地仅提供预期的点目录，同时对其他点文件保持默认的安全行为。
 
 ```diff
 +app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
@@ -491,8 +489,7 @@ Register each parameter name with its own `router.param()` call:
 
 ### app.listen
 
-在 Express 5 中，当服务器接收到错误事件时，`app.listen` 方法会调用用户提供的回调函数（若已指定）。 在 Express 4 中，这类错误会被直接抛出。 在 Express 5 中，此项变更将错误处理的职责转移给了回调函数。 如果发生错误，错误将作为参数传递给回调函数。
-举个例子：
+在 Express 5 中，当服务器接收到错误事件时，`app.listen` 方法会调用用户提供的回调函数（若已指定）。在 Express 4 中，这类错误会被直接抛出。在 Express 5 中，此项变更将错误处理的职责转移给了回调函数。如果发生错误，错误将作为参数传递给回调函数。举个例子：
 
 ```js ins={2-4}
 const server = app.listen(8080, '0.0.0.0', (error) => {
@@ -505,11 +502,11 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 
 ### app.router
 
-在 Express 4 中被移除的 `app.router` 对象，在 Express 5 中重新回归。 在新版本中，该对象只是对基础 Express 路由的引用，这与 Express 3 不同，在 Express 3 中应用必须显式加载它。
+在 Express 4 中被移除的 `app.router` 对象，在 Express 5 中重新回归。在新版本中，该对象只是对基础 Express 路由的引用，这与 Express 3 不同，在 Express 3 中应用必须显式加载它。
 
 ### req.body
 
-当请求体尚未被解析时，`req.body` 属性会返回 `undefined`。 在Express 4中，默认情况下返回 `{}` 。
+当请求体尚未被解析时，`req.body` 属性会返回 `undefined`。在Express 4中，默认情况下返回 `{}` 。
 
 ```js del={4} ins={6}
 app.post('/user', (req, res) => {
@@ -527,7 +524,7 @@ app.post('/user', (req, res) => {
 
 ### req.params
 
-当使用字符串路径时，`req.params`对象现在有一个 **null 原型** 。 但是，如果路径使用正则表达式定义，`req.params` 仍为带有标准原型的普通对象。 此外，还有两项重要的行为变更：
+当使用字符串路径时，`req.params`对象现在有一个 **null 原型** 。但是，如果路径使用正则表达式定义，`req.params` 仍为带有标准原型的普通对象。此外，还有两项重要的行为变更：
 
 **WildCard 参数现在是数组：**
 
@@ -543,7 +540,7 @@ app.get('/*splat', (req, res) => {
 
 **未匹配参数：**
 
-在 Express 4 中，不匹配的通配符为空字符串（`''`），可选 `:` 参数（使用 `?`）会存在键且值为 `undefined`。 在 Express 5 中，不匹配的参数会从 `req.params` 中完全省略。
+在 Express 4 中，不匹配的通配符为空字符串（`''`），可选 `:` 参数（使用 `?`）会存在键且值为 `undefined`。在 Express 5 中，不匹配的参数会从 `req.params` 中完全省略。
 
 ```diff
 -// v4: unmatched wildcard is empty string
@@ -570,7 +567,7 @@ app.get('/*splat', (req, res) => {
 
 ### req.query
 
-`req.query` 属性不再是可写属性，而是一个 getter。 默认查询解析器已从 "extended" 更改为 "simple"。
+`req.query` 属性不再是可写属性，而是一个 getter。默认查询解析器已从 "extended" 更改为 "simple"。
 
 ```js del={3}
 app.get('/search', (req, res) => {
@@ -603,7 +600,7 @@ app.get('/user', (req, res) => {
 
 ### res.vary
 
-当缺少`field`参数时，`res.vary`会抛出错误。 在 Express 4 中，如果省略该参数，控制台会输出一条警告信息。
+当缺少`field`参数时，`res.vary`会抛出错误。在 Express 4 中，如果省略该参数，控制台会输出一条警告信息。
 
 ```js del={2}
 app.get('/user', (req, res) => {

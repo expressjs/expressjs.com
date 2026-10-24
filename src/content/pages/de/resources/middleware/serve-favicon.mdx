@@ -9,7 +9,7 @@ import PackageManagerCommand from '@components/patterns/PackageManagerCommand/Pa
 
 <MiddlewareInfo
   version="2.5.1"
-  github="https://github.com/express js/serve-favicon"
+  github="https://github.com/expressjs/serve-favicon"
   npm="https://www.npmjs.com/package/serve-favicon"
 />
 
@@ -21,14 +21,14 @@ a site. Für ein Beispiel und weitere Informationen besuchen Sie bitte
 
 Warum dieses Modul verwenden?
 
-- User Agents fordern `favicon. co` häufig und unterschiedslos, damit Sie
+- User Agents fordern `favicon.ico` häufig und unterschiedslos, damit Sie
   diese Anfragen von Ihren Logs ausschließen möchten, indem Sie diese Middleware
   vor Ihrer Middleware verwenden.
 - Dieses Modul speichert das Symbol im Speicher, um die Leistung zu verbessern, indem Sie den Zugriff auf die
   Festplatte überspringen.
 - Dieses Modul bietet einen `ETag` basierend auf dem Inhalt des Icons, eher
   als Dateisystemeigenschaften.
-- Dieses Modul wird mit dem kompatibelsten "Content-Type" ausgeliefert.
+- Dieses Modul wird mit dem kompatibelsten `Content-Type` ausgeliefert.
 
 **Notiz** Dieses Modul dient ausschliesslich für den "Standard-, implizite Favicon",
 , der `GET /favicon.ico` ist. For additional vendor-specific icons that require
@@ -53,7 +53,7 @@ Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
 
 ## API
 
-### favicon(Pfad, Optionen)
+### favicon(path, options)
 
 Erstelle neue Middleware, um ein Favicon aus dem angegebenen `path` zu einer Favicon-Datei zu liefern.
 `path` kann auch ein `Buffer` des zu dienenden Icons sein.
@@ -70,11 +70,10 @@ module.
 
 ## Beispiele
 
-Normalerweise kommt diese Middleware sehr früh in Ihrem Stapel (vielleicht sogar zuerst)
-, um keine andere Middleware zu verarbeiten, wenn wir bereits wissen, dass die Anfrage für
-`/favicon ist. co`.
+Normalerweise kommt diese Middleware sehr früh in Ihrem Stapel (vielleicht sogar zuerst), um keine andere Middleware zu verarbeiten, wenn wir bereits wissen, dass die Anfrage für
+`/favicon.ico`.
 
-### ausdrücken
+### express
 
 ```javascript
 var express = require('express');
@@ -89,7 +88,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.listen(3000);
 ```
 
-### verbinden
+### connect
 
 ```javascript
 var connect = require('connect');
@@ -139,5 +138,5 @@ server.listen(3000);
 
 [downloads-url]: https://npmjs.org/package/serve-favicon
 [npm-url]: https://npmjs.org/package/serve-favicon
-[ossf-Scorecard-Abzeichen]: https://api.scorecard.dev/projects/github.com/expressjs/serve-favicon/badge
-[ossf-Punkte-Visualisierer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/serve-favicon
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/serve-favicon/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/serve-favicon

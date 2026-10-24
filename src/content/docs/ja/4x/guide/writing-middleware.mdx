@@ -4,6 +4,7 @@ description: Express.jsアプリケーション用にカスタムミドルウェ
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+import ReadMore from '@components/patterns/ReadMore/ReadMore.astro';
 
 _Middleware_ 関数は、[request object](/api#req) (`req`) にアクセスできる関数です。 [response object](/api#res) (`res`)とアプリケーションのリクエストレスポンスサイクルの中の `next` 関数。 `next` 関数はExpressルータ内の関数で、呼び出されたときに現在のミドルウェアを継承してミドルウェアを実行します。 `next` 関数はExpressルータ内の関数で、呼び出されたときに現在のミドルウェアを継承してミドルウェアを実行します。
 
@@ -14,7 +15,7 @@ _Middleware_ 関数は、[request object](/api#req) (`req`) にアクセスで�
 - リクエストレスポンスサイクルを終了します。
 - スタック内の次のミドルウェアを呼び出します。
 
-現在のミドルウェア関数がリクエスト応答サイクルを終了しない場合は、次のミドルウェア関数に制御を渡すために `next()` を呼び出す必要があります。 そうでなければ、リクエストはハングアップのままになります。 そうでなければ、リクエストはハングアップのままになります。
+現在のミドルウェア関数がリクエスト応答サイクルを終了しない場合は、次のミドルウェア関数に制御を渡すために `next()` を呼び出す必要があります。 そうでなければ、リクエストはハングアップのままになります。そうでなければ、リクエストはハングアップのままになります。
 
 次の図はミドルウェア関数呼び出しの要素を示しています。
 
@@ -53,8 +54,7 @@ Express 5以降、Promiseを返すミドルウェア関数はエラーの拒否�
 
 ## 例
 
-以下は、簡単な「Hello World」エクスプレスアプリケーションの例です。
-以下は、簡単な「Hello World」エクスプレスアプリケーションの例です。
+以下は、簡単な「Hello World」エクスプレスアプリケーションの例です。以下は、簡単な「Hello World」エクスプレスアプリケーションの例です。
 The remainder of this article will define and add three middleware functions to the application:
 one called `myLogger` that prints a simple log message, one called `requestTime` that
 displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
@@ -202,8 +202,8 @@ app.listen(3000);
 
 ### ミドルウェア関数requestTime
 
-次に、"requestTime" というミドルウェア関数を作成し、リクエストオブジェクトに `requestTime`
-というプロパティを追加します。
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the [request object](/api/request).
 
 <Alert type="アラート">
 
@@ -427,9 +427,13 @@ functions.
 
 </Alert>
 
-リクエストオブジェクト、レスポンスオブジェクト、スタック内の次のミドルウェア関数、そしてノード全体にアクセスできるためです。 s API、ミドルウェア関数の可能性は無限大です。
+Because you have access to the [request object](/api/request), the [response object](/api/response), the next middleware function in the stack, and the whole [Node.js API](https://nodejs.org/api/), the possibilities with middleware functions are endless.
 
-Express ミドルウェアの詳細については、[Express ミドルウェアを使用する](/guide/using-middleware)を参照してください。
+<ReadMore>
+
+For more information about Express middleware, see the [Using Express middleware](/guide/using-middleware) guide.
+
+</ReadMore>
 
 ## 設定可能なミドルウェア
 

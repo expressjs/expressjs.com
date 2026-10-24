@@ -1,5 +1,5 @@
 ---
-title: compressmiddleware
+title: compression middleware
 description: Node.js compression ミドルウェア
 ---
 
@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.8.1"
+  version="1.8.2"
   github="https://github.com/expressjs/compression"
   npm="https://www.npmjs.com/package/compression"
 />
@@ -21,13 +21,13 @@ Node.js compression ミドルウェア。
 - gzip
 - br (brotli)
 
-**注意** BrotliはNode.jsのバージョンv11.7.0とv10.16.0以降のみサポートされています。
+**Note** Brotli is available in all currently supported Node.js LTS versions (v18+).
 
 ## インストール
 
 これは、 [Node.js](https://nodejs.org/en/) モジュールで、
-[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
-[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+[npm registry](https://www.npmjs.com/) を介して利用できます。インストールは
+[`npm install` コマンド](https://docs.npmjs.com/downloading-and-installing-packages-locally):
 
 <PackageManagerCommand command="npm install compression" />
 
@@ -47,7 +47,7 @@ var compression = require('compression');
 
 ### compression([options])
 
-`options` を使用して圧縮ミドルウェアを返します。 ミドルウェア
+`options` を使用して圧縮ミドルウェアを返します。ミドルウェア
 は、指定された `options` に基づいて、
 ミドルウェアを横断するすべてのリクエストに対してレスポンスボディを圧縮しようとします。
 
@@ -87,8 +87,8 @@ the response.
 Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_COMPRESSION`, or `-1`
 
-応答に適用するzlib圧縮のレベル。 より高いレベルの場合、
-の圧縮が向上しますが、完了までに時間がかかります。 レベルが低い場合、
+応答に適用するzlib圧縮のレベル。より高いレベルの場合、
+の圧縮が向上しますが、完了までに時間がかかります。レベルが低い場合、
 は圧縮が少なくなりますが、はるかに速くなります。
 
 This is an integer in the range of `0` (no compression) to `9` (maximum
@@ -126,29 +126,27 @@ Default: `zlib.constants.Z_DEFAULT_MEMLEVEL`, or `8`
 
 型: `Object`
 
-Brotliを設定するためのオプションを指定します。 利用可能なオプションの一覧については、[Node.js documentation](https://nodejs.org/api/zlib.html#class-brotlioptions)を参照してください。
+Brotliを設定するためのオプションを指定します。利用可能なオプションの一覧については、[Node.js documentation](https://nodejs.org/api/zlib.html#class-brotlioptions)を参照してください。
 
 ##### 戦略
 
 Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_STRATEGY`
 
-これは圧縮アルゴリズムのチューニングに使用されます。 この値は、
+これは圧縮アルゴリズムのチューニングに使用されます。この値は、
 圧縮比にのみ影響し、
 が適切に設定されていなくても、圧縮出力の正確性には影響しません。
 
 - `zlib.constants.Z_DEFAULT_STRATEGY` 通常のデータに使用します。
-- `zlib.constants.Z_FILTERED` フィルター (または予測子) によって生成されたデータに使用します。
-  フィルタリングされたデータは、多少ランダムな
-  分布を持つ小さな値で構成されています。 この場合、圧縮アルゴリズムは
-  に調整され、圧縮が良くなります。 この効果は、より多くのハフマンのコーディングと
+- `zlib.constants.Z_FILTERED` フィルター (または予測子) によって生成されたデータに使用します。フィルタリングされたデータは、多少ランダムな
+  分布を持つ小さな値で構成されています。この場合、圧縮アルゴリズムは
+  に調整され、圧縮が良くなります。この効果は、より多くのハフマンのコーディングと
   より小さい文字列のマッチングを強制することです; `zlib.constants.Z_DEFAULT_STRATEGY`
   と `zlib.constants.Z_HUFFMAN_ONLY` の中間です。
 - `zlib.constants.Z_FIXED` 動的ハフマンコードの使用を防ぐために使用します。
   を使用すると、特殊なアプリケーションのデコーダが簡単になります。
 - `zlib.constants.Z_HUFFMAN_ONLY` Huffman エンコーディングのみを強制するために使用します (文字列が一致しません)。
-- `zlib.constants.Z_RLE` 距離を1つに一致させるのに使用します(実行長エンコーディング)。
-  これは `zlib.constants.Z_HUFFMAN_ONLY` とほぼ同じ速さで設計されていますが、PNG画像の場合は
+- `zlib.constants.Z_RLE` 距離を1つに一致させるのに使用します(実行長エンコーディング)。これは `zlib.constants.Z_HUFFMAN_ONLY` とほぼ同じ速さで設計されていますが、PNG画像の場合は
   より良い圧縮を行うように設計されています。
 
 上のリストの**Note** `zlib`は`zlib = require('zlib')`のものです。
@@ -184,7 +182,7 @@ Default: `identity`
 
 #### .filter
 
-デフォルトの `filter` 関数。 これは、デフォルト関数の拡張であるカスタム フィルター
+デフォルトの `filter` 関数。これは、デフォルト関数の拡張であるカスタム フィルター
 関数を構築するために使用されます。
 
 ```js
@@ -216,7 +214,7 @@ function shouldCompress(req, res) {
 ### エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|
 
 式でこのモジュールを使用する場合は、単純に `app.use` でモジュールを
-ハイにします。 ミドルウェアを通過するリクエストは圧縮されます。
+ハイにします。ミドルウェアを通過するリクエストは圧縮されます。
 
 ```js
 var compression = require('compression');
@@ -263,8 +261,8 @@ server.listen(3000, () => {
 ### サーバー送信イベント
 
 圧縮の性質上、このモジュールはサーバ送信イベントの
-ボックスからは動作しません。 コンテンツを圧縮するには、良好な圧縮を得るために出力ウィンドウを
-バッファリングする必要があります。 通常、サーバー送信の
+ボックスからは動作しません。コンテンツを圧縮するには、良好な圧縮を得るために出力ウィンドウを
+バッファリングする必要があります。通常、サーバー送信の
 イベントを使用する場合、クライアントに到達する必要のある特定のデータブロックがあります。
 
 に書き込まれたデータが実際にクライアントに送られる必要がある場合は、`res.flush()`を呼び出すことでこれを実現できます。
@@ -303,7 +301,7 @@ Express.jsプロジェクトは、すべての建設的な貢献を歓迎しま�
 from code for bug fixes and enhancements, to additions and fixes to documentation, additional
 tests, triaging incoming pull requests and issues, and more!
 
-See the [Contributing Guide](https://github.com/expressjs/express/blob/master/Contributing.md) for more technical details on contributing.
+See the [Contributing Guide](https://github.com/expressjs/.github/blob/HEAD/CONTRIBUTING.md) for more technical details on contributing.
 
 ## ライセンス
 

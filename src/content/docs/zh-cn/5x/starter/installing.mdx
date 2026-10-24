@@ -6,28 +6,26 @@ description: Learn how to install Express.js in your Node.js environment, includ
 import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
-在开始前，请确保你有安装 [Node.js](https://nodejs.org/) 18 或更高版本。 然后，为你的应用创建一个目录并进入该目录。
+在开始前，请确保你有安装 [Node.js](https://nodejs.org/) 18 或更高版本。然后，为你的应用创建一个目录并进入该目录。
 
 ```bash
 mkdir myapp
 cd myapp
 ```
 
-使用 `npm init` 命令为你的应用创建一个 `package.json` 文件。
-有关 `package.json` 工作机制的更多信息，请参阅 [npm 的 package.json 处理细则](https://docs.npmjs.com/files/package.json)。
+使用 `npm init` 命令为你的应用创建一个 `package.json` 文件。有关 `package.json` 工作机制的更多信息，请参阅 [npm 的 package.json 处理细则](https://docs.npmjs.com/files/package.json)。
 
 <PackageManagerCommand command="npm init" />
 
-该命令会提示你输入一些信息，例如应用的名称和版本号。
-目前，你可以直接按回车键接受大多数默认值，但以下情况除外：
+该命令会提示你输入一些信息，例如应用的名称和版本号。目前，你可以直接按回车键接受大多数默认值，但以下情况除外：
 
 ```
 entry point: (index.js)
 ```
 
-输入 `app.js`，或者你希望作为主文件的其他名称。 如果希望使用 `index.js`，直接按回车键接受系统建议的默认文件名即可。
+输入 `app.js`，或者你希望作为主文件的其他名称。如果希望使用 `index.js`，直接按回车键接受系统建议的默认文件名即可。
 
-现在，在 `myapp` 目录中安装 Express，并将其保存到依赖列表中。 举个例子：
+现在，在 `myapp` 目录中安装 Express，并将其保存到依赖列表中。举个例子：
 
 <PackageManagerCommand command="npm install express" />
 
@@ -70,7 +68,7 @@ non-erasable syntax (such as `enum`s, namespaces, and parameter properties) that
 }
 ```
 
-Write your application in TypeScript, annotating the request and response objects:
+Write your application in TypeScript, annotating the [request](/api/request) and [response](/api/response) objects:
 
 ```ts title="src/app.ts"
 import express, { type Express, type Request, type Response } from 'express';

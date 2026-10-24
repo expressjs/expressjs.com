@@ -8,14 +8,14 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="1.11.0"
+  version="1.12.1"
   github="https://github.com/expressjs/morgan"
   npm="https://www.npmjs.com/package/morgan"
 />
 
 middleware de l'enregistreur de requêtes HTTP pour node.js
 
-> Nommer après [Dexter](http://en.wikipedia.org/wiki/Dexter_Morgan), une série que vous ne devriez pas regarder jusqu'à la fin.
+> Named after [Dexter](https://en.wikipedia.org/wiki/Dexter_Morgan), a show you should not watch until completion.
 
 ## Installation
 
@@ -34,6 +34,16 @@ Ceci est un module [Node.js](https://nodejs.org/en/) disponible via
 </Alert>
 
 ## API
+
+For ES Modules:
+
+{/* eslint-disable no-unused-vars */}
+
+```js
+import morgan from 'morgan';
+```
+
+For CommonJS:
 
 {/* eslint-disable no-unused-vars */}
 
@@ -78,10 +88,12 @@ morgan(function (tokens, req, res) {
     tokens.method(req, res),
     tokens.url(req, res),
     tokens.status(req, res),
-    tokens.res(req, res, 'content-length'), '-',
-    tokens['response-time'](https://github.com/expressjs/morgan/blob/HEAD/req, res), 'ms'
-  ].join(' ')
-})
+    tokens.res(req, res, 'content-length'),
+    '-',
+    tokens['response-time'](req, res),
+    'ms',
+  ].join(' ');
+});
 ```
 
 #### Options
@@ -90,9 +102,9 @@ Morgan accepte ces propriétés dans l'objet options.
 
 ##### immédiat
 
-Écrivez la ligne du journal sur la requête au lieu de la réponse. Cela signifie qu'une requête
-sera enregistrée même si le serveur plante, _mais les données de la réponse (comme le code de réponse
-, la longueur du contenu, etc.) ne peut pas être logged_.
+Écrivez la ligne du journal sur la requête au lieu de la réponse. This means that requests will
+be logged even if the server crashes, _but data from the response (like the
+response code, content length, etc.) ne peut pas être logged_.
 
 ##### sauter
 
@@ -113,6 +125,33 @@ morgan('combined', {
 ##### flux
 
 Flux de sortie pour l'écriture des lignes de log, la valeur par défaut est `process.stdout`.
+
+If the stream is in object mode (`stream.writableObjectMode` is `true`) and the
+format function returns an object, the object is written to the stream as-is,
+without a trailing newline. This allows passing structured log entries to
+loggers that accept objects:
+
+{/* eslint-disable no-undef */}
+
+```js
+morgan(
+  function (tokens, req, res) {
+    return {
+      method: tokens.method(req, res),
+      url: tokens.url(req, res),
+      status: Number(tokens.status(req, res)),
+    };
+  },
+  {
+    stream: {
+      writableObjectMode: true,
+      write: function (entry) {
+        // entry is the object returned by the format function
+      },
+    },
+  }
+);
+```
 
 #### Formats prédéfinis
 
@@ -150,6 +189,11 @@ sans couleur pour les codes d'information.
 # will output
 GET /dev 200 0.224 ms - 2
 ```
+
+Coloring is disabled when the [`NO_COLOR`](https://no-color.org) environment
+variable is set to any non-empty value, in which case the output above is
+written without any escape sequences. The variable is read once, when `morgan`
+is first required.
 
 ##### court
 
@@ -191,8 +235,8 @@ Appeler `morgan.token()` en utilisant le même nom qu'un jeton existant écraser
 .
 
 La fonction token est appelée avec les arguments `req` et `res`, représentant
-la requête HTTP et la réponse HTTP. De plus, le jeton peut accepter d'autres arguments de
-il choisit de personnaliser le comportement.
+la requête HTTP et la réponse HTTP. Additionally, the token can accept further arguments of
+its choosing to customize behavior.
 
 ##### :date[format]
 
@@ -218,7 +262,7 @@ L'ID de processus du processus Node.js gérant la requête.
 
 #####
 
-L'en-tête Référent de la requête. Cela utilisera l'en-tête standard de Referer mal orthographié s'il existe, sinon Referrer.
+L'en-tête Référent de la requête. This will use the standard mis-spelled Referer header if it exists, otherwise Referrer.
 
 ##### :remote-addr
 
@@ -264,7 +308,7 @@ inclus sur le nombre, par défaut à `3`, qui fournit une précision de microsec
 
 #####
 
-L'URL de la requête. Cela utilisera `req.originalUrl` si existe, sinon `req.url`.
+L'URL de la requête. This will use `req.originalUrl` if it exists, otherwise `req.url`.
 
 ##### :user-agent
 
@@ -274,13 +318,13 @@ Le contenu de l'en-tête User-Agent de la requête.
 
 Compiler une chaîne de format dans une fonction `format` pour l'utiliser par `morgan`. Une chaîne de format
 est une chaîne de caractères qui représente une seule ligne de log et peut utiliser la syntaxe des jetons.
-Les jetons sont des références par `:token-name`. If tokens accept arguments, they can
+Tokens are referenced by `:token-name`. If tokens accept arguments, they can
 be passed using `[]`, for example: `:token-name[pretty]` would pass the string
 `'pretty'` as an argument to the token `token-name`.
 
-La fonction retournée par `morgan. ompile` prend trois arguments `tokens`, `req`, et
-`res`, où `tokens` est un objet avec tous les tokens définis, `req` est la requête HTTP et
-`res` est la réponse HTTP. La fonction retournera une chaîne qui sera la ligne de log,
+The function returned from `morgan.compile` takes three arguments `tokens`, `req`, and
+`res`, where `tokens` is an object with all defined tokens, `req` is the HTTP request and
+`res` is the HTTP response. La fonction retournera une chaîne qui sera la ligne de log,
 ou `undefined` / `null` pour sauter la journalisation.
 
 Normally formats are defined using `morgan.format(name, format)`, but for certain
@@ -290,7 +334,7 @@ advanced uses, this compile function is directly available.
 
 ### express/connexion
 
-Exemple d'application qui va enregistrer toutes les requêtes dans le format combiné Apache au STDOUT
+Sample app that will log all requests in the Apache combined format to STDOUT
 
 ```js
 var express = require('express');
@@ -307,7 +351,7 @@ app.get('/', function (req, res) {
 
 ### serveur http vanilla
 
-Exemple d'application qui va enregistrer toutes les requêtes dans le format combiné Apache au STDOUT
+Sample app that will log all requests in the Apache combined format to STDOUT
 
 ```js
 var finalhandler = require('finalhandler');
@@ -431,7 +475,7 @@ Exemple d'application qui utilisera des formats de jetons personnalisés. Cela a
 ```js
 var express = require('express');
 var morgan = require('morgan');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 morgan.token('id', function getId(req) {
   return req.id;
