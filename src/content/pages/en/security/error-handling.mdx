@@ -1,0 +1,81 @@
+---
+title: Error handling
+description: Decide what clients see when a request fails, instead of letting the default handler decide for you.
+---
+
+When a request fails, your application has to answer the client. If you haven't written a custom error handler, Express's default error handler reponds to the client. It responds with the full stack trace unless `NODE_ENV=production` is set, in which case it sends only the standard message for the error's status code, such as `Internal Server Error`.
+
+Sending a stack trace discloses the line number the error occurred at, absolute file paths on disk, the names of libraries in the call chain, and possibly their versions. That is useful to a normal client, but it is a gold mine for an attacker. If you send more detail than necessary you are handing out a hints for an attacker about what vulnerabilities your application may have. Choosing how much information your error responses carry is therefore a security decision.
+
+That decision lives in error-handling middleware of your own, which replaces the default for every error that reaches it. Errors reach it when a handler calls `next(err)`, when a handler throws, or, in Express 5, when the promise a handler returns rejects. The rest of this page covers where to register that middleware, what it should and should not send, why `NODE_ENV=production` still matters once you have one, and how to make sure errors from async code reach it at all.
+
+## Register an error handler after all routes
+
+You can create your own [error-handling middleware](/guide/error-handling) by registering a middleware that takes four arguments, after all your other routes and routers. The four argument signature is how Express distinguishes an error-handling middleware from a route handler or regular middleware, and it receives errors from any middleware or route registered before it.
+
+When handling errors you typically have two audiences to satisfy: the developers of the application who will be reading the logs and want detailed information, and the client who made the request which ended up erroring. Accommodate these two audiences by logging rich information about the error, and then sending a minimal response back to the client with only the information which is relevant to them.
+
+```js
+app.post('/login', (req, res, next) => {
+  // some route handler throwing an error...
+  throw new Error('BOOM');
+});
+
+app.use((err, req, res, next) => {
+  // If a response was already started, let the default handler close the connection.
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  // The logs get everything.
+  console.error(err);
+
+  // The client gets a status code and its standard message, nothing from the error itself.
+  // Only trust a status that is a real HTTP error code. Anything else is a 500.
+  const status =
+    Number.isInteger(err.status) && err.status >= 400 && err.status < 600 ? err.status : 500;
+
+  res.sendStatus(status);
+});
+```
+
+The example above is a minimal error-handling middleware which intentionally returns opaque errors to the client. Opaque here means the client is not told what caused the error, and nothing derived from the error object is sent besides the status code. You may notice that is less information than many applications want to communicate: a validation error should usually mention which field failed, and a payment that failed for insufficient balance should say so.
+
+The safest way to communicate that information to a client is to handle those errors on purpose, rather than passing through details of every error your handler receives and trusting that `err.message` is free of sensitive information. "On purpose" means your application creates those errors intentionally and marks them in a way that your error handler can recognize, and the handler sends the message only for errors it can recognize. Any other error keeps the opaque handling above. How your application marks them is your call, custom error classes or a package like [http-errors](https://github.com/jshttp/http-errors) both work.
+
+Whatever rule you choose, the handler must never throw. When an error handler throws, Express's default handler answers in its place, and outside production that answer is a stack trace. Keep the handler short and free of anything that can throw.
+
+## Set `NODE_ENV=production`
+
+It is best practice to set `NODE_ENV=production` when deploying your application. From a security and error handling perspective, its only effect is to ensure the default error handler sends only status text back rather than `err.stack`. This is relevant even if you have already set up a custom error-handling middleware, as the default handler is the backstop: if your own handler throws, or if a route is registered after your custom error-handling middleware, the default error handler can still run.
+
+The check is for the exact value `production`. Anything else, including an unset variable or a value like `staging`, sends the stack trace.
+
+Express reads the variable once, when `express()` creates the application. Assigning `process.env.NODE_ENV` in code after that point has no effect on the error handler, so set it in the environment before the process starts. [Production best practices](/advanced/best-practice-performance) covers how to do that for common setups.
+
+## Make async errors reach the handler
+
+In Express 5, a rejected promise from a handler or middleware is passed to `next(err)` for you, so an `async` handler that throws reaches your error handler like any other error. Nothing to do.
+
+In Express 4, it does not. A rejected promise from an `async` handler never reaches your error handler. The request hangs until the client gives up, and the rejection is unhandled at the process level, which crashes the process on Node 15 and later. A single request with an input that makes an async handler throw takes down every request in flight.
+
+The fix is to catch inside the handler and pass the error on yourself:
+
+```js
+app.get('/user/:id', async (req, res, next) => {
+  try {
+    const user = await db.findUser(req.params.id);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+```
+
+Do this in every `async` handler and middleware, or wrap them with a small helper that does it for you. If you are on Express 4, upgrading is the other fix.
+
+## Related
+
+- [Error handling](/guide/error-handling)
+- [`errorhandler` middleware](/resources/middleware/errorhandler)
+- [Production best practices: performance and reliability](/advanced/best-practice-performance)
