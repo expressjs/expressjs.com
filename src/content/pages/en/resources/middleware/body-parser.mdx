@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
 <MiddlewareInfo
-  version="2.3.0"
+  version="2.4.0"
   github="https://github.com/expressjs/body-parser"
   npm="https://www.npmjs.com/package/body-parser"
 />
@@ -82,6 +82,12 @@ The `bodyParser` object exposes various factories to create middlewares. All
 middlewares will populate the `req.body` property with the parsed body when
 the `Content-Type` request header matches the `type` option.
 
+**Note** As of v2, `req.body` is left `undefined` when no body is parsed (for
+example when the request has neither `Content-Length` nor `Transfer-Encoding`,
+or when `Content-Type` does not match). In v1, `req.body` was always initialized
+to `{}`. Code that assumes `req.body` is always an object should use optional
+chaining (for example `req.body?.username`) or set a default.
+
 The various errors returned by this module are described in the
 [errors section](#errors).
 
@@ -126,7 +132,7 @@ argument. You can find more information on this argument
 
 ##### strict
 
-When set to `true`, will only accept arrays and objects; when `false` will
+When set to `true`, it will only accept arrays and objects; when `false`, it will
 accept anything `JSON.parse` accepts. Defaults to `true`.
 
 ##### type
@@ -423,7 +429,7 @@ property is set to the encoding that is unsupported.
 
 ### The input exceeded the depth
 
-This error occurs when using `bodyParser.urlencoded` with the `extended` property set to `true` and the input exceeds the configured `depth` option. The `status` property is set to `400`. It is recommended to review the `depth` option and evaluate if it requires a higher value. When the `depth` option is set to `32` (default value), the error will not be thrown.
+This error occurs when using `bodyParser.urlencoded` with the `extended` property set to `true` and the input exceeds the configured `depth` option. The `status` property is set to `400`. It is recommended to review the `depth` option and evaluate if it requires a higher value. With the default `depth` of `32`, an input with 33 or more levels of nesting gets this error.
 
 ## Examples
 
