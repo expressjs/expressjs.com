@@ -55,10 +55,26 @@ The Express object has the following methods that can be used to create middlewa
           The `reviver` option is passed directly to `JSON.parse` as the second argument. You can
           find more information on this argument [in the MDN documentation about
           JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#the_reviver_parameter).
+
+          ```js
+          app.use(express.json({
+            reviver: (key, value) => key === 'createdAt' ? new Date(value) : value,
+          }));
+          // Body: {"createdAt":"2026-01-01T00:00:00Z"}
+          // req.body.createdAt is a Date.
+          ```
+
         </Param>
         <Param name="strict" type="Boolean" default="true">
           Enables or disables only accepting arrays and objects; when disabled will accept anything
           `JSON.parse` accepts.
+
+          ```js
+          app.use(express.json({ strict: false }));
+          // Body: 42 -> req.body is the number 42.
+          // With strict: true (the default), this body is rejected with status 400.
+          ```
+
         </Param>
         <Param name="type" type="String | String[] | Function" default='"application/json"'>
           This is used to determine what media type the middleware will parse. This option can be a
@@ -72,6 +88,16 @@ The Express object has the following methods that can be used to create middlewa
           This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a
           `Buffer` of the raw request body and `encoding` is the encoding of the request. The
           parsing can be aborted by throwing an error.
+
+          ```js
+          app.use(express.json({
+            verify: (req, res, buf) => {
+              req.rawBody = buf;
+            },
+          }));
+          // req.rawBody contains the original Buffer, before JSON parsing.
+          ```
+
         </Param>
       </Fragment>
     </Param>
@@ -249,15 +275,43 @@ app.post('/upload', (req: Request, res: Response) => {
   <Fragment slot="attributes">
     <Param name="caseSensitive" type="Boolean" default="false">
       Enable case sensitivity. Disabled by default, treating `/Foo` and `/foo` as the same.
+
+      ```js
+      // caseSensitive: treat "/Foo" and "/foo" as different routes
+      const router = express.Router({ caseSensitive: true });
+      router.get('/Foo', (req, res) => res.send('Matched /Foo exactly'));
+      ```
+
     </Param>
     <Param name="mergeParams" type="Boolean" default="false">
       Preserve the `req.params` values from the parent router. If the parent and the child have
       conflicting param names, the child's value take precedence.
+
+      ```js
+      // mergeParams: access parent route params in child router
+      const parent = express.Router();
+      const child = express.Router({ mergeParams: true });
+
+      parent.use('/user/:userId', child);
+      child.get('/comments', (req, res) => {
+        // req.params.userId is available because mergeParams: true
+        res.send(`Comments for user ${req.params.userId}`);
+      });
+      ```
+
     </Param>
     <Param name="strict" type="Boolean" default="false">
       Enable strict routing. Disabled by default, `/foo` and `/foo/` are treated the same by the
       router.
+
+      ```js
+      // strict: treat "/foo" and "/foo/" as different routes
+      const strictRouter = express.Router({ strict: true });
+      strictRouter.get('/foo/', (req, res) => res.send('Matched /foo/ with trailing slash'));
+      ```
+
     </Param>
+
   </Fragment>
 </Signature>
 
@@ -304,12 +358,32 @@ For more information, see [Router](/api/router/).
         <Param name="fallthrough" type="Boolean" default="true">
           Let client errors fall-through as unhandled requests, otherwise forward a client error.
           See [fallthrough](#fallthrough) below.
+
+          ```js
+          app.use('/assets', express.static('public', { fallthrough: true }));
+          app.use('/assets', (req, res) => {
+            res.status(404).send('Asset not found');
+          });
+          // Missing files reach the fallback above.
+          // With fallthrough: false, they reach error-handling middleware instead.
+          ```
+
         </Param>
         <Param name="immutable" type="Boolean" default="false">
           Enable or disable the `immutable` directive in the `Cache-Control` response header. If
           enabled, the `maxAge` option should also be specified to enable caching. The `immutable`
           directive will prevent supported clients from making conditional requests during the life
           of the `maxAge` option to check if the file has changed.
+
+          ```js
+          // Use filenames that change whenever the file contents change.
+          app.use('/assets', express.static('public', {
+            maxAge: '1y',
+            immutable: true,
+          }));
+          // Cache-Control: public, max-age=31536000, immutable
+          ```
+
         </Param>
         <Param name="index" type="String | Boolean" default='"index.html"'>
           Sends the specified directory index file. Set to `false` to disable directory indexing.
@@ -579,6 +653,18 @@ app.post('/', (req: Request, res: Response) => {
           rich objects and arrays to be encoded into the URL-encoded format, allowing for a
           JSON-like experience with URL-encoded. For more information, please [see the qs
           library](https://www.npmjs.com/package/qs#readme).
+
+          ```js
+          // Form body: user[name]=Tobi
+          app.post('/simple', express.urlencoded({ extended: false }), (req, res) => {
+            res.json(req.body); // => { 'user[name]': 'Tobi' }
+          });
+
+          app.post('/extended', express.urlencoded({ extended: true }), (req, res) => {
+            res.json(req.body); // => { user: { name: 'Tobi' } }
+          });
+          ```
+
         </Param>
         <Param name="inflate" type="Boolean" default="true">
           Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies
