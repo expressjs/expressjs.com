@@ -54,8 +54,12 @@ for example `@types/cors` alongside `cors`.
 
 Since the `tsconfig.json` below uses `"module": "nodenext"`, TypeScript determines whether each
 file is treated as an ES Module or CommonJS based on the `"type"` field in your `package.json`.
-Add `"type": "module"` to your `package.json` so that ES Module `import`/`export` syntax is
-recognized:
+Recent versions of `npm init` set `"type": "commonjs"` by default, so change it to `"module"` so
+that ES Module `import`/`export` syntax is recognized:
+
+```bash
+npm pkg set type=module
+```
 
 ```json title="package.json"
 {
