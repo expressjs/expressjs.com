@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Não confunda a posição da barra no caminho da rota com a [configuração `strict routing`](/api/application/#application-settings), que diz respeito à URL da requisição: ela controla se uma URL terminada em barra que o caminho da rota não exige ainda corresponde. Por exemplo, uma requisição para `/order/` corresponde à rota `/order{/:id}` por padrão, mas retorna um erro 404 quando o strict routing está habilitado; a barra final de `/user/` não é afetada porque a rota `/user/\{:id}` a exige. Todas as requisições comentadas nos exemplos acima se comportam da mesma forma independentemente dessa configuração.## Route handlersYou can provide multiple callback functions that
+Não confunda a posição da barra no caminho da rota com a [configuração `strict routing`](/api/application/#application-settings), que diz respeito à URL da requisição: ela controla se uma URL terminada em barra que o caminho da rota não exige ainda corresponde. Por exemplo, uma requisição para `/order/` corresponde à rota `/order{/:id}` por padrão, mas retorna um erro 404 quando o strict routing está habilitado; a barra final de `/user/` não é afetada porque a rota `/user/\{:id}` a exige. Todas as requisições comentadas nos exemplos acima se comportam da mesma forma independentemente dessa configuração.
 
 ## Manipuladores de rota
 
@@ -397,7 +397,7 @@ app.get('/user/:id', (req: Request, res: Response) => {
 Neste exemplo:
 
 - `GET /user/5` → tratado pela primeira rota → envia "Usuário 5"
-- `GET /user/0` → primeira rota chama `next('rote')`, pulando para a próxima rota `/user/:id` correspondente
+- `GET /user/0` → primeira rota chama `next('route')`, pulando para a próxima rota `/user/:id` correspondente
 
 Os manipuladores de rotas podem estar na forma de uma função, um array de funções ou combinações de ambos, como mostrado nos exemplos a seguir.A single callback function can handle a route. For example:```js
 
@@ -543,7 +543,7 @@ app.get(
 
 ## Métodos de resposta
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.| Method | Description| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.
 
 |                                                 |                                                                                                                                                                       |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -560,7 +560,7 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 ## app.route()
 
 Você pode criar manipuladores de rotas em cadeia para um caminho de rota usando `app.route()`.
-Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Aqui está um exemplo de manipuladores de rota encadeados que são definidos usando `app.route()`.```js
 app
@@ -699,10 +699,7 @@ app.use('/birds', birds);
 
 O aplicativo agora poderá lidar com pedidos para `/birds` e `/birds/about`, Além de chamar a função middleware `timeLog` que é específica da rota.But if the parent route `/birds` has path parameters, it will not b
 
-Mas se a rota pai `/birds` tiver parâmetros de caminho, ela não será acessível por padrão nas sub-rotas. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
-const router = express.Router({ mergeParams: true });
-
-````
+Mas se a rota pai `/birds` tiver parâmetros de caminho, ela não será acessível por padrão nas sub-rotas. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

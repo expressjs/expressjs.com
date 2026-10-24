@@ -360,15 +360,11 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-不要将路由路径中斜杠的位置与[`strict routing` 设置](/api/application/#application-settings)混淆，后者针对的是请求 URL：它控制以路由路径未要求的斜杠结尾的 URL 是否仍然匹配。例如，对 `/order/` 的请求默认匹配 `/order{/:id}` 路由，但在启用 strict routing 时会返回 404 错误；`/user/` 的末尾斜杠不受影响，因为 `/user/\{:id}` 路由要求它。上面示例中注释的所有请求无论该设置如何，行为都相同。## Route handlersYou can provide multiple callback functions that
+不要将路由路径中斜杠的位置与[`strict routing` 设置](/api/application/#application-settings)混淆，后者针对的是请求 URL：它控制以路由路径未要求的斜杠结尾的 URL 是否仍然匹配。例如，对 `/order/` 的请求默认匹配 `/order{/:id}` 路由，但在启用 strict routing 时会返回 404 错误；`/user/` 的末尾斜杠不受影响，因为 `/user/\{:id}` 路由要求它。上面示例中注释的所有请求无论该设置如何，行为都相同。
 
 ## Route handlers
 
-You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. 唯一的例外是这些回调函数可以调用 `next('route')` 来跳过剩余的路由回调。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。```js
-app.get('/user/:id', (req, res, next) => {
-if (req.params.i
-
-````
+You can provide multiple callback functions that behave like [middleware](/guide/using-middleware) to handle a request. 唯一的例外是这些回调函数可以调用 `next('route')` 来跳过剩余的路由回调。 你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。你可以通过这种机制为路由施加前置条件，如果没有理由继续执行当前路由，则将控制权传递给后续路由。
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -405,9 +401,7 @@ app.get('/user/:id', (req: Request, res: Response) => {
 
 路由处理程序可以采用函数、函数数组或二者结合的形式，如下示例所示。A single callback function can handle a route. For example:```js
 
-````
-
-单个回调函数即可处理一个路由。
+单个回调函数即可处理一个路由。举个例子：
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -423,7 +417,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-多个回调函数可以处理同一个路由（请确保你指定了 `next` 对象）。 举个例子：举个例子：
+多个回调函数可以处理同一个路由（请确保你指定了 `next` 对象）。举个例子：
 
 ```js
 app.get(
@@ -453,7 +447,7 @@ app.get(
 );
 ```
 
-一个回调函数数组可以处理一个路由。
+一个回调函数数组可以处理一个路由。举个例子：
 
 ```js
 const cb0 = function (req, res, next) {
@@ -547,7 +541,7 @@ app.get(
 
 ## Response methods
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. 如果路由处理程序未调用这些方法中的任何一个，客户端请求将一直处于挂起状态。
 
 |                                                 |                                                                                                                        |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -564,7 +558,7 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 ## app.route()
 
 你可以使用 `app.route()` 为路由路径创建可链式调用的路由处理程序。你可以使用 `app.route()` 为路由路径创建可链式调用的路由处理程序。
-Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 以下是使用 `app.route()` 定义的链式路由处理程序示例。```js
 app
@@ -703,10 +697,7 @@ app.use('/birds', birds);
 
 应用现在将能够处理指向 `/birds` 和 `/birds/about` 的请求，同时会调用该路由专用的 `timeLog` 中间件函数。But if the parent route `/birds` has path parameters, it will not b
 
-但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
-const router = express.Router({ mergeParams: true });
-
-````
+但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。但如果父路由 `/birds` 包含路径参数，默认情况下子路由无法访问这些参数。 To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

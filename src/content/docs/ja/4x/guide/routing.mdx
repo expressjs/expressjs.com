@@ -417,11 +417,11 @@ app.get('/user/:id', (req: Request, res: Response) => {
 この例では:
 
 - `GET /user/5` → 最初のルートで処理 → "User 5" を送信
-- `GET /user/0` → 最初のroute ('route')`を呼び出し、次に一致する `/user/:id\` route (ルート) をスキップします。
+- `GET /user/0` → 最初のルートが `next('route')` を呼び出し、次に一致する `/user/:id` ルートへスキップします。
 
 ルートハンドラは、次の例に示すように、関数、関数の配列、または両方の組み合わせの形式で使用できます。
 
-単一のコールバック関数はルートを処理できます。 例: 例:
+単一のコールバック関数はルートを処理できます。例:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -437,7 +437,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-複数のコールバック関数がルートを処理できます (`next` オブジェクトを指定してください)。 例: 例: 例:
+複数のコールバック関数がルートを処理できます (`next` オブジェクトを指定してください)。例:
 
 ```js
 app.get(
@@ -616,7 +616,7 @@ app
 
 ## express.Router
 
-Use the `express.Router` class to create modular, mountable route handlers. `express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。The following example creates a router as a module, loads a middlew
+`express.Router` クラスを使用して、モジュール化されたマウント可能なルートハンドラを作成します。 `Router`インスタンスは完全なミドルウェアとルーティングシステムです。そのため、しばしば「ミニアプリ」と呼ばれます。
 
 次の例では、ルータをモジュールとして作成し、ミドルウェア関数をロードします。 いくつかのルートを定義し、メインアプリのパスにルータモジュールをマウントします。Create a router file named `birds.js` in the app directory, with th
 

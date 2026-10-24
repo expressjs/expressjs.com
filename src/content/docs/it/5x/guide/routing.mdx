@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Non confondere la posizione della barra nel percorso della rotta con l'[impostazione `strict routing`](/api/application/#application-settings), che riguarda l'URL della richiesta: controlla se un URL che termina con una barra non richiesta dal percorso della rotta corrisponde comunque. Ad esempio, una richiesta a `/order/` corrisponde per impostazione predefinita alla rotta `/order{/:id}`, ma restituisce un errore 404 quando strict routing è abilitato; la barra finale di `/user/` non è interessata perché la rotta `/user/\{:id}` la richiede. Tutte le richieste commentate negli esempi precedenti si comportano allo stesso modo indipendentemente da questa impostazione.## Route handlersYou can provide multiple callback functions that
+Non confondere la posizione della barra nel percorso della rotta con l'[impostazione `strict routing`](/api/application/#application-settings), che riguarda l'URL della richiesta: controlla se un URL che termina con una barra non richiesta dal percorso della rotta corrisponde comunque. Ad esempio, una richiesta a `/order/` corrisponde per impostazione predefinita alla rotta `/order{/:id}`, ma restituisce un errore 404 quando strict routing è abilitato; la barra finale di `/user/` non è interessata perché la rotta `/user/\{:id}` la richiede. Tutte le richieste commentate negli esempi precedenti si comportano allo stesso modo indipendentemente da questa impostazione.
 
 ## Gestori del percorso
 
@@ -543,7 +543,7 @@ app.get(
 
 ## Metodi di risposta
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.| Method | Description| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nessuno di questi metodi è chiamato da un gestore del percorso, la richiesta del cliente sarà sospesa.
 
 |                                                 |                                                                                                                                                                                      |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -560,7 +560,7 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 ## app.route()
 
 È possibile creare i gestori di rotte per un percorso utilizzando `app.route()`.
-Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`.```js
 app
@@ -699,10 +699,7 @@ app.use('/birds', birds);
 
 L'app sarà ora in grado di gestire le richieste di `/birds` e `/birds/about`, oltre a chiamare la funzione middleware `timeLog` che è specifica per il percorso.But if the parent route `/birds` has path parameters, it will not b
 
-Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
-const router = express.Router({ mergeParams: true });
-
-````
+Ma se il percorso principale `/birds` ha parametri di percorso, non sarà accessibile per impostazione predefinita dai sotto-percorsi. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

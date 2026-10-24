@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Verwechsle die Position des Schrägstrichs im Routenpfad nicht mit der [`strict routing`-Einstellung](/api/application/#application-settings), die sich auf die Anfrage-URL bezieht: Sie steuert, ob eine URL, die mit einem Schrägstrich endet, den der Routenpfad nicht verlangt, trotzdem übereinstimmt. Zum Beispiel stimmt eine Anfrage an `/order/` standardmäßig mit der Route `/order{/:id}` überein, gibt aber einen 404-Fehler zurück, wenn strict routing aktiviert ist; der abschließende Schrägstrich von `/user/` ist davon nicht betroffen, weil die Route `/user/\{:id}` ihn verlangt. Alle in den obigen Beispielen kommentierten Anfragen verhalten sich unabhängig von dieser Einstellung gleich.## Route handlersYou can provide multiple callback functions that
+Verwechsle die Position des Schrägstrichs im Routenpfad nicht mit der [`strict routing`-Einstellung](/api/application/#application-settings), die sich auf die Anfrage-URL bezieht: Sie steuert, ob eine URL, die mit einem Schrägstrich endet, den der Routenpfad nicht verlangt, trotzdem übereinstimmt. Zum Beispiel stimmt eine Anfrage an `/order/` standardmäßig mit der Route `/order{/:id}` überein, gibt aber einen 404-Fehler zurück, wenn strict routing aktiviert ist; der abschließende Schrägstrich von `/user/` ist davon nicht betroffen, weil die Route `/user/\{:id}` ihn verlangt. Alle in den obigen Beispielen kommentierten Anfragen verhalten sich unabhängig von dieser Einstellung gleich.
 
 ## Routenhandler
 
@@ -543,7 +543,7 @@ app.get(
 
 ## Antwortmethoden
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.
 
 |                                                 |                                                                                                                                                                             |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -560,7 +560,7 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 ## app.route()
 
 Sie können verkettende Routenhandler für einen Routenpfad erstellen, indem Sie `app.route()` verwenden.
-Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Hier ist ein Beispiel für verkettete Routenhandler, die mit `app.route()` definiert werden.```js
 app
@@ -699,10 +699,7 @@ app.use('/birds', birds);
 
 Die App wird nun in der Lage sein, Anfragen an `/birds` und `/birds/about` zu bearbeiten, aufrufen sowie die Middleware-Funktion `timeLog` aufrufen, die spezifisch für die Route ist.But if the parent route `/birds` has path parameters, it will not b
 
-Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
-const router = express.Router({ mergeParams: true });
-
-````
+Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

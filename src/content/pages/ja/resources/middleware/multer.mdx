@@ -212,12 +212,12 @@ Files skipped by `fileFilter` do not count towards `maxCount`. Use
 
 #### `.none()`
 
-テキストフィールドのみ受け入れます。ファイルのアップロードが完了した場合は、
-"LIMIT_UNEXPECTED_FILE"でエラーが発生します。
+テキストフィールドのみ受け入れます。 If any file upload is made, error with code
+`LIMIT_UNEXPECTED_FILE` will be issued.
 
 #### `.any()`
 
-ワイヤ上にあるすべてのファイルを受け入れます。ファイルの配列は
+Accepts all files that come over the wire. ファイルの配列は
 `req.files` に格納されます。
 
 **警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。**警告:** ユーザーがアップロードするファイルを常に処理していることを確認してください。

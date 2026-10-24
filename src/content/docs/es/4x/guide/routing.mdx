@@ -411,7 +411,7 @@ app.get('/user/:id', (req: Request, res: Response) => {
 En este ejemplo:
 
 - `GET /user/5` → manejado por primera ruta → envía "Usuario 5"
-- `GET /user/0` → primera ruta llama a `next('ruta')`, saltando a la siguiente ruta `/user/:id`
+- `GET /user/0` → primera ruta llama a `next('route')`, saltando a la siguiente ruta `/user/:id`
 
 Los manejadores de rutas pueden ser en forma de una función, un array de funciones o combinaciones de ambos, como se muestra en los siguientes ejemplos.
 
@@ -431,7 +431,7 @@ app.get('/example/a', (req: Request, res: Response) => {
 });
 ```
 
-Una combinación de funciones independientes y arreglos de funciones puede manejar una ruta. Por ejemplo:
+Más de una función de callback puede manejar una ruta (asegúrese de especificar el objeto `next`). Por ejemplo:
 
 ```js
 app.get(
@@ -555,7 +555,7 @@ app.get(
 
 ## Métodos de respuesta
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Si ninguno de estos métodos es llamado desde un gestor de rutas, la petición del cliente se dejará colgada.
 
 | Método                                          | Descripción                                                                                                 |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |

@@ -411,7 +411,7 @@ app.get('/user/:id', (req: Request, res: Response) => {
 Neste exemplo:
 
 - `GET /user/5` → tratado pela primeira rota → envia "Usuário 5"
-- `GET /user/0` → primeira rota chama `next('rote')`, pulando para a próxima rota `/user/:id` correspondente
+- `GET /user/0` → primeira rota chama `next('route')`, pulando para a próxima rota `/user/:id` correspondente
 
 Os manipuladores de rotas podem estar na forma de uma função, um array de funções ou combinações de ambos, como mostrado nos exemplos a seguir.
 
@@ -555,7 +555,7 @@ app.get(
 
 ## Métodos de resposta
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Se nenhum destes métodos for chamado de um manipulador de redes, a solicitação do cliente será deixada em suspenso.
 
 | Método                                          | Descrição:                                                                                          |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |

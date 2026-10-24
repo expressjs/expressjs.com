@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-Ne confondez pas la position de la barre oblique dans le chemin de la route avec le [paramètre `strict routing`](/api/application/#application-settings), qui concerne l'URL de la requête : il contrôle si une URL se terminant par une barre oblique que le chemin de la route n'exige pas correspond quand même. Par exemple, une requête vers `/order/` correspond par défaut à la route `/order{/:id}`, mais renvoie une erreur 404 lorsque strict routing est activé ; la barre oblique finale de `/user/` n'est pas concernée car la route `/user/\{:id}` l'exige. Toutes les requêtes commentées dans les exemples ci-dessus se comportent de la même manière quel que soit ce paramètre.## Route handlersYou can provide multiple callback functions that
+Ne confondez pas la position de la barre oblique dans le chemin de la route avec le [paramètre `strict routing`](/api/application/#application-settings), qui concerne l'URL de la requête : il contrôle si une URL se terminant par une barre oblique que le chemin de la route n'exige pas correspond quand même. Par exemple, une requête vers `/order/` correspond par défaut à la route `/order{/:id}`, mais renvoie une erreur 404 lorsque strict routing est activé ; la barre oblique finale de `/user/` n'est pas concernée car la route `/user/\{:id}` l'exige. Toutes les requêtes commentées dans les exemples ci-dessus se comportent de la même manière quel que soit ce paramètre.
 
 ## Gestionnaires de routes
 
@@ -543,7 +543,7 @@ app.get(
 
 ## Méthodes de réponse
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Si aucune de ces méthodes n'est appelée à partir d'un gestionnaire d'itinéraire, la requête du client sera suspendue.| Method | Description| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. Si aucune de ces méthodes n'est appelée à partir d'un gestionnaire d'itinéraire, la requête du client sera suspendue.
 
 |                                                 |                                                                                                                                                                     |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -560,7 +560,7 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 ## app.route()
 
 Vous pouvez créer des gestionnaires de routes chaînables pour un chemin en utilisant `app.route()`.
-Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
 Voici un exemple de gestionnaires de routes enchaînés qui sont définis en utilisant `app.route()`.```js
 app
@@ -699,10 +699,7 @@ app.use('/birds', birds);
 
 L'application sera maintenant en mesure de traiter les demandes vers `/birds` et `/birds/about`, ainsi que d'appeler la fonction middleware `timeLog` qui est spécifique à la route.But if the parent route `/birds` has path parameters, it will not b
 
-Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
-const router = express.Router({ mergeParams: true });
-
-````
+Mais si la route parente `/birds` a des paramètres de chemin, elle ne sera pas accessible par défaut à partir des sous-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

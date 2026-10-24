@@ -356,7 +356,7 @@ app.get('/order{/:id}', (req: Request, res: Response) => {
 });
 ```
 
-라우트 경로에서 슬래시의 위치를 요청 URL에 관한 [`strict routing` 설정](/api/application/#application-settings)과 혼동하지 마세요. 이 설정은 라우트 경로가 요구하지 않는 슬래시로 끝나는 URL이 여전히 일치하는지를 제어합니다. 예를 들어 `/order/` 요청은 기본적으로 `/order{/:id}` 라우트와 일치하지만, strict routing이 활성화되면 404 오류를 반환합니다. `/user/`의 끝 슬래시는 `/user/\{:id}` 라우트가 이를 요구하므로 영향을 받지 않습니다. 위 예제에서 주석으로 표시된 모든 요청은 이 설정과 관계없이 동일하게 동작합니다.## Route handlersYou can provide multiple callback functions that
+라우트 경로에서 슬래시의 위치를 요청 URL에 관한 [`strict routing` 설정](/api/application/#application-settings)과 혼동하지 마세요. 이 설정은 라우트 경로가 요구하지 않는 슬래시로 끝나는 URL이 여전히 일치하는지를 제어합니다. 예를 들어 `/order/` 요청은 기본적으로 `/order{/:id}` 라우트와 일치하지만, strict routing이 활성화되면 404 오류를 반환합니다. `/user/`의 끝 슬래시는 `/user/\{:id}` 라우트가 이를 요구하므로 영향을 받지 않습니다. 위 예제에서 주석으로 표시된 모든 요청은 이 설정과 관계없이 동일하게 동작합니다.
 
 ## Route handlers
 
@@ -543,7 +543,7 @@ app.get(
 
 ## Response methods
 
-The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.| Method | Description| Method | Description
+The methods on the [response object](/api/response) (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
 |                                                 |                                                                                                                                                         |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -560,15 +560,9 @@ The methods on the [response object](/api/response) (`res`) in the following tab
 ## app.route()
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).Here is an example of chained route handlers that are defined by us
+Because the path is specified in a single location, this helps to create modular routes and reduces redundancy and typos. For more information about routes, see the [Router() documentation](/api/router).
 
-|## app.route()You can create chainable route handlers for a rou```js
-app
-.route('/book')
-.get((req, res) => {
-res.send('Ge
-
-````
+|## app.route()You can create chainable route handlers for a rou
 
 ```js
 app
@@ -699,10 +693,7 @@ app.use('/birds', birds);
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.But if the parent route `/birds` has path parameters, it will not b
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).```js
-const router = express.Router({ mergeParams: true });
-
-````
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the [Router constructor](/api/express/#expressrouter).
 
 ```js
 const router = express.Router({ mergeParams: true });

@@ -207,12 +207,12 @@ Exemple:
 
 #### `.none()`
 
-Accepter uniquement les champs de texte. Si un téléchargement de fichier est effectué, une erreur avec le code
-"LIMIT_UNEXPECTED_FILE" sera émise.
+Accepter uniquement les champs de texte. If any file upload is made, error with code
+`LIMIT_UNEXPECTED_FILE` will be issued.
 
 #### `.any()`
 
-Accepte tous les fichiers qui viennent sur le fil. Un tableau de fichiers sera stocké dans
+Accepts all files that come over the wire. Un tableau de fichiers sera stocké dans
 `req.files`.
 
 **AVERTISSEMENT :** Assurez-vous de toujours gérer les fichiers qu'un utilisateur téléverse.

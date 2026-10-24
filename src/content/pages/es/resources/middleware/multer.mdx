@@ -207,12 +207,12 @@ Ejemplo:
 
 #### `.None ()`
 
-Aceptar sólo campos de texto. Si se realiza cualquier carga de archivos, se emitirá un error con el código
-"LIMIT_UNEXPECTED_FILE".
+Aceptar sólo campos de texto. If any file upload is made, error with code
+`LIMIT_UNEXPECTED_FILE` will be issued.
 
 #### `.any()`
 
-Acepta todos los archivos que pasan por el cable. Un array de archivos se almacenará en
+Accepts all files that come over the wire. Un array de archivos se almacenará en
 `req.files`.
 
 **ADVERTENCIA:** Asegúrate de que siempre gestionas los archivos que sube un usuario.
