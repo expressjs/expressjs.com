@@ -61,9 +61,9 @@ If you believe you have discovered a security vulnerability in Express, please s
 
 ## Serving files
 
-- Does `express.static` [serve only files you intend to be public](/security/serving-files)?
-- When `res.sendFile` or `res.download` gets a path from request data, is [`root` set and the path allowlisted](/security/serving-files)?
-- Are [uploads limited in size and count](/security/serving-files) and stored outside any static directory?
+- Does `express.static` [serve only files you intend to be public](/security/serving-files#serve-only-files-you-intend-to-be-public)?
+- When `res.sendFile` or `res.download` gets a path from request data, is [`root` set and the path allowlisted](/security/serving-files#set-root-and-allowlist-the-path-for-ressendfile-and-resdownload)?
+- Are [uploads limited in size and count](/security/serving-files#limit-uploads-and-store-them-outside-any-public-directory) and stored outside any public directory?
 
 ## Proxies and client identity
 
