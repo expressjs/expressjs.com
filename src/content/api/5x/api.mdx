@@ -1,84 +1,284 @@
----
-title: 5.x API Reference
-description: API Reference for version 5.x
----
+Aşağıda; katlar, mutfak istasyonları, garsonlar ve runner'lar arasındaki gerçek zamanlı döngüyü yöneten, Node.js + Express.js + Socket.io ile yazılmış çalışır durumdaki arka ofis prototipi yer almaktadır.
+Hızlıca ayağa kaldırıp test edebilmeniz için veri katmanı bellek içi (in-memory state) olarak modellenmiştir; mantık doğrudan PostgreSQL tablolarındaki alanlarla birebir örtüşür.
+Proje Kurulumu
+Boş bir klasör açıp bağımlılıkları yükleyin:
+npm init -y
+npm install express socket.io cors dotenv
 
-import Alert from '@components/primitives/Alert/Alert.astro';
-import Card from '@components/primitives/Card/Card.astro';
-import { CardList } from '@components/patterns';
-import LocalizedLink from '@components/patterns/LocalizedLink/LocalizedLink.astro';
-
-This section provides an overview of the modules and APIs available in Express 5.x for building web applications and HTTP services.
-
-```cjs title="index.cjs"
+server.js
 const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('hello world');
-});
-
-app.listen(3000);
-```
-
-```mjs title="index.mjs"
-import express from 'express';
+const http = require('http');
+const { Server } = require('socket.io');
+const cors = require('cors');
 
 const app = express();
-
-app.get('/', (req, res) => {
-  res.send('hello world');
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH']
+  }
 });
 
-app.listen(3000);
-```
+app.use(cors());
+app.use(express.json());
 
-```ts title="index.ts"
-import express, { type Express, type Request, type Response } from 'express';
+// ==========================================
+// 1. STATİK / TEST VERİLERİ (IN-MEMORY STATE)
+// ==========================================
 
-const app: Express = express();
+const FLOORS = [
+  { id: 1, name: 'Zemin Kat', level: 0 },
+  { id: 2, name: '1. Kat', level: 1 },
+  { id: 3, name: '2. Kat / Teras', level: 2 }
+];
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
+const STATIONS = [
+  { id: 1, name: 'Sıcak Mutfak', code: 'HOT' },
+  { id: 2, name: 'Izgara', code: 'GRILL' },
+  { id: 3, name: 'Soğuk & Meze', code: 'COLD' },
+  { id: 4, name: 'Bar', code: 'BAR' }
+];
+
+let tables = [
+  { id: 101, floor_id: 1, table_number: 'Z-01' },
+  { id: 201, floor_id: 2, table_number: 'K1-04' },
+  { id: 301, floor_id: 3, table_number: 'T-12' }
+];
+
+let orders = [];
+let orderItems = [];
+let nextOrderId = 1;
+let nextItemId = 1001;
+
+// Bekleyen tabaklar için zamanlayıcı havuzu (Soğuma riski takibi)
+const plateTimers = new Map();
+
+// ==========================================
+// 2. SOCKET.IO ODA YÖNETİMİ
+// ==========================================
+
+io.on('connection', (socket) => {
+  console.log(`[WS] Cihaz bağlandı: ${socket.id}`);
+
+  // Cihazın rolüne göre odalara katılması
+  // Örn veri: { role: 'kitchen', stationId: 1 } veya { role: 'floor', floorId: 2 } veya { role: 'runner' }
+  socket.on('join_channel', (data) => {
+    if (data.role === 'kitchen' && data.stationId) {
+      socket.join(`station:${data.stationId}`);
+      console.log(`[WS] ${socket.id} -> Mutfak İstasyonu Odası: station:${data.stationId}`);
+    } else if (data.role === 'floor' && data.floorId) {
+      socket.join(`floor:${data.floorId}`);
+      console.log(`[WS] ${socket.id} -> Kat İstasyonu Odası: floor:${data.floorId}`);
+    } else if (data.role === 'runner') {
+      socket.join('runners');
+      console.log(`[WS] ${socket.id} -> Runner Odası: runners`);
+    } else if (data.role === 'expeditor') {
+      socket.join('expeditor');
+      console.log(`[WS] ${socket.id} -> Expeditor Odası: expeditor`);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`[WS] Cihaz ayrıldı: ${socket.id}`);
+  });
 });
 
-app.listen(3000);
-```
+// ==========================================
+// 3. REST API ENDPOINTLERİ
+// ==========================================
 
-<Alert type="info">
+// A. Yeni Sipariş Aç ve Kalemleri İstasyonlara Dağıt
+app.post('/api/v1/orders', (req, res) => {
+  const { table_id, waiter_id, waiter_name, items } = req.body;
 
-Express 5.x requires **Node.js 18 or higher**.
+  const table = tables.find(t => t.id === table_id);
+  if (!table) return res.status(404).json({ error: 'Masa bulunamadı.' });
 
-</Alert>
+  const floor = FLOORS.find(f => f.id === table.floor_id);
 
-With express v5.x, you can define routes, configure middleware, and start handling HTTP requests using the application instance created by the `express()` function. The API is organized into the following sections:
+  const orderId = nextOrderId++;
+  const newOrder = {
+    id: orderId,
+    table_id,
+    table_number: table.table_number,
+    floor_id: table.floor_id,
+    floor_name: floor ? floor.name : '',
+    waiter_id,
+    waiter_name,
+    status: 'open',
+    created_at: new Date()
+  };
+  orders.push(newOrder);
 
-<CardList gap="6">
-  <LocalizedLink href="/api/express">
-    <Card
-      title="express()"
-      body="Learn about the express() function, which creates an Express application."
-    />
-  </LocalizedLink>
-  <LocalizedLink href="/api/application">
-    <Card
-      title="Application Object"
-      body="Learn about the properties and methods of the Express 5.x application object."
-    />
-  </LocalizedLink>
-  <LocalizedLink href="/api/request">
-    <Card
-      title="Request Object"
-      body="Learn about the properties and methods of the Express 5.x request object."
-    />
-  </LocalizedLink>
-  <LocalizedLink href="/api/response">
-    <Card
-      title="Response Object"
-      body="Learn about the properties and methods of the Express 5.x response object."
-    />
-  </LocalizedLink>
-  <LocalizedLink href="/api/router">
-    <Card title="Router" body="Learn about the properties and methods of the Express 5.x router." />
-  </LocalizedLink>
-</CardList>
+  const createdItems = [];
+
+  items.forEach(item => {
+    const orderItem = {
+      id: nextItemId++,
+      order_id: orderId,
+      table_number: table.table_number,
+      floor_id: table.floor_id,
+      floor_name: floor ? floor.name : '',
+      menu_item_name: item.name,
+      station_id: item.station_id,
+      quantity: item.quantity || 1,
+      notes: item.notes || '',
+      status: 'queued',
+      ordered_at: new Date(),
+      cooking_started_at: null,
+      ready_at: null,
+      picked_up_at: null,
+      delivered_at: null
+    };
+
+    orderItems.push(orderItem);
+    createdItems.push(orderItem);
+
+    // Mutfaktaki ilgili istasyon ekranına (KDS) anlık sipariş gönder
+    io.to(`station:${orderItem.station_id}`).emit('kds:item_queued', orderItem);
+  });
+
+  // Expeditor (ana şef) ekranına tüm siparişi bildir
+  io.to('expeditor').emit('order:created', { order: newOrder, items: createdItems });
+
+  return res.status(201).json({ success: true, order: newOrder, items: createdItems });
+});
+
+// B. Mutfak İstasyonu İçin Bekleyen Kalemleri Getir
+app.get('/api/v1/kds/station/:stationId', (req, res) => {
+  const stationId = parseInt(req.params.stationId);
+  const queue = orderItems.filter(
+    item => item.station_id === stationId && ['queued', 'cooking'].includes(item.status)
+  );
+  res.json({ success: true, data: queue });
+});
+
+// C. Mutfak Durum Güncellemesi (Pişiyor / Hazır)
+app.patch('/api/v1/kds/items/:itemId/status', (req, res) => {
+  const itemId = parseInt(req.params.itemId);
+  const { status } = req.body; // 'cooking' | 'ready'
+
+  const item = orderItems.find(i => i.id === itemId);
+  if (!item) return res.status(404).json({ error: 'Sipariş kalemi bulunamadı.' });
+
+  item.status = status;
+
+  if (status === 'cooking') {
+    item.cooking_started_at = new Date();
+    io.to('expeditor').emit('kds:item_cooking', item);
+  } else if (status === 'ready') {
+    item.ready_at = new Date();
+
+    // 1. İlgili Kat İstasyonuna ve Runner Grubuna ANLIK BİLDİRİM
+    const payload = {
+      item_id: item.id,
+      order_id: item.order_id,
+      table_number: item.table_number,
+      floor_id: item.floor_id,
+      floor_name: item.floor_name,
+      item_name: item.menu_item_name,
+      notes: item.notes,
+      ready_at: item.ready_at
+    };
+
+    io.to(`floor:${item.floor_id}`).emit('order:item_ready', payload);
+    io.to('runners').emit('order:item_ready', payload);
+    io.to('expeditor').emit('kds:item_ready', payload);
+
+    // 2. Soğuma Uyarısı Zamanlayıcısı (Örn: Test için 30 saniye, canlıda 180 saniye)
+    if (plateTimers.has(item.id)) clearTimeout(plateTimers.get(item.id));
+
+    const timeout = setTimeout(() => {
+      // Hala tezgahta alınmamışsa eskalasyon uyarısı ver
+      if (item.status === 'ready') {
+        const alertData = {
+          item_id: item.id,
+          table_number: item.table_number,
+          floor_name: item.floor_name,
+          item_name: item.menu_item_name,
+          message: `${item.floor_name} - ${item.table_number} siparişi tezgâhta bekliyor, soğuma riski!`
+        };
+        io.to(`floor:${item.floor_id}`).emit('alert:cold_plate_risk', alertData);
+        io.to('runners').emit('alert:cold_plate_risk', alertData);
+        io.to('expeditor').emit('alert:cold_plate_risk', alertData);
+        console.warn(`[UYARI] Tabak gecikti: Item #${item.id}`);
+      }
+    }, 30000); // 30 saniye
+
+    plateTimers.set(item.id, timeout);
+  }
+
+  res.json({ success: true, item });
+});
+
+// D. Runner Tarafından Alındı (Picked Up)
+app.patch('/api/v1/orders/items/:itemId/pickup', (req, res) => {
+  const itemId = parseInt(req.params.itemId);
+  const item = orderItems.find(i => i.id === itemId);
+  if (!item) return res.status(404).json({ error: 'Sipariş kalemi bulunamadı.' });
+
+  item.status = 'picked_up';
+  item.picked_up_at = new Date();
+
+  // Bekleme sayacını iptal et
+  if (plateTimers.has(item.id)) {
+    clearTimeout(plateTimers.get(item.id));
+    plateTimers.delete(item.id);
+  }
+
+  const payload = { item_id: item.id, table_number: item.table_number, floor_id: item.floor_id };
+  io.to(`floor:${item.floor_id}`).emit('order:item_picked_up', payload);
+  io.to('runners').emit('order:item_picked_up', payload);
+  io.to('expeditor').emit('order:item_picked_up', payload);
+
+  res.json({ success: true, item });
+});
+
+// E. Masaya Teslim Edildi (Delivered)
+app.patch('/api/v1/orders/items/:itemId/deliver', (req, res) => {
+  const itemId = parseInt(req.params.itemId);
+  const item = orderItems.find(i => i.id === itemId);
+  if (!item) return res.status(404).json({ error: 'Sipariş kalemi bulunamadı.' });
+
+  item.status = 'delivered';
+  item.delivered_at = new Date();
+
+  io.to(`floor:${item.floor_id}`).emit('order:item_delivered', { item_id: item.id });
+  io.to('expeditor').emit('order:item_delivered', { item_id: item.id });
+
+  res.json({ success: true, item });
+});
+
+// ==========================================
+// 4. BAŞLAT
+// ==========================================
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`Restoran Servis Takip Sunucusu http://localhost:${PORT} üzerinde çalışıyor.`);
+});
+
+Test Etme (Hızlı Simülasyon)
+ * Sunucuyu başlatın:
+   node server.js
+
+ * Sipariş Gönderme (Garson Terminali Testi - cURL):
+   curl -X POST http://localhost:4000/api/v1/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "table_id": 201,
+    "waiter_id": 5,
+    "waiter_name": "Murat",
+    "items": [
+      { "name": "Kuzu Pirzola", "station_id": 2, "quantity": 1, "notes": "Orta pişmiş" },
+      { "name": "Mevsim Salata", "station_id": 3, "quantity": 1, "notes": "Sossuz" }
+    ]
+  }'
+
+   Bu istek yapıldığında Socket.io üzerinden station:2 (Izgara) ve station:3 (Soğuk) odalarına anında kds:item_queued sinyali basılır.
+ * Tabağı "Hazır" Konumuna Getirme (Mutfak Ekranı Testi):
+   curl -X PATCH http://localhost:4000/api/v1/kds/items/1001/status \
+  -H "Content-Type: application/json" \
+  -d '{ "status": "ready" }'
+
+   
