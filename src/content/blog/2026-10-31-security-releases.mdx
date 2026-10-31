@@ -67,13 +67,10 @@ As the Express project, our recommendation is to **upgrade Node.js** to a releas
 ```js
 // Register before every body parser or decompression middleware.
 app.use((req, res, next) => {
-  const encoding = (req.get('Content-Encoding') || 'identity')
-    .trim().toLowerCase();
+  const encoding = (req.get('Content-Encoding') || 'identity').trim().toLowerCase();
 
   if (!['identity', 'gzip', 'deflate'].includes(encoding)) {
-    return res.status(415).send(
-      'Use gzip, deflate, or an uncompressed request body.'
-    );
+    return res.status(415).send('Use gzip, deflate, or an uncompressed request body.');
   }
   next();
 });
