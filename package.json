@@ -42,13 +42,13 @@
     "gray-matter": "^4.0.3",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-to-string": "^4.0.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
-    "satori": "^0.33.5",
+    "satori": "^0.63.2",
     "sharp": "^0.35.5",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.2.0"
   },
   "packageManager": "npm@11.14.1",
   "devEngines": {
