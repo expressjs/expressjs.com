@@ -3,7 +3,7 @@ title: Proxies and client identity
 description: How trust proxy decides what req.ip, req.hostname, and req.protocol report, and what breaks when it does not match your deployment.
 ---
 
-When you deploy an Express app behind a proxy, by default your application no longer sees the IP address in `req.ip` of the client who sent the request. Also your application may see a different values of `req.hostname` or `req.protocol` than used by the client. This is a problem if your application is relyies on those fields to make decisions like IP-based rate limiting, writing IP addresses to access logs, or whether to set a session cookie marked `Secure`.
+When you deploy an Express app behind a proxy, by default your application no longer sees the IP address in `req.ip` of the client who sent the request. Also your application may see different values of `req.hostname` or `req.protocol` than used by the client. This is a problem if your application relies on those fields to make decisions like IP-based rate limiting, writing IP addresses to access logs, or whether to set a session cookie marked `Secure`.
 
 By default, Express sets `req.ip` from `req.socket.remoteAddress`, the socket the request arrived on. When your application is directly reachable over the internet, that address is the client that made the request. When your application sits behind a proxy, such as a load balancer or a reverse proxy like Nginx, every request arrives from the proxy, so `req.ip` is the proxy's address, not the client's. The same is true of `req.hostname` and `req.protocol`: behind a proxy that terminates TLS, Express sees a plain HTTP request from the proxy.
 
@@ -11,10 +11,9 @@ The `trust proxy` setting exists to solve this. Proxies add the address they rec
 
 ## Set `trust proxy` to match your deployment
 
-Set `trust proxy` to describe the proxies between your application and the internet. If you know the addresses or address range from which your proxies connect, then set it to those values explicitly as a string or array of strings, using [Classless Inter-Domain Routing (CIDR)](https://www.ipaddressguide.com/cidr) notation.
-otherwise set it to the number of proxies that sit in front of the application.
+Set `trust proxy` to describe the proxies between your application and the internet. If you know the addresses or address range from which your proxies connect, then set it to those values explicitly as a string or array of strings, using [Classless Inter-Domain Routing (CIDR)](https://www.ipaddressguide.com/cidr) notation. Otherwise set it to the number of proxies that sit in front of the application.
 
-If someone else runs your proxy setup, such as a hosting provider or cloud load balancer, consult their documentation to determine their address ranges, or how many sit in front of your application. If you run it yourself, you must determine this yourself.
+If someone else runs your proxy setup, such as a hosting provider or cloud load balancer, consult their documentation to determine their address ranges, or how many sit in front of your application.
 
 When you know the addresses from which your proxies connect, set `trust proxy` on the Express application instance as an IP address range or array of addresses; for example:
 
@@ -34,7 +33,9 @@ app.set('trust proxy', 1); // setting based on count, for an application behind 
 ```
 
 When `trust proxy` is set, Express starts at the socket address and walks the `X-Forwarded-For` entries from right to left, trusting as many as the setting allows. `req.ip` is the first address it doesn't trust.
+
 ### Example
+
 Here's an example of an application behind one proxy, where a client sends its own `X-Forwarded-For` header to try to forge an address, and what the application sees depending on the `trust proxy` setting. The proxy appends the client's real address to the `X-Forwarded-For` list and opens a connection to the application:
 
 ```text
@@ -43,17 +44,18 @@ X-Forwarded-For:  198.51.100.7, 192.0.2.44
 ```
 
 Here:
-- The socket address, `203.0.113.10, is the proxy. 
-- `198.51.100.7` is the forged address that the client adds. 
+
+- The socket address, `203.0.113.10`, is the proxy.
+- `198.51.100.7` is the forged address that the client adds.
 - `192.0.2.44` is the client's real address that the proxy adds to the `X-Forwarded-For` header.
 
-| Value of `trust proxy`      | `req.ip`       | Result                                         |
-| ------------------ | -------------- | ---------------------------------------------- |
-| `false`            | `203.0.113.10` | The proxy. Too few hops trusted.               |
-| `['203.0.113.10']` | `192.0.2.44`   | The client. Correct. The proxy is in the list. |
-| `1`                | `192.0.2.44`   | The client. Correct.                           |
-| `2`                | `198.51.100.7` | The forged address. Too many.                  |
-| `true`             | `198.51.100.7` | The forged address. Every entry trusted.       |
+| Value of `trust proxy` | `req.ip`       | Result                                         |
+| ---------------------- | -------------- | ---------------------------------------------- |
+| `false`                | `203.0.113.10` | The proxy. Too few hops trusted.               |
+| `['203.0.113.10']`     | `192.0.2.44`   | The client. Correct. The proxy is in the list. |
+| `1`                    | `192.0.2.44`   | The client. Correct.                           |
+| `2`                    | `198.51.100.7` | The forged address. Too many.                  |
+| `true`                 | `198.51.100.7` | The forged address. Every entry trusted.       |
 
 When the `trust proxy` setting matches your network topology the correct IP address from the `X-Forwarded-For` header is used. Trusting too few proxies will cause Express to identify the proxy as the client, while trusting too many proxies will allow clients to forge their IP address via the `X-Forwarded-For` header.
 
@@ -69,7 +71,7 @@ Setting `trust proxy` makes Express read three `X-Forwarded-*` headers to set in
 - `X-Forwarded-Proto` sets `req.protocol` and `req.secure`.
 - `X-Forwarded-Host` sets `req.hostname`.
 
-`X-Forwarded-For` is walked by hop count, or checked against a range you set. But the other two headers are not walked. If the setting is `1` or higher, or the range includes the connecting address, then Express uses whatever the headers contain.
+`X-Forwarded-For` is walked by hop count, or checked against a range you set. But the other two headers are not walked. If the setting is `1` or higher, or the range includes the connecting address, then Express uses whatever `X-Forwarded-Proto` and `X-Forwarded-Host` contain.
 
 So your proxy must overwrite at least `X-Forwarded-Proto` so a client cannot supply their own. A forged value makes `req.secure` true on a plain HTTP connection, which switches off anything that checks it, such as HTTPS-only redirects or secure cookie logic.
 
