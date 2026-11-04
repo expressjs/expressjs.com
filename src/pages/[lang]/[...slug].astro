@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import DocLayout from '@layouts/DocLayout.astro';
+import LegacyApiRedirect from '@/components/LegacyApiRedirect/LegacyApiRedirect.astro';
 import { languageCodes } from '@i18n/locales';
 import { render } from 'astro:content';
 import { getAdjacentPages } from '@utils/content';
@@ -229,5 +230,8 @@ const canonicalPathname = servedUnversioned ? `/${lang}/${contentSlug}/` : undef
   next={next}
   canonicalPathname={canonicalPathname}
 >
+  {page.collection === 'api' && /^(4x|5x)\/api$/.test(page.id) && (
+    <LegacyApiRedirect version={version} />
+  )}
   {isSharedCollection ? <Content components={{ a: LocalizedLink }} /> : <Content />}
 </DocLayout>

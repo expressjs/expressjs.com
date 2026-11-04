@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import { addLegacyApiTargets } from '@/utils/legacy-api-fragments.mjs';
+
+interface Props {
+  version: string;
+}
+
+const { version } = Astro.props;
+const targets: Record<string, string> = {};
+const pages = await getCollection('api', (page) => page.id.startsWith(`${version}/api/`));
+
+// Use the compiled headings so renamed signatures and generated slugs stay in sync.
+for (const page of pages) {
+  const { headings } = await render(page);
+  const section = page.id.split('/')[2];
+  addLegacyApiTargets(targets, section, headings);
+}
+---
+
+<div hidden data-legacy-api-targets={JSON.stringify(targets)} />
+
+<script>
+  import { getLegacyApiTarget } from '@/utils/legacy-api-fragments.mjs';
+  const redirectLegacyFragment = () => {
+    const data = document.querySelector<HTMLElement>('[data-legacy-api-targets]')?.dataset
+      .legacyApiTargets;
+    if (!data) return;
+
+    const target = getLegacyApiTarget(window.location.href, JSON.parse(data));
+    if (target) window.location.replace(target);
+  };
+
+  redirectLegacyFragment();
+  window.addEventListener('hashchange', redirectLegacyFragment);
+</script>
