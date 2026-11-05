@@ -137,6 +137,20 @@ small,
 }
 
 /* Heading links (rehype-autolink-headings) */
+:is(h2, h3, h4):has(.legacy-api-anchor) {
+  position: relative;
+}
+
+/* Match the heading's top and font metrics for native fragment scrolling.
+   Empty inline targets otherwise sit on the text baseline. */
+.legacy-api-anchor {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 0;
+  block-size: 0;
+}
+
 h1 > a,
 h2 > a,
 h3 > a,

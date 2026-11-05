@@ -7,6 +7,8 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
 
+<span id="express" aria-hidden="true" />
+
 Creates an Express application. The `express()` function is a top-level function exported by the `express` module.
 
 ```cjs title="index.cjs"
@@ -26,11 +28,11 @@ import express, { type Express } from 'express';
 const app: Express = express();
 ```
 
-## Methods
+## Methods<span id="express.methods" aria-hidden="true" className="legacy-api-anchor" />
 
 The Express object has the following methods that can be used to create middleware functions, routers and have some built-in middleware:
 
-### express.json()
+### express.json()<span id="express.json" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Function">
   <Fragment slot="attributes">
@@ -169,7 +171,7 @@ app.post('/profile', (req: Request, res: Response) => {
 });
 ```
 
-### express.raw()
+### express.raw()<span id="express.raw" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Function">
   <Fragment slot="attributes">
@@ -269,7 +271,7 @@ app.post('/upload', (req: Request, res: Response) => {
 });
 ```
 
-### express.Router()
+### express.Router()<span id="express.router" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Router">
   <Fragment slot="attributes">
@@ -326,7 +328,7 @@ so on) to `router` just like an application.
 
 For more information, see [Router](/api/router/).
 
-### express.static()
+### express.static()<span id="express.static" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Function">
   <Fragment slot="attributes">
@@ -472,7 +474,7 @@ Arguments:
 - `path`, the file path that is being sent.
 - `stat`, the `stat` object of the file that is being sent.
 
-#### Example of express.static
+#### Example of express.static<span id="example.of.express.static" aria-hidden="true" className="legacy-api-anchor" />
 
 Here is an example of using the `express.static` middleware function with an elaborate options object:
 
@@ -535,7 +537,7 @@ const options = {
 app.use(express.static('public', options));
 ```
 
-### express.text()
+### express.text()<span id="express.text" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Function">
   <Fragment slot="attributes">
@@ -639,7 +641,7 @@ app.post('/', (req: Request, res: Response) => {
 });
 ```
 
-### express.urlencoded()
+### express.urlencoded()<span id="express.urlencoded" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Function">
   <Fragment slot="attributes">

@@ -1,0 +1,11 @@
+<script>
+  import { getLegacyApiTarget } from '@/utils/legacy-api-fragments.mjs';
+
+  const redirectLegacyFragment = () => {
+    const target = getLegacyApiTarget(window.location.href);
+    if (target) window.location.replace(target);
+  };
+
+  redirectLegacyFragment();
+  window.addEventListener('hashchange', redirectLegacyFragment);
+</script>

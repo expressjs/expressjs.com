@@ -56,7 +56,7 @@ You can then use a router for a particular root URL in this way separating your 
 app.use('/calendar', router);
 ```
 
-## Methods
+## Methods<span id="router.methods" aria-hidden="true" className="legacy-api-anchor" />
 
 ### Router()
 
@@ -121,7 +121,7 @@ router.get('/events', (req: Request, res: Response) => {
 app.use('/calendar', router);
 ```
 
-### router.all()
+### router.all()<span id="router.all" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Router">
   <Fragment slot="attributes">
@@ -165,7 +165,7 @@ the example is much like before, but it only restricts paths prefixed with
 router.all('/api/*', requireAuthentication);
 ```
 
-### router.METHOD()
+### router.METHOD()<span id="router.METHOD" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Router">
   <Fragment slot="attributes">
@@ -245,7 +245,7 @@ router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req: Request, res: Resp
 });
 ```
 
-### router.param()
+### router.param()<span id="router.param" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Router">
   <Fragment slot="attributes">
@@ -504,7 +504,7 @@ router.param('id', function (candidate) {
 });
 ```
 
-### router.route()
+### router.route()<span id="router.route" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Route">
   <Fragment slot="attributes">
@@ -606,7 +606,7 @@ belong to the route to which they were added.
 
 </Alert>
 
-### router.use()
+### router.use()<span id="router.use" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Router">
   <Fragment slot="attributes">

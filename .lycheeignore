@@ -31,3 +31,6 @@ dist/(.*/)?404((/index)?\.html|/)$
 # Twitter/X rate limit (profile link and tweet intents)
 ^https://x\.com/UseExpressJS$
 ^https://x\.com/intent/tweet
+
+# WhatsApp share intents can return 500 to automated link checks
+^https://wa\.me/\?text=

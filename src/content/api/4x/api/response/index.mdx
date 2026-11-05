@@ -8,6 +8,8 @@ import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
+<span id="res" aria-hidden="true" />
+
 The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
 
 In this documentation and by convention,
@@ -49,9 +51,9 @@ app.get('/user/:id', function (request: Request, response: Response) {
 The `res` object is an enhanced version of Node's own response object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpserverresponse).
 
-## Properties
+## Properties<span id="res.properties" aria-hidden="true" className="legacy-api-anchor" />
 
-### res.app
+### res.app<span id="res.app" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Application" />
 
@@ -79,7 +81,7 @@ app.get('/', function (req: Request, res: Response) {
 });
 ```
 
-### res.headersSent
+### res.headersSent<span id="res.headersSent" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Boolean" />
 
@@ -103,7 +105,7 @@ app.get('/', function (req: Request, res: Response) {
 });
 ```
 
-### res.locals
+### res.locals<span id="res.locals" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -146,7 +148,7 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
 });
 ```
 
-### res.req
+### res.req<span id="res.req" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Request" />
 
@@ -171,9 +173,9 @@ app.get('/', function (req: Request, res: Response) {
 });
 ```
 
-## Methods
+## Methods<span id="res.methods" aria-hidden="true" className="legacy-api-anchor" />
 
-### res.append()
+### res.append()<span id="res.append" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response" since="v4.11.0">
   <Fragment slot="attributes">
@@ -201,7 +203,7 @@ res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
 res.append('Warning', '199 Miscellaneous warning');
 ```
 
-### res.attachment()
+### res.attachment()<span id="res.attachment" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -225,7 +227,7 @@ res.attachment('path/to/logo.png');
 // Content-Type: image/png
 ```
 
-### res.clearCookie()
+### res.clearCookie()<span id="res.clearCookie" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -264,7 +266,7 @@ res.cookie('name', 'tobi', { path: '/admin' });
 res.clearCookie('name', { path: '/admin' });
 ```
 
-### res.cookie()
+### res.cookie()<span id="res.cookie" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -388,7 +390,7 @@ res.cookie('name', 'tobi', { signed: true });
 
 Later you may access this value through the [req.signedCookie](/api/request/#reqsignedcookies) object.
 
-### res.download()
+### res.download()<span id="res.download" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -470,7 +472,7 @@ res.download('/report-12345.pdf', 'report.pdf', function (err) {
 });
 ```
 
-### res.end()
+### res.end()<span id="res.end" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -495,7 +497,7 @@ res.end();
 res.status(404).end();
 ```
 
-### res.format()
+### res.format()<span id="res.format" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -557,7 +559,7 @@ res.format({
 });
 ```
 
-### res.get()
+### res.get()<span id="res.get" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String">
   <Fragment slot="attributes">
@@ -575,7 +577,7 @@ res.get('Content-Type');
 // => 'text/plain'
 ```
 
-### res.json()
+### res.json()<span id="res.json" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -612,7 +614,7 @@ You can update your code automatically with the following codemod:
 
 </Alert>
 
-### res.jsonp()
+### res.jsonp()<span id="res.jsonp" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -668,7 +670,7 @@ You can update your code automatically with the following codemod:
 
 </Alert>
 
-### res.links()
+### res.links()<span id="res.links" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -697,7 +699,7 @@ Link: <http://api.example.com/users?page=2>; rel="next",
       <http://api.example.com/users?page=5>; rel="last"
 ```
 
-### res.location()
+### res.location()<span id="res.location" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -735,7 +737,7 @@ or the referring URL, and the URL specified in the `Location` header; and redire
 
 </Alert>
 
-### res.redirect()
+### res.redirect()<span id="res.redirect" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -821,7 +823,7 @@ res.redirect('back');
 See also [Security best practices: Prevent open redirect
 vulnerabilities](/advanced/best-practice-security/#prevent-open-redirects).
 
-### res.render()
+### res.render()<span id="res.render" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -885,7 +887,7 @@ res.render('user', { name: 'Tobi' }, function (err, html) {
 });
 ```
 
-### res.send()
+### res.send()<span id="res.send" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -948,7 +950,7 @@ You can update your code automatically with the following codemod:
 
 </Alert>
 
-### res.sendFile()
+### res.sendFile()<span id="res.sendFile" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature since="v4.8.0">
   <Fragment slot="attributes">
@@ -1127,7 +1129,7 @@ You can update your code automatically with the following codemod:
 
 Transfers the file at the given `path`. This is the legacy, lower-cased version of [`res.sendFile()`](#ressendfile) and behaves the same way. Prefer `res.sendFile()` in new code.
 
-### res.sendStatus()
+### res.sendStatus()<span id="res.sendStatus" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -1153,7 +1155,7 @@ version being used.
 
 [More about HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 
-### res.set()
+### res.set()<span id="res.set" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -1181,7 +1183,7 @@ res.set({
 
 Aliased as `res.header(field [, value])`.
 
-### res.status()
+### res.status()<span id="res.status" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -1200,7 +1202,7 @@ res.status(400).send('Bad Request');
 res.status(404).sendFile('/absolute/path/to/404.png');
 ```
 
-### res.type()
+### res.type()<span id="res.type" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
@@ -1228,7 +1230,7 @@ res.type('png');
 
 Aliased as `res.contentType(type)`.
 
-### res.vary()
+### res.vary()<span id="res.vary" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Response">
   <Fragment slot="attributes">
