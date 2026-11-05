@@ -58,9 +58,10 @@ for (const version of ['4x', '5x']) {
       ['app.listen_path_callback', '### app.listen()'],
       ['app.settings.table', '#### Application Settings'],
     ]) {
-      const after = source.split(`<span id="${id}" aria-hidden="true" />`)[1];
-      assert.ok(after, `missing legacy target ${id}`);
-      assert.equal(after.match(/^#{2,4} .+$/m)?.[0], heading, `${id} points to the wrong heading`);
+      const line = source.split('\n').find((line) => line.includes(`<span id="${id}" `));
+      assert.ok(line, `missing legacy target ${id}`);
+      assert.equal(line.split('<span')[0], heading, `${id} must be inside its heading`);
+      assert.ok(line.includes('className="legacy-api-anchor"'), `${id} needs heading alignment`);
     }
   });
 }

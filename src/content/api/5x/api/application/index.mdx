@@ -63,13 +63,9 @@ The Express application object can be referred from the [request object](/api/re
 
 </Alert>
 
-<span id="app.properties" aria-hidden="true" />
+## Properties<span id="app.properties" aria-hidden="true" className="legacy-api-anchor" />
 
-## Properties
-
-<span id="app.locals" aria-hidden="true" />
-
-### app.locals
+### app.locals<span id="app.locals" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -107,9 +103,7 @@ app.locals.strftime = require('strftime');
 app.locals.email = 'me@myapp.com';
 ```
 
-<span id="app.mountpath" aria-hidden="true" />
-
-### app.mountpath
+### app.mountpath<span id="app.mountpath" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String | String[]" />
 
@@ -207,9 +201,7 @@ admin.use('/secr{*splat}t', secret); // load the 'secret' router on '/secr{*spla
 app.use(['/adm{*splat}n', '/manager'], admin); // load the 'admin' router on '/adm{*splat}n' and '/manager', on the parent app
 ```
 
-<span id="app.router" aria-hidden="true" />
-
-### app.router
+### app.router<span id="app.router" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Router" />
 
@@ -257,13 +249,9 @@ You can add middleware and HTTP method routes to the `router` just like an appli
 
 For more information, see [Router](/api/router/).
 
-<span id="app.events" aria-hidden="true" />
+## Events<span id="app.events" aria-hidden="true" className="legacy-api-anchor" />
 
-## Events
-
-<span id="app.onmount" aria-hidden="true" />
-
-### app.on('mount')
+### app.on('mount')<span id="app.onmount" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -319,13 +307,9 @@ admin.get('/', (req: Request, res: Response) => {
 app.use('/admin', admin);
 ```
 
-<span id="app.methods" aria-hidden="true" />
+## Methods<span id="app.methods" aria-hidden="true" className="legacy-api-anchor" />
 
-## Methods
-
-<span id="app.all" aria-hidden="true" />
-
-### app.all()
+### app.all()<span id="app.all" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -397,9 +381,7 @@ The example is similar to the ones above, but it only restricts paths that start
 app.all('/api/{*splat}', requireAuthentication);
 ```
 
-<span id="app.delete.method" aria-hidden="true" />
-
-### app.delete()
+### app.delete()<span id="app.delete.method" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -440,9 +422,7 @@ app.delete('/', (req: Request, res: Response) => {
 });
 ```
 
-<span id="app.disable" aria-hidden="true" />
-
-### app.disable()
+### app.disable()<span id="app.disable" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Application">
   <Fragment slot="attributes">
@@ -464,9 +444,7 @@ app.get('trust proxy');
 // => false
 ```
 
-<span id="app.disabled" aria-hidden="true" />
-
-### app.disabled()
+### app.disabled()<span id="app.disabled" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Boolean">
   <Fragment slot="attributes">
@@ -489,9 +467,7 @@ app.disabled('trust proxy');
 // => false
 ```
 
-<span id="app.enable" aria-hidden="true" />
-
-### app.enable()
+### app.enable()<span id="app.enable" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Application">
   <Fragment slot="attributes">
@@ -511,9 +487,7 @@ app.get('trust proxy');
 // => true
 ```
 
-<span id="app.enabled" aria-hidden="true" />
-
-### app.enabled()
+### app.enabled()<span id="app.enabled" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Boolean">
   <Fragment slot="attributes">
@@ -536,9 +510,7 @@ app.enabled('trust proxy');
 // => true
 ```
 
-<span id="app.engine" aria-hidden="true" />
-
-### app.engine()
+### app.engine()<span id="app.engine" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Application">
   <Fragment slot="attributes">
@@ -593,9 +565,7 @@ app.engine('haml', engines.haml);
 app.engine('html', engines.hogan);
 ```
 
-<span id="app.get" aria-hidden="true" />
-
-### app.get(name)
+### app.get(name)<span id="app.get" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="any">
   <Fragment slot="attributes">
@@ -618,9 +588,7 @@ app.get('title');
 // => 'My Site'
 ```
 
-<span id="app.get.method" aria-hidden="true" />
-
-### app.get()
+### app.get()<span id="app.get.method" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -662,11 +630,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 ```
 
-<span id="app.listen_path_callback" aria-hidden="true" />
-
-<span id="app.listen" aria-hidden="true" />
-
-### app.listen()
+### app.listen()<span id="app.listen_path_callback" aria-hidden="true" className="legacy-api-anchor" /><span id="app.listen" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="http.Server">
   <Fragment slot="attributes">
@@ -793,9 +757,7 @@ actually supported.
 
 </Alert>
 
-<span id="app.METHOD" aria-hidden="true" />
-
-### app.METHOD()
+### app.METHOD()<span id="app.METHOD" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -911,9 +873,7 @@ For more information, see [app.all](#appall).
 
 For more information on routing, see the [routing guide](/guide/routing/).
 
-<span id="app.param" aria-hidden="true" />
-
-### app.param()
+### app.param()<span id="app.param" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -1043,9 +1003,7 @@ although this matches
 and this matches too
 ```
 
-<span id="app.path" aria-hidden="true" />
-
-### app.path()
+### app.path()<span id="app.path" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String" />
 
@@ -1082,9 +1040,7 @@ console.log(blogAdmin.path()); // '/blog/admin'
 The behavior of this method can become very complicated in complex cases of mounted apps:
 it is usually better to use [req.baseUrl](/api/request/#reqbaseurl) to get the canonical path of the app.
 
-<span id="app.post.method" aria-hidden="true" />
-
-### app.post()
+### app.post()<span id="app.post.method" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -1125,9 +1081,7 @@ app.post('/', (req: Request, res: Response) => {
 });
 ```
 
-<span id="app.put.method" aria-hidden="true" />
-
-### app.put()
+### app.put()<span id="app.put.method" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -1237,9 +1191,7 @@ app.query('/search', (req: Request, res: Response) => {
 });
 ```
 
-<span id="app.render" aria-hidden="true" />
-
-### app.render()
+### app.render()<span id="app.render" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">
@@ -1299,9 +1251,7 @@ app.render('email', { name: 'Tobi' }, (err, html) => {
 });
 ```
 
-<span id="app.route" aria-hidden="true" />
-
-### app.route()
+### app.route()<span id="app.route" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Route">
   <Fragment slot="attributes">
@@ -1350,9 +1300,7 @@ app
   });
 ```
 
-<span id="app.set" aria-hidden="true" />
-
-### app.set()
+### app.set()<span id="app.set" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Application">
   <Fragment slot="attributes">
@@ -1381,9 +1329,7 @@ app.set('title', 'My Site');
 app.get('title'); // "My Site"
 ```
 
-<span id="app.settings.table" aria-hidden="true" />
-
-#### Application Settings
+#### Application Settings<span id="app.settings.table" aria-hidden="true" className="legacy-api-anchor" />
 
 The following table lists application settings.
 
@@ -1586,9 +1532,7 @@ app.set('etag', (body, encoding) => {
 });
 ```
 
-<span id="app.use" aria-hidden="true" />
-
-### app.use()
+### app.use()<span id="app.use" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature>
   <Fragment slot="attributes">

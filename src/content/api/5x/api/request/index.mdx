@@ -49,15 +49,11 @@ app.get('/user/:id', (request: Request, response: Response) => {
 The `req` object is an enhanced version of Node's own request object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpincomingmessage).
 
-<span id="req.properties" aria-hidden="true" />
-
-## Properties
+## Properties<span id="req.properties" aria-hidden="true" className="legacy-api-anchor" />
 
 The `req` object contains a number of properties that provide information about the HTTP request, such as headers, query parameters, and more.
 
-<span id="req.app" aria-hidden="true" />
-
-### req.app
+### req.app<span id="req.app" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Application" />
 
@@ -100,9 +96,7 @@ export default (req: Request, res: Response) => {
 };
 ```
 
-<span id="req.baseUrl" aria-hidden="true" />
-
-### req.baseUrl
+### req.baseUrl<span id="req.baseUrl" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -148,9 +142,7 @@ app.use(['/gre:"param"t', '/hel{l}o'], greet); // load the router on '/gre:"para
 When a request is made to `/greet/jp`, `req.baseUrl` is "/greet". When a request is
 made to `/hello/jp`, `req.baseUrl` is "/hello".
 
-<span id="req.body" aria-hidden="true" />
-
-### req.body
+### req.body<span id="req.body" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -211,9 +203,7 @@ app.post('/profile', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-<span id="req.cookies" aria-hidden="true" />
-
-### req.cookies
+### req.cookies<span id="req.cookies" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -230,9 +220,7 @@ If the cookie has been signed, you have to use [req.signedCookies](#reqsignedcoo
 
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
 
-<span id="req.fresh" aria-hidden="true" />
-
-### req.fresh
+### req.fresh<span id="req.fresh" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Boolean" />
 
@@ -248,9 +236,7 @@ console.dir(req.fresh);
 // => true
 ```
 
-<span id="req.hostname" aria-hidden="true" />
-
-### req.hostname
+### req.hostname<span id="req.hostname" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -271,9 +257,7 @@ console.dir(req.hostname);
 // => 'example.com'
 ```
 
-<span id="req.host" aria-hidden="true" />
-
-### req.host
+### req.host<span id="req.host" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -298,9 +282,7 @@ console.dir(req.host);
 // => '[::1]:3000'
 ```
 
-<span id="req.ip" aria-hidden="true" />
-
-### req.ip
+### req.ip<span id="req.ip" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -315,9 +297,7 @@ console.dir(req.ip);
 // => '127.0.0.1'
 ```
 
-<span id="req.ips" aria-hidden="true" />
-
-### req.ips
+### req.ips<span id="req.ips" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String[]" />
 
@@ -340,9 +320,7 @@ console.dir(req.ips);
 // => ['client', 'proxy1', 'proxy2']
 ```
 
-<span id="req.method" aria-hidden="true" />
-
-### req.method
+### req.method<span id="req.method" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -367,9 +345,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-<span id="req.originalUrl" aria-hidden="true" />
-
-### req.originalUrl
+### req.originalUrl<span id="req.originalUrl" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -415,9 +391,7 @@ app.use('/admin', (req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
-<span id="req.params" aria-hidden="true" />
-
-### req.params
+### req.params<span id="req.params" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -487,9 +461,7 @@ Express automatically decodes the values in `req.params` (using `decodeURICompon
 
 </Alert>
 
-<span id="req.path" aria-hidden="true" />
-
-### req.path
+### req.path<span id="req.path" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -508,9 +480,7 @@ When called from a middleware, the mount point is not included in `req.path`. Se
 
 </Alert>
 
-<span id="req.protocol" aria-hidden="true" />
-
-### req.protocol
+### req.protocol<span id="req.protocol" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String" />
 
@@ -525,9 +495,7 @@ console.dir(req.protocol);
 // => 'http'
 ```
 
-<span id="req.query" aria-hidden="true" />
-
-### req.query
+### req.query<span id="req.query" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -576,9 +544,7 @@ app.set('query parser', (str: string) =>
 
 Check out the [query parser application setting](/api/application/#application-settings) documentation for other customization options.
 
-<span id="req.res" aria-hidden="true" />
-
-### req.res
+### req.res<span id="req.res" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Response" />
 
@@ -603,9 +569,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 ```
 
-<span id="req.route" aria-hidden="true" />
-
-### req.route
+### req.route<span id="req.route" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Route" />
 
@@ -648,9 +612,7 @@ Route {
 }
 ```
 
-<span id="req.secure" aria-hidden="true" />
-
-### req.secure
+### req.secure<span id="req.secure" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Boolean" />
 
@@ -662,9 +624,7 @@ A Boolean property that is true if a TLS connection is established. Equivalent t
 req.protocol === 'https';
 ```
 
-<span id="req.signedCookies" aria-hidden="true" />
-
-### req.signedCookies
+### req.signedCookies<span id="req.signedCookies" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Object" />
 
@@ -684,9 +644,7 @@ console.dir(req.signedCookies.user);
 
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
 
-<span id="req.stale" aria-hidden="true" />
-
-### req.stale
+### req.stale<span id="req.stale" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Boolean" />
 
@@ -698,9 +656,7 @@ console.dir(req.stale);
 // => true
 ```
 
-<span id="req.subdomains" aria-hidden="true" />
-
-### req.subdomains
+### req.subdomains<span id="req.subdomains" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="String[]" />
 
@@ -716,9 +672,7 @@ The application property `subdomain offset`, which defaults to 2, is used for de
 beginning of the subdomain segments. To change this behavior, change its value
 using [app.set](/api/application/#appset).
 
-<span id="req.xhr" aria-hidden="true" />
-
-### req.xhr
+### req.xhr<span id="req.xhr" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature type="Boolean" />
 
@@ -730,15 +684,11 @@ console.dir(req.xhr);
 // => true
 ```
 
-<span id="req.methods" aria-hidden="true" />
-
-## Methods
+## Methods<span id="req.methods" aria-hidden="true" className="legacy-api-anchor" />
 
 The `req` object also contains a number of methods that can be used to perform various tasks related to the HTTP request, such as checking the content type, retrieving header values, and more.
 
-<span id="req.accepts" aria-hidden="true" />
-
-### req.accepts()
+### req.accepts()<span id="req.accepts" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String | false">
   <Fragment slot="attributes">
@@ -784,9 +734,7 @@ req.accepts(['html', 'json']);
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
-<span id="req.acceptsCharsets" aria-hidden="true" />
-
-### req.acceptsCharsets()
+### req.acceptsCharsets()<span id="req.acceptsCharsets" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String | false">
   <Fragment slot="attributes">
@@ -811,9 +759,7 @@ req.acceptsCharsets('us-ascii');
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
-<span id="req.acceptsEncodings" aria-hidden="true" />
-
-### req.acceptsEncodings()
+### req.acceptsEncodings()<span id="req.acceptsEncodings" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String | false">
   <Fragment slot="attributes">
@@ -838,9 +784,7 @@ req.acceptsEncodings('br');
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
-<span id="req.acceptsLanguages" aria-hidden="true" />
-
-### req.acceptsLanguages()
+### req.acceptsLanguages()<span id="req.acceptsLanguages" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String | String[] | false">
   <Fragment slot="attributes">
@@ -874,9 +818,7 @@ Express (5.x) source: [request.js line 172](https://github.com/expressjs/express
 
 Accepts (2.0) source: [index.js line 195](https://github.com/jshttp/accepts/blob/2.0.0/index.js#L195)
 
-<span id="req.get" aria-hidden="true" />
-
-### req.get()
+### req.get()<span id="req.get" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String | undefined">
   <Fragment slot="attributes">
@@ -903,9 +845,7 @@ req.get('Something');
 
 Aliased as `req.header(field)`.
 
-<span id="req.is" aria-hidden="true" />
-
-### req.is()
+### req.is()<span id="req.is" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="String | false | null">
   <Fragment slot="attributes">
@@ -945,9 +885,7 @@ req.is('xml', 'yaml'); // => false
 
 For more information, or if you have issues or concerns, see [type-is](https://github.com/expressjs/type-is).
 
-<span id="req.range" aria-hidden="true" />
-
-### req.range()
+### req.range()<span id="req.range" aria-hidden="true" className="legacy-api-anchor" />
 
 <Signature returns="Array | Number">
   <Fragment slot="attributes">

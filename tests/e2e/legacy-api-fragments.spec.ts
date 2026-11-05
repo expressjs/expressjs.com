@@ -18,9 +18,19 @@ for (const version of ['4x', '5x']) {
       const anchor = page.locator(`[id="${fragment}"]`);
       await expect(anchor).toBeAttached();
       await expect(
-        anchor.locator('xpath=following-sibling::*[self::h2 or self::h3 or self::h4][1]')
+        anchor.locator('xpath=ancestor::*[self::h2 or self::h3 or self::h4][1]')
       ).toHaveText(heading);
-      await expect(page.getByRole('heading', { name: heading, exact: true })).toBeInViewport();
+      const targetHeading = page.getByRole('heading', { name: heading, exact: true });
+      await expect(targetHeading).toBeInViewport();
+      const legacyTop = await targetHeading.evaluate(
+        (element) => element.getBoundingClientRect().top
+      );
+      const canonicalId = await targetHeading.getAttribute('id');
+      await targetHeading.getByRole('link', { name: heading, exact: true }).click();
+      await expect(page).toHaveURL(new RegExp(`#${canonicalId}$`));
+      await expect
+        .poll(() => targetHeading.evaluate((element) => element.getBoundingClientRect().top))
+        .toBeCloseTo(legacyTop, 0);
     });
   }
 }
@@ -38,7 +48,7 @@ for (const [base, fragment, section, heading] of [
     const anchor = page.locator(`[id="${decodeURIComponent(fragment)}"]`);
     await expect(anchor).toBeAttached();
     await expect(
-      anchor.locator('xpath=following-sibling::*[self::h2 or self::h3 or self::h4][1]')
+      anchor.locator('xpath=ancestor::*[self::h2 or self::h3 or self::h4][1]')
     ).toHaveText(heading);
   });
 }
@@ -64,3 +74,22 @@ test('supports direct legacy links on section pages', async ({ page }) => {
   await page.goto('/en/5x/api/application/#app.get');
   await expect(page.getByRole('heading', { name: 'app.get(name)', exact: true })).toBeInViewport();
 });
+
+for (const heading of ['app.get(name)', 'Application Settings']) {
+  test(`mobile legacy target aligns with native heading: ${heading}`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const fragment = heading === 'app.get(name)' ? 'app.get' : 'app.settings.table';
+    await page.goto(`/en/5x/api/application/#${fragment}`);
+    const targetHeading = page.getByRole('heading', { name: heading, exact: true });
+    await expect(targetHeading).toBeInViewport();
+    const legacyTop = await targetHeading.evaluate(
+      (element) => element.getBoundingClientRect().top
+    );
+    const canonicalId = await targetHeading.getAttribute('id');
+    await targetHeading.getByRole('link', { name: heading, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`#${canonicalId}$`));
+    await expect
+      .poll(() => targetHeading.evaluate((element) => element.getBoundingClientRect().top))
+      .toBeCloseTo(legacyTop, 0);
+  });
+}
