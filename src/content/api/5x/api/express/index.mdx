@@ -440,8 +440,8 @@ and [Using middleware - Built-in middleware](/guide/using-middleware/#built-in-m
 Possible values for this option are:
 
 - "allow" - No special treatment for dotfiles.
-- "deny" - Deny a request for a dotfile, respond with `403`, then call `next()`.
-- "ignore" - Act as if the dotfile does not exist, respond with `404`, then call `next()`.
+- "deny" - Deny a request for a dotfile: call `next()`, or call `next(err)` with a `403` error when `fallthrough` is `false`.
+- "ignore" - Act as if the dotfile does not exist: call `next()`, or call `next(err)` with a `404` error when `fallthrough` is `false`.
 
 #### fallthrough
 
