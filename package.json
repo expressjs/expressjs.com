@@ -40,7 +40,7 @@
     "astro-expressive-code": "^0.44.3",
     "astro-icon": "^1.2.0",
     "gray-matter": "^4.0.3",
-    "mdast-util-from-markdown": "^2.0.3",
+    "mdast-util-from-markdown": "^2.1.0",
     "mdast-util-to-string": "^4.0.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
