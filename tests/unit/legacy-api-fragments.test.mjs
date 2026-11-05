@@ -1,35 +1,66 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { addLegacyApiTargets, getLegacyApiTarget } from '../../src/utils/legacy-api-fragments.mjs';
+import { readFileSync } from 'node:fs';
+import { getLegacyApiTarget } from '../../src/utils/legacy-api-fragments.mjs';
 
-test('maps API member signatures to compiled slugs, ignoring section titles', () => {
-  const targets = {};
-  addLegacyApiTargets(targets, 'response', [
-    { text: 'Methods', slug: 'methods' },
-    { text: 'res.send([body])', slug: 'ressendbody' },
-    { text: 'res.headersSent', slug: 'resheaderssent' },
-  ]);
-  addLegacyApiTargets(targets, 'router', [{ text: 'Router()', slug: 'router' }]);
-  assert.deepEqual(targets, {
-    'res.send': 'response/#ressendbody',
-    'res.headersSent': 'response/#resheaderssent',
-    router: 'router/#router',
-  });
+test('preserves the original fragment, locale, version and query string', () => {
+  for (const path of ['/en/4x/api', '/fr/5x/api/', '/en/api/']) {
+    for (const fragment of ['app.get', 'app.get.method', 'app.listen_path_callback']) {
+      assert.equal(
+        getLegacyApiTarget(`https://expressjs.com${path}?source=old#${fragment}`),
+        `https://expressjs.com${path.replace(/\/$/, '')}/application/?source=old#${fragment}`
+      );
+    }
+  }
 });
 
-test('preserves locale, version, query and unversioned paths', () => {
-  for (const path of ['/en/4x/api', '/fr/5x/api/', '/en/api/']) {
+test('routes all legacy sections and the express.static example', () => {
+  for (const [fragment, section] of [
+    ['express', 'express'],
+    ['express.router', 'express'],
+    ['app', 'application'],
+    ['req.body', 'request'],
+    ['res%2Esend', 'response'],
+    ['router', 'router'],
+    ['router.METHOD', 'router'],
+    ['example.of.express.static', 'express'],
+  ]) {
     assert.equal(
-      getLegacyApiTarget(`https://expressjs.com${path}?source=old#res%2Esend`, {
-        'res.send': 'response/#ressend',
-      }),
-      `https://expressjs.com${path.replace(/\/$/, '')}/response/?source=old#ressend`
+      getLegacyApiTarget(`https://expressjs.com/en/5x/api/#${fragment}`),
+      `https://expressjs.com/en/5x/api/${section}/#${fragment}`
     );
   }
 });
 
-test('does not redirect unknown, current, malformed or inherited fragments', () => {
-  for (const fragment of ['', 'overview', 'res.unknown', '%E0%A4%A', '__proto__', 'toString']) {
-    assert.equal(getLegacyApiTarget(`https://expressjs.com/en/5x/api/#${fragment}`, {}), undefined);
+test('leaves current, unknown and malformed fragments and section pages alone', () => {
+  for (const fragment of ['', 'overview', 'unknown.method', '%E0%A4%A', '__proto__', 'toString']) {
+    assert.equal(getLegacyApiTarget(`https://expressjs.com/en/5x/api/#${fragment}`), undefined);
   }
+  assert.equal(
+    getLegacyApiTarget('https://expressjs.com/en/5x/api/application/#app.get'),
+    undefined
+  );
 });
+
+for (const version of ['4x', '5x']) {
+  test(`${version} explicitly distinguishes historical application IDs`, () => {
+    const source = readFileSync(
+      new URL(`../../src/content/api/${version}/api/application/index.mdx`, import.meta.url),
+      'utf8'
+    );
+    for (const [id, heading] of [
+      ['app.get', '### app.get(name)'],
+      ['app.get.method', '### app.get()'],
+      ['app.delete.method', '### app.delete()'],
+      ['app.post.method', '### app.post()'],
+      ['app.put.method', '### app.put()'],
+      ['app.onmount', "### app.on('mount')"],
+      ['app.listen_path_callback', '### app.listen()'],
+      ['app.settings.table', '#### Application Settings'],
+    ]) {
+      const after = source.split(`<span id="${id}" aria-hidden="true" />`)[1];
+      assert.ok(after, `missing legacy target ${id}`);
+      assert.equal(after.match(/^#{2,4} .+$/m)?.[0], heading, `${id} points to the wrong heading`);
+    }
+  });
+}

@@ -7,6 +7,8 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
 
+<span id="res" aria-hidden="true" />
+
 The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
 
 In this documentation and by convention,
@@ -48,7 +50,11 @@ app.get('/user/:id', (request: Request, response: Response) => {
 The `res` object is an enhanced version of Node's own response object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpserverresponse).
 
+<span id="res.properties" aria-hidden="true" />
+
 ## Properties
+
+<span id="res.app" aria-hidden="true" />
 
 ### res.app
 
@@ -78,6 +84,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 ```
 
+<span id="res.headersSent" aria-hidden="true" />
+
 ### res.headersSent
 
 <Signature type="Boolean" />
@@ -101,6 +109,8 @@ app.get('/', (req: Request, res: Response) => {
   console.log(res.headersSent); // true
 });
 ```
+
+<span id="res.locals" aria-hidden="true" />
 
 ### res.locals
 
@@ -145,6 +155,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 ```
 
+<span id="res.req" aria-hidden="true" />
+
 ### res.req
 
 <Signature type="Request" />
@@ -170,7 +182,11 @@ app.get('/', (req: Request, res: Response) => {
 });
 ```
 
+<span id="res.methods" aria-hidden="true" />
+
 ## Methods
+
+<span id="res.append" aria-hidden="true" />
 
 ### res.append()
 
@@ -200,6 +216,8 @@ res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
 res.append('Warning', '199 Miscellaneous warning');
 ```
 
+<span id="res.attachment" aria-hidden="true" />
+
 ### res.attachment()
 
 <Signature returns="Response">
@@ -223,6 +241,8 @@ res.attachment('path/to/logo.png');
 // Content-Disposition: attachment; filename="logo.png"
 // Content-Type: image/png
 ```
+
+<span id="res.clearCookie" aria-hidden="true" />
 
 ### res.clearCookie()
 
@@ -255,6 +275,8 @@ identical to those given to [res.cookie()](#rescookie)
 res.cookie('name', 'tobi', { path: '/admin' });
 res.clearCookie('name', { path: '/admin' });
 ```
+
+<span id="res.cookie" aria-hidden="true" />
 
 ### res.cookie()
 
@@ -380,6 +402,8 @@ res.cookie('name', 'tobi', { signed: true });
 
 Later, you may access this value through the [req.signedCookies](/api/request/#reqsignedcookies) object.
 
+<span id="res.download" aria-hidden="true" />
+
 ### res.download()
 
 <Signature>
@@ -462,6 +486,8 @@ res.download('/report-12345.pdf', 'report.pdf', (err) => {
 });
 ```
 
+<span id="res.end" aria-hidden="true" />
+
 ### res.end()
 
 <Signature returns="Response">
@@ -486,6 +512,8 @@ Use to quickly end the response without any data. If you need to respond with da
 res.end();
 res.status(404).end();
 ```
+
+<span id="res.format" aria-hidden="true" />
 
 ### res.format()
 
@@ -549,6 +577,8 @@ res.format({
 });
 ```
 
+<span id="res.get" aria-hidden="true" />
+
 ### res.get()
 
 <Signature returns="String">
@@ -566,6 +596,8 @@ The match is case-insensitive.
 res.get('Content-Type');
 // => 'text/plain'
 ```
+
+<span id="res.json" aria-hidden="true" />
 
 ### res.json()
 
@@ -589,6 +621,8 @@ res.json(null);
 res.json({ user: 'tobi' });
 res.status(500).json({ error: 'message' });
 ```
+
+<span id="res.jsonp" aria-hidden="true" />
 
 ### res.jsonp()
 
@@ -632,6 +666,8 @@ res.status(500).jsonp({ error: 'message' });
 // => foo({ "error": "message" })
 ```
 
+<span id="res.links" aria-hidden="true" />
+
 ### res.links()
 
 <Signature returns="Response">
@@ -663,6 +699,8 @@ Link: <http://api.example.com/users?page=2>; rel="next",
       <http://api.example.com/users?page=5>; rel="last"
 ```
 
+<span id="res.location" aria-hidden="true" />
+
 ### res.location()
 
 <Signature returns="Response">
@@ -688,6 +726,8 @@ Browsers take the responsibility of deriving the intended URL from the current U
 or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
 
 </Alert>
+
+<span id="res.redirect" aria-hidden="true" />
 
 ### res.redirect()
 
@@ -751,6 +791,8 @@ res.redirect('..');
 
 See also [Security best practices: Prevent open redirect
 vulnerabilities](/advanced/best-practice-security/#prevent-open-redirects).
+
+<span id="res.render" aria-hidden="true" />
 
 ### res.render()
 
@@ -816,6 +858,8 @@ res.render('user', { name: 'Tobi' }, (err, html) => {
 });
 ```
 
+<span id="res.send" aria-hidden="true" />
+
 ### res.send()
 
 <Signature returns="Response">
@@ -863,6 +907,8 @@ When the parameter is an `Array` or `Object`, Express responds with the JSON rep
 res.send({ user: 'tobi' });
 res.send([1, 2, 3]);
 ```
+
+<span id="res.sendFile" aria-hidden="true" />
 
 ### res.sendFile()
 
@@ -1013,6 +1059,8 @@ app.get('/user/:uid/photos/:file', (req: Request, res: Response) => {
 
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).
 
+<span id="res.sendStatus" aria-hidden="true" />
+
 ### res.sendStatus()
 
 <Signature returns="Response">
@@ -1038,6 +1086,8 @@ version being used.
 </Alert>
 
 [More about HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+<span id="res.set" aria-hidden="true" />
 
 ### res.set()
 
@@ -1067,6 +1117,8 @@ res.set({
 
 Aliased as `res.header(field [, value])`.
 
+<span id="res.status" aria-hidden="true" />
+
 ### res.status()
 
 <Signature returns="Response">
@@ -1085,6 +1137,8 @@ res.status(403).end();
 res.status(400).send('Bad Request');
 res.status(404).sendFile('/absolute/path/to/404.png');
 ```
+
+<span id="res.type" aria-hidden="true" />
 
 ### res.type()
 
@@ -1108,6 +1162,8 @@ res.type('png'); // => 'image/png'
 ```
 
 Aliased as `res.contentType(type)`.
+
+<span id="res.vary" aria-hidden="true" />
 
 ### res.vary()
 

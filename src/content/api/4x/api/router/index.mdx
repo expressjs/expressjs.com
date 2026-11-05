@@ -56,6 +56,8 @@ You can then use a router for a particular root URL in this way separating your 
 app.use('/calendar', router);
 ```
 
+<span id="router.methods" aria-hidden="true" />
+
 ## Methods
 
 ### Router()
@@ -121,6 +123,8 @@ router.get('/events', (req: Request, res: Response) => {
 app.use('/calendar', router);
 ```
 
+<span id="router.all" aria-hidden="true" />
+
 ### router.all()
 
 <Signature returns="Router">
@@ -164,6 +168,8 @@ the example is much like before, but it only restricts paths prefixed with
 ```js
 router.all('/api/*', requireAuthentication);
 ```
+
+<span id="router.METHOD" aria-hidden="true" />
 
 ### router.METHOD()
 
@@ -244,6 +250,8 @@ router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req: Request, res: Resp
   res.send('commit range ' + from + '..' + to);
 });
 ```
+
+<span id="router.param" aria-hidden="true" />
 
 ### router.param()
 
@@ -504,6 +512,8 @@ router.param('id', function (candidate) {
 });
 ```
 
+<span id="router.route" aria-hidden="true" />
+
 ### router.route()
 
 <Signature returns="Route">
@@ -605,6 +615,8 @@ when method handlers are added to the route. For this purpose, you can consider 
 belong to the route to which they were added.
 
 </Alert>
+
+<span id="router.use" aria-hidden="true" />
 
 ### router.use()
 

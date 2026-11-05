@@ -230,8 +230,6 @@ const canonicalPathname = servedUnversioned ? `/${lang}/${contentSlug}/` : undef
   next={next}
   canonicalPathname={canonicalPathname}
 >
-  {page.collection === 'api' && /^(4x|5x)\/api$/.test(page.id) && (
-    <LegacyApiRedirect version={version} />
-  )}
+  {page.collection === 'api' && /^(4x|5x)\/api$/.test(page.id) && <LegacyApiRedirect />}
   {isSharedCollection ? <Content components={{ a: LocalizedLink }} /> : <Content />}
 </DocLayout>

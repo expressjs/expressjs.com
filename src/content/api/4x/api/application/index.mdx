@@ -8,6 +8,8 @@ import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
+<span id="app" aria-hidden="true" />
+
 The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:
 
@@ -62,7 +64,11 @@ The Express application object can be referred from the [request object](/api/re
 
 </Alert>
 
+<span id="app.properties" aria-hidden="true" />
+
 ## Properties
+
+<span id="app.locals" aria-hidden="true" />
 
 ### app.locals
 
@@ -101,6 +107,8 @@ app.locals.title = 'My App';
 app.locals.strftime = require('strftime');
 app.locals.email = 'me@myapp.com';
 ```
+
+<span id="app.mountpath" aria-hidden="true" />
 
 ### app.mountpath
 
@@ -200,7 +208,11 @@ admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the '
 app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app
 ```
 
+<span id="app.events" aria-hidden="true" />
+
 ## Events
+
+<span id="app.onmount" aria-hidden="true" />
 
 ### app.on('mount')
 
@@ -257,7 +269,11 @@ admin.get('/', function (req: Request, res: Response) {
 app.use('/admin', admin);
 ```
 
+<span id="app.methods" aria-hidden="true" />
+
 ## Methods
+
+<span id="app.all" aria-hidden="true" />
 
 ### app.all()
 
@@ -331,6 +347,8 @@ The example is similar to the ones above, but it only restricts paths that start
 app.all('/api/*', requireAuthentication);
 ```
 
+<span id="app.delete.method" aria-hidden="true" />
+
 ### app.delete()
 
 <Signature>
@@ -395,6 +413,8 @@ You can update your code automatically with the following codemod:
 
 </Alert>
 
+<span id="app.disable" aria-hidden="true" />
+
 ### app.disable()
 
 <Signature returns="Application">
@@ -416,6 +436,8 @@ app.disable('trust proxy');
 app.get('trust proxy');
 // => false
 ```
+
+<span id="app.disabled" aria-hidden="true" />
 
 ### app.disabled()
 
@@ -440,6 +462,8 @@ app.disabled('trust proxy');
 // => false
 ```
 
+<span id="app.enable" aria-hidden="true" />
+
 ### app.enable()
 
 <Signature returns="Application">
@@ -459,6 +483,8 @@ app.enable('trust proxy');
 app.get('trust proxy');
 // => true
 ```
+
+<span id="app.enabled" aria-hidden="true" />
 
 ### app.enabled()
 
@@ -482,6 +508,8 @@ app.enable('trust proxy');
 app.enabled('trust proxy');
 // => true
 ```
+
+<span id="app.engine" aria-hidden="true" />
 
 ### app.engine()
 
@@ -538,6 +566,8 @@ app.engine('haml', engines.haml);
 app.engine('html', engines.hogan);
 ```
 
+<span id="app.get" aria-hidden="true" />
+
 ### app.get(name)
 
 <Signature returns="any">
@@ -560,6 +590,8 @@ app.set('title', 'My Site');
 app.get('title');
 // => 'My Site'
 ```
+
+<span id="app.get.method" aria-hidden="true" />
 
 ### app.get()
 
@@ -602,6 +634,10 @@ app.get('/', function (req: Request, res: Response) {
   res.send('GET request to homepage');
 });
 ```
+
+<span id="app.listen_path_callback" aria-hidden="true" />
+
+<span id="app.listen" aria-hidden="true" />
 
 ### app.listen()
 
@@ -710,6 +746,8 @@ app.listen = function () {
 All the forms of Node's [http.Server.listen()](https://nodejs.org/api/http.html#serverlisten) method are in fact actually supported.
 
 </Alert>
+
+<span id="app.METHOD" aria-hidden="true" />
 
 ### app.METHOD()
 
@@ -896,6 +934,8 @@ app.query('/search', (req: Request, res: Response) => {
   res.json(results);
 });
 ```
+
+<span id="app.param" aria-hidden="true" />
 
 ### app.param()
 
@@ -1162,6 +1202,8 @@ router.get('[[\s\S]]*', function (req: Request, res: Response, next: NextFunctio
 
 </Alert>
 
+<span id="app.path" aria-hidden="true" />
+
 ### app.path()
 
 <Signature returns="String" />
@@ -1198,6 +1240,8 @@ console.dir(blogAdmin.path()); // '/blog/admin'
 
 The behavior of this method can become very complicated in complex cases of mounted apps:
 it is usually better to use [req.baseUrl](/api/request/#reqbaseurl) to get the canonical path of the app.
+
+<span id="app.post.method" aria-hidden="true" />
 
 ### app.post()
 
@@ -1240,6 +1284,8 @@ app.post('/', function (req: Request, res: Response) {
 });
 ```
 
+<span id="app.put.method" aria-hidden="true" />
+
 ### app.put()
 
 <Signature>
@@ -1279,6 +1325,8 @@ app.put('/', function (req: Request, res: Response) {
   res.send('PUT request to homepage');
 });
 ```
+
+<span id="app.render" aria-hidden="true" />
 
 ### app.render()
 
@@ -1340,6 +1388,8 @@ app.render('email', { name: 'Tobi' }, function (err, html) {
 });
 ```
 
+<span id="app.route" aria-hidden="true" />
+
 ### app.route()
 
 <Signature returns="Route">
@@ -1389,6 +1439,8 @@ app
   });
 ```
 
+<span id="app.set" aria-hidden="true" />
+
 ### app.set()
 
 <Signature returns="Application">
@@ -1417,6 +1469,8 @@ Retrieve the value of a setting with [`app.get()`](#appgetname).
 app.set('title', 'My Site');
 app.get('title'); // "My Site"
 ```
+
+<span id="app.settings.table" aria-hidden="true" />
 
 #### Application Settings
 
@@ -1620,6 +1674,8 @@ app.set('etag', function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined
 });
 ```
+
+<span id="app.use" aria-hidden="true" />
 
 ### app.use()
 

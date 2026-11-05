@@ -1,33 +1,38 @@
-/**
- * @param {Record<string, string>} targets
- * @param {string} section
- * @param {{ text: string, slug: string }[]} headings
- */
-export function addLegacyApiTargets(targets, section, headings) {
-  for (const heading of headings) {
-    const member = heading.text.match(/^(express|app|req|res|router)(?:\.[\w-]+)*(?=\(|$)/)?.[0];
-    if (member) targets[member] = `${section}/#${heading.slug}`;
-    if (heading.text === 'Router()') targets.router = `${section}/#${heading.slug}`;
-  }
-}
+const sections = {
+  express: 'express',
+  app: 'application',
+  req: 'request',
+  res: 'response',
+  router: 'router',
+};
 
 /**
- * Resolve only known legacy members, preserving the overview's locale, version and query.
+ * Route a legacy API fragment to its section, keeping the original fragment.
+ * The destination pages contain explicit legacy anchors, including overloads
+ * such as app.get (setting) and app.get.method (route).
  * @param {string} href
- * @param {Record<string, string>} targets
  * @returns {string | undefined}
  */
-export function getLegacyApiTarget(href, targets) {
+export function getLegacyApiTarget(href) {
   const target = new URL(href);
-  let member;
+  if (!/\/api\/?$/.test(target.pathname)) return;
+
+  let fragment;
   try {
-    member = decodeURIComponent(target.hash.slice(1));
+    fragment = decodeURIComponent(target.hash.slice(1));
   } catch {
     return;
   }
-  if (!Object.hasOwn(targets, member)) return;
-  const [section, slug] = targets[member].split('/#');
+
+  const prefix = fragment.split('.')[0];
+  const section =
+    fragment === 'example.of.express.static'
+      ? 'express'
+      : Object.hasOwn(sections, prefix)
+        ? sections[prefix]
+        : undefined;
+  if (!section) return;
+
   target.pathname = `${target.pathname.replace(/\/$/, '')}/${section}/`;
-  target.hash = slug;
   return target.href;
 }

@@ -79,6 +79,7 @@ nmap
 NOFILE
 nogroup
 OKLCH
+onmount
 Ooops
 oracledb
 Orama

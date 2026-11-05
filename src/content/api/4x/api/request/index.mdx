@@ -8,6 +8,8 @@ import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
 import PackageManagerCommand from '@components/patterns/PackageManagerCommand/PackageManagerCommand.astro';
 
+<span id="req" aria-hidden="true" />
+
 The `req` object represents the HTTP request and has properties for the
 request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention,
 the object is always referred to as `req` (and the HTTP response is `res`) but its actual name is determined
@@ -48,6 +50,8 @@ app.get('/user/:id', function (request: Request, response: Response) {
 The `req` object is an enhanced version of Node's own request object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpincomingmessage).
 
+<span id="req.properties" aria-hidden="true" />
+
 ## Properties
 
 The `req` object contains a number of properties that provide information about the HTTP request, such as headers, query parameters, and more.
@@ -60,6 +64,8 @@ on the `req.files` object, use multipart-handling middleware like [multer](https
 or [pez](https://www.npmjs.com/package/pez).
 
 </Alert>
+
+<span id="req.app" aria-hidden="true" />
 
 ### req.app
 
@@ -103,6 +109,8 @@ export default function (req: Request, res: Response) {
   res.send('The views directory is ' + req.app.get('views'));
 }
 ```
+
+<span id="req.baseUrl" aria-hidden="true" />
 
 ### req.baseUrl
 
@@ -149,6 +157,8 @@ app.use(['/gre+t', '/hel{2}o'], greet); // load the router on '/gre+t' and '/hel
 
 When a request is made to `/greet/jp`, `req.baseUrl` is "/greet". When a request is
 made to `/hello/jp`, `req.baseUrl` is "/hello".
+
+<span id="req.body" aria-hidden="true" />
 
 ### req.body
 
@@ -211,6 +221,8 @@ app.post('/profile', function (req: Request, res: Response, next: NextFunction) 
 });
 ```
 
+<span id="req.cookies" aria-hidden="true" />
+
 ### req.cookies
 
 <Signature type="Object" />
@@ -228,6 +240,8 @@ If the cookie has been signed, you have to use [req.signedCookies](#reqsignedcoo
 
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
 
+<span id="req.fresh" aria-hidden="true" />
+
 ### req.fresh
 
 <Signature type="Boolean" />
@@ -243,6 +257,8 @@ Further details for how cache validation works can be found in the
 console.dir(req.fresh);
 // => true
 ```
+
+<span id="req.hostname" aria-hidden="true" />
 
 ### req.hostname
 
@@ -288,6 +304,8 @@ console.dir(req.host);
 // => 'example.com'
 ```
 
+<span id="req.ip" aria-hidden="true" />
+
 ### req.ip
 
 <Signature type="String" />
@@ -302,6 +320,8 @@ the value of this property is derived from the left-most entry in the
 console.dir(req.ip);
 // => '127.0.0.1'
 ```
+
+<span id="req.ips" aria-hidden="true" />
 
 ### req.ips
 
@@ -325,6 +345,8 @@ console.dir(req.ips);
 console.dir(req.ips);
 // => ['client', 'proxy1', 'proxy2']
 ```
+
+<span id="req.method" aria-hidden="true" />
 
 ### req.method
 
@@ -350,6 +372,8 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 ```
+
+<span id="req.originalUrl" aria-hidden="true" />
 
 ### req.originalUrl
 
@@ -397,6 +421,8 @@ app.use('/admin', function (req: Request, res: Response, next: NextFunction) {
 });
 ```
 
+<span id="req.params" aria-hidden="true" />
+
 ### req.params
 
 <Signature type="Object" />
@@ -429,6 +455,8 @@ Express automatically decodes the values in `req.params` (using `decodeURICompon
 
 </Alert>
 
+<span id="req.path" aria-hidden="true" />
+
 ### req.path
 
 <Signature type="String" />
@@ -448,6 +476,8 @@ When called from a middleware, the mount point is not included in `req.path`. Se
 
 </Alert>
 
+<span id="req.protocol" aria-hidden="true" />
+
 ### req.protocol
 
 <Signature type="String" />
@@ -462,6 +492,8 @@ This header can be set by the client or by the proxy.
 console.dir(req.protocol);
 // => 'http'
 ```
+
+<span id="req.query" aria-hidden="true" />
 
 ### req.query
 
@@ -512,6 +544,8 @@ app.set('query parser', function (str: string) {
 
 Check out the [query parser application setting](/api/application/#application-settings) documentation for other customization options.
 
+<span id="req.res" aria-hidden="true" />
+
 ### req.res
 
 <Signature type="Response" />
@@ -536,6 +570,8 @@ app.get('/', function (req: Request, res: Response) {
   res.send('OK');
 });
 ```
+
+<span id="req.route" aria-hidden="true" />
 
 ### req.route
 
@@ -574,6 +610,8 @@ Example output from the previous snippet:
   methods: { get: true } }
 ```
 
+<span id="req.secure" aria-hidden="true" />
+
 ### req.secure
 
 <Signature type="Boolean" />
@@ -584,6 +622,8 @@ A Boolean property that is true if a TLS connection is established. Equivalent t
 console.dir(req.protocol === 'https');
 // => true
 ```
+
+<span id="req.signedCookies" aria-hidden="true" />
 
 ### req.signedCookies
 
@@ -605,6 +645,8 @@ console.dir(req.signedCookies.user);
 
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
 
+<span id="req.stale" aria-hidden="true" />
+
 ### req.stale
 
 <Signature type="Boolean" />
@@ -616,6 +658,8 @@ For more information, see [req.fresh](#reqfresh).
 console.dir(req.stale);
 // => true
 ```
+
+<span id="req.subdomains" aria-hidden="true" />
 
 ### req.subdomains
 
@@ -633,6 +677,8 @@ The application property `subdomain offset`, which defaults to 2, is used for de
 beginning of the subdomain segments. To change this behavior, change its value
 using [app.set](/api/application/#appset).
 
+<span id="req.xhr" aria-hidden="true" />
+
 ### req.xhr
 
 <Signature type="Boolean" />
@@ -645,9 +691,13 @@ console.dir(req.xhr);
 // => true
 ```
 
+<span id="req.methods" aria-hidden="true" />
+
 ## Methods
 
 The `req` object also contains a number of methods that can be used to perform various tasks related to the HTTP request, such as checking the content type, retrieving header values, and more.
+
+<span id="req.accepts" aria-hidden="true" />
 
 ### req.accepts()
 
@@ -695,6 +745,8 @@ req.accepts(['html', 'json']);
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
 
+<span id="req.acceptsCharsets" aria-hidden="true" />
+
 ### req.acceptsCharsets()
 
 <Signature returns="String | false">
@@ -740,6 +792,8 @@ You can update your code automatically with the following codemod:
 
 </Alert>
 
+<span id="req.acceptsEncodings" aria-hidden="true" />
+
 ### req.acceptsEncodings()
 
 <Signature returns="String | false">
@@ -784,6 +838,8 @@ You can update your code automatically with the following codemod:
 <PackageManagerCommand command="npx codemod@latest @expressjs/pluralize-method-names" />
 
 </Alert>
+
+<span id="req.acceptsLanguages" aria-hidden="true" />
 
 ### req.acceptsLanguages()
 
@@ -840,6 +896,8 @@ Express (4.x) source: [request.js line 179](https://github.com/expressjs/express
 
 Accepts (1.3) source: [index.js line 195](https://github.com/jshttp/accepts/blob/f69c19e459bd501e59fb0b1a40b7471bb578113a/index.js#L195)
 
+<span id="req.get" aria-hidden="true" />
+
 ### req.get()
 
 <Signature returns="String | undefined">
@@ -866,6 +924,8 @@ req.get('Something');
 ```
 
 Aliased as `req.header(field)`.
+
+<span id="req.is" aria-hidden="true" />
 
 ### req.is()
 
@@ -918,6 +978,8 @@ req.is('xml', 'yaml');
 
 For more information, or if you have issues or concerns, see [type-is](https://github.com/expressjs/type-is).
 
+<span id="req.param" aria-hidden="true" />
+
 ### req.param()
 
 <Signature returns="any">
@@ -968,6 +1030,8 @@ Direct access to `req.body`, `req.params`, and `req.query` should be favoured fo
 Body-parsing middleware must be loaded for `req.param()` to work predictably. Refer [req.body](#reqbody) for details.
 
 </Alert>
+
+<span id="req.range" aria-hidden="true" />
 
 ### req.range()
 

@@ -7,6 +7,8 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 import Signature from '@components/patterns/Signature/Signature.astro';
 import Param from '@components/patterns/Signature/Param.astro';
 
+<span id="express" aria-hidden="true" />
+
 Creates an Express application. The `express()` function is a top-level function exported by the `express` module.
 
 ```cjs title="index.cjs"
@@ -24,7 +26,11 @@ import express, { type Express } from 'express';
 const app: Express = express();
 ```
 
+<span id="express.methods" aria-hidden="true" />
+
 ## Methods
+
+<span id="express.json" aria-hidden="true" />
 
 ### express.json()
 
@@ -161,6 +167,8 @@ app.post('/profile', (req: Request, res: Response) => {
 });
 ```
 
+<span id="express.raw" aria-hidden="true" />
+
 ### express.raw()
 
 <Signature returns="Function" since="v4.17.0">
@@ -261,6 +269,8 @@ app.post('/upload', (req: Request, res: Response) => {
 });
 ```
 
+<span id="express.router" aria-hidden="true" />
+
 ### express.Router()
 
 <Signature returns="Router">
@@ -317,6 +327,8 @@ You can add middleware and HTTP method routes (such as `get`, `put`, `post`, and
 so on) to `router` just like an application.
 
 For more information, see [Router](/api/router/).
+
+<span id="express.static" aria-hidden="true" />
 
 ### express.static()
 
@@ -465,6 +477,8 @@ Arguments:
 - `path`, the file path that is being sent.
 - `stat`, the `stat` object of the file that is being sent.
 
+<span id="example.of.express.static" aria-hidden="true" />
+
 #### Example of express.static
 
 Here is an example of using the `express.static` middleware function with an elaborate options object:
@@ -527,6 +541,8 @@ const options = {
 
 app.use(express.static('public', options));
 ```
+
+<span id="express.text" aria-hidden="true" />
 
 ### express.text()
 
@@ -631,6 +647,8 @@ app.post('/', (req: Request, res: Response) => {
   res.send(req.body);
 });
 ```
+
+<span id="express.urlencoded" aria-hidden="true" />
 
 ### express.urlencoded()
 
