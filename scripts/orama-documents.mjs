@@ -21,10 +21,15 @@ const mdToText = (content) =>
   stripTags(toString(fromMarkdown(signatureMetaToText(stripMdxImports(content)))));
 
 // Build the public path segment from a content-relative file path: drop the
-// extension and any trailing `index` so `foo/index.mdx` -> `foo`. This matches
-// Astro's glob loader, which serves index files at their directory URL (without
-// a trailing `/index`).
-const toPathSegment = (relPath) => relPath.replace(/\.mdx?$/, '').replace(/(?:^|\/)index$/, '');
+// extension and any trailing `index` so `foo/index.mdx` -> `foo`, and lowercase
+// it so `CVE-2026-1.mdx` -> `cve-2026-1`. This matches Astro's glob loader, which
+// slugifies entry ids and serves index files at their directory URL (without a
+// trailing `/index`).
+export const toPathSegment = (relPath) =>
+  relPath
+    .toLowerCase()
+    .replace(/\.mdx?$/, '')
+    .replace(/(?:^|\/)index$/, '');
 
 const collectMdFiles = async (dir, base = dir) => {
   const entries = await readdir(dir);
@@ -94,7 +99,7 @@ export const getBlogPosts = async (lang) => {
       const fullPath = join(baseDir, file);
       const raw = await readFile(fullPath, 'utf-8');
       const { data, content } = matter(raw);
-      const slug = basename(file).replace(/\.mdx?$/, '');
+      const slug = toPathSegment(basename(file));
 
       return {
         title: data.title ?? slug,
