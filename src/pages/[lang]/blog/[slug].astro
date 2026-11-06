@@ -61,7 +61,7 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
         as="a"
         variant="secondary"
         size="sm"
-        href={`https://github.com/expressjs/expressjs.com/edit/main/src/content/blog/${Astro.params.slug}`}
+        href={`https://github.com/expressjs/expressjs.com/edit/main/${post.filePath}`}
       >
         <Icon name="github" aria-hidden="true" />
         {t('page.editOnGitHub')}
