@@ -1,0 +1,69 @@
+---
+title: Serving files
+description: Keep `express.static` to files meant for everyone, let your code choose which file a request gets, and keep uploads out of both.
+---
+
+When talking about serving files there are three core things to consider which relate to who decides which files are served and when the decision is made.
+
+The first case is when the developer decides which files are served, by picking an entire directory at startup to serve to the public. Express represents this case as `app.use(express.static(path.join(__dirname, 'public')))`. In this case it is important to be sure that all files in that directory are meant to be public.
+
+Second is when a request decides at runtime which files to serve. It is important in this case to limit which files the request is allowed to choose.
+
+And third is when accepting file uploads. In this case the uploader decides what the file contains, so it is important to ensure that the file does not end up in the same public directory as in the first case, where the file can immediately be served to anyone.
+
+## Serve only files you intend to be public
+
+It is common to serve an entire directory of files without putting any auth in front of the files. Think of a `public` directory which contains JavaScript files, HTML, or CSS style sheets which make up an application's frontend. That is the intended use case of mounting the `express.static` middleware globally in your application, and passing a path to a folder on disk to serve a directory of files without needing a request handler to negotiate authentication or authorization. Then files can be requested by filename and path within that public directory.
+
+```js
+// Serve everything under ./public, relative to this file, with no auth in front.
+app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'ignore' }));
+```
+
+There isn't much more to say on this besides: be very sure when serving files without auth from a directory that you only put files in it which are meant to be public! Set `dotfiles: 'ignore'` explicitly so that `express.static` responds 404 for dotfiles (files or directories prefixed with a period character, such as `.env` or `.git`). On Express 4 the default only hides a dotfile itself and still serves files inside dot-directories, such as `.git/config`. All the same, dotfiles should never be in the directory if they aren't meant to be served.
+
+Middleware runs in registration order, so an `express.static` mount registered before your auth middleware serves its files without it. [Route patterns and middleware order](/security/route-patterns) covers that ordering.
+
+## Set `root` and allowlist the path for `res.sendFile` and `res.download`
+
+Routes that respond to a request by sending a specific file based on user input, using something like `res.sendFile` or `res.download`, carry a risk that carefully crafted input could cause your application to send a file it never meant to serve, or never meant to serve to that user. The general case here is [path traversal](https://community.owasp.org/attacks/Path_Traversal) by including `../` in requested filenames to walk out of the expected directory where files are stored. It could also be as straightforward as a user requesting another user's file by guessing the filename. Two mitigations take care of these issues: scoping file paths to a root directory, and making sure your code is responsible for selecting a file instead of directly passing through a user provided path.
+
+Both `res.sendFile` and `res.download` take a path to a directory as a `root` option. Without it, Express requires an absolute path and doesn't check where that path points. A path constructed with request data can reach any file the process can read. With it, the path is resolved inside `root` so nothing outside it can be served. When using `root` its value must never come from request data. Set it once as a constant when the application starts, either via hardcoding it into the route or reading it from configuration such as an environment variable. Set `root` to the specific directory the file lives in rather than a convenient parent because everything under `root` is reachable.
+
+While `root` guards against path traversal attacks, it does not guard against one user requesting a file that doesn't belong to them. A route that passes a user controlled path directly to `res.download` or `res.sendFile` allows a user to guess the path of any file inside `root`. The fix here is to have a request name a record via an identifier instead of a file location. Your code is then responsible for resolving the identifier into a file path, as well as checking if the user is allowed to access it. This pattern also helps with path traversal. When your application no longer allows a request to specify a file path, there is no opportunity to sneak in a `../` path traversal. The `root` option is still useful as a backstop in case a direct path passthrough ever makes it into the code. Express has no mechanism for this resolution step. It is the application's responsibility to implement access control.
+
+```js
+const INVOICES_DIR = path.join(__dirname, 'invoices');
+
+app.get('/invoices/:id', async (req, res, next) => {
+  try {
+    // Your code decides which file this user may have.
+    const invoice = await db.findInvoice(req.params.id, req.user.id);
+    if (!invoice) return res.sendStatus(404);
+
+    // Scoping the file path to a root
+    res.download(invoice.filename, { root: INVOICES_DIR }, (err) => {
+      if (err) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+```
+
+This is the file-path case of a general rule: raw request data must never become a path. [Untrusted input](/security/untrusted-input) covers the rule itself.
+
+## Limit uploads and store them outside any public directory
+
+In the context of an application which serves files, special care should be taken with file uploads. Specifically, do not place user uploads into your public directory if you have one. That can allow an attacker to upload a file with contents they control, and then have the file served from your application's origin, opening up the possibility of [Cross Site Scripting (XSS)](https://community.owasp.org/attacks/xss/) attacks or other attacks. Instead, store uploads in a directory that isn't covered by any `express.static` mount, and serve them back through a route of your own using the identifier lookup and `root` approach described above.
+
+The filename a client provides for an upload is user input just like any other, and should not be used as the name of the file on disk. If two users each upload an `invoice.pdf` and the name is kept, the second one overwrites the first, and the client-provided name can also contain path separators or `../` that a custom storage setup would write out to disk. [multer](/resources/middleware/multer) handles this for you by giving each uploaded file a random name by default, so the mistake to watch for is a custom `filename` function that passes `file.originalname` through unchanged.
+
+Uploads should also have a limit on their size and on how many can be sent in a single request, otherwise a single client can fill up your disk, or your memory if that is where uploads are kept. With multer those are the `limits.fileSize` and `limits.files` options. That is really a resource exhaustion concern and not particularly unique to serving files, so the [Resource exhaustion](/security/resource-exhaustion) page covers it in more detail.
+
+## Related
+
+- [Serving static files](/starter/static-files)
+- [`serve-static` middleware](/resources/middleware/serve-static)
+- [`multer` middleware](/resources/middleware/multer)
+- [`express.static`](/api/express/#expressstatic), [`res.sendFile`](/api/response#ressendfile), and [`res.download`](/api/response#resdownload) in the API reference
