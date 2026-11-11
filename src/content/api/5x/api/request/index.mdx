@@ -224,6 +224,8 @@ For more information, issues, or concerns, see [cookie-parser](https://github.co
 
 When the response is still "fresh" in the client's cache `true` is returned, otherwise `false` is returned to indicate that the client cache is now stale and the full response should be sent.
 
+Freshness is only checked for `GET`, `HEAD`, and `QUERY` requests whose response status is `2xx` or `304`; for any other method or status, `req.fresh` is `false`.
+
 When a client sends the `Cache-Control: no-cache` request header to indicate an end-to-end reload request, this module will return `false` to make handling these requests transparent.
 
 Further details for how cache validation works can be found in the
