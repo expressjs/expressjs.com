@@ -11,20 +11,16 @@ import Icons from 'unplugin-icons/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import redirects from './src/config/redirects/index.js';
-import movedPages from './src/config/redirects/moved-pages.json' with { type: 'json' };
 import rehypeAccessibleTables from './src/plugins/rehype-accessible-tables.mjs';
 import remarkRewriteLocalizedLinks from './src/plugins/remark-rewrite-localized-links.mjs';
 import remarkCodeTabs from './src/plugins/remark-code-tabs.mjs';
 import rehypeRewriteLocalizedLinks from './src/plugins/rehype-rewrite-localized-links.mjs';
+import { isCanonicalSitemapPage } from './src/utils/sitemap.mjs';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
 
 const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
-
-// Unlocalized paths of moved/removed pages. `[...path].astro` emits `noindex`
-// redirect stubs for these in every locale; keep those stubs out of the sitemap.
-const movedPagePaths = new Set(Object.keys(movedPages));
 
 // https://astro.build/config
 export default defineConfig({
@@ -73,19 +69,9 @@ export default defineConfig({
     icon(),
     react(),
     sitemap({
-      // Only the canonical URLs belong in the sitemap. The catch-all
-      // `[...path].astro` also emits `noindex` redirect stubs: language-less ones
-      // (e.g. `/guide/x`) and per-locale ones for moved pages
-      // (e.g. `/en/resources/middleware/csurf`). Exclude both.
-      // Keep this locale list in sync with `i18n.locales` below.
-      filter: (page) => {
-        const { pathname } = new URL(page);
-        // The homepage is served at `/` and is the canonical for `/en/`.
-        if (pathname === '/') return true;
-        if (!/^\/(de|en|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)(\/|$)/.test(pathname)) return false;
-        const unlocalized = pathname.replace(/^\/[a-z-]+/, '').replace(/\/$/, '');
-        return !movedPagePaths.has(unlocalized);
-      },
+      // Only the canonical URLs belong in the sitemap.
+      // Keep `LOCALES` in the filter's module in sync with `i18n.locales` below.
+      filter: isCanonicalSitemapPage,
       i18n: {
         defaultLocale: 'en',
         locales: {
