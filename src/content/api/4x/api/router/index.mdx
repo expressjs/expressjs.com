@@ -737,7 +737,7 @@ import logger from 'morgan';
 import path from 'path';
 
 router.use(logger());
-router.use(express.static(path.join(__dirname, 'public')));
+router.use(express.static(path.join(import.meta.dirname, 'public')));
 router.use(function (req, res) {
   res.send('Hello');
 });
@@ -749,7 +749,7 @@ import path from 'path';
 import { type Request, type Response } from 'express';
 
 router.use(logger());
-router.use(express.static(path.join(__dirname, 'public')));
+router.use(express.static(path.join(import.meta.dirname, 'public')));
 router.use(function (req: Request, res: Response) {
   res.send('Hello');
 });
@@ -770,7 +770,7 @@ router.use(function (req, res) {
 ```ts
 import { type Request, type Response } from 'express';
 
-router.use(express.static(path.join(__dirname, 'public')));
+router.use(express.static(path.join(import.meta.dirname, 'public')));
 router.use(logger());
 router.use(function (req: Request, res: Response) {
   res.send('Hello');
