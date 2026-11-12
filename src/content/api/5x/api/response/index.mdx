@@ -1031,9 +1031,8 @@ res.sendStatus(404);
 
 <Alert type="alert">
 
-Some versions of Node.js will throw when `res.statusCode` is set to an invalid HTTP status code
-(outside of the range `100` to `599`). Consult the HTTP server documentation for the Node.js
-version being used.
+The status code is set with [res.status()](#resstatus), which throws a `TypeError` if
+`statusCode` is not an integer, or a `RangeError` if it is outside of the range `100` to `999`.
 
 </Alert>
 
