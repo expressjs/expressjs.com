@@ -8,11 +8,24 @@ export interface ContentEntry {
   filePath?: string;
 }
 
+// A fenced code block (``` or ~~~, optionally indented), up to its closing fence.
+const FENCED_CODE_BLOCK = /^[ \t]*(`{3,}|~{3,}).*\n[\s\S]*?^[ \t]*\1[`~]*[ \t]*$/gm;
+// Private-use character marking where a fenced code block was set aside.
+const CODE_BLOCK_MARKER = '\uE000';
+
 export function stripMdxSyntax(content: string): string {
+  // Set fenced code blocks aside so code examples keep their `import` lines and
+  // JSX-like syntax (e.g. `Array<Item>`).
+  const codeBlocks: string[] = [];
+  const prose = content.replace(FENCED_CODE_BLOCK, (block) => {
+    codeBlocks.push(block);
+    return `${CODE_BLOCK_MARKER}${codeBlocks.length - 1}${CODE_BLOCK_MARKER}`;
+  });
+
   return (
     signatureMetaToText(
       // Remove import statements
-      content.replace(/^import\s+.*$/gm, '')
+      prose.replace(/^import\s+.*$/gm, '')
     )
       // Remove JSX self-closing tags like <Alert ... />. `JSX_ATTRS` tolerates `>`
       // inside quoted or braced attribute values (e.g. runtime version constraints).
@@ -23,6 +36,11 @@ export function stripMdxSyntax(content: string): string {
       .replace(/^[ \t]+$/gm, '')
       .replace(/\n{3,}/g, '\n\n')
       .trim()
+      // Put the fenced code blocks back unchanged.
+      .replace(
+        new RegExp(`${CODE_BLOCK_MARKER}(\\d+)${CODE_BLOCK_MARKER}`, 'g'),
+        (_, index: string) => codeBlocks[Number(index)]
+      )
   );
 }
 
