@@ -2,28 +2,75 @@
 import Layout from '@/layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { Container, H1, H2, Body, Button, Flex } from '@components/primitives';
+import { defaultLang, languageCodes, languages, type LanguageCode } from '@/i18n/locales';
+import { getHomePath, useTranslations } from '@/i18n/utils';
+
+// The host serves this single `404.html` for every missing URL, whatever its
+// language, so the page can't be localized at build time. It is rendered in
+// English, and the inline script below switches it to the language of the
+// requested URL (e.g. `/de/…`) using the strings collected here.
+const translations = Object.fromEntries(
+  (languageCodes as LanguageCode[]).map((lang) => {
+    const t = useTranslations(lang);
+    return [
+      lang,
+      {
+        direction: languages[lang].direction,
+        title: t('error404.title'),
+        heading: t('error404.heading'),
+        message: t('error404.message'),
+        goHome: t('error404.goHome'),
+        reportIssue: t('error404.reportIssue'),
+        homePath: getHomePath(lang),
+      },
+    ];
+  })
+);
+const strings = translations[defaultLang];
+const description = useTranslations(defaultLang)('error404.description');
 ---
 
-<Layout title="404 - Page Not Found" description="The page you are looking for could not be found.">
+<Layout title={strings.title} description={description}>
   <Container class="not-found">
     <div>
       <H1>404</H1>
-      <H2>Page Not Found</H2>
-      <Body color="secondary">The page you are looking for does not exist or has been moved.</Body>
+      <H2 data-not-found="heading">{strings.heading}</H2>
+      <Body color="secondary" data-not-found="message">
+        {strings.message}
+      </Body>
       <Flex gap="4">
-        <Button as="a" href="/en" variant="primary">
-          Go to Home
+        <Button as="a" href={strings.homePath} variant="primary" data-not-found="goHome">
+          {strings.goHome}
         </Button>
         <Button
           as="a"
           href={'https://github.com/expressjs/expressjs.com/issues/new?template=4documentation.yml'}
         >
           <Icon name="fluent:warning-24-regular" size="20" />
-          Raise a issue
+          <span data-not-found="reportIssue">{strings.reportIssue}</span>
         </Button>
       </Flex>
     </div>
   </Container>
+  <script is:inline define:vars={{ translations, defaultLang }}>
+    // Runs as soon as the content above is parsed, so the localized text replaces
+    // the English text before the page is first painted.
+    const lang = location.pathname.split('/')[1];
+    if (lang !== defaultLang && Object.hasOwn(translations, lang)) {
+      const { direction, title, homePath, ...text } = translations[lang];
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = direction;
+      document.title = document.title.replace(translations[defaultLang].title, title);
+
+      // Each remaining string replaces the element tagged with the same key.
+      for (const [key, value] of Object.entries(text)) {
+        const el = document.querySelector(`[data-not-found="${key}"]`);
+        if (el) el.textContent = value;
+      }
+      document.querySelector('[data-not-found="goHome"]')?.setAttribute('href', homePath);
+    }
+  </script>
 </Layout>
 
 <style>
