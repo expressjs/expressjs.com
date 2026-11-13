@@ -4,11 +4,14 @@
 abbbbbcd
 abbbcd
 abbcd
+Abdelrahman
 abxcd
 Almeida
 Angelini
 Arcd
+Awad
 azser
+Belanger
 Beltran
 bjohansebas
 Burellier
@@ -67,6 +70,7 @@ Kysely
 letmein
 linklocal
 llms
+logaretm
 mkactivity
 mkcol
 mountpath
@@ -101,7 +105,9 @@ Shubham
 Spaziani
 SPDY
 sqlmap
+srvx
 sslyze
+Stöbich
 tobi
 triaging
 Ulises
