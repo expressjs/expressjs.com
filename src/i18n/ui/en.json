@@ -183,7 +183,8 @@
     "description": "The page you are looking for could not be found.",
     "heading": "Page Not Found",
     "message": "The page you are looking for does not exist or has been moved.",
-    "goHome": "Go to Home"
+    "goHome": "Go to Home",
+    "reportIssue": "Report an issue"
   },
   "common": {
     "download": "Download"
