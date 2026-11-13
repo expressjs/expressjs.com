@@ -271,11 +271,7 @@ If you maintain a library or a middleware, we'd love to see you publish your own
 
 ## Try it
 
-Tracing channels ship in [router v2.3](https://github.com/pillarjs/router), the package that powers Express 5's routing. Every Express 5 app already depends on it, so there is no Express upgrade needed. Just make sure your lockfile picks up the new version:
-
-```sh
-npm update router
-```
+Tracing channels ship in [router v2.3](https://github.com/pillarjs/router), the package that powers Express 5's routing. Every Express 5 app already depends on it, so there is no Express upgrade needed. Just make sure your lockfile picks up the new version.
 
 You need Node 18.19 or later. Older versions simply don't publish anything. The full list of events and context fields is in the [router's Diagnostics docs](https://github.com/pillarjs/router#diagnostics).
 
