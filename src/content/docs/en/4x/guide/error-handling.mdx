@@ -277,8 +277,7 @@ function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
   }
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500).send('Something went wrong.');
 }
 ```
 
@@ -289,8 +288,7 @@ function errorHandler(err: Error, req: Request, res: Response, next: NextFunctio
   if (res.headersSent) {
     return next(err);
   }
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500).send('Something went wrong.');
 }
 ```
 
@@ -460,8 +458,7 @@ Implement the "catch-all" `errorHandler` function as follows (for example):
 
 ```js
 function errorHandler(err, req, res, next) {
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500).send('Something went wrong.');
 }
 ```
 
@@ -469,8 +466,7 @@ function errorHandler(err, req, res, next) {
 import { type Request, type Response, type NextFunction } from 'express';
 
 function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500).send('Something went wrong.');
 }
 ```
 
