@@ -4,7 +4,7 @@ tags: ['announcements']
 authors:
   - name: Abdelrahman Awad
     github: logaretm
-description: Express 5.4 publishes a TracingChannel for every middleware, route handler, and param callback, so you can observe Express without patching it.
+description: Express's router now publishes a TracingChannel for every middleware, route handler, and param callback, so you can observe Express without patching it.
 ---
 
 > TL;DR: Express's router now publishes a `TracingChannel` (`express.router.request`) for every middleware, route handler and `router.param()` callback. APMs, loggers and your own code can observe Express without patching.
@@ -271,12 +271,12 @@ If you maintain a library or a middleware, we'd love to see you publish your own
 
 ## Try it
 
-Tracing channels ship in Express 5.4:
+Tracing channels ship in [router v2.3](https://github.com/pillarjs/router), the package that powers Express 5's routing. Every Express 5 app already depends on it, so there is no Express upgrade needed. Just make sure your lockfile picks up the new version:
 
 ```sh
-npm i express@5.4
+npm update router
 ```
 
-They are implemented in the [router v2.3](https://github.com/pillarjs/router) package, so any Express 5 app that picks up router 2.3 gets them as well. You need Node 18.19 or later. Older versions simply don't publish anything. The full list of events and context fields is in the [router's Diagnostics docs](https://github.com/pillarjs/router#diagnostics).
+You need Node 18.19 or later. Older versions simply don't publish anything. The full list of events and context fields is in the [router's Diagnostics docs](https://github.com/pillarjs/router#diagnostics).
 
 Thanks to everyone who helped ship this, especially [Sebastian Beltran](https://github.com/bjohansebas), [Stephen Belanger](https://github.com/Qard), [Gerhard Stöbich](https://github.com/Flarna), [Ulises Gascón](https://github.com/UlisesGascon) and [Wes Todd](https://github.com/wesleytodd) for the reviews and fixes that went into it.
