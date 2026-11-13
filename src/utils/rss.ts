@@ -43,15 +43,27 @@ export function formatPubDate(
   return date?.toLocaleDateString('en-US', { timeZone: 'UTC', ...options });
 }
 
+/**
+ * XML namespaces used by the item `customData` below. Pass as the `xmlns` option
+ * of every feed that uses `getAuthorsCustomData()`.
+ */
+export const RSS_NAMESPACES = {
+  dc: 'http://purl.org/dc/elements/1.1/',
+};
+
+function escapeXml(value: string): string {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
+ * Lists the post authors as Dublin Core `<dc:creator>` elements, one per author.
+ * The RSS 2.0 `<author>` element must contain an email address, so author names
+ * cannot go there.
+ */
 export function getAuthorsCustomData(authors?: FeedAuthor[]): string | undefined {
   if (!authors?.length) return undefined;
 
-  return authors
-    .map((author) => {
-      const uri = author.github ? `<uri>https://github.com/${author.github}</uri>` : '';
-      return `<author><name>${author.name}</name>${uri}</author>`;
-    })
-    .join('');
+  return authors.map((author) => `<dc:creator>${escapeXml(author.name)}</dc:creator>`).join('');
 }
 
 export function sortByPubDateDesc<T extends DatedPost>(items: T[]): T[] {
