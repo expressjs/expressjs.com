@@ -888,7 +888,7 @@ req.is('html');
 req.is('text/html');
 // => 'text/html'
 req.is('text/*');
-// => 'text/*'
+// => 'text/html'
 
 // When Content-Type is application/json
 req.is('json');
@@ -896,7 +896,7 @@ req.is('json');
 req.is('application/json');
 // => 'application/json'
 req.is('application/*');
-// => 'application/*'
+// => 'application/json'
 
 // Using arrays
 // When Content-Type is application/json

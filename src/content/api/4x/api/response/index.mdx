@@ -361,7 +361,7 @@ res.cookie('some_cross_domain_cookie', 'http://mysubdomain.example.com', {
   domain: 'example.com',
   encode: String,
 });
-// Result: 'some_cross_domain_cookie=http://mysubdomain.example.com; Domain=example.com; Path=/;'
+// Result: 'some_cross_domain_cookie=http://mysubdomain.example.com; Domain=example.com; Path=/'
 ```
 
 The `maxAge` option is a convenience option for setting "expires" relative to the current time in milliseconds.
@@ -371,7 +371,7 @@ The following is equivalent to the second example above.
 res.cookie('remember_me', '1', { maxAge: 900000, httpOnly: true });
 ```
 
-You can pass an object as the `value` parameter; it is then serialized as JSON and parsed by `bodyParser()` middleware.
+You can pass an object as the `value` parameter; it is then serialized as JSON and parsed by `cookieParser()` middleware.
 
 ```js
 res.cookie('cart', { items: [1, 2, 3] });
@@ -1215,13 +1215,13 @@ Sets the `Content-Type` HTTP header to the MIME type as determined by the specif
 
 ```js
 res.type('.html');
-// => 'text/html'
+// => 'text/html; charset=utf-8'
 res.type('html');
-// => 'text/html'
+// => 'text/html; charset=utf-8'
 res.type('json');
-// => 'application/json'
+// => 'application/json; charset=utf-8'
 res.type('application/json');
-// => 'application/json'
+// => 'application/json; charset=utf-8'
 res.type('png');
 // => 'image/png'
 ```
