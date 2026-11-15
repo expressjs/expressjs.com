@@ -275,6 +275,6 @@ Tracing channels ship in [router v2.3](https://github.com/pillarjs/router), the 
 
 You need Node 18.19 or later. Older versions simply don't publish anything. The full list of events and context fields is in the [router's Diagnostics docs](https://github.com/pillarjs/router#diagnostics).
 
-If you want the full story behind the initiative and why we landed on this design, I covered it in [my talk](https://www.youtube.com/watch?v=XaXJjQVlCWU&list=PLHJJhUxJCR0c&index=11).
+If you want the full story behind the initiative and why we landed on this design, I covered it in [my talk at NodeConf EU](https://www.youtube.com/watch?v=XaXJjQVlCWU&list=PLHJJhUxJCR0c&index=11).
 
 Thanks to everyone who helped ship this, especially [Sebastian Beltran](https://github.com/bjohansebas), [Stephen Belanger](https://github.com/Qard), [Gerhard Stöbich](https://github.com/Flarna), [Ulises Gascón](https://github.com/UlisesGascon) and [Wes Todd](https://github.com/wesleytodd) for the reviews and fixes that went into it.
