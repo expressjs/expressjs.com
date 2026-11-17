@@ -34,6 +34,7 @@ const blog = {
   '/2025/12/01/security-releases': '/en/blog/2025-12-01-security-releases',
   '/2026/02/27/security-releases': '/en/blog/2026-02-27-security-releases',
   '/2026/03/30/security-releases': '/en/blog/2026-03-30-security-releases',
+  '/en/blog/2026-10-17-express-tracing-channels': '/en/blog/2026-11-17-express-tracing-channels',
 };
 
 const api_v2 = {
