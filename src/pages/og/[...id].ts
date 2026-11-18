@@ -94,6 +94,7 @@ export const GET: APIRoute = async ({ props }) => {
         padding: '60px 70px',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        boxSizing: 'border-box',
       },
       children: [
         {
