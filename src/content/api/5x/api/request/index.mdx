@@ -509,7 +509,7 @@ may not be a function and instead a string or other user-input.
 
 </Alert>
 
-The value of this property can be configured with the [query parser application setting](/api/application/#application-settings) to work how your application needs it. A very popular query string parser is the [`qs` module](https://www.npmjs.com/package/qs), and this is used by default. The `qs` module is very configurable with many settings, and it may be desirable to use different settings than the default to populate `req.query`:
+The value of this property can be configured with the [query parser application setting](/api/application/#application-settings) to work how your application needs it. The default parser is `"simple"`, which uses Node's native [querystring](https://nodejs.org/api/querystring.html) module and does not parse nested objects. Set the setting to `"extended"` to use the [`qs` module](https://www.npmjs.com/package/qs), or pass a custom parsing function. The `qs` module is very configurable with many settings, and it may be desirable to use different settings than the `extended` defaults to populate `req.query`:
 
 ```cjs title="index.cjs"
 const qs = require('qs');
