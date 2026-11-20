@@ -296,6 +296,6 @@ Here are some further recommendations from the excellent [Node.js Security Check
 - Defend against SQL injection attacks by using parameterized queries or prepared statements.
 - Use the open-source [sqlmap](https://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
 - Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
-- Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
+- Use [recheck](https://makenowjust-labs.github.io/recheck/) to check that your regular expressions are not susceptible to [regular expression denial of service](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS) attacks. It can also run as an ESLint rule ([eslint-plugin-redos](https://www.npmjs.com/package/eslint-plugin-redos)), so a vulnerable pattern is caught before it is committed.
 
 [helmet]: https://helmet.js.org/
