@@ -49,7 +49,9 @@ The Express object has the following methods that can be used to create middlewa
         <Param name="limit" type="Number | String" default='"100kb"'>
           Controls the maximum request body size. If this is a number, then the value specifies the
           number of bytes; if it is a string, the value is passed to the
-          [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+          [bytes](https://www.npmjs.com/package/bytes) library for parsing. An invalid value, such
+          as `NaN` or a string that `bytes` cannot parse, throws a `TypeError` when the middleware
+          is created; `null` and `undefined` use the default.
         </Param>
         <Param name="reviver" type="Function" default="null">
           The `reviver` option is passed directly to `JSON.parse` as the second argument. You can
@@ -111,8 +113,9 @@ with JSON payloads and is based on
 
 Returns middleware that only parses JSON and only looks at requests where
 the `Content-Type` header matches the `type` option. This parser accepts any
-Unicode encoding of the body and supports automatic inflation of `gzip` and
-`deflate` encodings.
+Unicode encoding of the body and supports automatic inflation of `gzip`, `br`
+(Brotli), `deflate`, and `zstd` encodings. `zstd` requires Node.js `^22.15.0` or
+`>=23.8.0`; on older versions, `zstd`-encoded bodies are rejected with a `415` error.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`), or `undefined` if
@@ -184,7 +187,9 @@ app.post('/profile', (req: Request, res: Response) => {
         <Param name="limit" type="Number | String" default='"100kb"'>
           Controls the maximum request body size. If this is a number, then the value specifies the
           number of bytes; if it is a string, the value is passed to the
-          [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+          [bytes](https://www.npmjs.com/package/bytes) library for parsing. An invalid value, such
+          as `NaN` or a string that `bytes` cannot parse, throws a `TypeError` when the middleware
+          is created; `null` and `undefined` use the default.
         </Param>
         <Param name="type" type="String | String[] | Function" default='"application/octet-stream"'>
           This is used to determine what media type the middleware will parse. This option can be a
@@ -211,8 +216,9 @@ payloads into a `Buffer` and is based on
 
 Returns middleware that parses all bodies as a `Buffer` and only looks at requests
 where the `Content-Type` header matches the `type` option. This parser accepts
-any Unicode encoding of the body and supports automatic inflation of `gzip` and
-`deflate` encodings.
+any Unicode encoding of the body and supports automatic inflation of `gzip`, `br`
+(Brotli), `deflate`, and `zstd` encodings. `zstd` requires Node.js `^22.15.0` or
+`>=23.8.0`; on older versions, `zstd`-encoded bodies are rejected with a `415` error.
 
 A new `body` `Buffer` containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`), or `undefined` if
@@ -554,7 +560,9 @@ app.use(express.static('public', options));
         <Param name="limit" type="Number | String" default='"100kb"'>
           Controls the maximum request body size. If this is a number, then the value specifies the
           number of bytes; if it is a string, the value is passed to the
-          [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+          [bytes](https://www.npmjs.com/package/bytes) library for parsing. An invalid value, such
+          as `NaN` or a string that `bytes` cannot parse, throws a `TypeError` when the middleware
+          is created; `null` and `undefined` use the default.
         </Param>
         <Param name="type" type="String | String[] | Function" default='"text/plain"'>
           This is used to determine what media type the middleware will parse. This option can be a
@@ -581,8 +589,9 @@ payloads into a string and is based on
 
 Returns middleware that parses all bodies as a string and only looks at requests
 where the `Content-Type` header matches the `type` option. This parser accepts
-any Unicode encoding of the body and supports automatic inflation of `gzip` and
-`deflate` encodings.
+any Unicode encoding of the body and supports automatic inflation of `gzip`, `br`
+(Brotli), `deflate`, and `zstd` encodings. `zstd` requires Node.js `^22.15.0` or
+`>=23.8.0`; on older versions, `zstd`-encoded bodies are rejected with a `415` error.
 
 A new `body` string containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`), or `undefined` if
@@ -673,7 +682,9 @@ app.post('/', (req: Request, res: Response) => {
         <Param name="limit" type="Number | String" default='"100kb"'>
           Controls the maximum request body size. If this is a number, then the value specifies the
           number of bytes; if it is a string, the value is passed to the
-          [bytes](https://www.npmjs.com/package/bytes) library for parsing.
+          [bytes](https://www.npmjs.com/package/bytes) library for parsing. An invalid value, such
+          as `NaN` or a string that `bytes` cannot parse, throws a `TypeError` when the middleware
+          is created; `null` and `undefined` use the default.
         </Param>
         <Param name="parameterLimit" type="Number" default="1000">
           This option controls the maximum number of parameters that are allowed in the URL-encoded
@@ -721,7 +732,9 @@ with urlencoded payloads and is based on [body-parser](/resources/middleware/bod
 Returns middleware that only parses urlencoded bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
 parser accepts only UTF-8 encoding of the body and supports automatic
-inflation of `gzip` and `deflate` encodings.
+inflation of `gzip`, `br` (Brotli), `deflate`, and `zstd` encodings. `zstd`
+requires Node.js `^22.15.0` or `>=23.8.0`; on older versions, `zstd`-encoded
+bodies are rejected with a `415` error.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`), or `undefined` if

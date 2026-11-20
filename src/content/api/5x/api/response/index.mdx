@@ -713,6 +713,17 @@ res.redirect(301, 'http://example.com');
 res.redirect('../login');
 ```
 
+Express emits a deprecation warning when `path` is missing or is not a string, or when `status` is
+not a number. This helps you find calls that accidentally pass `undefined`, for example from a
+missing configuration value:
+
+```js
+res.redirect(config.loginUrl);
+// When config.loginUrl is undefined:
+// express deprecated Provide a url argument
+// express deprecated Url must be a string
+```
+
 Redirects can be a fully-qualified URL for redirecting to a different site:
 
 ```js
@@ -820,19 +831,21 @@ res.render('user', { name: 'Tobi' }, (err, html) => {
 
 <Signature returns="Response">
   <Fragment slot="attributes">
-    <Param name="body" type="String | Buffer | Object | Array | Boolean" optional>
-      The response body. Strings are sent as HTML; objects and arrays as JSON; Buffers as binary.
+    <Param name="body" type="String | Buffer | Uint8Array | Object | Array | Boolean" optional>
+      The response body. Strings are sent as HTML; objects and arrays as JSON; Buffers and
+      `Uint8Array`s as binary.
     </Param>
   </Fragment>
 </Signature>
 
 Sends the HTTP response.
 
-The `body` parameter can be a `Buffer` object, a `String`, an object, `Boolean`, or an `Array`.
-For example:
+The `body` parameter can be a `Buffer` object, a `Uint8Array`, a `String`, an object, `Boolean`, or
+an `Array`. For example:
 
 ```js
 res.send(Buffer.from('whoop'));
+res.send(new TextEncoder().encode('whoop'));
 res.send({ some: 'json' });
 res.send('<p>some html</p>');
 res.status(404).send('Sorry, we cannot find that!');
@@ -841,9 +854,10 @@ res.status(500).send({ error: 'something blew up' });
 
 This method performs many useful tasks for simple non-streaming responses:
 For example, it automatically assigns the `Content-Length` HTTP response header field
-and provides automatic HEAD and HTTP cache freshness support.
+and provides automatic HEAD and HTTP cache freshness support. `Content-Length` is not set when a
+`Transfer-Encoding` header is already present, because a response must not include both.
 
-When the parameter is a `Buffer` object, the method sets the `Content-Type`
+When the parameter is a `Buffer` object or a `Uint8Array`, the method sets the `Content-Type`
 response header field to "application/octet-stream", unless previously defined as shown below:
 
 ```js
@@ -855,6 +869,14 @@ When the parameter is a `String`, the method sets the `Content-Type` to "text/ht
 
 ```js
 res.send('<p>some html</p>');
+```
+
+If the `Content-Type` is already set when sending a `String`, the method keeps it and sets its
+`charset` parameter to `utf-8`, preserving any other parameters:
+
+```js
+res.set('Content-Type', 'text/plain; foo=bar').send('hey');
+// Content-Type: text/plain; foo=bar; charset=utf-8
 ```
 
 When the parameter is an `Array` or `Object`, Express responds with the JSON representation:
@@ -911,6 +933,10 @@ res.send([1, 2, 3]);
 Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
 based on the filename's extension. Unless the `root` option is set in
 the options object, `path` must be an absolute path to the file.
+
+The `ETag` response header follows the application's [`etag` setting](/api/application/#options-for-etag-setting):
+it is sent unless the setting is disabled with `app.set('etag', false)`. The ETag is always a weak
+ETag derived from the file's size and modification time, whatever the setting's value.
 
 <Alert type="warning">
 This API provides access to data on the running file system. Ensure that either (a) the way in
