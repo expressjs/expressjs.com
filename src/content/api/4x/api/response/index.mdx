@@ -1041,7 +1041,7 @@ import { type Request, type Response, type NextFunction } from 'express';
 
 app.get('/file/:name', function (req: Request, res: Response, next: NextFunction) {
   const options = {
-    root: path.join(__dirname, 'public'),
+    root: path.join(import.meta.dirname, 'public'),
     dotfiles: 'deny',
     headers: {
       'x-timestamp': Date.now(),
