@@ -5,6 +5,7 @@ import {
   getLinkedTitleContent,
   getAuthorsCustomData,
   getPubDate,
+  RSS_NAMESPACES,
   shouldIncludeInFeed,
   sortByPubDateDesc,
 } from '@/utils/rss';
@@ -18,6 +19,7 @@ export const GET: APIRoute = async (context) => {
     title: 'The Express.js Blog',
     description: 'News and updates about express.js',
     site: site.href,
+    xmlns: RSS_NAMESPACES,
     items: sortedBlog.map((post) => ({
       link: `/en/blog/${post.id}/`,
       title: post.data.title,
