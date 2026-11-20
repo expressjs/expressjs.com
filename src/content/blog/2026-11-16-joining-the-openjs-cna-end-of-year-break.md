@@ -7,9 +7,7 @@ authors:
     github: expressjs
 ---
 
-<!-- TODO: replace the issue link below with the OpenJS Foundation announcement once it is published, and confirm the final dates. -->
-
-The [OpenJS Foundation CNA](https://cna.openjsf.org/) is taking a [coordinated end-of-year break from December 18, 2026 to January 4, 2027](https://github.com/openjs-foundation/security-wg/issues/355). The Express security team is joining the pause for the same window, as we did for the [previous coordinated break](/blog/2026-09-09-joining-the-openjs-cna-security-break). That one passed without security incidents or escalations, and the team came back at full capacity, so we are glad to do it again.
+The [OpenJS Foundation CNA](https://cna.openjsf.org/) is taking a [coordinated end-of-year break from December 18, 2026 to January 4, 2027](https://openjsf.org/blog/the-openjs-foundation-cna-is-taking-a-break). The Express security team is joining the pause for the same window, as we did for the [previous coordinated break](/blog/2026-09-09-joining-the-openjs-cna-security-break). That one passed without security incidents or escalations, and the team came back at full capacity, so we are glad to do it again.
 
 ## What this means for Express
 
