@@ -1,0 +1,117 @@
+---
+title: 'Contributing to Express in 2026 and beyond: where to start'
+description: A guide to help you start contributing to Express, with advice from people who started recently and from the people who review contributions.
+tags: ['community']
+authors:
+  - name: Efe Karasakal
+    github: efekrskl
+  - name: Sebastian Beltran
+    github: bjohansebas
+  - name: Ulises Gascon
+    github: UlisesGascon
+---
+
+This guide helps you start contributing to Express in 2026. It includes advice from people who started recently, and from the people who review contributions. The first steps can be confusing, so we want to make them easier.
+
+If you are new to open source in general, we recommend reading [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/) first. It explains the basics that apply to any project. This guide focuses on what is specific to Express.
+
+## There are many ways to contribute
+
+New contributors often want to solve the most difficult problems first, and that is fine. But there are many other ways to help a project like Express. You can triage issues, review code, share your opinion in discussions, fix unstable tests, or improve the documentation. All of these are valuable. Even a good question can help other people understand something better. With time, the experience you get from small tasks prepares you for bigger ones.
+
+## Understand the ecosystem
+
+Many applications use Express, so every decision we make affects a lot of people.
+
+Express is more than one repository. The project has three GitHub organizations: [expressjs](https://github.com/expressjs), [pillarjs](https://github.com/pillarjs) and [jshttp](https://github.com/jshttp). The framework uses many small packages, for example the router, the body parser, and the packages for cookies and content negotiation. You can help in any of them.
+
+Express is also part of [a larger ecosystem](https://openjsf.org/projects). Many OpenJS projects work in a similar way, so what you learn here is useful in other projects too. Some of us started in Express and later joined other projects, for example Node.js and webpack. People there already knew and trusted us because of our work in Express, and this made the next step easier.
+
+> "Express and Node.js are closely connected, so getting to know Express also helped me understand and contribute to Node.js's HTTP stack."
+>
+> [Efe Karasakal](https://github.com/efekrskl)
+
+## Know where things happen
+
+With three organizations and many repositories, it is useful to know where to look.
+
+- **[expressjs/discussions](https://github.com/expressjs/discussions) shows the general picture.** This is where we discuss large initiatives and coordinate work between the three organizations. If you want to know what is happening in Express now, start here.
+- **We write our decisions down.** We discuss proposals in documents called RFCs (Request for Comments). When we make a decision, we record it as an [ADR](https://github.com/expressjs/discussions/tree/master/docs/adr) (Architecture Decision Record). Reading some of them is the fastest way to understand why things work the way they do.
+- **Every repository has people responsible for it.** The [list of captains and committers](https://github.com/expressjs/discussions/blob/master/docs/contributing/captains_and_committers.md) shows who maintains each package, so you know who to ask. Captains are the people responsible for a repository.
+- **The rules are public.** Our [governance document](https://github.com/expressjs/discussions/blob/master/docs/GOVERNANCE.md) explains how we accept contributions, how we make decisions, and how you can become a triager or a committer.
+
+Some history is also useful. In 2024, we started the [Express Forward](https://github.com/expressjs/discussions/issues/160) plan to make the project active again. One of the first steps was to renew the governance, so that new contributors could join. Reading that discussion helps you understand where the project is today, and why we want new people to participate.
+
+> "[...] we should make an effort to revive the project starting with a renewed look at the governance to help bring new contributors into the project."
+>
+> [Wes Todd](https://github.com/wesleytodd), Express Forward, January 2024
+
+## Be proactive
+
+In Express, we do not assign issues, and we do not tell you what to do next. A good place to start is an area that you already know well, or one that interests you.
+
+**Start with triage.** If you do not know where to begin, this is our recommendation. Triage means reading new issues, checking if they can be reproduced, and adding the right labels. Our repositories receive a lot of issues, and helping with them is one of the most valuable things you can do. It is also the best way to learn how a package really works.
+
+Choose one or two repositories, read the README, try to reproduce the newest issues, and ask questions when a report is not clear. The [triager guide](https://github.com/expressjs/discussions/blob/master/docs/contributing/triager-guide.md) explains the process. Anyone can become a triager. Help for some time, and then ask a member of the organization to nominate you.
+
+**Join a working group.** Some topics need continuous work, so we have groups for them: [security](https://github.com/expressjs/security-wg), [performance](https://github.com/expressjs/perf-wg), [TypeScript](https://github.com/expressjs/typescript-wg), and others. Most groups started with a few members who were interested in the same topic. You do not need to be an expert to join, but we expect you to be interested in the topic. Some groups meet regularly, and others meet only when it is needed.
+
+**Choose an initiative.** Several long-term projects need help. Some examples are making the router faster, supporting HTTP/2, and finding the best way to integrate QUIC. Not every change happens in Express itself. Some changes need work in a dependency, or even in Node.js, so you will also work with people from other projects. You can also look at [our open issues](https://github.com/expressjs/express/issues?q=sort%3Aupdated-desc+is%3Aissue+state%3Aopen+).
+
+Two habits will save you time:
+
+- **Say what you are working on.** We do not assign issues, so leave a comment on the issue before you start.
+- **Discuss large changes first.** A pull request is good for a small fix, or for work that was already agreed in an issue. For a large change, open an issue or a discussion first. This way you do not write code that we cannot accept.
+
+## Focus on a few things
+
+It is easy to try to help everywhere at the same time. We recommend the opposite. Choose a few packages, or even one part of one package, and stay with them. You will understand the code better, your reviews will be more useful, and the maintainers of those packages will get to know you.
+
+The same is true for other projects. It is good to contribute to more than one, but do not take more work than you can do.
+
+> "Focus on a few things instead of trying to take on too much. That's something I've learned through Express."
+>
+> [Sebastian Beltran](https://github.com/bjohansebas)
+
+## Know what to expect
+
+We want to be honest about this part, because this is where many contributors get frustrated.
+
+- **Things move slowly.** Most of us are volunteers with limited time, and there are many packages to maintain. A pull request can wait days or weeks for a review. This does not mean that your work is bad.
+- **Reviews take time, and this is intentional.** Pull requests that are not trivial stay open for at least 36 hours, so people in other timezones can review them. Every change needs a review, including changes from long-term members.
+- **If nobody answers, ask again.** Wait about a week, and then ask politely in the same issue or pull request. Keep the conversation public, so other people can also help.
+- **Small changes can have a big effect.** A bad change can break a very large number of applications, so we will ask you about compatibility and unusual cases. For example, Express 4 still supports [Node.js 0.10.0](https://github.com/expressjs/express/blob/2fd3d1f33651c27de04854093eb15a0f61ed1163/package.json#L86). A change in Express 4 cannot use any JavaScript feature from the last ten years.
+- **Standards are important.** A lot of the work depends on internet standards (the IETF RFCs), and one standard often refers to another. Reading them takes time and patience. Ask for help from people who know the topic.
+- **Not every contribution is accepted.** Sometimes a change does not fit the project, even when the code is good. Ask for feedback, and respect the decision. What you learned is still useful for your next contribution.
+- **Tell us when you need something.** If you tell us that there is a real need behind an issue or a pull request, it helps us decide what to do first. If something is blocked, contact the captain of the repository or a member of the Technical Committee (TC).
+
+Think about Express as a product: what is best for all its users? Be patient, and continue to participate.
+
+## Show that you care
+
+Projects like Express include decisions from 15 years ago, unusual optimizations, and code that is difficult to understand. AI tools make it much easier to explore a new codebase and to write a working change quickly. This is a real help for new contributors.
+
+But the human part of open source is still important, and this is where your contribution is most visible:
+
+- **Check what already exists.** Before you open a pull request, look for open pull requests that solve the same problem. It is often more useful to review or improve an existing pull request than to open a new one.
+- **Write the description yourself.** You know what your change does, but the reviewers do not. A clear description in your own words lets them compare your explanation with the code. It also makes a complex change much easier to review.
+- **Be ready to discuss your change.** Reviewers will ask questions, and you should answer them yourself. A pull request is the start of a conversation.
+
+> "You often know what your PR does, but others don't. A clear description lets reviewers compare your explanation with the code and understand your thought process."
+>
+> [Sebastian Beltran](https://github.com/bjohansebas)
+
+## Meet the people
+
+If you have a problem, ask for help. Open source depends on collaboration and communication.
+
+- **Slack.** Join the [OpenJS Slack](https://slack-invite.openjsf.org/) and look for `#express` and the other `#express-*` channels. It is the OpenJS workspace, so you can also meet people from many other open-source projects.
+- **Meetings.** Check the [OpenJS calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/ojsf?view=week) to see when we meet. You are welcome to join. You can participate, or you can only listen. You do not need to speak or to prepare anything.
+
+> "Instead of approaching open source as just 'pushing code', I joined Slack channels, read discussions, and participated in meetings to better understand the project's needs."
+>
+> [Efe Karasakal](https://github.com/efekrskl)
+
+Knowing the people behind the project is probably the best way to contribute for a long time. We hope to meet you soon.
+
+Thank you to everyone who shared their experience for this guide, and to the new contributors whose questions started it.
