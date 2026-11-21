@@ -102,6 +102,9 @@ app.locals.strftime = require('strftime');
 app.locals.email = 'me@myapp.com';
 ```
 
+A sub-app mounted with [app.use()](#appuse) does not inherit `app.locals` from the parent app.
+To share a value with a sub-app, set it on the `app.locals` of the sub-app.
+
 ### app.mountpath
 
 <Signature type="String | String[]" />
