@@ -133,7 +133,7 @@ LIST_END
   CONTENT=$(echo "$CONTENT" | sed -E 's/<(br|hr|img)([^/]*[^/])?\s*>/<\1\2 \/>/gi')
 
   # Convert single-command npm/npx code blocks into the PackageManagerCommand
-  # component so readers can switch between npm, Yarn, pnpm and Bun. Only blocks
+  # component so readers can switch between npm, Yarn, pnpm, Bun and vlt. Only blocks
   # holding exactly one npm/npx command are converted; anything with shell
   # operators or multiple lines is left as a plain code block.
   CONTENT=$(echo "$CONTENT" | perl -0777 -pe '
