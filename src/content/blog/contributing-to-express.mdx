@@ -61,7 +61,7 @@ Choose one or two repositories, read the README, try to reproduce the newest iss
 
 Two habits will save you time:
 
-- **Say what you are working on.** We do not assign issues, so leave a comment on the issue before you start.
+- **Say what you are working on.** We do not assign issues, and you do not need permission to start. Leave a comment on the issue that explains how you plan to fix it. If someone said they would work on an issue a long time ago and did not follow up, you can pick it up.
 - **Discuss large changes first.** A pull request is good for a small fix, or for work that was already agreed in an issue. For a large change, open an issue or a discussion first. This way you do not write code that we cannot accept.
 
 ## Focus on a few things
@@ -84,6 +84,7 @@ We want to be honest about this part, because this is where many contributors ge
 - **Small changes can have a big effect.** A bad change can break a very large number of applications, so we will ask you about compatibility and unusual cases. For example, Express 4 still supports [Node.js 0.10.0](https://github.com/expressjs/express/blob/2fd3d1f33651c27de04854093eb15a0f61ed1163/package.json#L86). A change in Express 4 cannot use any JavaScript feature from the last ten years.
 - **Standards are important.** A lot of the work depends on internet standards (the IETF RFCs), and one standard often refers to another. Reading them takes time and patience. Ask for help from people who know the topic.
 - **Not every contribution is accepted.** Sometimes a change does not fit the project, even when the code is good. Ask for feedback, and respect the decision. What you learned is still useful for your next contribution.
+- **Some changes are usually not accepted.** Pull requests that only modernize the code or change its style touch many lines, make the history harder to follow, and can break older Node.js versions, without solving a real problem for users.
 - **Tell us when you need something.** If you tell us that there is a real need behind an issue or a pull request, it helps us decide what to do first. If something is blocked, contact the captain of the repository or a member of the Technical Committee (TC).
 
 Think about Express as a product: what is best for all its users? Be patient, and continue to participate.
