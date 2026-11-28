@@ -35,7 +35,7 @@ import { DEFAULT_VERSION } from '../config/versions.ts';
 const DEFAULT_PREFIXES = ['guide', 'starter', 'api', 'resources', 'advanced', 'support', 'blog'];
 
 /** Sections that carry a version (every other section is language-only). */
-const DEFAULT_VERSIONED_SECTIONS = ['api', 'starter', 'guide', 'advanced'];
+export const DEFAULT_VERSIONED_SECTIONS = ['api', 'starter', 'guide', 'advanced'];
 
 /** Language used when it cannot be inferred from the source path. */
 const DEFAULT_LANG = 'en';
@@ -101,7 +101,7 @@ function collectGlobalPaths(menu) {
  * Default unversioned targets: the "global" pages declared in the menu. Computed
  * once so consumers (and `astro.config`) don't have to wire this up themselves.
  */
-const DEFAULT_UNVERSIONED_PATHS = collectGlobalPaths(docsMenu);
+export const DEFAULT_UNVERSIONED_PATHS = collectGlobalPaths(docsMenu);
 
 /**
  * Validates whether a path segment matches version format (e.g. `5x`, `4x`).
