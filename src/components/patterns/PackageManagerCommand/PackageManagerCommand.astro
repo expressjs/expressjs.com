@@ -3,7 +3,7 @@
  * Package Manager Command
  *
  * Renders a single authored `npm`/`npx` command as a tabbed code block that
- * lets readers switch between npm, Yarn, pnpm and Bun. The equivalent commands
+ * lets readers switch between npm, Yarn, pnpm, Bun and vlt. The equivalent commands
  * are derived at build time from the npm command (see `convertPackageManagerCommand`).
  *
  * The selected manager is shared across every instance on the page and
@@ -29,7 +29,7 @@ interface Props {
 const { command } = Astro.props;
 const commands = convertPackageManagerCommand(command);
 // Only show managers that have an equivalent command (e.g. `--no-save` has no
-// Yarn/pnpm equivalent, so those tabs are omitted for that command).
+// Yarn/pnpm/vlt equivalent, so those tabs are omitted for that command).
 const managers = PACKAGE_MANAGERS.filter((pm) => commands[pm] !== null);
 const defaultManager = managers[0];
 ---
@@ -64,12 +64,12 @@ const defaultManager = managers[0];
 
 <script>
   const STORAGE_KEY = 'expressjs:package-manager';
-  const MANAGERS = ['npm', 'yarn', 'pnpm', 'bun'];
+  const MANAGERS = ['npm', 'yarn', 'pnpm', 'bun', 'vlt'];
 
   function applyManager(pm: string) {
     document.querySelectorAll<HTMLElement>('[data-pm-command]').forEach((root) => {
       const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-pm-panel]'));
-      // A block may not offer every manager (e.g. `--no-save` has no Yarn/pnpm
+      // A block may not offer every manager (e.g. `--no-save` has no Yarn/pnpm/vlt
       // equivalent); fall back to its first tab when the selection is missing.
       const available = panels.map((panel) => panel.dataset.pmPanel);
       const effective = available.includes(pm) ? pm : available[0];
