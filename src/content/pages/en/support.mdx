@@ -7,14 +7,26 @@ Only the latest version of any given major release line is supported.
 
 Versions that are EOL (end-of-life) _may_ receive updates for critical security vulnerabilities, but the Express team offers no guarantee and does not plan to address or release fixes for any issues found.
 
-| Major Version                                                  | Minimum Node.js Version | Support Start Date | Support End Date |
-| -------------------------------------------------------------- | ----------------------- | ------------------ | ---------------- |
-| [**v5.x**](/5x/api)                                            | 18                      | September 2024     | **ongoing**      |
-| [**v4.x**](/4x/api)                                            | 0.10.0                  | April 2014         | **ongoing**      |
-| [**v3.x**](/3x/api)                                            | 0.8.0                   | October 2012       | July 2015        |
-| [**v2.x**](https://github.com/expressjs/expressjs.com/tree/2x) | 0.4.1                   | March 2011         | July 2012        |
-| **v1.x**                                                       | 0.2.0                   | December 2010      | March 2011       |
-| **v0.14.x**                                                    | 0.1.98                  | December 2010      | December 2010    |
+| Major Version                                                  | Minimum Node.js Version | Support Start Date | Support Phase | Support End Date                |
+| -------------------------------------------------------------- | ----------------------- | ------------------ | ------------- | ------------------------------- |
+| [**v5.x**](/5x/api)                                            | 18                      | September 2024     | `ACTIVE`      | **not yet determined**          |
+| [**v4.x**](/4x/api)                                            | 0.10.0                  | April 2014         | `MAINTENANCE` | **no sooner than October 2026** |
+| [**v3.x**](/3x/api)                                            | 0.8.0                   | October 2012       | EOL           | July 2015                       |
+| [**v2.x**](https://github.com/expressjs/expressjs.com/tree/2x) | 0.4.1                   | March 2011         | EOL           | July 2012                       |
+| **v1.x**                                                       | 0.2.0                   | December 2010      | EOL           | March 2011                      |
+| **v0.14.x**                                                    | 0.1.98                  | December 2010      | EOL           | December 2010                   |
+
+## Support Phases
+
+Express major versions go through three support phases:
+
+- `CURRENT`: A new major version is designated as `CURRENT` upon release. It is available but not the `latest` tag on npm for a minimum of 3 months. It receives all types of active work: bug fixes, security patches, new features, and deprecation notices.
+- `ACTIVE`: After the minimum 3 month period, once the Technical Committee agrees it is stable and secure, the version is tagged `latest` on npm for a minimum of 12 months. `ACTIVE` lines receive all types of active work and are considered the most stable and well supported version at any given time.
+- `MAINTENANCE`: When a new major version becomes `ACTIVE`, the previous major version enters `MAINTENANCE` for 12 months. `MAINTENANCE` lines only receive security patches or high priority bug fixes, so users are highly encouraged to upgrade to a `CURRENT` or `ACTIVE` release.
+
+v4 is a special case, having been the only major version for most of the history of Node.js itself, and its `MAINTENANCE` period may be extended. For any other release line, the end dates are not determined until the next major version is released, since that is what starts the clock on its `MAINTENANCE` period. Consider these dates goals, not commitments.
+
+These support periods also extend to the packages maintained under the [expressjs](https://github.com/expressjs), [jshttp](https://github.com/jshttp), and [pillarjs](https://github.com/pillarjs) organizations: the versions that a supported Express release line depends on are supported for at least as long as that line, and their support may be extended beyond that at the team's discretion.
 
 ## Commercial Support Options
 
