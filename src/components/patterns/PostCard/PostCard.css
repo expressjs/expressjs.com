@@ -2,6 +2,8 @@
   .post-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
     border: var(--border-width-1) solid var(--color-border-secondary);
     border-radius: var(--radius-base);
     gap: var(--space-4);
