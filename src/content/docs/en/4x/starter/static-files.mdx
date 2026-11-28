@@ -83,7 +83,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 ```mjs title="index.mjs"
 import path from 'path';
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(import.meta.dirname, 'public')));
 ```
 
 <ReadMore>
